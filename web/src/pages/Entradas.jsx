@@ -57,20 +57,35 @@ export default function Entradas() {
 
             {step === 2 && (
               <div className="space-y-6">
-                <h3 className="text-2xl font-display mb-4">Selecciona tu Zona</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {['Tribuna Principal (45€)', 'Fondo Sur (20€)', 'Grada Lateral (30€)', 'VIP Lounge (120€)'].map((zona, i) => (
-                    <div 
-                      key={i} 
-                      className="bg-black/60 border border-forest/30 hover:border-forest-light cursor-pointer p-4 rounded-sm flex justify-between items-center transition-colors"
-                      onClick={() => setStep(3)}
-                    >
-                      <span className="font-semibold">{zona}</span>
-                      <Ticket size={20} className="text-forest-light"/>
+                <h3 className="text-2xl font-display mb-4 text-center">Selecciona tus Butacas en Oslo Arena</h3>
+                <div className="relative w-full max-w-lg mx-auto bg-green-900 border-2 border-white rounded-lg p-4 aspect-[4/3] flex flex-col justify-between">
+                  {/* Campo */}
+                  <div className="absolute inset-4 border border-white/50 rounded-sm flex items-center justify-center opacity-30 pointer-events-none">
+                    <div className="w-16 h-16 border border-white/50 rounded-full"></div>
+                    <div className="absolute w-full h-px bg-white/50"></div>
+                  </div>
+                  
+                  {/* Gradas */}
+                  <div className="grid grid-cols-3 gap-2 h-full z-10 relative">
+                    <div className="col-span-3 flex justify-center">
+                      <button onClick={() => setStep(3)} className="w-3/4 bg-forest-dark/80 hover:bg-forest hover:border-forest-light border border-transparent p-2 text-xs font-bold text-center transition-colors rounded-b-lg">Fondo Norte (15€)</button>
                     </div>
-                  ))}
+                    <div className="flex flex-col justify-center items-start">
+                      <button onClick={() => setStep(3)} className="h-3/4 w-8 bg-forest-dark/80 hover:bg-forest hover:border-forest-light border border-transparent p-2 text-xs font-bold transition-colors rounded-r-lg writing-vertical-rl rotate-180">Tribuna Oeste (45€)</button>
+                    </div>
+                    <div className="flex items-center justify-center pointer-events-none">
+                      {/* Círculo central vacío para diseño */}
+                    </div>
+                    <div className="flex flex-col justify-center items-end">
+                      <button onClick={() => setStep(3)} className="h-3/4 w-8 bg-forest-dark/80 hover:bg-forest hover:border-forest-light border border-transparent p-2 text-xs font-bold transition-colors rounded-l-lg writing-vertical-rl">Grada Este (30€)</button>
+                    </div>
+                    <div className="col-span-3 flex justify-center items-end">
+                      <button onClick={() => setStep(3)} className="w-3/4 bg-forest-dark/80 hover:bg-forest hover:border-forest-light border border-transparent p-2 text-xs font-bold text-center transition-colors rounded-t-lg">Fondo Sur (20€)</button>
+                    </div>
+                  </div>
                 </div>
-                <button onClick={() => setStep(1)} className="text-sm text-cream/60 hover:text-cream mt-4 block">Volver</button>
+                <p className="text-center text-xs text-cream-dark uppercase tracking-widest mt-4">Haz clic en la grada para continuar</p>
+                <button onClick={() => setStep(1)} className="text-sm text-cream/60 hover:text-cream mt-4 block mx-auto">Volver</button>
               </div>
             )}
 

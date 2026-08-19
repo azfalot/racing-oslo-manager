@@ -34,16 +34,21 @@ export default function Plantilla() {
         {squadData.players.map(p => (
           <div key={p.id} className="bg-black border border-forest/30 rounded-sm overflow-hidden flex flex-col group hover:border-forest transition-colors">
             {/* Cabecera Tarjeta */}
-            <div className="relative h-32 bg-forest-dark/40 overflow-hidden flex items-end p-4 border-b border-forest/30">
+            <div className="relative h-48 bg-forest-dark/40 overflow-hidden flex items-end p-4 border-b border-forest/30">
+              <div className="absolute inset-0 flex justify-center items-end opacity-80 pt-4">
+                {p.image ? (
+                  <img src={p.image} alt={p.name} className="h-full object-cover" />
+                ) : null}
+              </div>
               <div className="absolute top-4 left-4 z-10">
                 <span className={`text-[10px] font-bold uppercase tracking-wider text-white px-2 py-1 rounded-sm ${getPosColor(p.position)}`}>
                   {getPosName(p.position)}
                 </span>
               </div>
-              <div className="absolute -right-4 -bottom-4 opacity-10 font-display font-bold text-9xl">
+              <div className="absolute -right-4 -bottom-4 opacity-30 font-display font-bold text-9xl">
                 {p.number}
               </div>
-              <h3 className="text-3xl font-display font-bold relative z-10 group-hover:text-white transition-colors">
+              <h3 className="text-3xl font-display font-bold relative z-10 group-hover:text-white transition-colors bg-black/60 px-2 py-1 rounded-sm">
                 {p.name}
               </h3>
             </div>

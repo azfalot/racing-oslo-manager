@@ -88,10 +88,10 @@ export default function Home() {
               <h3 className="text-xl font-display font-bold">EL ONCE</h3>
             </div>
             <ul className="flex flex-col gap-3">
-              {squadData.players.slice(0, 5).map(p => (
-                <li key={p.id} className="flex items-center justify-between bg-black/40 p-3 rounded-sm border-l-2 border-forest hover:border-cream transition-colors">
+              {squadData.players.filter(p => p.isStarter).map(p => (
+                <li key={p.id} className="flex items-center justify-between bg-black/40 p-2 rounded-sm border-l-2 border-forest hover:border-cream transition-colors">
                   <div className="flex items-center gap-3">
-                    <span className="text-forest-light font-display text-lg w-6 text-center">{p.number}</span>
+                    <img src={p.image} alt={p.name} className="w-8 h-8 rounded-full bg-forest-dark/50 object-cover" />
                     <span className="font-semibold text-sm">{p.name}</span>
                   </div>
                   <span className="text-[10px] uppercase tracking-wider text-cream/50 bg-forest-dark/50 px-2 py-1 rounded-full">{p.position}</span>

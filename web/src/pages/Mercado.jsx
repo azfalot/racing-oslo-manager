@@ -3,9 +3,9 @@ import { Radar, ArrowRightLeft, TrendingDown, TrendingUp, Search } from 'lucide-
 
 export default function Mercado() {
   const rumors = [
-    { id: 1, player: "Kylian Mbappé", club: "Real Madrid", prob: 2, desc: "El director deportivo Mateo Oslomany fue visto en París, pero parece que el jugador prefirió la liga española antes que el frío de Oslo." },
-    { id: 2, player: "Griezmann", club: "Atlético", prob: 15, desc: "Se rumorea que el Racing está ahorrando cada céntimo para intentar un asalto a la estrella francesa en el mercado de invierno." },
-    { id: 3, player: "Brahim Díaz", club: "Real Madrid", prob: 45, desc: "El radar de Oslomany lo tiene en rojo. Si no goza de minutos, el Racing de Oslo preparará una oferta de cesión." }
+    { id: 1, player: "David Soria", club: "Getafe", prob: 95, desc: "Fichaje inminente. Mateo Oslomany ha lanzado una oferta de 4.82M€ al Getafe y la operación está casi cerrada." },
+    { id: 2, player: "Oriol Rey", club: "Levante", prob: 60, desc: "El centro del campo necesita refuerzos. Se ha puesto encima de la mesa una puja de 440.000€, pero hay otros equipos interesados." },
+    { id: 3, player: "Álvaro Valles", club: "Las Palmas", prob: 15, desc: "Tras el posible fichaje de Soria, Valles se aleja definitivamente del Oslo Arena." }
   ]
 
   const targets = [

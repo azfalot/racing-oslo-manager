@@ -17,7 +17,7 @@ export default function Layout({ children }) {
             <Link to="/" className="hover:text-forest-light transition-colors">INICIO</Link>
             <Link to="/noticias" className="hover:text-forest-light transition-colors">NOTICIAS</Link>
             <Link to="/plantilla" className="hover:text-forest-light transition-colors">PLANTILLA</Link>
-            <Link to="/jornadas" className="hover:text-forest-light transition-colors">JORNADAS</Link>
+            <Link to="/clasificacion" className="hover:text-forest-light transition-colors">CLASIFICACIÓN</Link>
             <Link to="/mercado" className="hover:text-forest-light transition-colors">MERCADO</Link>
             <Link to="/entradas" className="hover:text-forest-light transition-colors">ENTRADAS</Link>
             <Link to="/tienda" className="bg-forest text-cream px-4 py-2 rounded-sm hover:bg-forest-light transition-colors">TIENDA</Link>
