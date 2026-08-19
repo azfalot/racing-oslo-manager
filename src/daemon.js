@@ -835,7 +835,19 @@ function startCronScheduler() {
 
       sendTelegramMessage(`💼 🕒 <b>[Mateo Oslomany]:</b> Ejecución programada (${timeStr} Madrid). Optimizando cuenta...`);
       exec('node src/app.js', { env: { ...process.env, COMUNIO_MODE: 'autonomo' } }, (err) => {
-        if (err) sendTelegramMessage(`💼 🚨 <b>[Mateo Oslomany]:</b> Error en ejecución automática: <code>${err.message}</code>`);
+        if (err) {
+          sendTelegramMessage(`💼 🚨 <b>[Mateo Oslomany]:</b> Error en ejecución automática: <code>${err.message}</code>`);
+          return;
+        }
+        if (hours === 9) {
+          console.log('[DAEMON-CRON] Sincronizando datos con la web...');
+          sendTelegramMessage(`💼 🌐 <i>[Mateo Oslomany]: Sincronizando datos reales con la Web (Mercado/Jornada cerrados)...</i>`);
+          const syncCmd = 'node src/syncWeb.mjs && git add web/src/data/*.json && git commit -m "chore: Sincronizacion automatica web" && git push origin main';
+          exec(syncCmd, (syncErr) => {
+             if (syncErr) console.error('[DAEMON-CRON] Error sincronizando web:', syncErr);
+             else sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Web oficial actualizada y publicada en Cloudflare.`);
+          });
+        }
       });
     }
   }, 60000);
