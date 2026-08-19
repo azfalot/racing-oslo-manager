@@ -117,11 +117,14 @@ async function runBot() {
     console.log('[INFO] Cargando panel principal de economía...');
     const dashboardData = await client.getDashboardData();
     
-    let balance = 20000000;
-    if (dashboardData && dashboardData.money !== undefined) {
-      balance = dashboardData.money;
-    } else {
-      console.log('[WARN] No se pudo leer el saldo exacto desde la API, utilizando saldo de seguridad en 20M.');
+    let balance = 0;
+    let teamValue = 0;
+    if (dashboardData) {
+      balance = dashboardData.money || 0;
+      teamValue = dashboardData.teamValue || 0;
+    }
+    if (balance === 0) {
+      console.log('[WARN] No se pudo leer el saldo exacto desde la API.');
     }
     console.log(`[INFO] Saldo actual: ${balance.toLocaleString()} €\n`);
 
@@ -249,17 +252,19 @@ async function runBot() {
     // ── RESUMEN EJECUTIVO COMPACTO ───────────────────────────────────────────
     const myRank = rivals.findIndex(r => r.isMe) + 1;
     const myRankStr = myRank > 0 ? `#${myRank} de ${rivals.length}` : '—';
-    const myValue = rivals.find(r => r.isMe)?.squadValue?.toLocaleString() || '—';
 
-    // Próxima jornada
+    // La API devuelve todas las jornadas sin started/finished diferenciado en pretemporada.
+    // La jornada más próxima es simplemente la de menor matchdayKey.
     let matchdayLine = '—';
-    if (nextMatchday) {
-      const dateMatch = (nextMatchday.eventInfo || '').match(/kickoff=(\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2})/);
+    if (matchdays && matchdays.length > 0) {
+      const next = matchdays[0]; // Ya vienen ordenadas por matchdayKey asc desde getMatchdays()
+      // Intentar extraer fecha del eventInfo (formato "Aufstellung X. Spieltag" sin fecha, o string con fecha)
+      const dateMatch = (next.eventInfo || '').match(/(\d{2}\/\d{2}\/\d{4})/);
       if (dateMatch) {
         const d = new Date(dateMatch[1]);
-        matchdayLine = `J${nextMatchday.matchdayKey} · ${d.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', timeZone: 'Europe/Madrid' })} ${d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' })}h`;
+        matchdayLine = `J${next.matchdayKey} · ${d.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', timeZone: 'Europe/Madrid' })}`;
       } else {
-        matchdayLine = `Jornada ${nextMatchday.matchdayKey}`;
+        matchdayLine = `Jornada ${next.matchdayKey}`;
       }
     }
 
@@ -290,10 +295,11 @@ async function runBot() {
 
     let report = `💼 <b>Mateo Oslomany · Resumen Ejecutivo</b>\n`;
     report += `<i>${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</i>\n\n`;
-    report += `💰 <b>Economía:</b> ${balance.toLocaleString()} € ${economyResult.inDebt ? '⚠️ EN DEUDA' : '✅'} | Margen: <b>${bidMargin}%</b>\n`;
+    report += `💰 <b>Presupuesto disponible:</b> ${balance.toLocaleString()} € ${economyResult.inDebt ? '⚠️ EN DEUDA' : '✅'}\n`;
+    if (teamValue > 0) report += `📊 <b>Valor de plantilla:</b> ${teamValue.toLocaleString()} € | Margen puja: <b>${bidMargin}%</b>\n`;
     report += `⚽ <b>Alineación:</b> ${lineupResult.formation || '—'} ${mode === 'autonomo' ? '(guardada ✅)' : '(modo asistente)'}\n`;
     report += `🛒 <b>Mercado:</b> ${marketLine}\n`;
-    report += `👥 <b>Liga:</b> ${myRankStr} | Plantilla: ${myValue} €\n`;
+    report += `👥 <b>Liga:</b> ${myRankStr} equipos\n`;
     report += `📅 <b>Próx. jornada:</b> ${matchdayLine}\n`;
 
     if (alertLines.length > 0) {

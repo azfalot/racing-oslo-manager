@@ -97,14 +97,16 @@ export class ComunioClient {
       });
 
       if (response.status === 200 && response.data.user) {
-        return {
-          money: response.data.user.budget || 0
-        };
+        const user = response.data.user;
+        // La API devuelve los valores como strings — parsear a número
+        const budget = parseInt(user.budget) || 0;
+        const teamValue = parseInt(user.teamValue) || 0;
+        return { money: budget, teamValue };
       }
     } catch (err) {
       console.warn('[CLIENT] Error al obtener presupuesto desde la API:', err.message);
     }
-    return { money: 20000000 };
+    return { money: 0, teamValue: 0 };
   }
 
   /**
@@ -577,16 +579,19 @@ export class ComunioClient {
         headers: this.getHeaders()
       });
       if (response.status === 200 && response.data) {
-        // La respuesta puede ser un array o un objeto con items
         const raw = Array.isArray(response.data) ? response.data : (response.data.items || []);
-        return raw.map(md => ({
-          id: md.id,
-          matchdayKey: md.matchdayKey,
-          started: md.started,
-          finished: md.finished,
-          type: md.type,
-          eventInfo: md.eventInfo
-        }));
+        // Ordenar por matchdayKey ascendente y devolver solo jornadas regulares (no aplazadas)
+        return raw
+          .filter(md => md.type === 'matchday' || md.type === 'regular')
+          .sort((a, b) => a.matchdayKey - b.matchdayKey)
+          .map(md => ({
+            id: md.id,
+            matchdayKey: md.matchdayKey,
+            started: md.started,
+            finished: md.finished,
+            type: md.type,
+            eventInfo: md.eventInfo
+          }));
       }
     } catch (err) {
       console.warn('[CLIENT] Error al obtener jornadas:', err.message);
