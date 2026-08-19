@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import newsData from '../data/news.json'
-import { Calendar } from 'lucide-react'
+import { Calendar, X } from 'lucide-react'
 
 export default function Noticias() {
+  const [selectedNews, setSelectedNews] = useState(null)
+
   return (
     <div className="container mx-auto px-6 py-12">
       <div className="mb-12">
@@ -11,7 +13,7 @@ export default function Noticias() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl">
         {newsData.map(news => (
-          <article key={news.id} className="bg-forest-dark/10 border border-forest/20 rounded-sm overflow-hidden group hover:border-forest/50 transition-colors">
+          <article key={news.id} className="bg-forest-dark/10 border border-forest/20 rounded-sm overflow-hidden group hover:border-forest/50 transition-colors cursor-pointer" onClick={() => setSelectedNews(news)}>
             <div className="h-64 overflow-hidden relative">
               <img src={news.image} alt={news.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute top-4 left-4">
@@ -32,6 +34,22 @@ export default function Noticias() {
           </article>
         ))}
       </div>
+
+      {selectedNews && (
+        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
+          <div className="bg-clubBlack border border-forest-light max-w-2xl w-full rounded-sm overflow-hidden animate-fade-in relative max-h-[90vh] overflow-y-auto">
+            <button onClick={() => setSelectedNews(null)} className="absolute top-4 right-4 z-10 bg-black/50 p-2 rounded-full hover:bg-forest text-cream transition-colors">
+              <X size={24} />
+            </button>
+            <img src={selectedNews.image} alt={selectedNews.title} className="w-full h-64 object-cover" />
+            <div className="p-8">
+              <span className="bg-forest text-cream text-xs font-bold px-3 py-1 uppercase tracking-wider mb-4 inline-block">{selectedNews.category}</span>
+              <h3 className="text-3xl font-display font-bold mb-4">{selectedNews.title}</h3>
+              <p className="text-cream-dark leading-relaxed whitespace-pre-wrap">{selectedNews.excerpt}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

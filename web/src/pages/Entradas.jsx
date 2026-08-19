@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Ticket, Calendar, MapPin, CreditCard, AlertCircle, XCircle } from 'lucide-react'
+import matchData from '../data/matches.json'
 
 export default function Entradas() {
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
   const [showPrank, setShowPrank] = useState(false)
+  const [selectedSeat, setSelectedSeat] = useState(null)
 
   const handlePayment = (e) => {
     e.preventDefault()
@@ -31,7 +33,8 @@ export default function Entradas() {
           <div className="flex bg-black/40 border-b border-forest/30 text-xs font-bold uppercase tracking-widest text-center">
             <div className={`flex-1 py-4 ${step >= 1 ? 'text-forest-light border-b-2 border-forest-light bg-forest/10' : 'text-cream/40'}`}>1. Partido</div>
             <div className={`flex-1 py-4 ${step >= 2 ? 'text-forest-light border-b-2 border-forest-light bg-forest/10' : 'text-cream/40'}`}>2. Zona</div>
-            <div className={`flex-1 py-4 ${step >= 3 ? 'text-forest-light border-b-2 border-forest-light bg-forest/10' : 'text-cream/40'}`}>3. Pago</div>
+            <div className={`flex-1 py-4 ${step >= 3 ? 'text-forest-light border-b-2 border-forest-light bg-forest/10' : 'text-cream/40'}`}>3. Asiento</div>
+            <div className={`flex-1 py-4 ${step >= 4 ? 'text-forest-light border-b-2 border-forest-light bg-forest/10' : 'text-cream/40'}`}>4. Pago</div>
           </div>
 
           <div className="p-8">
@@ -43,13 +46,13 @@ export default function Entradas() {
                   onClick={() => setStep(2)}
                 >
                   <div className="flex justify-between items-center mb-4">
-                    <span className="bg-cream text-clubBlack text-xs font-bold px-2 py-1 uppercase">Próximo Partido</span>
-                    <span className="text-forest-light font-bold">Jornada 1</span>
+                    <span className="bg-cream text-clubBlack text-xs font-bold px-2 py-1 uppercase">{matchData.nextMatch.competition}</span>
+                    <span className="text-forest-light font-bold">Jornada {matchData.nextMatch.matchday}</span>
                   </div>
-                  <h4 className="text-3xl font-display font-bold mb-2">Racing de Oslo vs CD Cayón B</h4>
+                  <h4 className="text-3xl font-display font-bold mb-2">Racing de Oslo vs {matchData.nextMatch.opponent}</h4>
                   <div className="flex gap-4 text-cream-dark text-sm">
-                    <span className="flex items-center gap-1"><Calendar size={16}/> Sábado, 18:00h</span>
-                    <span className="flex items-center gap-1"><MapPin size={16}/> Oslo Arena</span>
+                    <span className="flex items-center gap-1"><Calendar size={16}/> {matchData.nextMatch.date}</span>
+                    <span className="flex items-center gap-1"><MapPin size={16}/> {matchData.nextMatch.venue}</span>
                   </div>
                 </div>
               </div>
@@ -90,6 +93,40 @@ export default function Entradas() {
             )}
 
             {step === 3 && (
+              <div className="space-y-6">
+                <h3 className="text-2xl font-display mb-4 text-center">Selecciona tu Asiento</h3>
+                <div className="max-w-md mx-auto">
+                  <div className="w-full bg-cream-dark text-clubBlack text-center py-2 mb-8 font-bold text-xs tracking-widest uppercase">
+                    Césped
+                  </div>
+                  <div className="grid grid-cols-8 gap-2">
+                    {Array.from({length: 32}).map((_, i) => (
+                      <button 
+                        key={i}
+                        onClick={() => setSelectedSeat(i)}
+                        className={`w-full aspect-square rounded-sm border flex items-center justify-center text-[10px] transition-colors ${
+                          selectedSeat === i 
+                            ? 'bg-forest-light border-forest-light text-white font-bold' 
+                            : 'bg-black/60 border-forest/30 hover:border-forest text-cream-dark'
+                        }`}
+                      >
+                        {i + 1}
+                      </button>
+                    ))}
+                  </div>
+                  <button 
+                    onClick={() => setStep(4)} 
+                    disabled={selectedSeat === null}
+                    className="w-full bg-forest text-cream font-bold uppercase tracking-widest py-3 rounded-sm hover:bg-forest-light transition-colors mt-8 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Confirmar Asiento
+                  </button>
+                  <button onClick={() => setStep(2)} className="text-sm text-cream/60 hover:text-cream mt-4 block mx-auto">Volver</button>
+                </div>
+              </div>
+            )}
+
+            {step === 4 && (
               <div className="space-y-6 max-w-md mx-auto">
                 <h3 className="text-2xl font-display text-center mb-6">Pasarela de Pago Segura</h3>
                 <form onSubmit={handlePayment} className="space-y-4">
@@ -119,7 +156,7 @@ export default function Entradas() {
                     )}
                   </button>
                 </form>
-                <button onClick={() => setStep(2)} className="text-sm text-cream/60 hover:text-cream mt-4 block mx-auto">Volver</button>
+                <button onClick={() => setStep(3)} className="text-sm text-cream/60 hover:text-cream mt-4 block mx-auto">Volver</button>
               </div>
             )}
           </div>

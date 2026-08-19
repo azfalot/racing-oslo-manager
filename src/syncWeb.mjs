@@ -16,16 +16,32 @@ async function fetchRealData() {
   
   const squadJson = {
     coach: "Mateo Oslomany",
-    players: squad.players.map(p => ({
+    players: []
+  };
+
+  for (const p of squad.players) {
+    const photoUrl = `https://api.comunio.es/players/${p.id}/photo?size=l&cropped=1`;
+    const localPhotoPath = `/media/players/${p.id}.png`;
+    
+    // Download and save image
+    try {
+      const res = await axios.get(photoUrl, { headers: client.getHeaders(), responseType: 'arraybuffer' });
+      fs.writeFileSync(`./web/public/media/players/${p.id}.png`, res.data);
+    } catch (e) {
+      console.warn(`No se pudo descargar la foto de ${p.name}`);
+    }
+
+    squadJson.players.push({
       id: p.id,
       name: p.name,
       position: p.position,
-      number: Math.floor(Math.random() * 99) + 1, // Comunio doesn't expose shirt numbers easily
-      image: `https://api.comunio.es/players/${p.id}/photo?size=l&cropped=1`, // Direct comunio photo URL
+      number: Math.floor(Math.random() * 99) + 1,
+      image: localPhotoPath,
       isStarter: startingIds.has(p.id),
       stats: { matches: p.stats?.matchDays || 0, goals: p.stats?.goals || 0, points: p.stats?.points || 0 }
-    }))
-  };
+    });
+  }
+
   fs.writeFileSync('./web/src/data/squad.json', JSON.stringify(squadJson, null, 2));
   
   // Dashboard / Standings
