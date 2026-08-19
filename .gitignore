@@ -1,0 +1,15 @@
+# Dependencias
+node_modules/
+
+# Credenciales y configuración local
+.env
+config.json
+last_squad.json
+audit_log.json
+
+# Archivos temporales y capturas
+api_discovered_endpoints.json
+captured_sale_requests.json
+*.log
+*.tmp
+.DS_Store
