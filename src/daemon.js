@@ -688,58 +688,66 @@ async function startPolling() {
 
 // ── MONITOR DE MERCADO (cada 15 min) ─────────────────────────────────────────
 
-async function startMarketMonitor() {
-  console.log('[DAEMON] Iniciando monitor de mercado (cada 15 minutos)...');
+let marketMonitorRunning = false; // Guardia anti-solapamiento
 
-  // Primera comprobación a los 2 minutos de arrancar (para inicializar last_market.json sin alertas)
-  await new Promise(r => setTimeout(r, 2 * 60 * 1000));
+async function runMarketCheck() {
+  if (marketMonitorRunning) {
+    console.log('[DAEMON-MARKET] Comprobación anterior aún en curso, saltando...');
+    return;
+  }
+  marketMonitorRunning = true;
+  console.log('[DAEMON-MARKET] Ejecutando comprobación de mercado...');
+  const client = new ComunioClient();
+  try {
+    await client.login();
+    const squad = await client.getSquad();
+    const dashboard = await client.getDashboardData();
+    const balance = dashboard?.money || 0;
 
-  while (true) {
-    const client = new ComunioClient();
-    try {
-      await client.login();
-      const squad = await client.getSquad();
-      const dashboard = await client.getDashboardData();
-      const balance = dashboard?.money || 0;
+    const result = await checkMarket(client, squad, balance, botPaused);
 
-      const result = await checkMarket(client, squad, balance, botPaused);
-
-      // Notificar pujas automáticas realizadas
-      for (const bid of result.autoBids) {
-        const msg = bid.success
-          ? `🛒 <b>[Monitor Mercado]</b> Auto-puja enviada: <b>${escapeHtml(bid.name)}</b> por <b>${bid.bidAmount.toLocaleString()} €</b>\n📈 Mejora: +${bid.upgradePoints.toFixed(0)} ptos sobre tu peor ${bid.type}`
-          : `🛒 <b>[Monitor Mercado]</b> Auto-puja FALLIDA por <b>${escapeHtml(bid.name)}</b> (${bid.bidAmount.toLocaleString()} €)`;
-        await sendTelegramMessage(msg);
-      }
-
-      // Alertas manuales con botones inline
-      for (const alert of result.manualAlerts) {
-        const posTag = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' }[alert.type] || '👤';
-        const msg = `🛒 <b>[Mercado]</b> Nuevo jugador · ¿Pujo?\n\n${posTag} <b>${escapeHtml(alert.name)}</b> (${alert.type})\n💰 Precio: ${alert.price.toLocaleString()} €\n📈 Mejora: +${alert.upgradePoints.toFixed(0)} ptos\n<i>${escapeHtml(alert.reason)}</i>`;
-        const markup = {
-          inline_keyboard: [[
-            { text: '✅ PUJAR', callback_data: `bid:${alert.playerId}:${alert.name}:${alert.bidAmount}` },
-            { text: '❌ IGNORAR', callback_data: `ignore:${alert.playerId}:${alert.name}` }
-          ]]
-        };
-        await sendTelegramMessage(msg, markup);
-      }
-
-      // Notificar jugadores vendidos (desaparecidos del mercado)
-      if (result.soldPlayers.length > 0) {
-        const names = result.soldPlayers.map(p => escapeHtml(p.name)).join(', ');
-        await sendTelegramMessage(`💼 📤 <b>[Monitor Mercado]</b> Jugadores comprados/retirados: <b>${names}</b>`);
-      }
-
-    } catch (e) {
-      console.error('[DAEMON-MARKET] Error en el monitor de mercado:', e.message);
-    } finally {
-      await client.close();
+    // Notificar pujas automáticas realizadas
+    for (const bid of result.autoBids) {
+      const msg = bid.success
+        ? `🛒 <b>[Monitor Mercado]</b> Auto-puja enviada: <b>${escapeHtml(bid.name)}</b> por <b>${bid.bidAmount.toLocaleString()} €</b>\n📈 Mejora: +${bid.upgradePoints.toFixed(0)} ptos sobre tu peor ${bid.type}`
+        : `🛒 <b>[Monitor Mercado]</b> Auto-puja FALLIDA por <b>${escapeHtml(bid.name)}</b> (${bid.bidAmount.toLocaleString()} €)`;
+      await sendTelegramMessage(msg);
     }
 
-    // Esperar 15 minutos
-    await new Promise(r => setTimeout(r, 15 * 60 * 1000));
+    // Alertas manuales con botones inline
+    for (const alert of result.manualAlerts) {
+      const posTag = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' }[alert.type] || '👤';
+      const msg = `🛒 <b>[Mercado]</b> Nuevo jugador · ¿Pujo?\n\n${posTag} <b>${escapeHtml(alert.name)}</b> (${alert.type})\n💰 Precio: ${alert.price.toLocaleString()} €\n📈 Mejora: +${alert.upgradePoints.toFixed(0)} ptos\n<i>${escapeHtml(alert.reason)}</i>`;
+      const markup = {
+        inline_keyboard: [[
+          { text: '✅ PUJAR', callback_data: `bid:${alert.playerId}:${alert.name}:${alert.bidAmount}` },
+          { text: '❌ IGNORAR', callback_data: `ignore:${alert.playerId}:${alert.name}` }
+        ]]
+      };
+      await sendTelegramMessage(msg, markup);
+    }
+
+    // Notificar jugadores desaparecidos del mercado
+    if (result.soldPlayers.length > 0) {
+      const names = result.soldPlayers.map(p => escapeHtml(p.name)).join(', ');
+      await sendTelegramMessage(`💼 📤 <b>[Monitor Mercado]</b> Jugadores comprados/retirados: <b>${names}</b>`);
+    }
+
+  } catch (e) {
+    console.error('[DAEMON-MARKET] Error en el monitor de mercado:', e.message);
+  } finally {
+    await client.close();
+    marketMonitorRunning = false;
   }
+}
+
+function startMarketMonitor() {
+  console.log('[DAEMON] Iniciando monitor de mercado (cada 15 minutos)...');
+  // Primera ejecución a los 3 min para inicializar last_market.json sin lanzar alertas falsas
+  setTimeout(() => {
+    runMarketCheck();
+    setInterval(runMarketCheck, 15 * 60 * 1000);
+  }, 3 * 60 * 1000);
 }
 
 // ── CRON DIARIO (02:50 · 09:00 · 15:00) ──────────────────────────────────────
