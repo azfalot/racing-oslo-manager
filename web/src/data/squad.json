@@ -1,11 +1,12 @@
 {
   "players": [
-    { "id": 1, "name": "Álex Remiro", "position": "keeper", "number": 1 },
-    { "id": 2, "name": "Aïssa Mandi", "position": "defender", "number": 23 },
-    { "id": 3, "name": "Santi Comesaña", "position": "midfielder", "number": 6 },
-    { "id": 4, "name": "Hugo Álvarez", "position": "midfielder", "number": 10 },
-    { "id": 5, "name": "Pablo Durán", "position": "striker", "number": 9 },
-    { "id": 6, "name": "Gerard Moreno", "position": "striker", "number": 7 }
+    { "id": 1, "name": "Álex Remiro", "position": "keeper", "number": 1, "stats": { "matches": 38, "cleanSheets": 15, "goals": 0 } },
+    { "id": 2, "name": "Aïssa Mandi", "position": "defender", "number": 23, "stats": { "matches": 34, "cleanSheets": 12, "goals": 2, "yellows": 5 } },
+    { "id": 3, "name": "Santi Comesaña", "position": "midfielder", "number": 6, "stats": { "matches": 36, "assists": 7, "goals": 4, "yellows": 8 } },
+    { "id": 4, "name": "Hugo Álvarez", "position": "midfielder", "number": 10, "stats": { "matches": 28, "assists": 12, "goals": 6, "yellows": 2 } },
+    { "id": 5, "name": "Pablo Durán", "position": "striker", "number": 9, "stats": { "matches": 30, "assists": 4, "goals": 14, "yellows": 1 } },
+    { "id": 6, "name": "Gerard Moreno", "position": "striker", "number": 7, "stats": { "matches": 35, "assists": 8, "goals": 22, "yellows": 4 } },
+    { "id": 7, "name": "David Soria", "position": "keeper", "number": 13, "stats": { "matches": 0, "cleanSheets": 0, "goals": 0 } }
   ],
   "coach": "Mateo Oslomany"
 }
