@@ -96,13 +96,17 @@ export default function Plantilla() {
         ))}
       </div>
       
-      <div className="mt-16 bg-forest-dark/40 border border-forest-light p-6 rounded-sm flex items-center justify-between">
-        <div>
-          <h3 className="text-xl font-display font-bold">Cuerpo Técnico</h3>
-          <p className="text-sm text-cream-dark">Director Deportivo / Entrenador</p>
+      <div className="mt-16 bg-forest-dark/40 border border-forest-light p-6 rounded-sm flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex items-center gap-6">
+          <img src="/media/mateo.jpg" alt="Mateo Oslomany" className="w-24 h-24 rounded-full border-2 border-forest-light object-cover shadow-xl" />
+          <div>
+            <h3 className="text-xl font-display font-bold">Cuerpo Técnico</h3>
+            <p className="text-sm text-cream-dark">Director Deportivo / Entrenador</p>
+          </div>
         </div>
         <div className="text-right">
-          <p className="text-2xl font-display font-bold text-white">{squadData.coach}</p>
+          <p className="text-3xl font-display font-bold text-white">{squadData.coach}</p>
+          <p className="text-xs text-forest-light uppercase tracking-widest mt-1">El Arquitecto</p>
         </div>
       </div>
     </div>
