@@ -15,6 +15,8 @@ export class ComunioClient {
     this.isLoggedIn = false;
   }
 
+  getToken() { return this.token; }
+
   async login() {
     console.log(`[CLIENT] Iniciando sesión para el usuario ${this.username} a través de la API...`);
     try {

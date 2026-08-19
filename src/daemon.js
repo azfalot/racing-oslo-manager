@@ -109,10 +109,10 @@ async function sendTelegramPhoto(imagePath, caption = '') {
 /**
  * Genera la tarjeta de fichaje y la envía por Telegram
  */
-async function sendSigningCard(playerName, position, price, caption = '') {
+async function sendSigningCard(playerName, position, price, caption = '', playerId = null, authToken = null) {
   try {
     console.log(`[DAEMON] Generando tarjeta de fichaje para ${playerName}...`);
-    const imagePath = await generateSigningCard(playerName, position, price);
+    const imagePath = await generateSigningCard(playerName, position, price, { playerId, authToken });
     await sendTelegramPhoto(imagePath, caption);
   } catch (e) {
     console.error('[DAEMON] Error generando tarjeta de fichaje:', e.message);
@@ -574,8 +574,10 @@ async function handleTelegramMessage(message) {
         fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
         await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> ¡Puja enviada! <b>${player.name}</b> por <b>${player.price.toLocaleString()} €</b>.`);
         // Tarjeta de presentación del fichaje
+        const pid = player.playerId || player.id;
         await sendSigningCard(player.name, player.type, player.price,
-          `✍️ <b>${escapeHtml(player.name)}</b> firma con el Racing de Oslo por <b>${player.price.toLocaleString()} €</b>`);
+          `✍️ <b>${escapeHtml(player.name)}</b> firma con el Racing de Oslo por <b>${player.price.toLocaleString()} €</b>`,
+          pid, client.getToken());
       } else {
         await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> La puja por ${player.name} fue rechazada por Comunio.`);
       }
@@ -671,9 +673,9 @@ async function handleCallbackQuery(callbackQuery) {
   const data = callbackQuery.data || '';
   console.log(`[DAEMON] Callback recibido: "${data}"`);
 
-  // Formato: "bid:<playerId>:<playerName>:<price>" o "ignore:<playerId>:<playerName>"
+  // Formato: "bid:<playerId>:<playerName>:<price>:<position>" o "ignore:<playerId>:<playerName>"
   if (data.startsWith('bid:')) {
-    const [, playerId, playerName, price] = data.split(':');
+    const [, playerId, playerName, price, position] = data.split(':');
     await answerCallbackQuery(callbackQuery.id, '⏳ Procesando puja...');
 
     const client = new ComunioClient();
@@ -686,10 +688,14 @@ async function handleCallbackQuery(callbackQuery) {
       log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Puja Manual (Botón)', player: playerName, amount: `${parseInt(price).toLocaleString()} €`, status: success ? 'Éxito' : 'Fallo' });
       fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
 
-      const msg = success
-        ? `💼 ✅ <b>[Mateo Oslomany]:</b> ¡Puja enviada! <b>${playerName}</b> por <b>${parseInt(price).toLocaleString()} €</b>.`
-        : `💼 ❌ <b>[Mateo Oslomany]:</b> La puja por ${playerName} fue rechazada por Comunio.`;
-      await sendTelegramMessage(msg);
+      if (success) {
+        await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> ¡Puja enviada! <b>${playerName}</b> por <b>${parseInt(price).toLocaleString()} €</b>.`);
+        await sendSigningCard(playerName, position || '', parseInt(price),
+          `✍️ <b>${escapeHtml(playerName)}</b> firma con el Racing de Oslo por <b>${parseInt(price).toLocaleString()} €</b>`,
+          parseInt(playerId), client.getToken());
+      } else {
+        await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> La puja por ${playerName} fue rechazada por Comunio.`);
+      }
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ Error al pujar: <code>${e.message}</code>`);
     } finally {
@@ -759,8 +765,10 @@ async function runMarketCheck() {
       await sendTelegramMessage(msg);
       // Enviar tarjeta de presentación si la puja tuvo éxito
       if (bid.success) {
+        const pid = bid.playerId || bid.id;
         await sendSigningCard(bid.name, bid.type, bid.price,
-          `✍️ <b>${escapeHtml(bid.name)}</b> firma con el Racing de Oslo por <b>${bid.bidAmount.toLocaleString()} €</b>`);
+          `✍️ <b>${escapeHtml(bid.name)}</b> firma con el Racing de Oslo por <b>${bid.bidAmount.toLocaleString()} €</b>`,
+          pid, client.getToken());
       }
     }
 
@@ -770,7 +778,7 @@ async function runMarketCheck() {
       const msg = `🛒 <b>[Mercado]</b> Nuevo jugador · ¿Pujo?\n\n${posTag} <b>${escapeHtml(alert.name)}</b> (${alert.type})\n💰 Precio: ${alert.price.toLocaleString()} €\n📈 Mejora: +${alert.upgradePoints.toFixed(0)} ptos\n<i>${escapeHtml(alert.reason)}</i>`;
       const markup = {
         inline_keyboard: [[
-          { text: '✅ PUJAR', callback_data: `bid:${alert.playerId}:${alert.name}:${alert.bidAmount}` },
+          { text: '✅ PUJAR', callback_data: `bid:${alert.playerId}:${alert.name}:${alert.bidAmount}:${alert.type}` },
           { text: '❌ IGNORAR', callback_data: `ignore:${alert.playerId}:${alert.name}` }
         ]]
       };
