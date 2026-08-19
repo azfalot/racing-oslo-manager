@@ -48,47 +48,45 @@ export async function generateSigningCard(playerName, position, price, squadNumb
   }
 
   // ── 2. OVERLAY oscuro en la mitad inferior para texto legible ─────────────
-  const overlayGrad = ctx.createLinearGradient(0, H * 0.45, 0, H);
-  overlayGrad.addColorStop(0, 'rgba(10, 20, 50, 0)');
-  overlayGrad.addColorStop(0.4, 'rgba(10, 20, 50, 0.75)');
-  overlayGrad.addColorStop(1, 'rgba(10, 20, 50, 0.97)');
+  const overlayGrad = ctx.createLinearGradient(0, H * 0.40, 0, H);
+  overlayGrad.addColorStop(0, 'rgba(15, 30, 15, 0)');
+  overlayGrad.addColorStop(0.35, 'rgba(15, 30, 15, 0.78)');
+  overlayGrad.addColorStop(1, 'rgba(10, 20, 10, 0.97)');
   ctx.fillStyle = overlayGrad;
   ctx.fillRect(0, 0, W, H);
 
-  // ── 3. BANDA DORADA inferior ──────────────────────────────────────────────
-  ctx.fillStyle = '#c9a84c';
+  // ── 3. BANDA CREMA inferior ───────────────────────────────────────────────
+  ctx.fillStyle = '#e8e0cc';
   ctx.fillRect(0, H - 110, W, 110);
+
+  // Línea verde oscura sobre la banda crema
+  ctx.fillStyle = '#1e3d20';
+  ctx.fillRect(0, H - 114, W, 4);
 
   // ── 4. ETIQUETA POSICIÓN (badge) ──────────────────────────────────────────
   const posInfo = POS_LABELS[position] || { label: position?.toUpperCase() || '—', short: '—' };
-  ctx.fillStyle = '#c9a84c';
+  ctx.fillStyle = '#1e3d20';
   ctx.beginPath();
   roundRect(ctx, 40, H - 370, 180, 50, 8);
   ctx.fill();
 
-  ctx.fillStyle = '#0d1b3e';
+  ctx.fillStyle = '#e8e0cc';
   ctx.font = 'bold 22px sans-serif';
   ctx.textAlign = 'center';
   ctx.fillText(posInfo.short, 130, H - 337);
 
   // ── 5. NOMBRE DEL JUGADOR ─────────────────────────────────────────────────
   ctx.textAlign = 'left';
-  ctx.fillStyle = '#ffffff';
 
-  // Ajustar tamaño de fuente según longitud del nombre
   const nameFontSize = playerName.length > 14 ? 72 : playerName.length > 10 ? 86 : 96;
-  ctx.font = `bold ${nameFontSize}px sans-serif`;
-  ctx.shadowColor = 'rgba(0,0,0,0.8)';
-  ctx.shadowBlur = 15;
+  ctx.shadowColor = 'rgba(0,0,0,0.9)';
+  ctx.shadowBlur = 18;
 
-  // Mayúsculas
   const nameParts = playerName.toUpperCase().split(' ');
   if (nameParts.length > 1) {
-    // Primera parte más pequeña (apellido o nombre)
     ctx.font = `bold ${Math.round(nameFontSize * 0.6)}px sans-serif`;
-    ctx.fillStyle = '#c9a84c';
+    ctx.fillStyle = '#a8c49a'; // verde claro
     ctx.fillText(nameParts[0], 40, H - 300);
-    // Segunda parte más grande
     ctx.font = `bold ${nameFontSize}px sans-serif`;
     ctx.fillStyle = '#ffffff';
     ctx.fillText(nameParts.slice(1).join(' '), 40, H - 210);
@@ -101,38 +99,41 @@ export async function generateSigningCard(playerName, position, price, squadNumb
 
   // ── 6. POSICIÓN COMPLETA ──────────────────────────────────────────────────
   ctx.font = '28px sans-serif';
-  ctx.fillStyle = 'rgba(255,255,255,0.75)';
+  ctx.fillStyle = 'rgba(232, 224, 204, 0.80)';
   ctx.fillText(posInfo.label, 40, H - 165);
 
-  // ── 7. PRECIO (en banda dorada) ───────────────────────────────────────────
+  // ── 7. PRECIO (en banda crema) ────────────────────────────────────────────
   ctx.textAlign = 'left';
-  ctx.font = 'bold 28px sans-serif';
-  ctx.fillStyle = '#0d1b3e';
+  ctx.font = 'bold 26px sans-serif';
+  ctx.fillStyle = '#1e3d20';
   ctx.fillText('INVERSIÓN', 40, H - 72);
   ctx.font = 'bold 48px sans-serif';
+  ctx.fillStyle = '#1a1a1a';
   ctx.fillText(`${(price / 1_000_000).toFixed(1)}M €`, 40, H - 28);
 
   // ── 8. CLUB + TEXTO DERECHA ───────────────────────────────────────────────
   ctx.textAlign = 'right';
   ctx.font = 'bold 22px sans-serif';
-  ctx.fillStyle = '#0d1b3e';
+  ctx.fillStyle = '#1e3d20';
   ctx.fillText('NUEVO FICHAJE', W - 40, H - 72);
-  ctx.font = 'bold 36px sans-serif';
+  ctx.font = 'bold 34px sans-serif';
+  ctx.fillStyle = '#1a1a1a';
   ctx.fillText('RACING DE OSLO', W - 40, H - 28);
 
   // ── 9. NÚMERO DE DORSAL (si se conoce) ────────────────────────────────────
   if (squadNumber > 0) {
     ctx.textAlign = 'right';
     ctx.font = `bold 140px sans-serif`;
-    ctx.fillStyle = 'rgba(201, 168, 76, 0.15)';
+    ctx.fillStyle = 'rgba(30, 61, 32, 0.12)';
     ctx.fillText(`#${squadNumber}`, W - 30, H - 130);
   }
 
   // ── 10. MARCA DE AGUA / LÍNEA SUPERIOR ───────────────────────────────────
   ctx.textAlign = 'center';
-  ctx.font = '18px sans-serif';
-  ctx.fillStyle = 'rgba(255,255,255,0.6)';
-  ctx.fillText('🤖 Mateo Oslomany · Director Deportivo · Racing de Oslo', W / 2, 36);
+  ctx.font = '17px sans-serif';
+  ctx.fillStyle = 'rgba(232, 224, 204, 0.65)';
+  ctx.fillText('🤖 Mateo Oslomany · Director Deportivo · Racing de Oslo · Est. 2024', W / 2, 36);
+
 
   // ── Guardar PNG ───────────────────────────────────────────────────────────
   const safeName = playerName.replace(/[^a-zA-Z0-9]/g, '_');
