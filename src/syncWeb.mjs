@@ -30,36 +30,38 @@ async function fetchRealData() {
   
   // Dashboard / Standings
   const dashboard = await client.getDashboardData();
+  const realStandings = await client.getStandings();
   
   // Matches
   const matchdays = await client.getMatchdays();
   const nextMd = matchdays.find(md => !md.finished && !md.started) || matchdays.find(md => !md.finished);
-  let opponent = "Por determinar";
-  if (nextMd) {
-    const mdId = nextMd._links?.self?.href?.split('/').pop() || nextMd.id;
-    const detail = await client.getMatchdayDetail(mdId);
-    if (detail && detail.matches) {
-       // Just find a match
-       const match = detail.matches[0]; // Wait, we need to find the match involving the actual opponent or just the first match? 
-       // In Comunio, user doesn't have an "opponent" like in real life. Comunio is a fantasy league against other users.
-       // The "opponent" could just be a random real match for flavor, or a rivalry in the community.
-       opponent = match.home.name === "Racing" ? match.guest.name : match.home.name;
+  let opponent = "Resto de la Liga";
+  if (realStandings && realStandings.length > 1) {
+    const rivals = realStandings.filter(t => t.id !== 21163822); // Filtra Racing de Oslo
+    if (rivals.length > 0) {
+      opponent = rivals[Math.floor(Math.random() * rivals.length)].name;
     }
   }
   
   const matchesJson = {
     nextMatch: {
-      competition: "Segunda Regional Cántabra",
+      competition: "Comunio Liga Total",
       matchday: nextMd ? nextMd.matchdayKey : 1,
       opponent: opponent,
       date: nextMd ? "Próxima Jornada" : "Por determinar",
       venue: "Oslo Arena"
     },
-    standings: {
+    standingsInfo: {
       position: dashboard?.position || 1,
       points: dashboard?.points || 0,
       form: ["-", "-", "-", "-", "-"]
-    }
+    },
+    standingsData: realStandings.map((t, index) => ({
+      pos: index + 1,
+      team: t.name,
+      pts: t.points,
+      value: t.teamValue
+    }))
   };
   fs.writeFileSync('./web/src/data/matches.json', JSON.stringify(matchesJson, null, 2));
   
