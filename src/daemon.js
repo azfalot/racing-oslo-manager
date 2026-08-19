@@ -5,6 +5,7 @@ import { ComunioClient } from './comunioClient.js';
 import { ComunioEngine } from './engine.js';
 import { analyzeRivals } from './rivals.js';
 import { checkMarket, ignorePlayer } from './marketMonitor.js';
+import { generateSigningCard } from './signingCard.js';
 import fs from 'fs';
 
 dotenv.config();
@@ -76,6 +77,46 @@ async function answerCallbackQuery(callbackQueryId, text = '') {
       text
     });
   } catch (e) {}
+}
+
+/**
+ * Envía una imagen (archivo local) por Telegram
+ */
+async function sendTelegramPhoto(imagePath, caption = '') {
+  try {
+    const FormData = (await import('node:form-data')).default || (await import('form-data')).default;
+    const form = new FormData();
+    form.append('chat_id', telegramChatId);
+    form.append('photo', fs.createReadStream(imagePath), { filename: 'signing.png' });
+    if (caption) form.append('caption', caption);
+    form.append('parse_mode', 'HTML');
+
+    await axios.post(
+      `https://api.telegram.org/bot${telegramToken}/sendPhoto`,
+      form,
+      { headers: form.getHeaders(), maxBodyLength: Infinity }
+    );
+    console.log('[DAEMON-TG] Imagen de fichaje enviada correctamente.');
+  } catch (err) {
+    const detail = err.response ? JSON.stringify(err.response.data) : err.message;
+    console.error('[DAEMON-TG] Error al enviar imagen:', detail);
+  } finally {
+    // Borrar el archivo generado tras enviarlo para no acumular espacio
+    try { fs.unlinkSync(imagePath); } catch (e) {}
+  }
+}
+
+/**
+ * Genera la tarjeta de fichaje y la envía por Telegram
+ */
+async function sendSigningCard(playerName, position, price, caption = '') {
+  try {
+    console.log(`[DAEMON] Generando tarjeta de fichaje para ${playerName}...`);
+    const imagePath = await generateSigningCard(playerName, position, price);
+    await sendTelegramPhoto(imagePath, caption);
+  } catch (e) {
+    console.error('[DAEMON] Error generando tarjeta de fichaje:', e.message);
+  }
 }
 
 // ── MANEJADOR DE COMANDOS ─────────────────────────────────────────────────────
@@ -532,9 +573,13 @@ async function handleTelegramMessage(message) {
         log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Puja Manual (Telegram)', player: player.name, amount: `${player.price.toLocaleString()} €`, status: 'Éxito' });
         fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
         await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> ¡Puja enviada! <b>${player.name}</b> por <b>${player.price.toLocaleString()} €</b>.`);
+        // Tarjeta de presentación del fichaje
+        await sendSigningCard(player.name, player.type, player.price,
+          `✍️ <b>${escapeHtml(player.name)}</b> firma con el Racing de Oslo por <b>${player.price.toLocaleString()} €</b>`);
       } else {
         await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> La puja por ${player.name} fue rechazada por Comunio.`);
       }
+
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al pujar: <code>${e.message}</code>`);
     } finally {
@@ -712,6 +757,11 @@ async function runMarketCheck() {
         ? `🛒 <b>[Monitor Mercado]</b> Auto-puja enviada: <b>${escapeHtml(bid.name)}</b> por <b>${bid.bidAmount.toLocaleString()} €</b>\n📈 Mejora: +${bid.upgradePoints.toFixed(0)} ptos sobre tu peor ${bid.type}`
         : `🛒 <b>[Monitor Mercado]</b> Auto-puja FALLIDA por <b>${escapeHtml(bid.name)}</b> (${bid.bidAmount.toLocaleString()} €)`;
       await sendTelegramMessage(msg);
+      // Enviar tarjeta de presentación si la puja tuvo éxito
+      if (bid.success) {
+        await sendSigningCard(bid.name, bid.type, bid.price,
+          `✍️ <b>${escapeHtml(bid.name)}</b> firma con el Racing de Oslo por <b>${bid.bidAmount.toLocaleString()} €</b>`);
+      }
     }
 
     // Alertas manuales con botones inline

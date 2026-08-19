@@ -8,8 +8,10 @@
     "start": "node src/app.js"
   },
   "dependencies": {
+    "@napi-rs/canvas": "^1.0.7",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
+    "form-data": "^4.0.6",
     "playwright": "^1.43.0"
   },
   "type": "module"
