@@ -180,6 +180,18 @@ export class ComunioClient {
   /**
    * Obtiene los jugadores en venta en el mercado de fichajes
    */
+  async getMatchdayDetail(matchdayId) {
+    console.log(`[CLIENT] Obteniendo detalle de la jornada ${matchdayId}...`);
+    try {
+      const url = `https://api.comunio.es/matchdays/${matchdayId}`;
+      const response = await axios.get(url, { headers: this.getHeaders() });
+      return response.data;
+    } catch (err) {
+      console.warn(`[CLIENT] Error al obtener detalle de la jornada ${matchdayId}:`, err.message);
+      return null;
+    }
+  }
+
   async getMarket() {
     if (!this.isLoggedIn) await this.login();
     console.log('[CLIENT] Descargando mercado de fichajes...');

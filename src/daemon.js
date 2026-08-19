@@ -841,8 +841,52 @@ function startCronScheduler() {
   }, 60000);
 }
 
+// ── MATCHDAY MONITOR ────────────────────────────────────────────────────────
+let lastLineupMatchdayId = null;
+
+function startMatchdayMonitor() {
+  console.log('[DAEMON] Iniciando monitor de jornadas (Auto-Alineación <3h)...');
+  
+  setInterval(async () => {
+    if (botPaused) return;
+    try {
+      const client = new ComunioClient();
+      await client.login();
+      const matchdays = await client.getMatchdays();
+      const nextMatchday = matchdays.find(md => !md.finished && !md.started) || matchdays.find(md => !md.finished);
+      
+      if (nextMatchday) {
+        const mdId = nextMatchday._links?.self?.href?.split('/').pop() || nextMatchday.id;
+        const detail = await client.getMatchdayDetail(mdId);
+        
+        if (detail && detail.eventInfo && detail.eventInfo.kickoff) {
+          const kickoffTime = new Date(detail.eventInfo.kickoff).getTime();
+          const now = Date.now();
+          const hoursUntilKickoff = (kickoffTime - now) / (1000 * 60 * 60);
+          
+          if (hoursUntilKickoff > 0 && hoursUntilKickoff <= 3 && lastLineupMatchdayId !== mdId) {
+            console.log(`[DAEMON] Jornada inminente (${hoursUntilKickoff.toFixed(1)}h). Auto-alineando...`);
+            await sendTelegramMessage('💼 🚨 <i>[Mateo Oslomany]: La jornada arranca en menos de 3h. Cerrando alineación óptima y ventas de emergencia...</i>');
+            
+            exec('node src/app.js', { env: { ...process.env, COMUNIO_MODE: 'autonomo' } }, (err) => {
+              if (err) sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al aplicar cambios: <code>${err.message}</code>`);
+            });
+            
+            lastLineupMatchdayId = mdId;
+          }
+        }
+      }
+      await client.close();
+    } catch (e) {
+      console.error('[DAEMON] Error en monitor de jornadas:', e.message);
+    }
+  }, 30 * 60 * 1000); // 30 mins
+}
+
+
 // ── ARRANQUE ──────────────────────────────────────────────────────────────────
 
 startPolling();
 startCronScheduler();
 startMarketMonitor();
+startMatchdayMonitor();
