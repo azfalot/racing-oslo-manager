@@ -567,6 +567,80 @@ export class ComunioClient {
     return false;
   }
 
+  /**
+   * Obtiene las próximas jornadas de la liga
+   */
+  async getMatchdays() {
+    if (!this.isLoggedIn) await this.login();
+    try {
+      const response = await axios.get('https://api.comunio.es/matchdays', {
+        headers: this.getHeaders()
+      });
+      if (response.status === 200 && response.data) {
+        // La respuesta puede ser un array o un objeto con items
+        const raw = Array.isArray(response.data) ? response.data : (response.data.items || []);
+        return raw.map(md => ({
+          id: md.id,
+          matchdayKey: md.matchdayKey,
+          started: md.started,
+          finished: md.finished,
+          type: md.type,
+          eventInfo: md.eventInfo
+        }));
+      }
+    } catch (err) {
+      console.warn('[CLIENT] Error al obtener jornadas:', err.message);
+    }
+    return [];
+  }
+
+  /**
+   * Obtiene los jugadores más valiosos de la plataforma (top por precio)
+   */
+  async getTopPlayers() {
+    if (!this.isLoggedIn) await this.login();
+    try {
+      const response = await axios.get('https://api.comunio.es/portlets/players?filterBy=topQuote', {
+        headers: this.getHeaders()
+      });
+      if (response.status === 200 && response.data) {
+        const items = Array.isArray(response.data) ? response.data : (response.data.items || []);
+        return items.map(p => ({
+          playerId: p.id || p.playerId,
+          name: p.name,
+          price: p.quotedprice || p.price || 0,
+          type: p.position || p.type,
+          status: p.status,
+          totalPoints: p.points === '-' ? 0 : parseInt(p.points) || 0
+        }));
+      }
+    } catch (err) {
+      console.warn('[CLIENT] Error al obtener top jugadores:', err.message);
+    }
+    return [];
+  }
+
+  /**
+   * Cancela una puja activa por su offerId
+   */
+  async cancelBid(offerId, playerName) {
+    if (!this.isLoggedIn) await this.login();
+    console.log(`[CLIENT] Cancelando puja (offerId: ${offerId}) por ${playerName}...`);
+    try {
+      const url = `https://api.comunio.es/communities/${this.communityId}/users/${this.userId}/offers/${offerId}`;
+      const response = await axios.delete(url, {
+        headers: this.getHeaders()
+      });
+      if (response.status === 200 || response.status === 204) {
+        console.log(`[CLIENT] Puja por ${playerName} cancelada con éxito.`);
+        return true;
+      }
+    } catch (err) {
+      console.warn(`[CLIENT] Error al cancelar puja por ${playerName}:`, err.message);
+    }
+    return false;
+  }
+
   async close() {
     console.log('[CLIENT] Sesión finalizada.');
   }

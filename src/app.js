@@ -85,37 +85,10 @@ function logAction(action, player, amount, status) {
   fs.writeFileSync('audit_log.json', JSON.stringify(log, null, 2));
 }
 
-function getAuditHistoryText() {
-  try {
-    if (fs.existsSync('audit_log.json')) {
-      const log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8'));
-      if (log.length === 0) return ' - Ninguno.\n';
-      return log.slice(-5).reverse().map(entry => {
-        return `   [${entry.timestamp}] ${entry.action}: ${escapeHtml(entry.player)} (${entry.amount}) ➔ <b>${escapeHtml(entry.status)}</b>`;
-      }).join('\n') + '\n';
-    }
-  } catch (e) {}
-  return ' - Ninguno.\n';
-}
-
 async function runBot() {
   console.log('=================================================================');
   console.log(`INICIANDO COMUNIO BOT - MODO: ${mode.toUpperCase()}`);
   console.log('=================================================================\n');
-
-  // 1. Leer noticias públicas del blog de Comunio
-  console.log('[INFO] Leyendo noticias y análisis del día de Comunio...');
-  const news = await fetchLatestNews(6);
-  let newsText = `📰 <b>Últimos análisis del Comunio Magazine:</b>\n`;
-  if (news && news.length > 0) {
-    news.forEach((article, idx) => {
-      console.log(`  [Noticia ${idx + 1}] ${article.title}`);
-      newsText += ` - <a href="${escapeHtml(article.url)}">${escapeHtml(article.title)}</a>\n`;
-    });
-  } else {
-    newsText += ` - No se pudieron cargar las noticias de pretemporada hoy.\n`;
-  }
-  console.log('');
 
   const client = new ComunioClient();
   const engine = new ComunioEngine();
@@ -144,23 +117,17 @@ async function runBot() {
     console.log('[INFO] Cargando panel principal de economía...');
     const dashboardData = await client.getDashboardData();
     
-    // Configurar saldo leyendo de la API de Comunio
-    let balance = 20000000; // Por defecto de seguridad
+    let balance = 20000000;
     if (dashboardData && dashboardData.money !== undefined) {
       balance = dashboardData.money;
     } else {
       console.log('[WARN] No se pudo leer el saldo exacto desde la API, utilizando saldo de seguridad en 20M.');
     }
-    
     console.log(`[INFO] Saldo actual: ${balance.toLocaleString()} €\n`);
 
     // Obtener plantilla actual
     console.log('[INFO] Cargando plantilla del equipo...');
     const squad = await client.getSquad();
-
-    if (!squad || !squad.players) {
-      console.warn('[WARN] No se pudo cargar la plantilla mediante la API. Usando plantilla vacía o simulada.');
-    }
 
     // Obtener alineación actual
     console.log('[INFO] Cargando alineación actual...');
@@ -172,38 +139,34 @@ async function runBot() {
     const marketPlayers = market?.players || [];
     console.log(`[INFO] Jugadores en el mercado: ${marketPlayers.length}\n`);
 
-    // 2. Ejecutar análisis del motor de decisiones
+    // Obtener jornadas
+    console.log('[INFO] Cargando calendario de jornadas...');
+    const matchdays = await client.getMatchdays();
+    const nextMatchday = matchdays.find(md => !md.finished && !md.started) || matchdays.find(md => !md.finished);
+
+    // Ejecutar análisis del motor de decisiones
     console.log('[PROCESANDO] Ejecutando lógica de optimización...');
-    
-    // Optimizar alineación
     const lineupResult = engine.optimizeLineup(squad || { players: [] });
-    
-    // Gestionar economía
     const economyResult = engine.manageEconomy(squad || { players: [] }, balance);
-    
-    // Analizar mercado para compras
     const marketResult = engine.analyzeMarket(marketPlayers, squad, balance);
 
-    // Aplicar margen de puja configurable a las recomendaciones de compra
+    // Aplicar margen de puja a las recomendaciones
     if (marketResult.recommendations) {
       marketResult.recommendations = marketResult.recommendations.map(rec => {
         const withMargin = Math.ceil(rec.price * (1 + bidMargin / 100));
-        return {
-          ...rec,
-          bidAmount: withMargin
-        };
+        return { ...rec, bidAmount: withMargin };
       });
     }
 
-    // Analizar rivales de la comunidad
+    // Analizar rivales
     console.log('[INFO] Analizando los equipos rivales de la liga...');
     const rivals = await analyzeRivals(client);
 
-    // Obtener sugerencias de liquidez (ventas opcionales de suplentes/lesionados de la plantilla)
+    // Sugerencias de liquidez
     const starting11Ids = lineupResult.starting11 ? lineupResult.starting11.map(p => p.playerId) : [];
     const liquiditySuggestions = engine.getLiquiditySuggestions(squad, starting11Ids);
 
-    // Enriquecer recomendaciones con Transfermarkt
+    // Enriquecer recomendaciones con Transfermarkt (top 5)
     console.log('[INFO] Consultando valores de mercado reales en Transfermarkt...');
     const recommendationsWithTM = await Promise.all(
       (marketResult.recommendations || []).slice(0, 5).map(async (rec) => {
@@ -216,7 +179,7 @@ async function runBot() {
       })
     );
 
-    // 3. Aplicar cambios en Modo Autónomo ANTES de redactar el reporte
+    // ── MODO AUTÓNOMO: Aplicar cambios ──────────────────────────────────────
     if (mode === 'autonomo') {
       console.log('[AUTÓNOMO] Aplicando cambios en tu cuenta de Comunio...');
       
@@ -226,158 +189,128 @@ async function runBot() {
           const startingIds = lineupResult.starting11.map(p => p.playerId);
           console.log('[AUTÓNOMO] Guardando alineación ideal...');
           const success = await client.setLineup(startingIds, lineupResult.formation);
-          logAction("Alineación Guardada", lineupResult.formation, null, success ? "Éxito" : "Fallo");
+          logAction('Alineación Guardada', lineupResult.formation, null, success ? 'Éxito' : 'Fallo');
         } catch (e) {
           console.error('[AUTÓNOMO] Error guardando alineación:', e.message);
-          logAction("Alineación Guardada", lineupResult.formation, null, "Fallo (Error)");
+          logAction('Alineación Guardada', lineupResult.formation, null, 'Fallo (Error)');
         }
       }
 
-      // Si está en deuda y hay sugerencias de venta, ponerlos en venta
+      // Vender por deuda
       if (economyResult.inDebt && economyResult.suggestedSales.length > 0) {
         for (const s of economyResult.suggestedSales) {
           try {
             console.log(`[AUTÓNOMO] Poniendo en venta por deuda a ${s.name} por ${s.price}...`);
             const success = await client.sellPlayer(s.playerId, s.name, s.price);
-            logAction("Puesto en Venta (Deuda)", s.name, s.price, success ? "Éxito" : "Fallo");
+            logAction('Puesto en Venta (Deuda)', s.name, s.price, success ? 'Éxito' : 'Fallo');
           } catch (e) {
             console.error(`[AUTÓNOMO] Error vendiendo a ${s.name}:`, e.message);
-            logAction("Puesto en Venta (Deuda)", s.name, s.price, "Fallo (Error)");
+            logAction('Puesto en Venta (Deuda)', s.name, s.price, 'Fallo (Error)');
           }
         }
       }
 
-      // Poner en venta también las sugerencias de liquidez opcionales automáticamente
+      // Vender suplentes/lesionados para liquidez
       if (liquiditySuggestions && liquiditySuggestions.length > 0) {
         for (const s of liquiditySuggestions) {
           try {
             console.log(`[AUTÓNOMO] Poniendo en venta para liquidez a ${s.name} por ${s.price}...`);
             const success = await client.sellPlayer(s.playerId, s.name, s.price);
-            logAction("Puesto en Venta (Liquidez)", s.name, s.price, success ? "Éxito" : "Fallo");
+            logAction('Puesto en Venta (Liquidez)', s.name, s.price, success ? 'Éxito' : 'Fallo');
           } catch (e) {
             console.error(`[AUTÓNOMO] Error vendiendo sugerencia de liquidez ${s.name}:`, e.message);
-            logAction("Puesto en Venta (Liquidez)", s.name, s.price, "Fallo (Error)");
+            logAction('Puesto en Venta (Liquidez)', s.name, s.price, 'Fallo (Error)');
           }
         }
       }
 
-      // Comprar fichajes recomendados (pujas al mínimo absoluto + margen configurable)
+      // Pujar por recomendaciones del mercado
       if (marketResult.recommendations && marketResult.recommendations.length > 0) {
         for (const rec of marketResult.recommendations.slice(0, 2)) {
-          // Comprobar si ya existe una puja activa por este jugador
           const existingBid = pendingBids.find(b => b.playerId === rec.playerId);
           if (existingBid) {
-            console.log(`[AUTÓNOMO] Ya existe una oferta activa por ${rec.name} por ${existingBid.price.toLocaleString()} € (Oferta calculada: ${rec.bidAmount.toLocaleString()} €). Omitiendo duplicado.`);
+            console.log(`[AUTÓNOMO] Ya existe oferta activa por ${rec.name}. Omitiendo duplicado.`);
             continue;
           }
-
-          // Pujar solo si la mejora es significativa
           if (rec.upgradePoints > 15 && balance >= rec.bidAmount) {
             try {
-              console.log(`[AUTÓNOMO] Pujando automáticamente por ${rec.name} con oferta de ${rec.bidAmount.toLocaleString()} € (Margen: ${bidMargin}%)...`);
+              console.log(`[AUTÓNOMO] Pujando por ${rec.name}: ${rec.bidAmount.toLocaleString()} € (Margen: ${bidMargin}%)...`);
               const success = await client.placeBid(rec.playerId, rec.name, rec.bidAmount);
-              logAction("Puja Enviada", rec.name, rec.bidAmount, success ? "Éxito" : "Fallo");
+              logAction('Puja Enviada', rec.name, rec.bidAmount, success ? 'Éxito' : 'Fallo');
             } catch (e) {
               console.error(`[AUTÓNOMO] Error al pujar por ${rec.name}:`, e.message);
-              logAction("Puja Enviada", rec.name, rec.bidAmount, "Fallo (Error)");
+              logAction('Puja Enviada', rec.name, rec.bidAmount, 'Fallo (Error)');
             }
           }
         }
       }
     }
 
-    // 4. Confeccionar el reporte final en HTML
-    let report = `💼 <b>INFORME DE DIRECCIÓN DEPORTIVA</b>\n<i>Remite: Mateo Oslomany (Director Deportivo, Racing de Oslo)</i>\n\n`;
-    report += `💰 <b>Estado Financiero:</b>\n`;
-    report += ` - Saldo: ${balance.toLocaleString()} €\n`;
-    report += ` - Estado: ${economyResult.inDebt ? '⚠️ EN DEUDA' : '✅ Saneado'}\n`;
-    report += ` - Margen de puja activo: <b>${bidMargin}%</b>\n\n`;
+    // ── RESUMEN EJECUTIVO COMPACTO ───────────────────────────────────────────
+    const myRank = rivals.findIndex(r => r.isMe) + 1;
+    const myRankStr = myRank > 0 ? `#${myRank} de ${rivals.length}` : '—';
+    const myValue = rivals.find(r => r.isMe)?.squadValue?.toLocaleString() || '—';
 
-    if (economyResult.inDebt) {
-      report += `🚨 <b>Ventas Urgentes Sugeridas (Para salir de la deuda):</b>\n`;
-      economyResult.suggestedSales.forEach(s => {
-        report += ` - <b>${escapeHtml(s.name)}</b> (${escapeHtml(s.type)}) - Valor: ${s.price.toLocaleString()} €\n   <i>Motivo:</i> ${escapeHtml(s.reason)}\n`;
-      });
-      report += `\n`;
+    // Próxima jornada
+    let matchdayLine = '—';
+    if (nextMatchday) {
+      const dateMatch = (nextMatchday.eventInfo || '').match(/kickoff=(\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2})/);
+      if (dateMatch) {
+        const d = new Date(dateMatch[1]);
+        matchdayLine = `J${nextMatchday.matchdayKey} · ${d.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', timeZone: 'Europe/Madrid' })} ${d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' })}h`;
+      } else {
+        matchdayLine = `Jornada ${nextMatchday.matchdayKey}`;
+      }
     }
 
-    report += `⚽ <b>Alineación Actual en Comunio (Formación: ${currentLineup ? currentLineup.tactic : 'Desconocida'}):</b>\n`;
-    if (currentLineup && currentLineup.players && currentLineup.players.length > 0) {
-      currentLineup.players.forEach(p => {
-        report += `   • [${p.type.substring(0,2).toUpperCase()}] <b>${escapeHtml(p.name)}</b> (${p.price.toLocaleString()} €)\n`;
-      });
-    } else {
-      report += `   - No se pudo leer la alineación actual.\n`;
+    // Alertas
+    const injuredStarters = (lineupResult.starting11 || []).filter(p => !p.available);
+    const alertLines = [];
+    if (economyResult.inDebt) alertLines.push(`🚨 Deuda: ${Math.abs(balance).toLocaleString()} € → <code>/sugerencias</code>`);
+    if (injuredStarters.length > 0) alertLines.push(`🤕 Lesionados titulares: ${injuredStarters.map(p => escapeHtml(p.name)).join(', ')}`);
+    if (pendingBids.length > 0) alertLines.push(`⏳ ${pendingBids.length} puja(s) activa(s) → <code>/mis_pujas</code>`);
+
+    // Línea de mercado
+    const marketOpsCount = recommendationsWithTM.length;
+    const marketLine = marketOpsCount > 0
+      ? `${marketOpsCount} oportunidad(es) → <code>/mercado</code>`
+      : 'Sin compras rentables ahora mismo';
+
+    // Última acción auditada
+    let lastActionLine = '—';
+    try {
+      if (fs.existsSync('audit_log.json')) {
+        const log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8'));
+        if (log.length > 0) {
+          const last = log[log.length - 1];
+          lastActionLine = `${last.action}: ${escapeHtml(last.player)} (${last.amount}) ➔ ${escapeHtml(last.status)}`;
+        }
+      }
+    } catch (e) {}
+
+    let report = `💼 <b>Mateo Oslomany · Resumen Ejecutivo</b>\n`;
+    report += `<i>${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</i>\n\n`;
+    report += `💰 <b>Economía:</b> ${balance.toLocaleString()} € ${economyResult.inDebt ? '⚠️ EN DEUDA' : '✅'} | Margen: <b>${bidMargin}%</b>\n`;
+    report += `⚽ <b>Alineación:</b> ${lineupResult.formation || '—'} ${mode === 'autonomo' ? '(guardada ✅)' : '(modo asistente)'}\n`;
+    report += `🛒 <b>Mercado:</b> ${marketLine}\n`;
+    report += `👥 <b>Liga:</b> ${myRankStr} | Plantilla: ${myValue} €\n`;
+    report += `📅 <b>Próx. jornada:</b> ${matchdayLine}\n`;
+
+    if (alertLines.length > 0) {
+      report += `\n⚠️ <b>Alertas:</b>\n`;
+      alertLines.forEach(a => { report += ` • ${a}\n`; });
     }
-    report += `\n`;
 
-    report += `⚽ <b>Optimización de Alineación Recomendada (Formación: ${lineupResult.formation || 'Sin asignar'}):</b>\n`;
-    if (lineupResult.starting11) {
-      report += ` <b>Titulares:</b> \n`;
-      lineupResult.starting11.forEach(p => {
-        report += `   • [${p.type.substring(0,2).toUpperCase()}] <b>${escapeHtml(p.name)}</b> (Ptos esperados: ${p.expectedPoints.toFixed(0)}) ${p.available ? '✅' : '❌ Lesionado/Sancionado'}\n`;
-      });
-      report += ` <b>Reservas:</b> \n`;
-      lineupResult.bench.slice(0, 4).forEach(p => {
-        report += `   • [${p.type.substring(0,2).toUpperCase()}] <b>${escapeHtml(p.name)}</b>\n`;
-      });
-    } else {
-      report += ` - No se pudo generar la alineación ideal.\n`;
-    }
-    report += `\n`;
-
-    report += `🛒 <b>Recomendaciones de Compra en el Mercado (Análisis Transfermarkt):</b>\n`;
-    if (recommendationsWithTM.length > 0) {
-      recommendationsWithTM.forEach(rec => {
-        const tmSuffix = rec.tmUrl ? ` <a href="${escapeHtml(rec.tmUrl)}">[Valor TM: ${escapeHtml(rec.tmValue)}]</a>` : ` (Valor TM: ${escapeHtml(rec.tmValue)})`;
-        report += ` - <b>${escapeHtml(rec.name)}</b> (${escapeHtml(rec.type)}) - Precio Comunio: ${rec.price.toLocaleString()} €${tmSuffix}\n`;
-        report += `   <i>Oferta Sugerida:</i> <b>${rec.bidAmount.toLocaleString()} €</b> ( Upgrade: +${rec.upgradePoints.toFixed(0)} ptos )\n`;
-        report += `   <i>Análisis:</i> ${escapeHtml(rec.reason)}\n`;
-      });
-    } else {
-      report += ` - No hay compras recomendadas que mejoren tu equipo actual dentro de tu presupuesto.\n`;
-    }
-    report += `\n`;
-
-    report += `💡 <b>Sugerencias de Venta Opcionales (Para ganar liquidez):</b>\n`;
-    if (liquiditySuggestions.length > 0) {
-      liquiditySuggestions.forEach(s => {
-        report += ` - <b>${escapeHtml(s.name)}</b> - Valor: ${s.price.toLocaleString()} €\n   <i>Análisis:</i> ${escapeHtml(s.reason)}\n`;
-      });
-    } else {
-      report += ` - No tienes jugadores suplentes de alto valor o lesionados de larga duración que convenga vender.\n`;
-    }
-    report += `\n`;
-
-    report += `👥 <b>Análisis de Rivales en tu Liga (Ordenados por Valor de Plantilla):</b>\n`;
-    if (rivals && rivals.length > 0) {
-      rivals.forEach(r => {
-        const prefix = r.isMe ? '👑 <b>[TÚ]</b>' : '👤';
-        report += ` - ${prefix} <b>${escapeHtml(r.teamName)}</b> (${escapeHtml(r.ownerName)})\n`;
-        report += `   Plantilla: ${r.playerCount} jugadores - Valor total: ${r.squadValue.toLocaleString()} €\n`;
-        report += `   Estrellas principales: ${r.stars.map(s => `${escapeHtml(s.name)} (${s.price.toLocaleString()} €)`).join(', ')}\n`;
-      });
-    } else {
-      report += ` - No se pudo realizar el análisis de los rivales.\n`;
-    }
-    report += `\n`;
-
-    report += `📋 <b>Apartado de Cambios Recientes (Historial de Auditoría):</b>\n`;
-    report += getAuditHistoryText();
-    report += `\n`;
-
-    report += `Atentamente,\n<b>Mateo Oslomany</b>\n<i>Director Deportivo, Racing de Oslo</i>\n\n`;
-
-    report += newsText;
+    report += `\n📋 <b>Última acción:</b> <i>${lastActionLine}</i>\n`;
+    report += `\n<i>Usa /help para ver todos los comandos disponibles.</i>`;
 
     console.log('-----------------------------------------------------------------');
     console.log(report.replace(/<[^>]*>/g, ''));
     console.log('-----------------------------------------------------------------');
 
-    // Enviar reporte diario a Telegram
     await sendTelegramMessage(report);
 
-    // 5. Comparar plantilla actual con last_squad.json para detectar fichajes/ventas consolidados
+    // ── DETECTAR CAMBIOS EN PLANTILLA ────────────────────────────────────────
     try {
       const currentPlayers = squad?.players || [];
       if (fs.existsSync('last_squad.json')) {
@@ -387,26 +320,24 @@ async function runBot() {
         const currentIds = currentPlayers.map(p => p.playerId);
         const lastIds = lastPlayers.map(p => p.playerId);
 
-        // Altas (Fichajes)
         const newSignings = currentPlayers.filter(p => !lastIds.includes(p.playerId));
-        // Bajas (Ventas)
         const completedSales = lastPlayers.filter(p => !currentIds.includes(p.playerId));
 
         if (newSignings.length > 0 || completedSales.length > 0) {
           let changeReport = `💼 <b>[Mateo Oslomany]:</b> ¡Noticias de última hora sobre nuestra plantilla!\n\n`;
           
           if (newSignings.length > 0) {
-            changeReport += `✅ <b>Nuevas Incorporaciones (Fichajes):</b>\n`;
+            changeReport += `✅ <b>Nuevas Incorporaciones:</b>\n`;
             newSignings.forEach(p => {
-              changeReport += ` • <b>${escapeHtml(p.name)}</b> (Puntos est.: ${p.average?.points || 0}) - Valor: ${p.price.toLocaleString()} €\n`;
+              changeReport += ` • <b>${escapeHtml(p.name)}</b> - Valor: ${p.price.toLocaleString()} €\n`;
             });
             changeReport += `\n`;
           }
 
           if (completedSales.length > 0) {
-            changeReport += `❌ <b>Salidas del Club (Ventas):</b>\n`;
+            changeReport += `❌ <b>Salidas del Club:</b>\n`;
             completedSales.forEach(p => {
-              changeReport += ` • <b>${escapeHtml(p.name)}</b> - Liberado por: ${p.price.toLocaleString()} €\n`;
+              changeReport += ` • <b>${escapeHtml(p.name)}</b> - ${p.price.toLocaleString()} €\n`;
             });
             changeReport += `\n`;
           }
@@ -415,7 +346,6 @@ async function runBot() {
           await sendTelegramMessage(changeReport);
         }
       }
-      // Guardar plantilla actual como referencia para la siguiente ejecución
       fs.writeFileSync('last_squad.json', JSON.stringify({ players: currentPlayers }, null, 2));
     } catch (e) {
       console.error('[INFO] Error al procesar diferencias de plantilla:', e.message);
