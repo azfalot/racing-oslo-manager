@@ -33,10 +33,17 @@ export default function Home() {
   const nextSlide = () => setCurrentSlide((currentSlide + 1) % featuredNews.length)
   const prevSlide = () => setCurrentSlide((currentSlide - 1 + featuredNews.length) % featuredNews.length)
 
+  // Starters list for Mini Pitch
+  const starters = squadData.players.filter(p => p.isStarter)
+  const keeper = starters.find(p => (p.position || '').toLowerCase() === 'keeper') || starters[0]
+  const defenders = starters.filter(p => (p.position || '').toLowerCase() === 'defender')
+  const midfielders = starters.filter(p => (p.position || '').toLowerCase() === 'midfielder')
+  const strikers = starters.filter(p => (p.position || '').toLowerCase() === 'striker')
+
   return (
     <div className="space-y-4 pb-12">
-      {/* SLEEK EPIC HERO BANNER (Altura optimizada a 260px para ver las noticias en pantalla completa) */}
-      <section className="relative w-full h-[220px] sm:h-[260px] md:h-[280px] bg-black overflow-hidden flex items-center justify-center">
+      {/* HERO BANNER */}
+      <section className="relative w-full h-[220px] sm:h-[250px] md:h-[270px] bg-black overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 z-0">
           <img
             src="/media/poster_j1.jpg"
@@ -46,7 +53,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-clubBlack via-black/30 to-black/60"></div>
         </div>
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-2 sm:space-y-3">
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-2">
           <span className="text-forest-light font-bold tracking-[0.3em] text-[10px] sm:text-xs block uppercase">
             SEGUNDA REGIONAL CÁNTABRA · EST. 2018
           </span>
@@ -82,9 +89,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PORTADA & CARROUSEL DE NOTICIAS (VISIBLE 100% EN PRIMERA PANTALLA) */}
+      {/* MAIN CONTENT GRID */}
       <section className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
-        {/* CARROUSEL DE NOTICIAS PRINCIPAL */}
+        {/* COLUMNA IZQUIERDA: CARROUSEL DE NOTICIAS CON PANEL INFERIOR DEDICADO */}
         <div className="lg:col-span-2 space-y-3">
           <div className="flex items-center justify-between border-b border-forest/30 pb-2.5">
             <h3 className="text-lg sm:text-xl font-display font-bold flex items-center gap-2">
@@ -98,41 +105,55 @@ export default function Home() {
 
           {/* Carousel Slide Container */}
           {featuredNews.length > 0 && (
-            <div className="relative rounded-sm overflow-hidden bg-forest-dark/20 border border-forest/30 shadow-2xl group">
-              <div className="relative h-[280px] sm:h-[340px] md:h-[360px] w-full overflow-hidden bg-black flex items-center justify-center">
+            <div className="rounded-sm overflow-hidden border border-forest/30 shadow-2xl bg-clubBlack">
+              {/* 1. TOP: Imagen Oficial Completa (Uncropped Image Area) */}
+              <div className="relative h-[250px] sm:h-[280px] w-full bg-black/90 flex items-center justify-center p-2 border-b border-forest/30">
                 <img
                   src={featuredNews[currentSlide].image}
                   alt={featuredNews[currentSlide].title}
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition-all duration-700"
+                  className="w-full h-full object-contain rounded-sm"
                   onError={(e) => { e.target.src = '/media/crest.jpg' }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+
+                {/* Navigation Arrows */}
+                {featuredNews.length > 1 && (
+                  <>
+                    <button
+                      onClick={prevSlide}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/80 p-2.5 rounded-full text-cream hover:bg-forest transition-colors z-20 focus:outline-none border border-forest/40"
+                      aria-label="Noticia anterior"
+                    >
+                      <ChevronLeft size={20} />
+                    </button>
+                    <button
+                      onClick={nextSlide}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/80 p-2.5 rounded-full text-cream hover:bg-forest transition-colors z-20 focus:outline-none border border-forest/40"
+                      aria-label="Noticia siguiente"
+                    >
+                      <ChevronRight size={20} />
+                    </button>
+                  </>
+                )}
+
+                {/* Dots Indicators */}
+                {featuredNews.length > 1 && (
+                  <div className="absolute top-3 right-3 flex gap-1.5 z-20 bg-black/80 px-2.5 py-1 rounded-full backdrop-blur-sm border border-forest/40">
+                    {featuredNews.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setCurrentSlide(idx)}
+                        className={`h-1.5 rounded-full transition-all ${idx === currentSlide ? 'w-5 bg-forest-light' : 'w-1.5 bg-cream/40'}`}
+                        aria-label={`Ir a la noticia ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
 
-              {/* Navigation Arrows */}
-              {featuredNews.length > 1 && (
-                <>
-                  <button
-                    onClick={prevSlide}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/75 p-2.5 rounded-full text-cream hover:bg-forest transition-colors z-20 focus:outline-none border border-forest/30"
-                    aria-label="Noticia anterior"
-                  >
-                    <ChevronLeft size={20} />
-                  </button>
-                  <button
-                    onClick={nextSlide}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/75 p-2.5 rounded-full text-cream hover:bg-forest transition-colors z-20 focus:outline-none border border-forest/30"
-                    aria-label="Noticia siguiente"
-                  >
-                    <ChevronRight size={20} />
-                  </button>
-                </>
-              )}
-
-              {/* News Info Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 space-y-2 z-10">
+              {/* 2. BOTTOM: Espacio Inferior Dedicado para el Texto Completo de la Noticia */}
+              <div className="p-5 space-y-2.5 bg-forest-dark/15 border-t border-forest/20">
                 <div className="flex items-center gap-3">
-                  <span className="bg-forest text-cream text-[10px] font-bold px-2.5 py-0.5 uppercase tracking-widest rounded-sm shadow-md border border-forest-light/40">
+                  <span className="bg-forest text-cream text-[10px] font-bold px-2.5 py-0.5 uppercase tracking-widest rounded-sm border border-forest-light/40">
                     {featuredNews[currentSlide].category}
                   </span>
                   <span className="text-xs text-cream/70 flex items-center gap-1 font-mono">
@@ -143,42 +164,30 @@ export default function Home() {
                 <h4 className="text-xl sm:text-2xl font-display font-bold text-white leading-tight">
                   {featuredNews[currentSlide].title}
                 </h4>
-                <p className="text-xs text-cream-dark line-clamp-2 leading-relaxed">
+                <p className="text-xs sm:text-sm text-cream-dark leading-relaxed">
                   {featuredNews[currentSlide].excerpt || featuredNews[currentSlide].summary}
                 </p>
-                <Link
-                  to="/noticias"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest text-forest-light hover:text-white transition-colors pt-1 uppercase"
-                >
-                  LEER COMUNICADO COMPLETO &rarr;
-                </Link>
-              </div>
-
-              {/* Dots Indicators */}
-              {featuredNews.length > 1 && (
-                <div className="absolute top-3 right-3 flex gap-1.5 z-20 bg-black/70 px-2.5 py-1 rounded-full backdrop-blur-sm border border-forest/30">
-                  {featuredNews.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrentSlide(idx)}
-                      className={`h-1.5 rounded-full transition-all ${idx === currentSlide ? 'w-5 bg-forest-light' : 'w-1.5 bg-cream/40'}`}
-                      aria-label={`Ir a la noticia ${idx + 1}`}
-                    />
-                  ))}
+                <div className="pt-1">
+                  <Link
+                    to="/noticias"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest text-forest-light hover:text-white transition-colors uppercase"
+                  >
+                    LEER COMUNICADO COMPLETO &rarr;
+                  </Link>
                 </div>
-              )}
+              </div>
             </div>
           )}
         </div>
 
-        {/* SIDEBAR: ESTADO Y ONCE TITULAR */}
+        {/* COLUMNA DERECHA: ESTADO CLUB & MINI CAMPO DE FÚTBOL (ONCE TITULAR TÁCTICO) */}
         <div className="space-y-5">
           <div>
-            <div className="flex items-center gap-2 mb-2.5 border-b border-forest/30 pb-2">
+            <div className="flex items-center gap-2 mb-2 border-b border-forest/30 pb-2">
               <TrendingUp size={16} className="text-forest-light" />
               <h3 className="text-lg font-display font-bold">ESTADO CLUB</h3>
             </div>
-            <div className="bg-forest-dark/20 border border-forest/30 p-4 rounded-sm space-y-3">
+            <div className="bg-forest-dark/20 border border-forest/30 p-4 rounded-sm space-y-2">
               <div>
                 <p className="text-[10px] text-cream/60 uppercase tracking-widest">Posición Actual</p>
                 <p className="text-3xl font-display font-bold text-white">{matchData.standingsInfo.position}º</p>
@@ -190,27 +199,100 @@ export default function Home() {
             </div>
           </div>
 
+          {/* MINI CAMPO DE FÚTBOL TÁCTICO PARA EL ONCE TITULAR */}
           <div>
-            <div className="flex items-center justify-between mb-2.5 border-b border-forest/30 pb-2">
+            <div className="flex items-center justify-between mb-2 border-b border-forest/30 pb-2">
               <div className="flex items-center gap-2">
                 <Users size={16} className="text-forest-light" />
                 <h3 className="text-lg font-display font-bold">ONCE TITULAR</h3>
               </div>
               <Link to="/alineacion" className="text-[11px] font-bold text-forest-light hover:text-white transition-colors">
-                Ver XI &rarr;
+                Ver XI Completo &rarr;
               </Link>
             </div>
-            <ul className="space-y-2">
-              {squadData.players.filter(p => p.isStarter).slice(0, 5).map(p => (
-                <li key={p.id} className="flex items-center justify-between bg-black/50 p-2 rounded-sm border-l-2 border-forest hover:border-forest-light transition-all">
-                  <div className="flex items-center gap-2.5 overflow-hidden">
-                    <img src={p.image} alt={p.name} className="w-7 h-7 rounded-full bg-forest-dark/50 object-cover flex-shrink-0" onError={(e) => { e.target.src = '/media/crest.jpg' }} />
-                    <span className="font-bold text-xs truncate">{p.name}</span>
+
+            {/* MINI CAMPO VERDE */}
+            <div className="relative w-full h-[320px] bg-gradient-to-b from-forest-dark/95 via-forest/90 to-forest-dark/95 border border-forest-light/40 rounded-sm p-3 shadow-2xl flex flex-col justify-between overflow-hidden">
+              {/* LÍNEAS TÁCTICAS DEL CAMPO DE FÚTBOL */}
+              <div className="absolute inset-0 pointer-events-none opacity-20 border-2 border-white rounded-sm m-2">
+                {/* Línea Central */}
+                <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-white -translate-y-1/2"></div>
+                {/* Círculo Central */}
+                <div className="absolute top-1/2 left-1/2 w-20 h-20 border-2 border-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                {/* Área de Penalti Superior */}
+                <div className="absolute top-0 left-1/2 w-28 h-12 border-b-2 border-x-2 border-white -translate-x-1/2"></div>
+                {/* Área de Penalti Inferior */}
+                <div className="absolute bottom-0 left-1/2 w-28 h-12 border-t-2 border-x-2 border-white -translate-x-1/2"></div>
+              </div>
+
+              {/* 1. DELANTEROS (FRENTE) */}
+              <div className="relative z-10 flex justify-center gap-4 pt-1">
+                {strikers.map(p => (
+                  <div key={p.id} className="flex flex-col items-center">
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="w-8 h-8 rounded-full border-2 border-forest-light bg-black object-cover shadow-lg"
+                      onError={(e) => { e.target.src = '/media/crest.jpg' }}
+                    />
+                    <span className="text-[9px] font-bold text-white bg-black/80 px-1.5 py-0.5 rounded-sm border border-forest/40 truncate max-w-[70px] mt-0.5 shadow-md">
+                      {p.name.split(' ').pop()}
+                    </span>
                   </div>
-                  <span className="text-[9px] font-bold uppercase tracking-wider text-forest-light bg-forest/20 px-2 py-0.5 rounded-sm border border-forest/30">{p.position}</span>
-                </li>
-              ))}
-            </ul>
+                ))}
+              </div>
+
+              {/* 2. CENTROCAMPISTAS (MEDULAR) */}
+              <div className="relative z-10 flex justify-around px-1">
+                {midfielders.map(p => (
+                  <div key={p.id} className="flex flex-col items-center">
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="w-7 h-7 rounded-full border-2 border-cream bg-black object-cover shadow-md"
+                      onError={(e) => { e.target.src = '/media/crest.jpg' }}
+                    />
+                    <span className="text-[8px] font-bold text-white bg-black/80 px-1 py-0.5 rounded-sm border border-forest/40 truncate max-w-[60px] mt-0.5 shadow-sm">
+                      {p.name.split(' ').pop()}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* 3. DEFENSAS (LÍNEA DE 4) */}
+              <div className="relative z-10 flex justify-around px-2">
+                {defenders.map(p => (
+                  <div key={p.id} className="flex flex-col items-center">
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="w-7 h-7 rounded-full border-2 border-cream bg-black object-cover shadow-md"
+                      onError={(e) => { e.target.src = '/media/crest.jpg' }}
+                    />
+                    <span className="text-[8px] font-bold text-white bg-black/80 px-1 py-0.5 rounded-sm border border-forest/40 truncate max-w-[60px] mt-0.5 shadow-sm">
+                      {p.name.split(' ').pop()}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* 4. PORTERO (META) */}
+              <div className="relative z-10 flex justify-center pb-1">
+                {keeper && (
+                  <div className="flex flex-col items-center">
+                    <img
+                      src={keeper.image}
+                      alt={keeper.name}
+                      className="w-8 h-8 rounded-full border-2 border-amber-400 bg-black object-cover shadow-lg"
+                      onError={(e) => { e.target.src = '/media/crest.jpg' }}
+                    />
+                    <span className="text-[9px] font-bold text-amber-300 bg-black/90 px-1.5 py-0.5 rounded-sm border border-amber-400/40 truncate max-w-[70px] mt-0.5 shadow-md">
+                      {keeper.name.split(' ').pop()}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
