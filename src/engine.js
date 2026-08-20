@@ -73,16 +73,21 @@ export class ComunioEngine {
   }
 
   /**
-   * Determina si un jugador está activo y disponible
+   * Determina si un jugador está 100% activo y disponible para el Once Titular
    */
   isPlayerAvailable(player) {
-    if (!player.status) return true;
+    if (!player) return false;
+
+    const statusLower = ((player.status || '') + ' ' + (player.statusInfo || '') + ' ' + (player.availability || '')).toLowerCase();
     
-    // Lista de estados no disponibles (lesionados, sancionados, etc.)
-    const statusLower = player.status.toLowerCase();
-    const unavailableStatus = ['injured', 'suspended', 'rehabilitation', 'retired', 'away', 'lesionado', 'sancionado', 'baja'];
+    // Lista ampliada de estados no disponibles o con alto riesgo de 0 puntos (duda, debilitado, cirugía, molestias)
+    const unavailableKeywords = [
+      'injured', 'suspended', 'rehabilitation', 'retired', 'away',
+      'lesionado', 'sancionado', 'baja', 'duda', 'debilitado',
+      'molestias', 'cirugia', 'cirugía', 'quirófano', 'hombro', 'rotura'
+    ];
     
-    return !unavailableStatus.some(s => statusLower.includes(s));
+    return !unavailableKeywords.some(keyword => statusLower.includes(keyword));
   }
 
   /**
