@@ -20,24 +20,23 @@ async function fetchRealData() {
   };
 
   for (const p of squad.players) {
-    const photoUrl = `https://api.comunio.es/players/${p.id}/photo?size=l&cropped=1`;
-    const localPhotoPath = `/media/players/${p.id}.png`;
+    const photoUrl = `https://api.comunio.es/players/${p.playerId}/photo?size=l&cropped=1`;
+    const localPhotoPath = `/media/players/${p.playerId}.png`;
     
-    // Download and save image
     try {
       const res = await axios.get(photoUrl, { headers: client.getHeaders(), responseType: 'arraybuffer' });
-      fs.writeFileSync(`./web/public/media/players/${p.id}.png`, res.data);
+      fs.writeFileSync(`./web/public/media/players/${p.playerId}.png`, res.data);
     } catch (e) {
       console.warn(`No se pudo descargar la foto de ${p.name}`);
     }
 
     squadJson.players.push({
-      id: p.id,
+      id: p.playerId,
       name: p.name,
-      position: p.position,
+      position: p.type,
       number: Math.floor(Math.random() * 99) + 1,
       image: localPhotoPath,
-      isStarter: startingIds.has(p.id),
+      isStarter: startingIds.has(p.playerId),
       stats: { matches: p.stats?.matchDays || 0, goals: p.stats?.goals || 0, points: p.stats?.points || 0 }
     });
   }
@@ -53,7 +52,7 @@ async function fetchRealData() {
   const nextMd = matchdays.find(md => !md.finished && !md.started) || matchdays.find(md => !md.finished);
   let opponent = "Resto de la Liga";
   if (realStandings && realStandings.length > 1) {
-    const rivals = realStandings.filter(t => t.id !== 21163822); // Filtra Racing de Oslo
+    const rivals = realStandings.filter(t => t.id !== 21163822);
     if (rivals.length > 0) {
       opponent = rivals[Math.floor(Math.random() * rivals.length)].name;
     }
@@ -81,9 +80,8 @@ async function fetchRealData() {
   };
   fs.writeFileSync('./web/src/data/matches.json', JSON.stringify(matchesJson, null, 2));
   
-  // News and Rumors
-  // ...
-  
+  console.log("Web actualizada con éxito!");
   await client.close();
 }
+
 fetchRealData().catch(console.error);
