@@ -159,6 +159,43 @@ export class ComunioEngine {
   }
 
   /**
+   * Determina si se debe poner en venta a un jugador ÚNICAMENTE tras haber completado el fichaje de un reemplazo superior.
+   * Regla: Solo se vende al PEOR jugador de esa posición cuando el nuevo fichaje supera su nivel histórico.
+   */
+  evaluateSaleTriggerAfterSigning(newSigning, squad) {
+    const currentSquad = squad?.players || [];
+    const pos = newSigning.type || newSigning.position;
+    
+    // Filtrar jugadores de la misma posición
+    const samePositionPlayers = currentSquad.filter(p => (p.type || p.position) === pos);
+    
+    if (samePositionPlayers.length === 0) {
+      return { shouldListForSale: false, reason: 'No hay suficientes jugadores en la posición para vender.' };
+    }
+
+    // Ordenar de menor a mayor histórico (el peor de la posición es el primero)
+    const sortedPosition = [...samePositionPlayers].sort((a, b) => this.getExpectedPoints(a) - this.getExpectedPoints(b));
+    const worstPlayer = sortedPosition[0];
+
+    const newSigningScore = this.getExpectedPoints(newSigning);
+    const worstPlayerScore = this.getExpectedPoints(worstPlayer);
+
+    // Solo poner a la venta si el nuevo fichaje es SUPERIOR al peor de la posición
+    if (newSigningScore > worstPlayerScore) {
+      return {
+        shouldListForSale: true,
+        playerToList: worstPlayer,
+        reason: `🎯 VENTA AUTORIZADA TRAS FICHAJE: Se ha fichado a ${newSigning.name} (${newSigningScore} pts históricos), que mejora la posición. Se pone a la venta ÚNICAMENTE al peor de la posición (${worstPlayer.name}, ${worstPlayerScore} pts) para recuperar inversión.`
+      };
+    }
+
+    return {
+      shouldListForSale: false,
+      reason: `⛔ NO SE PONE A LA VENTA: El nuevo fichaje (${newSigningScore} pts) no supera la exigencia requerida.`
+    };
+  }
+
+  /**
    * Evalúa una oferta de venta recibida por un jugador de nuestra plantilla.
    * Reglas estrictas:
    * 1. Comparación de Múltiples Ofertas: Seleccionar SIEMPRE la oferta de MAYOR IMPORTE.
