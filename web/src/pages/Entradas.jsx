@@ -116,7 +116,7 @@ export default function Entradas() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          sender: { name: 'Racing de Oslo', email: 'cotero91@hotmail.es' },
+          sender: { name: 'Racing de Oslo', email: 'entradas@racingoslo.com' },
           to: [{ email: data.userEmail, name: data.userName }],
           subject: `🎟️ Tu entrada oficial para Racing de Oslo vs ${data.opponent}`,
           htmlContent: `
