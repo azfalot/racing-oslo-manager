@@ -700,10 +700,29 @@ async function handleTelegramMessage(message) {
   }
 }
 
+async function updateTelegramMessageMarkup(chatId, messageId, statusLabel) {
+  if (!chatId || !messageId) return;
+  try {
+    const url = `https://api.telegram.org/bot${telegramToken}/editMessageReplyMarkup`;
+    await axios.post(url, {
+      chat_id: chatId,
+      message_id: messageId,
+      reply_markup: {
+        inline_keyboard: [[
+          { text: statusLabel, callback_data: 'done' }
+        ]]
+      }
+    });
+  } catch (err) {
+    console.error('[DAEMON-TG] Error deshabilitando botones de mensaje:', err.message);
+  }
+}
+
 // ── MANEJADOR DE BOTONES INLINE (callback_query) ──────────────────────────────
 
 async function handleCallbackQuery(callbackQuery) {
   const chatId = callbackQuery.message?.chat?.id;
+  const messageId = callbackQuery.message?.message_id;
   if (chatId?.toString() !== telegramChatId.toString()) return;
 
   const data = callbackQuery.data || '';
@@ -713,6 +732,7 @@ async function handleCallbackQuery(callbackQuery) {
   if (data.startsWith('bid:')) {
     const [, playerId, playerName, price, position] = data.split(':');
     await answerCallbackQuery(callbackQuery.id, '⏳ Procesando puja...');
+    await updateTelegramMessageMarkup(chatId, messageId, `✅ PUJA CONFIRMADA (${parseInt(price).toLocaleString()} €)`);
 
     const client = new ComunioClient();
     try {
@@ -742,11 +762,13 @@ async function handleCallbackQuery(callbackQuery) {
     const [, playerId, playerName] = data.split(':');
     ignorePlayer(parseInt(playerId));
     await answerCallbackQuery(callbackQuery.id, '✅ Ignorado por 24h');
+    await updateTelegramMessageMarkup(chatId, messageId, `🚫 OPCIÓN IGNORADA`);
     await sendTelegramMessage(`💼 🚫 <b>[Mateo Oslomany]:</b> <b>${playerName}</b> añadido a la lista de ignorados por 24h. No volveré a alertarte por este jugador.`);
   } else if (data.startsWith('acc_sale:')) {
     // Formato ultra-compacto: acc_sale:offerId:playerId:price
     const [, offerId, playerId, price] = data.split(':');
     await answerCallbackQuery(callbackQuery.id, '⏳ Procesando aceptación de venta...');
+    await updateTelegramMessageMarkup(chatId, messageId, `✅ VENTA ACEPTADA (${parseInt(price).toLocaleString()} €)`);
 
     const client = new ComunioClient();
     try {
@@ -778,6 +800,7 @@ async function handleCallbackQuery(callbackQuery) {
     // Formato ultra-compacto: rej_sale:offerId:playerId
     const [, offerId, playerId] = data.split(':');
     await answerCallbackQuery(callbackQuery.id, '⛔ Venta rechazada');
+    await updateTelegramMessageMarkup(chatId, messageId, `❌ VENTA RECHAZADA`);
 
     const client = new ComunioClient();
     try {
