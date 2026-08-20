@@ -159,6 +159,70 @@ export class ComunioEngine {
   }
 
   /**
+   * Evalúa una oferta de venta recibida por un jugador de nuestra plantilla.
+   * Reglas estrictas:
+   * 1. Comparación de Múltiples Ofertas: Seleccionar SIEMPRE la oferta de MAYOR IMPORTE.
+   * 2. Protección de Rivales: Preferir la Computadora sobre un rival humano si la oferta es igual o mayor.
+   * 3. Evaluación Táctica: Si el jugador es Titular Indiscutible (Top 1-2 de su posición) y el saldo no es negativo, RECHAZAR.
+   * 4. Rentabilidad Financiera: Solo vender si la oferta supera el valor de mercado (VM) o resuelve saldo negativo urgente.
+   */
+  evaluateSaleOffer(player, offers, squad, currentBalance = 0) {
+    if (!offers || offers.length === 0) {
+      return { shouldAccept: false, reason: 'No hay ofertas para este jugador.' };
+    }
+
+    // 1. Ordenar ofertas de mayor a menor importe
+    const sortedOffers = [...offers].sort((a, b) => b.price - a.price);
+    const bestOffer = sortedOffers[0];
+
+    // Identificar si la Computadora ha hecho oferta
+    const computerOffer = offers.find(o => o.user?.id === 1 || (o.user?.name && o.user.name.toLowerCase().includes('computer')));
+
+    // Si la Computadora ofrece lo mismo o más que un rival, elegir la de la Computadora para no reforzar a rivales
+    let chosenOffer = bestOffer;
+    if (computerOffer && computerOffer.price >= bestOffer.price) {
+      chosenOffer = computerOffer;
+    }
+
+    const marketValue = player.quotedPrice || player.price || 0;
+    const isProfitable = chosenOffer.price >= marketValue;
+    const isComputer = chosenOffer.user?.id === 1 || (chosenOffer.user?.name && chosenOffer.user.name.toLowerCase().includes('computer'));
+
+    // 2. Verificar si es un titular imprescindible en la alineación actual
+    const bestLineup = this.selectBestLineup(squad);
+    const isStarter = bestLineup.starting11.some(p => p.playerId === player.id || p.playerId === player.playerId);
+
+    // Si es un titular clave y NO tenemos saldo negativo urgente, RECHAZAR
+    if (isStarter && currentBalance >= 0) {
+      return {
+        shouldAccept: false,
+        chosenOffer,
+        reason: `⛔ RECHAZADA: ${player.name} es titular indiscutible en el XI titular y el club tiene saldo positivo (${currentBalance.toLocaleString()} €). No se desmantela la plantilla.`
+      };
+    }
+
+    // Si la oferta proviene de un rival humano y ofrece menos o igual que la Computadora
+    if (!isComputer && computerOffer && bestOffer.price <= computerOffer.price) {
+      chosenOffer = computerOffer; // Forzar venta a Computer para no dar el jugador al rival
+    }
+
+    // 3. Aceptar si es rentable o si necesitamos liquidar deuda
+    if (isProfitable || currentBalance < 0) {
+      return {
+        shouldAccept: true,
+        chosenOffer,
+        reason: `✅ ACEPTADA: Venta estratégica de ${player.name} a ${chosenOffer.user?.name || 'Mercado'} por ${chosenOffer.price.toLocaleString()} € (+${(chosenOffer.price - marketValue).toLocaleString()} € sobre VM).`
+      };
+    }
+
+    return {
+      shouldAccept: false,
+      chosenOffer,
+      reason: `⛔ RECHAZADA: La oferta (${chosenOffer.price.toLocaleString()} €) no alcanza el valor de mercado (${marketValue.toLocaleString()} €).`
+    };
+  }
+
+  /**
    * Analiza el mercado de fichajes y sugiere las mejores compras
    */
   analyzeMarket(marketPlayers, squad, balance) {
