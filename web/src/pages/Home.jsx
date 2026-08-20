@@ -107,8 +107,8 @@ export default function Home() {
           {/* Carousel Slide Container */}
           {featuredNews.length > 0 && (
             <div className="rounded-sm overflow-hidden border border-forest/40 shadow-2xl bg-forest-dark/30 backdrop-blur-sm group">
-              {/* 1. TOP: Imagen Oficial Completa que Ocupa Todo el Espacio Natural (object-cover) */}
-              <div className="relative h-[280px] sm:h-[340px] md:h-[360px] w-full overflow-hidden bg-black flex items-center justify-center">
+              {/* 1. TOP: Imagen Oficial Completa que Ocupa Todo el Espacio Natural (object-cover con altura ampliada en escritorio) */}
+              <div className="relative h-[260px] sm:h-[360px] md:h-[450px] lg:h-[480px] w-full overflow-hidden bg-black flex items-center justify-center">
                 <img
                   src={featuredNews[currentSlide].image}
                   alt={featuredNews[currentSlide].title}
