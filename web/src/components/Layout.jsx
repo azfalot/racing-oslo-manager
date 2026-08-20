@@ -10,7 +10,7 @@ export default function Layout({ children }) {
             <img src="/media/crest.jpg" alt="Racing de Oslo Crest" className="h-12 w-12 rounded-full border-2 border-forest transition-transform group-hover:scale-110 object-cover" />
             <div className="hidden sm:block">
               <h1 className="font-display font-bold text-xl tracking-wider">RACING DE OSLO</h1>
-              <p className="text-xs text-cream-dark tracking-widest opacity-80">EST. 2024</p>
+              <p className="text-xs text-cream-dark tracking-widest opacity-80">EST. 2018</p>
             </div>
           </Link>
           <nav className="hidden lg:flex gap-8 text-sm font-semibold tracking-wide items-center">

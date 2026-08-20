@@ -28,7 +28,7 @@ export async function generateSigningPhoto(playerName, playerPrice, playerId, po
     ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
     ctx.font = '500 18px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('💼 Mateo Oslomany · Director Deportivo · Racing de Oslo · Est. 2024', width / 2, 35);
+    ctx.fillText('💼 Mateo Oslomany · Director Deportivo · Racing de Oslo · Est. 2018', width / 2, 35);
     ctx.restore();
 
     // 3. Draw Player Circular Avatar (Top Right)
