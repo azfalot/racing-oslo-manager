@@ -419,11 +419,15 @@ async function runBot() {
                   const news = JSON.parse(fs.readFileSync('web/src/data/news.json', 'utf-8'));
                   news.unshift({
                     id: Date.now() + Math.floor(Math.random() * 1000),
-                    title: `Traspaso Cerrado: ${p.name} abandona el club`,
+                    title: `¡Oficial! ${p.name} abandona el Racing de Oslo`,
                     date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
-                    excerpt: `El Racing de Oslo oficializa el traspaso de ${p.name}.`,
-                    content: `La dirección deportiva confirma la salida de ${p.name} por un importe total de ${p.price.toLocaleString()} €. Agradecemos su compromiso y le deseamos lo mejor en sus futuros proyectos.`,
-                    image: `/media/signings/${p.playerId}_sale.jpg`
+                    category: 'Ventas',
+                    excerpt: `El club hace oficial la salida de ${p.name} tras alcanzar un acuerdo por su traspaso.`,
+                    summary: `El club hace oficial la salida de ${p.name} tras alcanzar un acuerdo por su traspaso.`,
+                    content: `Mateo Oslomany ha cerrado la operación de traspaso de ${p.name} por un importe total de ${p.price.toLocaleString()} €. Agradecemos su profesionalidad con el Racing de Oslo y le deseamos lo mejor en su futuro deportivo.\n\n¡Gracias por todo, ${p.name}!`,
+                    image: fs.existsSync(`web/public/media/signings/${p.playerId}_sale.jpg`) 
+                      ? `/media/signings/${p.playerId}_sale.jpg` 
+                      : (fs.existsSync(`web/public/media/players/${p.playerId}.png`) ? `/media/players/${p.playerId}.png` : '/media/crest.jpg')
                   });
                   fs.writeFileSync('web/src/data/news.json', JSON.stringify(news, null, 2));
                 }

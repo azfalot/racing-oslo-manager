@@ -732,23 +732,23 @@ async function handleCallbackQuery(callbackQuery) {
           }
         } catch (e) {}
 
-        // Noticia para la Web con foto oficial del jugador
+        // Noticia de Venta para la Web (Mismo formato exacto que en los Fichajes)
         try {
           const newsPath = 'web/src/data/news.json';
           if (fs.existsSync(newsPath)) {
             const newsList = JSON.parse(fs.readFileSync(newsPath, 'utf-8'));
-            const playerPhoto = `/media/players/${playerId}.png`;
-            const imageToUse = fs.existsSync(`web/public/media/players/${playerId}.png`) 
-              ? playerPhoto 
-              : `/media/signings/${playerId}_sale.jpg`;
+            const imageToUse = fs.existsSync(`web/public/media/signings/${playerId}_sale.jpg`) 
+              ? `/media/signings/${playerId}_sale.jpg`
+              : (fs.existsSync(`web/public/media/players/${playerId}.png`) ? `/media/players/${playerId}.png` : '/media/crest.jpg');
 
             newsList.unshift({
-              id: `sale_${playerId}_${Date.now()}`,
-              title: `Traspaso Confirmado: ${playerName} traspasado por ${parseInt(price).toLocaleString()} €`,
+              id: Date.now() + Math.floor(Math.random() * 1000),
+              title: `¡Oficial! ${playerName} abandona el Racing de Oslo`,
               date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
               category: 'Ventas',
-              summary: `El Racing de Oslo ha oficializado la venta del jugador ${playerName} por una suma de ${parseInt(price).toLocaleString()} €.`,
-              content: `La dirección deportiva encabezada por Mateo Oslomany confirma el traspaso de ${playerName} por ${parseInt(price).toLocaleString()} €. La operación aporta liquidez estratégica para las siguientes jornadas.`,
+              excerpt: `El club hace oficial la salida de ${playerName} tras alcanzar un acuerdo por su traspaso.`,
+              summary: `El club hace oficial la salida de ${playerName} tras alcanzar un acuerdo por su traspaso.`,
+              content: `Mateo Oslomany ha cerrado la operación de traspaso de ${playerName} por un importe total de ${parseInt(price).toLocaleString()} €. Agradecemos su profesionalidad con el Racing de Oslo y le deseamos lo mejor en su futuro deportivo.\n\n¡Gracias por todo, ${playerName}!`,
               image: imageToUse
             });
             fs.writeFileSync(newsPath, JSON.stringify(newsList, null, 2));
