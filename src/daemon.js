@@ -707,14 +707,18 @@ async function handleCallbackQuery(callbackQuery) {
     ignorePlayer(parseInt(playerId));
     await answerCallbackQuery(callbackQuery.id, '✅ Ignorado por 24h');
     await sendTelegramMessage(`💼 🚫 <b>[Mateo Oslomany]:</b> <b>${playerName}</b> añadido a la lista de ignorados por 24h. No volveré a alertarte por este jugador.`);
-  } else if (data.startsWith('accept_sale:')) {
-    // Formato: accept_sale:offerId:playerId:price:playerName
-    const [, offerId, playerId, price, playerName] = data.split(':');
-    await answerCallbackQuery(callbackQuery.id, '⏳ Aceptando venta...');
+  } else if (data.startsWith('acc_sale:')) {
+    // Formato ultra-compacto: acc_sale:offerId:playerId:price
+    const [, offerId, playerId, price] = data.split(':');
+    await answerCallbackQuery(callbackQuery.id, '⏳ Procesando aceptación de venta...');
 
     const client = new ComunioClient();
     try {
       await client.login();
+      const squad = await client.getSquad();
+      const player = (squad?.players || []).find(p => p.id === parseInt(playerId) || p.playerId === parseInt(playerId));
+      const playerName = player?.name || `Jugador #${playerId}`;
+
       const success = await client.acceptSaleOffer(offerId, playerId, price);
       if (success) {
         await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Venta de <b>${playerName}</b> por <b>${parseInt(price).toLocaleString()} €</b> ACEPTADA con éxito.`);
@@ -758,14 +762,18 @@ async function handleCallbackQuery(callbackQuery) {
     } finally {
       await client.close();
     }
-  } else if (data.startsWith('reject_sale:')) {
-    // Formato: reject_sale:offerId:playerId:playerName
-    const [, offerId, playerId, playerName] = data.split(':');
+  } else if (data.startsWith('rej_sale:')) {
+    // Formato ultra-compacto: rej_sale:offerId:playerId
+    const [, offerId, playerId] = data.split(':');
     await answerCallbackQuery(callbackQuery.id, '⛔ Venta rechazada');
 
     const client = new ComunioClient();
     try {
       await client.login();
+      const squad = await client.getSquad();
+      const player = (squad?.players || []).find(p => p.id === parseInt(playerId) || p.playerId === parseInt(playerId));
+      const playerName = player?.name || `Jugador #${playerId}`;
+
       // Quitar del mercado y rechazar oferta
       await client.removeFromMarket(playerId);
       await sendTelegramMessage(`💼 ⛔ <b>[Mateo Oslomany]:</b> Oferta por <b>${playerName}</b> RECHAZADA. El jugador ha sido retirado del mercado y permanece intocable en la plantilla.`);
