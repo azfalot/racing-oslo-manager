@@ -643,81 +643,127 @@ export class ComunioClient {
    * Cancela una puja activa por su offerId
    */
   
-    /**
-     * Revisa todas las ofertas de venta recibidas, selecciona la mejor para cada jugador y la acepta usando Playwright.
-     */
-    async acceptBestOffers() {
-      let browser;
-      try {
-        browser = await chromium.launch({ headless: true });
-        const context = await browser.newContext();
-        const page = await context.newPage();
+  /**
+   * Quita a un jugador del mercado de fichajes (Vía API directa de Comunio)
+   */
+  async removeFromMarket(playerId) {
+    if (!this.isLoggedIn) await this.login();
+    console.log(`[CLIENT] Quitando al jugador ID ${playerId} del mercado vía API directa...`);
+    try {
+      const url = `https://api.comunio.es/communities/${this.communityId}/users/${this.userId}/exchangemarket/removeplayer`;
+      const response = await axios.post(url, {
+        tradableIds: [parseInt(playerId)]
+      }, {
+        headers: this.getHeaders()
+      });
 
-        await page.goto('https://www.comunio.es/', { waitUntil: 'networkidle' });
-
-        // Cookies
-        const acceptCookiesBtn = page.locator('button:has-text("AGREE"), button:has-text("Aceptar"), #accept-btn');
-        if (await acceptCookiesBtn.count() > 0) {
-          await acceptCookiesBtn.first().click();
-          await page.waitForTimeout(1000);
-        }
-
-        // Login
-        const entrarBtn = page.locator('button:has-text("Entrar")');
-        if (await entrarBtn.count() > 0) {
-          await entrarBtn.first().click();
-          await page.waitForTimeout(1000);
-        }
-
-        const userInput = page.locator('input#usernameLogin, input[name="login"]');
-        if (await userInput.count() > 0) {
-          await page.fill('input#usernameLogin', this.username);
-          await page.fill('input#passwordLogin', this.password);
-          const submitBtn = page.locator('button.login_loginButton__lZg4d, button[type="submit"]');
-          await submitBtn.first().click();
-          await page.waitForTimeout(4000);
-        }
-
-        console.log('[CLIENT] Navegando a Ofertas para procesar ventas...');
-        await page.goto('https://www.comunio.es/game/offers', { waitUntil: 'networkidle' });
-        await page.waitForTimeout(3000);
-
-        // Locate all Accept buttons in "Ofertas recibidas"
-        const acceptButtons = page.locator('button:has-text("Aceptar")');
-        const count = await acceptButtons.count();
-        let accepted = 0;
-
-        for (let i = 0; i < count; i++) {
-          try {
-            const btn = page.locator('button:has-text("Aceptar")').nth(0);
-            if (await btn.isVisible()) {
-              await btn.click();
-              await page.waitForTimeout(2000);
-
-              const confirmBtn = page.locator('button:has-text("Confirmar"), button:has-text("Sí")');
-              if (await confirmBtn.count() > 0 && await confirmBtn.first().isVisible()) {
-                await confirmBtn.first().click();
-                await page.waitForTimeout(1000);
-              }
-              accepted++;
-            }
-          } catch(e) {}
-        }
-
-        if (accepted > 0) {
-          console.log(`[CLIENT] Se han aceptado ${accepted} ofertas con éxito.`);
-        } else {
-          console.log('[CLIENT] No hay más ofertas pendientes por aceptar.');
-        }
-
-        return accepted;
-      } catch (e) {
-        console.error('[CLIENT] Error al aceptar ofertas:', e.message);
-        return 0;
-      } finally {
-        if (browser) await browser.close();
+      if (response.status === 200 && response.data?.status === 'OK') {
+        console.log(`[CLIENT] Jugador ID ${playerId} retirado del mercado con éxito (API).`);
+        return true;
       }
+    } catch (err) {
+      console.error(`[CLIENT] Error al retirar jugador ID ${playerId} del mercado:`, err.message);
     }
+    return false;
+  }
+
+  /**
+   * Pone a un jugador a la venta en el mercado (Vía API directa de Comunio)
+   */
+  async listPlayerOnMarket(playerId, price) {
+    if (!this.isLoggedIn) await this.login();
+    console.log(`[CLIENT] Poniendo a la venta al jugador ID ${playerId} por ${price} € vía API directa...`);
+    try {
+      const url = `https://api.comunio.es/communities/${this.communityId}/users/${this.userId}/exchangemarket/addplayer`;
+      const response = await axios.post(url, {
+        tradables: [{ id: parseInt(playerId), price: parseInt(price) }]
+      }, {
+        headers: this.getHeaders()
+      });
+
+      if (response.status === 200 && response.data?.status === 'OK') {
+        console.log(`[CLIENT] Jugador ID ${playerId} puesto a la venta con éxito (API).`);
+        return true;
+      }
+    } catch (err) {
+      console.error(`[CLIENT] Error al poner a la venta al jugador ID ${playerId}:`, err.message);
+    }
+    return false;
+  }
+
+  /**
+   * Acepta una oferta de venta recibida (Vía API directa de Comunio)
+   */
+  async acceptSaleOffer(offerId, playerId, price) {
+    if (!this.isLoggedIn) await this.login();
+    console.log(`[CLIENT] Aceptando oferta ID ${offerId} por jugador ID ${playerId} a precio ${price} € vía API directa...`);
+    try {
+      const url = `https://api.comunio.es/communities/${this.communityId}/users/${this.userId}/offers`;
+      const response = await axios.post(url, {
+        offers: [
+          {
+            offerid: parseInt(offerId),
+            tradableid: parseInt(playerId),
+            price: parseInt(price),
+            type: "ACCEPT"
+          }
+        ]
+      }, {
+        headers: this.getHeaders()
+      });
+
+      if (response.status === 200 && response.data?.status === 'OK') {
+        console.log(`[CLIENT] Oferta ID ${offerId} por jugador ID ${playerId} aceptada con éxito (API).`);
+        return true;
+      }
+    } catch (err) {
+      console.error(`[CLIENT] Error al aceptar oferta ID ${offerId}:`, err.message);
+    }
+    return false;
+  }
+
+  /**
+   * Revisa todas las ofertas de venta recibidas y acepta las ofertas validadas estratégicamente.
+   */
+  async acceptBestOffers() {
+    if (!this.isLoggedIn) await this.login();
+    try {
+      console.log('[CLIENT] Obteniendo ofertas de venta recibidas vía API...');
+      const url = `https://api.comunio.es/communities/${this.communityId}/users/${this.userId}/offers?current`;
+      const response = await axios.get(url, { headers: this.getHeaders() });
+
+      if (response.status !== 200 || !response.data?.items) {
+        console.log('[CLIENT] No hay ofertas activas.');
+        return 0;
+      }
+
+      // Filtrar únicamente ofertas de tipo SALE (ofertas que nos hacen por nuestros jugadores)
+      const saleOffers = response.data.items.filter(item => item.type === 'SALE' && item.state === 'PENDING');
+      if (saleOffers.length === 0) {
+        console.log('[CLIENT] No hay ofertas de venta pendientes por responder.');
+        return 0;
+      }
+
+      let acceptedCount = 0;
+
+      // Procesar cada oferta de venta con la API directa capturada
+      for (const offer of saleOffers) {
+        const offerId = offer.id;
+        const playerId = offer.tradable?.id;
+        const price = offer.price;
+        const playerName = offer.tradable?.name || 'Jugador';
+
+        console.log(`[CLIENT] Procesando aceptación de oferta por ${playerName} (${price} €)...`);
+        const success = await this.acceptSaleOffer(offerId, playerId, price);
+        if (success) acceptedCount++;
+      }
+
+      return acceptedCount;
+    } catch (err) {
+      console.error('[CLIENT] Error al procesar ofertas vía API:', err.message);
+      return 0;
+    }
+  }
   
     async cancelBid(offerId, playerName) {
     if (!this.isLoggedIn) await this.login();
