@@ -208,9 +208,9 @@ async function runBot() {
       })
     );
 
-    // ── MODO AUTÓNOMO: Aplicar cambios ──────────────────────────────────────
+    // ── MODO AUTÓNOMO: Únicamente guardar la alineación óptima (Cero ventas/compras autónomas) ──────
     if (mode === 'autonomo') {
-      console.log('[AUTÓNOMO] Aplicando cambios en tu cuenta de Comunio...');
+      console.log('[AUTÓNOMO] Guardando únicamente la alineación de tu 11 titular...');
       
       // Guardar la alineación óptima
       if (lineupResult.starting11 && lineupResult.starting11.length > 0) {
@@ -222,55 +222,6 @@ async function runBot() {
         } catch (e) {
           console.error('[AUTÓNOMO] Error guardando alineación:', e.message);
           logAction('Alineación Guardada', lineupResult.formation, null, 'Fallo (Error)');
-        }
-      }
-
-      // Vender por deuda
-      if (economyResult.inDebt && economyResult.suggestedSales.length > 0) {
-        for (const s of economyResult.suggestedSales) {
-          try {
-            console.log(`[AUTÓNOMO] Poniendo en venta por deuda a ${s.name} por ${s.price}...`);
-            const success = await client.sellPlayer(s.playerId, s.name, s.price);
-            logAction('Puesto en Venta (Deuda)', s.name, s.price, success ? 'Éxito' : 'Fallo');
-          } catch (e) {
-            console.error(`[AUTÓNOMO] Error vendiendo a ${s.name}:`, e.message);
-            logAction('Puesto en Venta (Deuda)', s.name, s.price, 'Fallo (Error)');
-          }
-        }
-      }
-
-      // Vender suplentes/lesionados para liquidez
-      if (liquiditySuggestions && liquiditySuggestions.length > 0) {
-        for (const s of liquiditySuggestions) {
-          try {
-            console.log(`[AUTÓNOMO] Poniendo en venta para liquidez a ${s.name} por ${s.price}...`);
-            const success = await client.sellPlayer(s.playerId, s.name, s.price);
-            logAction('Puesto en Venta (Liquidez)', s.name, s.price, success ? 'Éxito' : 'Fallo');
-          } catch (e) {
-            console.error(`[AUTÓNOMO] Error vendiendo sugerencia de liquidez ${s.name}:`, e.message);
-            logAction('Puesto en Venta (Liquidez)', s.name, s.price, 'Fallo (Error)');
-          }
-        }
-      }
-
-      // Pujar por recomendaciones del mercado
-      if (marketResult.recommendations && marketResult.recommendations.length > 0) {
-        for (const rec of marketResult.recommendations.slice(0, 2)) {
-          const existingBid = pendingBids.find(b => b.playerId === rec.playerId);
-          if (existingBid) {
-            console.log(`[AUTÓNOMO] Ya existe oferta activa por ${rec.name}. Omitiendo duplicado.`);
-            continue;
-          }
-          if (rec.upgradePoints > 15 && balance >= rec.bidAmount) {
-            try {
-              console.log(`[AUTÓNOMO] Pujando por ${rec.name}: ${rec.bidAmount.toLocaleString()} € (Margen: ${bidMargin}%)...`);
-              const success = await client.placeBid(rec.playerId, rec.name, rec.bidAmount);
-              logAction('Puja Enviada', rec.name, rec.bidAmount, success ? 'Éxito' : 'Fallo');
-            } catch (e) {
-              console.error(`[AUTÓNOMO] Error al pujar por ${rec.name}:`, e.message);
-              logAction('Puja Enviada', rec.name, rec.bidAmount, 'Fallo (Error)');
-            }
-          }
         }
       }
     }
