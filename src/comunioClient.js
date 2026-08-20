@@ -649,7 +649,7 @@ export class ComunioClient {
     async acceptBestOffers() {
       let browser;
       try {
-        const { chromium } = require('playwright');
+        
         browser = await chromium.launch({ headless: true });
         const page = await browser.newPage();
         

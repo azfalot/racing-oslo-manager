@@ -9,17 +9,6 @@ export default function Tienda() {
         <p className="text-cream-dark">Viste los colores del Racing de Oslo. Gracias a nuestro patrocinador oficial, puedes conseguir la equipación con un descuento exclusivo.</p>
       </div>
 
-      {/* Hero Image from Collage */}
-      <div className="mb-16 rounded-sm overflow-hidden border border-forest/30 shadow-2xl relative">
-        <img src="/media/merch_collection.jpg" alt="Colección de merchandising" className="w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent flex items-end">
-          <div className="p-8">
-            <span className="bg-forest text-cream text-xs font-bold px-3 py-1 uppercase tracking-wider mb-2 inline-block">Nueva Temporada</span>
-            <h3 className="text-4xl md:text-5xl font-display font-bold text-white">Colección 26/27</h3>
-          </div>
-        </div>
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
         {/* Productos */}
         {[
@@ -30,8 +19,8 @@ export default function Tienda() {
           { name: "Gorra", price: "24,99 €", type: "Accesorios" }
         ].map((item, idx) => (
           <div key={idx} className="bg-black border border-forest/30 rounded-sm overflow-hidden group">
-            <div className="relative h-64 bg-forest-dark/20 p-8 flex items-center justify-center">
-              <img src="/media/crest.jpg" alt={item.name} className="w-32 h-32 object-cover rounded-full mix-blend-screen opacity-20 group-hover:opacity-60 transition-opacity" />
+            <div className="relative h-64 bg-forest-dark/20 flex items-center justify-center overflow-hidden">
+              <img src="/media/merch_collection.jpg" alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
               <div className="absolute top-4 right-4 bg-forest text-cream text-[10px] font-bold px-2 py-1 uppercase">{item.type}</div>
             </div>
             <div className="p-6 text-center">
