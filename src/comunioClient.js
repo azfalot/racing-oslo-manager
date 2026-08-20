@@ -649,50 +649,51 @@ export class ComunioClient {
     async acceptBestOffers() {
       let browser;
       try {
-        
         browser = await chromium.launch({ headless: true });
-        const page = await browser.newPage();
-        
+        const context = await browser.newContext();
+        const page = await context.newPage();
+
         await page.goto('https://www.comunio.es/', { waitUntil: 'networkidle' });
-        
+
         // Cookies
-        const acceptBtn = page.locator('button:has-text("AGREE"), button:has-text("Aceptar"), #accept-btn');
-        if (await acceptBtn.count() > 0) {
-          await acceptBtn.first().click();
+        const acceptCookiesBtn = page.locator('button:has-text("AGREE"), button:has-text("Aceptar"), #accept-btn');
+        if (await acceptCookiesBtn.count() > 0) {
+          await acceptCookiesBtn.first().click();
           await page.waitForTimeout(1000);
         }
 
-        // Login if needed
-        const isLoggedOut = await page.locator('button:has-text("Login"), a:has-text("Login")').count() > 0;
-        if (isLoggedOut) {
-          await page.click('button:has-text("Login"), a:has-text("Login")');
-          await page.fill('input[type="text"], input[name="login"]', this.username);
-          await page.fill('input[type="password"], input[name="password"]', this.password);
-          await page.click('button[type="submit"]:has-text("Login"), button:has-text("Entrar")');
-          await page.waitForTimeout(3000);
+        // Login
+        const entrarBtn = page.locator('button:has-text("Entrar")');
+        if (await entrarBtn.count() > 0) {
+          await entrarBtn.first().click();
+          await page.waitForTimeout(1000);
         }
 
-        console.log('[CLIENT] Revisando ofertas de venta entrantes en Playwright...');
-        await page.goto('https://www.comunio.es/game/offers', { waitUntil: 'networkidle' });
-        await page.waitForTimeout(2000);
+        const userInput = page.locator('input#usernameLogin, input[name="login"]');
+        if (await userInput.count() > 0) {
+          await page.fill('input#usernameLogin', this.username);
+          await page.fill('input#passwordLogin', this.password);
+          const submitBtn = page.locator('button.login_loginButton__lZg4d, button[type="submit"]');
+          await submitBtn.first().click();
+          await page.waitForTimeout(4000);
+        }
 
-        // Find incoming offers for our players.
-        // We'll iterate through the offers and accept the highest one for each player.
-        // For simplicity, we just click "Aceptar" on any profitable offer if multiple exist, 
-        // or just rely on Comunio UI if it groups them.
-        const acceptButtons = page.locator('button:has-text("Aceptar"), a:has-text("Aceptar")');
+        console.log('[CLIENT] Navegando a Ofertas para procesar ventas...');
+        await page.goto('https://www.comunio.es/game/offers', { waitUntil: 'networkidle' });
+        await page.waitForTimeout(3000);
+
+        // Locate all Accept buttons in "Ofertas recibidas"
+        const acceptButtons = page.locator('button:has-text("Aceptar")');
         const count = await acceptButtons.count();
         let accepted = 0;
-        
+
         for (let i = 0; i < count; i++) {
           try {
-            // Re-query the locator because DOM might have changed after clicking
-            const btn = page.locator('button:has-text("Aceptar"), a:has-text("Aceptar")').nth(0);
+            const btn = page.locator('button:has-text("Aceptar")').nth(0);
             if (await btn.isVisible()) {
               await btn.click();
               await page.waitForTimeout(2000);
-              
-              // Confirm if there's a confirmation dialog
+
               const confirmBtn = page.locator('button:has-text("Confirmar"), button:has-text("Sí")');
               if (await confirmBtn.count() > 0 && await confirmBtn.first().isVisible()) {
                 await confirmBtn.first().click();
@@ -702,13 +703,13 @@ export class ComunioClient {
             }
           } catch(e) {}
         }
-        
+
         if (accepted > 0) {
           console.log(`[CLIENT] Se han aceptado ${accepted} ofertas con éxito.`);
         } else {
-          console.log('[CLIENT] No se han encontrado ofertas para aceptar.');
+          console.log('[CLIENT] No hay más ofertas pendientes por aceptar.');
         }
-        
+
         return accepted;
       } catch (e) {
         console.error('[CLIENT] Error al aceptar ofertas:', e.message);
