@@ -117,13 +117,14 @@ export async function checkMarket(client, squad, balance, botPaused) {
     manualAlerts: []
   };
 
-  if (botPaused || newPlayers.length === 0) return result;
+  if (botPaused || currentPlayers.length === 0) return result;
 
-  const marketAnalysis = engine.analyzeMarket(newPlayers, squad, balance);
+  // Analizar TODOS los jugadores del mercado vendidos por la Computadora
+  const marketAnalysis = engine.analyzeMarket(currentPlayers, squad, balance);
   const recommendations = marketAnalysis.recommendations || [];
 
   const pendingBids = await client.getPendingBids();
-  const pendingIds = new Set(pendingBids.map(b => b.playerId));
+  const pendingIds = new Set(pendingBids.map(b => parseInt(b.playerId || b.id)));
 
   let bidMargin = 0;
   try {
@@ -134,14 +135,17 @@ export async function checkMarket(client, squad, balance, botPaused) {
   } catch (e) {}
 
   for (const rec of recommendations) {
-    if (pendingIds.has(rec.playerId) || ignoredIds.has(rec.playerId)) continue;
+    const pid = parseInt(rec.playerId || rec.id);
+    if (pendingIds.has(pid) || ignoredIds.has(pid)) continue;
 
     const bidAmount = Math.ceil(rec.price * (1 + bidMargin / 100));
 
-    if (rec.upgradePoints > 20 && bidAmount <= autoBidLimit && bidAmount <= balance) {
+    // Pujar automáticamente por cualquier jugador que mejore a nuestros titulares y quepa en nuestro saldo
+    if (rec.upgradePoints > 0 && bidAmount <= autoBidLimit && bidAmount <= balance) {
       try {
-        const success = await client.placeBid(rec.playerId, rec.name, bidAmount);
-        result.autoBids.push({ ...rec, bidAmount, success });
+        console.log(`[AUTO-BID] Pujando por ${rec.name} (${bidAmount.toLocaleString()} €) - Mejora: +${rec.upgradePoints.toFixed(0)} pts`);
+        const success = await client.placeBid(pid, rec.name, bidAmount);
+        result.autoBids.push({ ...rec, playerId: pid, bidAmount, success });
 
         let log = [];
         try {
@@ -157,11 +161,23 @@ export async function checkMarket(client, squad, balance, botPaused) {
           status: success ? 'Éxito' : 'Fallo'
         });
         fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
+
+        // Publicar noticia de rumores/negociaciones en la Web
+        if (success) {
+          try {
+            const { publishRumorNews } = await import('./imageGen.js');
+            await publishRumorNews(rec.name, `Oferta de ${bidAmount.toLocaleString()} € enviada (+${rec.upgradePoints.toFixed(0)} pts de mejora)`, pid);
+          } catch (imgErr) {
+            console.error('[AUTO-BID NEWS] Error:', imgErr.message);
+          }
+        }
+
       } catch (e) {
-        result.autoBids.push({ ...rec, bidAmount, success: false });
+        console.error(`[AUTO-BID ERROR] Error al pujar por ${rec.name}:`, e.message);
+        result.autoBids.push({ ...rec, playerId: pid, bidAmount, success: false });
       }
-    } else if (rec.upgradePoints > 5 && bidAmount <= balance) {
-      result.manualAlerts.push({ ...rec, bidAmount });
+    } else if (rec.upgradePoints > 0 && bidAmount <= balance) {
+      result.manualAlerts.push({ ...rec, playerId: pid, bidAmount });
     }
   }
 
