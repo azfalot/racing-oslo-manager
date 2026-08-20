@@ -43,26 +43,29 @@ export class ComunioEngine {
    * Utiliza puntos actuales, promedio o histórico para dar robustez en pretemporada
    */
   getExpectedPoints(player) {
-    // 1. Intentar usar puntos de esta temporada
-    const currentPoints = parseInt(player.totalPoints);
-    if (!isNaN(currentPoints) && currentPoints > 0) {
-      return currentPoints;
-    }
+    // 1. Usar histórico de temporadas anteriores (soporta array o player.historical.points)
+    const historyList = Array.isArray(player.historical)
+      ? player.historical
+      : (player.historical?.points || []);
 
-    // 2. Intentar usar promedio de puntos
-    const avgPoints = parseFloat(player.average?.points);
-    if (!isNaN(avgPoints) && avgPoints > 0) {
-      return avgPoints * 10; // Escalar aproximando a 10 partidos
-    }
-
-    // 3. Usar histórico de temporadas anteriores
-    if (player.historical && player.historical.length > 0) {
-      // Ordenar por temporada descendente para coger la más reciente
-      const history = [...player.historical].sort((a, b) => b.season.localeCompare(a.season));
+    if (historyList.length > 0) {
+      const history = [...historyList].sort((a, b) => b.season.localeCompare(a.season));
       const lastSeasonPoints = parseInt(history[0].points);
       if (!isNaN(lastSeasonPoints) && lastSeasonPoints > 0) {
         return lastSeasonPoints;
       }
+    }
+
+    // 2. Intentar usar promedio de puntos por partido
+    const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
+    if (!isNaN(avgPoints) && avgPoints > 0) {
+      return avgPoints * 10;
+    }
+
+    // 3. Puntos totales de esta temporada
+    const currentPoints = parseInt(player.totalPoints);
+    if (!isNaN(currentPoints) && currentPoints > 0) {
+      return currentPoints * 5;
     }
 
     // 4. Puntuación por defecto si no hay datos
