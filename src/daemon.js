@@ -723,37 +723,13 @@ async function handleCallbackQuery(callbackQuery) {
       if (success) {
         await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Venta de <b>${playerName}</b> por <b>${parseInt(price).toLocaleString()} €</b> ACEPTADA con éxito.`);
         
-        // Generar y enviar cartel de traspaso en Telegram
+        // Generar cartel de venta, foto de API y Noticia Web idéntica a las compras
         try {
-          const { generateSalePhoto } = await import('./imageGen.js');
-          const photoPath = await generateSalePhoto(playerName, `${parseInt(price).toLocaleString()} €`, playerId);
-          if (photoPath) {
-            await sendTelegramPhoto(photoPath, `👋 <b>¡VENTA OFICIAL CONFIRMADA!</b>\n\n<b>${escapeHtml(playerName)}</b> ha sido traspasado por <b>${parseInt(price).toLocaleString()} €</b>.`);
-          }
-        } catch (e) {}
-
-        // Noticia de Venta para la Web (Mismo formato exacto que en los Fichajes)
-        try {
-          const newsPath = 'web/src/data/news.json';
-          if (fs.existsSync(newsPath)) {
-            const newsList = JSON.parse(fs.readFileSync(newsPath, 'utf-8'));
-            const imageToUse = fs.existsSync(`web/public/media/signings/${playerId}_sale.jpg`) 
-              ? `/media/signings/${playerId}_sale.jpg`
-              : (fs.existsSync(`web/public/media/players/${playerId}.png`) ? `/media/players/${playerId}.png` : '/media/crest.jpg');
-
-            newsList.unshift({
-              id: Date.now() + Math.floor(Math.random() * 1000),
-              title: `¡Oficial! ${playerName} abandona el Racing de Oslo`,
-              date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
-              category: 'Ventas',
-              excerpt: `El club hace oficial la salida de ${playerName} tras alcanzar un acuerdo por su traspaso.`,
-              summary: `El club hace oficial la salida de ${playerName} tras alcanzar un acuerdo por su traspaso.`,
-              content: `Mateo Oslomany ha cerrado la operación de traspaso de ${playerName} por un importe total de ${parseInt(price).toLocaleString()} €. Agradecemos su profesionalidad con el Racing de Oslo y le deseamos lo mejor en su futuro deportivo.\n\n¡Gracias por todo, ${playerName}!`,
-              image: imageToUse
-            });
-            fs.writeFileSync(newsPath, JSON.stringify(newsList, null, 2));
-          }
-        } catch (e) {}
+          const { publishSaleNews } = await import('./imageGen.js');
+          await publishSaleNews(playerName, parseInt(price), playerId);
+        } catch (e) {
+          console.error('[DAEMON-NEWS ERROR]', e.message);
+        }
       } else {
         await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> No se pudo procesar la venta de ${playerName} vía API.`);
       }

@@ -403,36 +403,11 @@ async function runBot() {
             for (const p of completedSales) {
               changeReport += ` • <b>${escapeHtml(p.name)}</b> - ${p.price.toLocaleString()} €\n`;
 
-              // Generar y enviar cartel de venta en Telegram
+              // Generar cartel de venta, foto de API y Noticia Web idéntica a las compras
               try {
-                const photoPath = await generateSalePhoto(p.name, p.price, p.playerId);
-                if (photoPath) {
-                  await sendTelegramPhoto(photoPath, `👋 <b>¡VENTA CONFIRMADA!</b>\n\n<b>${escapeHtml(p.name)}</b> abandona la disciplina del Racing de Oslo por <b>${p.price.toLocaleString()} €</b>.`);
-                }
+                await publishSaleNews(p.name, p.price, p.playerId);
               } catch (imgErr) {
-                console.error(`[TELEGRAM PHOTO] Error generando cartel de venta para ${p.name}:`, imgErr.message);
-              }
-
-              // Noticia de venta para la Web
-              try {
-                if (fs.existsSync('web/src/data/news.json')) {
-                  const news = JSON.parse(fs.readFileSync('web/src/data/news.json', 'utf-8'));
-                  news.unshift({
-                    id: Date.now() + Math.floor(Math.random() * 1000),
-                    title: `¡Oficial! ${p.name} abandona el Racing de Oslo`,
-                    date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
-                    category: 'Ventas',
-                    excerpt: `El club hace oficial la salida de ${p.name} tras alcanzar un acuerdo por su traspaso.`,
-                    summary: `El club hace oficial la salida de ${p.name} tras alcanzar un acuerdo por su traspaso.`,
-                    content: `Mateo Oslomany ha cerrado la operación de traspaso de ${p.name} por un importe total de ${p.price.toLocaleString()} €. Agradecemos su profesionalidad con el Racing de Oslo y le deseamos lo mejor en su futuro deportivo.\n\n¡Gracias por todo, ${p.name}!`,
-                    image: fs.existsSync(`web/public/media/signings/${p.playerId}_sale.jpg`) 
-                      ? `/media/signings/${p.playerId}_sale.jpg` 
-                      : (fs.existsSync(`web/public/media/players/${p.playerId}.png`) ? `/media/players/${p.playerId}.png` : '/media/crest.jpg')
-                  });
-                  fs.writeFileSync('web/src/data/news.json', JSON.stringify(news, null, 2));
-                }
-              } catch (newsErr) {
-                console.error(`[WEB NEWS] Error al publicar noticia de venta para ${p.name}:`, newsErr.message);
+                console.error(`[NEWS ERROR] Error al publicar noticia de venta para ${p.name}:`, imgErr.message);
               }
             }
             changeReport += `\n`;
