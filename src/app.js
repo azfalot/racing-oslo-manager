@@ -307,7 +307,8 @@ async function runBot() {
       alertLines.forEach(a => { report += ` • ${a}\n`; });
     }
 
-    report += `\n📋 <b>Última acción:</b> <i>${lastActionLine}</i>\n`;
+    report += `\n🎯 <b>Última acción:</b> <i>${lastActionLine}</i>\n`;
+    report += `\n🌐 <b>Web Oficial:</b> <a href="https://racing-oslo.cotero91.workers.dev/">Visitar la Web Oficial</a>\n`;
     report += `\n<i>Usa /help para ver todos los comandos disponibles.</i>`;
 
     console.log('-----------------------------------------------------------------');
