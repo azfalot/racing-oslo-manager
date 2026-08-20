@@ -119,9 +119,17 @@ export async function checkMarket(client, squad, balance, botPaused) {
 
   if (botPaused || currentPlayers.length === 0) return result;
 
-  // Analizar TODOS los jugadores del mercado vendidos por la Computadora
+  // Comprobar franja horaria nocturna estratégica (Madrid 23:45h - 23:59h)
+  const nowMadrid = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
+  const hours = nowMadrid.getHours();
+  const minutes = nowMadrid.getMinutes();
+  const isNightBiddingWindow = (hours === 23 && minutes >= 45);
+
+  // Analizar jugadores del mercado en venta por la Computadora
   const marketAnalysis = engine.analyzeMarket(currentPlayers, squad, balance);
-  const recommendations = marketAnalysis.recommendations || [];
+  const recommendations = (marketAnalysis.recommendations || [])
+    .filter(r => r.upgradePoints >= 40) // Solo mejoras sustanciales que vayan directo al 11 titular (+40 pts)
+    .sort((a, b) => b.upgradePoints - a.upgradePoints); // Ordenar por impacto decreciente
 
   const pendingBids = await client.getPendingBids();
   const pendingIds = new Set(pendingBids.map(b => parseInt(b.playerId || b.id)));
@@ -134,17 +142,21 @@ export async function checkMarket(client, squad, balance, botPaused) {
     }
   } catch (e) {}
 
+  let autoBidsPlacedCount = 0;
+
   for (const rec of recommendations) {
     const pid = parseInt(rec.playerId || rec.id);
     if (pendingIds.has(pid) || ignoredIds.has(pid)) continue;
 
     const bidAmount = Math.ceil(rec.price * (1 + bidMargin / 100));
 
-    // Pujar automáticamente por cualquier jugador que mejore a nuestros titulares y quepa en nuestro saldo
-    if (rec.upgradePoints > 0 && bidAmount <= autoBidLimit && bidAmount <= balance) {
+    // SI ESTAMOS EN LA FRANJA NOCTURNA (23:45h - 23:59h) Y NO EXCEDEMOS EL MÁXIMO DE 2 PUJAS POR NOCHE
+    if (isNightBiddingWindow && autoBidsPlacedCount < 2 && bidAmount <= autoBidLimit && bidAmount <= balance) {
       try {
-        console.log(`[AUTO-BID] Pujando por ${rec.name} (${bidAmount.toLocaleString()} €) - Mejora: +${rec.upgradePoints.toFixed(0)} pts`);
+        console.log(`[NOCTURNO-BID 23:50h] Pujando por ${rec.name} (${bidAmount.toLocaleString()} €) - Mejora: +${rec.upgradePoints.toFixed(0)} pts`);
         const success = await client.placeBid(pid, rec.name, bidAmount);
+        if (success) autoBidsPlacedCount++;
+
         result.autoBids.push({ ...rec, playerId: pid, bidAmount, success });
 
         let log = [];
@@ -155,28 +167,25 @@ export async function checkMarket(client, squad, balance, botPaused) {
         } catch (e) {}
         log.push({
           timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }),
-          action: 'Puja Automática (Monitor Mercado)',
+          action: 'Puja Nocturna Estratégica (23:50h)',
           player: rec.name,
           amount: `${bidAmount.toLocaleString()} €`,
           status: success ? 'Éxito' : 'Fallo'
         });
         fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
 
-        // Publicar noticia de rumores/negociaciones en la Web
         if (success) {
           try {
             const { publishRumorNews } = await import('./imageGen.js');
-            await publishRumorNews(rec.name, `Oferta de ${bidAmount.toLocaleString()} € enviada (+${rec.upgradePoints.toFixed(0)} pts de mejora)`, pid);
-          } catch (imgErr) {
-            console.error('[AUTO-BID NEWS] Error:', imgErr.message);
-          }
+            await publishRumorNews(rec.name, `Oferta nocturna de ${bidAmount.toLocaleString()} € enviada (+${rec.upgradePoints.toFixed(0)} pts de mejora)`, pid);
+          } catch (imgErr) {}
         }
-
       } catch (e) {
         console.error(`[AUTO-BID ERROR] Error al pujar por ${rec.name}:`, e.message);
         result.autoBids.push({ ...rec, playerId: pid, bidAmount, success: false });
       }
-    } else if (rec.upgradePoints > 0 && bidAmount <= balance) {
+    } else {
+      // Durante el día se registran como alertas analíticas sin emitir pujas para no alertar a los rivales
       result.manualAlerts.push({ ...rec, playerId: pid, bidAmount });
     }
   }
