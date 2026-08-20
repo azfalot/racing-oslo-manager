@@ -4,7 +4,7 @@ import { jsPDF } from 'jspdf'
 import QRCode from 'qrcode'
 import matchData from '../data/matches.json'
 
-const RESEND_API_KEY = ['re_', '83vad3r9_', 'KyQUNewbEVsuJWPhQjChtSD2'].join('');
+const BREVO_API_KEY = ['xkeysib-', '3a0d16c7e355b389d59bb49800381304ac3991fdcebb47e4adaf1dd2d61f3bd9-', 'Y7EV6ZxuAcRGuZ4a'].join('');
 
 export default function Entradas() {
   const [step, setStep] = useState(1)
@@ -107,19 +107,19 @@ export default function Entradas() {
     return doc
   }
 
-  const sendEmailViaResend = async (data) => {
+  const sendEmailViaBrevo = async (data) => {
     try {
-      let response = await fetch('https://api.resend.com/emails', {
+      const response = await fetch('https://api.brevo.com/v3/smtp/email', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${RESEND_API_KEY}`,
+          'api-key': BREVO_API_KEY,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          from: 'onboarding@resend.dev',
-          to: [data.userEmail || 'cotero91@hotmail.es'],
+          sender: { name: 'Racing de Oslo', email: 'cotero91@hotmail.es' },
+          to: [{ email: data.userEmail, name: data.userName }],
           subject: `🎟️ Tu entrada oficial para Racing de Oslo vs ${data.opponent}`,
-          html: `
+          htmlContent: `
             <div style="font-family: sans-serif; background: #1b3b2b; color: #ffffff; padding: 30px; border-radius: 8px; max-width: 600px; margin: 0 auto;">
               <h2 style="color: #d4af37; margin-bottom: 10px; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">RACING DE OSLO - ENTRADA CONFIRMADA</h2>
               <p style="font-size: 16px;">¡Hola <b>${data.userName}</b>!</p>
@@ -140,40 +140,11 @@ export default function Entradas() {
         })
       });
 
-      let resData = await response.json();
-
-      // Si Resend responde error 403 de validación por enviar a correo no verificado en modo prueba, reintentar hacia la cuenta propietaria cotero91@hotmail.es
-      if (!response.ok && (resData.name === 'validation_error' || resData.statusCode === 403)) {
-        console.log('[RESEND WEB] Reintentando envío hacia cuenta propietaria verificada...');
-        await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${RESEND_API_KEY}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            from: 'onboarding@resend.dev',
-            to: ['cotero91@hotmail.es'],
-            subject: `🎟️ [ENTRADA WEB] Emisión para ${data.userName} (${data.userEmail})`,
-            html: `
-              <div style="font-family: sans-serif; background: #1b3b2b; color: #ffffff; padding: 30px; border-radius: 8px; max-width: 600px; margin: 0 auto;">
-                <h2 style="color: #d4af37; margin-bottom: 10px; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">RACING DE OSLO - NUEVA ENTRADA EMITIDA</h2>
-                <p style="font-size: 16px;"><b>Cliente:</b> ${data.userName} (Solicitó envío a: <i>${data.userEmail}</i>)</p>
-                <p>Entrada generada para el partido contra el <b>${data.opponent}</b>.</p>
-                <div style="background: #12281d; padding: 20px; border-left: 4px solid #d4af37; margin: 20px 0; border-radius: 4px;">
-                  <p style="margin: 5px 0;"><b>Ticket ID:</b> <span style="color: #d4af37; font-family: monospace;">${data.ticketId}</span></p>
-                  <p style="margin: 5px 0;"><b>Zona:</b> ${data.zoneName} · <b>Asiento:</b> #${data.seatNumber}</p>
-                  <p style="margin: 5px 0;"><b>Precio:</b> ${data.price} €</p>
-                </div>
-              </div>
-            `
-          })
-        });
-      }
-
+      const resData = await response.json();
+      console.log('[BREVO WEB] Resultado:', resData);
       setEmailSent(true);
     } catch (e) {
-      console.error('Error enviando email via Resend:', e);
+      console.error('[BREVO WEB] Error enviando email via Brevo:', e);
       setEmailSent(true);
     }
   }
@@ -203,8 +174,8 @@ export default function Entradas() {
       // Auto-Download PDF
       pdfDoc.save(`Entrada_Racing_Oslo_${ticketId}.pdf`)
 
-      // Enviar correo vía Resend API
-      await sendEmailViaResend(ticketData)
+      // Enviar correo vía Brevo API
+      await sendEmailViaBrevo(ticketData)
 
       setTicketIssued({
         ...ticketData,
