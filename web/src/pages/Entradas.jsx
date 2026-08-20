@@ -109,7 +109,7 @@ export default function Entradas() {
 
   const sendEmailViaResend = async (data) => {
     try {
-      const response = await fetch('https://api.resend.com/emails', {
+      let response = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${RESEND_API_KEY}`,
@@ -117,7 +117,7 @@ export default function Entradas() {
         },
         body: JSON.stringify({
           from: 'onboarding@resend.dev',
-          to: [data.userEmail],
+          to: [data.userEmail || 'cotero91@hotmail.es'],
           subject: `🎟️ Tu entrada oficial para Racing de Oslo vs ${data.opponent}`,
           html: `
             <div style="font-family: sans-serif; background: #1b3b2b; color: #ffffff; padding: 30px; border-radius: 8px; max-width: 600px; margin: 0 auto;">
@@ -140,14 +140,38 @@ export default function Entradas() {
         })
       });
 
-      const resData = await response.json();
-      if (response.ok) {
-        setEmailSent(true);
-      } else {
-        console.warn('Resend response notice:', resData);
-        // Default to true for user experience if Resend is in dev mode
-        setEmailSent(true);
+      let resData = await response.json();
+
+      // Si Resend responde error 403 de validación por enviar a correo no verificado en modo prueba, reintentar hacia la cuenta propietaria cotero91@hotmail.es
+      if (!response.ok && (resData.name === 'validation_error' || resData.statusCode === 403)) {
+        console.log('[RESEND WEB] Reintentando envío hacia cuenta propietaria verificada...');
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${RESEND_API_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            from: 'onboarding@resend.dev',
+            to: ['cotero91@hotmail.es'],
+            subject: `🎟️ [ENTRADA WEB] Emisión para ${data.userName} (${data.userEmail})`,
+            html: `
+              <div style="font-family: sans-serif; background: #1b3b2b; color: #ffffff; padding: 30px; border-radius: 8px; max-width: 600px; margin: 0 auto;">
+                <h2 style="color: #d4af37; margin-bottom: 10px; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">RACING DE OSLO - NUEVA ENTRADA EMITIDA</h2>
+                <p style="font-size: 16px;"><b>Cliente:</b> ${data.userName} (Solicitó envío a: <i>${data.userEmail}</i>)</p>
+                <p>Entrada generada para el partido contra el <b>${data.opponent}</b>.</p>
+                <div style="background: #12281d; padding: 20px; border-left: 4px solid #d4af37; margin: 20px 0; border-radius: 4px;">
+                  <p style="margin: 5px 0;"><b>Ticket ID:</b> <span style="color: #d4af37; font-family: monospace;">${data.ticketId}</span></p>
+                  <p style="margin: 5px 0;"><b>Zona:</b> ${data.zoneName} · <b>Asiento:</b> #${data.seatNumber}</p>
+                  <p style="margin: 5px 0;"><b>Precio:</b> ${data.price} €</p>
+                </div>
+              </div>
+            `
+          })
+        });
       }
+
+      setEmailSent(true);
     } catch (e) {
       console.error('Error enviando email via Resend:', e);
       setEmailSent(true);
@@ -170,7 +194,7 @@ export default function Entradas() {
       seatNumber: (selectedSeat !== null ? selectedSeat + 1 : 1),
       price: selectedZone.price,
       userName: userName || 'Aficionado Racinguista',
-      userEmail: userEmail || 'cotero91@hotmail.es'
+      userEmail: userEmail || 'entradas@racingoslo.com'
     }
 
     try {
@@ -317,7 +341,7 @@ export default function Entradas() {
                     <label className="block text-xs uppercase tracking-widest text-cream-dark mb-1">Correo Electrónico (Envío de PDF)</label>
                     <input 
                       type="email" 
-                      placeholder="cotero91@hotmail.es" 
+                      placeholder="entradas@racingoslo.com" 
                       value={userEmail} 
                       onChange={(e) => setUserEmail(e.target.value)} 
                       className="w-full bg-black/60 border border-forest/30 p-3 rounded-sm text-cream focus:outline-none focus:border-forest-light font-mono" 
