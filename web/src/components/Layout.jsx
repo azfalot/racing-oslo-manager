@@ -16,6 +16,7 @@ export default function Layout({ children }) {
           <nav className="hidden lg:flex gap-8 text-sm font-semibold tracking-wide items-center">
             <Link to="/" className="hover:text-forest-light transition-colors">INICIO</Link>
             <Link to="/noticias" className="hover:text-forest-light transition-colors">NOTICIAS</Link>
+            <Link to="/alineacion" className="hover:text-forest-light transition-colors">EL ONCE</Link>
             <Link to="/plantilla" className="hover:text-forest-light transition-colors">PLANTILLA</Link>
             <Link to="/clasificacion" className="hover:text-forest-light transition-colors">CLASIFICACIÓN</Link>
             <Link to="/mercado" className="hover:text-forest-light transition-colors">MERCADO</Link>

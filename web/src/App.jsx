@@ -8,6 +8,7 @@ import Plantilla from './pages/Plantilla'
 import Mercado from './pages/Mercado'
 import Clasificacion from './pages/Clasificacion'
 import Entradas from './pages/Entradas'
+import Alineacion from './pages/Alineacion'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/alineacion" element={<Alineacion />} />
           <Route path="/noticias" element={<Noticias />} />
           <Route path="/plantilla" element={<Plantilla />} />
           <Route path="/clasificacion" element={<Clasificacion />} />

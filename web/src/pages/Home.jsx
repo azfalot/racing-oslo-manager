@@ -21,8 +21,8 @@ export default function Home() {
           <h2 className="text-5xl md:text-7xl font-display font-bold uppercase mb-6 leading-tight text-white drop-shadow-lg">
             Comienza la<br/>Nueva Era
           </h2>
-          <Link to="/jornadas" className="inline-flex items-center gap-2 bg-cream text-clubBlack px-8 py-3 rounded-sm font-bold tracking-wide hover:bg-white transition-colors">
-            PREVIA JORNADA 1 <ChevronRight size={20} />
+          <Link to="/alineacion" className="inline-flex items-center gap-2 bg-cream text-clubBlack px-8 py-3 rounded-sm font-bold tracking-wide hover:bg-white transition-colors">
+            VER ONCE TITULAR <ChevronRight size={20} />
           </Link>
         </div>
       </section>
