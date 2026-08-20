@@ -954,9 +954,112 @@ function startMatchdayMonitor() {
 }
 
 
+// ── MONITOR DE SALUD Y LESIONES DE LA PLANTILLA ─────────────────────────────
+let healthMonitorRunning = false;
+
+async function runSquadHealthCheck() {
+  if (healthMonitorRunning) return;
+  healthMonitorRunning = true;
+  console.log('[DAEMON-HEALTH] Escaneando estado físico y partes médicos de la plantilla...');
+
+  const client = new ComunioClient();
+  const engine = new ComunioEngine();
+
+  try {
+    await client.login();
+    const squad = await client.getSquad();
+    const players = squad?.players || [];
+    
+    const healthCachePath = 'last_squad_health.json';
+    let lastHealthState = {};
+    if (fs.existsSync(healthCachePath)) {
+      try { lastHealthState = JSON.parse(fs.readFileSync(healthCachePath, 'utf-8')); } catch (e) {}
+    }
+
+    let healthChangesCount = 0;
+    const currentHealthState = {};
+
+    for (const p of players) {
+      const pid = p.id || p.playerId;
+      const currentStatus = ((p.status || '') + ' ' + (p.statusInfo || '') + ' ' + (p.availability || '')).trim() || 'Disponible';
+      currentHealthState[pid] = currentStatus;
+
+      const previousStatus = lastHealthState[pid];
+
+      // Detectar cambio de estado de disponibilidad (ej. pasar a Dudoso/Lesionado/Debilitado)
+      if (previousStatus && previousStatus !== currentStatus) {
+        const isAvailableNow = engine.isPlayerAvailable(p);
+        console.log(`[DAEMON-HEALTH] 🩺 Cambio físico detectado en ${p.name}: "${previousStatus}" ➔ "${currentStatus}"`);
+
+        // Si ha pasado a estar lesionado/dudoso/debilitado
+        if (!isAvailableNow) {
+          healthChangesCount++;
+
+          // 1. Notificar por Telegram
+          const msg = `<b>🩺 ALERTA MÉDICA AUTOMÁTICA</b>\n\n` +
+            `👤 <b>Jugador:</b> ${p.name} (${p.type || p.position})\n` +
+            `📋 <b>Nuevo Estado:</b> <code>${escapeHtml(currentStatus)}</code>\n\n` +
+            `⚡ <i>El motor de decisiones procederá a re-optimizar el XI titular para asegurar un Once 100% Disponible.</i>`;
+          await sendTelegramMessage(msg);
+
+          // 2. Publicar noticia médica con la plantilla oficial 'medical' + foto API
+          try {
+            const { publishMedicalNews } = await import('./imageGen.js');
+            await publishMedicalNews(p.name, currentStatus, pid);
+          } catch (e) {
+            console.error('[DAEMON-HEALTH] Error publicando noticia médica:', e.message);
+          }
+        }
+      }
+    }
+
+    // Si se detectaron bajas físicas, re-optimizar XI y guardar en Comunio
+    if (healthChangesCount > 0) {
+      console.log(`[DAEMON-HEALTH] Re-optimizando el XI titular tras detectar ${healthChangesCount} bajas físicas...`);
+      const lineupResult = engine.optimizeLineup(squad);
+      const starting11Ids = lineupResult.starting11.map(p => p.playerId || p.id);
+      
+      const saved = await client.setLineup(starting11Ids, lineupResult.formation);
+      if (saved) {
+        await sendTelegramMessage(
+          `<b>⚽ XI TITULAR REAJUSTADO TRAS PARTE MÉDICO</b>\n\n` +
+          `<b>Formación:</b> ${lineupResult.formation} (~${lineupResult.score} pts esperados)\n\n` +
+          `<b>🛡️ NUEVO ONCE TITULAR 100% SANO:</b>\n` +
+          lineupResult.starting11.map(p => ` • <b>${p.name}</b> (${p.expectedPoints} pts)`).join('\n')
+        );
+
+        // Desplegar automáticamente a la web
+        const syncCmd = 'cd web && npm run build && cd .. && git add -A && git commit -m "fix: Reajuste automatico por parte medico" && git push origin main';
+        exec(syncCmd, (syncErr) => {
+          if (syncErr) console.error('[DAEMON-HEALTH] Error en auto-sync web:', syncErr.message);
+        });
+      }
+    }
+
+    fs.writeFileSync(healthCachePath, JSON.stringify(currentHealthState, null, 2));
+
+  } catch (err) {
+    console.error('[DAEMON-HEALTH] Error escaneando salud de la plantilla:', err.message);
+  } finally {
+    await client.close();
+    healthMonitorRunning = false;
+  }
+}
+
+function startSquadHealthMonitor() {
+  console.log('[DAEMON] Iniciando escáner continuo de salud y bajas físicas (cada 30 minutos)...');
+  // Ejecutar primera comprobación a los 2 minutos de arranque
+  setTimeout(() => {
+    runSquadHealthCheck();
+    setInterval(runSquadHealthCheck, 30 * 60 * 1000);
+  }, 2 * 60 * 1000);
+}
+
 // ── ARRANQUE ──────────────────────────────────────────────────────────────────
 
 startPolling();
 startCronScheduler();
 startMarketMonitor();
 startMatchdayMonitor();
+startSquadHealthMonitor();
+
