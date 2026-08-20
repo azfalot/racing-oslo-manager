@@ -74,10 +74,10 @@ export default function Home() {
             </div>
             <div className="bg-forest-dark/20 border border-forest/30 p-5 rounded-sm">
               <p className="text-sm text-cream-dark mb-1">Posición Actual</p>
-              <p className="text-3xl font-display font-bold text-white">{matchData.standings.position}º</p>
+              <p className="text-3xl font-display font-bold text-white">{matchData.standingsInfo.position}º</p>
               <div className="mt-4 pt-4 border-t border-forest/20 flex justify-between text-sm">
                 <span className="text-cream/60">Puntos:</span>
-                <span className="font-bold">{matchData.standings.points} pts</span>
+                <span className="font-bold">{matchData.standingsInfo.points} pts</span>
               </div>
             </div>
           </div>
