@@ -707,6 +707,73 @@ async function handleCallbackQuery(callbackQuery) {
     ignorePlayer(parseInt(playerId));
     await answerCallbackQuery(callbackQuery.id, '✅ Ignorado por 24h');
     await sendTelegramMessage(`💼 🚫 <b>[Mateo Oslomany]:</b> <b>${playerName}</b> añadido a la lista de ignorados por 24h. No volveré a alertarte por este jugador.`);
+  } else if (data.startsWith('accept_sale:')) {
+    // Formato: accept_sale:offerId:playerId:price:playerName
+    const [, offerId, playerId, price, playerName] = data.split(':');
+    await answerCallbackQuery(callbackQuery.id, '⏳ Aceptando venta...');
+
+    const client = new ComunioClient();
+    try {
+      await client.login();
+      const success = await client.acceptSaleOffer(offerId, playerId, price);
+      if (success) {
+        await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Venta de <b>${playerName}</b> por <b>${parseInt(price).toLocaleString()} €</b> ACEPTADA con éxito.`);
+        
+        // Generar y enviar cartel de traspaso en Telegram
+        try {
+          const { generateSalePhoto } = await import('./imageGen.js');
+          const photoPath = await generateSalePhoto(playerName, `${parseInt(price).toLocaleString()} €`, playerId);
+          if (photoPath) {
+            await sendTelegramPhoto(photoPath, `👋 <b>¡VENTA OFICIAL CONFIRMADA!</b>\n\n<b>${escapeHtml(playerName)}</b> ha sido traspasado por <b>${parseInt(price).toLocaleString()} €</b>.`);
+          }
+        } catch (e) {}
+
+        // Noticia para la Web con foto oficial del jugador
+        try {
+          const newsPath = 'web/src/data/news.json';
+          if (fs.existsSync(newsPath)) {
+            const newsList = JSON.parse(fs.readFileSync(newsPath, 'utf-8'));
+            const playerPhoto = `/media/players/${playerId}.png`;
+            const imageToUse = fs.existsSync(`web/public/media/players/${playerId}.png`) 
+              ? playerPhoto 
+              : `/media/signings/${playerId}_sale.jpg`;
+
+            newsList.unshift({
+              id: `sale_${playerId}_${Date.now()}`,
+              title: `Traspaso Confirmado: ${playerName} traspasado por ${parseInt(price).toLocaleString()} €`,
+              date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
+              category: 'Ventas',
+              summary: `El Racing de Oslo ha oficializado la venta del jugador ${playerName} por una suma de ${parseInt(price).toLocaleString()} €.`,
+              content: `La dirección deportiva encabezada por Mateo Oslomany confirma el traspaso de ${playerName} por ${parseInt(price).toLocaleString()} €. La operación aporta liquidez estratégica para las siguientes jornadas.`,
+              image: imageToUse
+            });
+            fs.writeFileSync(newsPath, JSON.stringify(newsList, null, 2));
+          }
+        } catch (e) {}
+      } else {
+        await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> No se pudo procesar la venta de ${playerName} vía API.`);
+      }
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error procesando venta: <code>${e.message}</code>`);
+    } finally {
+      await client.close();
+    }
+  } else if (data.startsWith('reject_sale:')) {
+    // Formato: reject_sale:offerId:playerId:playerName
+    const [, offerId, playerId, playerName] = data.split(':');
+    await answerCallbackQuery(callbackQuery.id, '⛔ Venta rechazada');
+
+    const client = new ComunioClient();
+    try {
+      await client.login();
+      // Quitar del mercado y rechazar oferta
+      await client.removeFromMarket(playerId);
+      await sendTelegramMessage(`💼 ⛔ <b>[Mateo Oslomany]:</b> Oferta por <b>${playerName}</b> RECHAZADA. El jugador ha sido retirado del mercado y permanece intocable en la plantilla.`);
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error al rechazar venta: <code>${e.message}</code>`);
+    } finally {
+      await client.close();
+    }
   }
 }
 

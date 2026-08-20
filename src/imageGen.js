@@ -145,6 +145,30 @@ export async function generateSigningPhoto(playerName, playerPrice, playerId, po
   }
 }
 
+export async function ensurePlayerPhoto(playerId) {
+  if (!playerId) return '/media/crest.jpg';
+  const dir = path.resolve('web/public/media/players');
+  const localPath = path.resolve(dir, `${playerId}.png`);
+  
+  if (fs.existsSync(localPath)) {
+    return `/media/players/${playerId}.png`;
+  }
+
+  try {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    const url = `https://api.comunio.es/players/${playerId}/photo`;
+    const response = await axios.get(url, { responseType: 'arraybuffer' });
+    fs.writeFileSync(localPath, response.data);
+    console.log(`[API PHOTO] Foto del jugador ID ${playerId} descargada con éxito.`);
+    return `/media/players/${playerId}.png`;
+  } catch (err) {
+    console.warn(`[API PHOTO] No se pudo descargar la foto del jugador ID ${playerId}:`, err.message);
+    return '/media/crest.jpg';
+  }
+}
+
 export async function generateSalePhoto(playerName, playerPrice, playerId, positionName = 'JUGADOR') {
   return generateSigningPhoto(playerName, playerPrice, playerId, positionName, true);
 }
