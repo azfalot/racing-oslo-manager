@@ -128,7 +128,7 @@ export async function checkMarket(client, squad, balance, botPaused) {
   // Analizar jugadores del mercado en venta por la Computadora
   const marketAnalysis = engine.analyzeMarket(currentPlayers, squad, balance);
   const recommendations = (marketAnalysis.recommendations || [])
-    .filter(r => r.upgradePoints >= 40) // Solo mejoras sustanciales que vayan directo al 11 titular (+40 pts)
+    .filter(r => r.upgradePoints > 0) // Presentar todas las mejoras potenciales para decisión del usuario
     .sort((a, b) => b.upgradePoints - a.upgradePoints); // Ordenar por impacto decreciente
 
   const pendingBids = await client.getPendingBids();

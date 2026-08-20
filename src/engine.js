@@ -283,8 +283,9 @@ export class ComunioEngine {
     const recommendations = [];
 
     for (const player of marketPlayers) {
-      // Solo interesan jugadores que venda la Computadora (nuevos en el mercado)
-      if (player.owner?.name !== 'Computer') continue;
+      // Evaluar todos los jugadores disponibles en el mercado (Computadora y Rivales Humanos)
+      const ownerName = (player.owner?.name || 'Computer').trim();
+      const isComputer = player.owner?.id === 1 || ownerName === 'Computer';
 
       const expectedPoints = this.getExpectedPoints(player);
       const isAvailable = this.isPlayerAvailable(player);
@@ -318,6 +319,8 @@ export class ComunioEngine {
           expectedPoints,
           ppm: parseFloat(ppm.toFixed(2)),
           upgradePoints,
+          ownerName,
+          isComputer,
           reason: myWeakest 
             ? `Mejora tu peor ${player.type} (${myWeakest.name}) en +${upgradePoints.toFixed(0)} puntos esperados.`
             : `Cubre posición vacía de ${player.type} con ${expectedPoints.toFixed(0)} puntos esperados.`

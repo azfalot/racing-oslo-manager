@@ -859,13 +859,15 @@ async function runMarketCheck() {
       }
     }
 
-    // 1. OPORTUNIDADES DE COMPRA: Propuestas detalladas con botones de confirmación
+    // 1. OPORTUNIDADES DE COMPRA: Propuestas detalladas con botones de confirmación (Computadora y Rivales)
     for (const alert of result.manualAlerts) {
       const posTag = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' }[alert.type] || '👤';
+      const sellerTag = alert.isComputer ? 'Computadora' : `<b>${escapeHtml(alert.ownerName)}</b> (Rival de la Liga)`;
       const msg = `🛒 <b>[Propuesta de Fichaje] · Mateo Oslomany</b>\n\n` +
         `${posTag} <b>${escapeHtml(alert.name)}</b> (${(alert.type || '').toUpperCase()})\n` +
+        `👤 <b>Vendedor:</b> ${sellerTag}\n` +
         `💰 <b>Precio de Mercado:</b> ${alert.price.toLocaleString()} €\n` +
-        `📈 <b>Impacto Estimado:</b> +${alert.upgradePoints.toFixed(0)} ptos de mejora sobre tu peor titular de esa línea\n` +
+        `📈 <b>Impacto Estimado:</b> +${alert.upgradePoints.toFixed(0)} ptos de mejora sobre tu peor titular\n` +
         `📊 <b>Puntos Esperados:</b> ~${(alert.expectedPoints || 0).toFixed(0)} ptos (PPM: ${alert.ppm || 0})\n\n` +
         `💡 <b>Justificación Técnico-Económica:</b>\n` +
         `<i>${escapeHtml(alert.reason)} Saldo disponible: ${balance.toLocaleString()} €.</i>\n\n` +
