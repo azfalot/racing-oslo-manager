@@ -142,52 +142,13 @@ export async function checkMarket(client, squad, balance, botPaused) {
     }
   } catch (e) {}
 
-  let autoBidsPlacedCount = 0;
-
+  // NUNCA SE COMPRA DE FORMA AUTÓNOMA: El bot solo genera alertas informativas para decisión del usuario
   for (const rec of recommendations) {
     const pid = parseInt(rec.playerId || rec.id);
     if (pendingIds.has(pid) || ignoredIds.has(pid)) continue;
 
     const bidAmount = Math.ceil(rec.price * (1 + bidMargin / 100));
-
-    // SI ESTAMOS EN LA FRANJA NOCTURNA (23:45h - 23:59h) Y NO EXCEDEMOS EL MÁXIMO DE 2 PUJAS POR NOCHE
-    if (isNightBiddingWindow && autoBidsPlacedCount < 2 && bidAmount <= autoBidLimit && bidAmount <= balance) {
-      try {
-        console.log(`[NOCTURNO-BID 23:50h] Pujando por ${rec.name} (${bidAmount.toLocaleString()} €) - Mejora: +${rec.upgradePoints.toFixed(0)} pts`);
-        const success = await client.placeBid(pid, rec.name, bidAmount);
-        if (success) autoBidsPlacedCount++;
-
-        result.autoBids.push({ ...rec, playerId: pid, bidAmount, success });
-
-        let log = [];
-        try {
-          if (fs.existsSync('audit_log.json')) {
-            log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8'));
-          }
-        } catch (e) {}
-        log.push({
-          timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }),
-          action: 'Puja Nocturna Estratégica (23:50h)',
-          player: rec.name,
-          amount: `${bidAmount.toLocaleString()} €`,
-          status: success ? 'Éxito' : 'Fallo'
-        });
-        fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
-
-        if (success) {
-          try {
-            const { publishRumorNews } = await import('./imageGen.js');
-            await publishRumorNews(rec.name, `Oferta nocturna de ${bidAmount.toLocaleString()} € enviada (+${rec.upgradePoints.toFixed(0)} pts de mejora)`, pid);
-          } catch (imgErr) {}
-        }
-      } catch (e) {
-        console.error(`[AUTO-BID ERROR] Error al pujar por ${rec.name}:`, e.message);
-        result.autoBids.push({ ...rec, playerId: pid, bidAmount, success: false });
-      }
-    } else {
-      // Durante el día se registran como alertas analíticas sin emitir pujas para no alertar a los rivales
-      result.manualAlerts.push({ ...rec, playerId: pid, bidAmount });
-    }
+    result.manualAlerts.push({ ...rec, playerId: pid, bidAmount });
   }
 
   return result;
