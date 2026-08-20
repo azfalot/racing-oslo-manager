@@ -226,7 +226,7 @@ export class ComunioEngine {
     const isComputer = chosenOffer.user?.id === 1 || (chosenOffer.user?.name && chosenOffer.user.name.toLowerCase().includes('computer'));
 
     // 2. Verificar si es un titular imprescindible en la alineación actual
-    const bestLineup = this.selectBestLineup(squad);
+    const bestLineup = this.optimizeLineup(squad);
     const isStarter = bestLineup.starting11.some(p => p.playerId === player.id || p.playerId === player.playerId);
 
     // Si es un titular clave y NO tenemos saldo negativo urgente, RECHAZAR
