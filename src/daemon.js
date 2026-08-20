@@ -4,7 +4,7 @@ import { exec } from 'child_process';
 import { ComunioClient } from './comunioClient.js';
 import { ComunioEngine } from './engine.js';
 import { analyzeRivals } from './rivals.js';
-import { checkMarket, ignorePlayer } from './marketMonitor.js';
+import { checkMarket, ignorePlayer, fetchRecentTransactions } from './marketMonitor.js';
 import { generateSigningCard } from './signingCard.js';
 import fs from 'fs';
 
@@ -785,10 +785,20 @@ async function runMarketCheck() {
       await sendTelegramMessage(msg, markup);
     }
 
-    // Notificar jugadores desaparecidos del mercado
+    // Notificar jugadores desaparecidos del mercado con detalles de traspaso (Precio, Comprador, Vendedor)
     if (result.soldPlayers.length > 0) {
-      const names = result.soldPlayers.map(p => escapeHtml(p.name)).join(', ');
-      await sendTelegramMessage(`💼 📤 <b>[Monitor Mercado]</b> Jugadores comprados/retirados: <b>${names}</b>`);
+      let txMsg = `🛒 <b>[Monitor Mercado] · Movimientos Registrados</b>\n\n`;
+      const transactions = await fetchRecentTransactions(client);
+      
+      for (const p of result.soldPlayers) {
+        const tx = transactions.find(t => t.player.toLowerCase().includes(p.name.toLowerCase()) || p.name.toLowerCase().includes(t.player.toLowerCase()));
+        if (tx) {
+          txMsg += ` • <b>${escapeHtml(tx.player)}</b> — <b>${escapeHtml(tx.price)}</b>\n   <i>Traspasado de ${escapeHtml(tx.seller)} a <b>${escapeHtml(tx.buyer)}</b></i>\n\n`;
+        } else {
+          txMsg += ` • <b>${escapeHtml(p.name)}</b> — ${p.price ? p.price.toLocaleString() + ' €' : ''}\n   <i>(Retirado del mercado sin comprador)</i>\n\n`;
+        }
+      }
+      await sendTelegramMessage(txMsg);
     }
 
   } catch (e) {

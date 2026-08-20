@@ -1,82 +1,95 @@
 import fs from 'fs';
+import axios from 'axios';
 import { ComunioEngine } from './engine.js';
 
-const LAST_MARKET_FILE = 'last_market.json';
-const IGNORED_PLAYERS_FILE = 'ignored_players.json';
-const AUTO_BID_LIMIT = 10_000_000; // Puja automática si precio <= 10M €. Ajustable con /limite
+const lastMarketFile = 'last_market.json';
+const ignoredPlayersFile = 'ignored_players.json';
 
-/**
- * Carga el estado anterior del mercado desde disco.
- */
 function loadLastMarket() {
   try {
-    if (fs.existsSync(LAST_MARKET_FILE)) {
-      return JSON.parse(fs.readFileSync(LAST_MARKET_FILE, 'utf-8'));
+    if (fs.existsSync(lastMarketFile)) {
+      return JSON.parse(fs.readFileSync(lastMarketFile, 'utf-8'));
     }
   } catch (e) {}
   return { players: [] };
 }
 
-/**
- * Guarda el estado actual del mercado en disco.
- */
 function saveLastMarket(players) {
   try {
-    fs.writeFileSync(LAST_MARKET_FILE, JSON.stringify({ players, timestamp: new Date().toISOString() }, null, 2));
+    fs.writeFileSync(lastMarketFile, JSON.stringify({ players }, null, 2));
   } catch (e) {}
 }
 
-/**
- * Carga la lista de jugadores ignorados temporalmente (24h).
- */
 function loadIgnoredPlayers() {
   try {
-    if (fs.existsSync(IGNORED_PLAYERS_FILE)) {
-      const data = JSON.parse(fs.readFileSync(IGNORED_PLAYERS_FILE, 'utf-8'));
-      // Filtrar los que ya han expirado (24h)
+    if (fs.existsSync(ignoredPlayersFile)) {
+      const list = JSON.parse(fs.readFileSync(ignoredPlayersFile, 'utf-8'));
       const now = Date.now();
-      const valid = data.filter(entry => (now - entry.timestamp) < 24 * 60 * 60 * 1000);
-      if (valid.length !== data.length) {
-        fs.writeFileSync(IGNORED_PLAYERS_FILE, JSON.stringify(valid, null, 2));
-      }
-      return valid;
+      return list.filter(e => e.expiresAt > now);
     }
   } catch (e) {}
   return [];
 }
 
-/**
- * Añade un jugador a la lista de ignorados por 24h.
- */
-export function ignorePlayer(playerId) {
-  const ignored = loadIgnoredPlayers();
-  if (!ignored.find(e => e.playerId === playerId)) {
-    ignored.push({ playerId, timestamp: Date.now() });
-    fs.writeFileSync(IGNORED_PLAYERS_FILE, JSON.stringify(ignored, null, 2));
-  }
+export function ignorePlayer(playerId, playerName) {
+  try {
+    const list = loadIgnoredPlayers();
+    list.push({
+      playerId,
+      name: playerName,
+      expiresAt: Date.now() + 24 * 60 * 60 * 1000
+    });
+    fs.writeFileSync(ignoredPlayersFile, JSON.stringify(list, null, 2));
+  } catch (e) {}
 }
 
-/**
- * Carga el límite de puja automática desde config.json.
- */
 function getAutoBidLimit() {
   try {
     if (fs.existsSync('config.json')) {
       const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
-      if (typeof config.autoBidLimit === 'number') return config.autoBidLimit;
+      return typeof config.autoBidLimit === 'number' ? config.autoBidLimit * 1000000 : 8000000;
     }
   } catch (e) {}
-  return AUTO_BID_LIMIT;
+  return 8000000;
 }
 
 /**
- * Módulo principal: compara el mercado actual con el anterior y emite eventos.
- * Devuelve un objeto con:
- *   - newPlayers: jugadores recién llegados al mercado
- *   - soldPlayers: jugadores que ya no están (comprados/retirados)
- *   - autoBids: lista de pujas automáticas realizadas
- *   - manualAlerts: lista de jugadores que requieren confirmación manual
+ * Consulta el feed de noticias oficial de Comunio para obtener el registro detallado
+ * de traspasos (jugador, precio pagado, comprador y vendedor).
  */
+export async function fetchRecentTransactions(client) {
+  try {
+    const url = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/news`;
+    const response = await axios.get(url, { headers: client.getHeaders() });
+    const entries = response.data?.newsList?.entries || [];
+    const transactions = [];
+
+    for (const entry of entries) {
+      if (entry.type === 'TRANSACTION' || entry.title === 'Fichajes') {
+        const text = entry.message?.text || '';
+        const lines = text.split(/<br\s*\/?>/i);
+        for (const line of lines) {
+          const clean = line.replace(/<[^>]*>/g, '').trim();
+          const match = clean.match(/(.+?)\s+cambia por\s+([\d.,]+\s*€)\s+de\s+(.+?)\s+a\s+(.+)/);
+          if (match) {
+            transactions.push({
+              player: match[1].replace(/^\d{2}:\d{2}\s*-\s*/, '').trim(),
+              price: match[2].trim(),
+              seller: match[3].trim(),
+              buyer: match[4].replace(/\.$/, '').trim(),
+              date: entry.date
+            });
+          }
+        }
+      }
+    }
+    return transactions;
+  } catch (e) {
+    console.error('[MARKET MONITOR] Error leyendo feed de transacciones:', e.message);
+    return [];
+  }
+}
+
 export async function checkMarket(client, squad, balance, botPaused) {
   const engine = new ComunioEngine();
   const lastMarket = loadLastMarket();
@@ -94,8 +107,8 @@ export async function checkMarket(client, squad, balance, botPaused) {
   const newPlayers = currentPlayers.filter(p => !lastIds.has(p.playerId));
   const soldPlayers = lastMarket.players.filter(p => !currentIds.has(p.playerId));
 
-  // Guardar estado actual para la próxima comprobación
-  saveLastMarket(currentPlayers.map(p => ({ playerId: p.playerId, name: p.name, price: p.price })));
+  // Guardar estado actual
+  saveLastMarket(currentPlayers.map(p => ({ playerId: p.playerId, name: p.name, price: p.price, owner: p.owner?.name || 'Computer' })));
 
   const result = {
     newPlayers,
@@ -104,18 +117,14 @@ export async function checkMarket(client, squad, balance, botPaused) {
     manualAlerts: []
   };
 
-  // Si el bot está pausado o no hay jugadores nuevos, no analizar
   if (botPaused || newPlayers.length === 0) return result;
 
-  // Analizar los jugadores nuevos con el motor
   const marketAnalysis = engine.analyzeMarket(newPlayers, squad, balance);
   const recommendations = marketAnalysis.recommendations || [];
 
-  // Cargar pujas pendientes para evitar duplicados
   const pendingBids = await client.getPendingBids();
   const pendingIds = new Set(pendingBids.map(b => b.playerId));
 
-  // Cargar margen desde config
   let bidMargin = 0;
   try {
     if (fs.existsSync('config.json')) {
@@ -125,18 +134,15 @@ export async function checkMarket(client, squad, balance, botPaused) {
   } catch (e) {}
 
   for (const rec of recommendations) {
-    // Ignorar si ya tenemos puja activa o está en lista de ignorados
     if (pendingIds.has(rec.playerId) || ignoredIds.has(rec.playerId)) continue;
 
     const bidAmount = Math.ceil(rec.price * (1 + bidMargin / 100));
 
     if (rec.upgradePoints > 20 && bidAmount <= autoBidLimit && bidAmount <= balance) {
-      // AUTO-PUJA: mejora clara y dentro del límite económico
       try {
         const success = await client.placeBid(rec.playerId, rec.name, bidAmount);
         result.autoBids.push({ ...rec, bidAmount, success });
 
-        // Registrar en auditoría
         let log = [];
         try {
           if (fs.existsSync('audit_log.json')) {
@@ -155,7 +161,6 @@ export async function checkMarket(client, squad, balance, botPaused) {
         result.autoBids.push({ ...rec, bidAmount, success: false });
       }
     } else if (rec.upgradePoints > 5 && bidAmount <= balance) {
-      // ALERTA MANUAL: mejora moderada o precio alto, pide confirmación
       result.manualAlerts.push({ ...rec, bidAmount });
     }
   }
