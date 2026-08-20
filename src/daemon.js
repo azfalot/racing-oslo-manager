@@ -285,50 +285,86 @@ async function handleTelegramMessage(message) {
 
   // ── /jornada ──────────────────────────────────────────────────────────────
   else if (text.startsWith('/jornada')) {
-    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Consultando calendario de jornadas...</i>');
+    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Obteniendo centro de mando de la jornada desde Comunio...</i>');
     const client = new ComunioClient();
+    const engine = new ComunioEngine();
     try {
       await client.login();
-      const matchdays = await client.getMatchdays();
+      const url = 'https://api.comunio.es/matchdays/current';
+      const res = await axios.get(url, { headers: client.getHeaders() });
+      const data = res.data || {};
 
-      if (!matchdays || matchdays.length === 0) {
-        await sendTelegramMessage('💼 ❌ <b>[Mateo Oslomany]:</b> No pude obtener el calendario de jornadas de la API.');
-        return;
+      const squad = await client.getSquad();
+      const dashboard = await client.getDashboardData();
+      const balance = dashboard?.money || 0;
+      const lineupResult = engine.optimizeLineup(squad || { players: [] });
+
+      const eventInfo = data.eventInfo || {};
+      const matches = data.items || [];
+      const matchdayNum = data.id || 'Actual';
+      const eventName = `Jornada ${matchdayNum} · Comunio Liga Total`;
+
+      // Kickoff date & countdown
+      let kickoffStr = '—';
+      let countdownStr = '';
+      if (eventInfo.kickoff) {
+        const kickoffDate = new Date(eventInfo.kickoff);
+        kickoffStr = kickoffDate.toLocaleString('es-ES', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' }) + 'h';
+        const now = new Date();
+        const diffMs = kickoffDate - now;
+        if (diffMs > 0) {
+          const hours = Math.floor(diffMs / (1000 * 60 * 60));
+          const mins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+          countdownStr = ` ⏰ <i>(Quedan ${hours}h ${mins}m para el cierre de alineaciones)</i>`;
+        } else {
+          countdownStr = ' 🟡 <i>(Jornada en curso / Cierre completado)</i>';
+        }
       }
 
-      const upcoming = matchdays.filter(md => !md.finished).slice(0, 4);
+      const isPositiveBalance = balance >= 0;
+      const balanceStatus = isPositiveBalance ? '✅ Positivo (Puntuarás normalmente)' : '❌ EN ROJO (Atención: Quedarás a 0 ptos si no vendes)';
 
-      let rep = `💼 <b>[Mateo Oslomany] · Calendario de Jornadas</b>\n\n`;
-      upcoming.forEach(md => {
-        const dateMatch = (md.eventInfo || '').match(/kickoff=(\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2})/);
-        let dateStr = '—';
-        if (dateMatch) {
-          const d = new Date(dateMatch[1]);
-          dateStr = d.toLocaleString('es-ES', { weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' }) + 'h';
-        }
-        const status = md.started ? '🟡 En curso' : '🔵 Pendiente';
-        rep += ` ${status} <b>Jornada ${md.matchdayKey}</b> — ${dateStr}\n`;
+      let rep = `📅 <b>[Mateo Oslomany] · Centro de Mando de Jornada</b>\n\n`;
+      rep += `⚽ <b>${escapeHtml(eventName)}</b>\n`;
+      rep += `⏳ <b>Cierre de Alineaciones:</b> ${kickoffStr}${countdownStr}\n`;
+      rep += `💰 <b>Estado Financiero:</b> ${balance.toLocaleString()} € | ${balanceStatus}\n\n`;
+
+      rep += `🛡️ <b>Tu XI Titular Guardado (${lineupResult.formation || '4-5-1'}):</b>\n`;
+      const posEmoji = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' };
+      
+      (lineupResult.starting11 || []).forEach(p => {
+        const emoji = posEmoji[p.type] || '👤';
+        const fit = p.available ? '✅ 100% Fit' : '⚠️ Baja/Duda';
+        rep += ` ${emoji} <b>${escapeHtml(p.name)}</b> — <i>${fit}</i>\n`;
       });
 
-      // Próxima jornada con tiempo restante
-      const next = matchdays.find(md => !md.finished && !md.started);
-      if (next) {
-        const dateMatch = (next.eventInfo || '').match(/kickoff=(\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2})/);
-        if (dateMatch) {
-          const kickoff = new Date(dateMatch[1]);
-          const now = new Date();
-          const diff = kickoff - now;
-          if (diff > 0) {
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            rep += `\n⏰ <b>Tiempo hasta la Jornada ${next.matchdayKey}:</b> ${days}d ${hours}h`;
+      const isFull11 = (lineupResult.starting11 || []).length === 11;
+      rep += ` <i>${isFull11 ? '✅ 11/11 posiciones cubiertas' : '⚠️ Atención: Tienes posiciones vacías'}</i>\n\n`;
+
+      if (matches.length > 0) {
+        rep += `🏟️ <b>Partidos Destacados de la Jornada:</b>\n`;
+        matches.slice(0, 5).forEach(m => {
+          const home = m.home?.name || 'Local';
+          const guest = m.guest?.name || 'Visitante';
+          const trend = m.predictionTrendData || {};
+          const homeWin = trend.percentageVictoryHome ? `${trend.percentageVictoryHome}%` : '—';
+          const draw = trend.percentageTie ? `${trend.percentageTie}%` : '—';
+          const guestWin = trend.percentageVictoryGuest ? `${trend.percentageVictoryGuest}%` : '—';
+
+          let timeStr = '';
+          if (m.kickoff) {
+            const kDate = new Date(m.kickoff);
+            timeStr = kDate.toLocaleString('es-ES', { weekday: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' }) + 'h';
           }
-        }
+
+          rep += ` • <b>${escapeHtml(home)} vs ${escapeHtml(guest)}</b> (${timeStr})\n`;
+          rep += `   📊 <i>Vic: ${homeWin} | Emp: ${draw} | Der: ${guestWin}</i>\n`;
+        });
       }
 
       await sendTelegramMessage(rep);
     } catch (e) {
-      await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error: <code>${e.message}</code>`);
+      await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al consultar jornada: <code>${e.message}</code>`);
     } finally {
       await client.close();
     }
