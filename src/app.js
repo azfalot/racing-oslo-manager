@@ -319,11 +319,14 @@ async function runBot() {
       }
     } catch (e) {}
 
+    const predictedPoints = engine.getMatchdayPrediction(lineupResult.starting11);
+
     let report = `💼 <b>Mateo Oslomany · Resumen Ejecutivo</b>\n`;
     report += `<i>${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</i>\n\n`;
     report += `💰 <b>Presupuesto disponible:</b> ${balance.toLocaleString()} € ${economyResult.inDebt ? '⚠️ EN DEUDA' : '✅'}\n`;
     if (teamValue > 0) report += `📊 <b>Valor de plantilla:</b> ${teamValue.toLocaleString()} € | Margen puja: <b>${bidMargin}%</b>\n`;
     report += `⚽ <b>Alineación:</b> ${lineupResult.formation || '—'} ${mode === 'autonomo' ? '(guardada ✅)' : '(modo asistente)'}\n`;
+    report += `📈 <b>Predicción Jornada:</b> ~${predictedPoints} pts esperados 🎯\n`;
     report += `🛒 <b>Mercado:</b> ${marketLine}\n`;
     report += `👥 <b>Liga:</b> ${myRankStr} equipos\n`;
     report += `📅 <b>Próx. jornada:</b> ${matchdayLine}\n`;
