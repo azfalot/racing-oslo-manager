@@ -859,17 +859,62 @@ async function runMarketCheck() {
       }
     }
 
-    // Alertas manuales con botones inline
+    // 1. OPORTUNIDADES DE COMPRA: Propuestas detalladas con botones de confirmación
     for (const alert of result.manualAlerts) {
       const posTag = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' }[alert.type] || '👤';
-      const msg = `🛒 <b>[Mercado]</b> Nuevo jugador · ¿Pujo?\n\n${posTag} <b>${escapeHtml(alert.name)}</b> (${alert.type})\n💰 Precio: ${alert.price.toLocaleString()} €\n📈 Mejora: +${alert.upgradePoints.toFixed(0)} ptos\n<i>${escapeHtml(alert.reason)}</i>`;
+      const msg = `🛒 <b>[Propuesta de Fichaje] · Mateo Oslomany</b>\n\n` +
+        `${posTag} <b>${escapeHtml(alert.name)}</b> (${(alert.type || '').toUpperCase()})\n` +
+        `💰 <b>Precio de Mercado:</b> ${alert.price.toLocaleString()} €\n` +
+        `📈 <b>Impacto Estimado:</b> +${alert.upgradePoints.toFixed(0)} ptos de mejora sobre tu peor titular de esa línea\n` +
+        `📊 <b>Puntos Esperados:</b> ~${(alert.expectedPoints || 0).toFixed(0)} ptos (PPM: ${alert.ppm || 0})\n\n` +
+        `💡 <b>Justificación Técnico-Económica:</b>\n` +
+        `<i>${escapeHtml(alert.reason)} Saldo disponible: ${balance.toLocaleString()} €.</i>\n\n` +
+        `<b>¿Autorizas enviar esta oferta a Comunio?</b>`;
+
       const markup = {
         inline_keyboard: [[
-          { text: '✅ PUJAR', callback_data: `bid:${alert.playerId}:${alert.name}:${alert.bidAmount}:${alert.type}` },
-          { text: '❌ IGNORAR', callback_data: `ignore:${alert.playerId}:${alert.name}` }
+          { text: `✅ PUJAR (${alert.bidAmount.toLocaleString()} €)`, callback_data: `bid:${alert.playerId}:${alert.name}:${alert.bidAmount}:${alert.type}` },
+          { text: `❌ IGNORAR`, callback_data: `ignore:${alert.playerId}:${alert.name}` }
         ]]
       };
       await sendTelegramMessage(msg, markup);
+    }
+
+    // 2. OFERTAS DE VENTA RECIBIDAS: Propuestas detalladas con botones de confirmación
+    try {
+      const incomingOffersUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers?current`;
+      const offersRes = await axios.get(incomingOffersUrl, { headers: client.getHeaders() });
+      const saleOffers = (offersRes.data?.items || []).filter(item => item.type === 'SALE' && item.state === 'PENDING');
+
+      for (const offer of saleOffers) {
+        const offerId = offer.id;
+        const playerId = offer.tradable?.id;
+        const playerName = offer.tradable?.name || 'Jugador';
+        const offerPrice = offer.price;
+        const buyerName = offer.user?.name || offer.tradingPartner?.name || 'Computadora';
+        const marketValue = offer.tradable?.quotedPrice || offer.tradable?.price || offerPrice;
+        const diff = offerPrice - marketValue;
+        const diffStr = diff >= 0 ? `+${diff.toLocaleString()} € beneficio` : `${diff.toLocaleString()} € sobreprecio`;
+
+        const msg = `💼 <b>[Propuesta de Venta] · Mateo Oslomany</b>\n\n` +
+          `👤 <b>${escapeHtml(playerName)}</b>\n` +
+          `💰 <b>Oferta Recibida:</b> ${offerPrice.toLocaleString()} €\n` +
+          `📊 <b>Valor de Mercado:</b> ${marketValue.toLocaleString()} € <i>(${diffStr})</i>\n` +
+          `👤 <b>Comprador:</b> ${escapeHtml(buyerName)}\n\n` +
+          `💡 <b>Justificación Técnico-Económica:</b>\n` +
+          `<i>Se ha recibido una oferta por ${escapeHtml(playerName)}. Si autorizas la venta, el dinero se ingresará en tu cuenta tras la ejecución del mercado.</i>\n\n` +
+          `<b>¿Autorizas aceptar esta venta en Comunio?</b>`;
+
+        const markup = {
+          inline_keyboard: [[
+            { text: `✅ ACEPTAR (${offerPrice.toLocaleString()} €)`, callback_data: `acc_sale:${offerId}:${playerId}:${offerPrice}` },
+            { text: `❌ RECHAZAR`, callback_data: `rej_sale:${offerId}:${playerId}` }
+          ]]
+        };
+        await sendTelegramMessage(msg, markup);
+      }
+    } catch (offerErr) {
+      console.warn('[DAEMON-MARKET] Error revisando ofertas entrantes:', offerErr.message);
     }
 
     // Notificar jugadores desaparecidos del mercado con detalles de traspaso (Precio, Comprador, Vendedor)
@@ -907,10 +952,31 @@ function startMarketMonitor() {
 
 // ── CRON DIARIO (02:50 · 09:00 · 15:00) ──────────────────────────────────────
 
+async function executeInLineupOptimization() {
+  console.log('[DAEMON-CRON] Ejecutando optimización de alineación (Flujo Unificado)...');
+  const client = new ComunioClient();
+  const engine = new ComunioEngine();
+  try {
+    await client.login();
+    const squad = await client.getSquad();
+    const lineupResult = engine.optimizeLineup(squad || { players: [] });
+    if (lineupResult.starting11 && lineupResult.starting11.length > 0) {
+      const startingIds = lineupResult.starting11.map(p => p.playerId);
+      const success = await client.setLineup(startingIds, lineupResult.formation);
+      console.log(`[DAEMON-CRON] 11 Titular guardado (${lineupResult.formation}) -> Éxito: ${success}`);
+      await sendTelegramMessage(`💼 ⚡ <b>[Mateo Oslomany]:</b> 11 Titular optimizado y guardado en Comunio (Formación: ${lineupResult.formation}).`);
+    }
+  } catch (e) {
+    console.error('[DAEMON-CRON] Error al optimizar alineación:', e.message);
+  } finally {
+    await client.close();
+  }
+}
+
 function startCronScheduler() {
   console.log('[DAEMON] Iniciando planificador de horas fijas (02:50, 09:00, 15:00)...');
   
-  setInterval(() => {
+  setInterval(async () => {
     const now = new Date();
     const madridTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
     const hours = madridTime.getHours();
@@ -923,26 +989,22 @@ function startCronScheduler() {
 
     if (shouldRun) {
       const timeStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-      console.log(`[DAEMON-CRON] Hora programada detectada (${timeStr}). Ejecutando optimización autónoma...`);
+      console.log(`[DAEMON-CRON] Hora programada detectada (${timeStr}). Ejecutando optimización de alineación unificada...`);
 
       if (botPaused) {
         console.log('[DAEMON-CRON] Bot pausado, omitiendo ejecución automática.');
         return;
       }
 
-      exec('node src/app.js', { env: { ...process.env, COMUNIO_MODE: 'autonomo' } }, (err) => {
-        if (err) {
-          sendTelegramMessage(`💼 🚨 <b>[Mateo Oslomany]:</b> Error en ejecución automática: <code>${err.message}</code>`);
-          return;
-        }
-        if (hours === 9) {
-          console.log('[DAEMON-CRON] Sincronizando datos con la web...');
-          const syncCmd = 'node src/syncWeb.mjs && git add web/src/data/*.json && git commit -m "chore: Sincronizacion automatica web" && git push origin main';
-          exec(syncCmd, (syncErr) => {
-             if (syncErr) console.error('[DAEMON-CRON] Error sincronizando web:', syncErr);
-          });
-        }
-      });
+      await executeInLineupOptimization();
+
+      if (hours === 9) {
+        console.log('[DAEMON-CRON] Sincronizando datos con la web...');
+        const syncCmd = 'node src/syncWeb.mjs && git add web/src/data/*.json && git commit -m "chore: Sincronizacion automatica web" && git push origin main';
+        exec(syncCmd, (syncErr) => {
+           if (syncErr) console.error('[DAEMON-CRON] Error sincronizando web:', syncErr);
+        });
+      }
     }
   }, 60000);
 }
