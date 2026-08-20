@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import { ComunioClient } from './comunioClient.js';
 import axios from 'axios';
+import { getTransfermarktData } from './transfermarkt.js';
 import fs from 'fs';
 
 async function fetchRealData() {
@@ -41,7 +42,14 @@ async function fetchRealData() {
     });
   }
 
+  
+  // TM Data for Squad
+  for (const p of squadJson.players) {
+    const tm = await getTransfermarktData(p.name);
+    p.tmValue = tm ? tm.value : 0;
+  }
   fs.writeFileSync('./web/src/data/squad.json', JSON.stringify(squadJson, null, 2));
+    
   
   // Dashboard / Standings
   const dashboard = await client.getDashboardData();
@@ -72,7 +80,14 @@ async function fetchRealData() {
     }
   }
   
+  
+  // TM Data for Market
+  for (const p of marketJson) {
+    const tm = await getTransfermarktData(p.name);
+    p.tmValue = tm ? tm.value : 0;
+  }
   fs.writeFileSync('./web/src/data/market.json', JSON.stringify(marketJson, null, 2));
+    
 
   // Matches
   const matchdays = await client.getMatchdays();

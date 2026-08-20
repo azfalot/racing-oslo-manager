@@ -20,6 +20,7 @@ export default function Mercado() {
       </td>
       <td className="p-4 text-cream-dark font-mono text-sm">{formatPrice(p.price)}</td>
       <td className="p-4 text-center font-bold text-forest-light">{p.points} pts</td>
+      <td className="p-4 text-right font-mono text-sm text-forest-light">{formatPrice(p.tmValue)}</td>
       <td className="p-4 text-right">
         <span className="bg-black/60 text-xs px-2 py-1 rounded-sm border border-forest/20 text-cream/70">
           {p.ownerId === 1 ? 'Mercado Libre' : p.owner}
@@ -50,6 +51,7 @@ export default function Mercado() {
                   <th className="p-4 font-semibold">Jugador</th>
                   <th className="p-4 font-semibold">Valor</th>
                   <th className="p-4 font-semibold text-center">Puntos</th>
+                  <th className="p-4 font-semibold text-right">TM</th>
                   <th className="p-4 font-semibold text-right">Vendedor</th>
                 </tr>
               </thead>
@@ -74,6 +76,7 @@ export default function Mercado() {
                   <th className="p-4 font-semibold">Jugador</th>
                   <th className="p-4 font-semibold">Valor</th>
                   <th className="p-4 font-semibold text-center">Puntos</th>
+                  <th className="p-4 font-semibold text-right">TM</th>
                   <th className="p-4 font-semibold text-right">Vendedor</th>
                 </tr>
               </thead>

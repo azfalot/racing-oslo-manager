@@ -3,6 +3,7 @@ import squadData from '../data/squad.json'
 import { Shield, Activity, Target, AlertTriangle } from 'lucide-react'
 
 export default function Plantilla() {
+  const formatPrice = (price) => price ? price.toLocaleString('es-ES') + ' €' : 'Desconocido';
   const getPosColor = (pos) => {
     switch(pos) {
       case 'keeper': return 'bg-yellow-600'
@@ -53,7 +54,20 @@ export default function Plantilla() {
               </h3>
             </div>
             
-            {/* Estadísticas Históricas */}
+            
+              {/* Valor de Mercado */}
+              <div className="px-6 py-4 bg-black border-t border-forest/30 flex justify-between items-center">
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-cream/50 mb-1">Valor Comunio</p>
+                  <p className="font-mono text-cream font-bold">{formatPrice(p.price)}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-[10px] uppercase tracking-wider text-cream/50 mb-1">Transfermarkt</p>
+                  <p className="font-mono text-forest-light font-bold">{formatPrice(p.tmValue)}</p>
+                </div>
+              </div>
+  
+              {/* Estadísticas Históricas */}
             <div className="p-6 bg-gradient-to-b from-black to-clubBlack flex-1">
               <h4 className="text-xs uppercase tracking-widest text-forest-light font-bold mb-4 flex items-center gap-2">
                 <Activity size={14} /> Estadísticas Históricas

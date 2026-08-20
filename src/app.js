@@ -21,6 +21,27 @@ function escapeHtml(text) {
     .replace(/>/g, '&gt;');
 }
 
+
+import FormData from 'form-data';
+import { generateSigningPhoto } from './imageGen.js';
+async function sendTelegramPhoto(photoPath, caption) {
+  if (!telegramToken || !telegramChatId) return;
+  try {
+    const url = `https://api.telegram.org/bot${telegramToken}/sendPhoto`;
+    const formData = new FormData();
+    formData.append('chat_id', telegramChatId);
+    formData.append('caption', caption);
+    formData.append('parse_mode', 'HTML');
+    formData.append('photo', fs.createReadStream(photoPath));
+
+    await axios.post(url, formData, {
+      headers: formData.getHeaders()
+    });
+  } catch (err) {
+    console.error('[TELEGRAM] Error al enviar foto:', err.message);
+  }
+}
+
 async function sendTelegramMessage(text) {
   if (!telegramToken || !telegramChatId) return;
   try {
@@ -111,6 +132,11 @@ async function runBot() {
     // Obtener ofertas de compra pendientes activas en los servidores
     console.log('[INFO] Cargando ofertas de compra pendientes...');
     const pendingBids = await client.getPendingBids();
+
+    // Aceptar ofertas rentables pendientes
+    console.log('[INFO] Revisando y aceptando ofertas de venta...');
+    await client.acceptBestOffers();
+  
     console.log(`[INFO] Ofertas activas encontradas: ${pendingBids.length}`);
 
     // Obtener datos del Dashboard (incluyendo saldo económico)
