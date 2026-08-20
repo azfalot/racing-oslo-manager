@@ -1,15 +1,25 @@
 import React, { useState } from 'react'
-import { Ticket, Calendar, MapPin, CreditCard, Download, Mail, CheckCircle2, ShieldCheck } from 'lucide-react'
+import { Ticket, Calendar, MapPin, CreditCard, Download, Mail, CheckCircle2, ShieldCheck, ChevronRight, ArrowLeft } from 'lucide-react'
 import { jsPDF } from 'jspdf'
 import QRCode from 'qrcode'
 import matchData from '../data/matches.json'
 
 const BREVO_API_KEY = ['xkeysib-', '3a0d16c7e355b389d59bb49800381304ac3991fdcebb47e4adaf1dd2d61f3bd9-', 'Y7EV6ZxuAcRGuZ4a'].join('');
 
+// Helper para limpiar acentos y caracteres especiales para jsPDF
+function sanitizePdfText(str) {
+  if (!str) return '';
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Eliminar diacríticos (ó -> o, á -> a, etc.)
+    .replace(/ñ/g, 'n')
+    .replace(/Ñ/g, 'N');
+}
+
 export default function Entradas() {
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
-  const [selectedZone, setSelectedZone] = useState({ name: 'Tribuna Oeste', price: 45 })
+  const [selectedZone, setSelectedZone] = useState({ id: 'tribuna', name: 'Tribuna Oeste', price: 45 })
   const [selectedSeat, setSelectedSeat] = useState(null)
   const [userName, setUserName] = useState('')
   const [userEmail, setUserEmail] = useState('')
@@ -22,6 +32,14 @@ export default function Entradas() {
     { id: 'sur', name: 'Fondo Sur', price: 20 },
     { id: 'norte', name: 'Fondo Norte', price: 15 }
   ]
+
+  const nextMatchInfo = {
+    opponent: matchData?.nextMatch?.opponent || 'Rival de Liga',
+    competition: matchData?.nextMatch?.competition || 'Comunio Liga Total',
+    matchday: matchData?.nextMatch?.matchday || '2',
+    date: matchData?.nextMatch?.date || 'Próxima Jornada',
+    venue: matchData?.nextMatch?.venue || 'Oslo Arena'
+  }
 
   const generatePDFTicket = async (data) => {
     const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: [210, 100] })
@@ -51,19 +69,19 @@ export default function Entradas() {
     doc.setTextColor(255, 255, 255)
     doc.setFontSize(9)
     doc.setFont('helvetica', 'normal')
-    doc.text('ENTRADA OFICIAL DE PARTIDO · TEMPORADA 2026/27', 12, 22)
+    doc.text('ENTRADA OFICIAL DE PARTIDO - TEMPORADA 2026/27', 12, 22)
 
     // Match Info
-    doc.setFontSize(16)
+    doc.setFontSize(15)
     doc.setFont('helvetica', 'bold')
     doc.setTextColor(255, 255, 255)
-    doc.text(`RACING DE OSLO vs ${data.opponent.toUpperCase()}`, 12, 34)
+    doc.text(`RACING DE OSLO vs ${sanitizePdfText(data.opponent).toUpperCase()}`, 12, 34)
 
     doc.setFontSize(10)
     doc.setFont('helvetica', 'normal')
     doc.setTextColor(200, 200, 200)
-    doc.text(`Competición: ${data.competition} (Jornada ${data.matchday})`, 12, 42)
-    doc.text(`Lugar: Oslo Arena  |  Fecha: ${data.date}`, 12, 48)
+    doc.text(`Competicion: ${sanitizePdfText(data.competition)} (Jornada ${data.matchday})`, 12, 42)
+    doc.text(`Lugar: Oslo Arena  |  Fecha: ${sanitizePdfText(data.date)}`, 12, 48)
 
     // Ticket Details Box
     doc.setFillColor(18, 40, 29)
@@ -72,14 +90,14 @@ export default function Entradas() {
     doc.setFontSize(9)
     doc.setTextColor(212, 175, 55)
     doc.setFont('helvetica', 'bold')
-    doc.text(`ZONA: ${data.zoneName.toUpperCase()}`, 16, 62)
+    doc.text(`ZONA: ${sanitizePdfText(data.zoneName).toUpperCase()}`, 16, 62)
     doc.text(`ASIENTO: #${data.seatNumber}`, 75, 62)
 
     doc.setTextColor(255, 255, 255)
     doc.setFont('helvetica', 'normal')
-    doc.text(`TITULAR: ${data.userName.toUpperCase()}`, 16, 70)
+    doc.text(`TITULAR: ${sanitizePdfText(data.userName).toUpperCase()}`, 16, 70)
     doc.text(`EMAIL: ${data.userEmail}`, 16, 76)
-    doc.text(`PRECIO: ${data.price} €  (IVA Incluido)`, 16, 82)
+    doc.text(`PRECIO: ${data.price} EUR (IVA Incluido)`, 16, 82)
 
     // QR Code Generation on Stub (Right Side)
     try {
@@ -96,13 +114,13 @@ export default function Entradas() {
     doc.setFontSize(8)
     doc.setFont('helvetica', 'normal')
     doc.setTextColor(255, 255, 255)
-    doc.text(`TICKET ID:`, 152, 73)
+    doc.text('TICKET ID:', 152, 73)
     doc.setFontSize(7)
     doc.text(data.ticketId, 152, 78)
 
     doc.setFontSize(7)
     doc.setTextColor(180, 180, 180)
-    doc.text('Presentar en puerta. Válida 1 acceso.', 152, 86)
+    doc.text('Presentar en puerta. Valida 1 acceso.', 152, 86)
 
     return doc
   }
@@ -134,17 +152,17 @@ export default function Entradas() {
                 <p style="margin: 5px 0;"><b>Precio:</b> ${data.price} €</p>
               </div>
 
-              <p style="color: #d4af37; font-size: 13px;">Se ha descargado una copia en PDF en tu dispositivo. También puedes presentar este correo a la entrada del estadio.</p>
+              <p style="color: #d4af37; font-size: 13px;">Se ha generado una copia oficial descargable en formato PDF. También puedes presentar este correo en el control de acceso del Oslo Arena.</p>
             </div>
           `
         })
       });
 
       const resData = await response.json();
-      console.log('[BREVO WEB] Resultado:', resData);
+      console.log('[BREVO WEB] Resultado del envío:', resData);
       setEmailSent(true);
     } catch (e) {
-      console.error('[BREVO WEB] Error enviando email via Brevo:', e);
+      console.error('[BREVO WEB] Error enviando email vía Brevo:', e);
       setEmailSent(true);
     }
   }
@@ -157,10 +175,10 @@ export default function Entradas() {
     
     const ticketData = {
       ticketId,
-      opponent: matchData.nextMatch.opponent,
-      competition: matchData.nextMatch.competition,
-      matchday: matchData.nextMatch.matchday,
-      date: matchData.nextMatch.date,
+      opponent: nextMatchInfo.opponent,
+      competition: nextMatchInfo.competition,
+      matchday: nextMatchInfo.matchday,
+      date: nextMatchInfo.date,
       zoneName: selectedZone.name,
       seatNumber: (selectedSeat !== null ? selectedSeat + 1 : 1),
       price: selectedZone.price,
@@ -171,7 +189,7 @@ export default function Entradas() {
     try {
       const pdfDoc = await generatePDFTicket(ticketData)
       
-      // Auto-Download PDF
+      // Auto-Descarga del PDF
       pdfDoc.save(`Entrada_Racing_Oslo_${ticketId}.pdf`)
 
       // Enviar correo vía Brevo API
@@ -192,12 +210,14 @@ export default function Entradas() {
 
   return (
     <div className="container mx-auto px-6 py-12 min-h-[70vh] flex flex-col items-center">
-      <div className="mb-12 text-center max-w-2xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 flex items-center justify-center gap-4">
-          <Ticket size={40} className="text-forest-light" />
+      <div className="mb-10 text-center max-w-2xl mx-auto space-y-2">
+        <h2 className="text-4xl md:text-5xl font-display font-bold flex items-center justify-center gap-3">
+          <Ticket size={38} className="text-forest-light" />
           Taquilla Oficial
         </h2>
-        <p className="text-cream-dark">Consigue tu entrada oficial en PDF para ver al Racing de Oslo en el Oslo Arena.</p>
+        <p className="text-cream-dark text-sm">
+          Reserva tu asiento oficial con PDF e identificador QR para ver al Racing de Oslo en el Oslo Arena.
+        </p>
       </div>
 
       {step < 5 ? (
@@ -210,23 +230,28 @@ export default function Entradas() {
             <div className={`flex-1 py-4 ${step >= 4 ? 'text-forest-light border-b-2 border-forest-light bg-forest/10' : 'text-cream/40'}`}>4. Pago y PDF</div>
           </div>
 
-          <div className="p-8">
+          <div className="p-6 sm:p-8">
             {/* Step 1: Partido */}
             {step === 1 && (
               <div className="space-y-6">
-                <h3 className="text-2xl font-display mb-4">Selecciona el Partido</h3>
+                <h3 className="text-2xl font-display mb-2">Selecciona el Partido</h3>
                 <div 
-                  className="bg-black/60 border border-forest/50 hover:border-cream cursor-pointer p-6 rounded-sm transition-colors"
+                  className="bg-black/60 border border-forest/50 hover:border-forest-light cursor-pointer p-6 rounded-sm transition-all shadow-xl hover:scale-[1.01]"
                   onClick={() => setStep(2)}
                 >
                   <div className="flex justify-between items-center mb-4">
-                    <span className="bg-cream text-clubBlack text-xs font-bold px-2 py-1 uppercase">{matchData.nextMatch.competition}</span>
-                    <span className="text-forest-light font-bold">Jornada {matchData.nextMatch.matchday}</span>
+                    <span className="bg-forest text-cream text-xs font-bold px-3 py-1 uppercase tracking-wider rounded-sm">{nextMatchInfo.competition}</span>
+                    <span className="text-forest-light font-bold text-sm">Jornada {nextMatchInfo.matchday}</span>
                   </div>
-                  <h4 className="text-3xl font-display font-bold mb-2">Racing de Oslo vs {matchData.nextMatch.opponent}</h4>
-                  <div className="flex gap-4 text-cream-dark text-sm">
-                    <span className="flex items-center gap-1"><Calendar size={16}/> {matchData.nextMatch.date}</span>
-                    <span className="flex items-center gap-1"><MapPin size={16}/> {matchData.nextMatch.venue}</span>
+                  <h4 className="text-2xl sm:text-3xl font-display font-bold mb-3 text-white">
+                    Racing de Oslo vs {nextMatchInfo.opponent}
+                  </h4>
+                  <div className="flex flex-wrap gap-4 text-cream/70 text-sm font-mono">
+                    <span className="flex items-center gap-1.5"><Calendar size={16} className="text-forest-light"/> {nextMatchInfo.date}</span>
+                    <span className="flex items-center gap-1.5"><MapPin size={16} className="text-forest-light"/> {nextMatchInfo.venue}</span>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-forest/20 flex justify-end items-center text-xs font-bold text-forest-light uppercase tracking-widest gap-1">
+                    Seleccionar Entradas <ChevronRight size={16} />
                   </div>
                 </div>
               </div>
@@ -235,14 +260,20 @@ export default function Entradas() {
             {/* Step 2: Zona */}
             {step === 2 && (
               <div className="space-y-6">
-                <h3 className="text-2xl font-display mb-4 text-center">Selecciona tus Butacas en Oslo Arena</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-xl mx-auto">
+                <div className="flex items-center justify-between">
+                  <button onClick={() => setStep(1)} className="text-xs font-bold text-cream/70 hover:text-white flex items-center gap-1 uppercase tracking-wider">
+                    <ArrowLeft size={16} /> Volver a Partidos
+                  </button>
+                  <span className="text-xs font-mono text-forest-light font-bold">Oslo Arena</span>
+                </div>
+                <h3 className="text-2xl font-display mb-4 text-center">Selecciona tu Zona en Oslo Arena</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
                   {zones.map((z) => (
                     <div 
                       key={z.id}
-                      onClick={() => { setSelectedZone(z); setStep(3); }}
-                      className={`p-6 border rounded-sm cursor-pointer transition-colors text-center ${
-                        selectedZone.id === z.id ? 'bg-forest border-forest-light text-white' : 'bg-black/60 border-forest/30 hover:border-forest'
+                      onClick={() => { setSelectedZone(z); setSelectedSeat(null); setStep(3); }}
+                      className={`p-6 border rounded-sm cursor-pointer transition-all text-center ${
+                        selectedZone.id === z.id ? 'bg-forest border-forest-light text-white shadow-lg' : 'bg-black/60 border-forest/30 hover:border-forest-light'
                       }`}
                     >
                       <h4 className="font-bold text-lg">{z.name}</h4>
@@ -250,27 +281,32 @@ export default function Entradas() {
                     </div>
                   ))}
                 </div>
-                <button onClick={() => setStep(1)} className="text-sm text-cream/60 hover:text-cream mt-4 block mx-auto">Volver</button>
               </div>
             )}
 
             {/* Step 3: Asiento */}
             {step === 3 && (
               <div className="space-y-6">
-                <h3 className="text-2xl font-display mb-4 text-center">Selecciona tu Asiento en {selectedZone.name}</h3>
-                <div className="max-w-md mx-auto">
-                  <div className="w-full bg-cream-dark text-clubBlack text-center py-2 mb-8 font-bold text-xs tracking-widest uppercase">
-                    Terreno de Juego
+                <div className="flex items-center justify-between">
+                  <button onClick={() => setStep(2)} className="text-xs font-bold text-cream/70 hover:text-white flex items-center gap-1 uppercase tracking-wider">
+                    <ArrowLeft size={16} /> Volver a Zonas
+                  </button>
+                  <span className="text-xs font-mono text-forest-light font-bold">{selectedZone.name} ({selectedZone.price} €)</span>
+                </div>
+                <h3 className="text-2xl font-display mb-2 text-center">Selecciona tu Asiento en {selectedZone.name}</h3>
+                <div className="max-w-md mx-auto space-y-6">
+                  <div className="w-full bg-forest-dark/80 text-cream text-center py-2 font-bold text-xs tracking-widest uppercase rounded-sm border border-forest/30">
+                    Terreno de Juego (Oslo Arena)
                   </div>
-                  <div className="grid grid-cols-8 gap-2">
+                  <div className="grid grid-cols-8 gap-2 bg-black/40 p-4 rounded-sm border border-forest/20">
                     {Array.from({length: 32}).map((_, i) => (
                       <button 
                         key={i}
                         onClick={() => setSelectedSeat(i)}
-                        className={`w-full aspect-square rounded-sm border flex items-center justify-center text-[10px] transition-colors ${
+                        className={`w-full aspect-square rounded-sm border flex items-center justify-center text-xs font-mono transition-all ${
                           selectedSeat === i 
-                            ? 'bg-forest-light border-forest-light text-white font-bold' 
-                            : 'bg-black/60 border-forest/30 hover:border-forest text-cream-dark'
+                            ? 'bg-forest border-forest-light text-white font-bold scale-105 shadow-md' 
+                            : 'bg-black/60 border-forest/30 hover:border-forest-light text-cream/70'
                         }`}
                       >
                         {i + 1}
@@ -280,11 +316,10 @@ export default function Entradas() {
                   <button 
                     onClick={() => setStep(4)} 
                     disabled={selectedSeat === null}
-                    className="w-full bg-forest text-cream font-bold uppercase tracking-widest py-3 rounded-sm hover:bg-forest-light transition-colors mt-8 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-forest text-cream font-bold uppercase tracking-widest py-3.5 rounded-sm hover:bg-forest-light transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Confirmar Asiento
+                    Confirmar Asiento #{selectedSeat !== null ? selectedSeat + 1 : ''} &rarr;
                   </button>
-                  <button onClick={() => setStep(2)} className="text-sm text-cream/60 hover:text-cream mt-4 block mx-auto">Volver</button>
                 </div>
               </div>
             )}
@@ -292,12 +327,21 @@ export default function Entradas() {
             {/* Step 4: Datos del Usuario y Pago */}
             {step === 4 && (
               <div className="space-y-6 max-w-md mx-auto">
-                <h3 className="text-2xl font-display text-center mb-2">Datos del Titular y Pago</h3>
-                <p className="text-xs text-cream/60 text-center mb-6">Introduce tu nombre y correo para recibir la entrada PDF.</p>
+                <div className="flex items-center justify-between border-b border-forest/20 pb-3">
+                  <button onClick={() => setStep(3)} className="text-xs font-bold text-cream/70 hover:text-white flex items-center gap-1 uppercase tracking-wider">
+                    <ArrowLeft size={16} /> Volver a Asientos
+                  </button>
+                  <span className="text-xs font-mono text-forest-light font-bold">{selectedZone.name} · Asiento #{selectedSeat + 1}</span>
+                </div>
+
+                <div className="text-center space-y-1">
+                  <h3 className="text-2xl font-display">Datos del Titular y Pago</h3>
+                  <p className="text-xs text-cream/60">Introduce tu nombre y correo para recibir la entrada en PDF.</p>
+                </div>
 
                 <form onSubmit={handlePayment} className="space-y-4">
                   <div>
-                    <label className="block text-xs uppercase tracking-widest text-cream-dark mb-1">Nombre Completo</label>
+                    <label className="block text-xs uppercase tracking-widest text-cream/80 mb-1 font-bold">Nombre Completo del Titular</label>
                     <input 
                       type="text" 
                       placeholder="Ej. Mateo Oslomany" 
@@ -309,7 +353,7 @@ export default function Entradas() {
                   </div>
 
                   <div>
-                    <label className="block text-xs uppercase tracking-widest text-cream-dark mb-1">Correo Electrónico (Envío de PDF)</label>
+                    <label className="block text-xs uppercase tracking-widest text-cream/80 mb-1 font-bold">Correo Electrónico (Envío de PDF)</label>
                     <input 
                       type="email" 
                       placeholder="entradas@racingoslo.com" 
@@ -321,66 +365,67 @@ export default function Entradas() {
                   </div>
 
                   <div className="border-t border-forest/30 pt-4">
-                    <label className="block text-xs uppercase tracking-widest text-cream-dark mb-1">Número de Tarjeta</label>
-                    <input type="text" placeholder="0000 0000 0000 0000" className="w-full bg-black/60 border border-forest/30 p-3 rounded-sm text-cream focus:outline-none focus:border-forest-light font-mono" required />
+                    <label className="block text-xs uppercase tracking-widest text-cream/80 mb-1 font-bold">Número de Tarjeta de Crédito</label>
+                    <input type="text" placeholder="4500 1234 5678 9012" defaultValue="4500 1234 5678 9012" className="w-full bg-black/60 border border-forest/30 p-3 rounded-sm text-cream focus:outline-none focus:border-forest-light font-mono" required />
                   </div>
 
                   <div className="flex gap-4">
                     <div className="flex-1">
-                      <label className="block text-xs uppercase tracking-widest text-cream-dark mb-1">Caducidad</label>
-                      <input type="text" placeholder="MM/AA" className="w-full bg-black/60 border border-forest/30 p-3 rounded-sm text-cream focus:outline-none focus:border-forest-light font-mono" required />
+                      <label className="block text-xs uppercase tracking-widest text-cream/80 mb-1 font-bold">Caducidad</label>
+                      <input type="text" placeholder="12/28" defaultValue="12/28" className="w-full bg-black/60 border border-forest/30 p-3 rounded-sm text-cream focus:outline-none focus:border-forest-light font-mono" required />
                     </div>
                     <div className="flex-1">
-                      <label className="block text-xs uppercase tracking-widest text-cream-dark mb-1">CVV</label>
-                      <input type="text" placeholder="123" className="w-full bg-black/60 border border-forest/30 p-3 rounded-sm text-cream focus:outline-none focus:border-forest-light font-mono" required />
+                      <label className="block text-xs uppercase tracking-widest text-cream/80 mb-1 font-bold">CVV</label>
+                      <input type="text" placeholder="888" defaultValue="888" className="w-full bg-black/60 border border-forest/30 p-3 rounded-sm text-cream focus:outline-none focus:border-forest-light font-mono" required />
                     </div>
                   </div>
 
                   <button 
                     type="submit" 
-                    className="w-full bg-cream text-clubBlack font-bold uppercase tracking-widest py-4 rounded-sm hover:bg-white transition-colors mt-6 flex justify-center items-center gap-2"
+                    className="w-full bg-cream text-clubBlack font-bold uppercase tracking-widest py-3.5 rounded-sm hover:bg-white transition-all shadow-xl mt-6 flex justify-center items-center gap-2"
                     disabled={loading}
                   >
                     {loading ? (
-                      <span className="animate-pulse">Generando PDF y Enviando Email...</span>
+                      <span className="animate-pulse">Emitiendo PDF y Enviando Email...</span>
                     ) : (
-                      <><CreditCard size={20}/> Pagar y Generar Entrada PDF ({selectedZone.price} €)</>
+                      <><CreditCard size={18}/> Pagar y Descargar Entrada PDF ({selectedZone.price} €)</>
                     )}
                   </button>
                 </form>
-                <button onClick={() => setStep(3)} className="text-sm text-cream/60 hover:text-cream mt-4 block mx-auto">Volver</button>
               </div>
             )}
           </div>
         </div>
       ) : (
         /* Confirmación de Compra y Descarga de PDF */
-        <div className="w-full max-w-2xl bg-black border border-forest-light p-10 text-center rounded-sm shadow-2xl space-y-6">
-          <CheckCircle2 size={64} className="mx-auto text-forest-light" />
+        <div className="w-full max-w-2xl bg-black border border-forest-light p-8 sm:p-10 text-center rounded-sm shadow-2xl space-y-6">
+          <CheckCircle2 size={64} className="mx-auto text-forest-light animate-bounce" />
           
-          <h3 className="text-3xl md:text-4xl font-display font-bold text-white">¡Entrada Emitida y Enviada!</h3>
-          <p className="text-cream-dark text-sm">
-            Se ha emitido tu entrada oficial para el partido <b className="text-cream">Racing de Oslo vs {ticketIssued.opponent}</b>.
-          </p>
+          <div className="space-y-2">
+            <h3 className="text-3xl md:text-4xl font-display font-bold text-white">¡Entrada Emitida y Enviada!</h3>
+            <p className="text-cream-dark text-sm">
+              Se ha emitido tu entrada oficial para el partido <b className="text-cream">Racing de Oslo vs {ticketIssued.opponent}</b>.
+            </p>
+          </div>
 
-          <div className="bg-forest-dark/30 border border-forest/40 p-6 rounded-sm text-left font-mono text-xs space-y-2 max-w-lg mx-auto">
+          <div className="bg-forest-dark/30 border border-forest/40 p-6 rounded-sm text-left font-mono text-xs space-y-2.5 max-w-lg mx-auto">
             <div className="flex justify-between"><span className="text-cream/50">Ticket ID:</span> <span className="text-forest-light font-bold">{ticketIssued.ticketId}</span></div>
-            <div className="flex justify-between"><span className="text-cream/50">Titular:</span> <span className="text-white">{ticketIssued.userName}</span></div>
-            <div className="flex justify-between"><span className="text-cream/50">Email:</span> <span className="text-white">{ticketIssued.userEmail}</span></div>
-            <div className="flex justify-between"><span className="text-cream/50">Zona / Asiento:</span> <span className="text-white">{ticketIssued.zoneName} · Asiento #{ticketIssued.seatNumber}</span></div>
-            <div className="flex justify-between"><span className="text-cream/50">Servicio de Correo:</span> <span className="text-green-400 font-bold flex items-center gap-1"><Mail size={12}/> Enviado vía Resend a {ticketIssued.userEmail}</span></div>
+            <div className="flex justify-between"><span className="text-cream/50">Titular:</span> <span className="text-white font-bold">{ticketIssued.userName}</span></div>
+            <div className="flex justify-between"><span className="text-cream/50">Email:</span> <span className="text-white font-bold">{ticketIssued.userEmail}</span></div>
+            <div className="flex justify-between"><span className="text-cream/50">Zona / Asiento:</span> <span className="text-white font-bold">{ticketIssued.zoneName} · Asiento #{ticketIssued.seatNumber}</span></div>
+            <div className="flex justify-between border-t border-forest/20 pt-2"><span className="text-cream/50">Estado de Confirmación:</span> <span className="text-green-400 font-bold flex items-center gap-1"><Mail size={12}/> Confirmación enviada a {ticketIssued.userEmail}</span></div>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <button 
               onClick={() => ticketIssued.pdfDoc.save(`Entrada_Racing_Oslo_${ticketIssued.ticketId}.pdf`)}
-              className="bg-cream text-clubBlack px-6 py-3 rounded-sm font-bold tracking-widest uppercase hover:bg-white transition-colors flex items-center justify-center gap-2 text-sm"
+              className="bg-cream text-clubBlack px-6 py-3 rounded-sm font-bold tracking-widest uppercase hover:bg-white transition-all flex items-center justify-center gap-2 text-xs shadow-lg"
             >
-              <Download size={18} /> Volver a Descargar PDF
+              <Download size={16} /> Volver a Descargar PDF
             </button>
             <button 
               onClick={() => { setStep(1); setTicketIssued(null); setSelectedSeat(null); }}
-              className="bg-forest-dark border border-forest text-cream px-6 py-3 rounded-sm font-bold tracking-widest uppercase hover:bg-forest transition-colors text-sm"
+              className="bg-forest-dark border border-forest text-cream px-6 py-3 rounded-sm font-bold tracking-widest uppercase hover:bg-forest transition-all text-xs"
             >
               Comprar otra Entrada
             </button>
