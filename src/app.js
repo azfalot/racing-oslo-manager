@@ -387,7 +387,7 @@ async function runBot() {
                     date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
                     excerpt: `El club hace oficial la incorporación de ${p.name} tras abonar su traspaso.`,
                     content: `Mateo Oslomany ha cerrado otra operación estelar. ${p.name} se une a las filas del Racing de Oslo por ${p.price.toLocaleString()} €. La dirección deportiva confía en su gran aportación para la temporada.\n\n¡Bienvenido al club!`,
-                    image: `/media/players/${p.playerId}.png`
+                    image: `/media/signings/${p.playerId}_signing.jpg`
                   });
                   fs.writeFileSync('web/src/data/news.json', JSON.stringify(news, null, 2));
                 }
@@ -423,7 +423,7 @@ async function runBot() {
                     date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
                     excerpt: `El Racing de Oslo oficializa el traspaso de ${p.name}.`,
                     content: `La dirección deportiva confirma la salida de ${p.name} por un importe total de ${p.price.toLocaleString()} €. Agradecemos su compromiso y le deseamos lo mejor en sus futuros proyectos.`,
-                    image: `/media/players/${p.playerId}.png`
+                    image: `/media/signings/${p.playerId}_sale.jpg`
                   });
                   fs.writeFileSync('web/src/data/news.json', JSON.stringify(news, null, 2));
                 }
