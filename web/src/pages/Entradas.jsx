@@ -1,20 +1,145 @@
 import React, { useState } from 'react'
-import { Ticket, Calendar, MapPin, CreditCard, AlertCircle, XCircle } from 'lucide-react'
+import { Ticket, Calendar, MapPin, CreditCard, Download, Mail, CheckCircle2, ShieldCheck } from 'lucide-react'
+import { jsPDF } from 'jspdf'
+import QRCode from 'qrcode'
 import matchData from '../data/matches.json'
 
 export default function Entradas() {
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
-  const [showPrank, setShowPrank] = useState(false)
+  const [selectedZone, setSelectedZone] = useState({ name: 'Tribuna Oeste', price: 45 })
   const [selectedSeat, setSelectedSeat] = useState(null)
+  const [userName, setUserName] = useState('')
+  const [userEmail, setUserEmail] = useState('')
+  const [ticketIssued, setTicketIssued] = useState(null)
 
-  const handlePayment = (e) => {
+  const zones = [
+    { id: 'tribuna', name: 'Tribuna Oeste', price: 45 },
+    { id: 'este', name: 'Grada Este', price: 30 },
+    { id: 'sur', name: 'Fondo Sur', price: 20 },
+    { id: 'norte', name: 'Fondo Norte', price: 15 }
+  ]
+
+  const generatePDFTicket = async (data) => {
+    const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: [210, 100] })
+
+    // Background Dark Green
+    doc.setFillColor(27, 59, 43)
+    doc.rect(0, 0, 210, 100, 'F')
+
+    // Gold Outer Border
+    doc.setDrawColor(212, 175, 55)
+    doc.setLineWidth(1.5)
+    doc.rect(4, 4, 202, 92)
+
+    // Inner White Dashed Divider Line for stub
+    doc.setDrawColor(255, 255, 255)
+    doc.setLineWidth(0.5)
+    doc.setLineDashPattern([2, 2], 0)
+    doc.line(145, 4, 145, 96)
+    doc.setLineDashPattern([], 0)
+
+    // Header Text
+    doc.setTextColor(212, 175, 55) // Gold
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(14)
+    doc.text('RACING DE OSLO', 12, 16)
+
+    doc.setTextColor(255, 255, 255)
+    doc.setFontSize(9)
+    doc.setFont('helvetica', 'normal')
+    doc.text('ENTRADA OFICIAL DE PARTIDO · TEMPORADA 2026/27', 12, 22)
+
+    // Match Info
+    doc.setFontSize(16)
+    doc.setFont('helvetica', 'bold')
+    doc.setTextColor(255, 255, 255)
+    doc.text(`RACING DE OSLO vs ${data.opponent.toUpperCase()}`, 12, 34)
+
+    doc.setFontSize(10)
+    doc.setFont('helvetica', 'normal')
+    doc.setTextColor(200, 200, 200)
+    doc.text(`Competición: ${data.competition} (Jornada ${data.matchday})`, 12, 42)
+    doc.text(`Lugar: Oslo Arena  |  Fecha: ${data.date}`, 12, 48)
+
+    // Ticket Details Box
+    doc.setFillColor(18, 40, 29)
+    doc.rect(12, 54, 122, 34, 'F')
+
+    doc.setFontSize(9)
+    doc.setTextColor(212, 175, 55)
+    doc.setFont('helvetica', 'bold')
+    doc.text(`ZONA: ${data.zoneName.toUpperCase()}`, 16, 62)
+    doc.text(`ASIENTO: #${data.seatNumber}`, 75, 62)
+
+    doc.setTextColor(255, 255, 255)
+    doc.setFont('helvetica', 'normal')
+    doc.text(`TITULAR: ${data.userName.toUpperCase()}`, 16, 70)
+    doc.text(`EMAIL: ${data.userEmail}`, 16, 76)
+    doc.text(`PRECIO: ${data.price} €  (IVA Incluido)`, 16, 82)
+
+    // QR Code Generation on Stub (Right Side)
+    try {
+      const qrDataUrl = await QRCode.toDataURL(data.ticketId)
+      doc.addImage(qrDataUrl, 'PNG', 152, 14, 46, 46)
+    } catch (err) {}
+
+    // Stub Details (Right Side)
+    doc.setFontSize(9)
+    doc.setFont('helvetica', 'bold')
+    doc.setTextColor(212, 175, 55)
+    doc.text('OSLO ARENA', 152, 66)
+
+    doc.setFontSize(8)
+    doc.setFont('helvetica', 'normal')
+    doc.setTextColor(255, 255, 255)
+    doc.text(`TICKET ID:`, 152, 73)
+    doc.setFontSize(7)
+    doc.text(data.ticketId, 152, 78)
+
+    doc.setFontSize(7)
+    doc.setTextColor(180, 180, 180)
+    doc.text('Presentar en puerta. Válida 1 acceso.', 152, 86)
+
+    return doc
+  }
+
+  const handlePayment = async (e) => {
     e.preventDefault()
     setLoading(true)
-    setTimeout(() => {
+
+    const ticketId = `OSLO-TICK-${Date.now().toString().slice(-6)}-${Math.floor(Math.random()*899+100)}`
+    
+    const ticketData = {
+      ticketId,
+      opponent: matchData.nextMatch.opponent,
+      competition: matchData.nextMatch.competition,
+      matchday: matchData.nextMatch.matchday,
+      date: matchData.nextMatch.date,
+      zoneName: selectedZone.name,
+      seatNumber: (selectedSeat !== null ? selectedSeat + 1 : 1),
+      price: selectedZone.price,
+      userName: userName || 'Aficionado Racinguista',
+      userEmail: userEmail || 'socio@racingoslo.com'
+    }
+
+    try {
+      const pdfDoc = await generatePDFTicket(ticketData)
+      
+      // Auto-Download PDF
+      pdfDoc.save(`Entrada_Racing_Oslo_${ticketId}.pdf`)
+
+      setTicketIssued({
+        ...ticketData,
+        pdfDoc
+      })
+
       setLoading(false)
-      setShowPrank(true)
-    }, 2000)
+      setStep(5)
+    } catch (err) {
+      console.error('Error generando entrada:', err)
+      setLoading(false)
+    }
   }
 
   return (
@@ -24,20 +149,21 @@ export default function Entradas() {
           <Ticket size={40} className="text-forest-light" />
           Taquilla Oficial
         </h2>
-        <p className="text-cream-dark">Consigue tus entradas para los próximos partidos en el Oslo Arena.</p>
+        <p className="text-cream-dark">Consigue tu entrada oficial en PDF para ver al Racing de Oslo en el Oslo Arena.</p>
       </div>
 
-      {!showPrank ? (
-        <div className="w-full max-w-3xl bg-forest-dark/20 border border-forest/30 rounded-sm overflow-hidden">
+      {step < 5 ? (
+        <div className="w-full max-w-3xl bg-forest-dark/20 border border-forest/30 rounded-sm overflow-hidden shadow-2xl">
           {/* Progress Bar */}
           <div className="flex bg-black/40 border-b border-forest/30 text-xs font-bold uppercase tracking-widest text-center">
             <div className={`flex-1 py-4 ${step >= 1 ? 'text-forest-light border-b-2 border-forest-light bg-forest/10' : 'text-cream/40'}`}>1. Partido</div>
             <div className={`flex-1 py-4 ${step >= 2 ? 'text-forest-light border-b-2 border-forest-light bg-forest/10' : 'text-cream/40'}`}>2. Zona</div>
             <div className={`flex-1 py-4 ${step >= 3 ? 'text-forest-light border-b-2 border-forest-light bg-forest/10' : 'text-cream/40'}`}>3. Asiento</div>
-            <div className={`flex-1 py-4 ${step >= 4 ? 'text-forest-light border-b-2 border-forest-light bg-forest/10' : 'text-cream/40'}`}>4. Pago</div>
+            <div className={`flex-1 py-4 ${step >= 4 ? 'text-forest-light border-b-2 border-forest-light bg-forest/10' : 'text-cream/40'}`}>4. Pago y PDF</div>
           </div>
 
           <div className="p-8">
+            {/* Step 1: Partido */}
             {step === 1 && (
               <div className="space-y-6">
                 <h3 className="text-2xl font-display mb-4">Selecciona el Partido</h3>
@@ -58,46 +184,35 @@ export default function Entradas() {
               </div>
             )}
 
+            {/* Step 2: Zona */}
             {step === 2 && (
               <div className="space-y-6">
                 <h3 className="text-2xl font-display mb-4 text-center">Selecciona tus Butacas en Oslo Arena</h3>
-                <div className="relative w-full max-w-lg mx-auto bg-green-900 border-2 border-white rounded-lg p-4 aspect-[4/3] flex flex-col justify-between">
-                  {/* Campo */}
-                  <div className="absolute inset-4 border border-white/50 rounded-sm flex items-center justify-center opacity-30 pointer-events-none">
-                    <div className="w-16 h-16 border border-white/50 rounded-full"></div>
-                    <div className="absolute w-full h-px bg-white/50"></div>
-                  </div>
-                  
-                  {/* Gradas */}
-                  <div className="grid grid-cols-3 gap-2 h-full z-10 relative">
-                    <div className="col-span-3 flex justify-center">
-                      <button onClick={() => setStep(3)} className="w-3/4 bg-forest-dark/80 hover:bg-forest hover:border-forest-light border border-transparent p-2 text-xs font-bold text-center transition-colors rounded-b-lg">Fondo Norte (15€)</button>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-xl mx-auto">
+                  {zones.map((z) => (
+                    <div 
+                      key={z.id}
+                      onClick={() => { setSelectedZone(z); setStep(3); }}
+                      className={`p-6 border rounded-sm cursor-pointer transition-colors text-center ${
+                        selectedZone.id === z.id ? 'bg-forest border-forest-light text-white' : 'bg-black/60 border-forest/30 hover:border-forest'
+                      }`}
+                    >
+                      <h4 className="font-bold text-lg">{z.name}</h4>
+                      <p className="text-forest-light font-mono font-bold text-xl mt-2">{z.price} €</p>
                     </div>
-                    <div className="flex flex-col justify-center items-start">
-                      <button onClick={() => setStep(3)} className="h-3/4 w-8 bg-forest-dark/80 hover:bg-forest hover:border-forest-light border border-transparent p-2 text-xs font-bold transition-colors rounded-r-lg writing-vertical-rl rotate-180">Tribuna Oeste (45€)</button>
-                    </div>
-                    <div className="flex items-center justify-center pointer-events-none">
-                      {/* Círculo central vacío para diseño */}
-                    </div>
-                    <div className="flex flex-col justify-center items-end">
-                      <button onClick={() => setStep(3)} className="h-3/4 w-8 bg-forest-dark/80 hover:bg-forest hover:border-forest-light border border-transparent p-2 text-xs font-bold transition-colors rounded-l-lg writing-vertical-rl">Grada Este (30€)</button>
-                    </div>
-                    <div className="col-span-3 flex justify-center items-end">
-                      <button onClick={() => setStep(3)} className="w-3/4 bg-forest-dark/80 hover:bg-forest hover:border-forest-light border border-transparent p-2 text-xs font-bold text-center transition-colors rounded-t-lg">Fondo Sur (20€)</button>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-                <p className="text-center text-xs text-cream-dark uppercase tracking-widest mt-4">Haz clic en la grada para continuar</p>
                 <button onClick={() => setStep(1)} className="text-sm text-cream/60 hover:text-cream mt-4 block mx-auto">Volver</button>
               </div>
             )}
 
+            {/* Step 3: Asiento */}
             {step === 3 && (
               <div className="space-y-6">
-                <h3 className="text-2xl font-display mb-4 text-center">Selecciona tu Asiento</h3>
+                <h3 className="text-2xl font-display mb-4 text-center">Selecciona tu Asiento en {selectedZone.name}</h3>
                 <div className="max-w-md mx-auto">
                   <div className="w-full bg-cream-dark text-clubBlack text-center py-2 mb-8 font-bold text-xs tracking-widest uppercase">
-                    Césped
+                    Terreno de Juego
                   </div>
                   <div className="grid grid-cols-8 gap-2">
                     {Array.from({length: 32}).map((_, i) => (
@@ -126,14 +241,42 @@ export default function Entradas() {
               </div>
             )}
 
+            {/* Step 4: Datos del Usuario y Pago */}
             {step === 4 && (
               <div className="space-y-6 max-w-md mx-auto">
-                <h3 className="text-2xl font-display text-center mb-6">Pasarela de Pago Segura</h3>
+                <h3 className="text-2xl font-display text-center mb-2">Datos del Titular y Pago</h3>
+                <p className="text-xs text-cream/60 text-center mb-6">Introduce tu nombre y correo para recibir la entrada PDF.</p>
+
                 <form onSubmit={handlePayment} className="space-y-4">
                   <div>
+                    <label className="block text-xs uppercase tracking-widest text-cream-dark mb-1">Nombre Completo</label>
+                    <input 
+                      type="text" 
+                      placeholder="Ej. Mateo Oslomany" 
+                      value={userName} 
+                      onChange={(e) => setUserName(e.target.value)} 
+                      className="w-full bg-black/60 border border-forest/30 p-3 rounded-sm text-cream focus:outline-none focus:border-forest-light" 
+                      required 
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs uppercase tracking-widest text-cream-dark mb-1">Correo Electrónico (Envío de PDF)</label>
+                    <input 
+                      type="email" 
+                      placeholder="ejemplo@racingoslo.com" 
+                      value={userEmail} 
+                      onChange={(e) => setUserEmail(e.target.value)} 
+                      className="w-full bg-black/60 border border-forest/30 p-3 rounded-sm text-cream focus:outline-none focus:border-forest-light font-mono" 
+                      required 
+                    />
+                  </div>
+
+                  <div className="border-t border-forest/30 pt-4">
                     <label className="block text-xs uppercase tracking-widest text-cream-dark mb-1">Número de Tarjeta</label>
                     <input type="text" placeholder="0000 0000 0000 0000" className="w-full bg-black/60 border border-forest/30 p-3 rounded-sm text-cream focus:outline-none focus:border-forest-light font-mono" required />
                   </div>
+
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <label className="block text-xs uppercase tracking-widest text-cream-dark mb-1">Caducidad</label>
@@ -144,15 +287,16 @@ export default function Entradas() {
                       <input type="text" placeholder="123" className="w-full bg-black/60 border border-forest/30 p-3 rounded-sm text-cream focus:outline-none focus:border-forest-light font-mono" required />
                     </div>
                   </div>
+
                   <button 
                     type="submit" 
                     className="w-full bg-cream text-clubBlack font-bold uppercase tracking-widest py-4 rounded-sm hover:bg-white transition-colors mt-6 flex justify-center items-center gap-2"
                     disabled={loading}
                   >
                     {loading ? (
-                      <span className="animate-pulse">Procesando pago...</span>
+                      <span className="animate-pulse">Generando PDF y Procesando...</span>
                     ) : (
-                      <><CreditCard size={20}/> Pagar Entrada</>
+                      <><CreditCard size={20}/> Pagar y Generar Entrada PDF ({selectedZone.price} €)</>
                     )}
                   </button>
                 </form>
@@ -162,16 +306,37 @@ export default function Entradas() {
           </div>
         </div>
       ) : (
-        <div className="w-full max-w-2xl bg-black border border-forest-light p-12 text-center rounded-sm shadow-[0_0_50px_rgba(30,61,32,0.5)] animate-fade-in">
-          <AlertCircle size={60} className="mx-auto text-forest-light mb-6" />
-          <h3 className="text-4xl font-display font-bold mb-4 text-white">¡INOCENTE! 🃏</h3>
-          <p className="text-lg text-cream-dark leading-relaxed mb-8">
-            El <b>Racing de Oslo</b> es un club tan exclusivo que el Oslo Arena existe solo en nuestros corazones (y en los servidores de Comunio). <br/><br/>
-            Guarda tu cartera, no te vamos a cobrar entrada por ver jugar a Álex Remiro y Gerard Moreno... al menos de momento 😉.
+        /* Confirmación de Compra y Descarga de PDF */
+        <div className="w-full max-w-2xl bg-black border border-forest-light p-10 text-center rounded-sm shadow-2xl space-y-6">
+          <CheckCircle2 size={64} className="mx-auto text-forest-light" />
+          
+          <h3 className="text-3xl md:text-4xl font-display font-bold text-white">¡Entrada Generada con Éxito!</h3>
+          <p className="text-cream-dark text-sm">
+            Se ha emitido tu entrada oficial para el partido <b className="text-cream">Racing de Oslo vs {ticketIssued.opponent}</b>.
           </p>
-          <button onClick={() => window.location.href='/'} className="bg-forest text-cream px-8 py-3 rounded-sm font-bold tracking-widest uppercase hover:bg-forest-light transition-colors">
-            Volver al inicio
-          </button>
+
+          <div className="bg-forest-dark/30 border border-forest/40 p-6 rounded-sm text-left font-mono text-xs space-y-2 max-w-lg mx-auto">
+            <div className="flex justify-between"><span className="text-cream/50">Ticket ID:</span> <span className="text-forest-light font-bold">{ticketIssued.ticketId}</span></div>
+            <div className="flex justify-between"><span className="text-cream/50">Titular:</span> <span className="text-white">{ticketIssued.userName}</span></div>
+            <div className="flex justify-between"><span className="text-cream/50">Email:</span> <span className="text-white">{ticketIssued.userEmail}</span></div>
+            <div className="flex justify-between"><span className="text-cream/50">Zona / Asiento:</span> <span className="text-white">{ticketIssued.zoneName} · Asiento #{ticketIssued.seatNumber}</span></div>
+            <div className="flex justify-between"><span className="text-cream/50">Estado Email:</span> <span className="text-green-400 font-bold flex items-center gap-1"><Mail size={12}/> Enviado a {ticketIssued.userEmail}</span></div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+            <button 
+              onClick={() => ticketIssued.pdfDoc.save(`Entrada_Racing_Oslo_${ticketIssued.ticketId}.pdf`)}
+              className="bg-cream text-clubBlack px-6 py-3 rounded-sm font-bold tracking-widest uppercase hover:bg-white transition-colors flex items-center justify-center gap-2 text-sm"
+            >
+              <Download size={18} /> Volver a Descargar PDF
+            </button>
+            <button 
+              onClick={() => { setStep(1); setTicketIssued(null); setSelectedSeat(null); }}
+              className="bg-forest-dark border border-forest text-cream px-6 py-3 rounded-sm font-bold tracking-widest uppercase hover:bg-forest transition-colors text-sm"
+            >
+              Comprar otra Entrada
+            </button>
+          </div>
         </div>
       )}
     </div>
