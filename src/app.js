@@ -361,17 +361,73 @@ async function runBot() {
           
           if (newSignings.length > 0) {
             changeReport += `✅ <b>Nuevas Incorporaciones:</b>\n`;
-            newSignings.forEach(p => {
+            for (const p of newSignings) {
               changeReport += ` • <b>${escapeHtml(p.name)}</b> - Valor: ${p.price.toLocaleString()} €\n`;
-            });
+              
+              // Generar y enviar cartel en Telegram
+              try {
+                const photoPath = await generateSigningPhoto(p.name, p.price, p.playerId);
+                if (photoPath) {
+                  await sendTelegramPhoto(photoPath, `🔥 <b>¡FICHAJE CONFIRMADO!</b>\n\n<b>${escapeHtml(p.name)}</b> llega al Oslo Arena por <b>${p.price.toLocaleString()} €</b>.`);
+                }
+              } catch (imgErr) {
+                console.error(`[TELEGRAM PHOTO] Error generando cartel para ${p.name}:`, imgErr.message);
+              }
+
+              // Noticia para la Web
+              try {
+                if (fs.existsSync('web/src/data/news.json')) {
+                  const news = JSON.parse(fs.readFileSync('web/src/data/news.json', 'utf-8'));
+                  news.unshift({
+                    id: Date.now() + Math.floor(Math.random() * 1000),
+                    title: `¡Oficial! ${p.name} ficha por el Racing de Oslo`,
+                    date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
+                    excerpt: `El club hace oficial la incorporación de ${p.name} tras abonar su traspaso.`,
+                    content: `Mateo Oslomany ha cerrado otra operación estelar. ${p.name} se une a las filas del Racing de Oslo por ${p.price.toLocaleString()} €. La dirección deportiva confía en su gran aportación para la temporada.\n\n¡Bienvenido al club!`,
+                    image: `/media/players/${p.playerId}.png`
+                  });
+                  fs.writeFileSync('web/src/data/news.json', JSON.stringify(news, null, 2));
+                }
+              } catch (newsErr) {
+                console.error(`[WEB NEWS] Error al publicar noticia para ${p.name}:`, newsErr.message);
+              }
+            }
             changeReport += `\n`;
           }
 
           if (completedSales.length > 0) {
             changeReport += `❌ <b>Salidas del Club:</b>\n`;
-            completedSales.forEach(p => {
+            for (const p of completedSales) {
               changeReport += ` • <b>${escapeHtml(p.name)}</b> - ${p.price.toLocaleString()} €\n`;
-            });
+
+              // Generar y enviar cartel de venta en Telegram
+              try {
+                const photoPath = await generateSalePhoto(p.name, p.price, p.playerId);
+                if (photoPath) {
+                  await sendTelegramPhoto(photoPath, `👋 <b>¡VENTA CONFIRMADA!</b>\n\n<b>${escapeHtml(p.name)}</b> abandona la disciplina del Racing de Oslo por <b>${p.price.toLocaleString()} €</b>.`);
+                }
+              } catch (imgErr) {
+                console.error(`[TELEGRAM PHOTO] Error generando cartel de venta para ${p.name}:`, imgErr.message);
+              }
+
+              // Noticia de venta para la Web
+              try {
+                if (fs.existsSync('web/src/data/news.json')) {
+                  const news = JSON.parse(fs.readFileSync('web/src/data/news.json', 'utf-8'));
+                  news.unshift({
+                    id: Date.now() + Math.floor(Math.random() * 1000),
+                    title: `Traspaso Cerrado: ${p.name} abandona el club`,
+                    date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
+                    excerpt: `El Racing de Oslo oficializa el traspaso de ${p.name}.`,
+                    content: `La dirección deportiva confirma la salida de ${p.name} por un importe total de ${p.price.toLocaleString()} €. Agradecemos su compromiso y le deseamos lo mejor en sus futuros proyectos.`,
+                    image: `/media/players/${p.playerId}.png`
+                  });
+                  fs.writeFileSync('web/src/data/news.json', JSON.stringify(news, null, 2));
+                }
+              } catch (newsErr) {
+                console.error(`[WEB NEWS] Error al publicar noticia de venta para ${p.name}:`, newsErr.message);
+              }
+            }
             changeReport += `\n`;
           }
 
