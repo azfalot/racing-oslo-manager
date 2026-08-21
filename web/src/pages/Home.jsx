@@ -42,17 +42,17 @@ export default function Home() {
 
   return (
     <div className="space-y-6 pb-12">
-      {/* BANNER ÉPICO LUMINOSO DE PORTADA (Iluminación y contraste vibrante restaurados) */}
-      <section className="relative w-full h-[320px] sm:h-[360px] md:h-[380px] bg-clubBlack overflow-hidden flex items-center justify-center border-b border-forest/40 shadow-2xl">
+      {/* BANNER ÉPICO DE PORTADA (Renderizado de imagen de alta fidelidad) */}
+      <section className="relative w-full h-[380px] sm:h-[450px] md:h-[500px] bg-clubBlack overflow-hidden flex items-center justify-center border-b border-forest/40 shadow-2xl">
         <div className="absolute inset-0 z-0">
           <img
             src="/media/poster_j1.jpg"
             alt="Racing de Oslo"
-            className="w-full h-full object-cover opacity-75 filter brightness-110 contrast-105"
+            className="w-full h-full object-cover object-center opacity-85 filter brightness-105 contrast-105 saturate-[1.05]"
             onError={(e) => { e.target.src = '/media/crest.jpg' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-clubBlack via-clubBlack/30 to-black/40"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-forest-dark/40 via-transparent to-forest-dark/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-clubBlack via-clubBlack/20 to-black/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-forest-dark/30 via-transparent to-forest-dark/30"></div>
         </div>
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-3">
           <span className="text-forest-light font-bold tracking-[0.3em] text-xs sm:text-sm block uppercase drop-shadow">
