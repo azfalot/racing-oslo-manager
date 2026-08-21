@@ -45,19 +45,32 @@ async function fetchRealData() {
   }
 
   
-  // TM Data for Squad
+  // TM & Historical Data for Squad
   for (const p of squadJson.players) {
     const tm = await getTransfermarktData(p.name);
     p.tmValue = tm ? tm.value : 0;
+    try {
+      const details = await client.getPlayerDetails(p.id);
+      if (details) {
+        p.clubName = details.club?.name || 'LaLiga EA Sports';
+        p.price = details.price || p.price || 0;
+        p.statusInfo = details.statusInfo || details.status || 'Disponible';
+        const historical = details.historical?.points || [];
+        p.historicalPoints = historical.map(h => ({ season: h.season, points: parseInt(h.points) || 0 }));
+        const lastSeason = historical.find(h => h.season === '25/26' || h.season === '24/25') || historical[historical.length - 1];
+        p.lastSeasonPoints = lastSeason ? (parseInt(lastSeason.points) || 0) : 0;
+        p.lastSeasonAvg = details.average?.points ? parseFloat(details.average.points.replace(',', '.')) : 4.2;
+        const baseHist = p.lastSeasonPoints > 0 ? p.lastSeasonPoints : (p.price > 4000000 ? 150 : 100);
+        p.projectedPoints = Math.round(baseHist * (p.isStarter ? 1.15 : 0.95));
+      }
+    } catch (e) {}
   }
   fs.writeFileSync('./web/src/data/squad.json', JSON.stringify(squadJson, null, 2));
     
-  
   // Dashboard / Standings & Rivals
   const dashboard = await client.getDashboardData();
   const realStandings = await client.getStandings();
   const rivalsData = await analyzeRivals(client);
-  
   
   // Market
   const rawMarket = await client.getMarket();
@@ -83,11 +96,25 @@ async function fetchRealData() {
     }
   }
   
-  
-  // TM Data for Market
+  // TM & Historical Data for Market
   for (const p of marketJson) {
     const tm = await getTransfermarktData(p.name);
     p.tmValue = tm ? tm.value : 0;
+    try {
+      const details = await client.getPlayerDetails(p.id);
+      if (details) {
+        p.clubName = details.club?.name || 'LaLiga EA Sports';
+        p.price = details.price || p.price || 0;
+        p.statusInfo = details.statusInfo || details.status || 'Disponible';
+        const historical = details.historical?.points || [];
+        p.historicalPoints = historical.map(h => ({ season: h.season, points: parseInt(h.points) || 0 }));
+        const lastSeason = historical.find(h => h.season === '25/26' || h.season === '24/25') || historical[historical.length - 1];
+        p.lastSeasonPoints = lastSeason ? (parseInt(lastSeason.points) || 0) : 0;
+        p.lastSeasonAvg = details.average?.points ? parseFloat(details.average.points.replace(',', '.')) : 4.0;
+        const baseHist = p.lastSeasonPoints > 0 ? p.lastSeasonPoints : (p.price > 4000000 ? 140 : 90);
+        p.projectedPoints = Math.round(baseHist);
+      }
+    } catch (e) {}
   }
   fs.writeFileSync('./web/src/data/market.json', JSON.stringify(marketJson, null, 2));
     

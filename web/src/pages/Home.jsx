@@ -6,6 +6,7 @@ import matchData from '../data/matches.json'
 import newsData from '../data/news.json'
 import marketData from '../data/market.json'
 import { getCategoryBadgeStyle } from './Noticias'
+import PlayerProfileModal from '../components/PlayerProfileModal'
 
 export function formatNewsDate(dateStr) {
   if (!dateStr) return ''
@@ -23,6 +24,7 @@ export default function Home() {
   const featuredNews = newsData.slice(0, 5)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [selectedNews, setSelectedNews] = useState(null)
+  const [profilePlayer, setProfilePlayer] = useState(null)
 
   // Jugadores reales a la venta hoy en el mercado de Comunio
   const realMarketTargets = (marketData || []).filter(p => p.price > 0).slice(0, 3)
@@ -235,7 +237,7 @@ export default function Home() {
                 const posText = posLabels[posKey] || 'JUG'
 
                 return (
-                  <div key={player.id} className="bg-forest-dark/30 border border-forest/40 p-3 rounded-sm hover:border-forest-light/60 transition-all flex flex-col justify-between space-y-2.5 group shadow-md">
+                  <div key={player.id} onClick={() => setProfilePlayer(player)} className="bg-forest-dark/30 border border-forest/40 p-3 rounded-sm hover:border-forest-light/60 transition-all flex flex-col justify-between space-y-2.5 group shadow-md cursor-pointer">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-black border border-forest/40">
                         <img
@@ -304,7 +306,7 @@ export default function Home() {
               {/* 1. DELANTEROS */}
               <div className="relative z-10 flex justify-center gap-4 pt-1">
                 {strikers.map(p => (
-                  <div key={p.id} className="flex flex-col items-center">
+                  <div key={p.id} onClick={() => setProfilePlayer(p)} className="flex flex-col items-center cursor-pointer hover:scale-110 transition-transform">
                     <img
                       src={p.image}
                       alt={p.name}
@@ -321,7 +323,7 @@ export default function Home() {
               {/* 2. CENTROCAMPISTAS */}
               <div className="relative z-10 flex justify-around px-1">
                 {midfielders.map(p => (
-                  <div key={p.id} className="flex flex-col items-center">
+                  <div key={p.id} onClick={() => setProfilePlayer(p)} className="flex flex-col items-center cursor-pointer hover:scale-110 transition-transform">
                     <img
                       src={p.image}
                       alt={p.name}
@@ -338,7 +340,7 @@ export default function Home() {
               {/* 3. DEFENSAS */}
               <div className="relative z-10 flex justify-around px-2">
                 {defenders.map(p => (
-                  <div key={p.id} className="flex flex-col items-center">
+                  <div key={p.id} onClick={() => setProfilePlayer(p)} className="flex flex-col items-center cursor-pointer hover:scale-110 transition-transform">
                     <img
                       src={p.image}
                       alt={p.name}
@@ -355,7 +357,7 @@ export default function Home() {
               {/* 4. PORTERO */}
               <div className="relative z-10 flex justify-center pb-1">
                 {keeper && (
-                  <div className="flex flex-col items-center">
+                  <div onClick={() => setProfilePlayer(keeper)} className="flex flex-col items-center cursor-pointer hover:scale-110 transition-transform">
                     <img
                       src={keeper.image}
                       alt={keeper.name}
@@ -420,6 +422,9 @@ export default function Home() {
           </div>
         )
       })()}
+
+      {/* PLAYER PROFILE MODAL */}
+      <PlayerProfileModal player={profilePlayer} onClose={() => setProfilePlayer(null)} />
     </div>
   )
 }

@@ -10,6 +10,8 @@ import Clasificacion from './pages/Clasificacion'
 import Entradas from './pages/Entradas'
 import Alineacion from './pages/Alineacion'
 
+import JugadorPage from './pages/JugadorPage'
+
 function App() {
   return (
     <Router>
@@ -21,6 +23,7 @@ function App() {
           <Route path="/plantilla" element={<Plantilla />} />
           <Route path="/clasificacion" element={<Clasificacion />} />
           <Route path="/mercado" element={<Mercado />} />
+          <Route path="/jugador/:id" element={<JugadorPage />} />
           <Route path="/entradas" element={<Entradas />} />
           <Route path="/tienda" element={<Tienda />} />
         </Routes>

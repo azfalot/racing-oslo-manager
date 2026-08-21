@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import squadData from '../data/squad.json'
+import PlayerProfileModal from '../components/PlayerProfileModal'
 
 export default function Alineacion() {
+  const [selectedPlayer, setSelectedPlayer] = useState(null)
   const starters = squadData.players.filter(p => p.isStarter)
   
   const keepers = starters.filter(p => p.position === 'keeper')
@@ -10,15 +12,20 @@ export default function Alineacion() {
   const strikers = starters.filter(p => p.position === 'striker')
 
   const renderPlayer = (p) => (
-    <div key={p.id} className="flex flex-col items-center animate-fade-in group">
+    <div
+      key={p.id}
+      onClick={() => setSelectedPlayer(p)}
+      className="flex flex-col items-center animate-fade-in group cursor-pointer hover:scale-105 transition-transform"
+    >
       <div className="relative">
-        <img src={p.image} alt={p.name} className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white/20 object-cover shadow-xl group-hover:border-cream transition-colors bg-forest-dark/50" />
+        <img src={p.image} alt={p.name} className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white/20 object-cover shadow-xl group-hover:border-forest-light transition-colors bg-forest-dark/50" />
         <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] font-bold px-2 py-0.5 rounded-sm border border-white/20">
           {p.number}
         </span>
       </div>
-      <div className="mt-3 bg-black/80 px-2 py-1 rounded-sm text-center min-w-[80px]">
+      <div className="mt-3 bg-black/80 px-2 py-1 rounded-sm text-center min-w-[80px] border border-forest/30 group-hover:border-forest-light transition-colors">
         <p className="text-xs md:text-sm font-bold text-white whitespace-nowrap">{p.name}</p>
+        <p className="text-[10px] text-amber-300 font-mono">~{p.projectedPoints || 140} pts</p>
       </div>
     </div>
   )
@@ -27,7 +34,7 @@ export default function Alineacion() {
     <div className="container mx-auto px-6 py-12">
       <div className="mb-12 text-center">
         <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">El Once Titular</h2>
-        <p className="text-cream-dark">La alineación elegida por Mateo Oslomany para el próximo encuentro.</p>
+        <p className="text-cream-dark">La alineación elegida por Mateo Oslomany para el próximo encuentro. Pulse en cualquier jugador para ver su ficha oficial.</p>
       </div>
 
       <div className="max-w-4xl mx-auto bg-green-800 rounded-lg p-4 md:p-8 relative shadow-2xl overflow-hidden border-4 border-white/10" style={{
@@ -52,12 +59,12 @@ export default function Alineacion() {
           </div>
 
           {/* Centrocampistas */}
-          <div className="flex justify-center gap-4 md:gap-12">
+          <div className="flex justify-around">
             {midfielders.map(renderPlayer)}
           </div>
 
           {/* Defensas */}
-          <div className="flex justify-center gap-4 md:gap-12">
+          <div className="flex justify-around">
             {defenders.map(renderPlayer)}
           </div>
 
@@ -65,8 +72,12 @@ export default function Alineacion() {
           <div className="flex justify-center">
             {keepers.map(renderPlayer)}
           </div>
+
         </div>
       </div>
+
+      {/* PLAYER PROFILE MODAL */}
+      <PlayerProfileModal player={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
     </div>
   )
 }
