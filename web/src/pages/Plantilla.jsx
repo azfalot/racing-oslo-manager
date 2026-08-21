@@ -1,100 +1,233 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import squadData from '../data/squad.json'
-import { Shield, Activity, Target, AlertTriangle, TrendingUp, Award } from 'lucide-react'
-import PlayerProfileModal from '../components/PlayerProfileModal'
+import { Search, Filter, ArrowUpDown, Shield, Users, Award, TrendingUp, ChevronRight } from 'lucide-react'
+import PlayerProfileModal, { getPosBadgeStyle } from '../components/PlayerProfileModal'
 
 export default function Plantilla() {
   const [selectedPlayer, setSelectedPlayer] = useState(null)
+  const [categoryFilter, setCategoryFilter] = useState('ALL') // ALL, STARTERS, KEEPER, DEFENDER, MIDFIELDER, STRIKER
+  const [searchTerm, setSearchTerm] = useState('')
+  const [sortBy, setSortBy] = useState('projected') // projected, points, price, position
 
-  const formatPrice = (price) => price ? price.toLocaleString('es-ES') + ' €' : 'Desconocido';
-  const getPosColor = (pos) => {
-    switch(pos) {
-      case 'keeper': return 'bg-amber-600'
-      case 'defender': return 'bg-blue-600'
-      case 'midfielder': return 'bg-emerald-600'
-      case 'striker': return 'bg-rose-600'
-      default: return 'bg-forest'
-    }
-  }
+  const players = squadData.players || []
 
-  const getPosName = (pos) => {
-    switch(pos) {
-      case 'keeper': return 'Portero'
-      case 'defender': return 'Defensa'
-      case 'midfielder': return 'Centrocampista'
-      case 'striker': return 'Delantero'
-      default: return pos
-    }
-  }
+  // Filtrado y Ordenación Dinámica
+  const filteredAndSortedPlayers = useMemo(() => {
+    return players
+      .filter(p => {
+        // 1. Filtro de Categoría / Puesto
+        if (categoryFilter === 'STARTERS') {
+          if (!p.isStarter) return false
+        } else if (categoryFilter !== 'ALL') {
+          const pos = (p.position || '').toLowerCase()
+          if (!pos.includes(categoryFilter.toLowerCase())) return false
+        }
+
+        // 2. Filtro de Búsqueda por Nombre
+        if (searchTerm.trim() !== '') {
+          const term = searchTerm.toLowerCase().trim()
+          const name = (p.name || '').toLowerCase()
+          const club = (p.clubName || '').toLowerCase()
+          if (!name.includes(term) && !club.includes(term)) return false
+        }
+
+        return true
+      })
+      .sort((a, b) => {
+        if (sortBy === 'projected') {
+          return (b.projectedPoints || 0) - (a.projectedPoints || 0)
+        }
+        if (sortBy === 'points') {
+          return (b.lastSeasonPoints || b.stats?.points || 0) - (a.lastSeasonPoints || a.stats?.points || 0)
+        }
+        if (sortBy === 'price') {
+          return (b.price || 0) - (a.price || 0)
+        }
+        if (sortBy === 'position') {
+          const order = { keeper: 1, defender: 2, midfielder: 3, striker: 4 }
+          return (order[a.position] || 5) - (order[b.position] || 5)
+        }
+        return 0
+      })
+  }, [players, categoryFilter, searchTerm, sortBy])
+
+  const startersCount = players.filter(p => p.isStarter).length
 
   return (
-    <div className="container mx-auto px-6 py-12">
-      <div className="mb-12">
-        <h2 className="text-4xl md:text-5xl font-display font-bold mb-2 border-l-4 border-forest pl-4">Primera Plantilla</h2>
-        <p className="text-cream-dark ml-5 text-sm uppercase tracking-widest">Temporada 2026/27 • Haga clic en cualquier jugador para ver su ficha completa</p>
+    <div className="container mx-auto px-4 sm:px-6 py-8 space-y-6">
+      
+      {/* Cabecera & Estadísticas Resumen */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-forest/30 pb-6">
+        <div>
+          <div className="flex items-center gap-3">
+            <Shield className="text-forest-light" size={28} />
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-white tracking-wide">Primera Plantilla</h2>
+          </div>
+          <p className="text-cream/70 text-xs sm:text-sm font-mono mt-1">
+            Temporada 2026/27 • {players.length} Jugadores en plantilla ({startersCount} Titulares)
+          </p>
+        </div>
+
+        {/* Badges de Resumen */}
+        <div className="flex items-center gap-2">
+          <span className="bg-forest-dark/80 text-forest-light border border-forest-light/40 text-xs font-mono px-3 py-1.5 rounded-sm">
+            XI Titular: <b>{startersCount}/11</b>
+          </span>
+          <span className="bg-black/60 text-amber-300 border border-amber-400/40 text-xs font-mono px-3 py-1.5 rounded-sm">
+            Entrenador: <b>{squadData.coach || 'Mateo Oslomany'}</b>
+          </span>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-        {squadData.players.map(p => (
-          <div
-            key={p.id}
-            onClick={() => setSelectedPlayer(p)}
-            className="bg-black border border-forest/30 rounded-sm overflow-hidden flex flex-col group hover:border-forest-light transition-all cursor-pointer shadow-xl hover:scale-[1.01]"
-          >
-            {/* Cabecera Tarjeta */}
-            <div className="relative h-48 bg-forest-dark/40 overflow-hidden flex items-end p-4 border-b border-forest/30">
-              <div className="absolute inset-0 flex justify-center items-end opacity-80 pt-4">
-                {p.image ? (
-                  <img src={p.image} alt={p.name} className="h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                ) : null}
-              </div>
-              <div className="absolute top-4 left-4 z-10 flex gap-2">
-                <span className={`text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-sm shadow-md ${getPosColor(p.position)}`}>
-                  {getPosName(p.position)}
-                </span>
-                <span className="bg-black/80 text-cream/90 text-[10px] font-mono px-2 py-1 rounded-sm border border-forest/40">
-                  {p.clubName || 'LaLiga'}
-                </span>
-              </div>
-              <div className="absolute -right-4 -bottom-4 opacity-30 font-display font-bold text-9xl">
-                {p.number}
-              </div>
-              <h3 className="text-2xl font-display font-bold relative z-10 group-hover:text-forest-light transition-colors bg-black/80 px-3 py-1 rounded-sm border border-forest/30">
-                {p.name}
-              </h3>
+      {/* CONTROLES: FILTROS, BUSCADOR Y ORDENACIÓN */}
+      <div className="bg-black/60 border border-forest/40 p-4 rounded-sm space-y-4 shadow-lg">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          
+          {/* Botones de Categorías / Posición */}
+          <div className="flex flex-wrap items-center gap-1.5">
+            {[
+              { id: 'ALL', label: 'TODOS' },
+              { id: 'STARTERS', label: '⭐ ONCE TITULAR' },
+              { id: 'keeper', label: '🧤 PORTEROS' },
+              { id: 'defender', label: '🛡️ DEFENSAS' },
+              { id: 'midfielder', label: '⚙️ MEDIOS' },
+              { id: 'striker', label: '⚡ DELANTEROS' },
+            ].map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setCategoryFilter(tab.id)}
+                className={`text-xs font-bold px-3 py-1.5 rounded-sm transition-all border uppercase tracking-wider ${
+                  categoryFilter === tab.id
+                    ? 'bg-forest text-cream border-forest-light shadow-md'
+                    : 'bg-forest-dark/30 text-cream/70 border-forest/30 hover:border-forest/60 hover:text-white'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Buscador & Selector de Ordenación */}
+          <div className="flex flex-col sm:flex-row items-center gap-3">
+            {/* Input Buscador */}
+            <div className="relative w-full sm:w-56">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-cream/50" size={14} />
+              <input
+                type="text"
+                placeholder="Buscar jugador..."
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                className="w-full bg-forest-dark/50 border border-forest/40 rounded-sm pl-9 pr-3 py-1.5 text-xs text-white placeholder-cream/40 focus:outline-none focus:border-forest-light"
+              />
             </div>
 
-            {/* Métricas e Info Rápidas */}
-            <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
-              <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="bg-forest-dark/20 p-2 rounded border border-forest/20">
-                  <span className="text-[9px] text-cream/60 uppercase block font-mono">Puntos 25/26</span>
-                  <span className="text-xs font-bold text-forest-light">{p.lastSeasonPoints || p.stats?.points || 0} pts</span>
-                </div>
-                <div className="bg-forest-dark/20 p-2 rounded border border-forest/20">
-                  <span className="text-[9px] text-cream/60 uppercase block font-mono">Media Pts</span>
-                  <span className="text-xs font-bold text-cream">{p.lastSeasonAvg || 4.2}</span>
-                </div>
-                <div className="bg-forest-dark/20 p-2 rounded border border-forest/20">
-                  <span className="text-[9px] text-cream/60 uppercase block font-mono">Predicción 26/27</span>
-                  <span className="text-xs font-bold text-amber-300">~{p.projectedPoints || 140} pts</span>
-                </div>
-              </div>
-
-              {/* Valor de Mercado */}
-              <div className="pt-2 border-t border-forest/30 flex justify-between items-center text-xs">
-                <div>
-                  <span className="text-[10px] text-cream/60 uppercase block font-mono">Valor Comunio</span>
-                  <span className="font-bold text-amber-300">{formatPrice(p.price)}</span>
-                </div>
-                <button className="bg-forest/40 hover:bg-forest text-cream text-[10px] font-bold px-3 py-1.5 rounded-sm border border-forest-light/40 transition-colors uppercase">
-                  VER FICHA COMPLETA &rarr;
-                </button>
-              </div>
+            {/* Selector de Orden */}
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <ArrowUpDown size={14} className="text-forest-light flex-shrink-0" />
+              <select
+                value={sortBy}
+                onChange={e => setSortBy(e.target.value)}
+                className="bg-forest-dark/50 border border-forest/40 text-cream text-xs px-3 py-1.5 rounded-sm focus:outline-none focus:border-forest-light w-full sm:w-auto cursor-pointer"
+              >
+                <option value="projected">Ordenar por Predicción 26/27</option>
+                <option value="points">Ordenar por Puntos 25/26</option>
+                <option value="price">Ordenar por Valor de Mercado</option>
+                <option value="position">Ordenar por Posición</option>
+              </select>
             </div>
           </div>
-        ))}
+
+        </div>
       </div>
+
+      {/* CUADRÍCULA COMPACTA DE JUGADORES ("DE UN PLUMAZO") */}
+      {filteredAndSortedPlayers.length === 0 ? (
+        <div className="bg-black/40 border border-forest/30 p-12 text-center rounded-sm">
+          <p className="text-cream/70 text-sm font-mono">No se han encontrado jugadores con los filtros seleccionados.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5">
+          {filteredAndSortedPlayers.map(p => {
+            const posBadge = getPosBadgeStyle(p.position)
+            return (
+              <div
+                key={p.id}
+                onClick={() => setSelectedPlayer(p)}
+                className="bg-black border border-forest/40 rounded-sm overflow-hidden flex flex-col justify-between group hover:border-forest-light transition-all cursor-pointer shadow-lg hover:scale-[1.02] relative"
+              >
+                {/* Badge de Titular / Suplente */}
+                <div className="absolute top-2 left-2 z-20 flex gap-1">
+                  {p.isStarter ? (
+                    <span className="bg-amber-500/90 text-black font-bold text-[8px] px-1.5 py-0.5 rounded-sm shadow-md">
+                      XI TITULAR
+                    </span>
+                  ) : (
+                    <span className="bg-black/80 text-cream/70 font-mono text-[8px] px-1.5 py-0.5 rounded-sm border border-forest/30">
+                      SUPLENTE
+                    </span>
+                  )}
+                </div>
+
+                {/* Dorsal Grande de Fondo */}
+                <div className="absolute top-1 right-2 opacity-20 text-cream font-display font-bold text-4xl pointer-events-none">
+                  #{p.number}
+                </div>
+
+                {/* Cabecera con Foto Reducida */}
+                <div className="relative h-32 bg-gradient-to-b from-forest-dark/60 to-black overflow-hidden flex justify-center items-end p-2 border-b border-forest/30">
+                  <img
+                    src={p.image || `/media/players/${p.id}.png`}
+                    alt={p.name}
+                    className="h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    onError={(e) => { e.target.src = '/media/crest.jpg' }}
+                  />
+                </div>
+
+                {/* Cuerpo de la Tarjeta Compacta */}
+                <div className="p-3 space-y-2 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded-sm border uppercase ${posBadge.color}`}>
+                        {posBadge.label}
+                      </span>
+                      <span className="text-[9px] text-cream/60 truncate font-mono">
+                        {p.clubName || 'LaLiga'}
+                      </span>
+                    </div>
+
+                    <h3 className="text-xs sm:text-sm font-bold text-white group-hover:text-forest-light transition-colors truncate">
+                      {p.name}
+                    </h3>
+                  </div>
+
+                  {/* Resumen Métrico de Puntos & Valor */}
+                  <div className="space-y-1.5 pt-1.5 border-t border-forest/20 text-[10px]">
+                    <div className="flex justify-between items-center">
+                      <span className="text-cream/60 font-mono">Predicción 26/27:</span>
+                      <span className="font-bold text-amber-300">~{p.projectedPoints || 140} pts</span>
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                      <span className="text-cream/60 font-mono">Valor Comunio:</span>
+                      <span className="font-bold text-cream">
+                        {p.price ? p.price.toLocaleString('es-ES') + ' €' : 'N/D'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Botón de Acción Ficha Completa */}
+                  <div className="pt-1.5 text-center">
+                    <span className="w-full bg-forest-dark/40 group-hover:bg-forest text-cream text-[9px] font-bold py-1 px-2 rounded-sm border border-forest/40 transition-colors uppercase block">
+                      FICHA COMPLETA &rarr;
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            )
+          })}
+        </div>
+      )}
 
       {/* PLAYER PROFILE MODAL */}
       <PlayerProfileModal player={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
