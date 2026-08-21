@@ -121,10 +121,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* MAIN CONTENT GRID */}
-      <section className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-6 pt-1">
+      {/* MAIN CONTENT GRID (Alineación vertical perfecta "De un plumazo") */}
+      <section className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-6 pt-1 items-stretch">
         {/* COLUMNA IZQUIERDA: CARRUSEL NOTICIAS + SEGUIMIENTO MERCADO REAL */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-6 flex flex-col justify-between">
           {/* 1. COMUNICADOS Y ACTUALIDAD (CARRUSEL COMPACTO) */}
           <div className="space-y-3">
             <div className="flex items-center justify-between border-b border-forest/40 pb-2">
@@ -145,8 +145,8 @@ export default function Home() {
                   onClick={() => setSelectedNews(activeNews)}
                   className="rounded-sm overflow-hidden border border-forest/40 shadow-2xl bg-forest-dark/40 backdrop-blur-sm group cursor-pointer hover:border-forest-light/60 transition-all"
                 >
-                  {/* Tarjeta Split/Overlay Compacta (Altura reducida a 220px/240px) */}
-                  <div className="relative h-[200px] sm:h-[230px] w-full overflow-hidden bg-black flex items-center justify-center">
+                  {/* Tarjeta Split/Overlay Compacta (Altura reducida a 200px/220px) */}
+                  <div className="relative h-[190px] sm:h-[220px] w-full overflow-hidden bg-black flex items-center justify-center">
                     <img
                       src={activeNews.image}
                       alt={activeNews.title}
@@ -279,21 +279,20 @@ export default function Home() {
           </div>
         </div>
 
-        {/* COLUMNA DERECHA: MINI CAMPO DE FÚTBOL (ONCE TITULAR TÁCTICO) */}
-        <div className="space-y-4">
-          <div>
-            <div className="flex items-center justify-between mb-2.5 border-b border-forest/40 pb-2">
-              <div className="flex items-center gap-2">
-                <Users size={18} className="text-forest-light" />
-                <h3 className="text-lg font-display font-bold text-white">ONCE TITULAR</h3>
-              </div>
-              <Link to="/alineacion" className="text-xs font-bold text-forest-light hover:text-white transition-colors">
-                Ver XI Completo &rarr;
-              </Link>
+        {/* COLUMNA DERECHA: MINI CAMPO DE FÚTBOL (ONCE TITULAR TÁCTICO QUE OCUPA TODO EL ALTO) */}
+        <div className="flex flex-col h-full space-y-3">
+          <div className="flex items-center justify-between border-b border-forest/40 pb-2">
+            <div className="flex items-center gap-2">
+              <Users size={18} className="text-forest-light" />
+              <h3 className="text-lg font-display font-bold text-white">ONCE TITULAR</h3>
             </div>
+            <Link to="/alineacion" className="text-xs font-bold text-forest-light hover:text-white transition-colors">
+              Ver XI Completo &rarr;
+            </Link>
+          </div>
 
-            {/* MINI CAMPO VERDE COMPACTO (h-[300px]) */}
-            <div className="relative w-full h-[300px] bg-gradient-to-b from-forest-dark/95 via-forest/90 to-forest-dark/95 border border-forest-light/50 rounded-sm p-2.5 shadow-2xl flex flex-col justify-between overflow-hidden">
+          {/* MINI CAMPO VERDE QUE SE ESTIRA HASTA ALINEAR SU BORDE INFERIOR AL 100% */}
+          <div className="flex-1 w-full min-h-[360px] relative bg-gradient-to-b from-forest-dark/95 via-forest/90 to-forest-dark/95 border border-forest-light/50 rounded-sm p-3 shadow-2xl flex flex-col justify-between overflow-hidden">
               {/* LÍNEAS TÁCTICAS DEL CAMPO DE FÚTBOL */}
               <div className="absolute inset-0 pointer-events-none opacity-25 border-2 border-white rounded-sm m-2">
                 <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-white -translate-y-1/2"></div>
@@ -371,7 +370,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
       </section>
 
       {/* FULL UNTRUNCATED NEWS MODAL EN LA PORTADA */}
