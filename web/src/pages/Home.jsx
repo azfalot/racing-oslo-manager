@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Trophy, ChevronRight, TrendingUp, Users, ChevronLeft, Calendar } from 'lucide-react'
+import { Trophy, ChevronRight, TrendingUp, Users, ChevronLeft, Calendar, Flame } from 'lucide-react'
 import squadData from '../data/squad.json'
 import matchData from '../data/matches.json'
 import newsData from '../data/news.json'
@@ -19,6 +19,7 @@ export function formatNewsDate(dateStr) {
 
 export default function Home() {
   const featuredNews = newsData.slice(0, 5)
+  const rumorNews = newsData.filter(n => (n.category || '').toLowerCase() === 'rumores' || (n.title || '').toLowerCase().includes('rumor'))
   const [currentSlide, setCurrentSlide] = useState(0)
 
   // Auto-play carousel every 5 seconds
@@ -112,8 +113,8 @@ export default function Home() {
           {/* Carousel Slide Container */}
           {featuredNews.length > 0 && (
             <div className="rounded-sm overflow-hidden border border-forest/40 shadow-2xl bg-forest-dark/30 backdrop-blur-sm group">
-              {/* 1. TOP: Imagen Oficial Completa que Ocupa Todo el Espacio Natural (object-cover con altura ampliada en escritorio) */}
-              <div className="relative h-[260px] sm:h-[360px] md:h-[450px] lg:h-[480px] w-full overflow-hidden bg-black flex items-center justify-center">
+              {/* 1. TOP: Imagen Oficial Completa con altura optimizada y compacta */}
+              <div className="relative h-[200px] sm:h-[260px] md:h-[300px] lg:h-[320px] w-full overflow-hidden bg-black flex items-center justify-center">
                 <img
                   src={featuredNews[currentSlide].image}
                   alt={featuredNews[currentSlide].title}
@@ -297,6 +298,50 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          {/* SECCIÓN RUMORES DE MERCADO */}
+          {rumorNews.length > 0 && (
+            <div>
+              <div className="flex items-center justify-between mb-3 border-b border-forest/40 pb-2.5">
+                <div className="flex items-center gap-2">
+                  <Flame size={18} className="text-amber-400 animate-pulse" />
+                  <h3 className="text-lg font-display font-bold text-white uppercase tracking-wide">RUMORES DE MERCADO</h3>
+                </div>
+                <Link to="/noticias" className="text-xs font-bold text-forest-light hover:text-white transition-colors">
+                  Ver todos &rarr;
+                </Link>
+              </div>
+
+              <div className="space-y-3">
+                {rumorNews.slice(0, 2).map((rumor) => (
+                  <div key={rumor.id} className="bg-forest-dark/30 border border-forest/40 p-3 rounded-sm hover:border-forest-light/60 transition-all flex gap-3 items-center group shadow-md">
+                    <div className="w-16 h-16 rounded-sm overflow-hidden flex-shrink-0 bg-black border border-forest/30">
+                      <img
+                        src={rumor.image}
+                        alt={rumor.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        onError={(e) => { e.target.src = '/media/templates/template_rumors.jpg' }}
+                      />
+                    </div>
+                    <div className="space-y-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="bg-amber-500/20 text-amber-300 text-[9px] font-bold px-2 py-0.5 uppercase tracking-wider rounded-sm border border-amber-500/40">
+                          RUMOR
+                        </span>
+                        <span className="text-[10px] text-cream/50 font-mono">{formatNewsDate(rumor.date)}</span>
+                      </div>
+                      <h4 className="text-xs font-bold text-white group-hover:text-forest-light transition-colors truncate">
+                        {rumor.title.replace(/Rumores de Mercado:\s*/i, '')}
+                      </h4>
+                      <p className="text-[11px] text-cream-dark line-clamp-1 leading-snug">
+                        {rumor.excerpt || rumor.summary}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </div>
