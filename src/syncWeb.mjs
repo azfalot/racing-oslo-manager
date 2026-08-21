@@ -5,6 +5,7 @@ import { analyzeRivals } from './rivals.js';
 import axios from 'axios';
 import { getTransfermarktData } from './transfermarkt.js';
 import fs from 'fs';
+import path from 'path';
 
 async function fetchRealData() {
   const client = new ComunioClient();
