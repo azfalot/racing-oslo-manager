@@ -393,7 +393,7 @@ async function handleTelegramMessage(message) {
       }
 
       const isPositiveBalance = balance >= 0;
-      const balanceStatus = isPositiveBalance ? '✅ Positivo (Puntuarás normalmente)' : '❌ EN ROJO (Atención: Quedarás a 0 ptos si no vendes)';
+      const balanceStatus = isPositiveBalance ? '✅ Positivo (Puntuarás normalmente)' : '❌ EN ROJO (Atención: Quedarás a 0 ptos si no vendes antes del cierre)';
 
       let rep = `📅 <b>[Mateo Oslomany] · Centro de Mando de Jornada</b>\n\n`;
       rep += `⚽ <b>${escapeHtml(eventName)}</b>\n`;
@@ -410,7 +410,7 @@ async function handleTelegramMessage(message) {
       });
 
       const isFull11 = (lineupResult.starting11 || []).length === 11;
-      rep += ` <i>${isFull11 ? '✅ 11/11 posiciones cubiertas' : '⚠️ Atención: Tienes posiciones vacías'}</i>\n\n`;
+      rep += ` <i>${isFull11 ? '✅ 11/11 posiciones cubiertas' : '⚠️ Atención: Penalización -4 ptos por posición vacía'}</i>\n\n`;
 
       if (matches.length > 0) {
         rep += `🏟️ <b>Partidos Destacados de la Jornada:</b>\n`;
@@ -433,7 +433,23 @@ async function handleTelegramMessage(message) {
         });
       }
 
-      await sendTelegramMessage(rep);
+      let markup = null;
+      if (!isPositiveBalance) {
+        const lineupIds = new Set((lineupResult.starting11 || []).map(p => p.playerId || p.id));
+        const suggestions = engine.getLiquiditySuggestions(squad, Array.from(lineupIds));
+        if (suggestions.length > 0) {
+          const topSub = suggestions[0];
+          const pid = topSub.playerId || topSub.id;
+          const minPrice = topSub.price || 0;
+          markup = {
+            inline_keyboard: [
+              [{ text: `🚨 VENDER A ${topSub.name.toUpperCase()} (${minPrice.toLocaleString()} €) PARA NO HACER 0 PTOS`, callback_data: `put_on_sale:${pid}:${topSub.name}:${minPrice}` }]
+            ]
+          };
+        }
+      }
+
+      await sendTelegramMessage(rep, markup);
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al consultar jornada: <code>${e.message}</code>`);
     } finally {
