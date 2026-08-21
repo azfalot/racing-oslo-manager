@@ -46,10 +46,10 @@ export class ComunioEngine {
     // 1. Usar histórico de temporadas anteriores (soporta array o player.historical.points)
     const historyList = Array.isArray(player.historical)
       ? player.historical
-      : (player.historical?.points || []);
+      : (player.historical?.points || player.historicalPoints || []);
 
     if (historyList.length > 0) {
-      const history = [...historyList].sort((a, b) => b.season.localeCompare(a.season));
+      const history = [...historyList].sort((a, b) => (b.season || '').localeCompare(a.season || ''));
       const lastSeasonPoints = parseInt(history[0].points);
       if (!isNaN(lastSeasonPoints) && lastSeasonPoints > 0) {
         return lastSeasonPoints;
@@ -59,17 +59,21 @@ export class ComunioEngine {
     // 2. Intentar usar promedio de puntos por partido
     const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
     if (!isNaN(avgPoints) && avgPoints > 0) {
-      return avgPoints * 10;
+      return Math.round(avgPoints * 25);
     }
 
     // 3. Puntos totales de esta temporada
-    const currentPoints = parseInt(player.totalPoints);
+    const currentPoints = parseInt(player.totalPoints || player.points);
     if (!isNaN(currentPoints) && currentPoints > 0) {
-      return currentPoints * 5;
+      return currentPoints;
     }
 
-    // 4. Puntuación por defecto si no hay datos
-    return 10; 
+    // 4. Estimación proporcional por valor de mercado si no hay registros históricos
+    const price = player.price || 0;
+    if (price > 5000000) return 120;
+    if (price > 2000000) return 80;
+    if (price > 1000000) return 40;
+    return 15; 
   }
 
   /**
