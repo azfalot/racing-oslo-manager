@@ -33,9 +33,11 @@ export async function ensurePlayerPhoto(playerId) {
 /**
  * Generador Maestro de Tarjetas Gráficas de Noticias
  * Soporta 4 Plantillas Oficiales: 'signing' (Compra), 'sale' (Venta), 'medical' (Enfermería), 'rumors' (Rumores)
- * Superpone en la esquina superior derecha la foto circular del jugador descargada de la API
+ * Superpone en la esquina superior derecha la foto circular del jugador descargada de la API.
+ * Para ventas ('sale'), superpone además la insignia del comprador (Comunio C o equipo rival).
+ * La plantilla se mantiene impoluta sin bloques de texto artificiales pegados.
  */
-export async function generateTemplateGraphic(type, playerName, subText = '', playerId = null) {
+export async function generateTemplateGraphic(type, playerName, subText = '', playerId = null, buyerName = 'Computadora') {
   try {
     const templateFilename = `template_${type}.jpg`;
     const bgPath = path.resolve(`web/public/media/templates/${templateFilename}`);
@@ -101,93 +103,52 @@ export async function generateTemplateGraphic(type, playerName, subText = '', pl
           ctx.lineWidth = 5;
           ctx.strokeStyle = '#2d5a42';
           ctx.stroke();
+
+          // Anillo crema fino interior
+          ctx.beginPath();
+          ctx.arc(cx, cy, radius - 4, 0, Math.PI * 2);
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = '#e8e0cc';
+          ctx.stroke();
         } catch (imgErr) {
           console.warn(`[IMAGE GEN] Error montando foto circular para ${playerName}:`, imgErr.message);
         }
       }
     }
 
-    // 3. Superponer Banner de Texto Dinámico (Nombre del jugador + Precio/Detalles)
-    if (playerName) {
+    // 3. Para Ventas ('sale'): Superponer insignia/logo del equipo comprador (Comunio C si es Computadora)
+    if (type === 'sale') {
+      const isComputer = !buyerName || buyerName.toLowerCase().includes('computer') || buyerName.toLowerCase().includes('computadora');
+      
+      const bx = width * 0.71;
+      const by = height * 0.205;
+      const bradius = width * 0.055;
+
       ctx.save();
-
-      // Dimensiones y posición del parche de texto (zona inferior izquierda)
-      const patchX = width * 0.04;
-      const patchY = height * 0.58;
-      const patchW = width * 0.72;
-      const patchH = height * 0.35;
-      const cornerRadius = 10;
-
-      // Dibujar caja de fondo oscuro semitransparente con diseño profesional
       ctx.beginPath();
-      ctx.moveTo(patchX + cornerRadius, patchY);
-      ctx.lineTo(patchX + patchW - cornerRadius, patchY);
-      ctx.quadraticCurveTo(patchX + patchW, patchY, patchX + patchW, patchY + cornerRadius);
-      ctx.lineTo(patchX + patchW, patchY + patchH - cornerRadius);
-      ctx.quadraticCurveTo(patchX + patchW, patchY + patchH, patchX + patchW - cornerRadius, patchY + patchH);
-      ctx.lineTo(patchX + cornerRadius, patchY + patchH);
-      ctx.quadraticCurveTo(patchX, patchY + patchH, patchX, patchY + patchH - cornerRadius);
-      ctx.lineTo(patchX, patchY + cornerRadius);
-      ctx.quadraticCurveTo(patchX, patchY, patchX + cornerRadius, patchY);
-      ctx.closePath();
-
-      // Relleno degradado elegante verde noche
-      const patchGrad = ctx.createLinearGradient(patchX, patchY, patchX, patchY + patchH);
-      patchGrad.addColorStop(0, 'rgba(15, 30, 20, 0.95)');
-      patchGrad.addColorStop(1, 'rgba(8, 18, 12, 0.98)');
-      ctx.fillStyle = patchGrad;
+      ctx.arc(bx, by, bradius, 0, Math.PI * 2);
+      ctx.fillStyle = '#1b382b';
       ctx.fill();
-
-      // Borde fino verde bosque
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = '#2d5a42';
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = '#e8e0cc';
       ctx.stroke();
 
-      // Borde de acento izquierdo (Línea de color según tipo)
-      const typeColors = {
-        signing: '#40805c',
-        sale: '#c85a5a',
-        medical: '#d4a359',
-        rumors: '#5a8cc8'
-      };
-      const accentColor = typeColors[type] || '#40805c';
-      ctx.fillStyle = accentColor;
-      ctx.fillRect(patchX, patchY, 6, patchH);
-
-      // A) Badge de Categoría / Tipo
-      const typeLabels = {
-        signing: '¡OFICIAL! FICHAJE',
-        sale: '¡OFICIAL! TRASPASO',
-        medical: 'PARTE MÉDICO OFICIAL',
-        rumors: 'RUMORES DE MERCADO'
-      };
-      const badgeText = typeLabels[type] || type.toUpperCase();
-      ctx.font = 'bold 16px sans-serif';
-      ctx.fillStyle = accentColor;
-      ctx.textAlign = 'left';
-      ctx.fillText(badgeText, patchX + 25, patchY + 38);
-
-      // B) Nombre del Jugador (Ajuste dinámico de fuente según longitud)
-      const nameUpper = playerName.toUpperCase();
-      let fontSize = 38;
-      if (nameUpper.length > 20) fontSize = 26;
-      else if (nameUpper.length > 15) fontSize = 30;
-      else if (nameUpper.length > 11) fontSize = 34;
-
-      ctx.font = `bold ${fontSize}px sans-serif`;
-      ctx.fillStyle = '#ffffff';
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
-      ctx.shadowBlur = 10;
-      ctx.fillText(nameUpper, patchX + 25, patchY + 38 + fontSize + 4);
-      ctx.shadowBlur = 0;
-
-      // C) SubTexto / Precio / Detalles
-      if (subText) {
-        ctx.font = 'bold 24px sans-serif';
+      if (isComputer) {
+        // Logo oficial de Comunio ("C")
+        ctx.font = `bold ${Math.round(bradius * 1.2)}px sans-serif`;
+        ctx.fillStyle = '#40805c';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('C', bx, by);
+      } else {
+        // Iniciales del comprador rival
+        ctx.font = `bold ${Math.round(bradius * 0.7)}px sans-serif`;
         ctx.fillStyle = '#e8e0cc';
-        ctx.fillText(subText.toString(), patchX + 25, patchY + patchH - 25);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        const initials = buyerName.split(' ').map(w => w[0]).join('').slice(0, 3).toUpperCase();
+        ctx.fillText(initials, bx, by);
       }
-
       ctx.restore();
     }
 
@@ -237,12 +198,12 @@ export async function publishSigningNews(playerName, price, playerId, position =
   return null;
 }
 
-export async function publishSaleNews(playerName, price, playerId) {
+export async function publishSaleNews(playerName, price, playerId, buyerName = 'Computadora') {
   try {
     const formattedPrice = typeof price === 'number' ? price.toLocaleString() + ' €' : price;
 
-    // Generar gráfica oficial con la plantilla de Venta + Foto API
-    const graphicUrl = await generateTemplateGraphic('sale', playerName, formattedPrice, playerId);
+    // Generar gráfica oficial con la plantilla de Venta (misma que signing) + Foto API + Logo comprador
+    const graphicUrl = await generateTemplateGraphic('sale', playerName, formattedPrice, playerId, buyerName);
 
     const newsPath = path.resolve('web/src/data/news.json');
     if (fs.existsSync(newsPath)) {
@@ -252,9 +213,9 @@ export async function publishSaleNews(playerName, price, playerId) {
         title: `¡Oficial! ${playerName} abandona el Racing de Oslo`,
         date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
         category: 'Ventas',
-        excerpt: `El club hace oficial la salida de ${playerName} tras alcanzar un acuerdo por su traspaso por ${formattedPrice}.`,
-        summary: `El club hace oficial la salida de ${playerName} tras alcanzar un acuerdo por su traspaso por ${formattedPrice}.`,
-        content: `La dirección deportiva encabezada por Mateo Oslomany ha cerrado la operación de traspaso de ${playerName} por un importe total de ${formattedPrice}.\n\nDesde el Racing de Oslo agradecemos su profesionalidad y dedicación defendiendo nuestra camiseta en el Oslo Arena, y le deseamos los mayores éxitos en sus futuros proyectos profesionales.\n\n¡Gracias por todo y mucha suerte, ${playerName}!`,
+        excerpt: `El club hace oficial la salida de ${playerName} a ${buyerName} tras alcanzar un acuerdo por su traspaso por ${formattedPrice}.`,
+        summary: `El club hace oficial la salida de ${playerName} a ${buyerName} tras alcanzar un acuerdo por su traspaso por ${formattedPrice}.`,
+        content: `La dirección deportiva encabezada por Mateo Oslomany ha cerrado la operación de traspaso de ${playerName} a ${buyerName} por un importe total de ${formattedPrice}.\n\nDesde el Racing de Oslo agradecemos su profesionalidad y dedicación defendiendo nuestra camiseta en el Oslo Arena, y le deseamos los mayores éxitos en sus futuros proyectos profesionales.\n\n¡Gracias por todo y mucha suerte, ${playerName}!`,
         image: graphicUrl
       };
 
