@@ -172,18 +172,18 @@ async function handleTelegramMessage(message) {
   // ── /start · /help ────────────────────────────────────────────────────────
   if (text.startsWith('/start') || text.startsWith('/help') || text.toLowerCase() === 'ayuda') {
     const pauseStatus = botPaused ? '⏸ <b>BOT PAUSADO</b> (acciones autónomas desactivadas)\n\n' : '';
-    const helpText = `💼 <b>[Mateo Oslomany] · Centro de Mando</b>\n${pauseStatus}\n` +
+    const helpText = `💼 <b>[Mateo Oslomany v3.5] · Centro de Mando Táctico</b>\n${pauseStatus}\n` +
       `📊 <b>Análisis & Táctica:</b>\n` +
-      ` • /analisis — Análisis estratégico de plantilla, carencias y mercado\n` +
+      ` • /analisis — Auditoría estratégica de plantilla, carencias y mercado\n` +
       ` • /reporte — Resumen ejecutivo diario\n` +
       ` • /plantilla — Plantilla (titulares + suplentes)\n` +
       ` • /tactica — Esquema táctico por líneas\n` +
       ` • /rivales — Clasificación y valor de rivales\n` +
-      ` • /sugerencias — Sugerencias de ventas\n` +
+      ` • /sugerencias — Sugerencias de ventas con botón de 1 clic\n` +
       ` • /jornada — Próxima jornada y cierre de XI\n` +
       ` • /top — Top 10 jugadores más valiosos\n\n` +
       `🛒 <b>Mercado & Finanzas:</b>\n` +
-      ` • /mercado — Mejores oportunidades (top 5)\n` +
+      ` • /mercado — Mejores oportunidades de mercado\n` +
       ` • /finanzas — Balance, pujas activas y margen\n` +
       ` • /ofertas — Ofertas de venta recibidas\n` +
       ` • /mis_pujas — Mis pujas activas pendientes\n` +
@@ -196,7 +196,7 @@ async function handleTelegramMessage(message) {
       ` • /margen — Ajustar sobreprecio (ej: /margen 1.5)\n` +
       ` • /limite — Límite auto-puja (ej: /limite 8)\n` +
       ` • /pausar / /reanudar — Control del bot autónomo\n` +
-      ` • /estado — Estado del sistema y configuración\n` +
+      ` • /estado — Estado del sistema v3.5.0\n` +
       ` • /historial — Registro de últimas acciones\n\n` +
       `🕒 Crons: <b>02:50</b>, <b>09:00</b> y <b>15:00</b> Madrid | 🛒 Monitor: cada <b>3 hrs</b>`;
     await sendTelegramMessage(helpText);
@@ -1042,8 +1042,8 @@ async function handleCallbackQuery(callbackQuery) {
 // ── LONG POLLING ──────────────────────────────────────────────────────────────
 
 async function startPolling() {
-  console.log('[DAEMON] Iniciando escucha de comandos de Telegram (Long Polling)...');
-  await sendTelegramMessage('💼 🟢 <b>[Mateo Oslomany]:</b> Servicio iniciado y en línea (v2). Envía <code>/help</code> para ver mis comandos.');
+  console.log('[DAEMON] Iniciando escucha de comandos de Telegram (Long Polling v3.5.0)...');
+  await sendTelegramMessage('💼 🟢 <b>[Mateo Oslomany v3.5]:</b> Servicio iniciado y en línea (v3.5.0). Envía <code>/help</code> para ver el Centro de Mando.');
 
   while (true) {
     try {
