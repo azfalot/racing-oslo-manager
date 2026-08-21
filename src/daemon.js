@@ -174,6 +174,7 @@ async function handleTelegramMessage(message) {
     const pauseStatus = botPaused ? '⏸ <b>BOT PAUSADO</b> (acciones autónomas desactivadas)\n\n' : '';
     const helpText = `💼 <b>[Mateo Oslomany] · Centro de Mando</b>\n${pauseStatus}\n` +
       `📊 <b>Análisis & Táctica:</b>\n` +
+      ` • /analisis — Análisis estratégico de plantilla, carencias y mercado\n` +
       ` • /reporte — Resumen ejecutivo diario\n` +
       ` • /plantilla — Plantilla (titulares + suplentes)\n` +
       ` • /tactica — Esquema táctico por líneas\n` +
@@ -197,8 +198,13 @@ async function handleTelegramMessage(message) {
       ` • /pausar / /reanudar — Control del bot autónomo\n` +
       ` • /estado — Estado del sistema y configuración\n` +
       ` • /historial — Registro de últimas acciones\n\n` +
-      `🕒 Crons: <b>02:50</b>, <b>09:00</b> y <b>15:00</b> Madrid | 🛒 Monitor: cada <b>15 min</b>`;
+      `🕒 Crons: <b>02:50</b>, <b>09:00</b> y <b>15:00</b> Madrid | 🛒 Monitor: cada <b>3 hrs</b>`;
     await sendTelegramMessage(helpText);
+  }
+
+  // ── /analisis ─────────────────────────────────────────────────────────────
+  else if (text.startsWith('/analisis')) {
+    await executeStrategicAnalysisReport();
   }
 
   // ── /reporte ──────────────────────────────────────────────────────────────
@@ -1147,6 +1153,109 @@ async function runMarketCheck() {
   } finally {
     await client.close();
     marketMonitorRunning = false;
+  }
+}
+
+// ── ANÁLISIS ESTRATÉGICO INTEGRAL DE PLANTILLA & MERCADO (/analisis) ───────
+
+async function executeStrategicAnalysisReport() {
+  await sendTelegramMessage('💼 🕵️‍♂️ <i>[Mateo Oslomany]: Iniciando auditoría y análisis estratégico integral del club y del mercado...</i>');
+  const client = new ComunioClient();
+  const engine = new ComunioEngine();
+  try {
+    await client.login();
+    const squad = await client.getSquad();
+    const dashboard = await client.getDashboardData();
+    const rawMarket = await client.getMarket();
+
+    const balance = dashboard?.money || 0;
+    const teamValue = dashboard?.teamValue || 0;
+    const players = squad?.players || [];
+    const marketPlayers = rawMarket?.players || [];
+
+    const keepers = players.filter(p => p.type === 'keeper');
+    const defenders = players.filter(p => p.type === 'defender');
+    const midfielders = players.filter(p => p.type === 'midfielder');
+    const strikers = players.filter(p => p.type === 'striker');
+
+    const lineup = engine.optimizeLineup({ players });
+
+    let msg = `💼 📊 <b>[Mateo Oslomany] · ANÁLISIS ESTRATÉGICO INTEGRAL</b>\n\n`;
+
+    // 1. ESTADO FINANCIERO & VALOR DEL CLUB
+    msg += `💰 <b>1. Estado Financiero & Valor:</b>\n`;
+    msg += ` • Saldo en Caja: <b>${balance.toLocaleString()} €</b>\n`;
+    msg += ` • Valor de Plantilla: <b>${teamValue.toLocaleString()} €</b>\n`;
+    msg += ` • Total Plantilla: <b>${players.length} jugadores</b>\n\n`;
+
+    // 2. DIAGNÓSTICO TÁCTICO Y CARENCIAS POR LÍNEAS
+    msg += `🛡️ <b>2. Diagnóstico Táctico por Líneas:</b>\n`;
+    msg += ` • 🧤 <b>Portería (${keepers.length}):</b> ${keepers.map(p => escapeHtml(p.name)).join(', ') || 'Sin portero'}\n`;
+    msg += ` • 🛡️ <b>Defensa (${defenders.length}):</b> ${defenders.map(p => escapeHtml(p.name)).join(', ') || 'Escasa'}\n`;
+    msg += ` • ⚙️ <b>Medular (${midfielders.length}):</b> ${midfielders.map(p => escapeHtml(p.name)).join(', ')}\n`;
+    msg += ` • ⚡ <b>Delantera (${strikers.length}):</b> ${strikers.map(p => escapeHtml(p.name)).join(', ')}\n\n`;
+
+    // Evaluaciones y Necesidades
+    msg += `🎯 <b>3. Carencias & Objetivos Tácticos:</b>\n`;
+    if (strikers.length < 3) {
+      msg += ` 🔴 <b>DELANTERA (Prioridad MÁXIMA):</b> Contamos con solo ${strikers.length} delantero(s). Se requiere fichar 1-2 atacantes para garantizar gol y puntuación constante.\n`;
+    }
+    if (defenders.length < 5) {
+      msg += ` 🟡 <b>DEFENSA (Prioridad ALTA):</b> Contamos con ${defenders.length} defensas. Se recomienda fichar 1 defensa adicional para asegurar rotaciones y fondo de armario.\n`;
+    }
+    if (midfielders.length >= 4) {
+      msg += ` 🟢 <b>MEDULAR (Superávit de Calidad):</b> Línea muy sólida con ${midfielders.length} centrocampistas de alto nivel.\n`;
+    }
+    msg += `\n`;
+
+    // 3. ANÁLISIS DEL MERCADO REAL Y OPORTUNIDADES
+    msg += `🛒 <b>4. Oportunidades del Mercado Actual (${marketPlayers.length} a la venta):</b>\n`;
+
+    // Oportunidades para Delantera
+    const marketStrikers = marketPlayers.filter(p => p.type === 'striker');
+    if (marketStrikers.length > 0) {
+      msg += `\n⚡ <b>Atacantes en Venta Hoy:</b>\n`;
+      marketStrikers.slice(0, 3).forEach(p => {
+        const ownerName = p.owner?.name === 'Computer' || p.owner === 'Computer' ? 'Computadora' : (p.owner?.name || p.owner);
+        msg += ` • <b>${escapeHtml(p.name)}</b> (${p.price.toLocaleString()} €) - Vendedor: ${escapeHtml(ownerName)}\n`;
+      });
+    } else {
+      msg += `\n⚡ <b>Delanteros:</b> No hay atacantes disponibles en el mercado en este momento.\n`;
+    }
+
+    // Oportunidades para Defensa
+    const marketDefenders = marketPlayers.filter(p => p.type === 'defender');
+    if (marketDefenders.length > 0) {
+      msg += `\n🛡️ <b>Defensas en Venta Hoy:</b>\n`;
+      marketDefenders.slice(0, 3).forEach(p => {
+        const ownerName = p.owner?.name === 'Computer' || p.owner === 'Computer' ? 'Computadora' : (p.owner?.name || p.owner);
+        msg += ` • <b>${escapeHtml(p.name)}</b> (${p.price.toLocaleString()} €) - Vendedor: ${escapeHtml(ownerName)}\n`;
+      });
+    } else {
+      msg += `\n🛡️ <b>Defensas:</b> No hay defensas disponibles en el mercado en este momento.\n`;
+    }
+
+    // Estrategia de Revalorización y Especulación
+    msg += `\n📈 <b>5. Estrategia de Revalorización & Trading:</b>\n`;
+    msg += ` • <b>Comprar & Especular:</b> Fichar jugadores de valor emergente en el mercado para revalorizar y revender a mayor precio, aumentando progresivamente la capacidad económica del club.\n`;
+
+    // Plan de Acción Sugerido
+    msg += `\n📋 <b>6. Plan de Acción Inmediato Sugerido:</b>\n`;
+    if (marketStrikers.length > 0) {
+      msg += ` 1️⃣ Enviar oferta por <b>${escapeHtml(marketStrikers[0].name)}</b> (usar /pujar ${escapeHtml(marketStrikers[0].name)}) para reforzar la delantera.\n`;
+    }
+    if (marketDefenders.length > 0) {
+      msg += ` 2️⃣ Enviar oferta por <b>${escapeHtml(marketDefenders[0].name)}</b> (usar /pujar ${escapeHtml(marketDefenders[0].name)}) para blindar la defensa.\n`;
+    }
+    msg += ` 3️⃣ Ejecutar /alinear para fijar el XI titular óptimo (${lineup.formation}).\n`;
+
+    await sendTelegramMessage(msg);
+
+  } catch (err) {
+    console.error('[DAEMON-ANALISIS ERROR]', err.message);
+    await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error en el análisis estratégico: <code>${escapeHtml(err.message)}</code>`);
+  } finally {
+    await client.close();
   }
 }
 
