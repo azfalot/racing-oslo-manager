@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
-import { Radar, ArrowRightLeft, Search, UserMinus, UserPlus, Computer, Eye } from 'lucide-react'
+import { Radar, ArrowRightLeft, Search, UserMinus, UserPlus, Computer, Eye, Flame, X } from 'lucide-react'
 import marketData from '../data/market.json'
+import newsData from '../data/news.json'
 import PlayerProfileModal from '../components/PlayerProfileModal'
+import { getCategoryBadgeStyle, formatNewsDate } from './Noticias'
 
 export default function Mercado() {
   const [selectedPlayer, setSelectedPlayer] = useState(null)
+  const [selectedNews, setSelectedNews] = useState(null)
 
   const computerPlayers = marketData.filter(p => p.ownerId === 1)
   const ourPlayers = marketData.filter(p => p.ownerId === 21163822)
   const otherPlayers = marketData.filter(p => p.ownerId !== 1 && p.ownerId !== 21163822)
+  const rumorNews = (newsData || []).filter(n => (n.category || '').toLowerCase() === 'rumores')
 
   const formatPrice = (price) => price ? price.toLocaleString('es-ES') + ' €' : 'Desconocido'
 
@@ -41,12 +45,79 @@ export default function Mercado() {
   )
 
   return (
-    <div className="container mx-auto px-6 py-12">
-      <div className="mb-12">
-        <h2 className="text-4xl md:text-5xl font-display font-bold mb-2 border-l-4 border-forest pl-4">Mercado de Fichajes</h2>
-        <p className="text-cream-dark ml-5 text-sm uppercase tracking-widest">Estado en Tiempo Real • Haga clic en cualquier jugador para abrir su ficha oficial</p>
+    <div className="container mx-auto px-6 py-12 space-y-12">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-forest/30 pb-6">
+        <div>
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-2 border-l-4 border-forest pl-4">Mercado de Fichajes</h2>
+          <p className="text-cream-dark ml-5 text-sm uppercase tracking-widest">Estado en Tiempo Real & Diario de Rumores de Mateo Oslomany</p>
+        </div>
       </div>
 
+      {/* SECCIÓN DE RUMORES DE MERCADO & EL DIARIO DE MATEO OSLOMANY */}
+      {rumorNews.length > 0 && (
+        <div className="bg-purple-950/20 border border-purple-500/40 p-6 rounded-sm space-y-4 shadow-xl">
+          <div className="flex items-center gap-3 border-b border-purple-500/40 pb-3">
+            <Flame className="text-purple-400 animate-pulse" size={24} />
+            <div>
+              <h3 className="text-2xl font-display font-bold text-white uppercase tracking-wide">
+                RUMORES & DIARIO DE MERCADO DE MATEO OSLOMANY
+              </h3>
+              <p className="text-xs text-purple-300/80 font-mono">
+                Análisis táctico editorial, rumores de fichaje y seguimiento de objetivos de la Secretaría Técnica
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {rumorNews.map(rumor => {
+              const badgeStyle = getCategoryBadgeStyle(rumor.category)
+              return (
+                <div
+                  key={rumor.id}
+                  onClick={() => setSelectedNews(rumor)}
+                  className="bg-black/60 border border-purple-500/40 rounded-sm overflow-hidden flex flex-col justify-between group hover:border-purple-400 transition-all cursor-pointer shadow-lg hover:scale-[1.01]"
+                >
+                  <div className="relative h-36 overflow-hidden border-b border-purple-500/30">
+                    <img
+                      src={rumor.image || '/media/crest.jpg'}
+                      alt={rumor.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-2 left-2 z-10">
+                      <span className={`text-[9px] font-bold px-2 py-0.5 rounded-sm border uppercase ${badgeStyle.pill}`}>
+                        RUMOR DE MERCADO
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
+                    <div>
+                      <span className="text-[10px] text-cream/50 font-mono block mb-1">
+                        {formatNewsDate(rumor.date)}
+                      </span>
+                      <h4 className="text-sm font-bold text-white group-hover:text-purple-300 transition-colors line-clamp-2 leading-tight">
+                        {rumor.title}
+                      </h4>
+                      <p className="text-xs text-cream/70 line-clamp-3 leading-relaxed italic border-l-2 border-purple-400 pl-2 bg-purple-950/30 py-1.5 mt-2 rounded-r-sm">
+                        {rumor.excerpt || rumor.summary}
+                      </p>
+                    </div>
+
+                    <div className="pt-3 border-t border-purple-500/20 flex justify-between items-center text-xs">
+                      <span className="text-purple-300 font-mono font-bold text-[10px]">Mateo Oslomany Editorial</span>
+                      <button className="bg-purple-600/30 text-purple-200 group-hover:bg-purple-600 group-hover:text-white px-2.5 py-1 rounded-sm border border-purple-400/40 transition-colors text-[10px] font-bold uppercase">
+                        LEER RUMOR &rarr;
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* MERCADO PRINCIPAL */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Jugadores Libres */}
         <div className="lg:col-span-2 space-y-8">
@@ -131,6 +202,57 @@ export default function Mercado() {
 
       {/* PLAYER PROFILE MODAL */}
       <PlayerProfileModal player={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
+
+      {/* RUMOR FULL NEWS MODAL */}
+      {selectedNews && (() => {
+        const modalBadgeStyle = getCategoryBadgeStyle(selectedNews.category)
+        return (
+          <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-6">
+            <div className="bg-clubBlack border border-purple-500/60 max-w-3xl w-full rounded-sm overflow-hidden animate-fade-in relative max-h-[92vh] flex flex-col shadow-2xl">
+              <button
+                onClick={() => setSelectedNews(null)}
+                className="absolute top-4 right-4 z-30 bg-black/80 p-2.5 rounded-full hover:bg-purple-700 text-cream transition-colors border border-purple-500/40 focus:outline-none"
+                aria-label="Cerrar rumor"
+              >
+                <X size={22} />
+              </button>
+
+              <div className="overflow-y-auto p-6 sm:p-8 space-y-6">
+                {selectedNews.image && (
+                  <div className="w-full h-56 sm:h-72 rounded-sm overflow-hidden border border-purple-500/40 relative shadow-2xl">
+                    <img
+                      src={selectedNews.image}
+                      alt={selectedNews.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-4 left-4 z-10">
+                      <span className={`text-xs font-bold px-3 py-1 rounded-sm border uppercase ${modalBadgeStyle.pill}`}>
+                        RUMOR DE MERCADO
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-3 border-b border-purple-500/30 pb-4">
+                  <div className="flex items-center gap-2 text-xs font-mono text-purple-300">
+                    <span>{formatNewsDate(selectedNews.date)}</span>
+                    <span>•</span>
+                    <span>Mateo Oslomany Editorial</span>
+                  </div>
+
+                  <h2 className="text-2xl sm:text-3xl font-display font-bold text-white leading-tight">
+                    {selectedNews.title}
+                  </h2>
+                </div>
+
+                <div className="pt-2 border-t border-purple-500/30 text-cream/90 text-sm leading-relaxed whitespace-pre-wrap font-sans space-y-4">
+                  {selectedNews.content || selectedNews.excerpt}
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })()}
     </div>
   )
 }
