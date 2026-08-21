@@ -42,8 +42,8 @@ export default function Home() {
 
   return (
     <div className="space-y-6 pb-12">
-      {/* BANNER ÉPICO DE PORTADA (Renderizado de imagen de alta fidelidad) */}
-      <section className="relative w-full h-[380px] sm:h-[450px] md:h-[500px] bg-clubBlack overflow-hidden flex items-center justify-center border-b border-forest/40 shadow-2xl">
+      {/* BANNER ÉPICO Y COMPACTO DE PORTADA */}
+      <section className="relative w-full h-[220px] sm:h-[250px] md:h-[270px] bg-clubBlack overflow-hidden flex items-center justify-center border-b border-forest/40 shadow-2xl">
         <div className="absolute inset-0 z-0">
           <img
             src="/media/poster_j1.jpg"
@@ -54,18 +54,18 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-clubBlack via-clubBlack/20 to-black/30"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-forest-dark/30 via-transparent to-forest-dark/30"></div>
         </div>
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-3">
-          <span className="text-forest-light font-bold tracking-[0.3em] text-xs sm:text-sm block uppercase drop-shadow">
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-2">
+          <span className="text-forest-light font-bold tracking-[0.3em] text-[10px] sm:text-xs block uppercase drop-shadow">
             SEGUNDA REGIONAL CÁNTABRA · EST. 2018
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold uppercase leading-none text-white drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] tracking-wide">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold uppercase leading-none text-white drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] tracking-wide">
             RACING DE OSLO
           </h2>
-          <div className="flex flex-wrap justify-center gap-4 pt-2">
-            <Link to="/alineacion" className="inline-flex items-center gap-2 bg-cream text-clubBlack px-6 py-2.5 rounded-sm text-xs font-bold tracking-wide hover:bg-white transition-all shadow-xl hover:scale-105">
-              VER ONCE TITULAR <ChevronRight size={16} />
+          <div className="flex flex-wrap justify-center gap-3 pt-1">
+            <Link to="/alineacion" className="inline-flex items-center gap-2 bg-cream text-clubBlack px-5 py-2 rounded-sm text-xs font-bold tracking-wide hover:bg-white transition-all shadow-xl hover:scale-105">
+              VER ONCE TITULAR <ChevronRight size={14} />
             </Link>
-            <Link to="/noticias" className="inline-flex items-center gap-2 bg-forest-dark/80 border border-forest-light/60 text-cream px-6 py-2.5 rounded-sm text-xs font-bold tracking-wide hover:bg-forest transition-all shadow-xl">
+            <Link to="/noticias" className="inline-flex items-center gap-2 bg-forest-dark/80 border border-forest-light/60 text-cream px-5 py-2 rounded-sm text-xs font-bold tracking-wide hover:bg-forest transition-all shadow-xl">
               COMUNICADOS OFICIALES
             </Link>
           </div>
