@@ -33,6 +33,11 @@ export default function Home() {
   const nextSlide = () => setCurrentSlide((currentSlide + 1) % featuredNews.length)
   const prevSlide = () => setCurrentSlide((currentSlide - 1 + featuredNews.length) % featuredNews.length)
 
+  // Real standings position for Racing de Oslo
+  const myTeamInStandings = matchData.standingsData?.find(t => (t.team || '').toLowerCase().includes('racing de oslo') || (t.team || '').toLowerCase().includes('oslo'))
+  const currentPos = myTeamInStandings ? myTeamInStandings.pos : (matchData.standingsInfo?.position || 1)
+  const currentPts = myTeamInStandings ? myTeamInStandings.pts : (matchData.standingsInfo?.points || 0)
+
   // Starters list for Mini Pitch
   const starters = squadData.players.filter(p => p.isStarter)
   const keeper = starters.find(p => (p.position || '').toLowerCase() === 'keeper') || starters[0]
@@ -192,11 +197,11 @@ export default function Home() {
             <div className="bg-forest-dark/30 border border-forest/40 p-4 rounded-sm space-y-3 shadow-lg">
               <div>
                 <p className="text-[10px] text-cream/60 uppercase tracking-widest">Posición Actual</p>
-                <p className="text-4xl font-display font-bold text-white">{matchData.standingsInfo.position}º</p>
+                <p className="text-4xl font-display font-bold text-white">{currentPos}º</p>
               </div>
               <div className="pt-2.5 border-t border-forest/30 flex justify-between items-center text-xs font-semibold">
                 <span className="text-cream/70">Puntos Acumulados:</span>
-                <span className="text-forest-light font-bold">{matchData.standingsInfo.points} pts</span>
+                <span className="text-forest-light font-bold">{currentPts} pts</span>
               </div>
             </div>
           </div>

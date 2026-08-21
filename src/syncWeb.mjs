@@ -117,6 +117,10 @@ async function fetchRealData() {
     };
   });
 
+  const myStanding = standingsDataEnriched.find(t => t.team.toLowerCase().includes('racing de oslo') || t.team.toLowerCase().includes('oslo'));
+  const realPos = myStanding ? myStanding.pos : (dashboard?.position || 1);
+  const realPts = myStanding ? myStanding.pts : (dashboard?.points || 0);
+
   const matchesJson = {
     nextMatch: {
       competition: "Comunio Liga Total",
@@ -126,8 +130,8 @@ async function fetchRealData() {
       venue: "Oslo Arena"
     },
     standingsInfo: {
-      position: dashboard?.position || 1,
-      points: dashboard?.points || 0,
+      position: realPos,
+      points: realPts,
       form: ["-", "-", "-", "-", "-"]
     },
     standingsData: standingsDataEnriched
