@@ -133,14 +133,36 @@ async function fetchRealData() {
   };
   fs.writeFileSync('./web/src/data/matches.json', JSON.stringify(matchesJson, null, 2));
   
-  console.log("Web actualizada localmente con éxito!");
-  await client.close();
+  // Verificación y aseguramiento de que todas las imágenes de noticias existan en disco
+  try {
+    const { generateTemplateGraphic } = await import('./imageGen.js');
+    const newsPath = path.resolve('web/src/data/news.json');
+    if (fs.existsSync(newsPath)) {
+      const newsList = JSON.parse(fs.readFileSync(newsPath, 'utf8'));
+      for (const item of newsList) {
+        if (item.image && item.image.startsWith('/media/news_graphics/')) {
+          const localImgPath = path.resolve('web/public', item.image.replace(/^\//, ''));
+          if (!fs.existsSync(localImgPath)) {
+            const matchType = item.image.match(/\/media\/news_graphics\/([a-z]+)_(\d+)\.jpg/);
+            if (matchType) {
+              const type = matchType[1];
+              const playerId = matchType[2];
+              const playerName = item.title.replace(/¡Oficial!|ficha por el Racing de Oslo|Parte Médico & Estado:/gi, '').trim();
+              await generateTemplateGraphic(type, playerName, '', playerId);
+            }
+          }
+        }
+      }
+    }
+  } catch (gfxErr) {
+    console.warn('[SYNC-WEB] Info verificación gráficas:', gfxErr.message);
+  }
 
   // Auto-commit y push a GitHub para desencadenar el despliegue automático en Cloudflare Pages / Workers
   try {
     const { execSync } = await import('child_process');
     console.log("[SYNC-WEB] Subiendo cambios a GitHub para despliegue en Cloudflare...");
-    execSync('git add web/src/data/*.json web/public/media/', { stdio: 'inherit' });
+    execSync('git add web/src/data/*.json web/public/media/ web/public/media/news_graphics/', { stdio: 'inherit' });
     execSync('git commit -m "chore(web): Sincronizacion automatica de datos y medios"', { stdio: 'inherit' });
     execSync('git push origin main', { stdio: 'inherit' });
     console.log("[SYNC-WEB] 🚀 ¡Despliegue enviado a Cloudflare con éxito!");
