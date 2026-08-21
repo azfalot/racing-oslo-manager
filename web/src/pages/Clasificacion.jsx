@@ -1,28 +1,43 @@
 import React, { useState } from 'react'
-import { Trophy, TrendingUp, DollarSign, Star, Sparkles, Shield, AlertCircle } from 'lucide-react'
+import { Trophy, TrendingUp, DollarSign, Star, Shield, Calculator } from 'lucide-react'
 import matchData from '../data/matches.json'
+
+// Mapa oficial de escudos e insignias para todos los clubes de la liga
+const CLUB_CRESTS = {
+  'Racing de Oslo': '/media/crest.jpg',
+  'Fermín Gadura F.C.': '/media/crests/fermin_gadura.svg',
+  'Puente Avios FC': '/media/crests/puente_avios.svg',
+  'Puente Avios': '/media/crests/puente_avios.svg',
+  'Hache FC': '/media/crests/hache_fc.svg',
+  'Ana': '/media/crests/ana.svg',
+  'NIN Team': '/media/crests/nin_team.svg',
+  'Pachangueros F.C.': '/media/crests/pachangueros.svg',
+  'M4 TEAM': '/media/crests/m4_team.svg',
+  'Melano Plabloroza': '/media/crests/melano_plabloroza.svg',
+  'Suances nin': '/media/crests/suances_nin.svg'
+}
 
 export default function Clasificacion() {
   const [activeTab, setActiveTab] = useState('live') // 'live' | 'predictive'
   const standings = matchData.standingsData || []
 
-  // Calcular tabla predictiva a final de temporada (38 jornadas)
+  // Proyección matemática basada estrictamente en datos numéricos (38 jornadas)
   const predictiveStandings = [...standings].map(t => {
     const livePts = t.pts || 0
     const val = t.value || 40000000
-    // Factor de potencia: Valor de plantilla + liquidez estimada
-    // Racing de Oslo tiene 19.7M extra en liquidez para fichajes clave
-    const effectiveValue = t.team === 'Racing de Oslo' ? (val + 19700000) : val
-    const estimatedPtsPerMatch = (effectiveValue / 1000000) * 1.05 + 4
+    const estimatedPtsPerMatch = (val / 1000000) * 1.05 + 4
     const remainingMatchdays = 36 // 38 - 2
     const projectedPts = livePts + Math.round(estimatedPtsPerMatch * remainingMatchdays)
 
     return {
       ...t,
-      effectiveValue,
       projectedPts
     }
   }).sort((a, b) => b.projectedPts - a.projectedPts)
+
+  const getCrest = (teamName) => {
+    return CLUB_CRESTS[teamName] || '/media/crests/hache_fc.svg'
+  }
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-10">
@@ -58,7 +73,7 @@ export default function Clasificacion() {
                   : 'text-cream-dark hover:text-cream hover:bg-forest-dark/30'
               }`}
             >
-              <Sparkles size={16} /> Proyección IA (Final de Temporada)
+              <Calculator size={16} /> Proyección a Final de Temporada
             </button>
           </div>
         </div>
@@ -70,7 +85,7 @@ export default function Clasificacion() {
           <div className="bg-black/80 border border-forest/30 rounded-lg overflow-hidden shadow-xl">
             <div className="p-4 bg-forest-dark/40 border-b border-forest/30 flex items-center justify-between">
               <span className="text-xs uppercase tracking-wider text-forest-light font-semibold flex items-center gap-2">
-                <DollarSign size={14} /> Puntos en Vivo (Live Scoring) + Valor de Mercado de Plantillas
+                <DollarSign size={14} /> Puntos en Vivo + Valor Económico del Plantel
               </span>
               <span className="text-xs text-cream-dark">10 Equipos</span>
             </div>
@@ -104,13 +119,11 @@ export default function Clasificacion() {
                         </td>
                         <td className="p-3 md:p-4">
                           <div className="flex items-center gap-3">
-                            {isMe ? (
-                              <img src="/media/crest.jpg" alt="Crest" className="w-7 h-7 rounded-full border border-yellow-500 shrink-0" />
-                            ) : (
-                              <div className="w-7 h-7 rounded-full bg-forest-dark/60 border border-forest/30 flex items-center justify-center text-xs font-bold text-forest-light shrink-0">
-                                {t.team.charAt(0)}
-                              </div>
-                            )}
+                            <img
+                              src={getCrest(t.team)}
+                              alt={t.team}
+                              className="w-8 h-8 rounded-full border border-forest/40 object-cover shrink-0 bg-black"
+                            />
                             <div>
                               <div className="flex items-center gap-2">
                                 <span className={`text-sm md:text-base ${isMe ? 'text-yellow-400 font-bold' : 'text-cream'}`}>
@@ -123,9 +136,8 @@ export default function Clasificacion() {
                                 )}
                               </div>
                               {/* Valor visible en dispositivos móviles */}
-                              <div className="text-xs text-cream-dark md:hidden mt-0.5 flex items-center gap-2">
-                                <span>💰 {t.value ? (t.value / 1000000).toFixed(1) + 'M €' : '—'}</span>
-                                {isMe && <span className="text-green-400 font-semibold">(+19,7M € Liquidez)</span>}
+                              <div className="text-xs text-cream-dark md:hidden mt-0.5">
+                                💰 {t.value ? (t.value / 1000000).toFixed(1) + 'M €' : '—'}
                               </div>
                             </div>
                           </div>
@@ -139,10 +151,7 @@ export default function Clasificacion() {
                         </td>
                         <td className="p-3 md:p-4 text-right font-mono text-sm md:text-base text-cream">
                           {t.value ? (
-                            <div>
-                              <div className="font-bold text-emerald-400">{t.value.toLocaleString('es-ES')} €</div>
-                              {isMe && <div className="text-[10px] text-yellow-400 font-sans">+19,7M € Liquidez Extra</div>}
-                            </div>
+                            <span className="font-bold text-emerald-400">{t.value.toLocaleString('es-ES')} €</span>
                           ) : (
                             <span className="text-cream-dark">—</span>
                           )}
@@ -170,20 +179,14 @@ export default function Clasificacion() {
         </div>
       )}
 
-      {/* VISTA 2: PROYECCIÓN FINAL DE TEMPORADA (IA) */}
+      {/* VISTA 2: PROYECCIÓN FINAL DE TEMPORADA */}
       {activeTab === 'predictive' && (
         <div className="space-y-6">
-          <div className="bg-gradient-to-br from-amber-950/30 via-black to-black border border-amber-500/30 rounded-lg p-5">
-            <div className="flex items-start gap-3">
-              <Sparkles className="text-yellow-400 shrink-0 mt-1" size={24} />
-              <div>
-                <h3 className="text-lg font-bold text-yellow-400 mb-1">Modelo de Proyección Algorítmica (38 Jornadas)</h3>
-                <p className="text-cream-dark text-xs md:text-sm leading-relaxed">
-                  Esta tabla simula la posición proyectada al cierre de la temporada basándose en el **Valor Eficiente del Plantel**, el potencial económico no gastado y la tasa media de puntos de Comunio.
-                  El <b>Racing de Oslo</b> escala posiciones debido a su reserva estratégica de <b>19,7M € en liquidez</b> lista para fichajes de alto impacto (+30 a +50 pts).
-                </p>
-              </div>
-            </div>
+          <div className="bg-black/80 border border-amber-500/30 rounded-lg p-4 flex items-center gap-3">
+            <Calculator className="text-yellow-400 shrink-0" size={22} />
+            <p className="text-cream-dark text-xs md:text-sm">
+              <b>Estimación Numérica a 38 Jornadas:</b> Modelo proyectado según la media de puntos ponderada y el valor de plantilla actual de cada club.
+            </p>
           </div>
 
           <div className="bg-black/80 border border-amber-500/30 rounded-lg overflow-hidden shadow-xl">
@@ -191,17 +194,17 @@ export default function Clasificacion() {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-amber-950/40 text-xs uppercase tracking-widest text-yellow-400 border-b border-amber-500/30">
-                    <th className="p-3 md:p-4 font-semibold w-12 text-center">Pos IA</th>
+                    <th className="p-3 md:p-4 font-semibold w-16 text-center">Pos Prob.</th>
                     <th className="p-3 md:p-4 font-semibold">Club</th>
                     <th className="p-3 md:p-4 font-semibold text-center w-24">Pts Actuales</th>
                     <th className="p-3 md:p-4 font-semibold text-center w-28 text-yellow-400">Pts Proyectados</th>
-                    <th className="p-3 md:p-4 font-semibold text-right w-36">Capacidad (€)</th>
+                    <th className="p-3 md:p-4 font-semibold text-right w-36">Valor Plantilla</th>
                   </tr>
                 </thead>
                 <tbody>
                   {predictiveStandings.map((t, index) => {
                     const isMe = t.team === 'Racing de Oslo'
-                    const medal = index === 0 ? '🏆 1º' : index === 1 ? '🥈 2º' : index === 3 ? '🥉 3º' : `${index + 1}º`
+                    const medal = index === 0 ? '🏆 1º' : index === 1 ? '🥈 2º' : index === 2 ? '🥉 3º' : `${index + 1}º`
 
                     return (
                       <tr
@@ -215,23 +218,14 @@ export default function Clasificacion() {
                         </td>
                         <td className="p-3 md:p-4">
                           <div className="flex items-center gap-3">
-                            {isMe ? (
-                              <img src="/media/crest.jpg" alt="Crest" className="w-7 h-7 rounded-full border border-yellow-400 shrink-0" />
-                            ) : (
-                              <div className="w-7 h-7 rounded-full bg-amber-950/60 border border-amber-500/30 flex items-center justify-center text-xs font-bold text-yellow-400 shrink-0">
-                                {t.team.charAt(0)}
-                              </div>
-                            )}
-                            <div>
-                              <span className={`text-sm md:text-base ${isMe ? 'text-yellow-300 font-bold' : 'text-cream'}`}>
-                                {t.team}
-                              </span>
-                              {isMe && (
-                                <div className="text-[10px] text-emerald-400 font-normal">
-                                  ▲ Alta proyección por margen de fichaje estrella (+19,7M €)
-                                </div>
-                              )}
-                            </div>
+                            <img
+                              src={getCrest(t.team)}
+                              alt={t.team}
+                              className="w-8 h-8 rounded-full border border-amber-500/40 object-cover shrink-0 bg-black"
+                            />
+                            <span className={`text-sm md:text-base ${isMe ? 'text-yellow-300 font-bold' : 'text-cream'}`}>
+                              {t.team}
+                            </span>
                           </div>
                         </td>
                         <td className="p-3 md:p-4 text-center text-sm text-cream-dark">
@@ -243,7 +237,7 @@ export default function Clasificacion() {
                           </span>
                         </td>
                         <td className="p-3 md:p-4 text-right font-mono text-xs md:text-sm text-cream-dark">
-                          {(t.effectiveValue / 1000000).toFixed(1)}M €
+                          {t.value ? (t.value / 1000000).toFixed(1) + 'M €' : '—'}
                         </td>
                       </tr>
                     )

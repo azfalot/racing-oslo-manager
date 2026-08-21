@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import { ComunioClient } from './comunioClient.js';
+import { analyzeRivals } from './rivals.js';
 import axios from 'axios';
 import { getTransfermarktData } from './transfermarkt.js';
 import fs from 'fs';
@@ -51,9 +52,10 @@ async function fetchRealData() {
   fs.writeFileSync('./web/src/data/squad.json', JSON.stringify(squadJson, null, 2));
     
   
-  // Dashboard / Standings
+  // Dashboard / Standings & Rivals
   const dashboard = await client.getDashboardData();
   const realStandings = await client.getStandings();
+  const rivalsData = await analyzeRivals(client);
   
   
   // Market
@@ -89,7 +91,7 @@ async function fetchRealData() {
   fs.writeFileSync('./web/src/data/market.json', JSON.stringify(marketJson, null, 2));
     
 
-  // Matches
+  // Matches & Standings Enriched
   const matchdays = await client.getMatchdays();
   const nextMd = matchdays.find(md => !md.finished && !md.started) || matchdays.find(md => !md.finished);
   let opponent = "Resto de la Liga";
@@ -100,6 +102,20 @@ async function fetchRealData() {
     }
   }
   
+  const standingsDataEnriched = realStandings.map((t, index) => {
+    const rivalObj = rivalsData.find(r => r.userId === t.id || r.teamName.toLowerCase().includes(t.name.toLowerCase()) || t.name.toLowerCase().includes(r.teamName.toLowerCase()));
+    const squadVal = rivalObj ? rivalObj.squadValue : (t.teamValue || 0);
+    const stars = rivalObj ? rivalObj.stars : [];
+
+    return {
+      pos: index + 1,
+      team: t.name,
+      pts: t.points,
+      value: squadVal,
+      stars: stars
+    };
+  });
+
   const matchesJson = {
     nextMatch: {
       competition: "Comunio Liga Total",
@@ -113,12 +129,7 @@ async function fetchRealData() {
       points: dashboard?.points || 0,
       form: ["-", "-", "-", "-", "-"]
     },
-    standingsData: realStandings.map((t, index) => ({
-      pos: index + 1,
-      team: t.name,
-      pts: t.points,
-      value: t.teamValue
-    }))
+    standingsData: standingsDataEnriched
   };
   fs.writeFileSync('./web/src/data/matches.json', JSON.stringify(matchesJson, null, 2));
   

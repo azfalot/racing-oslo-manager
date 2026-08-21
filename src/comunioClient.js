@@ -787,19 +787,38 @@ export class ComunioClient {
   async getStandings() {
     if (!this.isLoggedIn) await this.login();
     try {
-      const url = `https://api.comunio.es/communities/${this.communityId}/standings?period=season`;
-      const response = await axios.get(url, { headers: this.getHeaders() });
-      if (response.status === 200 && response.data && response.data.items) {
-        const items = Object.values(response.data.items)[0];
+      // 1. Intentar period=live para capturar la clasificación con puntos en vivo (Live Scoring)
+      const liveUrl = `https://api.comunio.es/communities/${this.communityId}/standings?period=live`;
+      const response = await axios.get(liveUrl, { headers: this.getHeaders() });
+      if (response.status === 200 && response.data && Array.isArray(response.data.items) && response.data.items.length > 0) {
+        return response.data.items.map(item => ({
+          id: item._embedded?.user?.id,
+          name: item._embedded?.user?.name || 'Equipo',
+          points: (item.totalPoints && item.totalPoints > 0) ? item.totalPoints : (item.livePoints || 0),
+          livePoints: item.livePoints || 0,
+          totalPoints: item.totalPoints || 0,
+          teamValue: item.teamValue || 0
+        }));
+      }
+
+      // 2. Fallback a period=season
+      const seasonUrl = `https://api.comunio.es/communities/${this.communityId}/standings?period=season`;
+      const seasonRes = await axios.get(seasonUrl, { headers: this.getHeaders() });
+      if (seasonRes.status === 200 && seasonRes.data && seasonRes.data.items) {
+        const items = Object.values(seasonRes.data.items)[0];
         if (items && items.players) {
-          return items.players;
+          return items.players.map(p => ({
+            id: p.id,
+            name: p.name,
+            points: p.points || 0,
+            teamValue: p.teamValue || 0
+          }));
         }
       }
-      return [];
     } catch (error) {
       console.error('[CLIENT] Error al obtener clasificación:', error.response?.data || error.message);
-      return [];
     }
+    return [];
   }
 
   async close() {
