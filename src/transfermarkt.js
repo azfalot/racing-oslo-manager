@@ -36,14 +36,33 @@ export async function getTransfermarktData(playerName) {
                     profileRes.data.match(/tm-player-market-value-development__current-value">[\s]*([0-9,]+\s*(mill\.|mil)\s*€)/i) ||
                     profileRes.data.match(/([0-9,]+\s*(mill\.|mil)\s*€)/i);
 
-    if (mvMatch) {
-      return {
-        value: mvMatch[1].trim(),
-        url: profileUrl
-      };
-    }
+    // Extraer edad
+    const ageMatch = profileRes.data.match(/Edad:[\s\S]*?info-table__content--bold">[\s]*([0-9]+)/i) ||
+                     profileRes.data.match(/F\. Nacim\.[\s\S]*?\(([0-9]{2})\)/i) ||
+                     profileRes.data.match(/([0-9]{2})\s*años/i);
+
+    // Extraer pie hábil
+    const footMatch = profileRes.data.match(/Pie:[\s\S]*?info-table__content--bold">[\s]*([a-zA-Záéíóúñ]+)/i) ||
+                      profileRes.data.match(/pie\s*(izquierdo|diestro|ambidiestro)/i);
+
+    // Extraer posición detallada
+    const posMatch = profileRes.data.match(/Posición principal:[\s\S]*?info-table__content--bold">[\s]*([a-zA-Záéíóúñ\s-]+)/i) ||
+                     profileRes.data.match(/data-header__label">Posición:[\s\S]*?<span class="data-header__content">[\s]*([a-zA-Záéíóúñ\s-]+)/i);
+
+    const valueStr = mvMatch ? mvMatch[1].trim() : 'Sin cotización';
+    const ageStr = ageMatch ? `${ageMatch[1].trim()} años` : null;
+    const footStr = footMatch ? footMatch[1].trim() : null;
+    const posStr = posMatch ? posMatch[1].trim() : null;
+
+    return {
+      value: valueStr,
+      age: ageStr,
+      foot: footStr,
+      detailedPosition: posStr,
+      url: profileUrl
+    };
   } catch (err) {
-    // Falla de red o de parseo silenciosa para no interrumpir el flujo principal
+    // Falla silenciosa para no interrumpir el flujo principal
   }
   return null;
 }

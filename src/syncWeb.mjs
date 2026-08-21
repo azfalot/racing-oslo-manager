@@ -48,7 +48,12 @@ async function fetchRealData() {
   // TM & Historical Data for Squad
   for (const p of squadJson.players) {
     const tm = await getTransfermarktData(p.name);
-    p.tmValue = tm ? tm.value : 0;
+    p.tmValue = tm ? tm.value : 'Sin cotización';
+    p.age = tm ? tm.age : null;
+    p.foot = tm ? tm.foot : null;
+    p.detailedPosition = tm ? tm.detailedPosition : null;
+    p.tmUrl = tm ? tm.url : null;
+
     try {
       const details = await client.getPlayerDetails(p.id);
       if (details) {

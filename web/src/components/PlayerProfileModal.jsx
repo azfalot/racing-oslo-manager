@@ -1,5 +1,5 @@
 import React from 'react'
-import { X, Trophy, TrendingUp, Calendar, ShieldCheck, Activity, Award, ArrowUpRight, DollarSign } from 'lucide-react'
+import { X, Trophy, TrendingUp, Calendar, ShieldCheck, Activity, Award, ArrowUpRight, DollarSign, ExternalLink } from 'lucide-react'
 
 export function getPosBadgeStyle(position) {
   const pos = (position || '').toLowerCase()
@@ -115,6 +115,50 @@ export default function PlayerProfileModal({ player, onClose }) {
               </span>
             </div>
           </div>
+
+          {/* INFORMACIÓN DE PERFIL TÉCNICO TRANSFERMARKT */}
+          {(player.age || player.foot || player.detailedPosition || player.tmUrl) && (
+            <div className="bg-black/60 border border-forest/40 p-4 rounded-sm space-y-2.5 shadow-md">
+              <div className="flex items-center justify-between border-b border-forest/30 pb-2">
+                <span className="text-xs font-display font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                  <ShieldCheck size={14} className="text-forest-light" /> PERFIL TÉCNICO TRANSFERMARKT
+                </span>
+                {player.tmUrl && (
+                  <a
+                    href={player.tmUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[10px] text-forest-light hover:text-white font-mono flex items-center gap-1 transition-colors uppercase font-bold"
+                  >
+                    FICHA OFICIAL <ExternalLink size={12} />
+                  </a>
+                )}
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                {player.age && (
+                  <div>
+                    <span className="text-[10px] text-cream/50 uppercase font-mono block">Edad</span>
+                    <span className="font-bold text-white">{player.age}</span>
+                  </div>
+                )}
+
+                {player.foot && (
+                  <div>
+                    <span className="text-[10px] text-cream/50 uppercase font-mono block">Pie Hábil</span>
+                    <span className="font-bold text-white capitalize">{player.foot}</span>
+                  </div>
+                )}
+
+                {player.detailedPosition && (
+                  <div>
+                    <span className="text-[10px] text-cream/50 uppercase font-mono block">Demarcación Específica</span>
+                    <span className="font-bold text-forest-light">{player.detailedPosition}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* PREDICCIÓN ESPERADA TEMPORADA 2026/27 */}
           <div className="bg-gradient-to-r from-forest-dark/60 via-forest/30 to-forest-dark/60 border border-forest-light/40 p-4 rounded-sm space-y-2 shadow-lg">
