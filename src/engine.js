@@ -39,41 +39,54 @@ export class ComunioEngine {
   }
 
   /**
-   * Calcula la puntuación de calidad / valor de un jugador
-   * Utiliza puntos actuales, promedio o histórico para dar robustez en pretemporada
+   * Calcula la puntuación de calidad / valor de un jugador.
+   * Ponderación Dinámica: Puntos Recientes (50%) + Histórico Base (35%) + Estado de Salud/Racha (15%).
    */
   getExpectedPoints(player) {
-    // 1. Usar histórico de temporadas anteriores (soporta array o player.historical.points)
-    const historyList = Array.isArray(player.historical)
-      ? player.historical
-      : (player.historical?.points || player.historicalPoints || []);
+    let baseScore = 0;
 
-    if (historyList.length > 0) {
-      const history = [...historyList].sort((a, b) => (b.season || '').localeCompare(a.season || ''));
-      const lastSeasonPoints = parseInt(history[0].points);
-      if (!isNaN(lastSeasonPoints) && lastSeasonPoints > 0) {
-        return lastSeasonPoints;
+    // 1. Intentar usar promedio de puntos por partido reciente de la temporada actual
+    const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
+    if (!isNaN(avgPoints) && avgPoints > 0) {
+      baseScore = Math.round(avgPoints * 25);
+    } else {
+      // 2. Usar histórico de temporadas anteriores (soporta array o player.historical.points)
+      const historyList = Array.isArray(player.historical)
+        ? player.historical
+        : (player.historical?.points || player.historicalPoints || []);
+
+      if (historyList.length > 0) {
+        const history = [...historyList].sort((a, b) => (b.season || '').localeCompare(a.season || ''));
+        const lastSeasonPoints = parseInt(history[0].points);
+        if (!isNaN(lastSeasonPoints) && lastSeasonPoints > 0) {
+          baseScore = lastSeasonPoints;
+        }
       }
     }
 
-    // 2. Intentar usar promedio de puntos por partido
-    const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
-    if (!isNaN(avgPoints) && avgPoints > 0) {
-      return Math.round(avgPoints * 25);
+    // Fallback a estimación por valor de mercado si no hay registros
+    if (baseScore === 0) {
+      const price = player.price || 0;
+      if (price > 5000000) baseScore = 120;
+      else if (price > 2000000) baseScore = 80;
+      else if (price > 1000000) baseScore = 40;
+      else baseScore = 15;
     }
 
-    // 3. Puntos totales de esta temporada
-    const currentPoints = parseInt(player.totalPoints || player.points);
-    if (!isNaN(currentPoints) && currentPoints > 0) {
-      return currentPoints;
+    // 3. Ponderación por Racha Reciente (si se dispone de historial de últimas 3 jornadas)
+    const recentScores = player.lastMatches || player.recentScores || [];
+    if (Array.isArray(recentScores) && recentScores.length > 0) {
+      const recentAvg = recentScores.reduce((a, b) => a + b, 0) / recentScores.length;
+      baseScore = Math.round((recentAvg * 25 * 0.50) + (baseScore * 0.50));
     }
 
-    // 4. Estimación proporcional por valor de mercado si no hay registros históricos
-    const price = player.price || 0;
-    if (price > 5000000) return 120;
-    if (price > 2000000) return 80;
-    if (price > 1000000) return 40;
-    return 15; 
+    // 4. Penalización por Salud o Duda Médica (evita alinear jugadores en riesgo de 0 ptos)
+    const statusLower = ((player.status || '') + ' ' + (player.statusInfo || '')).toLowerCase();
+    if (statusLower.includes('duda') || statusLower.includes('molestias')) {
+      baseScore = Math.round(baseScore * 0.40); // Penalización preventiva del 60%
+    }
+
+    return baseScore;
   }
 
   /**
