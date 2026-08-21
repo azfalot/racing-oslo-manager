@@ -168,17 +168,18 @@ export default function Plantilla() {
                   )}
                 </div>
 
-                {/* Dorsal Grande de Fondo */}
-                <div className="absolute top-1 right-2 opacity-20 text-cream font-display font-bold text-4xl pointer-events-none">
-                  #{p.number}
-                </div>
+                {/* Cabecera con Dorsal Gigante Translúcido Blanco y Foto del Jugador */}
+                <div className="relative h-36 bg-gradient-to-b from-forest-dark/90 via-clubBlack to-black overflow-hidden flex justify-center items-end p-2 border-b border-forest/30 group-hover:from-forest/70 transition-colors">
+                  {/* Dorsal Gigante Translúcido en Marca de Agua */}
+                  <div className="absolute -right-2 -bottom-4 opacity-25 text-white font-display font-bold text-7xl sm:text-8xl pointer-events-none select-none tracking-tighter group-hover:opacity-40 group-hover:scale-105 transition-all duration-500">
+                    {p.number}
+                  </div>
 
-                {/* Cabecera con Foto Reducida */}
-                <div className="relative h-32 bg-gradient-to-b from-forest-dark/60 to-black overflow-hidden flex justify-center items-end p-2 border-b border-forest/30">
+                  {/* Foto del Jugador */}
                   <img
                     src={p.image || `/media/players/${p.id}.png`}
                     alt={p.name}
-                    className="h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="h-[115%] object-cover relative z-10 group-hover:scale-110 transition-transform duration-500 drop-shadow-2xl"
                     onError={(e) => { e.target.src = '/media/crest.jpg' }}
                   />
                 </div>
