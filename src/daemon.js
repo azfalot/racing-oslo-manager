@@ -1151,11 +1151,11 @@ async function runMarketCheck() {
 }
 
 function startMarketMonitor() {
-  console.log('[DAEMON] Iniciando monitor de mercado (cada 15 minutos)...');
+  console.log('[DAEMON] Iniciando monitor de mercado inteligente (optimizado a intervalos de 3 horas)...');
   // Primera ejecución a los 3 min para inicializar last_market.json sin lanzar alertas falsas
   setTimeout(() => {
     runMarketCheck();
-    setInterval(runMarketCheck, 15 * 60 * 1000);
+    setInterval(runMarketCheck, 3 * 60 * 60 * 1000); // 3 horas en lugar de 15 minutos
   }, 3 * 60 * 1000);
 }
 
