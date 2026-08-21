@@ -581,15 +581,25 @@ async function handleTelegramMessage(message) {
       const startingIds = lineup?.players ? lineup.players.map(p => p.playerId) : [];
       
       const suggestions = engine.getLiquiditySuggestions(squad, startingIds);
-      let rep = `💼 <b>[Mateo Oslomany] · Sugerencias de Venta</b>\n\n`;
       if (suggestions.length > 0) {
+        let rep = `💼 <b>[Mateo Oslomany] · Sugerencias de Venta</b>\n\n`;
+        rep += `Los siguientes jugadores son suplentes prescindibles de alto valor. ¿Deseas poner alguno en el mercado de Comunio para liberar liquidez?\n\n`;
+        
+        const keyboard = [];
         suggestions.forEach(s => {
-          rep += ` • <b>${escapeHtml(s.name)}</b> — ${s.price.toLocaleString()} €\n   <i>${escapeHtml(s.reason)}</i>\n\n`;
+          const pid = s.playerId || s.id;
+          const minPrice = s.price || 0;
+          rep += ` • <b>${escapeHtml(s.name)}</b> — ${minPrice.toLocaleString()} €\n   <i>${escapeHtml(s.reason)}</i>\n\n`;
+          keyboard.push([
+            { text: `🏷️ PONER A LA VENTA A ${s.name.toUpperCase()} (${minPrice.toLocaleString()} €)`, callback_data: `put_on_sale:${pid}:${s.name}:${minPrice}` }
+          ]);
         });
+
+        const markup = { inline_keyboard: keyboard };
+        await sendTelegramMessage(rep, markup);
       } else {
-        rep += `Tu plantilla está bien ajustada. No hay suplentes de alto valor ni lesionados de larga duración que convenga vender.`;
+        await sendTelegramMessage(`💼 <b>[Mateo Oslomany]:</b> Tu plantilla está bien ajustada. No hay suplentes de alto valor ni lesionados de larga duración que convenga vender.`);
       }
-      await sendTelegramMessage(rep);
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error: <code>${e.message}</code>`);
     } finally {
@@ -1004,6 +1014,25 @@ async function handleCallbackQuery(callbackQuery) {
       await sendTelegramMessage(`💼 ⛔ <b>[Mateo Oslomany]:</b> Oferta por <b>${playerName}</b> RECHAZADA. El jugador ha sido retirado del mercado y permanece intocable en la plantilla.`);
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ Error al rechazar venta: <code>${e.message}</code>`);
+    } finally {
+      await client.close();
+    }
+  } else if (data.startsWith('put_on_sale:')) {
+    const [, playerId, playerName, minPrice] = data.split(':');
+    await answerCallbackQuery(callbackQuery.id, '⏳ Poniendo en mercado...');
+    await updateTelegramMessageMarkup(chatId, messageId, `🏷️ PUESTO EN MERCADO (${playerName})`);
+
+    const client = new ComunioClient();
+    try {
+      await client.login();
+      const success = await client.sellPlayer(parseInt(playerId), playerName, parseInt(minPrice));
+      if (success) {
+        await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> <b>${escapeHtml(playerName)}</b> ha sido puesto en el mercado de Comunio por <b>${parseInt(minPrice).toLocaleString()} €</b>.`);
+      } else {
+        await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> No se pudo poner a en venta a ${escapeHtml(playerName)}.`);
+      }
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error al poner en venta: <code>${e.message}</code>`);
     } finally {
       await client.close();
     }
