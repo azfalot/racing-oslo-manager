@@ -53,62 +53,49 @@ export default function Mercado() {
         </div>
       </div>
 
-      {/* SECCIÓN DE RUMORES DE MERCADO & EL DIARIO DE MATEO OSLOMANY */}
+      {/* SECCIÓN DE RUMORES DE MERCADO (ULTRA-COMPACTA & ARMONIZADA) */}
       {rumorNews.length > 0 && (
-        <div className="bg-purple-950/20 border border-purple-500/40 p-6 rounded-sm space-y-4 shadow-xl">
-          <div className="flex items-center gap-3 border-b border-purple-500/40 pb-3">
-            <Flame className="text-purple-400 animate-pulse" size={24} />
-            <div>
-              <h3 className="text-2xl font-display font-bold text-white uppercase tracking-wide">
-                RUMORES & DIARIO DE MERCADO DE MATEO OSLOMANY
+        <div className="bg-black border border-forest/30 p-3 rounded-sm space-y-2 shadow-md">
+          <div className="flex items-center justify-between border-b border-forest/20 pb-1.5">
+            <div className="flex items-center gap-2">
+              <Flame className="text-purple-400" size={16} />
+              <h3 className="text-xs font-display font-bold text-white uppercase tracking-wider">
+                RUMORES & DIARIO DE MERCADO
               </h3>
-              <p className="text-xs text-purple-300/80 font-mono">
-                Análisis táctico editorial, rumores de fichaje y seguimiento de objetivos de la Secretaría Técnica
-              </p>
             </div>
+            <span className="text-[10px] text-cream/50 font-mono">
+              Mateo Oslomany Radar
+            </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
             {rumorNews.map(rumor => {
-              const badgeStyle = getCategoryBadgeStyle(rumor.category)
               return (
                 <div
                   key={rumor.id}
                   onClick={() => setSelectedNews(rumor)}
-                  className="bg-black/60 border border-purple-500/40 rounded-sm overflow-hidden flex flex-col justify-between group hover:border-purple-400 transition-all cursor-pointer shadow-lg hover:scale-[1.01]"
+                  className="bg-forest-dark/20 border border-forest/20 p-2 rounded-sm hover:border-forest-light/60 transition-all flex items-center gap-2.5 group cursor-pointer"
                 >
-                  <div className="relative h-36 overflow-hidden border-b border-purple-500/30">
-                    <img
-                      src={rumor.image || '/media/crest.jpg'}
-                      alt={rumor.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-2 left-2 z-10">
-                      <span className={`text-[9px] font-bold px-2 py-0.5 rounded-sm border uppercase ${badgeStyle.pill}`}>
-                        RUMOR DE MERCADO
+                  <img
+                    src={rumor.image || '/media/crest.jpg'}
+                    alt={rumor.title}
+                    className="w-10 h-10 rounded-sm object-cover border border-forest/30 flex-shrink-0"
+                  />
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <span className="bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[8px] font-bold px-1.5 py-0.2 rounded-sm uppercase">
+                        RUMOR
                       </span>
-                    </div>
-                  </div>
-
-                  <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                    <div>
-                      <span className="text-[10px] text-cream/50 font-mono block mb-1">
+                      <span className="text-[9px] text-cream/40 font-mono truncate">
                         {formatNewsDate(rumor.date)}
                       </span>
-                      <h4 className="text-sm font-bold text-white group-hover:text-purple-300 transition-colors line-clamp-2 leading-tight">
-                        {rumor.title}
-                      </h4>
-                      <p className="text-xs text-cream/70 line-clamp-3 leading-relaxed italic border-l-2 border-purple-400 pl-2 bg-purple-950/30 py-1.5 mt-2 rounded-r-sm">
-                        {rumor.excerpt || rumor.summary}
-                      </p>
                     </div>
-
-                    <div className="pt-3 border-t border-purple-500/20 flex justify-between items-center text-xs">
-                      <span className="text-purple-300 font-mono font-bold text-[10px]">Mateo Oslomany Editorial</span>
-                      <button className="bg-purple-600/30 text-purple-200 group-hover:bg-purple-600 group-hover:text-white px-2.5 py-1 rounded-sm border border-purple-400/40 transition-colors text-[10px] font-bold uppercase">
-                        LEER RUMOR &rarr;
-                      </button>
-                    </div>
+                    <h4 className="text-xs font-bold text-white group-hover:text-forest-light transition-colors truncate">
+                      {rumor.title.replace(/^RUMOR:\s*/i, '')}
+                    </h4>
+                    <p className="text-[10px] text-cream/60 truncate italic">
+                      {rumor.excerpt || rumor.summary}
+                    </p>
                   </div>
                 </div>
               )
