@@ -122,8 +122,20 @@ async function fetchRealData() {
   };
   fs.writeFileSync('./web/src/data/matches.json', JSON.stringify(matchesJson, null, 2));
   
-  console.log("Web actualizada con éxito!");
+  console.log("Web actualizada localmente con éxito!");
   await client.close();
+
+  // Auto-commit y push a GitHub para desencadenar el despliegue automático en Cloudflare Pages / Workers
+  try {
+    const { execSync } = await import('child_process');
+    console.log("[SYNC-WEB] Subiendo cambios a GitHub para despliegue en Cloudflare...");
+    execSync('git add web/src/data/*.json web/public/media/', { stdio: 'inherit' });
+    execSync('git commit -m "chore(web): Sincronizacion automatica de datos y medios"', { stdio: 'inherit' });
+    execSync('git push origin main', { stdio: 'inherit' });
+    console.log("[SYNC-WEB] 🚀 ¡Despliegue enviado a Cloudflare con éxito!");
+  } catch (err) {
+    console.warn("[SYNC-WEB] Info auto-push git:", err.message);
+  }
 }
 
 fetchRealData().catch(console.error);
