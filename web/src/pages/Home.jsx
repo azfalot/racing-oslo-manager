@@ -271,7 +271,7 @@ export default function Home() {
                         to="/mercado"
                         className="bg-forest/40 hover:bg-forest border border-forest-light/40 text-cream text-[10px] font-bold px-2.5 py-1 rounded-sm transition-colors flex items-center gap-1"
                       >
-                        PUJAR <ChevronRight size={12} />
+                        VER EN MERCADO <ChevronRight size={12} />
                       </Link>
                     </div>
                   </div>
@@ -279,6 +279,65 @@ export default function Home() {
               })}
             </div>
           </div>
+
+          {/* 3. RUMORES DE MERCADO & EL DIARIO DE MATEO OSLOMANY */}
+          {(() => {
+            const rumorNews = (newsData || []).filter(n => (n.category || '').toLowerCase() === 'rumores').slice(0, 2)
+            if (rumorNews.length === 0) return null
+
+            return (
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center justify-between border-b border-forest/40 pb-2">
+                  <div className="flex items-center gap-2">
+                    <Flame size={18} className="text-purple-400 animate-pulse" />
+                    <h3 className="text-lg font-display font-bold text-white uppercase tracking-wide">
+                      RUMORES & DIARIO DE MATEO OSLOMANY
+                    </h3>
+                  </div>
+                  <Link to="/noticias" className="text-xs font-bold text-purple-300 hover:text-white transition-colors flex items-center gap-1">
+                    TODOS LOS RUMORES <ArrowUpRight size={14} />
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {rumorNews.map(rumor => {
+                    const badgeStyle = getCategoryBadgeStyle(rumor.category)
+                    return (
+                      <div
+                        key={rumor.id}
+                        onClick={() => setSelectedNews(rumor)}
+                        className="bg-purple-950/20 border border-purple-500/40 p-3 rounded-sm hover:border-purple-400 transition-all flex flex-col justify-between space-y-2 group shadow-md cursor-pointer"
+                      >
+                        <div className="space-y-1.5">
+                          <div className="flex items-center justify-between">
+                            <span className={`text-[8px] font-bold px-2 py-0.5 rounded-sm border uppercase ${badgeStyle.pill}`}>
+                              RUMOR DE MERCADO
+                            </span>
+                            <span className="text-[10px] text-cream/50 font-mono">
+                              {formatNewsDate(rumor.date)}
+                            </span>
+                          </div>
+                          <h4 className="text-xs font-bold text-white group-hover:text-purple-300 transition-colors line-clamp-1">
+                            {rumor.title}
+                          </h4>
+                          <p className="text-[11px] text-cream/70 line-clamp-2 leading-relaxed italic border-l-2 border-purple-400 pl-2 bg-black/40 py-1 rounded-r-sm">
+                            {rumor.excerpt || rumor.summary}
+                          </p>
+                        </div>
+
+                        <div className="pt-2 border-t border-purple-500/30 flex justify-between items-center text-[10px]">
+                          <span className="text-purple-300 font-mono font-bold">Mateo Oslomany Editorial</span>
+                          <span className="bg-purple-600/30 text-purple-200 group-hover:bg-purple-600 group-hover:text-white px-2 py-1 rounded-sm border border-purple-400/40 transition-colors font-bold uppercase">
+                            LEER RUMOR &rarr;
+                          </span>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )
+          })()}
         </div>
 
         {/* COLUMNA DERECHA: MINI CAMPO DE FÚTBOL (ONCE TITULAR TÁCTICO QUE OCUPA TODO EL ALTO) */}
