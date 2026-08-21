@@ -107,6 +107,90 @@ export async function generateTemplateGraphic(type, playerName, subText = '', pl
       }
     }
 
+    // 3. Superponer Banner de Texto Dinámico (Nombre del jugador + Precio/Detalles)
+    if (playerName) {
+      ctx.save();
+
+      // Dimensiones y posición del parche de texto (zona inferior izquierda)
+      const patchX = width * 0.04;
+      const patchY = height * 0.58;
+      const patchW = width * 0.72;
+      const patchH = height * 0.35;
+      const cornerRadius = 10;
+
+      // Dibujar caja de fondo oscuro semitransparente con diseño profesional
+      ctx.beginPath();
+      ctx.moveTo(patchX + cornerRadius, patchY);
+      ctx.lineTo(patchX + patchW - cornerRadius, patchY);
+      ctx.quadraticCurveTo(patchX + patchW, patchY, patchX + patchW, patchY + cornerRadius);
+      ctx.lineTo(patchX + patchW, patchY + patchH - cornerRadius);
+      ctx.quadraticCurveTo(patchX + patchW, patchY + patchH, patchX + patchW - cornerRadius, patchY + patchH);
+      ctx.lineTo(patchX + cornerRadius, patchY + patchH);
+      ctx.quadraticCurveTo(patchX, patchY + patchH, patchX, patchY + patchH - cornerRadius);
+      ctx.lineTo(patchX, patchY + cornerRadius);
+      ctx.quadraticCurveTo(patchX, patchY, patchX + cornerRadius, patchY);
+      ctx.closePath();
+
+      // Relleno degradado elegante verde noche
+      const patchGrad = ctx.createLinearGradient(patchX, patchY, patchX, patchY + patchH);
+      patchGrad.addColorStop(0, 'rgba(15, 30, 20, 0.95)');
+      patchGrad.addColorStop(1, 'rgba(8, 18, 12, 0.98)');
+      ctx.fillStyle = patchGrad;
+      ctx.fill();
+
+      // Borde fino verde bosque
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#2d5a42';
+      ctx.stroke();
+
+      // Borde de acento izquierdo (Línea de color según tipo)
+      const typeColors = {
+        signing: '#40805c',
+        sale: '#c85a5a',
+        medical: '#d4a359',
+        rumors: '#5a8cc8'
+      };
+      const accentColor = typeColors[type] || '#40805c';
+      ctx.fillStyle = accentColor;
+      ctx.fillRect(patchX, patchY, 6, patchH);
+
+      // A) Badge de Categoría / Tipo
+      const typeLabels = {
+        signing: '¡OFICIAL! FICHAJE',
+        sale: '¡OFICIAL! TRASPASO',
+        medical: 'PARTE MÉDICO OFICIAL',
+        rumors: 'RUMORES DE MERCADO'
+      };
+      const badgeText = typeLabels[type] || type.toUpperCase();
+      ctx.font = 'bold 16px sans-serif';
+      ctx.fillStyle = accentColor;
+      ctx.textAlign = 'left';
+      ctx.fillText(badgeText, patchX + 25, patchY + 38);
+
+      // B) Nombre del Jugador (Ajuste dinámico de fuente según longitud)
+      const nameUpper = playerName.toUpperCase();
+      let fontSize = 38;
+      if (nameUpper.length > 20) fontSize = 26;
+      else if (nameUpper.length > 15) fontSize = 30;
+      else if (nameUpper.length > 11) fontSize = 34;
+
+      ctx.font = `bold ${fontSize}px sans-serif`;
+      ctx.fillStyle = '#ffffff';
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+      ctx.shadowBlur = 10;
+      ctx.fillText(nameUpper, patchX + 25, patchY + 38 + fontSize + 4);
+      ctx.shadowBlur = 0;
+
+      // C) SubTexto / Precio / Detalles
+      if (subText) {
+        ctx.font = 'bold 24px sans-serif';
+        ctx.fillStyle = '#e8e0cc';
+        ctx.fillText(subText.toString(), patchX + 25, patchY + patchH - 25);
+      }
+
+      ctx.restore();
+    }
+
     // Guardar archivo compilado
     const buffer = canvas.toBuffer('image/jpeg', { quality: 0.95 });
     fs.writeFileSync(outPathWeb, buffer);
