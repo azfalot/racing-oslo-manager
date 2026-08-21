@@ -217,7 +217,6 @@ async function handleTelegramMessage(message) {
 
   // ── /alinear ──────────────────────────────────────────────────────────────
   else if (text.startsWith('/alinear')) {
-    await sendTelegramMessage('💼 ⚡ <i>[Mateo Oslomany]: Optimizando y guardando tu 11 titular...</i>');
     const client = new ComunioClient();
     const engine = new ComunioEngine();
     try {
@@ -257,15 +256,12 @@ async function handleTelegramMessage(message) {
 
   // ── /plantilla ────────────────────────────────────────────────────────────
   else if (text.startsWith('/plantilla')) {
-    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Descargando tu plantilla...</i>');
     const client = new ComunioClient();
     const engine = new ComunioEngine();
     try {
       await client.login();
       const squad = await client.getSquad();
-      const currentLineup = await client.getCurrentLineup();
       const lineupResult = engine.optimizeLineup(squad || { players: [] });
-      const startingIds = new Set((lineupResult.starting11 || []).map(p => p.playerId));
 
       const posEmoji = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' };
       
@@ -298,7 +294,6 @@ async function handleTelegramMessage(message) {
 
   // ── /mercado ──────────────────────────────────────────────────────────────
   else if (text.startsWith('/mercado')) {
-    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Escaneando el mercado de fichajes...</i>');
     const client = new ComunioClient();
     const engine = new ComunioEngine();
     try {
@@ -362,7 +357,6 @@ async function handleTelegramMessage(message) {
 
   // ── /jornada ──────────────────────────────────────────────────────────────
   else if (text.startsWith('/jornada')) {
-    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Obteniendo centro de mando de la jornada desde Comunio...</i>');
     const client = new ComunioClient();
     const engine = new ComunioEngine();
     try {
@@ -449,7 +443,6 @@ async function handleTelegramMessage(message) {
 
   // ── /top ──────────────────────────────────────────────────────────────────
   else if (text.startsWith('/top')) {
-    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Consultando los jugadores más valiosos de la plataforma...</i>');
     const client = new ComunioClient();
     try {
       await client.login();
