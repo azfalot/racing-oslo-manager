@@ -172,30 +172,32 @@ async function handleTelegramMessage(message) {
   // ── /start · /help ────────────────────────────────────────────────────────
   if (text.startsWith('/start') || text.startsWith('/help') || text.toLowerCase() === 'ayuda') {
     const pauseStatus = botPaused ? '⏸ <b>BOT PAUSADO</b> (acciones autónomas desactivadas)\n\n' : '';
-    const helpText = `💼 <b>[Mateo Oslomany]:</b> ¡Hola! Soy tu Director Deportivo.\n${pauseStatus}\n` +
-      `📊 <b>Análisis:</b>\n` +
-      ` • <code>/reporte</code> — Resumen ejecutivo del día\n` +
-      ` • <code>/plantilla</code> — Tu plantilla completa (titulares + suplentes)\n` +
-      ` • <code>/rivales</code> — Clasificación y valor de rivales\n` +
-      ` • <code>/sugerencias</code> — Jugadores que conviene vender\n` +
-      ` • <code>/jornada</code> — Próxima jornada y fecha de cierre\n` +
-      ` • <code>/top</code> — Jugadores más valiosos de la plataforma\n\n` +
-      `🛒 <b>Mercado:</b>\n` +
-      ` • <code>/mercado</code> — Mejores oportunidades ahora mismo (top 5)\n` +
-      ` • <code>/mis_pujas</code> — Tus pujas activas pendientes\n` +
-      ` • <code>/pujar &lt;nombre&gt;</code> — Puja manual por un jugador del mercado\n` +
-      ` • <code>/cancelar &lt;nombre&gt;</code> — Cancela una puja activa\n\n` +
-      `⚡ <b>Acción:</b>\n` +
-      ` • <code>/alinear</code> — Optimiza y guarda tu 11 titular\n` +
-      ` • <code>/vender &lt;nombre&gt;</code> — Pone en venta a un jugador\n` +
-      ` • <code>/margen &lt;%&gt;</code> — Configura el sobreprecio de pujas\n` +
-      ` • <code>/limite &lt;millones&gt;</code> — Límite de puja automática (def: 10M)\n\n` +
-      `⚙️ <b>Control:</b>\n` +
-      ` • <code>/pausar</code> / <code>/reanudar</code> — Pausa/reactiva acciones autónomas\n` +
-      ` • <code>/estado</code> — Estado del sistema y última ejecución\n` +
-      ` • <code>/historial</code> — Últimas 10 acciones del bot\n\n` +
-      `🕒 Ejecuciones automáticas: <b>02:50</b>, <b>09:00</b> y <b>15:00</b> (Madrid).\n` +
-      `🛒 Monitor de mercado: cada <b>15 minutos</b>.`;
+    const helpText = `💼 <b>[Mateo Oslomany] · Centro de Mando</b>\n${pauseStatus}\n` +
+      `📊 <b>Análisis & Táctica:</b>\n` +
+      ` • /reporte — Resumen ejecutivo diario\n` +
+      ` • /plantilla — Plantilla (titulares + suplentes)\n` +
+      ` • /tactica — Esquema táctico por líneas\n` +
+      ` • /rivales — Clasificación y valor de rivales\n` +
+      ` • /sugerencias — Sugerencias de ventas\n` +
+      ` • /jornada — Próxima jornada y cierre de XI\n` +
+      ` • /top — Top 10 jugadores más valiosos\n\n` +
+      `🛒 <b>Mercado & Finanzas:</b>\n` +
+      ` • /mercado — Mejores oportunidades (top 5)\n` +
+      ` • /finanzas — Balance, pujas activas y margen\n` +
+      ` • /ofertas — Ofertas de venta recibidas\n` +
+      ` • /mis_pujas — Mis pujas activas pendientes\n` +
+      ` • /pujar — Ofertar por jugador (ej: /pujar Bellingham)\n` +
+      ` • /cancelar — Cancelar puja (ej: /cancelar Bellingham)\n` +
+      ` • /vender — Poner en venta (ej: /vender Rodrygo)\n\n` +
+      `⚡ <b>Operativa & Sistema:</b>\n` +
+      ` • /alinear — Optimizar y guardar 11 titular\n` +
+      ` • /sync — Desplegar cambios web a Cloudflare\n` +
+      ` • /margen — Ajustar sobreprecio (ej: /margen 1.5)\n` +
+      ` • /limite — Límite auto-puja (ej: /limite 8)\n` +
+      ` • /pausar / /reanudar — Control del bot autónomo\n` +
+      ` • /estado — Estado del sistema y configuración\n` +
+      ` • /historial — Registro de últimas acciones\n\n` +
+      `🕒 Crons: <b>02:50</b>, <b>09:00</b> y <b>15:00</b> Madrid | 🛒 Monitor: cada <b>15 min</b>`;
     await sendTelegramMessage(helpText);
   }
 
@@ -764,8 +766,121 @@ async function handleTelegramMessage(message) {
     }
   }
 
+  // ── /finanzas · /saldo ──────────────────────────────────────────────────
+  else if (text.startsWith('/finanzas') || text.startsWith('/saldo')) {
+    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Calculando balance financiero...</i>');
+    const client = new ComunioClient();
+    try {
+      await client.login();
+      const squad = await client.getSquad();
+      const dashboard = await client.getDashboardData();
+      const pendingBids = await client.getPendingBids();
+
+      const balance = dashboard?.money || 0;
+      const squadVal = (squad?.players || []).reduce((s, p) => s + (p.price || 0), 0);
+      const bidsVal = pendingBids.reduce((s, b) => s + (b.price || 0), 0);
+      const netBalance = balance - bidsVal;
+
+      let rep = `💰 <b>[Mateo Oslomany] · Estado Financiero</b>\n\n`;
+      rep += `💵 <b>Saldo Disponible:</b> ${balance.toLocaleString()} €\n`;
+      rep += `⏳ <b>Pujas Comprometidas:</b> ${bidsVal.toLocaleString()} € (${pendingBids.length} pujas)\n`;
+      rep += `📊 <b>Saldo Efectivo Estimado:</b> ${netBalance.toLocaleString()} €\n`;
+      rep += `🏆 <b>Valor Plantilla:</b> ${squadVal.toLocaleString()} €\n`;
+      rep += `💎 <b>Patrimonio Total:</b> ${(balance + squadVal).toLocaleString()} €\n\n`;
+      rep += balance < 0
+        ? `⚠️ <b>ATENCIÓN:</b> Saldo negativo. Vende jugadores antes del inicio de la jornada para puntuar.`
+        : `✅ Balance saneado y sin riesgo de sanción.`;
+
+      await sendTelegramMessage(rep);
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error consultando finanzas: <code>${e.message}</code>`);
+    } finally {
+      await client.close();
+    }
+  }
+
+  // ── /ofertas ────────────────────────────────────────────────────────────
+  else if (text.startsWith('/ofertas')) {
+    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Consultando ofertas recibidas...</i>');
+    const client = new ComunioClient();
+    try {
+      await client.login();
+      const url = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers?current`;
+      const res = await axios.get(url, { headers: client.getHeaders() });
+      const saleOffers = (res.data?.items || []).filter(item => item.type === 'SALE' && item.state === 'PENDING');
+
+      let rep = `💼 <b>[Mateo Oslomany] · Ofertas de Venta Recibidas</b>\n\n`;
+      if (saleOffers.length > 0) {
+        for (const offer of saleOffers) {
+          const playerName = offer.tradable?.name || 'Jugador';
+          const offerPrice = offer.price;
+          const buyerName = offer.user?.name || offer.tradingPartner?.name || 'Computadora';
+          const marketValue = offer.tradable?.quotedPrice || offer.tradable?.price || offerPrice;
+          const diff = offerPrice - marketValue;
+          const diffStr = diff >= 0 ? `+${diff.toLocaleString()} €` : `${diff.toLocaleString()} €`;
+
+          rep += `👤 <b>${escapeHtml(playerName)}</b>\n`;
+          rep += `   💰 Oferta: ${offerPrice.toLocaleString()} € | Valor: ${marketValue.toLocaleString()} € (<i>${diffStr}</i>)\n`;
+          rep += `   🤝 Comprador: ${escapeHtml(buyerName)}\n\n`;
+        }
+      } else {
+        rep += `No tienes ofertas de venta pendientes en este momento.`;
+      }
+      await sendTelegramMessage(rep);
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error consultando ofertas: <code>${e.message}</code>`);
+    } finally {
+      await client.close();
+    }
+  }
+
+  // ── /sync ───────────────────────────────────────────────────────────────
+  else if (text.startsWith('/sync')) {
+    await sendTelegramMessage('💼 🚀 <i>[Mateo Oslomany]: Sincronizando web y desplegando a Cloudflare Pages...</i>');
+    exec('node src/syncWeb.mjs', (err) => {
+      if (err) {
+        sendTelegramMessage(`💼 ❌ Error al sincronizar web: <code>${escapeHtml(err.message)}</code>`);
+      } else {
+        sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Sincronización y despliegue a Cloudflare completados con éxito.`);
+      }
+    });
+  }
+
+  // ── /tactica · /esquema ─────────────────────────────────────────────────
+  else if (text.startsWith('/tactica') || text.startsWith('/esquema')) {
+    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Analizando esquema táctico...</i>');
+    const client = new ComunioClient();
+    const engine = new ComunioEngine();
+    try {
+      await client.login();
+      const squad = await client.getSquad();
+      const lineupResult = engine.optimizeLineup(squad || { players: [] });
+
+      const starters = lineupResult.starting11 || [];
+      const keeper = starters.filter(p => p.type === 'keeper');
+      const defenders = starters.filter(p => p.type === 'defender');
+      const midfielders = starters.filter(p => p.type === 'midfielder');
+      const strikers = starters.filter(p => p.type === 'striker');
+
+      let rep = `📐 <b>[Mateo Oslomany] · Esquema Táctico (${lineupResult.formation})</b>\n\n`;
+      rep += `🎯 <b>Puntuación esperada:</b> ~${lineupResult.score} pts\n\n`;
+
+      rep += `🧤 <b>POR (${keeper.length}):</b> ${keeper.map(p => escapeHtml(p.name)).join(', ') || '—'}\n`;
+      rep += `🛡️ <b>DEF (${defenders.length}):</b> ${defenders.map(p => escapeHtml(p.name)).join(', ') || '—'}\n`;
+      rep += `⚙️ <b>MED (${midfielders.length}):</b> ${midfielders.map(p => escapeHtml(p.name)).join(', ') || '—'}\n`;
+      rep += `⚡ <b>DEL (${strikers.length}):</b> ${strikers.map(p => escapeHtml(p.name)).join(', ') || '—'}\n\n`;
+      rep += `🔲 <b>Suplentes disponibles:</b> ${(lineupResult.bench || []).length} jugadores`;
+
+      await sendTelegramMessage(rep);
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error analizando táctica: <code>${e.message}</code>`);
+    } finally {
+      await client.close();
+    }
+  }
+
   else {
-    await sendTelegramMessage('💼 ⚠️ <b>[Mateo Oslomany]:</b> Comando no reconocido. Envía <code>/help</code> para ver los comandos válidos.');
+    await sendTelegramMessage('💼 ⚠️ <b>[Mateo Oslomany]:</b> Comando no reconocido. Envía /help para ver los comandos válidos.');
   }
 }
 

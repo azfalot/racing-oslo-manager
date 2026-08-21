@@ -22,8 +22,9 @@ function escapeHtml(text) {
 }
 
 
+import path from 'path';
 import FormData from 'form-data';
-import { generateSigningPhoto } from './imageGen.js';
+import { generateSigningPhoto, publishSigningNews, publishSaleNews } from './imageGen.js';
 async function sendTelegramPhoto(photoPath, caption) {
   if (!telegramToken || !telegramChatId) return;
   try {
@@ -313,32 +314,17 @@ async function runBot() {
             for (const p of newSignings) {
               changeReport += ` • <b>${escapeHtml(p.name)}</b> - Valor: ${p.price.toLocaleString()} €\n`;
               
-              // Generar y enviar cartel en Telegram
+              // Generar tarjeta gráfica oficial, publicar noticia en la web y enviar cartel por Telegram
               try {
-                const photoPath = await generateSigningPhoto(p.name, p.price, p.playerId);
-                if (photoPath) {
-                  await sendTelegramPhoto(photoPath, `🔥 <b>¡FICHAJE CONFIRMADO!</b>\n\n<b>${escapeHtml(p.name)}</b> llega al Oslo Arena por <b>${p.price.toLocaleString()} €</b>.`);
+                const article = await publishSigningNews(p.name, p.price, p.playerId, p.type || 'Jugador');
+                if (article && article.image) {
+                  const localImagePath = path.resolve('web/public', article.image.replace(/^\//, ''));
+                  if (fs.existsSync(localImagePath)) {
+                    await sendTelegramPhoto(localImagePath, `🔥 <b>¡FICHAJE CONFIRMADO!</b>\n\n<b>${escapeHtml(p.name)}</b> llega al Oslo Arena por <b>${p.price.toLocaleString()} €</b>.`);
+                  }
                 }
               } catch (imgErr) {
-                console.error(`[TELEGRAM PHOTO] Error generando cartel para ${p.name}:`, imgErr.message);
-              }
-
-              // Noticia para la Web
-              try {
-                if (fs.existsSync('web/src/data/news.json')) {
-                  const news = JSON.parse(fs.readFileSync('web/src/data/news.json', 'utf-8'));
-                  news.unshift({
-                    id: Date.now() + Math.floor(Math.random() * 1000),
-                    title: `¡Oficial! ${p.name} ficha por el Racing de Oslo`,
-                    date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
-                    excerpt: `El club hace oficial la incorporación de ${p.name} tras abonar su traspaso.`,
-                    content: `Mateo Oslomany ha cerrado otra operación estelar. ${p.name} se une a las filas del Racing de Oslo por ${p.price.toLocaleString()} €. La dirección deportiva confía en su gran aportación para la temporada.\n\n¡Bienvenido al club!`,
-                    image: `/media/signings/${p.playerId}_signing.jpg`
-                  });
-                  fs.writeFileSync('web/src/data/news.json', JSON.stringify(news, null, 2));
-                }
-              } catch (newsErr) {
-                console.error(`[WEB NEWS] Error al publicar noticia para ${p.name}:`, newsErr.message);
+                console.error(`[NEWS ERROR] Error publicando noticia de fichaje para ${p.name}:`, imgErr.message);
               }
             }
             changeReport += `\n`;
