@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Trophy, ChevronRight, TrendingUp, Users, ChevronLeft, Calendar, Flame } from 'lucide-react'
 import squadData from '../data/squad.json'
 import matchData from '../data/matches.json'
-import newsData from '../data/news.json'
+import { getCategoryBadgeStyle } from './Noticias'
 
 export function formatNewsDate(dateStr) {
   if (!dateStr) return ''
@@ -161,7 +161,7 @@ export default function Home() {
               {/* 2. BOTTOM: Espacio Inferior Estructurado para el Texto Completo */}
               <div className="p-6 space-y-3 bg-forest-dark/40 border-t border-forest/30">
                 <div className="flex items-center gap-3">
-                  <span className="bg-forest text-cream text-[10px] font-bold px-3 py-1 uppercase tracking-widest rounded-sm border border-forest-light/40 shadow-sm">
+                  <span className={`text-[10px] font-bold px-3 py-1 uppercase tracking-widest rounded-sm ${getCategoryBadgeStyle(featuredNews[currentSlide].category).pill}`}>
                     {featuredNews[currentSlide].category}
                   </span>
                   <span className="text-xs text-cream/70 flex items-center gap-1 font-mono">

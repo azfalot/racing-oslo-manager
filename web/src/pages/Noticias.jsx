@@ -14,6 +14,60 @@ export function formatNewsDate(dateStr) {
   return parsed.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
+/**
+ * Escala cromática oficial por categoría para diferenciar la actualidad de un vistazo
+ */
+export function getCategoryBadgeStyle(category) {
+  const cat = (category || '').toLowerCase()
+  if (cat.includes('fichaje') || cat.includes('signing')) {
+    return {
+      bg: 'bg-emerald-950/80 text-emerald-300 border-emerald-500/50 shadow-[0_0_12px_rgba(16,185,129,0.25)]',
+      borderLeft: 'border-l-4 border-emerald-500',
+      pill: 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm',
+      btnActive: 'bg-emerald-600 text-white border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.4)]'
+    }
+  }
+  if (cat.includes('venta') || cat.includes('traspaso') || cat.includes('sale')) {
+    return {
+      bg: 'bg-rose-950/80 text-rose-300 border-rose-500/50 shadow-[0_0_12px_rgba(244,63,94,0.25)]',
+      borderLeft: 'border-l-4 border-rose-500',
+      pill: 'bg-rose-500/20 text-rose-300 border border-rose-500/40 shadow-sm',
+      btnActive: 'bg-rose-600 text-white border-rose-400 shadow-[0_0_15px_rgba(244,63,94,0.4)]'
+    }
+  }
+  if (cat.includes('enfermer') || cat.includes('médic') || cat.includes('medical')) {
+    return {
+      bg: 'bg-amber-950/80 text-amber-300 border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.25)]',
+      borderLeft: 'border-l-4 border-amber-500',
+      pill: 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm',
+      btnActive: 'bg-amber-600 text-white border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.4)]'
+    }
+  }
+  if (cat.includes('rumor')) {
+    return {
+      bg: 'bg-purple-950/80 text-purple-300 border-purple-500/50 shadow-[0_0_12px_rgba(168,85,247,0.25)]',
+      borderLeft: 'border-l-4 border-purple-500',
+      pill: 'bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-sm',
+      btnActive: 'bg-purple-600 text-white border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)]'
+    }
+  }
+  if (cat.includes('equipo') || cat.includes('táctica') || cat.includes('xi')) {
+    return {
+      bg: 'bg-cyan-950/80 text-cyan-300 border-cyan-500/50 shadow-[0_0_12px_rgba(6,182,212,0.25)]',
+      borderLeft: 'border-l-4 border-cyan-500',
+      pill: 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm',
+      btnActive: 'bg-cyan-600 text-white border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.4)]'
+    }
+  }
+  // Default Club / Institucional (Verde Racing de Oslo)
+  return {
+    bg: 'bg-forest-dark text-cream border-forest-light/40 shadow-md',
+    borderLeft: 'border-l-4 border-forest-light',
+    pill: 'bg-forest text-cream border border-forest-light/40 shadow-sm',
+    btnActive: 'bg-forest text-cream border-forest-light shadow-md'
+  }
+}
+
 export default function Noticias() {
   const [selectedNews, setSelectedNews] = useState(null)
   const [filterCategory, setFilterCategory] = useState('ALL')
@@ -37,122 +91,134 @@ export default function Noticias() {
           </p>
         </div>
 
-        {/* Category Filters */}
+        {/* Category Filters con Escala Cromática */}
         <div className="flex flex-wrap gap-2 pt-2 border-b border-forest/30 pb-4">
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setFilterCategory(cat)}
-              className={`px-4 py-2 text-xs font-bold tracking-widest uppercase transition-all rounded-sm ${
-                filterCategory === cat
-                  ? 'bg-forest text-cream border border-forest-light shadow-md'
-                  : 'bg-black/40 text-cream/70 hover:bg-white/10 hover:text-white border border-forest/20'
-              }`}
-            >
-              {cat === 'ALL' ? 'TODOS' : cat}
-            </button>
-          ))}
+          {categories.map(cat => {
+            const badgeStyle = getCategoryBadgeStyle(cat)
+            const isSelected = filterCategory === cat
+            return (
+              <button
+                key={cat}
+                onClick={() => setFilterCategory(cat)}
+                className={`px-4 py-2 text-xs font-bold tracking-widest uppercase transition-all rounded-sm border ${
+                  isSelected
+                    ? cat === 'ALL'
+                      ? 'bg-forest text-cream border-forest-light shadow-md'
+                      : badgeStyle.btnActive
+                    : 'bg-black/40 text-cream/70 hover:bg-white/10 hover:text-white border-forest/20'
+                }`}
+              >
+                {cat === 'ALL' ? 'TODOS' : cat}
+              </button>
+            )
+          })}
         </div>
       </div>
 
-      {/* News Grid */}
+      {/* News Grid con Escala Cromática */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredNews.map(news => (
-          <article
-            key={news.id}
-            onClick={() => setSelectedNews(news)}
-            className="bg-forest-dark/10 border border-forest/30 rounded-sm overflow-hidden group hover:border-forest-light transition-all cursor-pointer flex flex-col justify-between shadow-xl"
-          >
-            <div>
-              {/* Image Preview Container */}
-              <div className="h-56 overflow-hidden relative bg-black/60 flex items-center justify-center">
-                <img
-                  src={news.image}
-                  alt={news.title}
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                  onError={(e) => { e.target.src = '/media/crest.jpg' }}
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-forest text-cream text-[10px] font-bold px-3 py-1 uppercase tracking-widest rounded-sm shadow-md border border-forest-light/40">
-                    {news.category || 'NOTICIA'}
-                  </span>
+        {filteredNews.map(news => {
+          const badgeStyle = getCategoryBadgeStyle(news.category)
+          return (
+            <article
+              key={news.id}
+              onClick={() => setSelectedNews(news)}
+              className={`bg-forest-dark/10 border border-forest/30 rounded-sm overflow-hidden group hover:border-forest-light transition-all cursor-pointer flex flex-col justify-between shadow-xl ${badgeStyle.borderLeft}`}
+            >
+              <div>
+                {/* Image Preview Container */}
+                <div className="h-56 overflow-hidden relative bg-black/60 flex items-center justify-center">
+                  <img
+                    src={news.image}
+                    alt={news.title}
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    onError={(e) => { e.target.src = '/media/crest.jpg' }}
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className={`text-[10px] font-bold px-3 py-1 uppercase tracking-widest rounded-sm ${badgeStyle.pill}`}>
+                      {news.category || 'NOTICIA'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Card Body */}
+                <div className="p-6 space-y-3">
+                  <div className="flex items-center gap-2 text-xs text-forest-light font-semibold font-mono">
+                    <Calendar size={14} />
+                    <span>{formatNewsDate(news.date)}</span>
+                  </div>
+                  <h3 className="text-xl font-display font-bold group-hover:text-forest-light transition-colors leading-tight">
+                    {news.title}
+                  </h3>
+                  <p className="text-cream-dark text-xs sm:text-sm line-clamp-3 leading-relaxed">
+                    {news.excerpt || news.summary}
+                  </p>
                 </div>
               </div>
 
-              {/* Card Body */}
-              <div className="p-6 space-y-3">
-                <div className="flex items-center gap-2 text-xs text-forest-light font-semibold font-mono">
-                  <Calendar size={14} />
-                  <span>{formatNewsDate(news.date)}</span>
-                </div>
-                <h3 className="text-xl font-display font-bold group-hover:text-forest-light transition-colors leading-tight">
-                  {news.title}
-                </h3>
-                <p className="text-cream-dark text-xs sm:text-sm line-clamp-3 leading-relaxed">
-                  {news.excerpt || news.summary}
-                </p>
+              {/* Read More Footer */}
+              <div className="p-6 pt-0">
+                <button className="text-xs font-bold tracking-widest text-forest-light group-hover:text-cream transition-colors uppercase flex items-center gap-2">
+                  <Eye size={14} /> Leer Comunicado &rarr;
+                </button>
               </div>
-            </div>
-
-            {/* Read More Footer */}
-            <div className="p-6 pt-0">
-              <button className="text-xs font-bold tracking-widest text-forest-light group-hover:text-cream transition-colors uppercase flex items-center gap-2">
-                <Eye size={14} /> Leer Comunicado &rarr;
-              </button>
-            </div>
-          </article>
-        ))}
+            </article>
+          )
+        })}
       </div>
 
       {/* FULL UNTRUNCATED NEWS MODAL */}
-      {selectedNews && (
-        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-6">
-          <div className="bg-clubBlack border border-forest-light/60 max-w-3xl w-full rounded-sm overflow-hidden animate-fade-in relative max-h-[92vh] flex flex-col shadow-2xl">
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedNews(null)}
-              className="absolute top-4 right-4 z-30 bg-black/80 p-2.5 rounded-full hover:bg-forest text-cream transition-colors border border-forest/40 focus:outline-none"
-              aria-label="Cerrar modal"
-            >
-              <X size={22} />
-            </button>
+      {selectedNews && (() => {
+        const modalBadgeStyle = getCategoryBadgeStyle(selectedNews.category)
+        return (
+          <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-6">
+            <div className="bg-clubBlack border border-forest-light/60 max-w-3xl w-full rounded-sm overflow-hidden animate-fade-in relative max-h-[92vh] flex flex-col shadow-2xl">
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedNews(null)}
+                className="absolute top-4 right-4 z-30 bg-black/80 p-2.5 rounded-full hover:bg-forest text-cream transition-colors border border-forest/40 focus:outline-none"
+                aria-label="Cerrar modal"
+              >
+                <X size={22} />
+              </button>
 
-            {/* Modal Body Scroll Container */}
-            <div className="overflow-y-auto p-6 sm:p-8 space-y-6">
-              {/* Full Graphic Image Container - UNTRUNCATED (object-contain) */}
-              <div className="w-full bg-black/80 rounded-sm border border-forest/30 overflow-hidden flex items-center justify-center p-2">
-                <img
-                  src={selectedNews.image}
-                  alt={selectedNews.title}
-                  className="w-full h-auto max-h-[60vh] object-contain rounded-sm shadow-2xl"
-                  onError={(e) => { e.target.src = '/media/crest.jpg' }}
-                />
-              </div>
-
-              {/* News Header & Content */}
-              <div className="space-y-4">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="bg-forest text-cream text-xs font-bold px-3 py-1 uppercase tracking-widest rounded-sm border border-forest-light/40">
-                    {selectedNews.category || 'COMUNICADO'}
-                  </span>
-                  <span className="text-xs text-cream/70 font-mono flex items-center gap-1">
-                    <Calendar size={14} className="text-forest-light" />
-                    {formatNewsDate(selectedNews.date)}
-                  </span>
+              {/* Modal Body Scroll Container */}
+              <div className="overflow-y-auto p-6 sm:p-8 space-y-6">
+                {/* Full Graphic Image Container */}
+                <div className="w-full bg-black/80 rounded-sm border border-forest/30 overflow-hidden flex items-center justify-center p-2">
+                  <img
+                    src={selectedNews.image}
+                    alt={selectedNews.title}
+                    className="w-full h-auto max-h-[60vh] object-contain rounded-sm shadow-2xl"
+                    onError={(e) => { e.target.src = '/media/crest.jpg' }}
+                  />
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-display font-bold text-white leading-tight">
-                  {selectedNews.title}
-                </h3>
+                {/* News Header & Content */}
+                <div className="space-y-4">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className={`text-xs font-bold px-3 py-1 uppercase tracking-widest rounded-sm ${modalBadgeStyle.pill}`}>
+                      {selectedNews.category || 'COMUNICADO'}
+                    </span>
+                    <span className="text-xs text-cream/70 font-mono flex items-center gap-1">
+                      <Calendar size={14} className="text-forest-light" />
+                      {formatNewsDate(selectedNews.date)}
+                    </span>
+                  </div>
 
-                <div className="pt-4 border-t border-forest/30 text-cream/90 text-sm leading-relaxed whitespace-pre-wrap font-sans space-y-4">
-                  {selectedNews.content || selectedNews.excerpt}
+                  <h3 className="text-2xl sm:text-3xl font-display font-bold text-white leading-tight">
+                    {selectedNews.title}
+                  </h3>
+
+                  <div className="pt-4 border-t border-forest/30 text-cream/90 text-sm leading-relaxed whitespace-pre-wrap font-sans space-y-4">
+                    {selectedNews.content || selectedNews.excerpt}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      })()}
     </div>
   )
 }
