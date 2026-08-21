@@ -273,6 +273,8 @@ export class ComunioEngine {
     }
 
     const currentSquad = squad?.players || [];
+    const mySquadIds = new Set(currentSquad.map(p => parseInt(p.playerId || p.id)));
+
     const myWeakestByPos = {
       keeper: this.getWeakestPlayer(currentSquad, 'keeper'),
       defender: this.getWeakestPlayer(currentSquad, 'defender'),
@@ -282,15 +284,30 @@ export class ComunioEngine {
 
     const recommendations = [];
 
+    // Colchón de seguridad financiera: Mantener al menos 1M € o el 15% del saldo disponible
+    const safetyReserve = Math.max(1000000, Math.round(balance * 0.15));
+    const maxExpenditure = balance - safetyReserve;
+
     for (const player of marketPlayers) {
-      // Evaluar todos los jugadores disponibles en el mercado (Computadora y Rivales Humanos)
+      const pid = parseInt(player.playerId || player.id);
+
+      // 1. Exclusión estricta: Jamás ofrecer nuestros propios jugadores puestos en el mercado
+      if (mySquadIds.has(pid)) continue;
+      if (player.owner?.id && squad?.userId && player.owner.id === squad.userId) continue;
+
       const ownerName = (player.owner?.name || 'Computer').trim();
-      const isComputer = player.owner?.id === 1 || ownerName === 'Computer';
+      const isComputer = player.owner?.id === 1 || ownerName.toLowerCase() === 'computer';
 
       const expectedPoints = this.getExpectedPoints(player);
       const isAvailable = this.isPlayerAvailable(player);
       
       if (!isAvailable) continue; // Ignorar lesionados o sancionados del mercado
+
+      // 2. Filtro de calidad general: exigir un rendimiento medio mínimo (~3.0 pts/partido o 25 pts de base esperada)
+      const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
+      if (expectedPoints < 25 && avgPoints < 3.0 && player.price > 1500000) {
+        continue; // Descartar parches o futbolistas con rendimiento mediocre y precio inflado
+      }
 
       // Puntos por millón (PPM)
       const ppm = expectedPoints / (player.price / 1000000);
@@ -298,20 +315,30 @@ export class ComunioEngine {
       // Comparar con el jugador más débil que tenemos en esa posición
       const myWeakest = myWeakestByPos[player.type];
       let upgradePoints = expectedPoints;
-      let isUpgrade = true;
+      let isSignificantUpgrade = true;
 
       if (myWeakest) {
         const myWeakestPoints = this.getExpectedPoints(myWeakest);
         upgradePoints = expectedPoints - myWeakestPoints;
-        isUpgrade = upgradePoints > 0;
+        
+        // 3. Exigir una MEJORA SIGNIFICATIVA (+5 puntos esperados sobre el peor titular de la posición)
+        isSignificantUpgrade = upgradePoints >= 5;
       }
 
-      // Si es una mejora y podemos permitírnoslo con nuestro saldo
-      if (isUpgrade && player.price <= balance) {
-        const bidAmount = player.price; // Siempre pujamos al mínimo (sin sobrevalorar)
+      // 4. Categorizar nivel de impacto (+30 a +50 pts = Gran Impacto / Fichaje Estrella)
+      let impactTag = '📈 Mejora Promedio';
+      if (upgradePoints >= 40) impactTag = '🔥 FICHAJE ESTRELLA (+40 pts impacto)';
+      else if (upgradePoints >= 25) impactTag = '⭐ GRAN IMPACTO (+25 pts impacto)';
+      else if (upgradePoints >= 15) impactTag = '🚀 MEJORA DESTACADA (+15 pts)';
+
+      // 5. Protección económica: El precio del fichaje no debe poner en riesgo la reserva financiera
+      const canAffordSafely = player.price <= maxExpenditure || (balance >= player.price && upgradePoints >= 15);
+
+      if (isSignificantUpgrade && canAffordSafely) {
+        const bidAmount = player.price; // Siempre pujamos al mínimo
 
         recommendations.push({
-          playerId: player.playerId,
+          playerId: pid,
           name: player.name,
           type: player.type,
           price: player.price,
@@ -319,20 +346,32 @@ export class ComunioEngine {
           expectedPoints,
           ppm: parseFloat(ppm.toFixed(2)),
           upgradePoints,
+          impactTag,
           ownerName,
           isComputer,
           reason: myWeakest 
-            ? `Mejora tu peor ${player.type} (${myWeakest.name}) en +${upgradePoints.toFixed(0)} puntos esperados.`
-            : `Cubre posición vacía de ${player.type} con ${expectedPoints.toFixed(0)} puntos esperados.`
+            ? `${impactTag}: +${upgradePoints.toFixed(0)} pts esperados sobre tu peor ${player.type} (${myWeakest.name}).`
+            : `${impactTag}: Cubre posición vacía de ${player.type} con ${expectedPoints.toFixed(0)} pts esperados.`
         });
       }
     }
 
-    // Ordenar recomendaciones: primero los upgrades que aportan más puntos esperados
+    // Ordenar recomendaciones: primero los fichajes de mayor impacto (+30 a +50 pts)
     recommendations.sort((a, b) => b.upgradePoints - a.upgradePoints);
+
+    // Identificar la mejor oferta del mercado en relación Calidad-Precio (Chollo / Bajo coste + Alto rendimiento)
+    let bestValueOffer = null;
+    if (recommendations.length > 0) {
+      const sortedByPPM = [...recommendations].sort((a, b) => b.ppm - a.ppm);
+      bestValueOffer = sortedByPPM[0];
+      if (bestValueOffer) {
+        bestValueOffer.isBestValue = true;
+      }
+    }
 
     return {
       recommendations,
+      bestValueOffer,
       message: `Se han encontrado ${recommendations.length} oportunidades de fichaje recomendadas.`
     };
   }

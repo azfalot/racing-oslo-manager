@@ -29,7 +29,7 @@ El bot responde a comandos directos en el chat con tu director deportivo de conf
 * `/sugerencias` - Sugiere qué jugadores suplentes de alto valor o lesionados conviene vender para ganar liquidez.
 
 ### ⚡ Acciones e Interacción (Escritura)
-* `/alinear` - Calcula el 11 titular ideal de la jornada, lo guarda en Comunio, realiza las ofertas de compra pendientes y publica los descartes en venta.
+* `/alinear` - Optimiza y guarda directamente en Comunio el 11 titular ideal de la jornada según estado físico y rendimiento.
 * `/vender <nombre_jugador>` - Pone en venta de inmediato al jugador indicado en el mercado de Comunio por su precio mínimo.
 * `/margen <porcentaje>` - Modifica el sobreprecio extra a aplicar sobre las ofertas de compra (ej: `/margen 1.5`).
 

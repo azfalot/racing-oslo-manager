@@ -18,6 +18,43 @@ if (!telegramToken || !telegramChatId) {
   process.exit(1);
 }
 
+// ── CONTROL DE INSTANCIA ÚNICA (PID LOCK) ──────────────────────────────────────
+const pidFile = '.daemon.pid';
+function ensureSingleInstance() {
+  if (fs.existsSync(pidFile)) {
+    try {
+      const oldPid = parseInt(fs.readFileSync(pidFile, 'utf8').trim(), 10);
+      if (!isNaN(oldPid)) {
+        try {
+          process.kill(oldPid, 0); // Comprobar si el proceso anterior sigue vivo
+          console.error(`[DAEMON] ⚠️ Ya hay una instancia en ejecución (PID ${oldPid}). Se cancela este nuevo inicio.`);
+          process.exit(0);
+        } catch (e) {
+          // El PID anterior ya no existe en el sistema
+        }
+      }
+    } catch (e) {}
+  }
+  fs.writeFileSync(pidFile, process.pid.toString(), 'utf8');
+
+  function cleanupPid() {
+    try {
+      if (fs.existsSync(pidFile)) {
+        const currentPid = parseInt(fs.readFileSync(pidFile, 'utf8').trim(), 10);
+        if (currentPid === process.pid) {
+          fs.unlinkSync(pidFile);
+        }
+      }
+    } catch (e) {}
+  }
+
+  process.on('exit', cleanupPid);
+  process.on('SIGINT', () => { cleanupPid(); process.exit(0); });
+  process.on('SIGTERM', () => { cleanupPid(); process.exit(0); });
+}
+
+ensureSingleInstance();
+
 let lastUpdateId = 0;
 let botPaused = false; // Flag para pausar las acciones autónomas
 
@@ -172,10 +209,42 @@ async function handleTelegramMessage(message) {
 
   // ── /alinear ──────────────────────────────────────────────────────────────
   else if (text.startsWith('/alinear')) {
-    await sendTelegramMessage('💼 ⚡ <i>[Mateo Oslomany]: Optimizando el 11 titular y lanzando pujas de mercado...</i>');
-    exec('node src/app.js', { env: { ...process.env, COMUNIO_MODE: 'autonomo' } }, (err) => {
-      if (err) sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al aplicar cambios: <code>${err.message}</code>`);
-    });
+    await sendTelegramMessage('💼 ⚡ <i>[Mateo Oslomany]: Optimizando y guardando tu 11 titular...</i>');
+    const client = new ComunioClient();
+    const engine = new ComunioEngine();
+    try {
+      await client.login();
+      const squad = await client.getSquad();
+      const lineupResult = engine.optimizeLineup(squad || { players: [] });
+      if (lineupResult.starting11 && lineupResult.starting11.length > 0) {
+        const startingIds = lineupResult.starting11.map(p => p.playerId || p.id);
+        const success = await client.setLineup(startingIds, lineupResult.formation);
+        
+        const posEmoji = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' };
+        let rep = `💼 ✅ <b>[Mateo Oslomany] · 11 Titular Guardado en Comunio</b>\n\n`;
+        rep += `📐 <b>Formación:</b> ${lineupResult.formation}\n`;
+        rep += `🎯 <b>Puntuación esperada:</b> ~${lineupResult.score} pts\n\n`;
+        rep += `<b>⬛ TITULARES:</b>\n`;
+        lineupResult.starting11.forEach(p => {
+          const emoji = posEmoji[p.type] || '👤';
+          const fit = p.available ? '' : ' ⚠️ (Duda/Baja)';
+          rep += ` ${emoji} <b>${escapeHtml(p.name)}</b>${fit}\n`;
+        });
+
+        let log = [];
+        try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
+        log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Alineación Guardada (Telegram)', player: lineupResult.formation, amount: '-', status: success ? 'Éxito' : 'Fallo' });
+        fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
+
+        await sendTelegramMessage(rep);
+      } else {
+        await sendTelegramMessage('💼 ❌ <b>[Mateo Oslomany]:</b> No se pudo calcular una alineación válida.');
+      }
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al alinear: <code>${e.message}</code>`);
+    } finally {
+      await client.close();
+    }
   }
 
   // ── /plantilla ────────────────────────────────────────────────────────────
