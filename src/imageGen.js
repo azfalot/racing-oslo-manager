@@ -294,8 +294,9 @@ export async function publishRumorNews(playerName, rumorDetails, playerId = null
   return null;
 }
 
-export async function publishClubNews(title, summary, bodyText, category = 'Institucional') {
+export async function publishClubNews(title, summary, bodyText, category = 'Institucional', templateType = 'club') {
   try {
+    const graphicUrl = await generateTemplateGraphic(templateType, title, summary);
     const newsPath = path.resolve('web/src/data/news.json');
     if (fs.existsSync(newsPath)) {
       const newsList = JSON.parse(fs.readFileSync(newsPath, 'utf-8'));
@@ -307,7 +308,7 @@ export async function publishClubNews(title, summary, bodyText, category = 'Inst
         excerpt: summary,
         summary: summary,
         content: bodyText,
-        image: '/media/crest.jpg'
+        image: graphicUrl || '/media/templates/template_club.jpg'
       };
 
       newsList.unshift(article);
@@ -331,7 +332,7 @@ export async function publishMatchdayPreviewNews(matchdayName, starting11Names, 
       `⬛ Titulares elegidos:\n` + starting11Names.map(n => ` • ${n}`).join('\n') + `\n\n` +
       `¡Todo listo en el vestuario para salir a competir al máximo nivel!`;
 
-    return await publishClubNews(title, summary, bodyText, 'Previa');
+    return await publishClubNews(title, summary, bodyText, 'Previa', 'preview');
   } catch (e) {
     console.error('[NEWS ERROR] Error publicando previa de jornada:', e.message);
   }
@@ -346,9 +347,21 @@ export async function publishMatchdayChronicleNews(matchdayName, totalPoints, hi
       `⭐ Destacados de la jornada:\n${highlights}\n\n` +
       `La dirección técnica saca conclusiones positivas y comienza a preparar el siguiente choque de LaLiga.`;
 
-    return await publishClubNews(title, summary, bodyText, 'Crónica');
+    return await publishClubNews(title, summary, bodyText, 'Crónica', 'chronicle');
   } catch (e) {
     console.error('[NEWS ERROR] Error publicando crónica de jornada:', e.message);
+  }
+  return null;
+}
+
+export async function publishTacticalAnalysisNews(summary, details) {
+  try {
+    const title = `ANÁLISIS TÁCTICO & MERCADO: Mateo Oslomany evalúa el estado del club`;
+    const bodyText = `La Secretaría Técnica ha completado el informe de auditoría integral del club:\n\n${details}`;
+
+    return await publishClubNews(title, summary, bodyText, 'Táctica', 'analysis');
+  } catch (e) {
+    console.error('[NEWS ERROR] Error publicando análisis táctico:', e.message);
   }
   return null;
 }
