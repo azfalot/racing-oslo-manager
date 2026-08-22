@@ -76,6 +76,52 @@ export default function Alineacion() {
         </div>
       </div>
 
+      {/* JUSTIFICACIÓN TÁCTICA DE MATEO OSLOMANY */}
+      <div className="max-w-4xl mx-auto mt-10 bg-black border border-forest/30 p-6 rounded-sm space-y-4 shadow-xl">
+        <div className="flex items-center gap-3 border-b border-forest/30 pb-3">
+          <div className="p-2 bg-forest-dark/60 text-forest-light rounded-sm border border-forest-light/30">
+            🧠
+          </div>
+          <div>
+            <h3 className="text-xl font-display font-bold text-white uppercase tracking-wide">
+              ¿Por qué estos 11 titulares sobre otros jugadores de mayor valor o puntos?
+            </h3>
+            <p className="text-xs text-cream/60 font-mono">
+              Criterios matemáticos y reglas tácticas aplicadas por la Secretaría Técnica
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div className="bg-forest-dark/20 border border-forest/20 p-3 rounded-sm space-y-1.5">
+            <span className="text-forest-light font-bold font-mono uppercase block text-[11px]">
+              1. Restricción de Posición & Formación
+            </span>
+            <p className="text-cream/80 leading-relaxed">
+              Un sistema como el 4-4-2 sólo admite 4 centrocampistas. Si dispones de un 5º o 6º medio con muchos puntos, no puede alinear en el medio; es obligatorio alinear defensas para no sufrir la penalización de -4 ptos por hueco libre.
+            </p>
+          </div>
+
+          <div className="bg-forest-dark/20 border border-forest/20 p-3 rounded-sm space-y-1.5">
+            <span className="text-amber-300 font-bold font-mono uppercase block text-[11px]">
+              2. Salud & Estado Físico Preventivo
+            </span>
+            <p className="text-cream/80 leading-relaxed">
+              Si una estrella de 9M € arrastra molestias, sanción o duda médica, el motor aplica una penalización del 60% para evitar un 0. Un suplente modesto de 1.5M € 100% Fit titular asegura puntuar.
+            </p>
+          </div>
+
+          <div className="bg-forest-dark/20 border border-forest/20 p-3 rounded-sm space-y-1.5">
+            <span className="text-blue-300 font-bold font-mono uppercase block text-[11px]">
+              3. Racha Dinámica vs Promedio Anual
+            </span>
+            <p className="text-cream/80 leading-relaxed">
+              El motor pondera al 50% las últimas 3-5 jornadas. Si un parche económico viene de encadenar dos 8s y un 10 consecutivo, su nota dinámica del momento supera a un titular frío o en baja forma.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* PLAYER PROFILE MODAL */}
       <PlayerProfileModal player={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
     </div>
