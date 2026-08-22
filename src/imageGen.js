@@ -260,32 +260,95 @@ export async function publishMedicalNews(playerName, statusDetails, playerId) {
   return null;
 }
 
-export async function publishRumorNews(playerName, rumorDetails, playerId = null) {
+export async function publishRumorNews(playerName, rumorDetails, playerId = null, isEntry = true) {
   try {
-    // Generar gráfica oficial con la plantilla de Rumores (Mateo Oslomany en despacho) + Foto API
+    // Generar gráfica oficial con la plantilla de Rumores + Foto API
     const graphicUrl = await generateTemplateGraphic('rumors', playerName, rumorDetails, playerId);
 
     const newsPath = path.resolve('web/src/data/news.json');
     if (fs.existsSync(newsPath)) {
       const newsList = JSON.parse(fs.readFileSync(newsPath, 'utf-8'));
+      const titleStr = isEntry
+        ? `RUMOR: El Racing de Oslo interesado en el fichaje de ${playerName}`
+        : `RUMOR: El Racing de Oslo escucha ofertas por ${playerName}`;
+      
       const rumorArticle = {
         id: `rumor_${playerId || Date.now()}_${Date.now()}`,
-        title: `Rumores de Mercado: Racing de Oslo interesado en ${playerName}`,
+        title: titleStr,
         date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
         category: 'Rumores',
-        excerpt: `Mateo Oslomany trabaja activamente en el mercado buscando reforzar el equipo con ${playerName}.`,
-        summary: `Mateo Oslomany trabaja activamente en el mercado buscando reforzar el equipo con ${playerName}.`,
-        content: `Las negociaciones de mercado se intensifican en las oficinas del Oslo Arena. Mateo Oslomany rastrea minuciosamente la situación de ${playerName} (${rumorDetails}).\n\nLa Dirección Deportiva continúa valorando perfiles estratégicos para elevar la competitividad de la plantilla.`,
+        excerpt: `Mateo Oslomany evalúa el mercado de fichajes sobre la situación de ${playerName}.`,
+        summary: `Mateo Oslomany evalúa el mercado de fichajes sobre la situación de ${playerName}.`,
+        content: `Las oficinas del Oslo Arena se mantienen en plena actividad. Mateo Oslomany y la Secretaría Técnica valoran la operación con ${playerName} (${rumorDetails}).\n\nEl club continúa analizando las opciones financieras y deportivas para mantener una plantilla de máximas garantías.`,
         image: graphicUrl
       };
 
       newsList.unshift(rumorArticle);
       fs.writeFileSync(newsPath, JSON.stringify(newsList, null, 2));
-      console.log(`[NEWS] Noticia de rumores publicada para ${playerName}.`);
+      console.log(`[NEWS] Noticia de rumor de ${isEntry ? 'entrada' : 'salida'} publicada para ${playerName}.`);
       return rumorArticle;
     }
   } catch (e) {
     console.error('[NEWS ERROR] Error publicando rumor:', e.message);
+  }
+  return null;
+}
+
+export async function publishClubNews(title, summary, bodyText, category = 'Institucional') {
+  try {
+    const newsPath = path.resolve('web/src/data/news.json');
+    if (fs.existsSync(newsPath)) {
+      const newsList = JSON.parse(fs.readFileSync(newsPath, 'utf-8'));
+      const article = {
+        id: `club_${Date.now()}`,
+        title: title,
+        date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
+        category: category,
+        excerpt: summary,
+        summary: summary,
+        content: bodyText,
+        image: '/media/crest.jpg'
+      };
+
+      newsList.unshift(article);
+      fs.writeFileSync(newsPath, JSON.stringify(newsList, null, 2));
+      console.log(`[NEWS] Comunicado oficial publicado: ${title}`);
+      return article;
+    }
+  } catch (e) {
+    console.error('[NEWS ERROR] Error publicando comunicado del club:', e.message);
+  }
+  return null;
+}
+
+export async function publishMatchdayPreviewNews(matchdayName, starting11Names, formation, expectedPoints) {
+  try {
+    const title = `ONCE CONFIRMADO: Mateo Oslomany anuncia la alineación para la ${matchdayName}`;
+    const summary = `El Racing de Oslo presenta su dibujo táctico (${formation}) con ~${expectedPoints} pts esperados.`;
+    const bodyText = `Mateo Oslomany ha confirmado el 11 Titular oficial para afrontar el próximo compromiso de la ${matchdayName}:\n\n` +
+      `📐 Formación: ${formation}\n` +
+      `🎯 Puntuación esperada: ~${expectedPoints} pts\n\n` +
+      `⬛ Titulares elegidos:\n` + starting11Names.map(n => ` • ${n}`).join('\n') + `\n\n` +
+      `¡Todo listo en el vestuario para salir a competir al máximo nivel!`;
+
+    return await publishClubNews(title, summary, bodyText, 'Previa');
+  } catch (e) {
+    console.error('[NEWS ERROR] Error publicando previa de jornada:', e.message);
+  }
+  return null;
+}
+
+export async function publishMatchdayChronicleNews(matchdayName, totalPoints, highlights) {
+  try {
+    const title = `CRÓNICA DE JORNADA: El Racing de Oslo suma ${totalPoints} puntos en la ${matchdayName}`;
+    const summary = `Resumen post-partido y actuaciones destacadas de la plantilla en el último choque liguero.`;
+    const bodyText = `Finalizada la ${matchdayName}, el Racing de Oslo firma un balance total de ${totalPoints} puntos.\n\n` +
+      `⭐ Destacados de la jornada:\n${highlights}\n\n` +
+      `La dirección técnica saca conclusiones positivas y comienza a preparar el siguiente choque de LaLiga.`;
+
+    return await publishClubNews(title, summary, bodyText, 'Crónica');
+  } catch (e) {
+    console.error('[NEWS ERROR] Error publicando crónica de jornada:', e.message);
   }
   return null;
 }

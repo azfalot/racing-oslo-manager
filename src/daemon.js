@@ -1037,6 +1037,14 @@ async function handleCallbackQuery(callbackQuery) {
       const success = await client.sellPlayer(parseInt(playerId), playerName, parseInt(minPrice));
       if (success) {
         await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> <b>${escapeHtml(playerName)}</b> ha sido puesto en el mercado de Comunio por <b>${parseInt(minPrice).toLocaleString()} €</b>.`);
+
+        // Generar noticia periodística oficial de rumor de salida en la web
+        try {
+          const { publishRumorNews } = await import('./imageGen.js');
+          await publishRumorNews(playerName, `Precio de salida: ${parseInt(minPrice).toLocaleString()} €`, parseInt(playerId), false);
+        } catch (e) {
+          console.error('[DAEMON] Error publicando rumor de salida:', e.message);
+        }
       } else {
         await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> No se pudo poner a en venta a ${escapeHtml(playerName)}.`);
       }
