@@ -1139,7 +1139,7 @@ async function runMarketCheck() {
       await sendTelegramMessage(msg, markup);
     }
 
-    // 2. OFERTAS DE VENTA RECIBIDAS: Propuestas detalladas con botones de confirmación
+    // 3. OFERTAS DE VENTA RECIBIDAS (Venta Crítica vs Venta Autónoma)
     try {
       const incomingOffersUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers?current`;
       const offersRes = await axios.get(incomingOffersUrl, { headers: client.getHeaders() });
@@ -1155,22 +1155,42 @@ async function runMarketCheck() {
         const diff = offerPrice - marketValue;
         const diffStr = diff >= 0 ? `+${diff.toLocaleString()} € beneficio` : `${diff.toLocaleString()} € sobreprecio`;
 
-        const msg = `💼 <b>[Propuesta de Venta] · Mateo Oslomany</b>\n\n` +
-          `👤 <b>${escapeHtml(playerName)}</b>\n` +
-          `💰 <b>Oferta Recibida:</b> ${offerPrice.toLocaleString()} €\n` +
-          `📊 <b>Valor de Mercado:</b> ${marketValue.toLocaleString()} € <i>(${diffStr})</i>\n` +
-          `👤 <b>Comprador:</b> ${escapeHtml(buyerName)}\n\n` +
-          `💡 <b>Justificación Técnico-Económica:</b>\n` +
-          `<i>Se ha recibido una oferta por ${escapeHtml(playerName)}. Si autorizas la venta, el dinero se ingresará en tu cuenta tras la ejecución del mercado.</i>\n\n` +
-          `<b>¿Autorizas aceptar esta venta en Comunio?</b>`;
+        // Buscar al jugador en nuestra plantilla para conocer sus puntos esperados
+        const squadPlayer = squad.players.find(p => p.id === playerId || p.playerId === playerId);
+        const expPts = squadPlayer ? engine.getExpectedPoints(squadPlayer) : 100;
+        const isStarPlayer = expPts >= 150 || (squadPlayer && squadPlayer.isStarter && balance >= 0);
 
-        const markup = {
-          inline_keyboard: [[
-            { text: `✅ ACEPTAR (${offerPrice.toLocaleString()} €)`, callback_data: `acc_sale:${offerId}:${playerId}:${offerPrice}` },
-            { text: `❌ RECHAZAR`, callback_data: `rej_sale:${offerId}:${playerId}` }
-          ]]
-        };
-        await sendTelegramMessage(msg, markup);
+        // VENTA CRÍTICA (Jugador estrella > 150 pts o titular indispensable) -> Confirmación en Telegram
+        if (isStarPlayer) {
+          const msg = `💼 ⚠️ <b>[VENTA CRÍTICA DE TITULAR ESTRELLA]</b>\n\n` +
+            `👤 <b>${escapeHtml(playerName)}</b> (~${expPts} pts esperados)\n` +
+            `💰 <b>Oferta Recibida:</b> ${offerPrice.toLocaleString()} €\n` +
+            `📊 <b>Valor de Mercado:</b> ${marketValue.toLocaleString()} € <i>(${diffStr})</i>\n` +
+            `👤 <b>Comprador:</b> ${escapeHtml(buyerName)}\n\n` +
+            `⚠️ <b>ATENCIÓN:</b> Este jugador promedia $\\ge 150$ pts o es pieza clave de tu Once Titular.\n\n` +
+            `<b>¿Autorizas vender a este jugador estrella?</b>`;
+
+          const markup = {
+            inline_keyboard: [[
+              { text: `⚠️ CONFIRMAR VENTA (${offerPrice.toLocaleString()} €)`, callback_data: `acc_sale:${offerId}:${playerId}:${offerPrice}` },
+              { text: `❌ RECHAZAR & CONSERVAR`, callback_data: `rej_sale:${offerId}:${playerId}` }
+            ]]
+          };
+          await sendTelegramMessage(msg, markup);
+        } else {
+          // VENTA AUTÓNOMA (Suplente / Descarte / Parche < 150 pts): Aceptar si la oferta es justa o hay deuda
+          if (diff >= 0 || balance < 0) {
+            const acceptUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers/${offerId}/accept`;
+            await axios.post(acceptUrl, {}, { headers: client.getHeaders() });
+
+            let log = [];
+            try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
+            log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Auto-Venta Descarte', player: playerName, amount: `${offerPrice.toLocaleString()} €`, status: 'Éxito' });
+            fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
+
+            await sendTelegramMessage(`💼 🤖 <b>[Mateo Oslomany] Auto-Venta Ejecutada:</b> ${escapeHtml(playerName)} traspasado a ${escapeHtml(buyerName)} por ${offerPrice.toLocaleString()} €.`);
+          }
+        }
       }
     } catch (offerErr) {
       console.warn('[DAEMON-MARKET] Error revisando ofertas entrantes:', offerErr.message);

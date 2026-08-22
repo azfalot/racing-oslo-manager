@@ -146,15 +146,29 @@ export async function checkMarket(client, squad, balance, botPaused) {
     const pid = parseInt(rec.playerId || rec.id);
     if (pendingIds.has(pid) || ignoredIds.has(pid)) continue;
 
-    const bidAmount = Math.ceil(rec.price * (1 + bidMargin / 100));
+    // Fórmula de Sobreprecio Dinámico por Esfuerzo Económico:
+    // Base: 2.0% | Salto Cualitativo (+25 pts): 3.0% | Mejora Moderada: 1.5% | Liquidez Ajustada (< 3M €): 0.5%
+    let dynamicMargin = bidMargin || 2.0;
+    if (balance < 3000000) {
+      dynamicMargin = 0.5;
+    } else if (rec.upgradePoints >= 25) {
+      dynamicMargin = 3.0; // Esfuerzo económico máximo para fichaje estrella
+    } else if (rec.category === 'MEJORA_MODERADA') {
+      dynamicMargin = 1.5; // Margen prudente
+    }
 
-    // Determinar si la operación es CRÍTICA (Exige confirmación por Telegram) o AUTÓNOMA
-    const isCritical = rec.price > autoBidLimit || rec.price > (balance * 0.40) || rec.requiresSaleFirst || rec.category === 'SALTO_CUALITATIVO';
+    const bidAmount = Math.ceil(rec.price * (1 + dynamicMargin / 100));
 
-    if (isCritical) {
-      result.manualAlerts.push({ ...rec, playerId: pid, bidAmount, isCritical: true });
+    // Definición de COMPRA CRÍTICA (Exige confirmación interactiva por Telegram):
+    // 1. Fichaje grande (> autoBidLimit, ej: > 8M €)
+    // 2. Fichaje que consume más del 40% del saldo total en caja
+    // 3. Fichaje de Salto Cualitativo Estrella (+25 pts)
+    const isCriticalPurchase = rec.price > autoBidLimit || rec.price > (balance * 0.40) || rec.upgradePoints >= 25;
+
+    if (isCriticalPurchase) {
+      result.manualAlerts.push({ ...rec, playerId: pid, bidAmount, dynamicMargin, isCritical: true });
     } else {
-      result.autoBids.push({ ...rec, playerId: pid, bidAmount, isCritical: false });
+      result.autoBids.push({ ...rec, playerId: pid, bidAmount, dynamicMargin, isCritical: false });
     }
   }
 
