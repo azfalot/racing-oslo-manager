@@ -55,7 +55,13 @@ export default function TeamValueChart({ onClose }) {
   const meTeam = teams.find(t => t.isMe)
   const meInitial = meTeam ? meTeam.values[0] : 32.5
   const meCurrent = meTeam ? meTeam.values[meTeam.values.length - 1] : 41.93
-  const meGrowth = (((meCurrent - meInitial) / meInitial) * 100).toFixed(1)
+  const meGrowthM = (meCurrent - meInitial).toFixed(2)
+  const meGrowthPct = (((meCurrent - meInitial) / meInitial) * 100).toFixed(1)
+
+  // Calcular puesto real dinámico en la liga según valor de plantilla
+  const sortedByValue = [...teams].sort((a, b) => (b.squadValue || (b.values[b.values.length - 1] * 1000000)) - (a.squadValue || (a.values[a.values.length - 1] * 1000000)))
+  const myRank = sortedByValue.findIndex(t => t.isMe) + 1
+  const totalTeams = teams.length
 
   return (
     <div className="bg-black border border-forest/40 rounded-sm p-6 space-y-6 shadow-2xl relative">
@@ -86,14 +92,16 @@ export default function TeamValueChart({ onClose }) {
           </div>
         </div>
 
-        {/* Crecimiento Racing de Oslo */}
+        {/* Resumen Financiero Real de Racing de Oslo */}
         <div className="flex items-center gap-3 bg-forest-dark/30 border border-forest/40 px-4 py-2 rounded-sm">
           <div className="text-right">
             <span className="text-[10px] text-cream/50 uppercase font-mono block">Crecimiento Racing</span>
-            <span className="text-sm font-bold text-forest-light font-mono">+{meGrowth}% ({meCurrent} M€)</span>
+            <span className="text-sm font-bold text-forest-light font-mono">+{meGrowthPct}% (+{meGrowthM} M€)</span>
           </div>
-          <span className="text-xs font-bold text-black bg-emerald-400 px-2 py-0.5 rounded-sm uppercase">
-            LÍDER
+          <span className={`text-xs font-bold px-2 py-0.5 rounded-sm uppercase ${
+            myRank === 1 ? 'bg-amber-400 text-black' : 'bg-forest/60 text-forest-light border border-forest-light/40'
+          }`}>
+            {myRank}º DE {totalTeams} EQUIPOS
           </span>
         </div>
       </div>
