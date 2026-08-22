@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { TrendingUp, Shield, BarChart2, Check } from 'lucide-react'
+import { TrendingUp, Shield, BarChart2, Check, X } from 'lucide-react'
 import historyData from '../data/teamValueHistory.json'
 
-export default function TeamValueChart() {
+export default function TeamValueChart({ onClose }) {
   const [activeTeams, setActiveTeams] = useState(
     historyData.teams.reduce((acc, t) => ({ ...acc, [t.name]: true }), {})
   )
@@ -58,9 +58,20 @@ export default function TeamValueChart() {
   const meGrowth = (((meCurrent - meInitial) / meInitial) * 100).toFixed(1)
 
   return (
-    <div className="bg-black border border-forest/30 rounded-sm p-6 space-y-6 shadow-2xl">
+    <div className="bg-black border border-forest/40 rounded-sm p-6 space-y-6 shadow-2xl relative">
+      {/* Botón de cerrar si se renderiza en modal */}
+      {onClose && (
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 z-30 bg-black/80 p-2 rounded-full hover:bg-forest text-cream transition-colors border border-forest/40 focus:outline-none cursor-pointer"
+          aria-label="Cerrar gráfico"
+        >
+          <X size={20} />
+        </button>
+      )}
+
       {/* Cabecera */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-forest/30 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-forest/30 pb-4 pr-8">
         <div className="flex items-center gap-3">
           <div className="p-2.5 bg-forest-dark/60 border border-forest-light/40 rounded-sm text-forest-light">
             <TrendingUp size={22} />

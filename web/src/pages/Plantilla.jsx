@@ -6,6 +6,7 @@ import TeamValueChart from '../components/TeamValueChart'
 
 export default function Plantilla() {
   const [selectedPlayer, setSelectedPlayer] = useState(null)
+  const [showChartModal, setShowChartModal] = useState(false)
   const [categoryFilter, setCategoryFilter] = useState('ALL') // ALL, STARTERS, KEEPER, DEFENDER, MIDFIELDER, STRIKER
   const [searchTerm, setSearchTerm] = useState('')
   const [sortBy, setSortBy] = useState('projected') // projected, points, price, position
@@ -57,9 +58,6 @@ export default function Plantilla() {
   return (
     <div className="container mx-auto px-4 sm:px-6 py-8 space-y-6">
       
-      {/* GRÁFICO DE EVOLUCIÓN DEL VALOR DE PLANTILLA VS RIVALES */}
-      <TeamValueChart />
-
       {/* Cabecera & Estadísticas Resumen */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-forest/30 pb-6">
         <div>
@@ -72,8 +70,14 @@ export default function Plantilla() {
           </p>
         </div>
 
-        {/* Badges de Resumen */}
-        <div className="flex items-center gap-2">
+        {/* Badges de Resumen y Botón de Modal para Gráfico */}
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            onClick={() => setShowChartModal(true)}
+            className="bg-forest-dark/80 hover:bg-forest text-cream border border-forest-light/40 text-xs font-mono font-bold px-3 py-1.5 rounded-sm transition-all flex items-center gap-1.5 cursor-pointer shadow-md uppercase"
+          >
+            <TrendingUp size={14} className="text-forest-light" /> EVOLUCIÓN VS RIVALES
+          </button>
           <span className="bg-forest-dark/80 text-forest-light border border-forest-light/40 text-xs font-mono px-3 py-1.5 rounded-sm">
             XI Titular: <b>{startersCount}/11</b>
           </span>
@@ -231,6 +235,15 @@ export default function Plantilla() {
               </div>
             )
           })}
+        </div>
+      )}
+
+      {/* TEAM VALUE EVOLUTION MODAL */}
+      {showChartModal && (
+        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6">
+          <div className="max-w-5xl w-full max-h-[92vh] overflow-y-auto rounded-sm">
+            <TeamValueChart onClose={() => setShowChartModal(false)} />
+          </div>
         </div>
       )}
 
