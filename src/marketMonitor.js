@@ -128,7 +128,7 @@ export async function checkMarket(client, squad, balance, botPaused) {
   // Analizar jugadores del mercado en venta por la Computadora
   const marketAnalysis = engine.analyzeMarket(currentPlayers, squad, balance);
   const recommendations = (marketAnalysis.recommendations || [])
-    .filter(r => r.upgradePoints > 0) // Presentar todas las mejoras potenciales para decisión del usuario
+    .filter(r => r.category === 'SALTO_CUALITATIVO' || r.category === 'MEJORA_MODERADA') // SUPRIMIR EL_RESTO
     .sort((a, b) => b.upgradePoints - a.upgradePoints); // Ordenar por impacto decreciente
 
   const pendingBids = await client.getPendingBids();
@@ -142,13 +142,20 @@ export async function checkMarket(client, squad, balance, botPaused) {
     }
   } catch (e) {}
 
-  // NUNCA SE COMPRA DE FORMA AUTÓNOMA: El bot solo genera alertas informativas para decisión del usuario
   for (const rec of recommendations) {
     const pid = parseInt(rec.playerId || rec.id);
     if (pendingIds.has(pid) || ignoredIds.has(pid)) continue;
 
     const bidAmount = Math.ceil(rec.price * (1 + bidMargin / 100));
-    result.manualAlerts.push({ ...rec, playerId: pid, bidAmount });
+
+    // Determinar si la operación es CRÍTICA (Exige confirmación por Telegram) o AUTÓNOMA
+    const isCritical = rec.price > autoBidLimit || rec.price > (balance * 0.40) || rec.requiresSaleFirst || rec.category === 'SALTO_CUALITATIVO';
+
+    if (isCritical) {
+      result.manualAlerts.push({ ...rec, playerId: pid, bidAmount, isCritical: true });
+    } else {
+      result.autoBids.push({ ...rec, playerId: pid, bidAmount, isCritical: false });
+    }
   }
 
   return result;

@@ -1097,36 +1097,42 @@ async function runMarketCheck() {
 
     // Notificar pujas automáticas realizadas
     for (const bid of result.autoBids) {
-      const msg = bid.success
-        ? `🛒 <b>[Monitor Mercado]</b> Auto-puja enviada: <b>${escapeHtml(bid.name)}</b> por <b>${bid.bidAmount.toLocaleString()} €</b>\n📈 Mejora: +${bid.upgradePoints.toFixed(0)} ptos sobre tu peor ${bid.type}`
-        : `🛒 <b>[Monitor Mercado]</b> Auto-puja FALLIDA por <b>${escapeHtml(bid.name)}</b> (${bid.bidAmount.toLocaleString()} €)`;
-      await sendTelegramMessage(msg);
-      // Enviar tarjeta de presentación si la puja tuvo éxito
-      if (bid.success) {
-        const pid = bid.playerId || bid.id;
-        await sendSigningCard(bid.name, bid.type, bid.price,
-          `✍️ <b>${escapeHtml(bid.name)}</b> firma con el Racing de Oslo por <b>${bid.bidAmount.toLocaleString()} €</b>`,
-          pid, client.getToken());
+    // 1. PUJAS AUTOMÁTICAS (Operaciones Estándar no críticas)
+    for (const bid of result.autoBids) {
+      if (botPaused) continue;
+      const success = await client.placeBid(bid.playerId, bid.name, bid.bidAmount);
+      if (success) {
+        let log = [];
+        try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
+        log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Auto-Puja', player: bid.name, amount: `${bid.bidAmount.toLocaleString()} €`, status: 'Éxito' });
+        fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
+
+        const msg = `💼 🤖 <b>[Mateo Oslomany] Auto-Puja Ejecutada</b>\n\n` +
+          `👤 <b>${escapeHtml(bid.name)}</b> (${(bid.type || '').toUpperCase()})\n` +
+          `💰 <b>Importe Pujado:</b> ${bid.bidAmount.toLocaleString()} €\n` +
+          `📈 <b>Impacto:</b> +${bid.upgradePoints.toFixed(0)} ptos de mejora sobre tu plantilla`;
+        await sendTelegramMessage(msg);
       }
     }
 
-    // 1. OPORTUNIDADES DE COMPRA: Propuestas detalladas con botones de confirmación (Computadora y Rivales)
+    // 2. OPERACIONES CRÍTICAS Y SALTO CUALITATIVO (Confirmación obligatoria por Telegram)
     for (const alert of result.manualAlerts) {
       const posTag = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' }[alert.type] || '👤';
       const sellerTag = alert.isComputer ? 'Computadora' : `<b>${escapeHtml(alert.ownerName)}</b> (Rival de la Liga)`;
-      const msg = `🛒 <b>[Propuesta de Fichaje] · Mateo Oslomany</b>\n\n` +
+      const msg = `🛒 <b>[OPERACIÓN CRÍTICA / SALTO CUALITATIVO]</b>\n\n` +
         `${posTag} <b>${escapeHtml(alert.name)}</b> (${(alert.type || '').toUpperCase()})\n` +
         `👤 <b>Vendedor:</b> ${sellerTag}\n` +
         `💰 <b>Precio de Mercado:</b> ${alert.price.toLocaleString()} €\n` +
+        `🏆 <b>Categoría:</b> ${alert.impactTag}\n` +
         `📈 <b>Impacto Estimado:</b> +${alert.upgradePoints.toFixed(0)} ptos de mejora sobre tu peor titular\n` +
         `📊 <b>Puntos Esperados:</b> ~${(alert.expectedPoints || 0).toFixed(0)} ptos (PPM: ${alert.ppm || 0})\n\n` +
         `💡 <b>Justificación Técnico-Económica:</b>\n` +
         `<i>${escapeHtml(alert.reason)} Saldo disponible: ${balance.toLocaleString()} €.</i>\n\n` +
-        `<b>¿Autorizas enviar esta oferta a Comunio?</b>`;
+        `<b>¿Autorizas pujar por este jugador?</b>`;
 
       const markup = {
         inline_keyboard: [[
-          { text: `✅ PUJAR (${alert.bidAmount.toLocaleString()} €)`, callback_data: `bid:${alert.playerId}:${alert.name}:${alert.bidAmount}:${alert.type}` },
+          { text: `⚠️ CONFIRMAR PUJA (${alert.bidAmount.toLocaleString()} €)`, callback_data: `bid:${alert.playerId}:${alert.name}:${alert.bidAmount}:${alert.type}` },
           { text: `❌ IGNORAR`, callback_data: `ignore:${alert.playerId}:${alert.name}` }
         ]]
       };

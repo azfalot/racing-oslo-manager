@@ -39,10 +39,42 @@ export class ComunioEngine {
   }
 
   /**
-   * Calcula la puntuación de calidad / valor de un jugador.
-   * Ponderación Dinámica: Puntos Recientes (50%) + Histórico Base (35%) + Estado de Salud/Racha (15%).
+   * Calcula la dificultad del partido de la próxima jornada según el rival.
+   * Modificador: Rival Gigante (Barça, Madrid, Atleti) -> -25%
+   * Salida complicada -> -15%
+   * Partido favorable en casa vs zona baja -> +10%
    */
-  getExpectedPoints(player) {
+  getMatchDifficultyModifier(player, matchData) {
+    if (!matchData) return 1.0;
+
+    const opponent = ((matchData.opponent || matchData.rival || '').toLowerCase());
+    const isAway = Boolean(matchData.isAway || matchData.away);
+
+    // Rival Gigante (Penalización del 25%)
+    const giants = ['real madrid', 'barcelona', 'fc barcelona', 'barça', 'atletico', 'atlético', 'atleti'];
+    if (giants.some(g => opponent.includes(g))) {
+      return 0.75;
+    }
+
+    // Rival Alto fuera de casa (Penalización del 15%)
+    const toughTeams = ['real sociedad', 'athletic', 'villarreal', 'girona', 'betis', 'sevilla'];
+    if (isAway && toughTeams.some(t => opponent.includes(t))) {
+      return 0.85;
+    }
+
+    // Partido favorable en casa (Bonus +10%)
+    if (!isAway && (opponent.includes('alaves') || opponent.includes('elche') || opponent.includes('valladolid') || opponent.includes('cadiz') || opponent.includes('granada'))) {
+      return 1.10;
+    }
+
+    return 1.0;
+  }
+
+  /**
+   * Calcula la puntuación de calidad / valor de un jugador.
+   * Ponderación Dinámica: Puntos Recientes (50%) + Histórico Base (35%) + Estado de Salud/Racha (15%) + Dificultad Rival.
+   */
+  getExpectedPoints(player, matchData = null) {
     let baseScore = 0;
 
     // 1. Intentar usar promedio de puntos por partido reciente de la temporada actual
@@ -85,6 +117,10 @@ export class ComunioEngine {
     if (statusLower.includes('duda') || statusLower.includes('molestias')) {
       baseScore = Math.round(baseScore * 0.40); // Penalización preventiva del 60%
     }
+
+    // 5. Aplicar Modificador por Pronóstico de Partido / Dificultad del Rival
+    const matchMod = this.getMatchDifficultyModifier(player, matchData);
+    baseScore = Math.round(baseScore * matchMod);
 
     return baseScore;
   }
@@ -332,27 +368,33 @@ export class ComunioEngine {
       // Comparar con el jugador más débil que tenemos en esa posición
       const myWeakest = myWeakestByPos[player.type];
       let upgradePoints = expectedPoints;
-      let isSignificantUpgrade = true;
 
       if (myWeakest) {
         const myWeakestPoints = this.getExpectedPoints(myWeakest);
         upgradePoints = expectedPoints - myWeakestPoints;
-        
-        // 3. Exigir una MEJORA SIGNIFICATIVA (+5 puntos esperados sobre el peor titular de la posición)
-        isSignificantUpgrade = upgradePoints >= 5;
       }
 
-      // 4. Categorizar nivel de impacto (+30 a +50 pts = Gran Impacto / Fichaje Estrella)
-      let impactTag = '📈 Mejora Promedio';
-      if (upgradePoints >= 40) impactTag = '🔥 FICHAJE ESTRELLA (+40 pts impacto)';
-      else if (upgradePoints >= 25) impactTag = '⭐ GRAN IMPACTO (+25 pts impacto)';
-      else if (upgradePoints >= 15) impactTag = '🚀 MEJORA DESTACADA (+15 pts)';
+      // 4. Categorizar según la directiva de mercado:
+      // SALTO_CUALITATIVO: mejora >= 15 pts
+      // MEJORA_MODERADA: 0 < mejora < 15 pts
+      // EL_RESTO: mejora <= 0 pts (Suprimido en Telegram)
+      let category = 'EL_RESTO';
+      let impactTag = '⛔ EL RESTO (Sin Mejora)';
 
-      // 5. Protección económica: El precio del fichaje no debe poner en riesgo la reserva financiera
-      const canAffordSafely = player.price <= maxExpenditure || (balance >= player.price && upgradePoints >= 15);
+      if (upgradePoints >= 15) {
+        category = 'SALTO_CUALITATIVO';
+        impactTag = upgradePoints >= 30 ? '🏆 SALTO CUALITATIVO ESTRELLA (+30 pts)' : '🚀 SALTO CUALITATIVO (+15 pts)';
+      } else if (upgradePoints > 0) {
+        category = 'MEJORA_MODERADA';
+        impactTag = '📈 MEJORA MODERADA';
+      }
 
-      if (isSignificantUpgrade && canAffordSafely) {
-        const bidAmount = player.price; // Siempre pujamos al mínimo
+      // 5. Protección económica y control de plantilla (15 jugadores máx)
+      const canAffordSafely = player.price <= maxExpenditure || (balance >= player.price && category === 'SALTO_CUALITATIVO');
+      const isSquadFull = currentSquad.length >= 15;
+
+      if (category !== 'EL_RESTO' && canAffordSafely) {
+        const bidAmount = player.price; // Puja mínima por defecto
 
         recommendations.push({
           playerId: pid,
@@ -363,9 +405,11 @@ export class ComunioEngine {
           expectedPoints,
           ppm: parseFloat(ppm.toFixed(2)),
           upgradePoints,
+          category, // SALTO_CUALITATIVO o MEJORA_MODERADA
           impactTag,
           ownerName,
           isComputer,
+          requiresSaleFirst: isSquadFull,
           reason: myWeakest 
             ? `${impactTag}: +${upgradePoints.toFixed(0)} pts esperados sobre tu peor ${player.type} (${myWeakest.name}).`
             : `${impactTag}: Cubre posición vacía de ${player.type} con ${expectedPoints.toFixed(0)} pts esperados.`
