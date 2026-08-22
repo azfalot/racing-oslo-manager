@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react'
 import squadData from '../data/squad.json'
 import { Search, Filter, ArrowUpDown, Shield, Users, Award, TrendingUp, ChevronRight } from 'lucide-react'
 import PlayerProfileModal, { getPosBadgeStyle } from '../components/PlayerProfileModal'
+import TeamValueChart from '../components/TeamValueChart'
 
 export default function Plantilla() {
   const [selectedPlayer, setSelectedPlayer] = useState(null)
@@ -56,6 +57,9 @@ export default function Plantilla() {
   return (
     <div className="container mx-auto px-4 sm:px-6 py-8 space-y-6">
       
+      {/* GRÁFICO DE EVOLUCIÓN DEL VALOR DE PLANTILLA VS RIVALES */}
+      <TeamValueChart />
+
       {/* Cabecera & Estadísticas Resumen */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-forest/30 pb-6">
         <div>
