@@ -8,10 +8,29 @@ import { getCategoryBadgeStyle, formatNewsDate } from './Noticias'
 export default function Mercado() {
   const [selectedPlayer, setSelectedPlayer] = useState(null)
   const [selectedNews, setSelectedNews] = useState(null)
+  const [positionFilter, setPositionFilter] = useState('ALL') // ALL, keeper, defender, midfielder, striker
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const computerPlayers = marketData.filter(p => p.ownerId === 1)
-  const ourPlayers = marketData.filter(p => p.ownerId === 21163822)
-  const otherPlayers = marketData.filter(p => p.ownerId !== 1 && p.ownerId !== 21163822)
+  const filterPlayer = (p) => {
+    // 1. Filtro por posición
+    if (positionFilter !== 'ALL') {
+      const pos = (p.position || '').toLowerCase()
+      if (!pos.includes(positionFilter.toLowerCase())) return false
+    }
+    // 2. Buscador por nombre o club
+    if (searchTerm.trim() !== '') {
+      const term = searchTerm.toLowerCase().trim()
+      const name = (p.name || '').toLowerCase()
+      const club = (p.clubName || '').toLowerCase()
+      if (!name.includes(term) && !club.includes(term)) return false
+    }
+    return true
+  }
+
+  const rawComputer = marketData.filter(p => p.ownerId === 1)
+  const computerPlayers = rawComputer.filter(filterPlayer)
+  const ourPlayers = marketData.filter(p => p.ownerId === 21163822).filter(filterPlayer)
+  const otherPlayers = marketData.filter(p => p.ownerId !== 1 && p.ownerId !== 21163822).filter(filterPlayer)
   const rumorNews = (newsData || []).filter(n => (n.category || '').toLowerCase() === 'rumores')
 
   const formatPrice = (price) => price ? price.toLocaleString('es-ES') + ' €' : 'Desconocido'
@@ -104,13 +123,58 @@ export default function Mercado() {
         </div>
       )}
 
+      {/* BARRA DE HERRAMIENTAS: FILTRO POR POSICIÓN Y BUSCADOR */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-black border border-forest/30 p-4 rounded-sm shadow-md">
+        {/* Pestañas de Filtro por Posición */}
+        <div className="flex flex-wrap items-center gap-1.5 w-full sm:w-auto">
+          {[
+            { id: 'ALL', label: 'TODOS' },
+            { id: 'keeper', label: '🧤 PORTEROS' },
+            { id: 'defender', label: '🛡️ DEFENSAS' },
+            { id: 'midfielder', label: '⚙️ MEDIOS' },
+            { id: 'striker', label: '⚡ DELANTEROS' },
+          ].map(tab => (
+            <button
+              key={tab.id}
+              onClick={() => setPositionFilter(tab.id)}
+              className={`text-xs font-bold px-3 py-1.5 rounded-sm transition-all border uppercase tracking-wider cursor-pointer ${
+                positionFilter === tab.id
+                  ? 'bg-forest text-cream border-forest-light shadow-md'
+                  : 'bg-forest-dark/30 text-cream/70 border-forest/30 hover:border-forest/60 hover:text-white'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Buscador de Jugadores en Mercado */}
+        <div className="relative w-full sm:w-64">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-cream/50" size={14} />
+          <input
+            type="text"
+            placeholder="Buscar jugador o club..."
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+            className="w-full bg-forest-dark/50 border border-forest/40 rounded-sm pl-9 pr-3 py-1.5 text-xs text-white placeholder-cream/40 focus:outline-none focus:border-forest-light"
+          />
+        </div>
+      </div>
+
       {/* MERCADO PRINCIPAL */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Jugadores Libres */}
         <div className="lg:col-span-2 space-y-8">
-          <div className="flex items-center gap-3 border-b border-forest/30 pb-4">
-            <Computer className="text-forest-light" />
-            <h3 className="text-2xl font-display font-bold">Jugadores Libres ({computerPlayers.length})</h3>
+          <div className="flex items-center justify-between border-b border-forest/30 pb-4">
+            <div className="flex items-center gap-3">
+              <Computer className="text-forest-light" />
+              <h3 className="text-2xl font-display font-bold">Jugadores Libres ({computerPlayers.length})</h3>
+            </div>
+            {positionFilter !== 'ALL' && (
+              <span className="text-xs text-forest-light font-mono font-bold uppercase border border-forest/40 px-2 py-0.5 rounded-sm bg-forest-dark/30">
+                Filtro: {positionFilter}
+              </span>
+            )}
           </div>
           
           <div className="bg-black border border-forest/30 rounded-sm overflow-hidden shadow-xl">
