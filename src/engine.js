@@ -327,13 +327,15 @@ export class ComunioEngine {
     }
 
     const currentSquad = squad?.players || [];
-    const mySquadIds = new Set(currentSquad.map(p => parseInt(p.playerId || p.id)));
+    // Identificar el mejor XI actual para comparar los fichajes del mercado contra los titulares
+    const currentLineup = this.optimizeLineup(squad);
+    const starters = currentLineup.starting11 || [];
 
-    const myWeakestByPos = {
-      keeper: this.getWeakestPlayer(currentSquad, 'keeper'),
-      defender: this.getWeakestPlayer(currentSquad, 'defender'),
-      midfielder: this.getWeakestPlayer(currentSquad, 'midfielder'),
-      striker: this.getWeakestPlayer(currentSquad, 'striker')
+    const myWeakestStarterByPos = {
+      keeper: this.getWeakestPlayer(starters, 'keeper'),
+      defender: this.getWeakestPlayer(starters, 'defender'),
+      midfielder: this.getWeakestPlayer(starters, 'midfielder'),
+      striker: this.getWeakestPlayer(starters, 'striker')
     };
 
     const recommendations = [];
@@ -370,12 +372,12 @@ export class ComunioEngine {
       // Puntos por millón (PPM)
       const ppm = adjustedExpectedPoints / (player.price / 1000000);
 
-      // Comparar con el jugador más débil que tenemos en esa posición
-      const myWeakest = myWeakestByPos[player.type];
+      // Comparar con el titular más débil que tenemos en esa posición
+      const myWeakestStarter = myWeakestStarterByPos[player.type];
       let upgradePoints = adjustedExpectedPoints;
 
-      if (myWeakest) {
-        const myWeakestPoints = this.getExpectedPoints(myWeakest);
+      if (myWeakestStarter) {
+        const myWeakestPoints = this.getExpectedPoints(myWeakestStarter);
         upgradePoints = adjustedExpectedPoints - myWeakestPoints;
       }
 
