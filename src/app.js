@@ -175,10 +175,10 @@ async function runBot() {
     const economyResult = engine.manageEconomy(squad || { players: [] }, balance);
     const marketResult = engine.analyzeMarket(marketPlayers, squad, balance);
 
-    // Aplicar margen de puja a las recomendaciones
+    // Aplicar margen de puja a las recomendaciones si no tienen ya puja calculada
     if (marketResult.recommendations) {
       marketResult.recommendations = marketResult.recommendations.map(rec => {
-        const withMargin = Math.ceil(rec.price * (1 + bidMargin / 100));
+        const withMargin = rec.bidAmount || Math.ceil(rec.price * (1 + bidMargin / 100));
         return { ...rec, bidAmount: withMargin };
       });
     }
@@ -244,14 +244,14 @@ async function runBot() {
     // Alertas
     const injuredStarters = (lineupResult.starting11 || []).filter(p => !p.available);
     const alertLines = [];
-    if (economyResult.inDebt) alertLines.push(`🚨 Deuda: ${Math.abs(balance).toLocaleString()} € → <code>/sugerencias</code>`);
+    if (economyResult.inDebt) alertLines.push(`🚨 Deuda: ${Math.abs(balance).toLocaleString()} € → /sugerencias`);
     if (injuredStarters.length > 0) alertLines.push(`🤕 Lesionados titulares: ${injuredStarters.map(p => escapeHtml(p.name)).join(', ')}`);
-    if (pendingBids.length > 0) alertLines.push(`⏳ ${pendingBids.length} puja(s) activa(s) → <code>/mis_pujas</code>`);
+    if (pendingBids.length > 0) alertLines.push(`⏳ ${pendingBids.length} puja(s) activa(s) → /mis_pujas`);
 
     // Línea de mercado
     const marketOpsCount = recommendationsWithTM.length;
     const marketLine = marketOpsCount > 0
-      ? `${marketOpsCount} oportunidad(es) → <code>/mercado</code>`
+      ? `${marketOpsCount} oportunidad(es) → /mercado`
       : 'Sin compras rentables ahora mismo';
 
     // Última acción auditada

@@ -13,14 +13,16 @@ async function fetchRealData() {
   
   // Squad
   const squad = await client.getSquad();
-  const currentLineup = await client.getCurrentLineup() || [];
-  const lineupArr = Array.isArray(currentLineup) ? currentLineup : (currentLineup.players || []);
-  const startingIds = new Set(lineupArr.map(p => p.playerId || p.id));
-  
   const squadJson = {
     coach: "Mateo Oslomany",
     players: []
   };
+
+  // Usar el motor táctico ComunioEngine para determinar el XI titular óptimo y las proyecciones exactas
+  const { ComunioEngine } = await import('./engine.js');
+  const engine = new ComunioEngine();
+  const optimalLineup = engine.optimizeLineup(squad);
+  const optimalStarterIds = new Set((optimalLineup.starting11 || []).map(p => p.playerId));
 
   for (const p of squad.players) {
     const photoUrl = `https://api.comunio.es/players/${p.playerId}/photo?size=l&cropped=1`;
@@ -33,13 +35,15 @@ async function fetchRealData() {
       console.warn(`No se pudo descargar la foto de ${p.name}`);
     }
 
+    const isStarter = optimalStarterIds.has(p.playerId);
+
     squadJson.players.push({
       id: p.playerId,
       name: p.name,
       position: p.type,
       number: Math.floor(Math.random() * 99) + 1,
       image: localPhotoPath,
-      isStarter: startingIds.has(p.playerId),
+      isStarter: isStarter,
       stats: { matches: p.stats?.matchDays || 0, goals: p.stats?.goals || 0, points: p.stats?.points || 0 }
     });
   }
@@ -62,11 +66,12 @@ async function fetchRealData() {
         p.statusInfo = details.statusInfo || details.status || 'Disponible';
         const historical = details.historical?.points || [];
         p.historicalPoints = historical.map(h => ({ season: h.season, points: parseInt(h.points) || 0 }));
-        const lastSeason = historical.find(h => h.season === '25/26' || h.season === '24/25') || historical[historical.length - 1];
-        p.lastSeasonAvg = details.average?.points ? parseFloat(details.average.points.replace(',', '.')) : 0;
-        const validHistPoints = (p.historicalPoints || []).map(h => h.points).filter(pts => pts > 0);
-        const bestHist = validHistPoints.length > 0 ? Math.max(...validHistPoints) : (p.lastSeasonAvg > 0 ? Math.round(p.lastSeasonAvg * 25) : 40);
-        p.projectedPoints = Math.round(bestHist * (p.isStarter ? 1.05 : 0.95));
+        p.historical = details.historical || [];
+        p.average = details.average || { points: '0' };
+        
+        // Puntuación esperada y proyección calculada 100% con el motor empírico ComunioEngine
+        const exp = engine.getExpectedPoints(p);
+        p.projectedPoints = exp;
       }
     } catch (e) {}
   }

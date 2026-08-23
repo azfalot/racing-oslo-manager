@@ -165,6 +165,9 @@ export class ComunioClient {
             type: item.position,
             historical: details?.historical || [],
             average: details?.average || { points: item.averagePoints },
+            club: details?.club || { name: item.clubName || '' },
+            nextMatches: details?.nextMatches || [],
+            cards: details?.cards || null,
             available: item.status === 'ACTIVE'
           };
         }));
@@ -765,15 +768,24 @@ export class ComunioClient {
     }
   }
   
-    async cancelBid(offerId, playerName) {
+    async cancelBid(offerId, playerName, playerId = 0) {
     if (!this.isLoggedIn) await this.login();
     console.log(`[CLIENT] Cancelando puja (offerId: ${offerId}) por ${playerName}...`);
     try {
-      const url = `https://api.comunio.es/communities/${this.communityId}/users/${this.userId}/offers/${offerId}`;
-      const response = await axios.delete(url, {
+      const url = `https://api.comunio.es/communities/${this.communityId}/users/${this.userId}/offers`;
+      const response = await axios.post(url, {
+        offers: [
+          {
+            offerid: parseInt(offerId),
+            tradableid: parseInt(playerId),
+            price: 0,
+            type: "DELETE"
+          }
+        ]
+      }, {
         headers: this.getHeaders()
       });
-      if (response.status === 200 || response.status === 204) {
+      if (response.status === 200 && response.data?.status === 'OK') {
         console.log(`[CLIENT] Puja por ${playerName} cancelada con éxito.`);
         return true;
       }

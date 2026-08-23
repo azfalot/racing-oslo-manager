@@ -1,6 +1,7 @@
 import fs from 'fs';
 import axios from 'axios';
 import { ComunioEngine } from './engine.js';
+import { getRivalBiddingIntelligence } from './rivals.js';
 
 const lastMarketFile = 'last_market.json';
 const ignoredPlayersFile = 'ignored_players.json';
@@ -119,74 +120,72 @@ export async function checkMarket(client, squad, balance, botPaused) {
 
   if (botPaused || currentPlayers.length === 0) return result;
 
-  // Comprobar franja horaria nocturna estratégica (Madrid 23:45h - 23:59h)
-  const nowMadrid = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
-  const hours = nowMadrid.getHours();
-  const minutes = nowMadrid.getMinutes();
-  const isNightBiddingWindow = (hours === 23 && minutes >= 45);
+  // Obtener inteligencia de pujas de rivales (si está disponible)
+  let rivalIntel = null;
+  try {
+    rivalIntel = await getRivalBiddingIntelligence(client);
+  } catch (e) {
+    console.warn('[MARKET MONITOR] No se pudo obtener inteligencia de rivales:', e.message);
+  }
 
-  // Analizar jugadores del mercado en venta por la Computadora
-  const marketAnalysis = engine.analyzeMarket(currentPlayers, squad, balance);
+  // Analizar mercado con el motor de optimización de plantilla
+  const marketAnalysis = engine.analyzeMarket(currentPlayers, squad, balance, rivalIntel);
   const recommendations = (marketAnalysis.recommendations || [])
-    .filter(r => r.category === 'SALTO_CUALITATIVO' || r.category === 'MEJORA_MODERADA') // SUPRIMIR EL_RESTO
-    .sort((a, b) => b.upgradePoints - a.upgradePoints); // Ordenar por impacto decreciente
+    .filter(r => r.action !== 'PASS' && r.category !== 'EL_RESTO')
+    .sort((a, b) => (b.strategicScore || 0) - (a.strategicScore || 0));
 
+  // Calcular límite estricto de pujas abiertas de Comunio (Saldo + 1/4 Plantilla)
+  const teamVal = (squad?.players || []).reduce((s, p) => s + (p.price || 0), 0);
+  const maxOpenBidsCap = balance + Math.floor(teamVal / 4);
   const pendingBids = await client.getPendingBids();
+  let currentOpenBidsSum = pendingBids.reduce((s, b) => s + (b.price || 0), 0);
+  let availableBiddingPower = Math.max(0, maxOpenBidsCap - currentOpenBidsSum);
+
   const pendingIds = new Set(pendingBids.map(b => parseInt(b.playerId || b.id || 0)).filter(id => id > 0));
   const pendingNames = new Set(pendingBids.map(b => (b.playerName || b.name || '').toLowerCase().trim()).filter(n => n.length > 0));
-
-  let bidMargin = 0;
-  try {
-    if (fs.existsSync('config.json')) {
-      const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
-      bidMargin = typeof config.bidMargin === 'number' ? config.bidMargin : 0;
-    }
-  } catch (e) {}
 
   for (const rec of recommendations) {
     const pid = parseInt(rec.playerId || rec.id || 0);
     const pName = (rec.name || rec.playerName || '').toLowerCase().trim();
 
-    // ⛔ SUPRESIÓN DE DUPLICADOS: Omitir inmediatamente si ya tenemos una puja activa por este jugador
+    // ⛔ SUPRESIÓN DE DUPLICADOS
     if ((pid > 0 && pendingIds.has(pid)) || (pName && pendingNames.has(pName)) || (pid > 0 && ignoredIds.has(pid))) {
       console.log(`[MARKET MONITOR] Omitiendo ${rec.name}: Ya existe una puja activa registrada o ignorada.`);
       continue;
     }
 
-    // Regla de Esfuerzo Económico Proporcional al Salto Táctico (upgradePoints):
-    // 👑 Crack Absoluto (>= +60 pts): +12.0% a +15.0% (Pagar lo necesario para asegurar el fichaje estrella)
-    // 🏆 Titular Estrella (+35 a +59 pts): +6.0% a +10.0% (Sobreprecio competitivo justo)
-    // 📈 Suplente de Refresco (+20 a +34 pts): +2.5% a +5.0% (Sobreprecio prudente sobre VM)
-    // 📉 Saldo Ajustado (< 3M €): +1.0% (Protección estricta de la liquidez)
-    let dynamicMargin = 2.0;
-    const upPts = rec.upgradePoints || 0;
+    const bidAmount = rec.bidAmount || rec.price;
+    const dynamicMargin = rec.marginPct || 0;
 
-    if (balance < 3000000) {
-      dynamicMargin = 1.0;
-    } else if (upPts >= 60) {
-      dynamicMargin = Math.min(15.0, 12.0 + ((upPts - 60) / 40) * 3.0);
-    } else if (upPts >= 35) {
-      dynamicMargin = 6.0 + ((upPts - 35) / 25) * 4.0;
-    } else if (upPts >= 20) {
-      dynamicMargin = 2.5 + ((upPts - 20) / 15) * 2.5;
-    } else {
-      dynamicMargin = 1.0;
+    // 🛡️ CONTROL DE CAPACIDAD COMUNIO: Verificar que la puja cabe en el cupo legal
+    if (bidAmount > availableBiddingPower) {
+      console.log(`[MARKET MONITOR] Omitiendo ${rec.name} (${bidAmount.toLocaleString()} €): Excede el cupo disponible de pujas (${availableBiddingPower.toLocaleString()} € de ${maxOpenBidsCap.toLocaleString()} €).`);
+      continue;
     }
 
-    dynamicMargin = parseFloat(dynamicMargin.toFixed(1));
-    const bidAmount = Math.ceil(rec.price * (1 + dynamicMargin / 100));
+    availableBiddingPower -= bidAmount;
 
-    // Definición de COMPRA CRÍTICA (Exige confirmación interactiva por Telegram):
-    // Únicamente es crítica si:
-    // 1. Es una súper-puja por un jugador estrella cuyo precio supera el límite autoBidLimit (8M €)
-    // 2. O consume más del 40% del saldo disponible en caja
-    // Las ofertas de oportunidad o parches (< 8M €) se ejecutan 100% AUTOMÁTICAMENTE para no saturar Telegram
-    const isCriticalPurchase = rec.price >= autoBidLimit || rec.price >= (balance * 0.40);
+    // Clasificación de seguridad: si la acción calculada es REQUIRE_CONFIRMATION o excede límites
+    const isCriticalPurchase = rec.action === 'REQUIRE_CONFIRMATION' ||
+      rec.price >= autoBidLimit ||
+      rec.price >= (balance * 0.40);
 
     if (isCriticalPurchase) {
-      result.manualAlerts.push({ ...rec, playerId: pid, bidAmount, dynamicMargin, isCritical: true });
+      result.manualAlerts.push({
+        ...rec,
+        playerId: pid,
+        bidAmount,
+        dynamicMargin,
+        isCritical: true
+      });
     } else {
-      result.autoBids.push({ ...rec, playerId: pid, bidAmount, dynamicMargin, isCritical: false });
+      result.autoBids.push({
+        ...rec,
+        playerId: pid,
+        bidAmount,
+        dynamicMargin,
+        isCritical: false
+      });
     }
   }
 

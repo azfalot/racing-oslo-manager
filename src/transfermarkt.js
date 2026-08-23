@@ -36,9 +36,10 @@ export async function getTransfermarktData(playerName) {
                     profileRes.data.match(/tm-player-market-value-development__current-value">[\s]*([0-9,]+\s*(mill\.|mil)\s*€)/i) ||
                     profileRes.data.match(/([0-9,]+\s*(mill\.|mil)\s*€)/i);
 
-    // Extraer edad
-    const ageMatch = profileRes.data.match(/Edad:[\s\S]*?info-table__content--bold">[\s]*([0-9]+)/i) ||
-                     profileRes.data.match(/F\. Nacim\.[\s\S]*?\(([0-9]{2})\)/i) ||
+    // Extraer edad (ej: itemprop="birthDate" ... (32))
+    const ageMatch = profileRes.data.match(/itemprop="birthDate"[^>]*>[\s\S]*?\(([0-9]{2})\)/i) ||
+                     profileRes.data.match(/Edad:[\s\S]*?\(([0-9]{2})\)/i) ||
+                     profileRes.data.match(/Fec\. nacim\.\/Edad:[\s\S]*?\(([0-9]{2})\)/i) ||
                      profileRes.data.match(/([0-9]{2})\s*años/i);
 
     // Extraer pie hábil

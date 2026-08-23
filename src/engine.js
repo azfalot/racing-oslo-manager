@@ -2,6 +2,20 @@
  * Motor de Inteligencia y Toma de Decisiones para Comunio
  */
 
+import {
+  getStrategy,
+  calculateSquadValue,
+  calculateMarginalValue,
+  calculateReplacementLoss,
+  calculatePositionNeed,
+  getExpectedPerformance,
+  calculateStrategicPurchaseScore,
+  calculateMaxRationalBid,
+  evaluateIncomingOffer,
+  evaluateSalePortfolio,
+  evaluatePostSigningSale
+} from './squadOptimizer.js';
+
 export class ComunioEngine {
 
   /**
@@ -47,8 +61,23 @@ export class ComunioEngine {
   getMatchDifficultyModifier(player, matchData) {
     if (!matchData) return 1.0;
 
-    const opponent = ((matchData.opponent || matchData.rival || '').toLowerCase());
-    const isAway = Boolean(matchData.isAway || matchData.away);
+    let opponent = ((matchData.opponent || matchData.rival || '').toLowerCase());
+    let isAway = Boolean(matchData.isAway || matchData.away);
+
+    // Si matchData contiene el cruce oficial de Comunio API ({ homeClub, guestClub })
+    if (matchData.homeClub && matchData.guestClub) {
+      const playerClub = (player?.club?.name || player?.clubName || '').toLowerCase();
+      const homeName = (matchData.homeClub.name || '').toLowerCase();
+      const guestName = (matchData.guestClub.name || '').toLowerCase();
+
+      if (playerClub && (homeName.includes(playerClub) || playerClub.includes(homeName))) {
+        opponent = guestName;
+        isAway = false;
+      } else {
+        opponent = homeName;
+        isAway = true;
+      }
+    }
 
     // Rival Gigante (Penalización del 25%)
     const giants = ['real madrid', 'barcelona', 'fc barcelona', 'barça', 'atletico', 'atlético', 'atleti'];
@@ -62,8 +91,8 @@ export class ComunioEngine {
       return 0.85;
     }
 
-    // Partido favorable en casa (Bonus +10%)
-    if (!isAway && (opponent.includes('alaves') || opponent.includes('elche') || opponent.includes('valladolid') || opponent.includes('cadiz') || opponent.includes('granada'))) {
+    // Partido favorable en casa vs rival accesible (Bonus +10%)
+    if (!isAway && (opponent.includes('alaves') || opponent.includes('elche') || opponent.includes('valladolid') || opponent.includes('cadiz') || opponent.includes('granada') || opponent.includes('leganes') || opponent.includes('espanyol') || opponent.includes('getafe'))) {
       return 1.10;
     }
 
@@ -131,13 +160,20 @@ export class ComunioEngine {
   isPlayerAvailable(player) {
     if (!player) return false;
 
+    // 1. Comprobar tarjetas rojas directas o doble amarilla activa
+    if (player.cards && (player.cards.red > 0 || player.cards.yellowRed > 0)) {
+      return false;
+    }
+
     const statusLower = ((player.status || '') + ' ' + (player.statusInfo || '') + ' ' + (player.availability || '')).toLowerCase();
     
-    // Lista ampliada de estados no disponibles o con alto riesgo de 0 puntos (duda, debilitado, cirugía, molestias)
+    // Lista completa de estados no disponibles (sanciones, rojas, lesiones, cirugías, dudas)
     const unavailableKeywords = [
       'injured', 'suspended', 'rehabilitation', 'retired', 'away',
       'lesionado', 'sancionado', 'baja', 'duda', 'debilitado',
-      'molestias', 'cirugia', 'cirugía', 'quirófano', 'hombro', 'rotura'
+      'molestias', 'cirugia', 'cirugía', 'quirófano', 'hombro', 'rotura',
+      'red_banned', 'yellow_banned', 'banned', 'ban', 'sancion', 'sanción',
+      'expulsado', 'expulsión', 'roja'
     ];
     
     return !unavailableKeywords.some(keyword => statusLower.includes(keyword));
@@ -151,11 +187,14 @@ export class ComunioEngine {
       return { error: 'No se encontraron jugadores en la plantilla.' };
     }
 
-    const players = squad.players.map(p => ({
-      ...p,
-      expectedPoints: this.getExpectedPoints(p),
-      available: this.isPlayerAvailable(p)
-    }));
+    const players = squad.players.map(p => {
+      const nextMatch = (p.nextMatches && p.nextMatches.length > 0) ? p.nextMatches[0] : null;
+      return {
+        ...p,
+        expectedPoints: this.getExpectedPoints(p, nextMatch),
+        available: this.isPlayerAvailable(p)
+      };
+    });
 
     // Separar por posiciones
     const keepers = players.filter(p => p.type === 'keeper');
@@ -217,49 +256,32 @@ export class ComunioEngine {
   }
 
   /**
-   * Determina si se debe poner en venta a un jugador ÚNICAMENTE tras haber completado el fichaje de un reemplazo superior.
-   * Regla: Solo se vende al PEOR jugador de esa posición cuando el nuevo fichaje supera su nivel histórico.
+   * Obtiene la valoración de rendimiento independiente de la jornada (PPM, proyección, eficiencia)
    */
-  evaluateSaleTriggerAfterSigning(newSigning, squad) {
-    const currentSquad = squad?.players || [];
-    const pos = newSigning.type || newSigning.position;
-    
-    // Filtrar jugadores de la misma posición
-    const samePositionPlayers = currentSquad.filter(p => (p.type || p.position) === pos);
-    
-    if (samePositionPlayers.length === 0) {
-      return { shouldListForSale: false, reason: 'No hay suficientes jugadores en la posición para vender.' };
-    }
+  getExpectedPerformance(player) {
+    return getExpectedPerformance(player, getStrategy());
+  }
 
-    // Ordenar de menor a mayor histórico (el peor de la posición es el primero)
-    const sortedPosition = [...samePositionPlayers].sort((a, b) => this.getExpectedPoints(a) - this.getExpectedPoints(b));
-    const worstPlayer = sortedPosition[0];
-
-    const newSigningScore = this.getExpectedPoints(newSigning);
-    const worstPlayerScore = this.getExpectedPoints(worstPlayer);
-
-    // Solo poner a la venta si el nuevo fichaje es SUPERIOR al peor de la posición
-    if (newSigningScore > worstPlayerScore) {
-      return {
-        shouldListForSale: true,
-        playerToList: worstPlayer,
-        reason: `🎯 VENTA AUTORIZADA TRAS FICHAJE: Se ha fichado a ${newSigning.name} (${newSigningScore} pts históricos), que mejora la posición. Se pone a la venta ÚNICAMENTE al peor de la posición (${worstPlayer.name}, ${worstPlayerScore} pts) para recuperar inversión.`
-      };
-    }
-
+  /**
+   * Determina si se debe poner en venta a un jugador tras haber completado un fichaje.
+   * Evalúa la plantilla antes, después del fichaje y tras una posible venta.
+   */
+  evaluateSaleTriggerAfterSigning(newSigning, squad, balance = 0) {
+    const result = evaluatePostSigningSale(this, newSigning, squad, balance);
     return {
-      shouldListForSale: false,
-      reason: `⛔ NO SE PONE A LA VENTA: El nuevo fichaje (${newSigningScore} pts) no supera la exigencia requerida.`
+      shouldListForSale: result.shouldSell,
+      playerToList: result.saleCandidate,
+      reason: result.reason,
+      squadValues: result.squadValues
     };
   }
 
   /**
    * Evalúa una oferta de venta recibida por un jugador de nuestra plantilla.
-   * Reglas estrictas:
-   * 1. Comparación de Múltiples Ofertas: Seleccionar SIEMPRE la oferta de MAYOR IMPORTE.
-   * 2. Protección de Rivales: Preferir la Computadora sobre un rival humano si la oferta es igual o mayor.
-   * 3. Evaluación Táctica: Si el jugador es Titular Indiscutible (Top 1-2 de su posición) y el saldo no es negativo, RECHAZAR.
-   * 4. Rentabilidad Financiera: Solo vender si la oferta supera el valor de mercado (VM) o resuelve saldo negativo urgente.
+   * Reglas racionales:
+   * 1. Selección de la mejor oferta (preferencia Computer en caso de empate).
+   * 2. Protección de jugadores Core basada en pérdida por reemplazo del XI (marginal).
+   * 3. Manejo de deuda racional (no malvender destruyendo valor).
    */
   evaluateSaleOffer(player, offers, squad, currentBalance = 0) {
     if (!offers || offers.length === 0) {
@@ -279,70 +301,29 @@ export class ComunioEngine {
       chosenOffer = computerOffer;
     }
 
-    const marketValue = player.quotedPrice || player.price || 0;
-    const isProfitable = chosenOffer.price >= marketValue;
-    const isComputer = chosenOffer.user?.id === 1 || (chosenOffer.user?.name && chosenOffer.user.name.toLowerCase().includes('computer'));
-
-    // 2. Verificar si es un titular imprescindible o un jugador clave (>= 130 pts)
-    const bestLineup = this.optimizeLineup(squad);
-    const isStarter = bestLineup.starting11.some(p => p.playerId === player.id || p.playerId === player.playerId);
-    const expectedPoints = this.getExpectedPoints(player);
-
-    // Si es un titular clave o jugador estelar (>= 130 pts) y NO tenemos saldo negativo urgente, RECHAZAR VENTA AUTOMÁTICA
-    if ((isStarter || expectedPoints >= 130) && currentBalance >= 0) {
-      return {
-        shouldAccept: false,
-        chosenOffer,
-        reason: `⛔ RECHAZADA AUTOMÁTICAMENTE: ${player.name} (~${expectedPoints} pts) es una pieza clave de tu equipo y el club tiene saldo positivo (${currentBalance.toLocaleString()} €). No se vende a jugadores top.`
-      };
-    }
-
-    // Si la oferta proviene de un rival humano y ofrece menos o igual que la Computadora
-    if (!isComputer && computerOffer && bestOffer.price <= computerOffer.price) {
-      chosenOffer = computerOffer; // Forzar venta a Computer para no dar el jugador al rival
-    }
-
-    // 3. Aceptar si es rentable o si necesitamos liquidar deuda
-    if (isProfitable || currentBalance < 0) {
-      return {
-        shouldAccept: true,
-        chosenOffer,
-        reason: `✅ ACEPTADA: Venta estratégica de ${player.name} a ${chosenOffer.user?.name || 'Mercado'} por ${chosenOffer.price.toLocaleString()} € (+${(chosenOffer.price - marketValue).toLocaleString()} € sobre VM).`
-      };
-    }
+    const evalResult = evaluateIncomingOffer(this, player, chosenOffer, squad, currentBalance);
 
     return {
-      shouldAccept: false,
+      shouldAccept: evalResult.shouldAccept,
+      action: evalResult.action,
       chosenOffer,
-      reason: `⛔ RECHAZADA: La oferta (${chosenOffer.price.toLocaleString()} €) no alcanza el valor de mercado (${marketValue.toLocaleString()} €).`
+      replacementLoss: evalResult.replacementLoss,
+      reason: evalResult.reasoning.join(' ')
     };
   }
 
   /**
-   * Analiza el mercado de fichajes y sugiere las mejores compras
+   * Analiza el mercado de fichajes utilizando el motor de optimización de plantilla (Mejora Real sobre el Mejor Once).
    */
-  analyzeMarket(marketPlayers, squad, balance) {
+  analyzeMarket(marketPlayers, squad, balance, rivalIntel = null) {
     if (!marketPlayers || marketPlayers.length === 0) {
       return { recommendations: [], message: 'No hay jugadores en el mercado para analizar.' };
     }
 
     const currentSquad = squad?.players || [];
-    // Identificar el mejor XI actual para comparar los fichajes del mercado contra los titulares
-    const currentLineup = this.optimizeLineup(squad);
-    const starters = currentLineup.starting11 || [];
-
-    const myWeakestStarterByPos = {
-      keeper: this.getWeakestPlayer(starters, 'keeper'),
-      defender: this.getWeakestPlayer(starters, 'defender'),
-      midfielder: this.getWeakestPlayer(starters, 'midfielder'),
-      striker: this.getWeakestPlayer(starters, 'striker')
-    };
+    const mySquadIds = new Set(currentSquad.map(p => parseInt(p.playerId || p.id || 0)).filter(id => id > 0));
 
     const recommendations = [];
-
-    // Colchón de seguridad financiera: Mantener al menos 1M € o el 15% del saldo disponible
-    const safetyReserve = Math.max(1000000, Math.round(balance * 0.15));
-    const maxExpenditure = balance - safetyReserve;
 
     for (const player of marketPlayers) {
       const pid = parseInt(player.playerId || player.id);
@@ -354,90 +335,79 @@ export class ComunioEngine {
       const ownerName = (player.owner?.name || 'Computer').trim();
       const isComputer = player.owner?.id === 1 || ownerName.toLowerCase() === 'computer';
 
-      const expectedPoints = this.getExpectedPoints(player);
       const isAvailable = this.isPlayerAvailable(player);
-      
       if (!isAvailable) continue; // Ignorar lesionados o sancionados del mercado
 
-      // 2. Filtro de calidad general: exigir un rendimiento medio mínimo (~3.0 pts/partido o 25 pts de base esperada)
+      // 2. Filtro de calidad general
+      const expectedPoints = this.getExpectedPoints(player);
       const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
       if (expectedPoints < 25 && avgPoints < 3.0 && player.price > 1500000) {
-        continue; // Descartar parches o futbolistas con rendimiento mediocre y precio inflado
+        continue;
       }
 
-      // 3. Aplicar Modificador por Calendario & Dificultad del Rival Inminente
+      // 3. Modificador por Calendario & Dificultad del Rival Inminente
       const calendarMod = this.getMatchDifficultyModifier(player, { opponent: player.nextOpponent || player.clubName || '' });
       const adjustedExpectedPoints = Math.round(expectedPoints * calendarMod);
 
-      // Puntos por millón (PPM)
-      const ppm = adjustedExpectedPoints / (player.price / 1000000);
+      // 4. Evaluación de Squad Optimization (Mejora Real sobre el Mejor Once)
+      const purchaseScore = calculateStrategicPurchaseScore(this, player, squad, balance, rivalIntel);
+      const bidCalc = calculateMaxRationalBid(player, purchaseScore, balance, rivalIntel);
 
-      // Comparar con el titular más débil que tenemos en esa posición
-      const myWeakestStarter = myWeakestStarterByPos[player.type];
-      let upgradePoints = adjustedExpectedPoints;
+      const marginalValue = purchaseScore.marginalValue;
+      const upgradePoints = marginalValue; // Mapping para compatibilidad con código existente
+      const ppm = purchaseScore.performance.ppm;
+      const efficiency = purchaseScore.performance.efficiency;
 
-      if (myWeakestStarter) {
-        const myWeakestPoints = this.getExpectedPoints(myWeakestStarter);
-        upgradePoints = adjustedExpectedPoints - myWeakestPoints;
-      }
-
-      // 4. Categorizar según la directiva de alta exigencia de mercado:
-      // SALTO_CUALITATIVO: mejora >= 35 pts (Jugadores estrella que garantizan salto real)
-      // MEJORA_MODERADA: 20 <= mejora < 35 pts (Mejora secundaria significativa)
-      // EL_RESTO: mejora < 20 pts (Suprimido 100% en Telegram para evitar exceso de notificaciones)
+      // 5. Categorización racional
       let category = 'EL_RESTO';
       let impactTag = '⛔ EL RESTO (Sin Mejora Significativa)';
 
-      if (upgradePoints >= 35) {
+      if (purchaseScore.entersXI && marginalValue >= 8) {
         category = 'SALTO_CUALITATIVO';
-        impactTag = upgradePoints >= 50 ? '🏆 SALTO CUALITATIVO ESTRELLA (+50 pts)' : '🚀 SALTO CUALITATIVO (+35 pts)';
-      } else if (upgradePoints >= 20) {
-        // Exigir estado de forma positivo esta temporada (PPM >= 3.2 o racha reciente) para ocupar plaza de Suplente de Refresco
-        const isGoodForm = avgPoints >= 3.2 || (player.totalPoints && player.totalPoints > 30);
-        if (isGoodForm) {
-          category = 'MEJORA_MODERADA';
-          impactTag = '📈 MEJORA MODERADA EN FORMA (Suplente de Refresco +20 pts)';
-        } else {
-          category = 'EL_RESTO'; // Descartar si el jugador está fuera de forma en la temporada en curso
-        }
+        impactTag = marginalValue >= 15 ? '🏆 SALTO CUALITATIVO ESTRELLA (+15 pts XI)' : '🚀 SALTO CUALITATIVO (+8 pts XI)';
+      } else if (purchaseScore.entersXI || marginalValue >= 3 || purchaseScore.score >= 35) {
+        category = 'MEJORA_MODERADA';
+        impactTag = '📈 MEJORA TÁCTICA / ROTACIÓN';
+      } else if (purchaseScore.score >= 25) {
+        category = 'MEJORA_MODERADA';
+        impactTag = '📈 OPORTUNIDAD DE MERCADO / FONDO DE ARMARIO';
       }
 
-      // 5. Protección económica y control de plantilla (15 jugadores máx)
-      const canAffordSafely = player.price <= maxExpenditure || (balance >= player.price && category === 'SALTO_CUALITATIVO');
       const isSquadFull = currentSquad.length >= 15;
 
-      if (category !== 'EL_RESTO' && canAffordSafely) {
-        const bidAmount = player.price; // Puja mínima por defecto
-
-        recommendations.push({
-          playerId: pid,
-          name: player.name,
-          type: player.type,
-          price: player.price,
-          bidAmount,
-          expectedPoints,
-          ppm: parseFloat(ppm.toFixed(2)),
-          upgradePoints,
-          category, // SALTO_CUALITATIVO o MEJORA_MODERADA
-          impactTag,
-          ownerName,
-          isComputer,
-          requiresSaleFirst: isSquadFull,
-          reason: myWeakest 
-            ? `${impactTag}: +${upgradePoints.toFixed(0)} pts esperados sobre tu peor ${player.type} (${myWeakest.name}).`
-            : `${impactTag}: Cubre posición vacía de ${player.type} con ${expectedPoints.toFixed(0)} pts esperados.`
-        });
-      }
+      recommendations.push({
+        playerId: pid,
+        name: player.name,
+        type: player.type,
+        price: player.price,
+        bidAmount: bidCalc.recommendedBid,
+        maxRationalBid: bidCalc.maxRationalBid,
+        marginPct: bidCalc.marginPct,
+        expectedPoints: adjustedExpectedPoints,
+        ppm,
+        efficiency,
+        upgradePoints,
+        marginalValue,
+        strategicScore: purchaseScore.score,
+        strategicComponents: purchaseScore.components,
+        category,
+        impactTag,
+        action: bidCalc.action,
+        ownerName,
+        isComputer,
+        requiresSaleFirst: isSquadFull,
+        reasoning: purchaseScore.reasoning.concat(bidCalc.reasoning),
+        reason: `${impactTag}: Mejora real del XI: +${marginalValue.toFixed(0)} pts. ${bidCalc.reasoning[0] || ''}`
+      });
     }
 
-    // Ordenar recomendaciones: primero los fichajes de mayor impacto (+30 a +50 pts)
-    recommendations.sort((a, b) => b.upgradePoints - a.upgradePoints);
+    // Ordenar recomendaciones: primero los fichajes de mayor puntuación estratégica
+    recommendations.sort((a, b) => b.strategicScore - a.strategicScore);
 
-    // Identificar la mejor oferta del mercado en relación Calidad-Precio (Chollo / Bajo coste + Alto rendimiento)
     let bestValueOffer = null;
     if (recommendations.length > 0) {
-      const sortedByPPM = [...recommendations].sort((a, b) => b.ppm - a.ppm);
-      bestValueOffer = sortedByPPM[0];
+      const sortedByEfficiency = [...recommendations].sort((a, b) => (b.efficiency || 0) - (a.efficiency || 0));
+      bestValueOffer = sortedByEfficiency[0];
       if (bestValueOffer) {
         bestValueOffer.isBestValue = true;
       }
@@ -446,12 +416,12 @@ export class ComunioEngine {
     return {
       recommendations,
       bestValueOffer,
-      message: `Se han encontrado ${recommendations.length} oportunidades de fichaje recomendadas.`
+      message: `Se han encontrado ${recommendations.length} oportunidades de fichaje evaluadas.`
     };
   }
 
   /**
-   * Gestiona la economía y calcula qué jugadores vender en caso de deuda
+   * Gestiona la economía y optimiza la cartera de ventas en caso de deuda
    */
   manageEconomy(squad, balance) {
     const currentSquad = squad?.players || [];
@@ -467,47 +437,23 @@ export class ComunioEngine {
       return report;
     }
 
-    console.log(`[ENGINE] Alerta de Deuda: Tu balance es de ${balance}. Debes vender jugadores por valor de ${report.requiredSalesValue} antes de que comience la jornada.`);
+    console.log(`[ENGINE] Alerta de Deuda: Balance de ${balance.toLocaleString()} €. Optimizando cartera de ventas...`);
 
-    // Estrategia de venta:
-    // Clasificar jugadores de la plantilla según su ratio puntos/valor (PPM) ascendente.
-    // Los que tengan menor PPM (alto precio y pocos puntos, o lesionados) serán los primeros candidatos a vender.
-    const saleCandidates = currentSquad.map(p => {
-      const expectedPoints = this.getExpectedPoints(p);
-      const isAvailable = this.isPlayerAvailable(p);
-      const ppm = expectedPoints / (p.price / 1000000);
-      
-      // Multiplicar por 0.1 los puntos esperados si está lesionado a largo plazo para priorizar su venta
-      const scoreWeight = isAvailable ? expectedPoints : (expectedPoints * 0.1);
-      const priorityMetric = scoreWeight / (p.price / 1000000); // Menor valor = mejor candidato de venta
+    const portfolio = evaluateSalePortfolio(this, squad, Math.abs(balance));
+    report.suggestedSales = portfolio.suggestedSales.map(s => ({
+      playerId: s.playerId,
+      name: s.name,
+      type: s.type,
+      price: s.salePrice,
+      isAvailable: s.wasInXI,
+      replacementLoss: s.replacementLoss,
+      reason: s.reason
+    }));
 
-      return {
-        ...p,
-        expectedPoints,
-        isAvailable,
-        ppm,
-        priorityMetric
-      };
-    }).sort((a, b) => a.priorityMetric - b.priorityMetric); // De menor a mayor rendimiento de dinero
+    report.totalSportingLoss = portfolio.totalSportingLoss;
+    report.totalCashGenerated = portfolio.totalCash;
+    report.message = `¡ALERTA! Deuda de ${balance.toLocaleString()} €. Cartera óptima de venta calculada (${report.suggestedSales.length} jugadores, pérdida deportiva de ${portfolio.totalSportingLoss} pts).`;
 
-    let accumulatedValue = 0;
-    for (const player of saleCandidates) {
-      if (accumulatedValue >= report.requiredSalesValue) break;
-
-      accumulatedValue += player.price;
-      report.suggestedSales.push({
-        playerId: player.playerId,
-        name: player.name,
-        type: player.type,
-        price: player.price,
-        isAvailable: player.isAvailable,
-        reason: !player.isAvailable 
-          ? `Lesionado o no disponible, liberando ${player.price.toLocaleString()}€`
-          : `Bajo rendimiento por millón de euros (PPM: ${player.ppm.toFixed(2)}).`
-      });
-    }
-
-    report.message = `¡ALERTA! Tienes una deuda de ${balance.toLocaleString()}€. Para solucionarlo antes del inicio de la jornada, se sugiere poner en venta a los siguientes ${report.suggestedSales.length} jugadores.`;
     return report;
   }
 

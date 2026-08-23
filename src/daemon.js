@@ -310,20 +310,27 @@ async function handleTelegramMessage(message) {
       let rep = `💼 <b>[Mateo Oslomany] · Mercado de Fichajes</b>\n`;
       rep += `<i>Saldo disponible: ${balance.toLocaleString()} € | Jugadores en venta: ${marketPlayers.length}</i>\n\n`;
 
+      const keyboard = [];
       if (recs.length > 0) {
         recs.forEach((rec, i) => {
           const posTag = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' }[rec.type] || '👤';
+          const bidP = rec.bidAmount || rec.price;
           rep += `${i + 1}. ${posTag} <b>${escapeHtml(rec.name)}</b>\n`;
-          rep += `   💰 ${rec.price.toLocaleString()} € | PPM: ${rec.ppm}\n`;
-          rep += `   📈 Mejora: +${rec.upgradePoints.toFixed(0)} ptos\n`;
+          rep += `   💰 VM: ${rec.price.toLocaleString()} € | Puja: <b>${bidP.toLocaleString()} €</b>\n`;
+          rep += `   📈 Mejora Real XI: +${(rec.marginalValue || rec.upgradePoints || 0).toFixed(0)} pts | Eficiencia: ${rec.efficiency || 0} pts/M€\n`;
           rep += `   <i>${escapeHtml(rec.reason)}</i>\n\n`;
+
+          keyboard.push([
+            { text: `🎯 PUJAR POR ${rec.name.toUpperCase()} (${bidP.toLocaleString()} €)`, callback_data: `bid:${rec.playerId}:${rec.name}:${bidP}:${rec.type}` }
+          ]);
         });
-        rep += `Usa <code>/pujar &lt;nombre&gt;</code> para ofertar manualmente.`;
+        rep += `<i>💡 Pulsa en los botones inferiores para pujar con 1 clic o usa /pujar &lt;nombre&gt;.</i>`;
       } else {
         rep += `🔍 No hay oportunidades de fichaje rentables en este momento dentro de tu presupuesto.`;
       }
 
-      await sendTelegramMessage(rep);
+      const markup = keyboard.length > 0 ? { inline_keyboard: keyboard } : null;
+      await sendTelegramMessage(rep, markup);
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al consultar el mercado: <code>${e.message}</code>`);
     } finally {
@@ -339,15 +346,22 @@ async function handleTelegramMessage(message) {
       await client.login();
       const bids = await client.getPendingBids();
       let rep = `💼 <b>[Mateo Oslomany] · Pujas Activas</b>\n\n`;
+      const keyboard = [];
+
       if (bids.length > 0) {
         bids.forEach(b => {
-          rep += ` ⏳ <b>${escapeHtml(b.playerName)}</b> — Oferta: ${b.price.toLocaleString()} €\n`;
+          rep += ` ⏳ <b>${escapeHtml(b.playerName)}</b> — Oferta: <b>${b.price.toLocaleString()} €</b>\n`;
+          keyboard.push([
+            { text: `❌ CANCELAR PUJA POR ${b.playerName.toUpperCase()}`, callback_data: `cancel_bid:${b.offerId}:${b.playerName}:${b.playerId || 0}` }
+          ]);
         });
-        rep += `\nUsa <code>/cancelar &lt;nombre&gt;</code> para retirar una puja.`;
+        rep += `\n<i>💡 Pulsa en los botones inferiores para cancelar una puja con 1 clic.</i>`;
       } else {
         rep += `No tienes pujas activas en este momento.`;
       }
-      await sendTelegramMessage(rep);
+
+      const markup = keyboard.length > 0 ? { inline_keyboard: keyboard } : null;
+      await sendTelegramMessage(rep, markup);
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error: <code>${e.message}</code>`);
     } finally {
@@ -904,6 +918,46 @@ async function handleTelegramMessage(message) {
     }
   }
 
+  // ── /salud ───────────────────────────────────────────────────────────────
+  else if (text.startsWith('/salud')) {
+    await sendTelegramMessage('💼 🩺 <i>[Mateo Oslomany]: Analizando parte médico y estado físico de la plantilla...</i>');
+    const client = new ComunioClient();
+    const engine = new ComunioEngine();
+    try {
+      await client.login();
+      const squad = await client.getSquad();
+      const players = squad?.players || [];
+      const injuredOrDoubt = players.filter(p => !engine.isPlayerAvailable(p));
+
+      let rep = `🩺 <b>[Mateo Oslomany] · Parte Médico Oficial</b>\n\n`;
+      if (injuredOrDoubt.length > 0) {
+        rep += `⚠️ Se han detectado <b>${injuredOrDoubt.length} futbolistas</b> con problemas físicos o sanciones:\n\n`;
+        injuredOrDoubt.forEach(p => {
+          const statusDesc = p.statusInfo || p.status || 'No disponible';
+          rep += ` • <b>${escapeHtml(p.name)}</b> (${(p.type || '').toUpperCase()})\n   <i>Estado: ${escapeHtml(statusDesc)}</i>\n\n`;
+        });
+        rep += `💡 El optimizador táctico los excluye automáticamente del 11 titular para no arriesgar 0 puntos.`;
+      } else {
+        rep += `✅ <b>¡Plantilla al 100% Fit!</b> No hay lesionados, dudas médicas ni sancionados en el equipo.`;
+      }
+      await sendTelegramMessage(rep);
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error consultando parte médico: <code>${e.message}</code>`);
+    } finally {
+      await client.close();
+    }
+  }
+
+  // ── /web ─────────────────────────────────────────────────────────────────
+  else if (text.startsWith('/web')) {
+    const webUrl = 'https://racing-oslo.cotero91.workers.dev/';
+    const rep = `🌐 <b>[Mateo Oslomany] · Centro de Control Web</b>\n\n` +
+      `Accede al portal oficial del Racing de Oslo para consultar el análisis en tiempo real, histórico de puntos, plantilla y cotizaciones:\n\n` +
+      `🔗 <a href="${webUrl}"><b>Abrir Dashboard de Racing de Oslo</b></a>\n\n` +
+      `<i>Desplegado y sincronizado en Cloudflare Pages / Workers.</i>`;
+    await sendTelegramMessage(rep);
+  }
+
   else {
     await sendTelegramMessage('💼 ⚠️ <b>[Mateo Oslomany]:</b> Comando no reconocido. Envía /help para ver los comandos válidos.');
   }
@@ -1053,6 +1107,25 @@ async function handleCallbackQuery(callbackQuery) {
     } finally {
       await client.close();
     }
+  } else if (data.startsWith('cancel_bid:')) {
+    const [, offerId, playerName, playerId] = data.split(':');
+    await answerCallbackQuery(callbackQuery.id, '⏳ Cancelando puja...');
+    await updateTelegramMessageMarkup(chatId, messageId, `❌ PUJA CANCELADA (${playerName})`);
+
+    const client = new ComunioClient();
+    try {
+      await client.login();
+      const success = await client.cancelBid(offerId, playerName, parseInt(playerId || 0));
+      if (success) {
+        await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Puja por <b>${escapeHtml(playerName)}</b> cancelada con éxito.`);
+      } else {
+        await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> No pude cancelar la puja por ${escapeHtml(playerName)}.`);
+      }
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error cancelando puja: <code>${e.message}</code>`);
+    } finally {
+      await client.close();
+    }
   }
 }
 
@@ -1115,37 +1188,40 @@ async function runMarketCheck() {
 
         const msg = `💼 🤖 <b>[Mateo Oslomany] Auto-Puja Ejecutada</b>\n\n` +
           `👤 <b>${escapeHtml(bid.name)}</b> (${(bid.type || '').toUpperCase()})\n` +
-          `💰 <b>Importe Pujado:</b> ${bid.bidAmount.toLocaleString()} €\n` +
-          `📈 <b>Impacto:</b> +${bid.upgradePoints.toFixed(0)} ptos de mejora sobre tu plantilla`;
+          `💰 <b>Importe Pujado:</b> ${bid.bidAmount.toLocaleString()} € (+${bid.dynamicMargin || 0}%)\n` +
+          `📈 <b>Mejora Real del XI:</b> +${(bid.marginalValue || bid.upgradePoints || 0).toFixed(0)} ptos\n` +
+          `📊 <b>Eficiencia:</b> ${bid.efficiency || 0} pts/M€ (Puntuación Estratégica: ${bid.strategicScore || 0}/100)`;
         await sendTelegramMessage(msg);
       }
     }
 
-    // 2. OPERACIONES CRÍTICAS Y SALTO CUALITATIVO (Confirmación obligatoria por Telegram)
+    // 2. OPERACIONES ESTRATÉGICAS / SALTO CUALITATIVO (Ejecución 100% Autónoma + Resumen Ejecutivo)
     for (const alert of result.manualAlerts) {
+      if (botPaused) continue;
       const posTag = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' }[alert.type] || '👤';
       const sellerTag = alert.isComputer ? 'Computadora' : `<b>${escapeHtml(alert.ownerName)}</b> (Rival de la Liga)`;
-      const msg = `🛒 <b>[OPERACIÓN CRÍTICA / SALTO CUALITATIVO]</b>\n\n` +
-        `${posTag} <b>${escapeHtml(alert.name)}</b> (${(alert.type || '').toUpperCase()})\n` +
-        `👤 <b>Vendedor:</b> ${sellerTag}\n` +
-        `💰 <b>Precio de Mercado:</b> ${alert.price.toLocaleString()} €\n` +
-        `🏆 <b>Categoría:</b> ${alert.impactTag}\n` +
-        `📈 <b>Impacto Estimado:</b> +${alert.upgradePoints.toFixed(0)} ptos de mejora sobre tu peor titular\n` +
-        `📊 <b>Puntos Esperados:</b> ~${(alert.expectedPoints || 0).toFixed(0)} ptos (PPM: ${alert.ppm || 0})\n\n` +
-        `💡 <b>Justificación Técnico-Económica:</b>\n` +
-        `<i>${escapeHtml(alert.reason)} Saldo disponible: ${balance.toLocaleString()} €.</i>\n\n` +
-        `<b>¿Autorizas pujar por este jugador?</b>`;
 
-      const markup = {
-        inline_keyboard: [[
-          { text: `⚠️ CONFIRMAR PUJA (${alert.bidAmount.toLocaleString()} €)`, callback_data: `bid:${alert.playerId}:${alert.name}:${alert.bidAmount}:${alert.type}` },
-          { text: `❌ IGNORAR`, callback_data: `ignore:${alert.playerId}:${alert.name}` }
-        ]]
-      };
-      await sendTelegramMessage(msg, markup);
+      const success = await client.placeBid(alert.playerId, alert.name, alert.bidAmount);
+      if (success) {
+        let log = [];
+        try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
+        log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Auto-Puja Estratégica', player: alert.name, amount: `${alert.bidAmount.toLocaleString()} €`, status: 'Éxito' });
+        fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
+
+        const msg = `💼 🤖 <b>[Mateo Oslomany] Auto-Puja Estratégica Ejecutada</b>\n\n` +
+          `${posTag} <b>${escapeHtml(alert.name)}</b> (${(alert.type || '').toUpperCase()})\n` +
+          `👤 <b>Vendedor:</b> ${sellerTag}\n` +
+          `💰 <b>Importe Pujado:</b> ${alert.bidAmount.toLocaleString()} € (+${alert.dynamicMargin || 0}%)\n` +
+          `🏆 <b>Categoría:</b> ${alert.impactTag}\n` +
+          `📈 <b>Mejora Real del XI:</b> +${(alert.marginalValue || alert.upgradePoints || 0).toFixed(0)} ptos\n` +
+          `📊 <b>Rendimiento:</b> ~${(alert.expectedPoints || 0).toFixed(0)} ptos (PPM: ${alert.ppm || 0} | Eficiencia: ${alert.efficiency || 0} pts/M€)\n` +
+          `💎 <b>Puntuación Estratégica:</b> ${alert.strategicScore || 0}/100\n\n` +
+          `💡 <i>${escapeHtml(alert.reason || '')} Saldo restante: ${(balance - alert.bidAmount).toLocaleString()} €.</i>`;
+        await sendTelegramMessage(msg);
+      }
     }
 
-    // 3. OFERTAS DE VENTA RECIBIDAS (Venta Crítica vs Venta Autónoma)
+    // 3. OFERTAS DE VENTA RECIBIDAS (Evaluación y Ejecución 100% Autónoma)
     try {
       const incomingOffersUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers?current`;
       const offersRes = await axios.get(incomingOffersUrl, { headers: client.getHeaders() });
@@ -1158,44 +1234,27 @@ async function runMarketCheck() {
         const offerPrice = offer.price;
         const buyerName = offer.user?.name || offer.tradingPartner?.name || 'Computadora';
         const marketValue = offer.tradable?.quotedPrice || offer.tradable?.price || offerPrice;
-        const diff = offerPrice - marketValue;
-        const diffStr = diff >= 0 ? `+${diff.toLocaleString()} € beneficio` : `${diff.toLocaleString()} € sobreprecio`;
 
-        // Buscar al jugador en nuestra plantilla para conocer sus puntos esperados
+        // Buscar al jugador en nuestra plantilla
         const squadPlayer = squad.players.find(p => p.id === playerId || p.playerId === playerId);
-        const expPts = squadPlayer ? engine.getExpectedPoints(squadPlayer) : 100;
-        const isStarPlayer = expPts >= 150 || (squadPlayer && squadPlayer.isStarter && balance >= 0);
+        if (!squadPlayer) continue;
 
-        // VENTA CRÍTICA (Jugador estrella > 150 pts o titular indispensable) -> Confirmación en Telegram
-        if (isStarPlayer) {
-          const msg = `💼 ⚠️ <b>[VENTA CRÍTICA DE TITULAR ESTRELLA]</b>\n\n` +
-            `👤 <b>${escapeHtml(playerName)}</b> (~${expPts} pts esperados)\n` +
-            `💰 <b>Oferta Recibida:</b> ${offerPrice.toLocaleString()} €\n` +
-            `📊 <b>Valor de Mercado:</b> ${marketValue.toLocaleString()} € <i>(${diffStr})</i>\n` +
-            `👤 <b>Comprador:</b> ${escapeHtml(buyerName)}\n\n` +
-            `⚠️ <b>ATENCIÓN:</b> Este jugador promedia $\\ge 150$ pts o es pieza clave de tu Once Titular.\n\n` +
-            `<b>¿Autorizas vender a este jugador estrella?</b>`;
+        // Evaluación racional con el motor de optimización
+        const saleEval = engine.evaluateSaleOffer(squadPlayer, [offer], squad, balance);
 
-          const markup = {
-            inline_keyboard: [[
-              { text: `⚠️ CONFIRMAR VENTA (${offerPrice.toLocaleString()} €)`, callback_data: `acc_sale:${offerId}:${playerId}:${offerPrice}` },
-              { text: `❌ RECHAZAR & CONSERVAR`, callback_data: `rej_sale:${offerId}:${playerId}` }
-            ]]
-          };
-          await sendTelegramMessage(msg, markup);
+        if (saleEval.shouldAccept) {
+          // VENTA AUTÓNOMA RACIONADA (Descarte, rotación favorable o saneamiento de deuda)
+          const acceptUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers/${offerId}/accept`;
+          await axios.post(acceptUrl, {}, { headers: client.getHeaders() });
+
+          let log = [];
+          try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
+          log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Auto-Venta Racional', player: playerName, amount: `${offerPrice.toLocaleString()} €`, status: 'Éxito' });
+          fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
+
+          await sendTelegramMessage(`💼 🤖 <b>[Mateo Oslomany] Auto-Venta Ejecutada:</b> ${escapeHtml(playerName)} traspasado a ${escapeHtml(buyerName)} por ${offerPrice.toLocaleString()} €.\n<i>${escapeHtml(saleEval.reason)}</i>`);
         } else {
-          // VENTA AUTÓNOMA (Suplente / Descarte / Parche < 150 pts): Aceptar si la oferta es justa o hay deuda
-          if (diff >= 0 || balance < 0) {
-            const acceptUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers/${offerId}/accept`;
-            await axios.post(acceptUrl, {}, { headers: client.getHeaders() });
-
-            let log = [];
-            try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
-            log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Auto-Venta Descarte', player: playerName, amount: `${offerPrice.toLocaleString()} €`, status: 'Éxito' });
-            fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
-
-            await sendTelegramMessage(`💼 🤖 <b>[Mateo Oslomany] Auto-Venta Ejecutada:</b> ${escapeHtml(playerName)} traspasado a ${escapeHtml(buyerName)} por ${offerPrice.toLocaleString()} €.`);
-          }
+          console.log(`[DAEMON-MARKET] Oferta por ${playerName} (${offerPrice.toLocaleString()} €) rechazada para blindar el Once: ${saleEval.reason}`);
         }
       }
     } catch (offerErr) {
