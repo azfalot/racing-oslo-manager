@@ -1298,8 +1298,11 @@ async function runMarketCheck() {
       await sendTelegramMessage(txMsg);
     }
 
-  } catch (e) {
-    console.error('[DAEMON-MARKET] Error en el monitor de mercado:', e.message);
+    // Auditar cambios de plantilla y nuevos fichajes incorporados
+    await auditAndSyncSquadEvents(client, squad, balance);
+
+  } catch (err) {
+    console.error('[DAEMON-MARKET] Error en el monitor de mercado:', err.message);
   } finally {
     await client.close();
     marketMonitorRunning = false;
@@ -1418,6 +1421,69 @@ function startMarketMonitor() {
   }, 3 * 60 * 1000);
 }
 
+// ── AUDITORÍA AUTOMÁTICA DE EVENTOS Y GENERACIÓN DE NOTICIAS ─────────────────
+
+async function auditAndSyncSquadEvents(client, squad, balance, lineupResult = null) {
+  try {
+    const { publishSigningNews, publishSaleNews, publishMatchdayPreviewNews, publishClubNews } = await import('./imageGen.js');
+    const stateFile = 'last_squad_state.json';
+    let previousState = { playerIds: [], playerNames: {}, balance: 0, formation: '' };
+
+    if (fs.existsSync(stateFile)) {
+      try {
+        previousState = JSON.parse(fs.readFileSync(stateFile, 'utf-8'));
+      } catch (e) {}
+    }
+
+    const currentPlayers = squad?.players || [];
+    const currentPlayerIds = currentPlayers.map(p => p.id || p.playerId);
+
+    // 1. Detectar NUEVOS FICHAJES (jugadores que aparecen por primera vez en la plantilla)
+    if (previousState.playerIds && previousState.playerIds.length > 0) {
+      for (const p of currentPlayers) {
+        const pid = p.id || p.playerId;
+        if (!previousState.playerIds.includes(pid)) {
+          console.log(`[DAEMON-EVENTS] 🌟 ¡Nuevo fichaje confirmado detectado en la plantilla: ${p.name}!`);
+          await publishSigningNews(p.name, p.price || 0, pid, p.type || p.position);
+          await sendTelegramMessage(`💼 🌟 <b>[Mateo Oslomany] ¡Fichaje Confirmado!</b>\n\n<b>${escapeHtml(p.name)}</b> se ha incorporado oficialmente al Racing de Oslo.\n💰 Coste/Valor: ${(p.price || 0).toLocaleString()} €`);
+        }
+      }
+
+      // 2. Detectar VENTAS / SALIDAS (jugadores que ya no están en la plantilla)
+      for (const prevId of previousState.playerIds) {
+        if (!currentPlayerIds.includes(prevId)) {
+          const prevName = previousState.playerNames[prevId] || `Jugador #${prevId}`;
+          console.log(`[DAEMON-EVENTS] 🏷️ ¡Salida de jugador confirmada detectada: ${prevName}!`);
+          await publishSaleNews(prevName, 0, prevId, 'Computadora');
+          await sendTelegramMessage(`💼 🏷️ <b>[Mateo Oslomany] ¡Venta Confirmada!</b>\n\n<b>${escapeHtml(prevName)}</b> ha abandonado la disciplina del Racing de Oslo.`);
+        }
+      }
+    }
+
+    // 3. Detectar CAMBIOS EN EL 11 TITULAR Y FORMACIÓN
+    if (lineupResult && lineupResult.formation && lineupResult.formation !== previousState.formation) {
+      const matchdayName = 'Próxima Jornada';
+      const names = (lineupResult.starting11 || []).map(p => p.name);
+      await publishMatchdayPreviewNews(matchdayName, names, lineupResult.formation, lineupResult.score);
+    }
+
+    // Guardar nuevo estado
+    const newNames = {};
+    currentPlayers.forEach(p => { newNames[p.id || p.playerId] = p.name; });
+    const newState = {
+      playerIds: currentPlayerIds,
+      playerNames: newNames,
+      balance,
+      formation: lineupResult?.formation || previousState.formation || '5-3-2',
+      updatedAt: new Date().toISOString()
+    };
+    fs.writeFileSync(stateFile, JSON.stringify(newState, null, 2));
+
+  } catch (err) {
+    console.error('[DAEMON-EVENTS ERROR] Error auditando eventos de plantilla:', err.message);
+  }
+}
+
 // ── CRON DIARIO (02:50 · 09:00 · 15:00) ──────────────────────────────────────
 
 async function executeInLineupOptimization() {
@@ -1427,13 +1493,20 @@ async function executeInLineupOptimization() {
   try {
     await client.login();
     const squad = await client.getSquad();
+    const dashboard = await client.getDashboardData();
+    const balance = dashboard?.money || 0;
     const lineupResult = engine.optimizeLineup(squad || { players: [] });
+    
     if (lineupResult.starting11 && lineupResult.starting11.length > 0) {
       const startingIds = lineupResult.starting11.map(p => p.playerId);
       const success = await client.setLineup(startingIds, lineupResult.formation);
       console.log(`[DAEMON-CRON] 11 Titular guardado (${lineupResult.formation}) -> Éxito: ${success}`);
       await sendTelegramMessage(`💼 ⚡ <b>[Mateo Oslomany]:</b> 11 Titular optimizado y guardado en Comunio (Formación: ${lineupResult.formation}).`);
     }
+
+    // Auditar cambios de plantilla, fichajes resueltos y publicar noticias automáticas
+    await auditAndSyncSquadEvents(client, squad, balance, lineupResult);
+
   } catch (e) {
     console.error('[DAEMON-CRON] Error al optimizar alineación:', e.message);
   } finally {
