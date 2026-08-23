@@ -390,8 +390,14 @@ export class ComunioEngine {
         category = 'SALTO_CUALITATIVO';
         impactTag = upgradePoints >= 50 ? '🏆 SALTO CUALITATIVO ESTRELLA (+50 pts)' : '🚀 SALTO CUALITATIVO (+35 pts)';
       } else if (upgradePoints >= 20) {
-        category = 'MEJORA_MODERADA';
-        impactTag = '📈 MEJORA MODERADA (+20 pts)';
+        // Exigir estado de forma positivo esta temporada (PPM >= 3.2 o racha reciente) para ocupar plaza de Suplente de Refresco
+        const isGoodForm = avgPoints >= 3.2 || (player.totalPoints && player.totalPoints > 30);
+        if (isGoodForm) {
+          category = 'MEJORA_MODERADA';
+          impactTag = '📈 MEJORA MODERADA EN FORMA (Suplente de Refresco +20 pts)';
+        } else {
+          category = 'EL_RESTO'; // Descartar si el jugador está fuera de forma en la temporada en curso
+        }
       }
 
       // 5. Protección económica y control de plantilla (15 jugadores máx)
