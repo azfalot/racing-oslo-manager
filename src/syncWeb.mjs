@@ -63,10 +63,10 @@ async function fetchRealData() {
         const historical = details.historical?.points || [];
         p.historicalPoints = historical.map(h => ({ season: h.season, points: parseInt(h.points) || 0 }));
         const lastSeason = historical.find(h => h.season === '25/26' || h.season === '24/25') || historical[historical.length - 1];
-        p.lastSeasonPoints = lastSeason ? (parseInt(lastSeason.points) || 0) : 0;
-        p.lastSeasonAvg = details.average?.points ? parseFloat(details.average.points.replace(',', '.')) : 4.2;
-        const baseHist = p.lastSeasonPoints > 0 ? p.lastSeasonPoints : (p.price > 4000000 ? 150 : 100);
-        p.projectedPoints = Math.round(baseHist * (p.isStarter ? 1.15 : 0.95));
+        p.lastSeasonAvg = details.average?.points ? parseFloat(details.average.points.replace(',', '.')) : 0;
+        const validHistPoints = (p.historicalPoints || []).map(h => h.points).filter(pts => pts > 0);
+        const bestHist = validHistPoints.length > 0 ? Math.max(...validHistPoints) : (p.lastSeasonAvg > 0 ? Math.round(p.lastSeasonAvg * 25) : 40);
+        p.projectedPoints = Math.round(bestHist * (p.isStarter ? 1.05 : 0.95));
       }
     } catch (e) {}
   }
