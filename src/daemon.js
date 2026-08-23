@@ -175,6 +175,8 @@ async function handleTelegramMessage(message) {
     const helpText = `💼 <b>[Mateo Oslomany v3.5] · Centro de Mando Táctico</b>\n${pauseStatus}\n` +
       `📊 <b>Análisis & Táctica:</b>\n` +
       ` • /analisis — Auditoría estratégica de plantilla, carencias y mercado\n` +
+      ` • /scout — Scouting de titularidad y prensa en internet (ej: /scout Christensen)\n` +
+      ` • /salud — Parte médico oficial y bajas físicas\n` +
       ` • /reporte — Resumen ejecutivo diario\n` +
       ` • /plantilla — Plantilla (titulares + suplentes)\n` +
       ` • /tactica — Esquema táctico por líneas\n` +
@@ -192,6 +194,7 @@ async function handleTelegramMessage(message) {
       ` • /vender — Poner en venta (ej: /vender Rodrygo)\n\n` +
       `⚡ <b>Operativa & Sistema:</b>\n` +
       ` • /alinear — Optimizar y guardar 11 titular\n` +
+      ` • /web — Abrir dashboard web oficial en Cloudflare\n` +
       ` • /sync — Desplegar cambios web a Cloudflare\n` +
       ` • /margen — Ajustar sobreprecio (ej: /margen 1.5)\n` +
       ` • /limite — Límite auto-puja (ej: /limite 8)\n` +
@@ -943,6 +946,65 @@ async function handleTelegramMessage(message) {
       await sendTelegramMessage(rep);
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ Error consultando parte médico: <code>${e.message}</code>`);
+    } finally {
+      await client.close();
+    }
+  }
+
+  // ── /scout <nombre> ──────────────────────────────────────────────────────
+  else if (text.startsWith('/scout')) {
+    const parts = text.split(' ');
+    if (parts.length < 2) {
+      await sendTelegramMessage('💼 🕵️ <b>[Mateo Oslomany]:</b> Uso: <code>/scout &lt;nombre_jugador&gt;</code>\nEjemplo: <code>/scout Christensen</code> o <code>/scout Gerard Moreno</code>');
+      return;
+    }
+    const nameQuery = parts.slice(1).join(' ').trim();
+    await sendTelegramMessage(`💼 🕵️ <i>[Mateo Oslomany]: Rastreando prensa deportiva y scouting online para "${escapeHtml(nameQuery)}"...</i>`);
+
+    const client = new ComunioClient();
+    try {
+      await client.login();
+      const squad = await client.getSquad();
+      const market = await client.getMarket();
+      const allPlayers = [...(squad?.players || []), ...(market?.players || [])];
+      
+      const found = allPlayers.find(p => p.name.toLowerCase().includes(nameQuery.toLowerCase()));
+      const targetName = found ? found.name : nameQuery;
+      const targetClub = found ? (found.club || found.teamName || '') : '';
+      const targetPos = found ? found.type : 'Jugador';
+
+      const { getOnlineScoutingReport } = await import('./scoutIntelligence.js');
+      const { evaluateClubCompetition } = await import('./clubCompetition.js');
+
+      const scoutReport = await getOnlineScoutingReport(targetName, targetClub);
+      const compReport = evaluateClubCompetition(found || { name: targetName, club: targetClub, type: targetPos });
+
+      let rep = `🕵️ <b>[Informe de Scouting & Titularidad]</b>\n\n` +
+        `👤 <b>Jugador:</b> <b>${escapeHtml(targetName)}</b> (${(targetPos || '').toUpperCase()})\n` +
+        `🏟️ <b>Club:</b> ${escapeHtml(targetClub || 'LaLiga')}\n` +
+        `📊 <b>Probabilidad Titularidad:</b> ${scoutReport.statusEmoji} <b>${scoutReport.starterProbability}%</b> (${scoutReport.statusTag})\n\n`;
+
+      if (scoutReport.alerts.length > 0) {
+        rep += `📋 <b>Diagnóstico de Prensa:</b>\n`;
+        scoutReport.alerts.forEach(a => { rep += ` • ${a}\n`; });
+        rep += `\n`;
+      }
+
+      rep += `⚔️ <b>Competencia Interna en su Club:</b>\n` +
+        ` • Nivel: <b>${compReport.competitionLevel}</b> | Confianza: <b>${compReport.confidencePct}%</b>\n` +
+        ` • Rivales directos: <i>${compReport.directRivals.slice(0, 4).join(', ') || 'Sin rivales directos'}</i>\n` +
+        ` • Riesgo de rotación: <i>${compReport.rotationRisk}</i>\n\n`;
+
+      if (scoutReport.headlines.length > 0) {
+        rep += `📰 <b>Últimas Noticias & Titulares Rastreados:</b>\n`;
+        scoutReport.headlines.slice(0, 4).forEach(h => {
+          rep += ` • [${escapeHtml(h.source)}] <b>${escapeHtml(h.title)}</b>\n`;
+        });
+      }
+
+      await sendTelegramMessage(rep);
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error en scouting: <code>${e.message}</code>`);
     } finally {
       await client.close();
     }

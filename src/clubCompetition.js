@@ -9,7 +9,7 @@
 export const LALIGA_CLUB_DEPTH_CHARTS = {
   'barcelona': {
     keeper: ['Ter Stegen', 'Iñaki Peña', 'Szczesny'],
-    defender: ['Pau Cubarsí', 'Ronald Araujo', 'Jules Koundé', 'Andreas Christensen', 'Alejandro Balde', 'Eric García', 'Héctor Fort', 'Gerard Martín'],
+    defender: ['Pau Cubarsí', 'Jules Koundé', 'Andreas Christensen', 'Alejandro Balde', 'Eric García', 'Héctor Fort', 'Gerard Martín'],
     midfielder: ['Pedri', 'Gavi', 'Frenkie de Jong', 'Dani Olmo', 'Marc Casadó', 'Fermín López', 'Pablo Torre', 'Marc Bernal'],
     striker: ['Robert Lewandowski', 'Lamine Yamal', 'Raphinha', 'Ferran Torres', 'Pau Víctor', 'Ansu Fati']
   },
