@@ -153,19 +153,27 @@ export async function checkMarket(client, squad, balance, botPaused) {
       continue;
     }
 
-    // Fórmula de Sobreprecio Dinámico Inteligente (Inteligencia Competitiva de Mercado):
-    // Salto Cualitativo (+35 pts): 12.0% (Para blindar el fichaje frente a sobrepujas agresivas de rivales como Hache FC o Puente Avios)
-    // Mejora Moderada en Forma (+20 pts): 4.0%
-    // Liquidez Ajustada (< 3M €): 1.0%
-    let dynamicMargin = bidMargin || 2.0;
+    // Regla de Esfuerzo Económico Proporcional al Salto Táctico (upgradePoints):
+    // 👑 Crack Absoluto (>= +60 pts): +12.0% a +15.0% (Pagar lo necesario para asegurar el fichaje estrella)
+    // 🏆 Titular Estrella (+35 a +59 pts): +6.0% a +10.0% (Sobreprecio competitivo justo)
+    // 📈 Suplente de Refresco (+20 a +34 pts): +2.5% a +5.0% (Sobreprecio prudente sobre VM)
+    // 📉 Saldo Ajustado (< 3M €): +1.0% (Protección estricta de la liquidez)
+    let dynamicMargin = 2.0;
+    const upPts = rec.upgradePoints || 0;
+
     if (balance < 3000000) {
       dynamicMargin = 1.0;
-    } else if (rec.category === 'SALTO_CUALITATIVO' || rec.upgradePoints >= 35) {
-      dynamicMargin = 12.0; // Sobrepuja competitiva de blindaje frente a rivales humanos
-    } else if (rec.category === 'MEJORA_MODERADA') {
-      dynamicMargin = 4.0; // Margen competitivo moderado
+    } else if (upPts >= 60) {
+      dynamicMargin = Math.min(15.0, 12.0 + ((upPts - 60) / 40) * 3.0);
+    } else if (upPts >= 35) {
+      dynamicMargin = 6.0 + ((upPts - 35) / 25) * 4.0;
+    } else if (upPts >= 20) {
+      dynamicMargin = 2.5 + ((upPts - 20) / 15) * 2.5;
+    } else {
+      dynamicMargin = 1.0;
     }
 
+    dynamicMargin = parseFloat(dynamicMargin.toFixed(1));
     const bidAmount = Math.ceil(rec.price * (1 + dynamicMargin / 100));
 
     // Definición de COMPRA CRÍTICA (Exige confirmación interactiva por Telegram):
