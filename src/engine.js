@@ -81,18 +81,18 @@ export class ComunioEngine {
     const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
     if (!isNaN(avgPoints) && avgPoints > 0) {
       baseScore = Math.round(avgPoints * 25);
-    } else {
-      // 2. Usar histórico de temporadas anteriores (soporta array o player.historical.points)
-      const historyList = Array.isArray(player.historical)
-        ? player.historical
-        : (player.historical?.points || player.historicalPoints || []);
+    }
+    
+    // 2. Usar histórico de temporadas anteriores (evalúa la mejor temporada válida con puntos para no infravalorar cracks)
+    const historyList = Array.isArray(player.historical)
+      ? player.historical
+      : (player.historical?.points || player.historicalPoints || []);
 
-      if (historyList.length > 0) {
-        const history = [...historyList].sort((a, b) => (b.season || '').localeCompare(a.season || ''));
-        const lastSeasonPoints = parseInt(history[0].points);
-        if (!isNaN(lastSeasonPoints) && lastSeasonPoints > 0) {
-          baseScore = lastSeasonPoints;
-        }
+    if (historyList.length > 0) {
+      const validPoints = historyList.map(h => parseInt(h.points) || 0).filter(p => p > 0);
+      if (validPoints.length > 0) {
+        const bestHistoricalPoints = Math.max(...validPoints);
+        baseScore = Math.max(baseScore, bestHistoricalPoints);
       }
     }
 
@@ -283,16 +283,17 @@ export class ComunioEngine {
     const isProfitable = chosenOffer.price >= marketValue;
     const isComputer = chosenOffer.user?.id === 1 || (chosenOffer.user?.name && chosenOffer.user.name.toLowerCase().includes('computer'));
 
-    // 2. Verificar si es un titular imprescindible en la alineación actual
+    // 2. Verificar si es un titular imprescindible o un jugador clave (>= 130 pts)
     const bestLineup = this.optimizeLineup(squad);
     const isStarter = bestLineup.starting11.some(p => p.playerId === player.id || p.playerId === player.playerId);
+    const expectedPoints = this.getExpectedPoints(player);
 
-    // Si es un titular clave y NO tenemos saldo negativo urgente, RECHAZAR
-    if (isStarter && currentBalance >= 0) {
+    // Si es un titular clave o jugador estelar (>= 130 pts) y NO tenemos saldo negativo urgente, RECHAZAR VENTA AUTOMÁTICA
+    if ((isStarter || expectedPoints >= 130) && currentBalance >= 0) {
       return {
         shouldAccept: false,
         chosenOffer,
-        reason: `⛔ RECHAZADA: ${player.name} es titular indiscutible en el XI titular y el club tiene saldo positivo (${currentBalance.toLocaleString()} €). No se desmantela la plantilla.`
+        reason: `⛔ RECHAZADA AUTOMÁTICAMENTE: ${player.name} (~${expectedPoints} pts) es una pieza clave de tu equipo y el club tiene saldo positivo (${currentBalance.toLocaleString()} €). No se vende a jugadores top.`
       };
     }
 
