@@ -167,10 +167,11 @@ export async function checkMarket(client, squad, balance, botPaused) {
     const bidAmount = Math.ceil(rec.price * (1 + dynamicMargin / 100));
 
     // Definición de COMPRA CRÍTICA (Exige confirmación interactiva por Telegram):
-    // 1. Fichaje grande (> autoBidLimit, ej: > 8M €)
-    // 2. Fichaje que consume más del 40% del saldo total en caja
-    // 3. Fichaje de Salto Cualitativo Estrella (+25 pts)
-    const isCriticalPurchase = rec.price > autoBidLimit || rec.price > (balance * 0.40) || rec.upgradePoints >= 25;
+    // Únicamente es crítica si:
+    // 1. Es una súper-puja por un jugador estrella cuyo precio supera el límite autoBidLimit (8M €)
+    // 2. O consume más del 40% del saldo disponible en caja
+    // Las ofertas de oportunidad o parches (< 8M €) se ejecutan 100% AUTOMÁTICAMENTE para no saturar Telegram
+    const isCriticalPurchase = rec.price >= autoBidLimit || rec.price >= (balance * 0.40);
 
     if (isCriticalPurchase) {
       result.manualAlerts.push({ ...rec, playerId: pid, bidAmount, dynamicMargin, isCritical: true });
