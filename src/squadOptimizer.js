@@ -7,6 +7,7 @@
  */
 
 import fs from 'fs';
+import { evaluateClubCompetition } from './clubCompetition.js';
 
 // ── CONFIGURATION ──────────────────────────────────────────────────────────────
 
@@ -302,25 +303,32 @@ export function getExpectedPerformance(player, strategyConfig = null) {
     effectivePPM *= (strategy.risk?.doubtfulPlayerWeight || 0.4);
   }
 
+  // 6. Positional Club Competition Modifier (Compañeros de puesto en su club)
+  const competition = evaluateClubCompetition(player);
+  let competitionMultiplier = 1.0;
+  if (competition.competitionLevel === 'BAJA') competitionMultiplier = 1.05;
+  else if (competition.competitionLevel === 'ALTA') competitionMultiplier = 0.90;
+
+  effectivePPM *= competitionMultiplier;
   const expectedRemainingPoints = effectivePPM * matchdaysRemaining;
 
-  // 6. Economic efficiency: expected remaining points per million
+  // 7. Economic efficiency: expected remaining points per million
   const priceInM = Math.max(0.1, (player.price || 100000) / 1000000);
   const efficiency = expectedRemainingPoints / priceInM;
 
-  // 7. Starter Status Classification (Minutos y probabilidad de titularidad en equipo real)
+  // 8. Starter Status Classification (Minutos y probabilidad de titularidad en equipo real)
   let starterStatus = 'ROTACION_HABITUAL';
   let starterTag = '🔄 Rotación Habitual';
-  let starterProbability = 0.75;
+  let starterProbability = (competition.confidencePct / 100);
 
-  if (effectivePPM >= 4.0 || bestHistorical >= 120) {
+  if (effectivePPM >= 4.0 || bestHistorical >= 120 || competition.isUndisputed) {
     starterStatus = 'TITULAR_INDISCUTIBLE';
     starterTag = '⭐ Titular Fijo';
-    starterProbability = 0.95;
+    starterProbability = Math.max(0.90, competition.confidencePct / 100);
   } else if (effectivePPM < 2.5 && bestHistorical < 60) {
     starterStatus = 'SUPLENTE_RESIDUAL';
     starterTag = '⚠️ Suplente Residual';
-    starterProbability = 0.30;
+    starterProbability = Math.min(0.40, competition.confidencePct / 100);
   }
 
   return {
@@ -331,7 +339,8 @@ export function getExpectedPerformance(player, strategyConfig = null) {
     efficiency: parseFloat(efficiency.toFixed(1)),
     starterStatus,
     starterTag,
-    starterProbability
+    starterProbability: parseFloat(starterProbability.toFixed(2)),
+    competition
   };
 }
 
@@ -482,6 +491,9 @@ export function calculateStrategicPurchaseScore(engine, candidate, squad, balanc
   }
 
   reasoning.push(`📊 ${perf.starterTag} (PPM: ${perf.ppm} | Fiabilidad: ${Math.round(perf.starterProbability * 100)}% minutos | Eficiencia: ${perf.efficiency} pts/M€)`);
+  if (perf.competition && perf.competition.reasoning) {
+    reasoning.push(`⚔️ Competencia en club: ${perf.competition.reasoning}`);
+  }
 
   // Determine action type
   const minUpgrade = strategy.purchase?.minMarginalXIUpgrade || 3;

@@ -336,3 +336,33 @@ test('15. Sanctioned, red-banned, or suspended player is discarded (PASS) and ri
   const rivalBid = calculateMaxRationalBid(rivalPlayer, rivalScore, balance);
   assert.equal(rivalBid.marginPct, 0, 'Must NOT offer extra overbid margin (+0%) when buying from a human rival manager');
 });
+
+test('16. Positional club competition evaluates depth chart, direct rivals and starter confidence', async () => {
+  const { evaluateClubCompetition } = await import('../src/clubCompetition.js');
+
+  // Case A: FC Barcelona defender (Christensen) competing with Cubarsi, Araujo, Kounde
+  const christensen = {
+    name: 'Andreas Christensen',
+    club: 'FC Barcelona',
+    type: 'defender',
+    average: { points: '4.2' },
+    historical: [{ points: '134' }]
+  };
+  const compBarca = evaluateClubCompetition(christensen);
+  assert.ok(compBarca.directRivals.length > 0, 'Must identify Barcelona defensive rivals');
+  assert.ok(compBarca.directRivals.some(r => r.includes('Cubarsí') || r.includes('Araujo')), 'Must include top teammates in depth chart');
+  assert.ok(compBarca.confidencePct >= 70, 'Must calculate confident starter probability for experienced international');
+
+  // Case B: Undisputed star (Gerard Moreno in Villarreal)
+  const gerard = {
+    name: 'Gerard Moreno',
+    club: 'Villarreal CF',
+    type: 'striker',
+    average: { points: '6.5' },
+    historical: [{ points: '180' }]
+  };
+  const compVillarreal = evaluateClubCompetition(gerard);
+  assert.equal(compVillarreal.isUndisputed, true, 'Gerard Moreno must be classified as undisputed starter');
+  assert.equal(compVillarreal.competitionLevel, 'BAJA', 'Undisputed starter must have BAJA competition level');
+});
+
