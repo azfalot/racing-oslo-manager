@@ -2,6 +2,51 @@ import { createCanvas, loadImage } from '@napi-rs/canvas';
 import fs from 'fs';
 import path from 'path';
 import axios from 'axios';
+import { exec } from 'child_process';
+
+let syncDebounceTimeout = null;
+export function triggerWebSync() {
+  if (syncDebounceTimeout) clearTimeout(syncDebounceTimeout);
+  syncDebounceTimeout = setTimeout(() => {
+    console.log('[NEWS] Desencadenando sincronización web automática tras publicación...');
+    exec('node src/syncWeb.mjs', (err) => {
+      if (err) console.error('[NEWS ERROR] Error en syncWeb automático:', err.message);
+      else console.log('[NEWS] Sincronización y despliegue a Cloudflare completado tras nuevo evento.');
+    });
+  }, 4000);
+}
+
+export function insertOrUpdateNews(article) {
+  const newsPath = path.resolve('web/src/data/news.json');
+  let newsList = [];
+  if (fs.existsSync(newsPath)) {
+    try {
+      newsList = JSON.parse(fs.readFileSync(newsPath, 'utf-8'));
+    } catch (e) {
+      newsList = [];
+    }
+  }
+
+  // Deduplicación estricta por ID base, título o par jugador-categoría
+  const cleanList = newsList.filter(n => {
+    if (n.id === article.id) return false;
+    if (n.title.trim().toLowerCase() === article.title.trim().toLowerCase()) return false;
+    if (article.category === n.category && article.id && n.id) {
+      const artBase = article.id.split('_').slice(0, 2).join('_');
+      const curBase = n.id.split('_').slice(0, 2).join('_');
+      if (artBase === curBase) return false;
+    }
+    return true;
+  });
+
+  cleanList.unshift(article);
+  const finalList = cleanList.slice(0, 25);
+  fs.writeFileSync(newsPath, JSON.stringify(finalList, null, 2));
+  console.log(`[NEWS] Noticia guardada y deduplicada con éxito: "${article.title}"`);
+  
+  triggerWebSync();
+  return article;
+}
 
 /**
  * Descarga y asegura la foto oficial del jugador vía API de Comunio
@@ -169,29 +214,20 @@ export async function generateTemplateGraphic(type, playerName, subText = '', pl
 export async function publishSigningNews(playerName, price, playerId, position = 'Jugador') {
   try {
     const formattedPrice = typeof price === 'number' ? price.toLocaleString() + ' €' : price;
-    
-    // Generar gráfica oficial con la plantilla de Compra + Foto API
     const graphicUrl = await generateTemplateGraphic('signing', playerName, formattedPrice, playerId);
 
-    const newsPath = path.resolve('web/src/data/news.json');
-    if (fs.existsSync(newsPath)) {
-      const newsList = JSON.parse(fs.readFileSync(newsPath, 'utf-8'));
-      const signingArticle = {
-        id: `signing_${playerId}_${Date.now()}`,
-        title: `¡Oficial! ${playerName} ficha por el Racing de Oslo`,
-        date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
-        category: 'Fichajes',
-        excerpt: `El club hace oficial la incorporación de ${playerName} tras abonar su traspaso por ${formattedPrice}.`,
-        summary: `El club hace oficial la incorporación de ${playerName} tras abonar su traspaso por ${formattedPrice}.`,
-        content: `Mateo Oslomany ha cerrado otra operación estelar. ${playerName} se une a las filas del Racing de Oslo por ${formattedPrice}.\n\nLa dirección deportiva confía en su gran aportación y calidad para afrontar la temporada con máximas garantías.\n\n¡Bienvenido al club, ${playerName}!`,
-        image: graphicUrl
-      };
+    const signingArticle = {
+      id: `signing_${playerId}`,
+      title: `¡Oficial! ${playerName} ficha por el Racing de Oslo`,
+      date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
+      category: 'Fichajes',
+      excerpt: `El club hace oficial la incorporación de ${playerName} tras abonar su traspaso por ${formattedPrice}.`,
+      summary: `El club hace oficial la incorporación de ${playerName} tras abonar su traspaso por ${formattedPrice}.`,
+      content: `Mateo Oslomany ha cerrado otra operación estelar. ${playerName} se une a las filas del Racing de Oslo por ${formattedPrice}.\n\nLa dirección deportiva confía en su gran aportación y calidad para afrontar la temporada con máximas garantías.\n\n¡Bienvenido al club, ${playerName}!`,
+      image: graphicUrl
+    };
 
-      newsList.unshift(signingArticle);
-      fs.writeFileSync(newsPath, JSON.stringify(newsList, null, 2));
-      console.log(`[NEWS] Noticia oficial de fichaje publicada para ${playerName}.`);
-      return signingArticle;
-    }
+    return insertOrUpdateNews(signingArticle);
   } catch (e) {
     console.error('[NEWS ERROR] Error publicando noticia de fichaje:', e.message);
   }
@@ -201,29 +237,20 @@ export async function publishSigningNews(playerName, price, playerId, position =
 export async function publishSaleNews(playerName, price, playerId, buyerName = 'Computadora') {
   try {
     const formattedPrice = typeof price === 'number' ? price.toLocaleString() + ' €' : price;
-
-    // Generar gráfica oficial con la plantilla de Venta (misma que signing) + Foto API + Logo comprador
     const graphicUrl = await generateTemplateGraphic('sale', playerName, formattedPrice, playerId, buyerName);
 
-    const newsPath = path.resolve('web/src/data/news.json');
-    if (fs.existsSync(newsPath)) {
-      const newsList = JSON.parse(fs.readFileSync(newsPath, 'utf-8'));
-      const saleArticle = {
-        id: `sale_${playerId}_${Date.now()}`,
-        title: `¡Oficial! ${playerName} abandona el Racing de Oslo`,
-        date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
-        category: 'Ventas',
-        excerpt: `El club hace oficial la salida de ${playerName} a ${buyerName} tras alcanzar un acuerdo por su traspaso por ${formattedPrice}.`,
-        summary: `El club hace oficial la salida de ${playerName} a ${buyerName} tras alcanzar un acuerdo por su traspaso por ${formattedPrice}.`,
-        content: `La dirección deportiva encabezada por Mateo Oslomany ha cerrado la operación de traspaso de ${playerName} a ${buyerName} por un importe total de ${formattedPrice}.\n\nDesde el Racing de Oslo agradecemos su profesionalidad y dedicación defendiendo nuestra camiseta en el Oslo Arena, y le deseamos los mayores éxitos en sus futuros proyectos profesionales.\n\n¡Gracias por todo y mucha suerte, ${playerName}!`,
-        image: graphicUrl
-      };
+    const saleArticle = {
+      id: `sale_${playerId}`,
+      title: `¡Oficial! ${playerName} abandona el Racing de Oslo`,
+      date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
+      category: 'Ventas',
+      excerpt: `El club hace oficial la salida de ${playerName} a ${buyerName} tras alcanzar un acuerdo por su traspaso por ${formattedPrice}.`,
+      summary: `El club hace oficial la salida de ${playerName} a ${buyerName} tras alcanzar un acuerdo por su traspaso por ${formattedPrice}.`,
+      content: `La dirección deportiva encabezada por Mateo Oslomany ha cerrado la operación de traspaso de ${playerName} a ${buyerName} por un importe total de ${formattedPrice}.\n\nDesde el Racing de Oslo agradecemos su profesionalidad y dedicación defendiendo nuestra camiseta en el Oslo Arena, y le deseamos los mayores éxitos en sus futuros proyectos profesionales.\n\n¡Gracias por todo y mucha suerte, ${playerName}!`,
+      image: graphicUrl
+    };
 
-      newsList.unshift(saleArticle);
-      fs.writeFileSync(newsPath, JSON.stringify(newsList, null, 2));
-      console.log(`[NEWS] Noticia oficial de venta publicada para ${playerName}.`);
-      return saleArticle;
-    }
+    return insertOrUpdateNews(saleArticle);
   } catch (e) {
     console.error('[NEWS ERROR] Error publicando noticia de venta:', e.message);
   }
@@ -232,28 +259,20 @@ export async function publishSaleNews(playerName, price, playerId, buyerName = '
 
 export async function publishMedicalNews(playerName, statusDetails, playerId) {
   try {
-    // Generar gráfica oficial con la plantilla de Enfermería + Foto API
     const graphicUrl = await generateTemplateGraphic('medical', playerName, statusDetails, playerId);
 
-    const newsPath = path.resolve('web/src/data/news.json');
-    if (fs.existsSync(newsPath)) {
-      const newsList = JSON.parse(fs.readFileSync(newsPath, 'utf-8'));
-      const medicalArticle = {
-        id: `medical_${playerId}_${Date.now()}`,
-        title: `Parte Médico & Estado: ${playerName}`,
-        date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
-        category: 'Enfermería',
-        excerpt: `El cuerpo médico emite el informe de evolución física y disponibilidad de ${playerName}.`,
-        summary: `El cuerpo médico emite el informe de evolución física y disponibilidad de ${playerName}.`,
-        content: `Los servicios médicos del Racing de Oslo informan sobre la situación de ${playerName}: ${statusDetails}.\n\nEl cuerpo técnico liderado por Mateo Oslomany evalúa su evolución día a día priorizando la salud y el máximo rendimiento del jugador de cara a las próximas jornadas.`,
-        image: graphicUrl
-      };
+    const medicalArticle = {
+      id: `medical_${playerId}`,
+      title: `Parte Médico & Estado: ${playerName}`,
+      date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
+      category: 'Enfermería',
+      excerpt: `El cuerpo médico emite el informe de evolución física y disponibilidad de ${playerName}.`,
+      summary: `El cuerpo médico emite el informe de evolución física y disponibilidad de ${playerName}.`,
+      content: `Los servicios médicos del Racing de Oslo informan sobre la situación de ${playerName}: ${statusDetails}.\n\nEl cuerpo técnico liderado por Mateo Oslomany evalúa su evolución día a día priorizando la salud y el máximo rendimiento del jugador de cara a las próximas jornadas.`,
+      image: graphicUrl
+    };
 
-      newsList.unshift(medicalArticle);
-      fs.writeFileSync(newsPath, JSON.stringify(newsList, null, 2));
-      console.log(`[NEWS] Noticia médica oficial publicada para ${playerName}.`);
-      return medicalArticle;
-    }
+    return insertOrUpdateNews(medicalArticle);
   } catch (e) {
     console.error('[NEWS ERROR] Error publicando parte médico:', e.message);
   }
@@ -262,32 +281,23 @@ export async function publishMedicalNews(playerName, statusDetails, playerId) {
 
 export async function publishRumorNews(playerName, rumorDetails, playerId = null, isEntry = true) {
   try {
-    // Generar gráfica oficial con la plantilla de Rumores + Foto API
     const graphicUrl = await generateTemplateGraphic('rumors', playerName, rumorDetails, playerId);
+    const titleStr = isEntry
+      ? `RUMOR: El Racing de Oslo interesado en el fichaje de ${playerName}`
+      : `RUMOR: El Racing de Oslo escucha ofertas por ${playerName}`;
+    
+    const rumorArticle = {
+      id: `rumor_${playerId || playerName.toLowerCase().replace(/\s+/g, '_')}`,
+      title: titleStr,
+      date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
+      category: 'Rumores',
+      excerpt: `Mateo Oslomany evalúa el mercado de fichajes sobre la situación de ${playerName}.`,
+      summary: `Mateo Oslomany evalúa el mercado de fichajes sobre la situación de ${playerName}.`,
+      content: `Las oficinas del Oslo Arena se mantienen en plena actividad. Mateo Oslomany y la Secretaría Técnica valoran la operación con ${playerName} (${rumorDetails}).\n\nEl club continúa analizando las opciones financieras y deportivas para mantener una plantilla de máximas garantías.`,
+      image: graphicUrl
+    };
 
-    const newsPath = path.resolve('web/src/data/news.json');
-    if (fs.existsSync(newsPath)) {
-      const newsList = JSON.parse(fs.readFileSync(newsPath, 'utf-8'));
-      const titleStr = isEntry
-        ? `RUMOR: El Racing de Oslo interesado en el fichaje de ${playerName}`
-        : `RUMOR: El Racing de Oslo escucha ofertas por ${playerName}`;
-      
-      const rumorArticle = {
-        id: `rumor_${playerId || Date.now()}_${Date.now()}`,
-        title: titleStr,
-        date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
-        category: 'Rumores',
-        excerpt: `Mateo Oslomany evalúa el mercado de fichajes sobre la situación de ${playerName}.`,
-        summary: `Mateo Oslomany evalúa el mercado de fichajes sobre la situación de ${playerName}.`,
-        content: `Las oficinas del Oslo Arena se mantienen en plena actividad. Mateo Oslomany y la Secretaría Técnica valoran la operación con ${playerName} (${rumorDetails}).\n\nEl club continúa analizando las opciones financieras y deportivas para mantener una plantilla de máximas garantías.`,
-        image: graphicUrl
-      };
-
-      newsList.unshift(rumorArticle);
-      fs.writeFileSync(newsPath, JSON.stringify(newsList, null, 2));
-      console.log(`[NEWS] Noticia de rumor de ${isEntry ? 'entrada' : 'salida'} publicada para ${playerName}.`);
-      return rumorArticle;
-    }
+    return insertOrUpdateNews(rumorArticle);
   } catch (e) {
     console.error('[NEWS ERROR] Error publicando rumor:', e.message);
   }
@@ -297,25 +307,18 @@ export async function publishRumorNews(playerName, rumorDetails, playerId = null
 export async function publishClubNews(title, summary, bodyText, category = 'Institucional', templateType = 'club') {
   try {
     const graphicUrl = await generateTemplateGraphic(templateType, title, summary);
-    const newsPath = path.resolve('web/src/data/news.json');
-    if (fs.existsSync(newsPath)) {
-      const newsList = JSON.parse(fs.readFileSync(newsPath, 'utf-8'));
-      const article = {
-        id: `club_${Date.now()}`,
-        title: title,
-        date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
-        category: category,
-        excerpt: summary,
-        summary: summary,
-        content: bodyText,
-        image: graphicUrl || '/media/templates/template_club.jpg'
-      };
+    const article = {
+      id: `club_${category.toLowerCase()}_${title.slice(0, 15).toLowerCase().replace(/[^a-z0-9]/g, '_')}`,
+      title: title,
+      date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
+      category: category,
+      excerpt: summary,
+      summary: summary,
+      content: bodyText,
+      image: graphicUrl || '/media/templates/template_club.jpg'
+    };
 
-      newsList.unshift(article);
-      fs.writeFileSync(newsPath, JSON.stringify(newsList, null, 2));
-      console.log(`[NEWS] Comunicado oficial publicado: ${title}`);
-      return article;
-    }
+    return insertOrUpdateNews(article);
   } catch (e) {
     console.error('[NEWS ERROR] Error publicando comunicado del club:', e.message);
   }

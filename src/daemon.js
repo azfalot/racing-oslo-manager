@@ -1186,6 +1186,13 @@ async function runMarketCheck() {
         log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Auto-Puja', player: bid.name, amount: `${bid.bidAmount.toLocaleString()} €`, status: 'Éxito' });
         fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
 
+        try {
+          const { publishRumorNews } = await import('./imageGen.js');
+          await publishRumorNews(bid.name, `Oferta emitida en el mercado oficial por ${bid.bidAmount.toLocaleString()} € (+${(bid.marginalValue || bid.upgradePoints || 0).toFixed(0)} pts al Once)`, bid.playerId, true);
+        } catch (e) {
+          console.error('[DAEMON-NEWS ERROR]', e.message);
+        }
+
         const msg = `💼 🤖 <b>[Mateo Oslomany] Auto-Puja Ejecutada</b>\n\n` +
           `👤 <b>${escapeHtml(bid.name)}</b> (${(bid.type || '').toUpperCase()})\n` +
           `💰 <b>Importe Pujado:</b> ${bid.bidAmount.toLocaleString()} € (+${bid.dynamicMargin || 0}%)\n` +
@@ -1207,6 +1214,13 @@ async function runMarketCheck() {
         try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
         log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Auto-Puja Estratégica', player: alert.name, amount: `${alert.bidAmount.toLocaleString()} €`, status: 'Éxito' });
         fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
+
+        try {
+          const { publishRumorNews } = await import('./imageGen.js');
+          await publishRumorNews(alert.name, `Oferta emitida por ${alert.bidAmount.toLocaleString()} € (+${(alert.marginalValue || alert.upgradePoints || 0).toFixed(0)} pts al Once)`, alert.playerId, true);
+        } catch (e) {
+          console.error('[DAEMON-NEWS ERROR]', e.message);
+        }
 
         const msg = `💼 🤖 <b>[Mateo Oslomany] Auto-Puja Estratégica Ejecutada</b>\n\n` +
           `${posTag} <b>${escapeHtml(alert.name)}</b> (${(alert.type || '').toUpperCase()})\n` +
@@ -1251,6 +1265,13 @@ async function runMarketCheck() {
           try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
           log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Auto-Venta Racional', player: playerName, amount: `${offerPrice.toLocaleString()} €`, status: 'Éxito' });
           fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
+
+          try {
+            const { publishSaleNews } = await import('./imageGen.js');
+            await publishSaleNews(playerName, offerPrice, playerId, buyerName);
+          } catch (e) {
+            console.error('[DAEMON-NEWS ERROR]', e.message);
+          }
 
           await sendTelegramMessage(`💼 🤖 <b>[Mateo Oslomany] Auto-Venta Ejecutada:</b> ${escapeHtml(playerName)} traspasado a ${escapeHtml(buyerName)} por ${offerPrice.toLocaleString()} €.\n<i>${escapeHtml(saleEval.reason)}</i>`);
         } else {
