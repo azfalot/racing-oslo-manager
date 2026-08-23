@@ -362,31 +362,35 @@ export class ComunioEngine {
         continue; // Descartar parches o futbolistas con rendimiento mediocre y precio inflado
       }
 
+      // 3. Aplicar Modificador por Calendario & Dificultad del Rival Inminente
+      const calendarMod = this.getMatchDifficultyModifier(player, { opponent: player.nextOpponent || player.clubName || '' });
+      const adjustedExpectedPoints = Math.round(expectedPoints * calendarMod);
+
       // Puntos por millón (PPM)
-      const ppm = expectedPoints / (player.price / 1000000);
+      const ppm = adjustedExpectedPoints / (player.price / 1000000);
 
       // Comparar con el jugador más débil que tenemos en esa posición
       const myWeakest = myWeakestByPos[player.type];
-      let upgradePoints = expectedPoints;
+      let upgradePoints = adjustedExpectedPoints;
 
       if (myWeakest) {
         const myWeakestPoints = this.getExpectedPoints(myWeakest);
-        upgradePoints = expectedPoints - myWeakestPoints;
+        upgradePoints = adjustedExpectedPoints - myWeakestPoints;
       }
 
-      // 4. Categorizar según la directiva de mercado:
-      // SALTO_CUALITATIVO: mejora >= 15 pts
-      // MEJORA_MODERADA: 0 < mejora < 15 pts
-      // EL_RESTO: mejora <= 0 pts (Suprimido en Telegram)
+      // 4. Categorizar según la directiva de alta exigencia de mercado:
+      // SALTO_CUALITATIVO: mejora >= 35 pts (Jugadores estrella que garantizan salto real)
+      // MEJORA_MODERADA: 20 <= mejora < 35 pts (Mejora secundaria significativa)
+      // EL_RESTO: mejora < 20 pts (Suprimido 100% en Telegram para evitar exceso de notificaciones)
       let category = 'EL_RESTO';
-      let impactTag = '⛔ EL RESTO (Sin Mejora)';
+      let impactTag = '⛔ EL RESTO (Sin Mejora Significativa)';
 
-      if (upgradePoints >= 15) {
+      if (upgradePoints >= 35) {
         category = 'SALTO_CUALITATIVO';
-        impactTag = upgradePoints >= 30 ? '🏆 SALTO CUALITATIVO ESTRELLA (+30 pts)' : '🚀 SALTO CUALITATIVO (+15 pts)';
-      } else if (upgradePoints > 0) {
+        impactTag = upgradePoints >= 50 ? '🏆 SALTO CUALITATIVO ESTRELLA (+50 pts)' : '🚀 SALTO CUALITATIVO (+35 pts)';
+      } else if (upgradePoints >= 20) {
         category = 'MEJORA_MODERADA';
-        impactTag = '📈 MEJORA MODERADA';
+        impactTag = '📈 MEJORA MODERADA (+20 pts)';
       }
 
       // 5. Protección económica y control de plantilla (15 jugadores máx)
