@@ -132,7 +132,8 @@ export async function checkMarket(client, squad, balance, botPaused) {
     .sort((a, b) => b.upgradePoints - a.upgradePoints); // Ordenar por impacto decreciente
 
   const pendingBids = await client.getPendingBids();
-  const pendingIds = new Set(pendingBids.map(b => parseInt(b.playerId || b.id)));
+  const pendingIds = new Set(pendingBids.map(b => parseInt(b.playerId || b.id || 0)).filter(id => id > 0));
+  const pendingNames = new Set(pendingBids.map(b => (b.playerName || b.name || '').toLowerCase().trim()).filter(n => n.length > 0));
 
   let bidMargin = 0;
   try {
@@ -143,8 +144,14 @@ export async function checkMarket(client, squad, balance, botPaused) {
   } catch (e) {}
 
   for (const rec of recommendations) {
-    const pid = parseInt(rec.playerId || rec.id);
-    if (pendingIds.has(pid) || ignoredIds.has(pid)) continue;
+    const pid = parseInt(rec.playerId || rec.id || 0);
+    const pName = (rec.name || rec.playerName || '').toLowerCase().trim();
+
+    // ⛔ SUPRESIÓN DE DUPLICADOS: Omitir inmediatamente si ya tenemos una puja activa por este jugador
+    if ((pid > 0 && pendingIds.has(pid)) || (pName && pendingNames.has(pName)) || (pid > 0 && ignoredIds.has(pid))) {
+      console.log(`[MARKET MONITOR] Omitiendo ${rec.name}: Ya existe una puja activa registrada o ignorada.`);
+      continue;
+    }
 
     // Fórmula de Sobreprecio Dinámico por Esfuerzo Económico:
     // Base: 2.0% | Salto Cualitativo (+25 pts): 3.0% | Mejora Moderada: 1.5% | Liquidez Ajustada (< 3M €): 0.5%

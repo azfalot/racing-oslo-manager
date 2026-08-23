@@ -1103,8 +1103,6 @@ async function runMarketCheck() {
 
     const result = await checkMarket(client, squad, balance, botPaused);
 
-    // Notificar pujas automáticas realizadas
-    for (const bid of result.autoBids) {
     // 1. PUJAS AUTOMÁTICAS (Operaciones Estándar no críticas)
     for (const bid of result.autoBids) {
       if (botPaused) continue;
