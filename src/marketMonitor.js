@@ -153,15 +153,17 @@ export async function checkMarket(client, squad, balance, botPaused) {
       continue;
     }
 
-    // Fórmula de Sobreprecio Dinámico por Esfuerzo Económico:
-    // Base: 2.0% | Salto Cualitativo (+25 pts): 3.0% | Mejora Moderada: 1.5% | Liquidez Ajustada (< 3M €): 0.5%
+    // Fórmula de Sobreprecio Dinámico Inteligente (Inteligencia Competitiva de Mercado):
+    // Salto Cualitativo (+35 pts): 12.0% (Para blindar el fichaje frente a sobrepujas agresivas de rivales como Hache FC o Puente Avios)
+    // Mejora Moderada en Forma (+20 pts): 4.0%
+    // Liquidez Ajustada (< 3M €): 1.0%
     let dynamicMargin = bidMargin || 2.0;
     if (balance < 3000000) {
-      dynamicMargin = 0.5;
-    } else if (rec.upgradePoints >= 25) {
-      dynamicMargin = 3.0; // Esfuerzo económico máximo para fichaje estrella
+      dynamicMargin = 1.0;
+    } else if (rec.category === 'SALTO_CUALITATIVO' || rec.upgradePoints >= 35) {
+      dynamicMargin = 12.0; // Sobrepuja competitiva de blindaje frente a rivales humanos
     } else if (rec.category === 'MEJORA_MODERADA') {
-      dynamicMargin = 1.5; // Margen prudente
+      dynamicMargin = 4.0; // Margen competitivo moderado
     }
 
     const bidAmount = Math.ceil(rec.price * (1 + dynamicMargin / 100));
