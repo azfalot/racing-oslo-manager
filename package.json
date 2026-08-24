@@ -6,7 +6,8 @@
   "scripts": {
     "discover": "node src/discover.js",
     "start": "node src/app.js",
-    "test": "node --test test/engine.test.mjs"
+    "test": "node --test test/engine.test.mjs",
+    "whatsapp": "node src/whatsappPair.js"
   },
   "dependencies": {
     "@napi-rs/canvas": "^1.0.7",
@@ -16,7 +17,9 @@
     "jimp": "^1.6.1",
     "jsdom": "^29.1.1",
     "playwright": "^1.43.0",
-    "puppeteer": "^24.43.1"
+    "puppeteer": "^24.43.1",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.34.7"
   },
   "type": "module"
 }
