@@ -338,7 +338,8 @@ export async function publishSigningNews(playerName, price, playerId, position =
       excerpt: `El club hace oficial la incorporación de ${playerName} tras abonar su traspaso por ${formattedPrice}.`,
       summary: `El club hace oficial la incorporación de ${playerName} tras abonar su traspaso por ${formattedPrice}.`,
       content: `Mateo Oslomany ha cerrado otra operación estelar. ${playerName} se une a las filas del Racing de Oslo por ${formattedPrice}.\n\nLa dirección deportiva confía en su gran aportación y calidad para afrontar la temporada con máximas garantías.\n\n¡Bienvenido al club, ${playerName}!`,
-      image: graphicUrl
+      image: graphicUrl,
+      author: 'Mateo Oslomany'
     };
 
     return insertOrUpdateNews(signingArticle);
@@ -361,7 +362,8 @@ export async function publishSaleNews(playerName, price, playerId, buyerName = '
       excerpt: `El club hace oficial la salida de ${playerName} a ${buyerName} tras alcanzar un acuerdo por su traspaso por ${formattedPrice}.`,
       summary: `El club hace oficial la salida de ${playerName} a ${buyerName} tras alcanzar un acuerdo por su traspaso por ${formattedPrice}.`,
       content: `La dirección deportiva encabezada por Mateo Oslomany ha cerrado la operación de traspaso de ${playerName} a ${buyerName} por un importe total de ${formattedPrice}.\n\nDesde el Racing de Oslo agradecemos su profesionalidad y dedicación defendiendo nuestra camiseta en el Oslo Arena, y le deseamos los mayores éxitos en sus futuros proyectos profesionales.\n\n¡Gracias por todo y mucha suerte, ${playerName}!`,
-      image: graphicUrl
+      image: graphicUrl,
+      author: 'Mateo Oslomany'
     };
 
     return insertOrUpdateNews(saleArticle);
@@ -382,7 +384,8 @@ export async function publishMarketDealNews(data) {
       excerpt: `${data.buyerName} completa la incorporación de ${data.playerName} procedente de ${data.prevClub || 'LaLiga'}.`,
       summary: `${data.buyerName} completa la incorporación de ${data.playerName} procedente de ${data.prevClub || 'LaLiga'}.`,
       content: `Movimiento de mercado confirmado en la comunidad. ${data.buyerName} se ha hecho con los servicios de ${data.playerName} tras una puja de ${typeof data.price === 'number' ? data.price.toLocaleString() + ' €' : data.price}.\n\nEl Racing de Oslo audita los movimientos de los rivales mientras mantiene una sólida posición de liquidez.`,
-      image: graphicUrl
+      image: graphicUrl,
+      author: 'Fabrizio Oslomano'
     };
     return insertOrUpdateNews(article);
   } catch (e) {
@@ -401,7 +404,8 @@ export async function publishFinancialReportNews(data) {
       excerpt: `Cuentas 100% saneadas con ${(data.balance || 19765340).toLocaleString()} € de saldo disponible y patrimonio neto de ${(data.netWorth || 61075340).toLocaleString()} €.`,
       summary: `Cuentas 100% saneadas con ${(data.balance || 19765340).toLocaleString()} € de saldo disponible y patrimonio neto de ${(data.netWorth || 61075340).toLocaleString()} €.`,
       content: `La Dirección Deportiva y el Departamento Financiero del Racing de Oslo presentan el balance económico oficial:\n\n💰 Saldo Disponible en Caja: ${(data.balance || 19765340).toLocaleString()} €\n🛡️ Valor de Plantilla: ${(data.teamValue || 41310000).toLocaleString()} €\n🏦 Patrimonio Neto: ${(data.netWorth || 61075340).toLocaleString()} €\n📊 Deuda Total: 0 € (Club 100% Saneado)\n\nEl Racing de Oslo mantiene una posición financiera privilegiada para afrontar las grandes operaciones del mercado.`,
-      image: graphicUrl
+      image: graphicUrl,
+      author: 'Mateo Oslomany'
     };
     return insertOrUpdateNews(article);
   } catch (e) {
@@ -420,7 +424,8 @@ export async function publishMvpNews(data) {
       excerpt: `${data.playerName} es elegido mejor jugador del Racing de Oslo en la ${data.matchday || 'jornada'}.`,
       summary: `${data.playerName} es elegido mejor jugador del Racing de Oslo en la ${data.matchday || 'jornada'}.`,
       content: `Actuación colosal de ${data.playerName}. El futbolista del Racing de Oslo firma ${data.points} puntos en Comunio con ${data.goals || 1} gol(es) y ${data.assists || 1} asistencia(s).\n\n"Su talento decide partidos, su coraje construye historia." — Mateo Oslomany.`,
-      image: graphicUrl
+      image: graphicUrl,
+      author: 'Julio Osldini'
     };
     return insertOrUpdateNews(article);
   } catch (e) {
@@ -440,7 +445,8 @@ export async function publishMedicalNews(playerName, statusDetails, playerId) {
       excerpt: `El cuerpo médico emite el informe de evolución física y disponibilidad de ${playerName}.`,
       summary: `El cuerpo médico emite el informe de evolución física y disponibilidad de ${playerName}.`,
       content: `Los servicios médicos del Racing de Oslo informan sobre la situación de ${playerName}: ${statusDetails}.\n\nEl cuerpo técnico liderado por Mateo Oslomany evalúa su evolución día a día priorizando la salud y el máximo rendimiento del jugador de cara a las próximas jornadas.`,
-      image: graphicUrl
+      image: graphicUrl,
+      author: 'Mateo Oslomany'
     };
 
     return insertOrUpdateNews(medicalArticle);
@@ -465,7 +471,8 @@ export async function publishRumorNews(playerName, rumorDetails, playerId = null
       excerpt: `Mateo Oslomany evalúa el mercado de fichajes sobre la situación de ${playerName}.`,
       summary: `Mateo Oslomany evalúa el mercado de fichajes sobre la situación de ${playerName}.`,
       content: `Las oficinas del Oslo Arena se mantienen en plena actividad. Mateo Oslomany y la Secretaría Técnica valoran la operación con ${playerName} (${rumorDetails}).\n\nEl club continúa analizando las opciones financieras y deportivas para mantener una plantilla de máximas garantías.`,
-      image: graphicUrl
+      image: graphicUrl,
+      author: 'Fabrizio Oslomano'
     };
 
     return insertOrUpdateNews(rumorArticle);

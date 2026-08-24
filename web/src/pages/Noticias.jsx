@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import newsData from '../data/news.json'
-import { Calendar, X, Eye, Flame, TrendingUp, Shield, Activity, Award, DollarSign, Clock, User, Feather } from 'lucide-react'
+import { Calendar, X, Eye, Flame, TrendingUp, Shield, Activity, Award, DollarSign, Clock, User, Feather, Filter } from 'lucide-react'
 
 export function formatNewsDate(dateStr) {
   if (!dateStr) return ''
@@ -17,40 +17,47 @@ export function formatNewsDate(dateStr) {
 /**
  * Periodistas deportivos oficiales del Racing de Oslo
  */
-export function getNewsJournalist(category, customAuthor = null) {
-  if (customAuthor) {
-    return { name: customAuthor, role: 'Redacción Deportiva', tag: 'Diario de Oslo', color: 'text-white' }
-  }
+export function getNewsJournalist(authorName, category = '') {
+  const author = (authorName || '').toLowerCase()
   const cat = (category || '').toLowerCase()
-  if (cat.includes('fichaje') || cat.includes('venta') || cat.includes('rival') || cat.includes('mercado') || cat.includes('rumor')) {
+
+  if (author.includes('fabrizio') || (!authorName && (cat.includes('rumor') || cat.includes('rival') || cat.includes('mercado')))) {
     return { 
       name: 'Fabrizio Oslomano', 
       role: 'Especialista en Fichajes & Mercado', 
       tag: '✍️ Here We Go Oslo!',
-      color: 'text-amber-300'
+      color: 'text-amber-300',
+      badgeBg: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
+      activeBg: 'bg-amber-500 text-black border-amber-300 font-bold shadow-[0_0_15px_rgba(245,158,11,0.5)]'
     }
   }
-  if (cat.includes('táctica') || cat.includes('previa') || cat.includes('mvp') || cat.includes('scout') || cat.includes('equipo')) {
+  if (author.includes('julio') || (!authorName && (cat.includes('táctica') || cat.includes('previa') || cat.includes('mvp') || cat.includes('scout') || cat.includes('equipo')))) {
     return { 
       name: 'Julio Osldini', 
       role: 'Analista Táctico & Scouting', 
       tag: '📋 Pizarra Táctica',
-      color: 'text-cyan-300'
+      color: 'text-cyan-300',
+      badgeBg: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
+      activeBg: 'bg-cyan-500 text-black border-cyan-300 font-bold shadow-[0_0_15px_rgba(6,182,212,0.5)]'
     }
   }
-  if (cat.includes('finanza') || cat.includes('econom') || cat.includes('crónica') || cat.includes('institucional')) {
+  if (author.includes('pedroslo') || author.includes('josep') || (!authorName && (cat.includes('crónica') || cat.includes('exclusiva')))) {
     return { 
       name: 'Josep Pedroslo', 
       role: 'Redactor Jefe & Exclusivas', 
       tag: '🔥 ¡Tic, Tac, Oslo!',
-      color: 'text-yellow-300'
+      color: 'text-yellow-300',
+      badgeBg: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40',
+      activeBg: 'bg-yellow-500 text-black border-yellow-300 font-bold shadow-[0_0_15px_rgba(234,179,8,0.5)]'
     }
   }
   return { 
     name: 'Mateo Oslomany', 
     role: 'Director Deportivo', 
     tag: '💼 Secretaría Técnica',
-    color: 'text-emerald-300'
+    color: 'text-emerald-300',
+    badgeBg: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
+    activeBg: 'bg-emerald-600 text-white border-emerald-400 font-bold shadow-[0_0_15px_rgba(16,185,129,0.5)]'
   }
 }
 
@@ -131,23 +138,43 @@ export function getCategoryBadgeStyle(category) {
   }
 }
 
+const JOURNALISTS = [
+  { id: 'ALL', name: 'Todas las Firmas', role: 'Redacción Completa', tag: 'Diario de Oslo' },
+  { id: 'Mateo Oslomany', name: 'Mateo Oslomany', role: 'Director Deportivo', tag: '💼 Finanzas & Club' },
+  { id: 'Fabrizio Oslomano', name: 'Fabrizio Oslomano', role: 'Mercado & Fichajes', tag: '✍️ Here We Go!' },
+  { id: 'Julio Osldini', name: 'Julio Osldini', role: 'Táctica & Scouting', tag: '📋 Pizarra Táctica' },
+  { id: 'Josep Pedroslo', name: 'Josep Pedroslo', role: 'Redactor Jefe', tag: '🔥 Exclusivas' }
+]
+
 export default function Noticias() {
   const [selectedNews, setSelectedNews] = useState(null)
   const [filterCategory, setFilterCategory] = useState('ALL')
+  const [filterAuthor, setFilterAuthor] = useState('ALL')
 
   const categories = ['ALL', 'Fichajes', 'Rivales', 'Finanzas', 'MVP', 'Ventas', 'Enfermería', 'Rumores', 'Previa', 'Institucional']
 
-  const filteredNews = filterCategory === 'ALL'
-    ? newsData
-    : newsData.filter(n => {
-        const cat = (n.category || '').toLowerCase()
-        const target = filterCategory.toLowerCase()
-        return cat.includes(target) || (target === 'rivales' && cat.includes('mercado'))
-      })
+  // Filtrado compuesto por Categoría y Periodista Autor
+  const filteredNews = newsData.filter(n => {
+    // 1. Filtro por Periodista
+    if (filterAuthor !== 'ALL') {
+      const j = getNewsJournalist(n.author, n.category)
+      if (j.name.toLowerCase() !== filterAuthor.toLowerCase()) return false
+    }
+
+    // 2. Filtro por Categoría
+    if (filterCategory !== 'ALL') {
+      const cat = (n.category || '').toLowerCase()
+      const target = filterCategory.toLowerCase()
+      const matches = cat.includes(target) || (target === 'rivales' && cat.includes('mercado'))
+      if (!matches) return false
+    }
+
+    return true
+  })
 
   const featuredNews = filteredNews.length > 0 ? filteredNews[0] : null
   const secondaryNews = filteredNews.slice(1)
-  const featuredJournalist = featuredNews ? getNewsJournalist(featuredNews.category, featuredNews.author) : null
+  const featuredJournalist = featuredNews ? getNewsJournalist(featuredNews.author, featuredNews.category) : null
 
   return (
     <div className="min-h-screen bg-[#0d1611] text-[#f4efe6]">
@@ -163,12 +190,14 @@ export default function Noticias() {
           <span>📋 <b>JULIO OSLDINI:</b> Pizarra táctica lista para la próxima jornada liguera.</span>
           <span className="text-forest-light">•</span>
           <span>🔥 <b>JOSEP PEDROSLO:</b> <i>"¡Exclusinda en el Oslo Arena! Cuentas 100% saneadas y deuda cero."</i></span>
+          <span className="text-forest-light">•</span>
+          <span>💼 <b>MATEO OSLOMANY:</b> <i>"Balance económico impecable con 61.07M€ de patrimonio."</i></span>
         </div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 py-8 max-w-7xl">
-        {/* HEADER PRINCIPAL CON FIRMAS DE PERIODISTAS */}
-        <div className="mb-8 border-b-2 border-[#2d5a42] pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        {/* HEADER PRINCIPAL */}
+        <div className="mb-6 border-b-2 border-[#2d5a42] pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-[#d4af37] uppercase mb-1">
               <Shield size={14} className="text-[#d4af37]" />
@@ -182,20 +211,54 @@ export default function Noticias() {
             </p>
           </div>
 
-          {/* EQUIPO DE REDACCIÓN OFICIAL */}
-          <div className="flex flex-wrap items-center gap-2">
-            {[
-              { name: 'Fabrizio Oslomano', tag: 'Mercado', color: 'bg-amber-500/20 text-amber-300 border-amber-500/40' },
-              { name: 'Julio Osldini', tag: 'Táctica', color: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40' },
-              { name: 'Josep Pedroslo', tag: 'Exclusivas', color: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40' },
-              { name: 'Mateo Oslomany', tag: 'D. Deportivo', color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' }
-            ].map((p, i) => (
-              <div key={i} className={'flex items-center gap-1.5 px-3 py-1.5 rounded-sm border text-xs font-mono ' + p.color}>
-                <Feather size={12} />
-                <span className="font-bold">{p.name}</span>
-                <span className="text-[10px] opacity-70">({p.tag})</span>
-              </div>
-            ))}
+          <div className="flex items-center gap-2 text-xs font-mono text-[#a3a092] bg-black/40 px-3 py-2 rounded-sm border border-[#2d5a42]/40">
+            <Feather size={14} className="text-[#d4af37]" />
+            <span>Filtra por <b>Columnista</b> o <b>Categoría</b></span>
+          </div>
+        </div>
+
+        {/* ✍️ EQUIPO DE REDACCIÓN OFICIAL (FILTROS INTERACTIVOS POR PERIODISTA) */}
+        <div className="mb-6 bg-[#12241b] p-3 rounded-sm border border-[#2d5a42]/60 shadow-lg">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[11px] font-mono font-bold text-[#d4af37] uppercase tracking-wider flex items-center gap-1.5">
+              <Feather size={13} />
+              Firmas & Columnistas Oficiales
+            </span>
+            {filterAuthor !== 'ALL' && (
+              <button
+                onClick={() => setFilterAuthor('ALL')}
+                className="text-[10px] font-bold text-amber-300 hover:text-white uppercase flex items-center gap-1 bg-amber-950/60 px-2 py-0.5 rounded-sm border border-amber-500/40 cursor-pointer"
+              >
+                Limpiar filtro de autor ✕
+              </button>
+            )}
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {JOURNALISTS.map(j => {
+              const isSelected = filterAuthor === j.id
+              const meta = getNewsJournalist(j.id)
+              const count = j.id === 'ALL' 
+                ? newsData.length 
+                : newsData.filter(n => getNewsJournalist(n.author, n.category).name === j.name).length
+
+              return (
+                <button
+                  key={j.id}
+                  onClick={() => setFilterAuthor(j.id)}
+                  className={'flex items-center gap-2 px-3 py-1.5 rounded-sm border text-xs font-mono transition-all cursor-pointer ' + (
+                    isSelected
+                      ? (j.id === 'ALL' ? 'bg-[#d4af37] text-black border-amber-300 font-bold shadow-md' : meta.activeBg)
+                      : (j.id === 'ALL' ? 'bg-black/50 text-[#d4ceb8] border-[#2d5a42]/40 hover:bg-white/10' : meta.badgeBg + ' hover:opacity-80')
+                  )}
+                >
+                  <Feather size={12} />
+                  <span className="font-bold">{j.name}</span>
+                  <span className="text-[10px] opacity-75">({j.tag})</span>
+                  <span className="bg-black/40 text-[10px] px-1.5 py-0.2 rounded-full font-mono">{count}</span>
+                </button>
+              )
+            })}
           </div>
         </div>
 
@@ -208,7 +271,7 @@ export default function Noticias() {
               <button
                 key={cat}
                 onClick={() => setFilterCategory(cat)}
-                className={'px-4 py-2 text-xs font-black tracking-wider uppercase transition-all rounded-sm border ' + (
+                className={'px-4 py-2 text-xs font-black tracking-wider uppercase transition-all rounded-sm border cursor-pointer ' + (
                   isSelected
                     ? cat === 'ALL'
                       ? 'bg-[#d4af37] text-black border-amber-300 shadow-[0_0_15px_rgba(212,175,55,0.4)]'
@@ -216,14 +279,31 @@ export default function Noticias() {
                     : 'bg-black/40 text-[#d4ceb8] hover:bg-white/10 hover:text-white border-[#2d5a42]/30'
                 )}
               >
-                {cat === 'ALL' ? '📰 PORTADA' : cat}
+                {cat === 'ALL' ? '📰 TODAS LAS NOTICIAS' : cat}
               </button>
             )
           })}
         </div>
 
+        {/* SI NO HAY NOTICIAS TRAS EL FILTRADO */}
+        {filteredNews.length === 0 && (
+          <div className="bg-[#12241b] border border-[#2d5a42] p-12 text-center rounded-sm my-8 space-y-4">
+            <Filter size={32} className="mx-auto text-[#d4af37]" />
+            <h3 className="text-xl font-bold text-white uppercase">No hay publicaciones con estos filtros</h3>
+            <p className="text-xs text-[#a3a092] font-mono">
+              Prueba a seleccionar otro columnista o categoría.
+            </p>
+            <button
+              onClick={() => { setFilterAuthor('ALL'); setFilterCategory('ALL'); }}
+              className="bg-[#d4af37] text-black font-bold text-xs uppercase px-4 py-2 rounded-sm hover:bg-amber-300 transition-colors cursor-pointer"
+            >
+              Restablecer todos los filtros
+            </button>
+          </div>
+        )}
+
         {/* 🌟 NOTICIA PRINCIPAL DE PORTADA (HERO BANNER) */}
-        {featuredNews && filterCategory === 'ALL' && (
+        {featuredNews && filterCategory === 'ALL' && filterAuthor === 'ALL' && (
           <div className="mb-12">
             <div
               onClick={() => setSelectedNews(featuredNews)}
@@ -286,9 +366,9 @@ export default function Noticias() {
 
         {/* 📰 GRID DE NOTICIAS EDITORIALES */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {(filterCategory === 'ALL' ? secondaryNews : filteredNews).map(news => {
+          {(filterCategory === 'ALL' && filterAuthor === 'ALL' ? secondaryNews : filteredNews).map(news => {
             const badgeStyle = getCategoryBadgeStyle(news.category)
-            const journalist = getNewsJournalist(news.category, news.author)
+            const journalist = getNewsJournalist(news.author, news.category)
 
             return (
               <article
@@ -310,7 +390,8 @@ export default function Noticias() {
                         {news.category || 'ACTUALIDAD'}
                       </span>
                     </div>
-                    <div className="absolute bottom-3 right-3 bg-black/80 px-2 py-0.5 rounded-sm border border-white/20 text-[10px] font-mono text-white font-bold">
+                    <div className="absolute bottom-3 right-3 bg-black/85 px-2 py-0.5 rounded-sm border border-white/20 text-[10px] font-mono text-white font-bold flex items-center gap-1">
+                      <Feather size={10} className={journalist.color} />
                       {journalist.tag}
                     </div>
                   </div>
@@ -351,7 +432,7 @@ export default function Noticias() {
       {/* 📖 MODAL DE LECTURA COMPLETA CON FIRMA OFICIAL */}
       {selectedNews && (() => {
         const modalBadgeStyle = getCategoryBadgeStyle(selectedNews.category)
-        const modalJournalist = getNewsJournalist(selectedNews.category, selectedNews.author)
+        const modalJournalist = getNewsJournalist(selectedNews.author, selectedNews.category)
 
         return (
           <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-fade-in">
