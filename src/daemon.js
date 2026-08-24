@@ -1348,11 +1348,31 @@ async function runMarketCheck() {
     if (result.soldPlayers.length > 0) {
       let txMsg = `🛒 <b>[Monitor Mercado] · Movimientos Registrados</b>\n\n`;
       const transactions = await fetchRecentTransactions(client);
+      const { publishSigningNews, insertOrUpdateNews } = await import('./imageGen.js');
       
       for (const p of result.soldPlayers) {
         const tx = transactions.find(t => t.player.toLowerCase().includes(p.name.toLowerCase()) || p.name.toLowerCase().includes(t.player.toLowerCase()));
         if (tx) {
           txMsg += ` • <b>${escapeHtml(tx.player)}</b> — <b>${escapeHtml(tx.price)}</b>\n   <i>Traspasado de ${escapeHtml(tx.seller)} a <b>${escapeHtml(tx.buyer)}</b></i>\n\n`;
+          
+          // Generar noticia automática si la compra la hizo Racing de Oslo o si fue un bombazo de rival
+          try {
+            if (tx.buyer.toLowerCase().includes('racing') || tx.buyer.toLowerCase().includes('azfalot')) {
+              await publishSigningNews(tx.player, tx.price, p.playerId, p.type || 'defender');
+            } else {
+              insertOrUpdateNews({
+                id: `rival_signing_${p.playerId || tx.player.replace(/\s+/g, '_')}`,
+                title: `MERCADO: ${tx.buyer} ficha a ${tx.player} por ${tx.price}`,
+                date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }),
+                category: 'Mercado',
+                summary: `${tx.buyer} completa el fichaje de ${tx.player} procedente de ${tx.seller} tras una puja de ${tx.price}.`,
+                body: `Movimiento oficial confirmado en la comunidad de Comunio. ${tx.buyer} se ha impuesto en la puja por ${tx.player} tras desembolsar ${tx.price} a ${tx.seller}.\\n\\nEl Racing de Oslo mantiene su plan financiero con 19.7M€ de liquidez mientras audita las siguientes oportunidades del mercado.`,
+                image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80'
+              });
+            }
+          } catch (newsErr) {
+            console.error('[DAEMON-NEWS] Error publicando transacción:', newsErr.message);
+          }
         } else {
           txMsg += ` • <b>${escapeHtml(p.name)}</b> — ${p.price ? p.price.toLocaleString() + ' €' : ''}\n   <i>(Retirado del mercado sin comprador)</i>\n\n`;
         }
