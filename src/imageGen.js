@@ -508,7 +508,7 @@ export async function publishRumorNews(playerName, rumorDetails, playerId = null
       category: 'Rumores',
       excerpt: `Mateo Oslomany evalúa el mercado de fichajes sobre la situación de ${playerName}.`,
       summary: `Mateo Oslomany evalúa el mercado de fichajes sobre la situación de ${playerName}.`,
-      content: `Las oficinas del Oslo Arena se mantienen en plena actividad. Mateo Oslomany y la Secretaría Técnica valoran la operación con ${playerName} (${rumorDetails}).\n\nEl club continúa analizando las opciones financieras y deportivas para mantener una plantilla de máximas garantías.`,
+      content: `Las oficinas del Oslo Arena se mantienen en plena actividad. Fabrizio Oslomano desvela en exclusiva que Mateo Oslomany y la Secretaría Técnica siguen muy de cerca la situación de ${playerName}.\n\n${pressDetails}.\n\nEl club continúa analizando las opciones financieras y deportivas para mantener una plantilla de máximas garantías.`,
       image: graphicUrl,
       author: 'Fabrizio Oslomano'
     };
