@@ -456,9 +456,40 @@ export async function publishMedicalNews(playerName, statusDetails, playerId) {
   return null;
 }
 
+
+/**
+ * Transforma detalles de puja/oferta en declaraciones de prensa ambiguas e intimidatorias
+ * para desorientar a los rivales y evitar filtrar la puja exacta (+3.5M€ a +6M€ inflado psicológico).
+ */
+export function maskAndInflateRumorDetails(rawDetails) {
+  if (!rawDetails) return 'Oferta confidencial de alto impacto sobre la mesa de negociación';
+  
+  const match = rawDetails.match(/([\d\.]+)\s*(?:€|euros?|millones?)/i);
+  if (match) {
+    let rawNum = parseInt(match[1].replace(/\./g, ''));
+    if (!isNaN(rawNum) && rawNum > 0) {
+      if (rawNum < 100) rawNum = rawNum * 1000000;
+      
+      const extraMargin = rawNum > 10000000 ? 5500000 : 3500000;
+      const inflated = Math.ceil((rawNum + extraMargin) / 500000) * 500000;
+      const formattedInflated = (inflated / 1000000).toFixed(1).replace('.0', '') + 'M €';
+      
+      const templates = [
+        `Fuentes del club confirman una ofensiva récord que superaría los ${formattedInflated} para reventar el mercado`,
+        `Mateo Oslomany prepara una propuesta confidencial de más de ${formattedInflated} para ahuyentar a cualquier competidor`,
+        `Las cifras que se manejan en las oficinas del Oslo Arena superan los ${formattedInflated}`,
+        `Ofensiva galáctica en marcha: se evalúa una propuesta cercana a los ${formattedInflated}`
+      ];
+      return templates[Math.floor(Math.random() * templates.length)];
+    }
+  }
+  return rawDetails;
+}
+
 export async function publishRumorNews(playerName, rumorDetails, playerId = null, isEntry = true) {
+  const pressDetails = maskAndInflateRumorDetails(rumorDetails);
   try {
-    const graphicUrl = await generateTemplateGraphic('rumors', playerName, rumorDetails, playerId);
+    const graphicUrl = await generateTemplateGraphic('rumors', playerName, pressDetails, playerId);
     const titleStr = isEntry
       ? `RUMOR: El Racing de Oslo interesado en el fichaje de ${playerName}`
       : `RUMOR: El Racing de Oslo escucha ofertas por ${playerName}`;
