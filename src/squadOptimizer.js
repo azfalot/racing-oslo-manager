@@ -720,11 +720,34 @@ export function evaluateIncomingOffer(engine, player, offer, squad, balance) {
     };
   }
 
-  // 4. Autonomous Descarte / Bench Asset Monetization
-  // If player does NOT contribute to starting XI (replacementLoss === 0)
-  // and offer is fair (>= 95% of market value, typical Computer offer)
-  if (replacementLoss === 0 && offerPctOfMV >= 0.95) {
-    reasoning.push(`🤖 Venta de Descarte Autónoma: ${player.name} es suplente residual (0 pts pérdida) y la oferta (${offerPrice.toLocaleString()} €) es justa (${(offerPctOfMV * 100).toFixed(1)}% del VM).`);
+  // 4. Con saldo positivo (superávit de liquidez): POLÍTICA DE PROTECCIÓN & REVALORIZACIÓN
+  // Se retiene a los jugadores del banquillo para especular con su subida de cotización en los siguientes partidos.
+  // Solo se acepta venta si la oferta trae prima/plusvalía clara (>= autoAcceptPct de VM, ej. >= 105%).
+  if (balance >= 0) {
+    if (offerPctOfMV >= autoAcceptPct) {
+      reasoning.push(`✅ Oferta (${offerPrice.toLocaleString()} €) supera el ${(autoAcceptPct * 100).toFixed(0)}% del VM. Venta con plusvalía aceptada.`);
+      return {
+        shouldAccept: true,
+        action: 'ACCEPT_OFFER',
+        chosenOffer: offer,
+        replacementLoss,
+        reasoning
+      };
+    }
+
+    reasoning.push(`🛡️ Política de Revalorización: Con saldo positivo (+${balance.toLocaleString()} €), se retiene a ${player.name} para especular con su revalorización y subida de cotización. Oferta (${offerPrice.toLocaleString()} €) sin prima suficiente.`);
+    return {
+      shouldAccept: false,
+      action: 'REJECT_OFFER',
+      chosenOffer: offer,
+      replacementLoss,
+      reasoning
+    };
+  }
+
+  // 5. Normal conditions (deuda o necesidad): aceptar si oferta es justa
+  if (offerPctOfMV >= 0.95) {
+    reasoning.push(`💸 Venta aceptada por necesidad de liquidez/saneamiento.`);
     return {
       shouldAccept: true,
       action: 'ACCEPT_OFFER',
@@ -733,28 +756,6 @@ export function evaluateIncomingOffer(engine, player, offer, squad, balance) {
       reasoning
     };
   }
-
-  // 5. Normal conditions: accept if offer >= autoAcceptPct of market value
-  if (offerPctOfMV >= autoAcceptPct) {
-    reasoning.push(`✅ Oferta (${offerPrice.toLocaleString()} €) supera ${(autoAcceptPct * 100).toFixed(0)}% del VM. Venta rentable.`);
-    return {
-      shouldAccept: true,
-      action: 'ACCEPT_OFFER',
-      chosenOffer: offer,
-      replacementLoss,
-      reasoning
-    };
-  }
-
-  // 6. Offer below market value and no debt: reject
-  reasoning.push(`⛔ Oferta (${offerPrice.toLocaleString()} €) inferior al VM (${marketValue.toLocaleString()} €). Sin necesidad de liquidez.`);
-  return {
-    shouldAccept: false,
-    action: 'REJECT_OFFER',
-    chosenOffer: offer,
-    replacementLoss,
-    reasoning
-  };
 }
 
 // ── SALE PORTFOLIO OPTIMIZATION ────────────────────────────────────────────────
