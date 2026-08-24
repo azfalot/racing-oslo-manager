@@ -1,6 +1,7 @@
 import { getWhatsAppClient, sendWhatsAppMessage, listWhatsAppGroups } from './whatsappClient.js';
 import { getNextMatchdayInfo } from './comunioNewsConsumer.js';
 import { ComunioClient } from './comunioClient.js';
+import fs from 'fs';
 import path from 'path';
 
 async function main() {

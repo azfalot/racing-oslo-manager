@@ -1,6 +1,7 @@
 import pkg from 'whatsapp-web.js';
 const { Client, LocalAuth, MessageMedia } = pkg;
-import qrcode from 'qrcode-terminal';
+import qrcodeTerminal from 'qrcode-terminal';
+import QRCode from 'qrcode';
 import path from 'path';
 
 let clientInstance = null;
@@ -18,6 +19,7 @@ export function getWhatsAppClient() {
     }),
     puppeteer: {
       headless: true,
+      executablePath: 'C:\\\\Program Files (x86)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe',
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
@@ -30,11 +32,23 @@ export function getWhatsAppClient() {
     }
   });
 
-  clientInstance.on('qr', (qr) => {
+  clientInstance.on('qr', async (qr) => {
     console.log('\n======================================================');
     console.log('📱 ESCANEA ESTE CÓDIGO QR CON TU WHATSAPP (Dispositivos vinculados):');
     console.log('======================================================\n');
-    qrcode.generate(qr, { small: true });
+    qrcodeTerminal.generate(qr, { small: true });
+
+    // Guardar imagen QR local y en directorio de artefactos para renderizado perfecto
+    try {
+      await QRCode.toFile('d:/racing-oslo-manager/qr.png', qr, { width: 350, margin: 2 });
+      await QRCode.toFile('d:/racing-oslo-manager/web/public/media/qr.png', qr, { width: 350, margin: 2 });
+      const artifactPath = 'C:/Users/Hokaido/.gemini/antigravity/brain/17f24c9d-a2e9-4fef-8e14-4eed349b904e/qr.png';
+      await QRCode.toFile(artifactPath, qr, { width: 350, margin: 2 });
+      console.log('\n🖼️ Imagen QR generada en: d:/racing-oslo-manager/qr.png y en artefactos.');
+    } catch (err) {
+      console.error('Error guardando QR PNG:', err.message);
+    }
+
     console.log('\n💡 Abre WhatsApp en tu móvil > Ajustes / Menú > Dispositivos vinculados > Vincular un dispositivo\n');
   });
 
@@ -61,9 +75,6 @@ export function getWhatsAppClient() {
 
 /**
  * Envía un mensaje de texto o una imagen a un chat/número o grupo de WhatsApp
- * @param {string} target - Número con prefijo país (ej: '34600112233') o ID de grupo ('1203630...@g.us')
- * @param {string} text - Texto del mensaje (admite negritas con *texto*)
- * @param {string|null} imagePath - Ruta local a la imagen para adjuntar (opcional)
  */
 export async function sendWhatsAppMessage(target, text, imagePath = null) {
   const client = getWhatsAppClient();
@@ -76,10 +87,8 @@ export async function sendWhatsAppMessage(target, text, imagePath = null) {
     });
   }
 
-  // Normalizar target ID
   let chatId = target.trim();
   if (!chatId.includes('@')) {
-    // Es un número telefónico (ej: 34600112233)
     chatId = chatId.replace(/[^0-9]/g, '') + '@c.us';
   }
 
@@ -100,7 +109,7 @@ export async function sendWhatsAppMessage(target, text, imagePath = null) {
 }
 
 /**
- * Obtiene la lista de grupos en los que estás para facilitar encontrar el ID del grupo de Comunio
+ * Obtiene la lista de grupos en los que estás
  */
 export async function listWhatsAppGroups() {
   const client = getWhatsAppClient();

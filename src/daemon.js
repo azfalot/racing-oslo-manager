@@ -201,7 +201,7 @@ async function handleTelegramMessage(message) {
       ` • /pausar / /reanudar — Control del bot autónomo\n` +
       ` • /estado — Estado del sistema v1.2.0\n` +
       ` • /historial — Registro de últimas acciones\n\n` +
-      `🕒 Crons: <b>02:50</b>, <b>09:00</b> y <b>15:00</b> Madrid | 🛒 Monitor: cada <b>3 hrs</b>`;
+      `🕒 Horarios de conexión automática: <b>09:00</b> y <b>23:50</b> (Madrid) | Resto del día: <i>En reposo</i>`;
     await sendTelegramMessage(helpText);
   }
 
@@ -1616,85 +1616,6 @@ async function executeInLineupOptimization() {
   }
 }
 
-function startCronScheduler() {
-  console.log('[DAEMON] Iniciando planificador de horas fijas (02:50, 09:00, 15:00)...');
-  
-  setInterval(async () => {
-    const now = new Date();
-    const madridTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
-    const hours = madridTime.getHours();
-    const minutes = madridTime.getMinutes();
-
-    const shouldRun = 
-      (hours === 9 && minutes === 0) || 
-      (hours === 15 && minutes === 0) || 
-      (hours === 2 && minutes === 50);
-
-    if (shouldRun) {
-      const timeStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-      console.log(`[DAEMON-CRON] Hora programada detectada (${timeStr}). Ejecutando optimización de alineación unificada...`);
-
-      if (botPaused) {
-        console.log('[DAEMON-CRON] Bot pausado, omitiendo ejecución automática.');
-        return;
-      }
-
-      await executeInLineupOptimization();
-
-      if (hours === 9) {
-        console.log('[DAEMON-CRON] Sincronizando datos con la web...');
-        const syncCmd = 'node src/syncWeb.mjs && git add web/src/data/*.json && git commit -m "chore: Sincronizacion automatica web" && git push origin main';
-        exec(syncCmd, (syncErr) => {
-           if (syncErr) console.error('[DAEMON-CRON] Error sincronizando web:', syncErr);
-        });
-      }
-    }
-  }, 60000);
-}
-
-// ── MATCHDAY MONITOR ────────────────────────────────────────────────────────
-let lastLineupMatchdayId = null;
-
-function startMatchdayMonitor() {
-  console.log('[DAEMON] Iniciando monitor de jornadas (Auto-Alineación <3h)...');
-  
-  setInterval(async () => {
-    if (botPaused) return;
-    try {
-      const client = new ComunioClient();
-      await client.login();
-      const matchdays = await client.getMatchdays();
-      const nextMatchday = matchdays.find(md => !md.finished && !md.started) || matchdays.find(md => !md.finished);
-      
-      if (nextMatchday) {
-        const mdId = nextMatchday._links?.self?.href?.split('/').pop() || nextMatchday.id;
-        const detail = await client.getMatchdayDetail(mdId);
-        
-        if (detail && detail.eventInfo && detail.eventInfo.kickoff) {
-          const kickoffTime = new Date(detail.eventInfo.kickoff).getTime();
-          const now = Date.now();
-          const hoursUntilKickoff = (kickoffTime - now) / (1000 * 60 * 60);
-          
-          if (hoursUntilKickoff > 0 && hoursUntilKickoff <= 3 && lastLineupMatchdayId !== mdId) {
-            console.log(`[DAEMON] Jornada inminente (${hoursUntilKickoff.toFixed(1)}h). Auto-alineando...`);
-            await sendTelegramMessage('💼 🚨 <i>[Mateo Oslomany]: La jornada arranca en menos de 3h. Cerrando alineación óptima y ventas de emergencia...</i>');
-            
-            exec('node src/app.js', { env: { ...process.env, COMUNIO_MODE: 'autonomo' } }, (err) => {
-              if (err) sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al aplicar cambios: <code>${err.message}</code>`);
-            });
-            
-            lastLineupMatchdayId = mdId;
-          }
-        }
-      }
-      await client.close();
-    } catch (e) {
-      console.error('[DAEMON] Error en monitor de jornadas:', e.message);
-    }
-  }, 30 * 60 * 1000); // 30 mins
-}
-
-
 // ── MONITOR DE SALUD Y LESIONES DE LA PLANTILLA ─────────────────────────────
 let healthMonitorRunning = false;
 
@@ -1727,23 +1648,18 @@ async function runSquadHealthCheck() {
 
       const previousStatus = lastHealthState[pid];
 
-      // Detectar cambio de estado de disponibilidad (ej. pasar a Dudoso/Lesionado/Debilitado)
       if (previousStatus && previousStatus !== currentStatus) {
         const isAvailableNow = engine.isPlayerAvailable(p);
         console.log(`[DAEMON-HEALTH] 🩺 Cambio físico detectado en ${p.name}: "${previousStatus}" ➔ "${currentStatus}"`);
 
-        // Si ha pasado a estar lesionado/dudoso/debilitado
         if (!isAvailableNow) {
           healthChangesCount++;
-
-          // 1. Notificar por Telegram
           const msg = `<b>🩺 ALERTA MÉDICA AUTOMÁTICA</b>\n\n` +
             `👤 <b>Jugador:</b> ${p.name} (${p.type || p.position})\n` +
             `📋 <b>Nuevo Estado:</b> <code>${escapeHtml(currentStatus)}</code>\n\n` +
             `⚡ <i>El motor de decisiones procederá a re-optimizar el XI titular para asegurar un Once 100% Disponible.</i>`;
           await sendTelegramMessage(msg);
 
-          // 2. Publicar noticia médica con la plantilla oficial 'medical' + foto API
           try {
             const { publishMedicalNews } = await import('./imageGen.js');
             await publishMedicalNews(p.name, currentStatus, pid);
@@ -1754,7 +1670,6 @@ async function runSquadHealthCheck() {
       }
     }
 
-    // Si se detectaron bajas físicas, re-optimizar XI y guardar en Comunio
     if (healthChangesCount > 0) {
       console.log(`[DAEMON-HEALTH] Re-optimizando el XI titular tras detectar ${healthChangesCount} bajas físicas...`);
       const lineupResult = engine.optimizeLineup(squad);
@@ -1769,7 +1684,6 @@ async function runSquadHealthCheck() {
           lineupResult.starting11.map(p => ` • <b>${p.name}</b> (${p.expectedPoints} pts)`).join('\n')
         );
 
-        // Desplegar automáticamente a la web
         const syncCmd = 'cd web && npm run build && cd .. && git add -A && git commit -m "fix: Reajuste automatico por parte medico" && git push origin main';
         exec(syncCmd, (syncErr) => {
           if (syncErr) console.error('[DAEMON-HEALTH] Error en auto-sync web:', syncErr.message);
@@ -1787,20 +1701,50 @@ async function runSquadHealthCheck() {
   }
 }
 
-function startSquadHealthMonitor() {
-  console.log('[DAEMON] Iniciando escáner continuo de salud y bajas físicas (cada 30 minutos)...');
-  // Ejecutar primera comprobación a los 2 minutos de arranque
-  setTimeout(() => {
-    runSquadHealthCheck();
-    setInterval(runSquadHealthCheck, 30 * 60 * 1000);
-  }, 2 * 60 * 1000);
+// ── PLANIFICADOR ESTRICTO DE HORAS FIJAS (09:00 y 23:50) ────────────────────
+function startCronScheduler() {
+  console.log('[DAEMON] Iniciando planificador estricto de conexión: 09:00 y 23:50 (Madrid). Resto del día en reposo.');
+  
+  setInterval(async () => {
+    const now = new Date();
+    const madridTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
+    const hours = madridTime.getHours();
+    const minutes = madridTime.getMinutes();
+
+    const isMorningSlot = (hours === 9 && minutes === 0);
+    const isNightSlot = (hours === 23 && minutes === 50);
+
+    if (isMorningSlot || isNightSlot) {
+      const timeStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+      console.log(`[DAEMON-CRON] ⏰ Ventana de conexión oficial detectada (${timeStr}). Ejecutando operativa completa...`);
+
+      if (botPaused) {
+        console.log('[DAEMON-CRON] Bot pausado, omitiendo ejecución automática.');
+        return;
+      }
+
+      // 1. Ejecutar escáner y acciones de mercado / ofertas recibidas
+      await runMarketCheck();
+
+      // 2. Ejecutar optimización y confirmación de alineación
+      await executeInLineupOptimization();
+
+      // 3. Escaneo de salud y bajas físicas
+      await runSquadHealthCheck();
+
+      // 4. Sincronización con el portal web
+      console.log('[DAEMON-CRON] Sincronizando datos con la web y portal...');
+      const syncCmd = 'node src/syncWeb.mjs && git add web/src/data/*.json && git commit -m "chore: Sincronizacion automatica programada" && git push origin main';
+      exec(syncCmd, (syncErr) => {
+         if (syncErr) console.error('[DAEMON-CRON] Error sincronizando web:', syncErr.message);
+      });
+    }
+  }, 60000);
 }
 
 // ── ARRANQUE ──────────────────────────────────────────────────────────────────
 
 startPolling();
 startCronScheduler();
-startMarketMonitor();
-startMatchdayMonitor();
-startSquadHealthMonitor();
+
 
