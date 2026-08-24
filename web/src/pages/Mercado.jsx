@@ -309,7 +309,7 @@ export default function Mercado() {
                 </div>
 
                 <div className="pt-2 border-t border-purple-500/30 text-cream/90 text-sm leading-relaxed whitespace-pre-wrap font-sans space-y-4">
-                  {selectedNews.content || selectedNews.excerpt}
+                  {(selectedNews.content || selectedNews.excerpt || '').split('\\n').join('\n')}
                 </div>
               </div>
             </div>

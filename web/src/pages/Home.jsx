@@ -414,7 +414,7 @@ export default function Home() {
                   </h3>
 
                   <div className="pt-4 border-t border-forest/30 text-cream/90 text-sm leading-relaxed whitespace-pre-wrap font-sans space-y-4">
-                    {selectedNews.content || selectedNews.excerpt}
+                    {(selectedNews.content || selectedNews.excerpt || '').split('\\n').join('\n')}
                   </div>
                 </div>
               </div>

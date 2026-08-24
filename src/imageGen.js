@@ -27,6 +27,13 @@ export function insertOrUpdateNews(article) {
     }
   }
 
+  // Sanitizar campos de texto para evitar '\n' literales escapados
+  for (const k of ['content', 'summary', 'excerpt', 'body', 'title']) {
+    if (article[k] && typeof article[k] === 'string') {
+      article[k] = article[k].split('\\n').join('\n');
+    }
+  }
+
   // Deduplicación estricta por ID base, título o par jugador-categoría
   const cleanList = newsList.filter(n => {
     if (n.id === article.id) return false;

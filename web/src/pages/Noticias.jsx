@@ -487,7 +487,7 @@ export default function Noticias() {
 
                   {/* Cuerpo del Artículo */}
                   <div className="pt-2 text-[#f4efe6] text-sm sm:text-base leading-relaxed whitespace-pre-wrap font-sans space-y-4 bg-black/30 p-6 rounded-sm border border-[#2d5a42]/30">
-                    {selectedNews.content || selectedNews.excerpt || selectedNews.summary}
+                    {(selectedNews.content || selectedNews.excerpt || selectedNews.summary || '').split('\\n').join('\n')}
                   </div>
 
                   {/* Footer Oficial */}
