@@ -22,7 +22,11 @@ export default function PlayerProfileModal({ player, onClose }) {
   const priceFormatted = player.price ? player.price.toLocaleString('es-ES') + ' €' : 'Sin cotización'
   const tmValueFormatted = player.tmValue || 'N/D'
   const historical = player.historicalPoints || []
-  const lastSeasonPts = player.lastSeasonPoints || 0
+  const histLast = historical.find(h => h.season === '25/26' || h.season === '24/25') || (historical.length > 0 ? historical[historical.length - 1] : null)
+  const lastSeasonPts = (player.lastSeasonPoints !== undefined && player.lastSeasonPoints > 0)
+    ? player.lastSeasonPoints
+    : (histLast ? (parseInt(histLast.points) || 0) : (player.points || 0))
+  const lastSeasonAvg = player.lastSeasonAvg || (player.average?.points ? parseFloat(String(player.average.points).replace(',', '.')) : (lastSeasonPts > 0 ? parseFloat((lastSeasonPts / 30).toFixed(1)) : 4.2))
   const projectedPts = player.projectedPoints || Math.round((lastSeasonPts || 120) * 1.1)
   const status = player.statusInfo || 'Disponible'
   const isHealthy = !status.toLowerCase().includes('baja') && !status.toLowerCase().includes('enfermer')

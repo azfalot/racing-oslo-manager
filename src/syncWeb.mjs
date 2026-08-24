@@ -68,6 +68,10 @@ async function fetchRealData() {
         p.historicalPoints = historical.map(h => ({ season: h.season, points: parseInt(h.points) || 0 }));
         p.historical = details.historical || [];
         p.average = details.average || { points: '0' };
+
+        const lastSeason = historical.find(h => h.season === '25/26' || h.season === '24/25') || historical[historical.length - 1];
+        p.lastSeasonPoints = lastSeason ? (parseInt(lastSeason.points) || 0) : 0;
+        p.lastSeasonAvg = details.average?.points ? parseFloat(details.average.points.replace(',', '.')) : 4.0;
         
         // Puntuación esperada y proyección calculada 100% con el motor empírico ComunioEngine
         const exp = engine.getExpectedPoints(p);
