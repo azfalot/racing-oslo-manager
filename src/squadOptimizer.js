@@ -720,7 +720,21 @@ export function evaluateIncomingOffer(engine, player, offer, squad, balance) {
     };
   }
 
-  // 4. Normal conditions: accept if offer >= autoAcceptPct of market value
+  // 4. Autonomous Descarte / Bench Asset Monetization
+  // If player does NOT contribute to starting XI (replacementLoss === 0)
+  // and offer is fair (>= 95% of market value, typical Computer offer)
+  if (replacementLoss === 0 && offerPctOfMV >= 0.95) {
+    reasoning.push(`🤖 Venta de Descarte Autónoma: ${player.name} es suplente residual (0 pts pérdida) y la oferta (${offerPrice.toLocaleString()} €) es justa (${(offerPctOfMV * 100).toFixed(1)}% del VM).`);
+    return {
+      shouldAccept: true,
+      action: 'ACCEPT_OFFER',
+      chosenOffer: offer,
+      replacementLoss,
+      reasoning
+    };
+  }
+
+  // 5. Normal conditions: accept if offer >= autoAcceptPct of market value
   if (offerPctOfMV >= autoAcceptPct) {
     reasoning.push(`✅ Oferta (${offerPrice.toLocaleString()} €) supera ${(autoAcceptPct * 100).toFixed(0)}% del VM. Venta rentable.`);
     return {
@@ -732,7 +746,7 @@ export function evaluateIncomingOffer(engine, player, offer, squad, balance) {
     };
   }
 
-  // 5. Offer below market value and no debt: reject
+  // 6. Offer below market value and no debt: reject
   reasoning.push(`⛔ Oferta (${offerPrice.toLocaleString()} €) inferior al VM (${marketValue.toLocaleString()} €). Sin necesidad de liquidez.`);
   return {
     shouldAccept: false,

@@ -1320,8 +1320,8 @@ async function runMarketCheck() {
 
         if (saleEval.shouldAccept) {
           // VENTA AUTÓNOMA RACIONADA (Descarte, rotación favorable o saneamiento de deuda)
-          const acceptUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers/${offerId}/accept`;
-          await axios.post(acceptUrl, {}, { headers: client.getHeaders() });
+          const accepted = await client.acceptSaleOffer(offerId, playerId, offerPrice);
+          if (!accepted) continue;
 
           let log = [];
           try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
@@ -1342,6 +1342,26 @@ async function runMarketCheck() {
       }
     } catch (offerErr) {
       console.warn('[DAEMON-MARKET] Error revisando ofertas entrantes:', offerErr.message);
+    }
+
+    // 4. AUTO-LISTADO DE DESCARTES EN EL MERCADO (Para recibir ofertas de la Computadora)
+    try {
+      const lineup = engine.optimizeLineup(squad);
+      const startingIds = (lineup.starting11 || []).map(p => p.playerId || p.id);
+      const currentMarket = await client.getMarket();
+      const myListedIds = new Set((currentMarket?.players || []).filter(p => p.owner?.id === client.userId || p.owner === client.userId).map(p => p.playerId || p.id));
+      
+      const benchDescartes = squad.players.filter(p => !startingIds.includes(p.playerId || p.id));
+      for (const descarte of benchDescartes) {
+        const dId = descarte.playerId || descarte.id;
+        // Si no está listado en el mercado, ponerlo en venta por su valor para recibir ofertas de Computer
+        if (!myListedIds.has(dId)) {
+          console.log(`[DAEMON-SALES] 🏷️ Auto-listando descarte en el mercado: ${descarte.name} (${(descarte.price || 0).toLocaleString()} €)`);
+          await client.sellPlayer(dId, descarte.name, descarte.price || 160000);
+        }
+      }
+    } catch (listErr) {
+      console.warn('[DAEMON-SALES] Error auto-listando descartes:', listErr.message);
     }
 
     // Notificar jugadores desaparecidos del mercado con detalles de traspaso (Precio, Comprador, Vendedor)
