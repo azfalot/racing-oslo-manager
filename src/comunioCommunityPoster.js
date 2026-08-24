@@ -1,12 +1,13 @@
-import path from 'path';
-import puppeteer from 'puppeteer';
+import axios from 'axios';
 import { generateTemplateGraphic, publishClubNews } from './imageGen.js';
 import { ComunioClient } from './comunioClient.js';
 
+const PUBLIC_BASE_URL = 'https://racing-oslo.cotero91.workers.dev';
+
 /**
- * Publica una noticia directamente en el tablón oficial de la comunidad en Comunio
+ * Publica una noticia oficial directamente en el tablón de Comunio vía API directa con HTML e imágenes
  */
-export async function publishPostToComunio(title, body, options = {}) {
+export async function publishPostToComunioApi(title, htmlMessage, options = {}) {
   const client = options.client || new ComunioClient();
   let mustClose = false;
   if (!client.isLoggedIn) {
@@ -14,152 +15,111 @@ export async function publishPostToComunio(title, body, options = {}) {
     mustClose = true;
   }
 
-  console.log(`[COMUNIO-POSTER] 📢 Publicando post en el tablón oficial de Comunio: "${title}"...`);
-
-  let posted = false;
+  console.log(`[COMUNIO-POSTER] 📢 Publicando comunicado en Comunio: "${title}"...`);
 
   try {
-    const browser = await puppeteer.launch({ 
-      headless: true,
-      executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
-    });
-
-    const page = await browser.newPage();
-    await page.setViewport({ width: 1280, height: 800 });
-
-    console.log('[COMUNIO-POSTER] 1. Accediendo a Comunio...');
-    await page.goto('https://www.comunio.es/', { waitUntil: 'networkidle2' });
-    await new Promise(r => setTimeout(r, 1500));
-
-    // 1. Aceptar cookies si aparecen
-    await page.evaluate(() => {
-      const agreeBtn = Array.from(document.querySelectorAll('button')).find(b => b.innerText && b.innerText.trim().toUpperCase() === 'ACEPTO');
-      if (agreeBtn) agreeBtn.click();
-    });
-    await new Promise(r => setTimeout(r, 1000));
-
-    // 2. Clic en Entrar
-    await page.evaluate(() => {
-      const entrarBtn = Array.from(document.querySelectorAll('button')).find(b => b.innerText && b.innerText.trim().toLowerCase() === 'entrar');
-      if (entrarBtn) entrarBtn.click();
-    });
-    await new Promise(r => setTimeout(r, 1500));
-
-    // 3. Rellenar credenciales
-    await page.type('input[placeholder="Nombre de usuario"]', client.username, { delay: 25 });
-    await page.type('input[placeholder="Contraseña"]', client.password, { delay: 25 });
-    await page.evaluate(() => {
-      const btns = Array.from(document.querySelectorAll('button'));
-      const modalBtn = btns.reverse().find(b => b.innerText && b.innerText.trim().toLowerCase() === 'entrar' && !b.disabled);
-      if (modalBtn) modalBtn.click();
-    });
-    await new Promise(r => setTimeout(r, 5000));
-
-    // 4. Ir a Noticias
-    await page.goto('https://www.comunio.es/game/news', { waitUntil: 'networkidle2' });
-    await new Promise(r => setTimeout(r, 2500));
-
-    // 5. Clic físico con ratón sobre Crear Post
-    const boundingBox = await page.evaluate(() => {
-      const all = Array.from(document.querySelectorAll('*'));
-      const target = all.find(e => e.innerText && e.innerText.trim() === 'Crear post');
-      if (target) {
-        const rect = (target.closest('div') || target).getBoundingClientRect();
-        return { x: rect.x, y: rect.y, width: rect.width, height: rect.height };
+    const url = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/news`;
+    const payload = {
+      newsEntry: {
+        newsId: `notSaved@${Date.now()}`,
+        date: new Date().toISOString(),
+        owner: {
+          id: client.userId,
+          name: 'Racing de Oslo'
+        },
+        iconType: 'USER_POST',
+        comments: [],
+        title: title.slice(0, 255),
+        message: {
+          text: htmlMessage
+        },
+        type: 'OTHER',
+        recipientId: null,
+        poll: null
       }
-      return null;
-    });
+    };
 
-    if (boundingBox) {
-      await page.mouse.click(boundingBox.x + boundingBox.width / 2, boundingBox.y + boundingBox.height / 2);
-      await new Promise(r => setTimeout(r, 2000));
-
-      // 6. Escribir Título y Cuerpo
-      const titleInput = await page.$('input[placeholder*="Título"], input[placeholder*="Titulo"]');
-      if (titleInput) {
-        await titleInput.click();
-        await page.keyboard.type(title.slice(0, 250), { delay: 15 });
-      }
-
-      const editor = await page.$('div[contenteditable="true"], textarea[placeholder*="mensaje"]');
-      if (editor) {
-        await editor.click();
-        await page.keyboard.type(body, { delay: 10 });
-      }
-
-      await new Promise(r => setTimeout(r, 1500));
-
-      // 7. Clic en Crear publicación
-      const submitResult = await page.evaluate(() => {
-        const btns = Array.from(document.querySelectorAll('button'));
-        const submitBtn = btns.find(b => b.innerText && b.innerText.trim().toLowerCase() === 'crear publicación');
-        if (submitBtn && !submitBtn.disabled) {
-          submitBtn.click();
-          return true;
-        }
-        return false;
-      });
-
-      if (submitResult) {
-        console.log('[COMUNIO-POSTER] 🚀 ¡Post oficial publicado en Comunio con éxito!');
-        posted = true;
-        await new Promise(r => setTimeout(r, 3000));
-      }
+    const res = await axios.post(url, payload, { headers: client.getHeaders() });
+    if (res.status === 200 || res.status === 201) {
+      console.log(`[COMUNIO-POSTER] 🚀 ¡Post publicado en Comunio con éxito! NewsID: ${res.data?.newsId || 'OK'}`);
+      if (mustClose) await client.close();
+      return true;
     }
-
-    await browser.close();
   } catch (err) {
-    console.error('[COMUNIO-POSTER ERROR] Error al publicar en Comunio:', err.message);
+    console.error('[COMUNIO-POSTER ERROR] Error al publicar en Comunio API:', err.response?.data || err.message);
   }
 
   if (mustClose) await client.close();
-  return posted;
+  return false;
 }
 
 /**
- * PUNTO 1: Publica la promoción oficial del Portal Web del Racing de Oslo
+ * PUNTO 1: Publica el lanzamiento de la Sede Digital con enlace e imagen oficial
  */
 export async function postPortalLaunchAnnouncement() {
-  const title = '🏛️ COMUNICADO: El Racing de Oslo estrena su Sede Digital';
-  const body = 
+  const title = '🏛️ COMUNICADO OFICIAL: Sede Digital del Racing de Oslo';
+  const imgPath = '/media/news_graphics/club_sede_digital_oficial.jpg';
+  const fullImgUrl = `${PUBLIC_BASE_URL}${imgPath}`;
+
+  // 1. Generar tarjeta gráfica oficial
+  await generateTemplateGraphic('club', 'SEDE DIGITAL OFICIAL', 'Portal Web Oficial y Sala de Prensa');
+
+  // 2. Publicar en nuestra propia web
+  const rawBody = 
     'La Junta Directiva del Racing de Oslo hace público el lanzamiento oficial de su portal digital para toda la comunidad de la Segunda Regional Cántabra.\n\n' +
     '📊 CONTENIDO EN ABIERTO:\n' +
     ' • Seguimiento en tiempo real de la plantilla y cotizaciones.\n' +
     ' • Crónicas oficiales, actas de partidos y auditoría de puntos.\n' +
     ' • Gráfica histórica de valor de mercado de todos los clubes de la liga.\n\n' +
-    '🌐 Acceso al Portal: https://racing-oslo-manager.pages.dev\n\n' +
+    '🌐 Acceso al Portal: https://racing-oslo.cotero91.workers.dev\n\n' +
     '¡Bienvenidos al Oslo Arena!';
 
-  // 1. Generar tarjeta gráfica institucional
-  await generateTemplateGraphic('club', 'SEDE DIGITAL OFICIAL', 'Portal Web Oficial y Sala de Prensa');
-  
-  // 2. Publicar en nuestra propia web
-  await publishClubNews(title, 'Lanzamiento del portal web institucional del club.', body, 'Institucional', 'club');
+  await publishClubNews(title, 'Lanzamiento del portal web institucional del club.', rawBody, 'Institucional', 'club');
 
-  // 3. Publicar en el tablón de Comunio
-  return publishPostToComunio(title, body);
+  // 3. Formato HTML para el tablón oficial de Comunio
+  const htmlMessage = 
+    '<p>La Junta Directiva del <strong>Racing de Oslo</strong> pone a disposición de toda la comunidad el portal interactivo oficial del club.<br><br>' +
+    '📊 <strong>CONTENIDO EN ABIERTO:</strong><br>' +
+    ' • <strong>Plantilla en tiempo real:</strong> cotizaciones, roles tácticos y actas oficiales.<br>' +
+    ' • <strong>Crónicas & Pronósticos:</strong> auditorías de puntos por jornada y previas.<br>' +
+    ' • <strong>Economía de la Liga:</strong> gráfica comparativa de valor de todos los clubes.<br><br>' +
+    `🌐 <strong>ACCESO AL PORTAL:</strong> <a title="Sede Digital Racing de Oslo" href="${PUBLIC_BASE_URL}/" target="_blank" rel="noopener">racing-oslo.cotero91.workers.dev</a><br><br>` +
+    `<img src="${fullImgUrl}" alt="Sede Digital Racing de Oslo" width="1024" height="682"><br><br>` +
+    '<em>¡Bienvenidos al Oslo Arena!</em></p>';
+
+  return publishPostToComunioApi(title, htmlMessage);
 }
 
 /**
  * PUNTO 2: Publica un Comunicado Oficial tras un Fichaje Bomba / Galáctico
  */
 export async function postStarSigningAnnouncement(playerName, priceFormatted, playerId = null, position = 'centrocampista') {
-  const title = `⭐ OFICIAL: ${playerName} nuevo jugador del Racing de Oslo`;
-  const body = 
+  const title = `⭐ COMUNICADO OFICIAL: ${playerName} nuevo jugador del Racing de Oslo`;
+  
+  // 1. Generar tarjeta gráfica oficial de fichaje
+  const graphicRelPath = await generateTemplateGraphic('signing', playerName, priceFormatted, playerId);
+  const fullImgUrl = `${PUBLIC_BASE_URL}${graphicRelPath}`;
+
+  // 2. Publicar en nuestra web
+  const rawBody = 
     `El Racing de Oslo y la Secretaría Técnica encabezada por Mateo Oslomany han cerrado un acuerdo para la incorporación definitiva de ${playerName}.\n\n` +
     `💼 DETALLES DE LA OPERACIÓN:\n` +
     ` • Futbolista: ${playerName} (${position})\n` +
     ` • Inversión: ${priceFormatted}\n\n` +
     `El jugador se incorporará de inmediato a la disciplina del equipo en el Oslo Arena para preparar la próxima jornada.\n\n` +
-    `📰 Ficha completa y perfil técnico en: https://racing-oslo-manager.pages.dev`;
+    `📰 Ficha completa y perfil técnico en: ${PUBLIC_BASE_URL}`;
 
-  // 1. Generar tarjeta gráfica de fichaje oficial
-  await generateTemplateGraphic('signing', playerName, priceFormatted, playerId);
+  await publishClubNews(title, `Acuerdo oficial para el traspaso de ${playerName}.`, rawBody, 'Fichajes', 'signing');
 
-  // 2. Publicar en nuestra web
-  await publishClubNews(title, `Acuerdo oficial para el traspaso de ${playerName}.`, body, 'Fichajes', 'signing');
+  // 3. Formato HTML para Comunio
+  const htmlMessage = 
+    `<p>El <strong>Racing de Oslo</strong> y la Secretaría Técnica liderada por Mateo Oslomany han cerrado con éxito la incorporación de <strong>${playerName}</strong>.<br><br>` +
+    `💼 <strong>DETALLES DE LA OPERACIÓN:</strong><br>` +
+    ` • <strong>Futbolista:</strong> ${playerName} (${position})<br>` +
+    ` • <strong>Inversión acordada:</strong> ${priceFormatted}<br><br>` +
+    `El jugador queda inscrito de inmediato para afrontar el próximo choque liguero en el Oslo Arena.<br><br>` +
+    `📰 <strong>Ficha técnica y perfil del jugador en:</strong> <a title="Portal Oficial" href="${PUBLIC_BASE_URL}/" target="_blank" rel="noopener">racing-oslo.cotero91.workers.dev</a><br><br>` +
+    `<img src="${fullImgUrl}" alt="${playerName}" width="1024" height="682"></p>`;
 
-  // 3. Publicar en el tablón de Comunio
-  return publishPostToComunio(title, body);
+  return publishPostToComunioApi(title, htmlMessage);
 }
