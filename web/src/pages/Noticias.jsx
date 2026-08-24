@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import newsData from '../data/news.json'
-import { Calendar, X, Eye, Flame, TrendingUp, Shield, Activity, Award, DollarSign, Clock, User } from 'lucide-react'
+import { Calendar, X, Eye, Flame, TrendingUp, Shield, Activity, Award, DollarSign, Clock, User, Feather } from 'lucide-react'
 
 export function formatNewsDate(dateStr) {
   if (!dateStr) return ''
@@ -12,6 +12,46 @@ export function formatNewsDate(dateStr) {
     return dateStr
   }
   return parsed.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
+}
+
+/**
+ * Periodistas deportivos oficiales del Racing de Oslo
+ */
+export function getNewsJournalist(category, customAuthor = null) {
+  if (customAuthor) {
+    return { name: customAuthor, role: 'Redacción Deportiva', tag: 'Diario de Oslo', color: 'text-white' }
+  }
+  const cat = (category || '').toLowerCase()
+  if (cat.includes('fichaje') || cat.includes('venta') || cat.includes('rival') || cat.includes('mercado') || cat.includes('rumor')) {
+    return { 
+      name: 'Fabrizio Oslomano', 
+      role: 'Especialista en Fichajes & Mercado', 
+      tag: '✍️ Here We Go Oslo!',
+      color: 'text-amber-300'
+    }
+  }
+  if (cat.includes('táctica') || cat.includes('previa') || cat.includes('mvp') || cat.includes('scout') || cat.includes('equipo')) {
+    return { 
+      name: 'Julio Osldini', 
+      role: 'Analista Táctico & Scouting', 
+      tag: '📋 Pizarra Táctica',
+      color: 'text-cyan-300'
+    }
+  }
+  if (cat.includes('finanza') || cat.includes('econom') || cat.includes('crónica') || cat.includes('institucional')) {
+    return { 
+      name: 'Josep Pedroslo', 
+      role: 'Redactor Jefe & Exclusivas', 
+      tag: '🔥 ¡Tic, Tac, Oslo!',
+      color: 'text-yellow-300'
+    }
+  }
+  return { 
+    name: 'Mateo Oslomany', 
+    role: 'Director Deportivo', 
+    tag: '💼 Secretaría Técnica',
+    color: 'text-emerald-300'
+  }
 }
 
 /**
@@ -82,7 +122,6 @@ export function getCategoryBadgeStyle(category) {
       icon: Flame
     }
   }
-  // Default Club / Institucional
   return {
     bg: 'bg-forest-dark text-cream border-forest-light/40 shadow-md',
     borderLeft: 'border-l-4 border-forest-light',
@@ -108,6 +147,7 @@ export default function Noticias() {
 
   const featuredNews = filteredNews.length > 0 ? filteredNews[0] : null
   const secondaryNews = filteredNews.slice(1)
+  const featuredJournalist = featuredNews ? getNewsJournalist(featuredNews.category, featuredNews.author) : null
 
   return (
     <div className="min-h-screen bg-[#0d1611] text-[#f4efe6]">
@@ -118,16 +158,16 @@ export default function Noticias() {
           Última Hora
         </div>
         <div className="flex items-center gap-6 whitespace-nowrap text-[#d4ceb8] font-semibold text-xs overflow-hidden">
-          <span>💼 <b>MERCADO DE FICHAJES:</b> Racing de Oslo cuenta con <b>19.765.340 €</b> de liquidez en caja tras blindar su Once.</span>
+          <span>✍️ <b>FABRIZIO OSLOMANO:</b> <i>"Here we go Oslo! Saldo de 19.76M€ y 10 ofertas prioritarias activas."</i></span>
           <span className="text-forest-light">•</span>
-          <span>🌟 <b>Fichajes Oficiales:</b> Álvaro Núñez incorporado a la zaga defensiva.</span>
+          <span>📋 <b>JULIO OSLDINI:</b> Pizarra táctica lista para la próxima jornada liguera.</span>
           <span className="text-forest-light">•</span>
-          <span>💸 <b>Rivales:</b> Ana desembolsa 16.5M€ por Cubarsí y 2M€ por Christensen.</span>
+          <span>🔥 <b>JOSEP PEDROSLO:</b> <i>"¡Exclusinda en el Oslo Arena! Cuentas 100% saneadas y deuda cero."</i></span>
         </div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 py-8 max-w-7xl">
-        {/* HEADER PRINCIPAL */}
+        {/* HEADER PRINCIPAL CON FIRMAS DE PERIODISTAS */}
         <div className="mb-8 border-b-2 border-[#2d5a42] pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-[#d4af37] uppercase mb-1">
@@ -138,20 +178,28 @@ export default function Noticias() {
               NOTICIAS & MERCADO
             </h1>
             <p className="text-sm text-[#a3a092] font-sans mt-1">
-              Crónica diaria, fichajes, informes financieros, MVP y exclusivas de la Secretaría Técnica.
+              Crónica deportiva, exclusivas de mercado, partes médicos e informes firmados por nuestro equipo periodístico.
             </p>
           </div>
 
-          <div className="flex items-center gap-3 bg-[#162e22] border border-[#2d5a42] px-4 py-2 rounded-sm shadow-md">
-            <User size={16} className="text-[#d4af37]" />
-            <div className="text-xs">
-              <span className="text-[#a3a092] block">Director Deportivo</span>
-              <span className="font-bold text-white tracking-wide">Mateo Oslomany</span>
-            </div>
+          {/* EQUIPO DE REDACCIÓN OFICIAL */}
+          <div className="flex flex-wrap items-center gap-2">
+            {[
+              { name: 'Fabrizio Oslomano', tag: 'Mercado', color: 'bg-amber-500/20 text-amber-300 border-amber-500/40' },
+              { name: 'Julio Osldini', tag: 'Táctica', color: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40' },
+              { name: 'Josep Pedroslo', tag: 'Exclusivas', color: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40' },
+              { name: 'Mateo Oslomany', tag: 'D. Deportivo', color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' }
+            ].map((p, i) => (
+              <div key={i} className={'flex items-center gap-1.5 px-3 py-1.5 rounded-sm border text-xs font-mono ' + p.color}>
+                <Feather size={12} />
+                <span className="font-bold">{p.name}</span>
+                <span className="text-[10px] opacity-70">({p.tag})</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* BARRA DE CATEGORÍAS (TABS TIPO PRENSA DEPORTIVA) */}
+        {/* BARRA DE CATEGORÍAS */}
         <div className="flex flex-wrap gap-2 mb-8 bg-[#12241b] p-2 rounded-sm border border-[#2d5a42]/40 shadow-lg">
           {categories.map(cat => {
             const badgeStyle = getCategoryBadgeStyle(cat)
@@ -160,13 +208,13 @@ export default function Noticias() {
               <button
                 key={cat}
                 onClick={() => setFilterCategory(cat)}
-                className={`px-4 py-2 text-xs font-black tracking-wider uppercase transition-all rounded-sm border ${
+                className={'px-4 py-2 text-xs font-black tracking-wider uppercase transition-all rounded-sm border ' + (
                   isSelected
                     ? cat === 'ALL'
                       ? 'bg-[#d4af37] text-black border-amber-300 shadow-[0_0_15px_rgba(212,175,55,0.4)]'
                       : badgeStyle.btnActive
                     : 'bg-black/40 text-[#d4ceb8] hover:bg-white/10 hover:text-white border-[#2d5a42]/30'
-                }`}
+                )}
               >
                 {cat === 'ALL' ? '📰 PORTADA' : cat}
               </button>
@@ -174,7 +222,7 @@ export default function Noticias() {
           })}
         </div>
 
-        {/* 🌟 NOTICIA PRINCIPAL DE PORTADA (HERO BANNER ESTILO MARCA) */}
+        {/* 🌟 NOTICIA PRINCIPAL DE PORTADA (HERO BANNER) */}
         {featuredNews && filterCategory === 'ALL' && (
           <div className="mb-12">
             <div
@@ -193,7 +241,7 @@ export default function Noticias() {
                   <span className="bg-red-600 text-white font-black text-xs px-3 py-1 uppercase tracking-widest shadow-md">
                     EXCLUSIVA
                   </span>
-                  <span className={`text-xs font-black px-3 py-1 uppercase tracking-widest rounded-sm ${getCategoryBadgeStyle(featuredNews.category).pill}`}>
+                  <span className={'text-xs font-black px-3 py-1 uppercase tracking-widest rounded-sm ' + getCategoryBadgeStyle(featuredNews.category).pill}>
                     {featuredNews.category || 'OFICIAL'}
                   </span>
                 </div>
@@ -220,9 +268,12 @@ export default function Noticias() {
                 </div>
 
                 <div className="pt-6 mt-6 border-t border-[#2d5a42]/50 flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-xs text-[#a3a092] font-mono">
-                    <User size={14} className="text-[#d4af37]" />
-                    <span>Por <b>Mateo Oslomany</b></span>
+                  <div className="flex items-center gap-2.5 text-xs font-mono">
+                    <Feather size={15} className={featuredJournalist.color} />
+                    <div>
+                      <span className="text-[#a3a092] block text-[10px]">{featuredJournalist.role}</span>
+                      <span className="font-bold text-white tracking-wide">{featuredJournalist.name}</span>
+                    </div>
                   </div>
                   <span className="text-xs font-black uppercase text-[#d4af37] group-hover:translate-x-1 transition-transform flex items-center gap-1">
                     Leer crónica completa &rarr;
@@ -237,11 +288,13 @@ export default function Noticias() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {(filterCategory === 'ALL' ? secondaryNews : filteredNews).map(news => {
             const badgeStyle = getCategoryBadgeStyle(news.category)
+            const journalist = getNewsJournalist(news.category, news.author)
+
             return (
               <article
                 key={news.id}
                 onClick={() => setSelectedNews(news)}
-                className={`bg-[#12241b]/90 border border-[#2d5a42]/40 rounded-sm overflow-hidden group hover:border-[#d4af37] transition-all duration-300 cursor-pointer flex flex-col justify-between shadow-xl ${badgeStyle.borderLeft}`}
+                className={'bg-[#12241b]/90 border border-[#2d5a42]/40 rounded-sm overflow-hidden group hover:border-[#d4af37] transition-all duration-300 cursor-pointer flex flex-col justify-between shadow-xl ' + badgeStyle.borderLeft}
               >
                 <div>
                   {/* Container Imagen */}
@@ -253,9 +306,12 @@ export default function Noticias() {
                       onError={(e) => { e.target.src = '/media/crest.jpg' }}
                     />
                     <div className="absolute top-3 left-3">
-                      <span className={`text-[10px] font-black px-2.5 py-1 uppercase tracking-wider rounded-sm ${badgeStyle.pill}`}>
+                      <span className={'text-[10px] font-black px-2.5 py-1 uppercase tracking-wider rounded-sm ' + badgeStyle.pill}>
                         {news.category || 'ACTUALIDAD'}
                       </span>
+                    </div>
+                    <div className="absolute bottom-3 right-3 bg-black/80 px-2 py-0.5 rounded-sm border border-white/20 text-[10px] font-mono text-white font-bold">
+                      {journalist.tag}
                     </div>
                   </div>
 
@@ -276,10 +332,13 @@ export default function Noticias() {
                   </div>
                 </div>
 
-                {/* Footer Tarjeta */}
+                {/* Footer Tarjeta con Firma del Periodista */}
                 <div className="p-5 pt-0 border-t border-[#2d5a42]/20 mt-4 flex items-center justify-between text-xs">
-                  <span className="text-[#a3a092] font-mono">Dirección Deportiva</span>
-                  <span className="font-bold text-forest-light group-hover:text-[#d4af37] transition-colors uppercase flex items-center gap-1">
+                  <div className="flex items-center gap-1.5 text-xs text-[#a3a092] font-mono truncate max-w-[190px]">
+                    <Feather size={12} className={journalist.color} />
+                    <span className="truncate"><b>{journalist.name}</b></span>
+                  </div>
+                  <span className="font-bold text-forest-light group-hover:text-[#d4af37] transition-colors uppercase flex items-center gap-1 shrink-0">
                     <Eye size={13} /> Ver &rarr;
                   </span>
                 </div>
@@ -289,16 +348,18 @@ export default function Noticias() {
         </div>
       </div>
 
-      {/* 📖 MODAL DE LECTURA COMPLETA INMERSIVA (ESTILO DIARIO DEPORTIVO) */}
+      {/* 📖 MODAL DE LECTURA COMPLETA CON FIRMA OFICIAL */}
       {selectedNews && (() => {
         const modalBadgeStyle = getCategoryBadgeStyle(selectedNews.category)
+        const modalJournalist = getNewsJournalist(selectedNews.category, selectedNews.author)
+
         return (
           <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-fade-in">
             <div className="bg-[#12241b] border-2 border-[#2d5a42] max-w-4xl w-full rounded-sm overflow-hidden relative max-h-[92vh] flex flex-col shadow-2xl">
               {/* Botón Cerrar */}
               <button
                 onClick={() => setSelectedNews(null)}
-                className="absolute top-4 right-4 z-30 bg-black/80 p-2.5 rounded-full hover:bg-red-600 text-white transition-colors border border-white/20 focus:outline-none shadow-lg"
+                className="absolute top-4 right-4 z-30 bg-black/80 p-2.5 rounded-full hover:bg-red-600 text-white transition-colors border border-white/20 focus:outline-none shadow-lg cursor-pointer"
                 aria-label="Cerrar modal"
               >
                 <X size={20} />
@@ -320,7 +381,7 @@ export default function Noticias() {
                 <div className="space-y-4">
                   <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#2d5a42]/40 pb-4">
                     <div className="flex items-center gap-2">
-                      <span className={`text-xs font-black px-3 py-1 uppercase tracking-wider rounded-sm ${modalBadgeStyle.pill}`}>
+                      <span className={'text-xs font-black px-3 py-1 uppercase tracking-wider rounded-sm ' + modalBadgeStyle.pill}>
                         {selectedNews.category || 'COMUNICADO'}
                       </span>
                       <span className="text-xs text-[#d4af37] font-mono flex items-center gap-1.5 ml-2">
@@ -329,9 +390,13 @@ export default function Noticias() {
                       </span>
                     </div>
 
-                    <div className="text-xs text-[#a3a092] font-mono flex items-center gap-2">
-                      <User size={14} className="text-[#d4af37]" />
-                      <span>Firmado: <b>Mateo Oslomany</b></span>
+                    {/* Tarjeta de Firma del Periodista */}
+                    <div className="flex items-center gap-2 bg-black/50 border border-[#2d5a42] px-3 py-1.5 rounded-sm">
+                      <Feather size={14} className={modalJournalist.color} />
+                      <div className="text-xs font-mono">
+                        <span className="text-[#a3a092] block text-[10px]">{modalJournalist.role}</span>
+                        <span className="font-bold text-white">{modalJournalist.name}</span>
+                      </div>
                     </div>
                   </div>
 
@@ -346,8 +411,8 @@ export default function Noticias() {
 
                   {/* Footer Oficial */}
                   <div className="pt-4 border-t border-[#2d5a42]/40 flex items-center justify-between text-xs text-[#a3a092] font-mono">
-                    <span>© Racing de Oslo · Comunicaciones Oficiales</span>
-                    <span className="text-[#d4af37]">Powered by Hookr & Comunio</span>
+                    <span>© Racing de Oslo · Redacción Diario Oficial</span>
+                    <span className="text-[#d4af37]">Firmado por {modalJournalist.name} ({modalJournalist.tag})</span>
                   </div>
                 </div>
               </div>
