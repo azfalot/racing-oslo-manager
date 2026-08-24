@@ -1775,8 +1775,22 @@ function startCronScheduler() {
          if (syncErr) console.error('[DAEMON-CRON] Error sincronizando web:', syncErr.message);
       });
 
-      // 5. Notificación por WhatsApp si es Pre-Jornada
+      // 5. Pre-Jornada: Registro oficial de Pronóstico y Noticia de Previa (15 min antes)
       if (isPreMatchdaySlot) {
+        try {
+          const { recordMatchdayPrediction } = await import('./matchdayPredictionAuditor.js');
+          const client = new ComunioClient();
+          const engine = new ComunioEngine();
+          await client.login();
+          const currentSquad = await client.getSquad();
+          const lineupRes = engine.optimizeLineup(currentSquad);
+          await client.close();
+
+          await recordMatchdayPrediction(matchdayKey || 3, `Jornada ${matchdayKey || 3}`, lineupRes);
+        } catch (predErr) {
+          console.warn('[DAEMON-CRON] Info registro predicción:', predErr.message);
+        }
+
         try {
           const { sendWhatsAppMessage } = await import('./whatsappClient.js');
           let cfg = {};
