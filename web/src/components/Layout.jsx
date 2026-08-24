@@ -101,7 +101,7 @@ export default function Layout({ children }) {
         <div className="container mx-auto px-6 text-center">
           <img src="/media/crest.jpg" alt="Racing de Oslo" className="h-16 w-16 mx-auto mb-6 rounded-full opacity-50 grayscale hover:grayscale-0 transition-all" />
           <p className="text-cream-dark text-sm mb-2 font-display">Instinto. Inteligencia. Familia. Racing.</p>
-          <p className="text-xs text-forest-light opacity-60 mb-4 font-mono">© 2026 Racing de Oslo · Est. 2018. Todos los derechos reservados.</p>
+          <p className="text-xs text-forest-light opacity-60 mb-4 font-mono">© 2026 Racing de Oslo · Est. 2018. Todos los derechos reservados · <span className="bg-forest/40 text-cream px-1.5 py-0.5 rounded text-[10px] border border-forest/50 font-mono">v1.2.0</span></p>
           <div className="flex justify-center gap-4 text-xs text-cream/50 items-center">
             <a href="https://github.com/azfalot/racing-oslo-manager" target="_blank" rel="noreferrer" className="hover:text-cream flex items-center gap-1.5 transition-colors">
               <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
