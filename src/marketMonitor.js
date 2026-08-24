@@ -134,9 +134,10 @@ export async function checkMarket(client, squad, balance, botPaused) {
     .filter(r => r.action !== 'PASS' && r.category !== 'EL_RESTO')
     .sort((a, b) => (b.strategicScore || 0) - (a.strategicScore || 0));
 
-  // Calcular límite estricto de pujas abiertas de Comunio (Saldo + 1/4 Plantilla)
-  const teamVal = (squad?.players || []).reduce((s, p) => s + (p.price || 0), 0);
-  const maxOpenBidsCap = balance + Math.floor(teamVal / 4);
+  // 🛡️ REGLA DE ORO DE TESORERÍA PRE-JORNADA:
+  // El tope de pujas abiertas concurrentes es estrictamente el SALDO LÍQUIDO DISPONIBLE (balance).
+  // De esta forma, aunque la Computadora acepte el 100% de las pujas simultáneamente, NUNCA entraremos en deuda.
+  const maxOpenBidsCap = balance;
   const pendingBids = await client.getPendingBids();
   let currentOpenBidsSum = pendingBids.reduce((s, b) => s + (b.price || 0), 0);
   let availableBiddingPower = Math.max(0, maxOpenBidsCap - currentOpenBidsSum);
@@ -148,18 +149,25 @@ export async function checkMarket(client, squad, balance, botPaused) {
     const pid = parseInt(rec.playerId || rec.id || 0);
     const pName = (rec.name || rec.playerName || '').toLowerCase().trim();
 
-    // ⛔ SUPRESIÓN DE DUPLICADOS
+    // ⛔ SUPRESIÓN DE DUPLICADOS Y JUGADORES EN LISTA NEGRA / CANCELADOS
     if ((pid > 0 && pendingIds.has(pid)) || (pName && pendingNames.has(pName)) || (pid > 0 && ignoredIds.has(pid))) {
-      console.log(`[MARKET MONITOR] Omitiendo ${rec.name}: Ya existe una puja activa registrada o ignorada.`);
+      console.log(`[MARKET MONITOR] Omitiendo ${rec.name}: Ya existe una puja activa registrada o en lista ignorada.`);
+      continue;
+    }
+
+    // 🚫 ESCUDO ANTI-FINANCIACIÓN DE RIVALES:
+    // No pujar automáticamente sumas altas (> 1.5M€) a jugadores de otros usuarios para no darles liquidez.
+    if (!rec.isComputer && rec.ownerId && rec.ownerId !== 1 && (rec.price > 1500000 || (rec.bidAmount || 0) > 1500000)) {
+      console.log(`[MARKET MONITOR] Omitiendo ${rec.name}: Jugador propiedad de rival (${rec.ownerName || 'Usuario'}). Bloqueado para evitar financiar competidores.`);
       continue;
     }
 
     const bidAmount = rec.bidAmount || rec.price;
     const dynamicMargin = rec.marginPct || 0;
 
-    // 🛡️ CONTROL DE CAPACIDAD COMUNIO: Verificar que la puja cabe en el cupo legal
+    // 🛡️ CONTROL DE CAPACIDAD ESTRICTO: Verificar que la puja cabe en la liquidez disponible
     if (bidAmount > availableBiddingPower) {
-      console.log(`[MARKET MONITOR] Omitiendo ${rec.name} (${bidAmount.toLocaleString()} €): Excede el cupo disponible de pujas (${availableBiddingPower.toLocaleString()} € de ${maxOpenBidsCap.toLocaleString()} €).`);
+      console.log(`[MARKET MONITOR] Omitiendo ${rec.name} (${bidAmount.toLocaleString()} €): Excede el cupo disponible de saldo líquido (${availableBiddingPower.toLocaleString()} € de ${maxOpenBidsCap.toLocaleString()} €).`);
       continue;
     }
 
