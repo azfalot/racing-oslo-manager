@@ -1382,6 +1382,12 @@ async function runMarketCheck() {
 
             if (isMe) {
               await publishSigningNews(tx.player, tx.price, p.playerId, p.type || 'defender');
+              try {
+                const { postStarSigningAnnouncement } = await import('./comunioCommunityPoster.js');
+                await postStarSigningAnnouncement(tx.player, tx.price, p.playerId, p.type || 'jugador');
+              } catch (commErr) {
+                console.warn('[DAEMON] Info post comunidad fichaje:', commErr.message);
+              }
             } else if (!isComputer) {
               // Solo publicar si es un mánager rival humano de la comunidad
               insertOrUpdateNews({
