@@ -72,8 +72,8 @@ export async function recordMatchdayPrediction(matchdayNumber, matchdayName, lin
       `🎯 Pronóstico Estimado: ~${projectedPoints} puntos\n\n` +
       `🛡️ ONCE TITULAR Y EXPECTATIVAS DE RENDIMIENTO:\n`;
     
-    starting11.forEach(p => {
-      body += ` • ${p.name} (${p.type || 'MED'}): ~${p.expectedPoints || 0} pts esperados\n`;
+    normalizedStarters.forEach(p => {
+      body += ` • ${p.name} (${p.type || 'MED'}): ~${p.expectedPoints || 4} pts esperados\n`;
     });
 
     body += `\nAl término de todos los encuentros, la Dirección Deportiva auditará el balance entre la estimación y los puntos reales obtenidos.`;

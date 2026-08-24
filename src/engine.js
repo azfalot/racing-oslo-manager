@@ -188,9 +188,11 @@ export class ComunioEngine {
     }
 
     const players = squad.players.map(p => {
+      const type = p.type || p.position;
       const nextMatch = (p.nextMatches && p.nextMatches.length > 0) ? p.nextMatches[0] : null;
       return {
         ...p,
+        type,
         expectedPoints: this.getExpectedPoints(p, nextMatch),
         available: this.isPlayerAvailable(p)
       };
