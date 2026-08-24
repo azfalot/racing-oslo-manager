@@ -87,8 +87,165 @@ export async function ensurePlayerPhoto(playerId) {
  * Soporta todas las plantillas oficiales:
  * 'signing', 'sale', 'market', 'finance', 'mvp', 'medical', 'rumors', 'preview', 'chronicle', 'club', 'analysis'
  */
+export async function generateSigningGraphic(playerName, price, playerId, extraData = {}) {
+  const width = 1024;
+  const height = 682;
+  const canvas = createCanvas(width, height);
+  const ctx = canvas.getContext('2d');
+
+  const TEMPLATES = ['contract', 'front', 'jersey'];
+  const templateType = extraData.templateType || TEMPLATES[Math.floor(Math.random() * TEMPLATES.length)];
+
+  let templateFile = 'template_signing_contract.jpg';
+  let headCoords = { cx: 578, cy: 220, rx: 90, ry: 120 };
+
+  if (templateType === 'front') {
+    templateFile = 'template_signing_front.jpg';
+    headCoords = { cx: 615, cy: 210, rx: 88, ry: 115 };
+  } else if (templateType === 'jersey') {
+    templateFile = 'template_signing_jersey.jpg';
+    headCoords = { cx: 590, cy: 190, rx: 82, ry: 110 };
+  }
+
+  const bgPath = path.resolve(`web/public/media/templates/${templateFile}`);
+  const templateImg = await loadImage(bgPath);
+  ctx.drawImage(templateImg, 0, 0, width, height);
+
+  // 1. CARA DEL JUGADOR
+  if (playerId) {
+    await ensurePlayerPhoto(playerId);
+    const photoPath = path.resolve(`web/public/media/players/${playerId}.png`);
+    if (fs.existsSync(photoPath)) {
+      try {
+        const faceImg = await loadImage(photoPath);
+
+        // Oscurecer fondo blanco de la silueta
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(headCoords.cx, headCoords.cy, headCoords.rx + 8, headCoords.ry + 8, 0, 0, Math.PI * 2);
+        ctx.fillStyle = '#06160c';
+        ctx.fill();
+        ctx.restore();
+
+        // Recorte elíptico
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(headCoords.cx, headCoords.cy, headCoords.rx, headCoords.ry, 0, 0, Math.PI * 2);
+        ctx.clip();
+
+        const faceWidth = headCoords.rx * 2.5;
+        const faceHeight = headCoords.ry * 2.35;
+        ctx.drawImage(
+          faceImg, 
+          headCoords.cx - faceWidth / 2, 
+          headCoords.cy - faceHeight / 2 - 4, 
+          faceWidth, 
+          faceHeight
+        );
+        ctx.restore();
+
+        // Viñeta de integración con el cuello
+        ctx.save();
+        const grad = ctx.createRadialGradient(
+          headCoords.cx, headCoords.cy, headCoords.rx * 0.75,
+          headCoords.cx, headCoords.cy, headCoords.rx * 1.05
+        );
+        grad.addColorStop(0, 'rgba(0,0,0,0)');
+        grad.addColorStop(1, 'rgba(6,20,12,0.65)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.ellipse(headCoords.cx, headCoords.cy, headCoords.rx, headCoords.ry, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      } catch (e) {
+        console.warn('[SIGNING GFX] Error cara:', e.message);
+      }
+    }
+  }
+
+  // 2. NOMBRE DEL JUGADOR EN LA PLACA
+  ctx.save();
+  ctx.fillStyle = '#0d2217';
+  ctx.fillRect(45, 275, 290, 135);
+
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.shadowColor = 'rgba(0,0,0,0.9)';
+  ctx.shadowBlur = 5;
+  ctx.shadowOffsetX = 2;
+  ctx.shadowOffsetY = 2;
+
+  const names = (playerName || 'NUEVO FICHAJE').toUpperCase().split(' ');
+  if (names.length > 1) {
+    ctx.fillStyle = '#dfd3b3';
+    ctx.font = 'bold 30px "Arial Black", sans-serif';
+    ctx.fillText(names[0], 190, 318);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 34px "Arial Black", sans-serif';
+    ctx.fillText(names.slice(1).join(' '), 190, 365);
+  } else {
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 36px "Arial Black", sans-serif';
+    ctx.fillText(playerName.toUpperCase(), 190, 340);
+  }
+  ctx.restore();
+
+  // 3. TABLA DE DETALLES TÉCNICOS
+  ctx.save();
+  ctx.font = 'bold 12px sans-serif';
+  ctx.fillStyle = '#dfd3b3';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+
+  const rows = [
+    { y: 438, val: (extraData.position || 'FUTBOLISTA').toUpperCase().slice(0, 18) },
+    { y: 486, val: (extraData.origin || extraData.club || 'LALIGA').toUpperCase().slice(0, 18) },
+    { y: 532, val: (typeof price === 'number' ? price.toLocaleString() + ' €' : price || '0 €').toUpperCase() },
+    { y: 576, val: (extraData.contract || extraData.age || 'HASTA 2029').toUpperCase() },
+    { y: 622, val: (extraData.country || extraData.nationality || 'ESPAÑA').toUpperCase().slice(0, 18) },
+    { y: 666, val: (extraData.number || 'Nº ' + (Math.floor(Math.random() * 25) + 1)).toUpperCase() }
+  ];
+
+  rows.forEach(r => {
+    ctx.fillStyle = '#0d2217';
+    ctx.fillRect(205, r.y - 10, 130, 20);
+
+    ctx.fillStyle = '#e8dcba';
+    ctx.fillText(r.val, 210, r.y);
+  });
+  ctx.restore();
+
+  // 4. SI ES LA PLANTILLA DE LA CAMISETA, ESCRIBIR EL APELLIDO EN LA ESPALDA
+  if (templateType === 'jersey') {
+    ctx.save();
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#102d1d';
+    ctx.font = 'bold 34px "Arial Black", Impact, sans-serif';
+    ctx.fillText(names[names.length - 1], 582, 420);
+    ctx.restore();
+  }
+
+  // Guardar archivo
+  const outDirWeb = path.resolve('web/public/media/news_graphics');
+  if (!fs.existsSync(outDirWeb)) fs.mkdirSync(outDirWeb, { recursive: true });
+  
+  const outputFileName = `signing_${playerId || playerName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}.jpg`;
+  const outPathWeb = path.resolve(outDirWeb, outputFileName);
+  const webRelativeUrl = `/media/news_graphics/${outputFileName}`;
+
+  const buffer = canvas.toBuffer('image/jpeg', { quality: 0.95 });
+  fs.writeFileSync(outPathWeb, buffer);
+  console.log(`[IMAGE GEN] 🎨 Tarjeta oficial de presentación generada (${templateType}): ${webRelativeUrl}`);
+  return webRelativeUrl;
+}
+
 export async function generateTemplateGraphic(type, playerName, subText = '', playerId = null, extraData = {}) {
   try {
+    if (type === 'signing') {
+      return await generateSigningGraphic(playerName, subText, playerId, extraData);
+    }
+
     let templateFilename = `template_${type}.jpg`;
     let bgPath = path.resolve(`web/public/media/templates/${templateFilename}`);
     
