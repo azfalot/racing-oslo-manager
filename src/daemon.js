@@ -172,7 +172,7 @@ async function handleTelegramMessage(message) {
   // ── /start · /help ────────────────────────────────────────────────────────
   if (text.startsWith('/start') || text.startsWith('/help') || text.toLowerCase() === 'ayuda') {
     const pauseStatus = botPaused ? '⏸ <b>BOT PAUSADO</b> (acciones autónomas desactivadas)\n\n' : '';
-    const helpText = `💼 <b>[Mateo Oslomany v3.5] · Centro de Mando Táctico</b>\n${pauseStatus}\n` +
+    const helpText = `💼 <b>[Mateo Oslomany v1.2.0] · Centro de Mando Táctico</b>\n${pauseStatus}\n` +
       `📊 <b>Análisis & Táctica:</b>\n` +
       ` • /analisis — Auditoría estratégica de plantilla, carencias y mercado\n` +
       ` • /scout — Scouting de titularidad y prensa en internet (ej: /scout Christensen)\n` +
@@ -199,7 +199,7 @@ async function handleTelegramMessage(message) {
       ` • /margen — Ajustar sobreprecio (ej: /margen 1.5)\n` +
       ` • /limite — Límite auto-puja (ej: /limite 8)\n` +
       ` • /pausar / /reanudar — Control del bot autónomo\n` +
-      ` • /estado — Estado del sistema v3.5.0\n` +
+      ` • /estado — Estado del sistema v1.2.0\n` +
       ` • /historial — Registro de últimas acciones\n\n` +
       `🕒 Crons: <b>02:50</b>, <b>09:00</b> y <b>15:00</b> Madrid | 🛒 Monitor: cada <b>3 hrs</b>`;
     await sendTelegramMessage(helpText);
