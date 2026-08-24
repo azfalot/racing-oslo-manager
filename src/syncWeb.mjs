@@ -208,6 +208,17 @@ async function fetchRealData() {
   };
   fs.writeFileSync('./web/src/data/matches.json', JSON.stringify(matchesJson, null, 2));
   
+  // Auditoría automática de jornadas resueltas (Balance Real vs Predicción)
+  try {
+    const { auditMatchdayResults } = await import('./matchdayPredictionAuditor.js');
+    if (finishedMd && dashboard?.lastPoints !== undefined) {
+      const finishedNum = parseInt(finishedMd.matchdayKey || finishedMd.id || 2);
+      await auditMatchdayResults(finishedNum, dashboard.lastPoints, squadPlayers);
+    }
+  } catch (auditErr) {
+    console.warn('[SYNC-WEB] Info auditoría jornada:', auditErr.message);
+  }
+  
   // Verificación y aseguramiento de que todas las imágenes de noticias existan en disco
   try {
     const { generateTemplateGraphic } = await import('./imageGen.js');
