@@ -10,6 +10,7 @@ export default function Mercado() {
   const [selectedNews, setSelectedNews] = useState(null)
   const [positionFilter, setPositionFilter] = useState('ALL') // ALL, keeper, defender, midfielder, striker
   const [searchTerm, setSearchTerm] = useState('')
+  const [showAllRumors, setShowAllRumors] = useState(false)
 
   const filterPlayer = (p) => {
     // 1. Filtro por posición
@@ -32,6 +33,7 @@ export default function Mercado() {
   const ourPlayers = marketData.filter(p => p.ownerId === 21163822).filter(filterPlayer)
   const otherPlayers = marketData.filter(p => p.ownerId !== 1 && p.ownerId !== 21163822).filter(filterPlayer)
   const rumorNews = (newsData || []).filter(n => (n.category || '').toLowerCase() === 'rumores')
+  const displayedRumors = showAllRumors ? rumorNews : rumorNews.slice(0, 3)
 
   const formatPrice = (price) => price ? price.toLocaleString('es-ES') + ' €' : 'Desconocido'
 
@@ -72,23 +74,33 @@ export default function Mercado() {
         </div>
       </div>
 
-      {/* SECCIÓN DE RUMORES DE MERCADO (ULTRA-COMPACTA & ARMONIZADA) */}
+      {/* SECCIÓN DE RUMORES DE MERCADO (TOP 3 COMPACTO + BOTÓN AMPLIAR) */}
       {rumorNews.length > 0 && (
         <div className="bg-black border border-forest/30 p-3 rounded-sm space-y-2 shadow-md">
           <div className="flex items-center justify-between border-b border-forest/20 pb-1.5">
             <div className="flex items-center gap-2">
               <Flame className="text-purple-400" size={16} />
               <h3 className="text-xs font-display font-bold text-white uppercase tracking-wider">
-                RUMORES & DIARIO DE MERCADO
+                RUMORES & DIARIO DE MERCADO ({displayedRumors.length} de {rumorNews.length})
               </h3>
             </div>
-            <span className="text-[10px] text-cream/50 font-mono">
-              Mateo Oslomany Radar
-            </span>
+            <div className="flex items-center gap-3">
+              {rumorNews.length > 3 && (
+                <button
+                  onClick={() => setShowAllRumors(!showAllRumors)}
+                  className="text-[10px] font-bold text-purple-300 hover:text-purple-200 transition-colors uppercase flex items-center gap-1 bg-purple-950/50 hover:bg-purple-900/60 px-2 py-0.5 rounded-sm border border-purple-500/40 shadow-sm cursor-pointer"
+                >
+                  {showAllRumors ? 'Mostrar menos ▴' : `Ver todos (${rumorNews.length}) ▾`}
+                </button>
+              )}
+              <span className="text-[10px] text-cream/50 font-mono hidden sm:inline">
+                Mateo Oslomany Radar
+              </span>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
-            {rumorNews.map(rumor => {
+            {displayedRumors.map(rumor => {
               return (
                 <div
                   key={rumor.id}
