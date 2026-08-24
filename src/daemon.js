@@ -1701,27 +1701,63 @@ async function runSquadHealthCheck() {
   }
 }
 
-// ── PLANIFICADOR ESTRICTO DE HORAS FIJAS (09:00 y 23:50) ────────────────────
+let lastPreMatchdayTriggeredKey = null;
+
+function getScheduleConfig() {
+  try {
+    if (fs.existsSync('config.json')) {
+      const cfg = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+      return {
+        dailySlots: cfg.schedule?.dailySlots || ['09:00', '23:50'],
+        preMatchdayMinutes: cfg.schedule?.preMatchdayMinutesBeforeKickoff || 60,
+        enabled: cfg.schedule?.enabled !== false
+      };
+    }
+  } catch (e) {}
+  return { dailySlots: ['09:00', '23:50'], preMatchdayMinutes: 60, enabled: true };
+}
+
+// ── PLANIFICADOR CONFIGURABLE (HORAS FIJAS + PRE-JORNADA DINÁMICO) ────────────
 function startCronScheduler() {
-  console.log('[DAEMON] Iniciando planificador estricto de conexión: 09:00 y 23:50 (Madrid). Resto del día en reposo.');
+  const sched = getScheduleConfig();
+  console.log(`[DAEMON] Iniciando planificador configurable: ${sched.dailySlots.join(', ')} (Madrid) + ${sched.preMatchdayMinutes} min antes de cada jornada.`);
   
   setInterval(async () => {
+    const config = getScheduleConfig();
+    if (!config.enabled || botPaused) return;
+
     const now = new Date();
     const madridTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
     const hours = madridTime.getHours();
     const minutes = madridTime.getMinutes();
+    const currentTimeStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 
-    const isMorningSlot = (hours === 9 && minutes === 0);
-    const isNightSlot = (hours === 23 && minutes === 50);
+    // 1. Comprobar franja diaria fija configurada (ej: 09:00 o 23:50)
+    const isDailySlot = config.dailySlots.includes(currentTimeStr) && madridTime.getSeconds() < 60;
 
-    if (isMorningSlot || isNightSlot) {
-      const timeStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-      console.log(`[DAEMON-CRON] ⏰ Ventana de conexión oficial detectada (${timeStr}). Ejecutando operativa completa...`);
+    // 2. Comprobar disparo dinámico previo al inicio de jornada (ej: 60 min antes del kickoff)
+    let isPreMatchdaySlot = false;
+    try {
+      if (minutes % 5 === 0) {
+        const { getNextMatchdayInfo } = await import('./comunioNewsConsumer.js');
+        const client = new ComunioClient();
+        await client.login();
+        const info = await getNextMatchdayInfo(client);
+        await client.close();
 
-      if (botPaused) {
-        console.log('[DAEMON-CRON] Bot pausado, omitiendo ejecución automática.');
-        return;
+        if (info.kickoffDate) {
+          const diffMinutes = Math.round((info.kickoffDate.getTime() - now.getTime()) / (1000 * 60));
+          if (diffMinutes > 0 && diffMinutes <= config.preMatchdayMinutes && lastPreMatchdayTriggeredKey !== info.nextMatchday) {
+            isPreMatchdaySlot = true;
+            lastPreMatchdayTriggeredKey = info.nextMatchday;
+            console.log(`[DAEMON-CRON] 🚨 Alerta Pre-Jornada detectada: Quedan ${diffMinutes} min para el kickoff de la Jornada ${info.nextMatchday}.`);
+          }
+        }
       }
+    } catch (err) {}
+
+    if (isDailySlot || isPreMatchdaySlot) {
+      console.log(`[DAEMON-CRON] ⏰ Ventana de ejecución activada (${currentTimeStr} | Pre-Jornada: ${isPreMatchdaySlot ? 'SÍ' : 'NO'}). Ejecutando operativa...`);
 
       // 1. Ejecutar escáner y acciones de mercado / ofertas recibidas
       await runMarketCheck();
@@ -1738,6 +1774,26 @@ function startCronScheduler() {
       exec(syncCmd, (syncErr) => {
          if (syncErr) console.error('[DAEMON-CRON] Error sincronizando web:', syncErr.message);
       });
+
+      // 5. Notificación por WhatsApp si es Pre-Jornada
+      if (isPreMatchdaySlot) {
+        try {
+          const { sendWhatsAppMessage } = await import('./whatsappClient.js');
+          let cfg = {};
+          if (fs.existsSync('config.json')) cfg = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+          const target = cfg.whatsapp?.groupChat || cfg.whatsapp?.personalChat;
+          if (target && cfg.whatsapp?.enabled) {
+            const waMsg = `*🚨 ONCE CERRADO & SALDO BLINDADO · RACING DE OSLO 🚨*\n\n` +
+              `⏰ *Inicio de Jornada:* En menos de ${config.preMatchdayMinutes} minutos.\n` +
+              `✅ *11 Titular:* Optimizado y guardado en Comunio.\n` +
+              `💰 *Estado Financiero:* Saldo en regla (>= 0 €).\n\n` +
+              `_Todo listo para sumar puntos._`;
+            await sendWhatsAppMessage(target, waMsg);
+          }
+        } catch (waErr) {
+          console.warn('[DAEMON-CRON] No se pudo enviar WhatsApp pre-jornada:', waErr.message);
+        }
+      }
     }
   }, 60000);
 }
