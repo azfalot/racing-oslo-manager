@@ -1375,18 +1375,22 @@ async function runMarketCheck() {
         if (tx) {
           txMsg += ` • <b>${escapeHtml(tx.player)}</b> — <b>${escapeHtml(tx.price)}</b>\n   <i>Traspasado de ${escapeHtml(tx.seller)} a <b>${escapeHtml(tx.buyer)}</b></i>\n\n`;
           
-          // Generar noticia automática si la compra la hizo Racing de Oslo o si fue un bombazo de rival
+          // Generar noticia automática si la compra la hizo Racing de Oslo o si fue un fichaje de un rival real (ignorando a Computer)
           try {
-            if (tx.buyer.toLowerCase().includes('racing') || tx.buyer.toLowerCase().includes('azfalot')) {
+            const isMe = tx.buyer.toLowerCase().includes('racing') || tx.buyer.toLowerCase().includes('azfalot');
+            const isComputer = tx.buyer.toLowerCase() === 'computer' || tx.buyer.toLowerCase().includes('computadora');
+
+            if (isMe) {
               await publishSigningNews(tx.player, tx.price, p.playerId, p.type || 'defender');
-            } else {
+            } else if (!isComputer) {
+              // Solo publicar si es un mánager rival humano de la comunidad
               insertOrUpdateNews({
                 id: `rival_signing_${p.playerId || tx.player.replace(/\s+/g, '_')}`,
                 title: `MERCADO: ${tx.buyer} ficha a ${tx.player} por ${tx.price}`,
                 date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }),
                 category: 'Mercado',
                 summary: `${tx.buyer} completa el fichaje de ${tx.player} procedente de ${tx.seller} tras una puja de ${tx.price}.`,
-                body: `Movimiento oficial confirmado en la comunidad de Comunio. ${tx.buyer} se ha impuesto en la puja por ${tx.player} tras desembolsar ${tx.price} a ${tx.seller}.\\n\\nEl Racing de Oslo mantiene su plan financiero con 19.7M€ de liquidez mientras audita las siguientes oportunidades del mercado.`,
+                body: `Movimiento oficial confirmado en la comunidad de Comunio. ${tx.buyer} se ha impuesto en la puja por ${tx.player} tras desembolsar ${tx.price} a ${tx.seller}.\n\nEl Racing de Oslo mantiene su plan financiero con la tesorería saneada mientras audita las siguientes oportunidades del mercado.`,
                 image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80'
               });
             }
