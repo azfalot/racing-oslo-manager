@@ -172,10 +172,12 @@ async function handleTelegramMessage(message) {
     return;
   }
 
-  console.log(`[DAEMON] Comando recibido de Telegram: "${text}"`);
+  const rawText = text || '';
+  const cleanText = rawText.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  console.log(`[DAEMON] Comando recibido de Telegram: "${rawText}" (Normalizado: "${cleanText}")`);
 
   // ── /start · /help ────────────────────────────────────────────────────────
-  if (text.startsWith('/start') || text.startsWith('/help') || text.toLowerCase() === 'ayuda') {
+  if (cleanText.startsWith('/start') || cleanText.startsWith('/help') || cleanText === 'ayuda') {
     const pauseStatus = botPaused ? '⏸ <b>BOT PAUSADO</b> (acciones autónomas desactivadas)\n\n' : '';
     const helpText = `💼 <b>[Mateo Oslomany v1.2.0] · Centro de Mando Táctico</b>\n${pauseStatus}\n` +
       `📊 <b>Análisis & Táctica:</b>\n` +
@@ -223,7 +225,7 @@ async function handleTelegramMessage(message) {
   }
 
   // ── /analisis ─────────────────────────────────────────────────────────────
-  else if (text.startsWith('/analisis')) {
+  else if (cleanText.startsWith('/analisis')) {
     await executeStrategicAnalysisReport();
   }
 
@@ -1537,20 +1539,41 @@ async function executeStrategicAnalysisReport() {
     msg += ` • Caja Disponible: <b>${balance.toLocaleString()} €</b> ${balance >= 0 ? '✅ (Saneado)' : '❌ (En Deuda)'}\n`;
     msg += ` • Valor Plantilla: <b>${teamValue.toLocaleString()} €</b> (${players.length} jug)\n\n`;
 
-    // 2. DIAGNÓSTICO T    // Guardar nuevo estado
-    const newNames = {};
-    currentPlayers.forEach(p => { newNames[p.id || p.playerId] = p.name; });
-    const newState = {
-      playerIds: currentPlayerIds,
-      playerNames: newNames,
-      balance,
-      formation: lineupResult?.formation || previousState.formation || '5-3-2',
-      updatedAt: new Date().toISOString()
-    };
-    fs.writeFileSync(stateFile, JSON.stringify(newState, null, 2));
+    // 2. DIAGNÓSTICO TÁCTICO POR LÍNEAS
+    msg += `🛡️ <b>2. Diagnóstico Táctico por Líneas:</b>\n`;
+    msg += ` • 🧤 <b>Portería (${keepers.length}/2):</b> ${keepers.map(p => escapeHtml(p.name) + ' (~' + engine.getSeasonProjection(p) + ' pts)').join(', ')} | <i>${keepers.length < 2 ? '⚠️ Falta 1 portero suplente para rotaciones/seguridad.' : 'Línea completa.'}</i>\n`;
+    msg += ` • 🛡️ <b>Defensa (${defenders.length}/5):</b> ${defenders.map(p => escapeHtml(p.name) + ' (~' + engine.getSeasonProjection(p) + ' pts)').join(', ')} | <i>${defenders.length < 5 ? 'Recomendable sumar 1 central titular contrastado.' : 'Línea sólida.'}</i>\n`;
+    msg += ` • ⚙️ <b>Medular (${midfielders.length}/5):</b> ${midfielders.map(p => escapeHtml(p.name) + ' (~' + engine.getSeasonProjection(p) + ' pts)').join(', ')} | <i>Línea estelar con Valverde y Galarreta.</i>\n`;
+    msg += ` • ⚡ <b>Delantera (${strikers.length}/3):</b> ${strikers.map(p => escapeHtml(p.name) + ' (~' + engine.getSeasonProjection(p) + ' pts)').join(', ')} | <i>Dupla goleadora con Gerard Moreno y Hugo Duro.</i>\n\n`;
+
+    // 3. OPORTUNIDADES CLAVE DEL MERCADO
+    msg += `🛒 <b>3. Oportunidades Clave del Mercado Hoy (${marketPlayers.length} en venta):</b>\n`;
+    const marketKeepers = marketPlayers.filter(p => p.type === 'keeper').sort((a, b) => a.price - b.price);
+    if (marketKeepers.length > 0) {
+      msg += ` • 🧤 <b>Portero disponible:</b> ${escapeHtml(marketKeepers[0].name)} (${(marketKeepers[0].price/1000000).toFixed(2)}M €)\n`;
+    }
+    const marketDefs = marketPlayers.filter(p => p.type === 'defender' && p.price > 1000000).sort((a, b) => a.price - b.price);
+    if (marketDefs.length > 0) {
+      msg += ` • 🛡️ <b>Defensa recomendado:</b> ${escapeHtml(marketDefs[0].name)} (${(marketDefs[0].price/1000000).toFixed(2)}M €)\n`;
+    }
+    const marketMids = marketPlayers.filter(p => p.type === 'midfielder' && p.price > 1000000).sort((a, b) => a.price - b.price);
+    if (marketMids.length > 0) {
+      msg += ` • ⚙️ <b>Centrocampista recomendado:</b> ${escapeHtml(marketMids[0].name)} (${(marketMids[0].price/1000000).toFixed(2)}M €)\n`;
+    }
+
+    // 4. PLAN DE ACCIÓN
+    msg += `\n📋 <b>4. Plan de Acción Inmediato:</b>\n`;
+    msg += ` 1️⃣ Mantener en venta los descartes (Kike Barja) para tesorería.\n`;
+    msg += ` 2️⃣ Tras liquidar puntos de la jornada, cerrar el 2º portero (Leo Román / Dituro).\n`;
+    msg += ` 3️⃣ Once titular guardado (${lineup.formation}) con prioridad a clubes activos.`;
+
+    await sendTelegramMessage(msg);
 
   } catch (err) {
-    console.error('[DAEMON-EVENTS ERROR] Error auditando eventos de plantilla:', err.message);
+    console.error('[DAEMON-ANALISIS ERROR]', err.message);
+    await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error en el análisis estratégico: <code>${escapeHtml(err.message)}</code>`);
+  } finally {
+    await client.close();
   }
 }
 
