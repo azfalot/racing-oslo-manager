@@ -499,32 +499,41 @@ export class ComunioEngine {
   }
 
   /**
-   * Sugiere ventas opcionales para ganar liquidez
+   * Sugiere ventas inteligentes para ganar liquidez sin tocar a los pilares del equipo
    */
   getLiquiditySuggestions(squad, starting11Ids) {
     const currentSquad = squad?.players || [];
     const suggestions = [];
 
     currentSquad.forEach(p => {
-      const isLinedUp = starting11Ids.includes(p.playerId);
+      const price = p.price || 0;
+      const totalPoints = p.totalPoints || 0;
+      const seasonProj = this.getSeasonProjection(p);
+      const isLinedUp = starting11Ids.includes(p.playerId || p.id);
       const isAvailable = this.isPlayerAvailable(p);
+      const statusLower = ((p.status || '') + ' ' + (p.statusInfo || '')).toLowerCase();
+
+      // PROTECCIÓN DE PILARES Y CRACKS: Nunca sugerir vender pilares
+      if (price > 3000000 || seasonProj > 135 || totalPoints > 10) {
+        return; // Intocable
+      }
       
-      // 1. Caso crítico: Lesionados graves de larga duración
-      if (!isAvailable && (p.statusInfo || '').toLowerCase().includes('baja') || (p.statusInfo || '').toLowerCase().includes('diciembre') || (p.statusInfo || '').toLowerCase().includes('rotura') || (p.statusInfo || '').toLowerCase().includes('cruzado')) {
+      // 1. Caso crítico: Lesionados graves de larga duración o sin ritmo (ej: Kike Barja)
+      if (!isAvailable || statusLower.includes('baja') || statusLower.includes('cruzado') || statusLower.includes('rotura')) {
         suggestions.push({
-          playerId: p.playerId,
+          playerId: p.playerId || p.id,
           name: p.name,
           price: p.price,
-          reason: `Lesión grave/largo plazo (${p.statusInfo}). Vender libera ${p.price.toLocaleString()} €.`
+          reason: `Sin minutos o en recuperación (${p.statusInfo || 'Baja'}). Vender libera ${p.price.toLocaleString()} € de tesorería.`
         });
       }
-      // 2. Caso secundario: Suplentes de alto valor económico secuestrado
-      else if (!isLinedUp && p.price > 1500000) {
+      // 2. Caso secundario: Parches suplentes prescindibles con 0 puntos
+      else if (totalPoints === 0 && price < 1500000) {
         suggestions.push({
-          playerId: p.playerId,
+          playerId: p.playerId || p.id,
           name: p.name,
           price: p.price,
-          reason: `Suplente de alto valor en el banquillo. Vender libera ${p.price.toLocaleString()} € para fichajes titulares.`
+          reason: `Parche secundario sin minutos. Vender libera ${p.price.toLocaleString()} € para acometer fichajes titulares.`
         });
       }
     });

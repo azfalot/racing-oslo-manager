@@ -276,7 +276,7 @@ async function handleTelegramMessage(message) {
         const posEmoji = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' };
         let rep = `💼 ✅ <b>[Mateo Oslomany] · 11 Titular Guardado en Comunio</b>\n\n`;
         rep += `📐 <b>Formación:</b> ${lineupResult.formation}\n`;
-        rep += `🎯 <b>Puntuación esperada:</b> ~${Math.round(lineupResult.score / 38)} pts en la jornada\n\n`;
+        rep += `🎯 <b>Puntuación esperada:</b> ~${Math.round(lineupResult.score)} pts en la jornada\n\n`;
         rep += `<b>⬛ TITULARES:</b>\n`;
         lineupResult.starting11.forEach(p => {
           const emoji = posEmoji[p.type] || '👤';
@@ -1537,96 +1537,7 @@ async function executeStrategicAnalysisReport() {
     msg += ` • Caja Disponible: <b>${balance.toLocaleString()} €</b> ${balance >= 0 ? '✅ (Saneado)' : '❌ (En Deuda)'}\n`;
     msg += ` • Valor Plantilla: <b>${teamValue.toLocaleString()} €</b> (${players.length} jug)\n\n`;
 
-    // 2. DIAGNÓSTICO TÁCTICO POR LÍNEAS
-    msg += `🛡️ <b>2. Diagnóstico Táctico por Líneas:</b>\n`;
-    msg += ` • 🧤 <b>Portería (${keepers.length}/2):</b> ${keepers.map(p => escapeHtml(p.name) + ' (' + (p.totalPoints || 0) + ' pts)').join(', ')} | <i>${keepers.length < 2 ? 'Falta 1 portero suplente para rotaciones/seguridad.' : 'Línea completa.'}</i>\n`;
-    msg += ` • 🛡️ <b>Defensa (${defenders.length}/5):</b> ${defenders.map(p => escapeHtml(p.name) + ' (' + (p.totalPoints || 0) + ' pts)').join(', ')} | <i>${defenders.length < 5 ? 'Recomendable sumar 1 central titular contrastado.' : 'Línea sólida.'}</i>\n`;
-    msg += ` • ⚙️ <b>Medular (${midfielders.length}/5 Élite):</b> ${midfielders.map(p => escapeHtml(p.name) + ' (' + (p.totalPoints || 0) + ' pts)').join(', ')} | <i>Línea galáctica blindada.</i>\n`;
-    msg += ` • ⚡ <b>Delantera (${strikers.length}/3):</b> ${strikers.map(p => escapeHtml(p.name) + ' (' + (p.totalPoints || 0) + ' pts)').join(', ')} | <i>Dupla goleadora de máximo nivel.</i>\n\n`;
-
-    // 3. OPORTUNIDADES CLAVE DEL MERCADO
-    msg += `🛒 <b>3. Oportunidades Clave del Mercado Hoy (${marketPlayers.length} en venta):</b>\n`;
-    const marketKeepers = marketPlayers.filter(p => p.type === 'keeper').sort((a, b) => a.price - b.price);
-    if (marketKeepers.length > 0) {
-      msg += ` • 🧤 <b>Portero recomendado:</b> ${escapeHtml(marketKeepers[0].name)} (${(marketKeepers[0].price/1000000).toFixed(2)}M €)\n`;
-    }
-    const marketDefs = marketPlayers.filter(p => p.type === 'defender' && p.price > 1000000).sort((a, b) => a.price - b.price);
-    if (marketDefs.length > 0) {
-      msg += ` • 🛡️ <b>Defensa recomendado:</b> ${escapeHtml(marketDefs[0].name)} (${(marketDefs[0].price/1000000).toFixed(2)}M €)\n`;
-    }
-
-    // 4. PLAN DE ACCIÓN
-    msg += `\n📋 <b>4. Plan de Acción Inmediato:</b>\n`;
-    msg += ` 1️⃣ Mantener en venta los descartes para generar liquidez.\n`;
-    msg += ` 2️⃣ Tras la liquidación de puntos de la jornada, cerrar el 2º portero (Matías Dituro).\n`;
-    msg += ` 3️⃣ Once titular guardado (${lineup.formation}) con prioridad a futbolistas con partido activo.`;
-
-    await sendTelegramMessage(msg);
-
-  } catch (err) {
-    console.error('[DAEMON-ANALISIS ERROR]', err.message);
-    await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error en el análisis estratégico: <code>${escapeHtml(err.message)}</code>`);
-  } finally {
-    await client.close();
-  }
-}
-
-function startMarketMonitor() {
-  console.log('[DAEMON] Iniciando monitor de mercado inteligente (optimizado a intervalos de 3 horas)...');
-  // Primera ejecución a los 3 min para inicializar last_market.json sin lanzar alertas falsas
-  setTimeout(() => {
-    runMarketCheck();
-    setInterval(runMarketCheck, 3 * 60 * 60 * 1000); // 3 horas en lugar de 15 minutos
-  }, 3 * 60 * 1000);
-}
-
-// ── AUDITORÍA AUTOMÁTICA DE EVENTOS Y GENERACIÓN DE NOTICIAS ─────────────────
-
-async function auditAndSyncSquadEvents(client, squad, balance, lineupResult = null) {
-  try {
-    const { publishSigningNews, publishSaleNews, publishMatchdayPreviewNews, publishClubNews } = await import('./imageGen.js');
-    const stateFile = 'last_squad_state.json';
-    let previousState = { playerIds: [], playerNames: {}, balance: 0, formation: '' };
-
-    if (fs.existsSync(stateFile)) {
-      try {
-        previousState = JSON.parse(fs.readFileSync(stateFile, 'utf-8'));
-      } catch (e) {}
-    }
-
-    const currentPlayers = squad?.players || [];
-    const currentPlayerIds = currentPlayers.map(p => p.id || p.playerId);
-
-    // 1. Detectar NUEVOS FICHAJES (jugadores que aparecen por primera vez en la plantilla)
-    if (previousState.playerIds && previousState.playerIds.length > 0) {
-      for (const p of currentPlayers) {
-        const pid = p.id || p.playerId;
-        if (!previousState.playerIds.includes(pid)) {
-          console.log(`[DAEMON-EVENTS] 🌟 ¡Nuevo fichaje confirmado detectado en la plantilla: ${p.name}!`);
-          await publishSigningNews(p.name, p.price || 0, pid, p.type || p.position);
-          await sendTelegramMessage(`💼 🌟 <b>[Mateo Oslomany] ¡Fichaje Confirmado!</b>\n\n<b>${escapeHtml(p.name)}</b> se ha incorporado oficialmente al Racing de Oslo.\n💰 Coste/Valor: ${(p.price || 0).toLocaleString()} €`);
-        }
-      }
-
-      // 2. Detectar VENTAS / SALIDAS (jugadores que ya no están en la plantilla)
-      for (const prevId of previousState.playerIds) {
-        if (!currentPlayerIds.includes(prevId)) {
-          const prevName = previousState.playerNames[prevId] || `Jugador #${prevId}`;
-          console.log(`[DAEMON-EVENTS] 🏷️ ¡Salida de jugador confirmada detectada: ${prevName}!`);
-          await publishSaleNews(prevName, 0, prevId, 'Computadora');
-          await sendTelegramMessage(`💼 🏷️ <b>[Mateo Oslomany] ¡Venta Confirmada!</b>\n\n<b>${escapeHtml(prevName)}</b> ha abandonado la disciplina del Racing de Oslo.`);
-        }
-      }
-    }
-
-    // 3. Detectar CAMBIOS EN EL 11 TITULAR Y FORMACIÓN
-    if (lineupResult && lineupResult.formation && lineupResult.formation !== previousState.formation) {
-      const matchdayName = 'Próxima Jornada';
-      const names = (lineupResult.starting11 || []).map(p => p.name);
-      await publishMatchdayPreviewNews(matchdayName, names, lineupResult.formation, lineupResult.score);
-    }
-
-    // Guardar nuevo estado
+    // 2. DIAGNÓSTICO T    // Guardar nuevo estado
     const newNames = {};
     currentPlayers.forEach(p => { newNames[p.id || p.playerId] = p.name; });
     const newState = {
@@ -1643,7 +1554,7 @@ async function auditAndSyncSquadEvents(client, squad, balance, lineupResult = nu
   }
 }
 
-// ── CRON DIARIO (02:50 · 09:00 · 15:00) ──────────────────────────────────────
+// ── CRON DIARIO (09:00 · 23:50) ──────────────────────────────────────────────
 
 async function executeInLineupOptimization() {
   console.log('[DAEMON-CRON] Ejecutando optimización de alineación (Flujo Unificado)...');
@@ -1654,10 +1565,11 @@ async function executeInLineupOptimization() {
     const squad = await client.getSquad();
     const dashboard = await client.getDashboardData();
     const balance = dashboard?.money || 0;
-    const lineupResult = engine.optimizeLineup(squad || { players: [] });
+    const activeClubs = await getActiveMatchdayClubs(client);
+    const lineupResult = engine.optimizeLineup(squad || { players: [] }, activeClubs);
     
     if (lineupResult.starting11 && lineupResult.starting11.length > 0) {
-      const startingIds = lineupResult.starting11.map(p => p.playerId);
+      const startingIds = lineupResult.starting11.map(p => p.playerId || p.id);
       const success = await client.setLineup(startingIds, lineupResult.formation);
       console.log(`[DAEMON-CRON] 11 Titular guardado (${lineupResult.formation}) -> Éxito: ${success}`);
       await sendTelegramMessage(`💼 ⚡ <b>[Mateo Oslomany]:</b> 11 Titular optimizado y guardado en Comunio (Formación: ${lineupResult.formation}).`);
@@ -1729,20 +1641,21 @@ async function runSquadHealthCheck() {
 
     if (healthChangesCount > 0) {
       console.log(`[DAEMON-HEALTH] Re-optimizando el XI titular tras detectar ${healthChangesCount} bajas físicas...`);
-      const lineupResult = engine.optimizeLineup(squad);
+      const activeClubs = await getActiveMatchdayClubs(client);
+      const lineupResult = engine.optimizeLineup(squad, activeClubs);
       const starting11Ids = lineupResult.starting11.map(p => p.playerId || p.id);
       
       const saved = await client.setLineup(starting11Ids, lineupResult.formation);
       if (saved) {
         await sendTelegramMessage(
           `<b>⚽ XI TITULAR REAJUSTADO TRAS PARTE MÉDICO</b>\n\n` +
-          `<b>Formación:</b> ${lineupResult.formation} (~${lineupResult.score} pts esperados)\n\n` +
+          `<b>Formación:</b> ${lineupResult.formation} (~${Math.round(lineupResult.score)} pts esperados)\n\n` +
           `<b>🛡️ NUEVO ONCE TITULAR 100% SANO:</b>\n` +
           lineupResult.starting11.map(p => ` • <b>${p.name}</b> (${p.expectedPoints} pts)`).join('\n')
         );
 
-        const syncCmd = 'cd web && npm run build && cd .. && git add -A && git commit -m "fix: Reajuste automatico por parte medico" && git push origin main';
-        exec(syncCmd, (syncErr) => {
+        const { exec } = await import('node:child_process');
+        exec('node src/syncWeb.mjs', (syncErr) => {
           if (syncErr) console.error('[DAEMON-HEALTH] Error en auto-sync web:', syncErr.message);
         });
       }
@@ -1759,6 +1672,7 @@ async function runSquadHealthCheck() {
 }
 
 let lastPreMatchdayTriggeredKey = null;
+let lastDailyTriggeredSlots = {};
 
 function getScheduleConfig() {
   try {
@@ -1788,9 +1702,16 @@ function startCronScheduler() {
     const hours = madridTime.getHours();
     const minutes = madridTime.getMinutes();
     const currentTimeStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    const todayDateStr = madridTime.toISOString().slice(0, 10);
 
-    // 1. Comprobar franja diaria fija configurada (ej: 09:00 o 23:50)
-    const isDailySlot = config.dailySlots.includes(currentTimeStr) && madridTime.getSeconds() < 60;
+    // 1. Comprobar franja diaria fija configurada con bloqueo diario único
+    let isDailySlot = false;
+    if (config.dailySlots.includes(currentTimeStr)) {
+      if (lastDailyTriggeredSlots[currentTimeStr] !== todayDateStr) {
+        isDailySlot = true;
+        lastDailyTriggeredSlots[currentTimeStr] = todayDateStr;
+      }
+    }
 
     // 2. Comprobar disparo dinámico previo al inicio de jornada (ej: 60 min antes del kickoff)
     let isPreMatchdaySlot = false;
@@ -1827,12 +1748,13 @@ function startCronScheduler() {
 
       // 4. Sincronización con el portal web
       console.log('[DAEMON-CRON] Sincronizando datos con la web y portal...');
-      const syncCmd = 'node src/syncWeb.mjs && git add web/src/data/*.json && git commit -m "chore: Sincronizacion automatica programada" && git push origin main';
-      exec(syncCmd, (syncErr) => {
+      const { exec } = await import('node:child_process');
+      exec('node src/syncWeb.mjs', (syncErr) => {
          if (syncErr) console.error('[DAEMON-CRON] Error sincronizando web:', syncErr.message);
+         else console.log('[DAEMON-CRON] Web sincronizada con éxito.');
       });
 
-      // 5. Pre-Jornada: Registro oficial de Pronóstico y Noticia de Previa (15 min antes)
+      // 5. Pre-Jornada: Registro oficial de Pronóstico
       if (isPreMatchdaySlot) {
         try {
           const { recordMatchdayPrediction } = await import('./matchdayPredictionAuditor.js');
@@ -1840,33 +1762,17 @@ function startCronScheduler() {
           const engine = new ComunioEngine();
           await client.login();
           const currentSquad = await client.getSquad();
-          const lineupRes = engine.optimizeLineup(currentSquad);
+          const activeClubs = await getActiveMatchdayClubs(client);
+          const lineupRes = engine.optimizeLineup(currentSquad, activeClubs);
           await client.close();
 
-          await recordMatchdayPrediction(matchdayKey || 3, `Jornada ${matchdayKey || 3}`, lineupRes);
+          await recordMatchdayPrediction(3, `Jornada 3`, lineupRes);
         } catch (predErr) {
           console.warn('[DAEMON-CRON] Info registro predicción:', predErr.message);
         }
-
-        try {
-          const { sendWhatsAppMessage } = await import('./whatsappClient.js');
-          let cfg = {};
-          if (fs.existsSync('config.json')) cfg = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-          const target = cfg.whatsapp?.groupChat || cfg.whatsapp?.personalChat;
-          if (target && cfg.whatsapp?.enabled) {
-            const waMsg = `*🚨 ONCE CERRADO & SALDO BLINDADO · RACING DE OSLO 🚨*\n\n` +
-              `⏰ *Inicio de Jornada:* En menos de ${config.preMatchdayMinutes} minutos.\n` +
-              `✅ *11 Titular:* Optimizado y guardado en Comunio.\n` +
-              `💰 *Estado Financiero:* Saldo en regla (>= 0 €).\n\n` +
-              `_Todo listo para sumar puntos._`;
-            await sendWhatsAppMessage(target, waMsg);
-          }
-        } catch (waErr) {
-          console.warn('[DAEMON-CRON] No se pudo enviar WhatsApp pre-jornada:', waErr.message);
-        }
       }
     }
-  }, 60000);
+  }, 60 * 1000);
 }
 
 // ── ARRANQUE ──────────────────────────────────────────────────────────────────
