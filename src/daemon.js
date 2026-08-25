@@ -303,7 +303,7 @@ async function handleTelegramMessage(message) {
           }
           // Disparar sincronización web en segundo plano
           const { exec } = await import('node:child_process');
-          exec('node src/syncWeb.mjs', (err) => {
+          exec('node src/syncWeb.mjs', { windowsHide: true }, (err) => {
             if (err) console.error('[DAEMON-SYNC] Error en auto-sync web:', err.message);
             else console.log('[DAEMON-SYNC] Web sincronizada y desplegada con éxito tras alinear.');
           });
@@ -949,7 +949,7 @@ async function handleTelegramMessage(message) {
   // ── /sync ───────────────────────────────────────────────────────────────
   else if (text.startsWith('/sync')) {
     await sendTelegramMessage('💼 🚀 <i>[Mateo Oslomany]: Sincronizando web y desplegando a Cloudflare Pages...</i>');
-    exec('node src/syncWeb.mjs', (err) => {
+    exec('node src/syncWeb.mjs', { windowsHide: true }, (err) => {
       if (err) {
         sendTelegramMessage(`💼 ❌ Error al sincronizar web: <code>${escapeHtml(err.message)}</code>`);
       } else {
@@ -1655,7 +1655,7 @@ async function runSquadHealthCheck() {
         );
 
         const { exec } = await import('node:child_process');
-        exec('node src/syncWeb.mjs', (syncErr) => {
+        exec('node src/syncWeb.mjs', { windowsHide: true }, (syncErr) => {
           if (syncErr) console.error('[DAEMON-HEALTH] Error en auto-sync web:', syncErr.message);
         });
       }
@@ -1749,7 +1749,7 @@ function startCronScheduler() {
       // 4. Sincronización con el portal web
       console.log('[DAEMON-CRON] Sincronizando datos con la web y portal...');
       const { exec } = await import('node:child_process');
-      exec('node src/syncWeb.mjs', (syncErr) => {
+      exec('node src/syncWeb.mjs', { windowsHide: true }, (syncErr) => {
          if (syncErr) console.error('[DAEMON-CRON] Error sincronizando web:', syncErr.message);
          else console.log('[DAEMON-CRON] Web sincronizada con éxito.');
       });

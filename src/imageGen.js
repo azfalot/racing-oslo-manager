@@ -9,7 +9,7 @@ export function triggerWebSync() {
   if (syncDebounceTimeout) clearTimeout(syncDebounceTimeout);
   syncDebounceTimeout = setTimeout(() => {
     console.log('[NEWS] Desencadenando sincronización web automática tras publicación...');
-    exec('node src/syncWeb.mjs', (err) => {
+    exec('node src/syncWeb.mjs', { windowsHide: true }, (err) => {
       if (err) console.error('[NEWS ERROR] Error en syncWeb automático:', err.message);
       else console.log('[NEWS] Sincronización y despliegue a Cloudflare completado tras nuevo evento.');
     });

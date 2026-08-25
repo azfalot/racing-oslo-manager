@@ -253,9 +253,9 @@ async function fetchRealData() {
   try {
     const { execSync } = await import('child_process');
     console.log("[SYNC-WEB] Subiendo cambios a GitHub para despliegue en Cloudflare...");
-    execSync('git add web/src/data/*.json web/public/media/ web/public/media/news_graphics/', { stdio: 'inherit' });
-    execSync('git commit -m "chore(web): Sincronizacion automatica de datos y medios"', { stdio: 'inherit' });
-    execSync('git push origin main', { stdio: 'inherit' });
+    execSync('git add web/src/data/*.json web/public/media/ web/public/media/news_graphics/', { stdio: 'pipe', windowsHide: true });
+    execSync('git commit -m "chore(web): Sincronizacion automatica de datos y medios"', { stdio: 'pipe', windowsHide: true });
+    execSync('git push origin main', { stdio: 'pipe', windowsHide: true });
     console.log("[SYNC-WEB] 🚀 ¡Despliegue enviado a Cloudflare con éxito!");
   } catch (err) {
     console.warn("[SYNC-WEB] Info auto-push git:", err.message);
