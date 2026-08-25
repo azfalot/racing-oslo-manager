@@ -212,10 +212,31 @@ async function handleTelegramMessage(message) {
 
   // ── /reporte ──────────────────────────────────────────────────────────────
   else if (text.startsWith('/reporte')) {
-    await sendTelegramMessage('💼 <i>[Mateo Oslomany]: Ejecutando análisis (modo lectura)...</i>');
-    exec('node src/app.js', { env: { ...process.env, COMUNIO_MODE: 'asistente' } }, (err) => {
-      if (err) sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al generar el informe: <code>${err.message}</code>`);
-    });
+    const client = new ComunioClient();
+    const engine = new ComunioEngine();
+    try {
+      await client.login();
+      const squad = await client.getSquad();
+      const dash = await client.getDashboardData();
+      const lineup = engine.optimizeLineup(squad);
+      await client.close();
+
+      const balance = dash.money || 0;
+      const teamValue = dash.teamValue || 0;
+
+      let rep = `💼 📊 <b>[Mateo Oslomany] · INFORME EJECUTIVO</b>\n\n`;
+      rep += `💰 <b>Saldo en Caja:</b> <b>${balance.toLocaleString()} €</b> ${balance >= 0 ? '✅ (Saneado)' : '❌ (En Deuda)'}\n`;
+      rep += `📈 <b>Valor Plantilla:</b> <b>${teamValue.toLocaleString()} €</b> (${squad.players.length} jug)\n\n`;
+      rep += `🛡️ <b>Once Óptimo (${lineup.formation}):</b>\n`;
+      lineup.starting11.forEach(p => {
+        const icon = p.type === 'keeper' ? '🧤' : p.type === 'defender' ? '🛡️' : p.type === 'midfielder' ? '⚙️' : '⚡';
+        rep += ` • ${icon} ${escapeHtml(p.name)} (${(p.price/1000000).toFixed(1)}M €)\n`;
+      });
+      rep += `\n🌐 <b>Sede Digital:</b> <a href="https://racing-oslo.cotero91.workers.dev">racing-oslo.cotero91.workers.dev</a>`;
+      await sendTelegramMessage(rep);
+    } catch (err) {
+      await sendTelegramMessage(`💼 ❌ Error generando reporte: ${err.message}`);
+    }
   }
 
   // ── /alinear ──────────────────────────────────────────────────────────────
@@ -1344,19 +1365,25 @@ async function runMarketCheck() {
       console.warn('[DAEMON-MARKET] Error revisando ofertas entrantes:', offerErr.message);
     }
 
-    // 4. AUTO-LISTADO DE DESCARTES EN EL MERCADO (Para recibir ofertas de la Computadora)
+    // 4. AUTO-LISTADO DE DESCARTES EN EL MERCADO (Solo para descartes reales de bajo valor, nunca estrellas)
     try {
       const lineup = engine.optimizeLineup(squad);
-      const startingIds = (lineup.starting11 || []).map(p => p.playerId || p.id);
+      const startingIds = new Set((lineup.starting11 || []).map(p => p.playerId || p.id));
       const currentMarket = await client.getMarket();
       const myListedIds = new Set((currentMarket?.players || []).filter(p => p.owner?.id === client.userId || p.owner === client.userId).map(p => p.playerId || p.id));
       
-      const benchDescartes = squad.players.filter(p => !startingIds.includes(p.playerId || p.id));
+      // NUNCA auto-listar estrellas, jugadores franquicia (> 3M €) o pilares del equipo
+      const benchDescartes = squad.players.filter(p => {
+        const pId = p.playerId || p.id;
+        const isStarter = startingIds.has(pId);
+        const isCoreOrHighValue = (p.price || 0) > 3000000 || (p.lastSeasonPoints || 0) > 100;
+        return !isStarter && !isCoreOrHighValue;
+      });
+
       for (const descarte of benchDescartes) {
         const dId = descarte.playerId || descarte.id;
-        // Si no está listado en el mercado, ponerlo en venta por su valor para recibir ofertas de Computer
         if (!myListedIds.has(dId)) {
-          console.log(`[DAEMON-SALES] 🏷️ Auto-listando descarte en el mercado: ${descarte.name} (${(descarte.price || 0).toLocaleString()} €)`);
+          console.log(`[DAEMON-SALES] 🏷️ Auto-listando descarte de bajo coste en el mercado: ${descarte.name} (${(descarte.price || 0).toLocaleString()} €)`);
           await client.sellPlayer(dId, descarte.name, descarte.price || 160000);
         }
       }
