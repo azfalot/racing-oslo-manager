@@ -179,35 +179,47 @@ async function handleTelegramMessage(message) {
     const pauseStatus = botPaused ? '⏸ <b>BOT PAUSADO</b> (acciones autónomas desactivadas)\n\n' : '';
     const helpText = `💼 <b>[Mateo Oslomany v1.2.0] · Centro de Mando Táctico</b>\n${pauseStatus}\n` +
       `📊 <b>Análisis & Táctica:</b>\n` +
+      ` • /reporte — Resumen ejecutivo rápido en 1 mensaje\n` +
       ` • /analisis — Auditoría estratégica de plantilla, carencias y mercado\n` +
-      ` • /scout — Scouting de titularidad y prensa en internet (ej: /scout Christensen)\n` +
-      ` • /salud — Parte médico oficial y bajas físicas\n` +
-      ` • /reporte — Resumen ejecutivo diario\n` +
-      ` • /plantilla — Plantilla (titulares + suplentes)\n` +
+      ` • /alinear — Optimizar y guardar Once Titular\n` +
+      ` • /plantilla — Plantilla completa (titulares y banquillo)\n` +
       ` • /tactica — Esquema táctico por líneas\n` +
       ` • /rivales — Clasificación y valor de rivales\n` +
-      ` • /sugerencias — Sugerencias de ventas con botón de 1 clic\n` +
-      ` • /jornada — Próxima jornada y cierre de XI\n` +
-      ` • /top — Top 10 jugadores más valiosos\n\n` +
+      ` • /sugerencias — Sugerencias de ventas recomendadas\n` +
+      ` • /salud — Parte médico y bajas físicas\n\n` +
       `🛒 <b>Mercado & Finanzas:</b>\n` +
-      ` • /mercado — Mejores oportunidades de mercado\n` +
-      ` • /finanzas — Balance, pujas activas y margen\n` +
-      ` • /ofertas — Ofertas de venta recibidas\n` +
+      ` • /mercado — Oportunidades del mercado actual\n` +
+      ` • /finanzas — Balance, margen y tesorería\n` +
+      ` • /ofertas — Ofertas de compra recibidas\n` +
       ` • /mis_pujas — Mis pujas activas pendientes\n` +
-      ` • /pujar — Ofertar por jugador (ej: /pujar Bellingham)\n` +
-      ` • /cancelar — Cancelar puja (ej: /cancelar Bellingham)\n` +
-      ` • /vender — Poner en venta (ej: /vender Rodrygo)\n\n` +
-      `⚡ <b>Operativa & Sistema:</b>\n` +
-      ` • /alinear — Optimizar y guardar 11 titular\n` +
-      ` • /web — Abrir dashboard web oficial en Cloudflare\n` +
-      ` • /sync — Desplegar cambios web a Cloudflare\n` +
-      ` • /margen — Ajustar sobreprecio (ej: /margen 1.5)\n` +
-      ` • /limite — Límite auto-puja (ej: /limite 8)\n` +
-      ` • /pausar / /reanudar — Control del bot autónomo\n` +
-      ` • /estado — Estado del sistema v1.2.0\n` +
-      ` • /historial — Registro de últimas acciones\n\n` +
-      `🕒 Horarios de conexión automática: <b>09:00</b> y <b>23:50</b> (Madrid) | Resto del día: <i>En reposo</i>`;
-    await sendTelegramMessage(helpText);
+      ` • /pujar &lt;jugador&gt; — Ofertar por un jugador\n` +
+      ` • /vender &lt;jugador&gt; — Poner a la venta de inmediato\n\n` +
+      `⚡ <i>Toca cualquier botón abajo para ejecutar al instante:</i>`;
+
+    const helpMarkup = {
+      inline_keyboard: [
+        [
+          { text: '📊 Reporte', callback_data: 'cmd:reporte' },
+          { text: '🕵️‍♂️ Análisis', callback_data: 'cmd:analisis' },
+          { text: '🛡️ Alinear XI', callback_data: 'cmd:alinear' }
+        ],
+        [
+          { text: '👥 Plantilla', callback_data: 'cmd:plantilla' },
+          { text: '🛒 Mercado', callback_data: 'cmd:mercado' },
+          { text: '💰 Finanzas', callback_data: 'cmd:finanzas' }
+        ],
+        [
+          { text: '🏆 Rivales', callback_data: 'cmd:rivales' },
+          { text: '💡 Sugerencias', callback_data: 'cmd:sugerencias' },
+          { text: '🏥 Salud', callback_data: 'cmd:salud' }
+        ],
+        [
+          { text: '🌐 Abrir Sede Digital', url: 'https://racing-oslo.cotero91.workers.dev' }
+        ]
+      ]
+    };
+
+    await sendTelegramMessage(helpText, helpMarkup);
   }
 
   // ── /analisis ─────────────────────────────────────────────────────────────
@@ -1085,6 +1097,14 @@ async function handleCallbackQuery(callbackQuery) {
 
   const data = callbackQuery.data || '';
   console.log(`[DAEMON] Callback recibido: "${data}"`);
+
+  // Comandos rápidos desde botones inline
+  if (data.startsWith('cmd:')) {
+    const cmd = data.replace('cmd:', '');
+    await answerCallbackQuery(callbackQuery.id, `⚡ Ejecutando /${cmd}...`);
+    await handleTelegramMessage({ text: `/${cmd}`, chat: { id: chatId } });
+    return;
+  }
 
   // Formato: "bid:<playerId>:<playerName>:<price>:<position>" o "ignore:<playerId>:<playerName>"
   if (data.startsWith('bid:')) {
