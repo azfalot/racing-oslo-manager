@@ -188,7 +188,7 @@ export class ComunioEngine {
   /**
    * Calcula la mejor alineación posible (formación y 11 jugadores)
    */
-  optimizeLineup(squad) {
+  optimizeLineup(squad, activeClubNames = null) {
     if (!squad || !squad.players || squad.players.length === 0) {
       return { error: 'No se encontraron jugadores en la plantilla.' };
     }
@@ -196,10 +196,21 @@ export class ComunioEngine {
     const players = squad.players.map(p => {
       const type = p.type || p.position;
       const nextMatch = (p.nextMatches && p.nextMatches.length > 0) ? p.nextMatches[0] : null;
+      let expPts = this.getExpectedPoints(p, nextMatch);
+
+      // Si se conocen los clubes con partido en esta jornada y este jugador NO juega esta fecha:
+      if (Array.isArray(activeClubNames) && activeClubNames.length > 0) {
+        const club = (p.club?.name || p.clubName || '').toLowerCase();
+        const playsThisRound = activeClubNames.some(c => club.includes(c.toLowerCase()) || c.toLowerCase().includes(club));
+        if (!playsThisRound) {
+          expPts = 0.1; // Su equipo descansa: puntúa 0 en la jornada (solo sirve de parche de relleno para evitar el -4)
+        }
+      }
+
       return {
         ...p,
         type,
-        expectedPoints: this.getExpectedPoints(p, nextMatch),
+        expectedPoints: expPts,
         available: this.isPlayerAvailable(p)
       };
     });

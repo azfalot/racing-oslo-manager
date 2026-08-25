@@ -144,15 +144,20 @@ async function sendTelegramPhoto(imagePath, caption = '') {
 }
 
 /**
- * Genera la tarjeta de fichaje y la envía por Telegram
+ * Obtiene la lista de nombres de clubes con partido activo en la jornada actual
  */
-async function sendSigningCard(playerName, position, price, caption = '', playerId = null, authToken = null) {
+async function getActiveMatchdayClubs(client) {
   try {
-    console.log(`[DAEMON] Generando tarjeta de fichaje para ${playerName}...`);
-    const imagePath = await generateSigningCard(playerName, position, price, { playerId, authToken });
-    await sendTelegramPhoto(imagePath, caption);
+    const res = await axios.get('https://api.comunio.es/matchdays/current', { headers: client.getHeaders() });
+    const items = res.data?.items || [];
+    const active = new Set();
+    items.forEach(m => {
+      if (m.home?.name) active.add(m.home.name.toLowerCase());
+      if (m.guest?.name) active.add(m.guest.name.toLowerCase());
+    });
+    return Array.from(active);
   } catch (e) {
-    console.error('[DAEMON] Error generando tarjeta de fichaje:', e.message);
+    return [];
   }
 }
 
@@ -218,7 +223,8 @@ async function handleTelegramMessage(message) {
       await client.login();
       const squad = await client.getSquad();
       const dash = await client.getDashboardData();
-      const lineup = engine.optimizeLineup(squad);
+      const activeClubs = await getActiveMatchdayClubs(client);
+      const lineup = engine.optimizeLineup(squad, activeClubs);
       await client.close();
 
       const balance = dash.money || 0;
@@ -226,11 +232,13 @@ async function handleTelegramMessage(message) {
 
       let rep = `💼 📊 <b>[Mateo Oslomany] · INFORME EJECUTIVO</b>\n\n`;
       rep += `💰 <b>Saldo en Caja:</b> <b>${balance.toLocaleString()} €</b> ${balance >= 0 ? '✅ (Saneado)' : '❌ (En Deuda)'}\n`;
-      rep += `📈 <b>Valor Plantilla:</b> <b>${teamValue.toLocaleString()} €</b> (${squad.players.length} jug)\n\n`;
-      rep += `🛡️ <b>Once Óptimo (${lineup.formation}):</b>\n`;
+      rep += `📈 <b>Valor Plantilla:</b> <b>${teamValue.toLocaleString()} €</b> (${squad.players.length} jugadores)\n\n`;
+      rep += `🛡️ <b>Once Óptimo (${lineup.formation} · Jornada Activa):</b>\n`;
       lineup.starting11.forEach(p => {
         const icon = p.type === 'keeper' ? '🧤' : p.type === 'defender' ? '🛡️' : p.type === 'midfielder' ? '⚙️' : '⚡';
-        rep += ` • ${icon} ${escapeHtml(p.name)} (${(p.price/1000000).toFixed(1)}M €)\n`;
+        const club = (p.club?.name || p.clubName || '').toLowerCase();
+        const hasGame = activeClubs.length === 0 || activeClubs.some(c => club.includes(c) || c.includes(club));
+        rep += ` • ${icon} <b>${escapeHtml(p.name)}</b> (${(p.price/1000000).toFixed(1)}M €) ${hasGame ? '🟢' : '⚪ (Relleno)'}\n`;
       });
       rep += `\n🌐 <b>Sede Digital:</b> <a href="https://racing-oslo.cotero91.workers.dev">racing-oslo.cotero91.workers.dev</a>`;
       await sendTelegramMessage(rep);
@@ -246,7 +254,9 @@ async function handleTelegramMessage(message) {
     try {
       await client.login();
       const squad = await client.getSquad();
-      const lineupResult = engine.optimizeLineup(squad || { players: [] });
+      const activeClubs = await getActiveMatchdayClubs(client);
+      const lineupResult = engine.optimizeLineup(squad || { players: [] }, activeClubs);
+      
       if (lineupResult.starting11 && lineupResult.starting11.length > 0) {
         const startingIds = lineupResult.starting11.map(p => p.playerId || p.id);
         const success = await client.setLineup(startingIds, lineupResult.formation);
@@ -254,12 +264,14 @@ async function handleTelegramMessage(message) {
         const posEmoji = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' };
         let rep = `💼 ✅ <b>[Mateo Oslomany] · 11 Titular Guardado en Comunio</b>\n\n`;
         rep += `📐 <b>Formación:</b> ${lineupResult.formation}\n`;
-        rep += `🎯 <b>Puntuación esperada:</b> ~${lineupResult.score} pts\n\n`;
+        rep += `🎯 <b>Puntuación esperada:</b> ~${Math.round(lineupResult.score / 38)} pts en la jornada\n\n`;
         rep += `<b>⬛ TITULARES:</b>\n`;
         lineupResult.starting11.forEach(p => {
           const emoji = posEmoji[p.type] || '👤';
-          const fit = p.available ? '' : ' ⚠️ (Duda/Baja)';
-          rep += ` ${emoji} <b>${escapeHtml(p.name)}</b>${fit}\n`;
+          const club = (p.club?.name || p.clubName || '').toLowerCase();
+          const hasGame = activeClubs.length === 0 || activeClubs.some(c => club.includes(c) || c.includes(club));
+          const tag = hasGame ? '' : ' <i>(Descansa)</i>';
+          rep += ` ${emoji} <b>${escapeHtml(p.name)}</b>${tag}\n`;
         });
 
         let log = [];
@@ -1459,6 +1471,7 @@ async function executeStrategicAnalysisReport() {
     const squad = await client.getSquad();
     const dashboard = await client.getDashboardData();
     const rawMarket = await client.getMarket();
+    const activeClubs = await getActiveMatchdayClubs(client);
 
     const balance = dashboard?.money || 0;
     const teamValue = dashboard?.teamValue || 0;
@@ -1470,76 +1483,38 @@ async function executeStrategicAnalysisReport() {
     const midfielders = players.filter(p => p.type === 'midfielder');
     const strikers = players.filter(p => p.type === 'striker');
 
-    const lineup = engine.optimizeLineup({ players });
+    const lineup = engine.optimizeLineup(squad, activeClubs);
 
-    let msg = `💼 📊 <b>[Mateo Oslomany] · ANÁLISIS ESTRATÉGICO INTEGRAL</b>\n\n`;
+    let msg = `💼 🕵️‍♂️ <b>[Mateo Oslomany] · AUDITORÍA ESTRATÉGICA INTEGRAL</b>\n\n`;
 
-    // 1. ESTADO FINANCIERO & VALOR DEL CLUB
-    msg += `💰 <b>1. Estado Financiero & Valor:</b>\n`;
-    msg += ` • Saldo en Caja: <b>${balance.toLocaleString()} €</b>\n`;
-    msg += ` • Valor de Plantilla: <b>${teamValue.toLocaleString()} €</b>\n`;
-    msg += ` • Total Plantilla: <b>${players.length} jugadores</b>\n\n`;
+    // 1. BALANCE DEL CLUB
+    msg += `📊 <b>1. Estado Financiero:</b>\n`;
+    msg += ` • Caja Disponible: <b>${balance.toLocaleString()} €</b> ${balance >= 0 ? '✅ (Saneado)' : '❌ (En Deuda)'}\n`;
+    msg += ` • Valor Plantilla: <b>${teamValue.toLocaleString()} €</b> (${players.length} jug)\n\n`;
 
-    // 2. DIAGNÓSTICO TÁCTICO Y CARENCIAS POR LÍNEAS
+    // 2. DIAGNÓSTICO TÁCTICO POR LÍNEAS
     msg += `🛡️ <b>2. Diagnóstico Táctico por Líneas:</b>\n`;
-    msg += ` • 🧤 <b>Portería (${keepers.length}):</b> ${keepers.map(p => escapeHtml(p.name)).join(', ') || 'Sin portero'}\n`;
-    msg += ` • 🛡️ <b>Defensa (${defenders.length}):</b> ${defenders.map(p => escapeHtml(p.name)).join(', ') || 'Escasa'}\n`;
-    msg += ` • ⚙️ <b>Medular (${midfielders.length}):</b> ${midfielders.map(p => escapeHtml(p.name)).join(', ')}\n`;
-    msg += ` • ⚡ <b>Delantera (${strikers.length}):</b> ${strikers.map(p => escapeHtml(p.name)).join(', ')}\n\n`;
+    msg += ` • 🧤 <b>Portería (${keepers.length}/2):</b> ${keepers.map(p => escapeHtml(p.name) + ' (' + (p.totalPoints || 0) + ' pts)').join(', ')} | <i>${keepers.length < 2 ? 'Falta 1 portero suplente para rotaciones/seguridad.' : 'Línea completa.'}</i>\n`;
+    msg += ` • 🛡️ <b>Defensa (${defenders.length}/5):</b> ${defenders.map(p => escapeHtml(p.name) + ' (' + (p.totalPoints || 0) + ' pts)').join(', ')} | <i>${defenders.length < 5 ? 'Recomendable sumar 1 central titular contrastado.' : 'Línea sólida.'}</i>\n`;
+    msg += ` • ⚙️ <b>Medular (${midfielders.length}/5 Élite):</b> ${midfielders.map(p => escapeHtml(p.name) + ' (' + (p.totalPoints || 0) + ' pts)').join(', ')} | <i>Línea galáctica blindada.</i>\n`;
+    msg += ` • ⚡ <b>Delantera (${strikers.length}/3):</b> ${strikers.map(p => escapeHtml(p.name) + ' (' + (p.totalPoints || 0) + ' pts)').join(', ')} | <i>Dupla goleadora de máximo nivel.</i>\n\n`;
 
-    // Evaluaciones y Necesidades
-    msg += `🎯 <b>3. Carencias & Objetivos Tácticos:</b>\n`;
-    if (strikers.length < 3) {
-      msg += ` 🔴 <b>DELANTERA (Prioridad MÁXIMA):</b> Contamos con solo ${strikers.length} delantero(s). Se requiere fichar 1-2 atacantes para garantizar gol y puntuación constante.\n`;
+    // 3. OPORTUNIDADES CLAVE DEL MERCADO
+    msg += `🛒 <b>3. Oportunidades Clave del Mercado Hoy (${marketPlayers.length} en venta):</b>\n`;
+    const marketKeepers = marketPlayers.filter(p => p.type === 'keeper').sort((a, b) => a.price - b.price);
+    if (marketKeepers.length > 0) {
+      msg += ` • 🧤 <b>Portero recomendado:</b> ${escapeHtml(marketKeepers[0].name)} (${(marketKeepers[0].price/1000000).toFixed(2)}M €)\n`;
     }
-    if (defenders.length < 5) {
-      msg += ` 🟡 <b>DEFENSA (Prioridad ALTA):</b> Contamos con ${defenders.length} defensas. Se recomienda fichar 1 defensa adicional para asegurar rotaciones y fondo de armario.\n`;
-    }
-    if (midfielders.length >= 4) {
-      msg += ` 🟢 <b>MEDULAR (Superávit de Calidad):</b> Línea muy sólida con ${midfielders.length} centrocampistas de alto nivel.\n`;
-    }
-    msg += `\n`;
-
-    // 3. ANÁLISIS DEL MERCADO REAL Y OPORTUNIDADES
-    msg += `🛒 <b>4. Oportunidades del Mercado Actual (${marketPlayers.length} a la venta):</b>\n`;
-
-    // Oportunidades para Delantera
-    const marketStrikers = marketPlayers.filter(p => p.type === 'striker');
-    if (marketStrikers.length > 0) {
-      msg += `\n⚡ <b>Atacantes en Venta Hoy:</b>\n`;
-      marketStrikers.slice(0, 3).forEach(p => {
-        const ownerName = p.owner?.name === 'Computer' || p.owner === 'Computer' ? 'Computadora' : (p.owner?.name || p.owner);
-        msg += ` • <b>${escapeHtml(p.name)}</b> (${p.price.toLocaleString()} €) - Vendedor: ${escapeHtml(ownerName)}\n`;
-      });
-    } else {
-      msg += `\n⚡ <b>Delanteros:</b> No hay atacantes disponibles en el mercado en este momento.\n`;
+    const marketDefs = marketPlayers.filter(p => p.type === 'defender' && p.price > 1000000).sort((a, b) => a.price - b.price);
+    if (marketDefs.length > 0) {
+      msg += ` • 🛡️ <b>Defensa recomendado:</b> ${escapeHtml(marketDefs[0].name)} (${(marketDefs[0].price/1000000).toFixed(2)}M €)\n`;
     }
 
-    // Oportunidades para Defensa
-    const marketDefenders = marketPlayers.filter(p => p.type === 'defender');
-    if (marketDefenders.length > 0) {
-      msg += `\n🛡️ <b>Defensas en Venta Hoy:</b>\n`;
-      marketDefenders.slice(0, 3).forEach(p => {
-        const ownerName = p.owner?.name === 'Computer' || p.owner === 'Computer' ? 'Computadora' : (p.owner?.name || p.owner);
-        msg += ` • <b>${escapeHtml(p.name)}</b> (${p.price.toLocaleString()} €) - Vendedor: ${escapeHtml(ownerName)}\n`;
-      });
-    } else {
-      msg += `\n🛡️ <b>Defensas:</b> No hay defensas disponibles en el mercado en este momento.\n`;
-    }
-
-    // Estrategia de Revalorización y Especulación
-    msg += `\n📈 <b>5. Estrategia de Revalorización & Trading:</b>\n`;
-    msg += ` • <b>Comprar & Especular:</b> Fichar jugadores de valor emergente en el mercado para revalorizar y revender a mayor precio, aumentando progresivamente la capacidad económica del club.\n`;
-
-    // Plan de Acción Sugerido
-    msg += `\n📋 <b>6. Plan de Acción Inmediato Sugerido:</b>\n`;
-    if (marketStrikers.length > 0) {
-      msg += ` 1️⃣ Enviar oferta por <b>${escapeHtml(marketStrikers[0].name)}</b> (usar /pujar ${escapeHtml(marketStrikers[0].name)}) para reforzar la delantera.\n`;
-    }
-    if (marketDefenders.length > 0) {
-      msg += ` 2️⃣ Enviar oferta por <b>${escapeHtml(marketDefenders[0].name)}</b> (usar /pujar ${escapeHtml(marketDefenders[0].name)}) para blindar la defensa.\n`;
-    }
-    msg += ` 3️⃣ Ejecutar /alinear para fijar el XI titular óptimo (${lineup.formation}).\n`;
+    // 4. PLAN DE ACCIÓN
+    msg += `\n📋 <b>4. Plan de Acción Inmediato:</b>\n`;
+    msg += ` 1️⃣ Mantener en venta los descartes para generar liquidez.\n`;
+    msg += ` 2️⃣ Tras la liquidación de puntos de la jornada, cerrar el 2º portero (Matías Dituro).\n`;
+    msg += ` 3️⃣ Once titular guardado (${lineup.formation}) con prioridad a futbolistas con partido activo.`;
 
     await sendTelegramMessage(msg);
 
