@@ -87,78 +87,73 @@ export async function ensurePlayerPhoto(playerId) {
  * Soporta todas las plantillas oficiales:
  * 'signing', 'sale', 'market', 'finance', 'mvp', 'medical', 'rumors', 'preview', 'chronicle', 'club', 'analysis'
  */
+let lastUsedTemplateIndex = 0;
+const TEMPLATES = ['front', 'contract', 'jersey'];
+
 export async function generateSigningGraphic(playerName, price, playerId, extraData = {}) {
   const width = 1024;
   const height = 682;
   const canvas = createCanvas(width, height);
   const ctx = canvas.getContext('2d');
 
-  const TEMPLATES = ['contract', 'front', 'jersey'];
-  const templateType = extraData.templateType || TEMPLATES[Math.floor(Math.random() * TEMPLATES.length)];
+  let templateType = extraData.templateType;
+  if (!templateType) {
+    templateType = TEMPLATES[lastUsedTemplateIndex % TEMPLATES.length];
+    lastUsedTemplateIndex++;
+  }
 
-  let templateFile = 'template_signing_contract.jpg';
-  let headCoords = { cx: 578, cy: 220, rx: 90, ry: 120 };
+  let templateFile = 'template_signing_front.jpg';
+  let headX = 505;
+  let headY = 60;
+  let headW = 230;
+  let headH = 280;
 
-  if (templateType === 'front') {
-    templateFile = 'template_signing_front.jpg';
-    headCoords = { cx: 615, cy: 210, rx: 88, ry: 115 };
+  if (templateType === 'contract') {
+    templateFile = 'template_signing_contract.jpg';
+    headX = 475;
+    headY = 70;
+    headW = 230;
+    headH = 280;
   } else if (templateType === 'jersey') {
     templateFile = 'template_signing_jersey.jpg';
-    headCoords = { cx: 590, cy: 190, rx: 82, ry: 110 };
+    headX = 485;
+    headY = 50;
+    headW = 220;
+    headH = 270;
   }
 
   const bgPath = path.resolve(`web/public/media/templates/${templateFile}`);
   const templateImg = await loadImage(bgPath);
   ctx.drawImage(templateImg, 0, 0, width, height);
 
-  // 1. CARA DEL JUGADOR
+  // 1. Tintar fondo de la silueta en verde oscuro para eliminar el halo blanco
+  ctx.save();
+  ctx.fillStyle = '#081a10';
+  if (templateType === 'front') {
+    ctx.beginPath();
+    ctx.ellipse(615, 200, 85, 125, 0, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (templateType === 'contract') {
+    ctx.beginPath();
+    ctx.ellipse(580, 210, 85, 125, 0, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (templateType === 'jersey') {
+    ctx.beginPath();
+    ctx.ellipse(590, 185, 80, 115, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+
+  // 2. Foto oficial del jugador tal cual (PNG limpio sobre la silueta)
   if (playerId) {
     await ensurePlayerPhoto(playerId);
     const photoPath = path.resolve(`web/public/media/players/${playerId}.png`);
     if (fs.existsSync(photoPath)) {
       try {
         const faceImg = await loadImage(photoPath);
-
-        // Oscurecer fondo blanco de la silueta
-        ctx.save();
-        ctx.beginPath();
-        ctx.ellipse(headCoords.cx, headCoords.cy, headCoords.rx + 8, headCoords.ry + 8, 0, 0, Math.PI * 2);
-        ctx.fillStyle = '#06160c';
-        ctx.fill();
-        ctx.restore();
-
-        // Recorte elíptico
-        ctx.save();
-        ctx.beginPath();
-        ctx.ellipse(headCoords.cx, headCoords.cy, headCoords.rx, headCoords.ry, 0, 0, Math.PI * 2);
-        ctx.clip();
-
-        const faceWidth = headCoords.rx * 2.5;
-        const faceHeight = headCoords.ry * 2.35;
-        ctx.drawImage(
-          faceImg, 
-          headCoords.cx - faceWidth / 2, 
-          headCoords.cy - faceHeight / 2 - 4, 
-          faceWidth, 
-          faceHeight
-        );
-        ctx.restore();
-
-        // Viñeta de integración con el cuello
-        ctx.save();
-        const grad = ctx.createRadialGradient(
-          headCoords.cx, headCoords.cy, headCoords.rx * 0.75,
-          headCoords.cx, headCoords.cy, headCoords.rx * 1.05
-        );
-        grad.addColorStop(0, 'rgba(0,0,0,0)');
-        grad.addColorStop(1, 'rgba(6,20,12,0.65)');
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.ellipse(headCoords.cx, headCoords.cy, headCoords.rx, headCoords.ry, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
+        ctx.drawImage(faceImg, headX, headY, headW, headH);
       } catch (e) {
-        console.warn('[SIGNING GFX] Error cara:', e.message);
+        console.warn('[SIGNING GFX] Error al cargar foto:', e.message);
       }
     }
   }
