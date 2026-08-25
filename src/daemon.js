@@ -286,6 +286,31 @@ async function handleTelegramMessage(message) {
           rep += ` ${emoji} <b>${escapeHtml(p.name)}</b>${tag}\n`;
         });
 
+        // Sincronizar automáticamente squad.json con los titulares exactos
+        try {
+          const squadPath = './web/src/data/squad.json';
+          if (fs.existsSync(squadPath)) {
+            const sqData = JSON.parse(fs.readFileSync(squadPath, 'utf8'));
+            if (sqData && Array.isArray(sqData.players)) {
+              sqData.players.forEach(p => {
+                const isSelected = startingIds.includes(p.id) || startingIds.includes(p.playerId);
+                p.isStarter = isSelected;
+              });
+              sqData.formation = lineupResult.formation;
+              fs.writeFileSync(squadPath, JSON.stringify(sqData, null, 2));
+              console.log('[DAEMON-LINEUP] squad.json actualizado con el nuevo 11 titular.');
+            }
+          }
+          // Disparar sincronización web en segundo plano
+          const { exec } = await import('node:child_process');
+          exec('node src/syncWeb.mjs', (err) => {
+            if (err) console.error('[DAEMON-SYNC] Error en auto-sync web:', err.message);
+            else console.log('[DAEMON-SYNC] Web sincronizada y desplegada con éxito tras alinear.');
+          });
+        } catch (syncErr) {
+          console.error('[DAEMON-LINEUP] Error sincronizando web:', syncErr.message);
+        }
+
         let log = [];
         try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
         log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Alineación Guardada (Telegram)', player: lineupResult.formation, amount: '-', status: success ? 'Éxito' : 'Fallo' });

@@ -5,6 +5,8 @@ import PlayerProfileModal from '../components/PlayerProfileModal'
 export default function Alineacion() {
   const [selectedPlayer, setSelectedPlayer] = useState(null)
   const starters = squadData.players.filter(p => p.isStarter)
+  const bench = squadData.players.filter(p => !p.isStarter)
+  const formation = squadData.formation || '4-3-3'
   
   const keepers = starters.filter(p => p.position === 'keeper')
   const defenders = starters.filter(p => p.position === 'defender')
@@ -32,9 +34,13 @@ export default function Alineacion() {
 
   return (
     <div className="container mx-auto px-6 py-12">
-      <div className="mb-12 text-center">
-        <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">El Once Titular</h2>
-        <p className="text-cream-dark">La alineación elegida por Mateo Oslomany para el próximo encuentro. Pulse en cualquier jugador para ver su ficha oficial.</p>
+      <div className="mb-8 text-center space-y-2">
+        <div className="inline-flex items-center gap-2 bg-forest-dark border border-forest-light/40 px-3 py-1 rounded-full text-xs font-bold text-cream">
+          <span>📐 Esquema Oficial:</span>
+          <span className="text-amber-300 font-mono">{formation}</span>
+        </div>
+        <h2 className="text-4xl md:text-5xl font-display font-bold text-white">El Once Titular</h2>
+        <p className="text-cream-dark">La alineación oficial sincronizada en Comunio. Pulse en cualquier jugador para ver su ficha y proyección anual.</p>
       </div>
 
       <div className="max-w-4xl mx-auto bg-green-800 rounded-lg p-4 md:p-8 relative shadow-2xl overflow-hidden border-4 border-white/10" style={{
@@ -76,6 +82,29 @@ export default function Alineacion() {
         </div>
       </div>
 
+      {/* BANQUILLO */}
+      {bench.length > 0 && (
+        <div className="max-w-4xl mx-auto mt-8 bg-black/60 border border-forest/40 p-5 rounded-sm shadow-xl">
+          <h3 className="text-sm font-display font-bold text-cream uppercase tracking-wider mb-4 border-b border-forest/30 pb-2">
+            🛡️ Banquillo de Suplentes ({bench.length})
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            {bench.map(p => (
+              <div
+                key={p.id}
+                onClick={() => setSelectedPlayer(p)}
+                className="flex items-center gap-3 bg-forest-dark/40 border border-forest/30 p-2.5 rounded-sm cursor-pointer hover:border-forest-light hover:bg-forest-dark transition-all"
+              >
+                <img src={p.image} alt={p.name} className="w-10 h-10 rounded-full border border-white/20 object-cover flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs font-bold text-white truncate">{p.name}</p>
+                  <p className="text-[10px] text-amber-300 font-mono">~{p.projectedPoints || 80} pts</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* PLAYER PROFILE MODAL */}
       <PlayerProfileModal player={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
