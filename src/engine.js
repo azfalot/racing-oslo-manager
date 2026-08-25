@@ -106,32 +106,38 @@ export class ComunioEngine {
   getExpectedPoints(player, matchData = null) {
     let baseScore = 0;
 
-    // 1. Intentar usar promedio de puntos por partido reciente de la temporada actual
+    // 1. Si el jugador tiene puntos en la temporada actual, usar su promedio real
+    const totalCurrentPoints = player.totalPoints || 0;
     const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
+    
     if (!isNaN(avgPoints) && avgPoints > 0) {
       baseScore = Math.round(avgPoints * 25);
-    }
-    
-    // 2. Usar histórico de temporadas anteriores (evalúa la mejor temporada válida con puntos para no infravalorar cracks)
-    const historyList = Array.isArray(player.historical)
-      ? player.historical
-      : (player.historical?.points || player.historicalPoints || []);
-
-    if (historyList.length > 0) {
-      const validPoints = historyList.map(h => parseInt(h.points) || 0).filter(p => p > 0);
-      if (validPoints.length > 0) {
-        const bestHistoricalPoints = Math.max(...validPoints);
-        baseScore = Math.max(baseScore, bestHistoricalPoints);
-      }
-    }
-
-    // Fallback a estimación por valor de mercado si no hay registros
-    if (baseScore === 0) {
+    } else if (totalCurrentPoints > 0) {
+      baseScore = totalCurrentPoints * 10;
+    } else {
+      // 2. Si lleva 0 puntos en la temporada actual y cuesta poco (< 1M €), es un jugador sin minutos / saliendo de lesión
       const price = player.price || 0;
-      if (price > 5000000) baseScore = 120;
-      else if (price > 2000000) baseScore = 80;
-      else if (price > 1000000) baseScore = 40;
-      else baseScore = 15;
+      if (price < 1000000) {
+        baseScore = 5; // Puntuación mínima para parches sin minutos
+      } else {
+        // Para jugadores recién fichados de alto valor (> 1M €), usar histórico reciente ponderado
+        const historyList = Array.isArray(player.historical)
+          ? player.historical
+          : (player.historical?.points || player.historicalPoints || []);
+
+        if (historyList.length > 0) {
+          const validPoints = historyList.map(h => parseInt(h.points) || 0).filter(p => p > 0);
+          if (validPoints.length > 0) {
+            const bestHistoricalPoints = Math.max(...validPoints);
+            baseScore = Math.round(bestHistoricalPoints * 0.6); // Ponderación prudente
+          }
+        }
+        if (baseScore === 0) {
+          if (price > 5000000) baseScore = 120;
+          else if (price > 2000000) baseScore = 70;
+          else baseScore = 30;
+        }
+      }
     }
 
     // 3. Ponderación por Racha Reciente (si se dispone de historial de últimas 3 jornadas)
