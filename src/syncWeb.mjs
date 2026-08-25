@@ -73,9 +73,10 @@ async function fetchRealData() {
         p.lastSeasonPoints = lastSeason ? (parseInt(lastSeason.points) || 0) : 0;
         p.lastSeasonAvg = details.average?.points ? parseFloat(details.average.points.replace(',', '.')) : 4.0;
         
-        // Puntuación esperada y proyección calculada 100% con el motor empírico ComunioEngine
-        const exp = engine.getExpectedPoints(p);
-        p.projectedPoints = exp;
+        // Proyección total de la temporada calculada con el motor empírico ComunioEngine
+        p.projectedPoints = engine.getSeasonProjection(p);
+        p.lastSeasonAvg = parseFloat((p.projectedPoints / 34).toFixed(1));
+        p.matchExpected = engine.getExpectedPoints(p);
       }
     } catch (e) {}
   }

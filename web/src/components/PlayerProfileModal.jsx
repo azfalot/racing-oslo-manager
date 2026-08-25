@@ -170,7 +170,7 @@ export default function PlayerProfileModal({ player, onClose }) {
               <div className="flex items-center gap-2">
                 <TrendingUp size={18} className="text-forest-light animate-pulse" />
                 <h3 className="text-sm font-display font-bold text-white uppercase tracking-wider">
-                  PREDICCIÓN DE PUNTOS ESPERADOS (TEMPORADA 26/27)
+                  PROYECCIÓN TEMPORADA 2026/27 (38 JORNADAS)
                 </h3>
               </div>
               <span className="bg-forest text-cream text-[10px] font-bold px-2.5 py-0.5 rounded-sm border border-forest-light/50">
@@ -178,12 +178,12 @@ export default function PlayerProfileModal({ player, onClose }) {
               </span>
             </div>
 
-            <div className="flex items-baseline gap-3 pt-1">
+            <div className="flex flex-col sm:flex-row sm:items-baseline gap-3 pt-1">
               <span className="text-3xl sm:text-4xl font-display font-bold text-white shadow-sm">
-                ~{projectedPts} <span className="text-sm text-forest-light font-normal">pts</span>
+                ~{projectedPts} <span className="text-sm text-forest-light font-normal">pts totales</span>
               </span>
               <p className="text-xs text-cream/80 leading-relaxed">
-                Rendimiento estimado según rendimiento histórico en LaLiga, rol de titularidad y valoración de mercado.
+                Media estimada de <b className="text-amber-300">~{(projectedPts / 34).toFixed(1)} pts/partido</b> según histórico contrastado en Primera División y rol de titularidad.
               </p>
             </div>
           </div>

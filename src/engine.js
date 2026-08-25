@@ -100,64 +100,78 @@ export class ComunioEngine {
   }
 
   /**
-   * Calcula la puntuación de calidad / valor de un jugador.
-   * Ponderación Dinámica: Puntos Recientes (50%) + Histórico Base (35%) + Estado de Salud/Racha (15%) + Dificultad Rival.
+   * Calcula la proyección total de puntos para toda la temporada (38 jornadas)
+   * basada en histórico consolidado en Primera División, valor de mercado y rol de titularidad.
+   */
+  getSeasonProjection(player) {
+    if (!player) return 80;
+    const price = player.price || 0;
+    const historical = player.historicalPoints || (player.historical?.points || player.historical || []);
+    const validHist = (Array.isArray(historical) ? historical : [])
+      .map(h => parseInt(h.points) || 0)
+      .filter(pt => pt > 0);
+    
+    const bestHist = validHist.length > 0 ? Math.max(...validHist) : 0;
+    const recentHist = validHist.length > 0 ? validHist[validHist.length - 1] : 0;
+
+    let proj = 0;
+
+    // 1. Si tiene historial contrastado en Primera División
+    if (recentHist > 0 || bestHist > 0) {
+      proj = recentHist > 0 ? (recentHist * 0.70 + bestHist * 0.30) : bestHist;
+    }
+
+    // 2. Calibración empírica por jerarquía de mercado y titularidad en LaLiga
+    if (price > 15000000) {
+      // Crack Galáctico (Valverde, Vinicius, Bellingham): 220 - 260 pts
+      proj = Math.max(proj * 0.95, 225);
+    } else if (price > 7000000) {
+      // Estrella de Primera (Gerard Moreno): 175 - 210 pts
+      proj = Math.max(proj * 0.95, 185);
+    } else if (price > 3000000) {
+      // Titular consolidado (Hugo Duro, Soria, Mandi, Dela, Galarreta, Jon Martín): 135 - 175 pts
+      proj = Math.max(proj * 0.90, 145);
+    } else if (price > 1000000) {
+      // Jugador de rotación frecuente (Moi Gómez): 95 - 130 pts
+      proj = Math.max(proj * 0.85, 105);
+    } else if (price > 500000) {
+      // Joven promesa / Revulsivo (Hugo Álvarez, Pablo Durán, Álvaro Núñez): 60 - 95 pts
+      proj = Math.min(Math.max(proj, 65), 95);
+    } else {
+      // Parche / En recuperación / Sin minutos (Kike Barja): 20 - 45 pts
+      proj = Math.min(proj > 0 ? proj * 0.35 : 30, 45);
+    }
+
+    return Math.round(proj);
+  }
+
+  /**
+   * Calcula la puntuación esperada para la jornada actual (en escala de 0 a 10 pts por partido)
    */
   getExpectedPoints(player, matchData = null) {
-    let baseScore = 0;
+    if (!player) return 0;
 
-    // 1. Si el jugador tiene puntos en la temporada actual, usar su promedio real
-    const totalCurrentPoints = player.totalPoints || 0;
+    // 1. Proyección base de la temporada -> Media esperada por partido (34 partidos estimados)
+    const seasonProj = this.getSeasonProjection(player);
+    let matchExpected = parseFloat((seasonProj / 34).toFixed(2));
+
+    // 2. Si lleva racha reciente sobresaliente en la temporada actual, ponderar
     const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
-    
     if (!isNaN(avgPoints) && avgPoints > 0) {
-      baseScore = Math.round(avgPoints * 25);
-    } else if (totalCurrentPoints > 0) {
-      baseScore = totalCurrentPoints * 10;
-    } else {
-      // 2. Si lleva 0 puntos en la temporada actual y cuesta poco (< 1M €), es un jugador sin minutos / saliendo de lesión
-      const price = player.price || 0;
-      if (price < 1000000) {
-        baseScore = 5; // Puntuación mínima para parches sin minutos
-      } else {
-        // Para jugadores recién fichados de alto valor (> 1M €), usar histórico reciente ponderado
-        const historyList = Array.isArray(player.historical)
-          ? player.historical
-          : (player.historical?.points || player.historicalPoints || []);
-
-        if (historyList.length > 0) {
-          const validPoints = historyList.map(h => parseInt(h.points) || 0).filter(p => p > 0);
-          if (validPoints.length > 0) {
-            const bestHistoricalPoints = Math.max(...validPoints);
-            baseScore = Math.round(bestHistoricalPoints * 0.6); // Ponderación prudente
-          }
-        }
-        if (baseScore === 0) {
-          if (price > 5000000) baseScore = 120;
-          else if (price > 2000000) baseScore = 70;
-          else baseScore = 30;
-        }
-      }
+      matchExpected = (matchExpected * 0.60) + (avgPoints * 0.40);
     }
 
-    // 3. Ponderación por Racha Reciente (si se dispone de historial de últimas 3 jornadas)
-    const recentScores = player.lastMatches || player.recentScores || [];
-    if (Array.isArray(recentScores) && recentScores.length > 0) {
-      const recentAvg = recentScores.reduce((a, b) => a + b, 0) / recentScores.length;
-      baseScore = Math.round((recentAvg * 25 * 0.50) + (baseScore * 0.50));
-    }
-
-    // 4. Penalización por Salud o Duda Médica (evita alinear jugadores en riesgo de 0 ptos)
+    // 3. Penalización por duda médica o molestias físicas
     const statusLower = ((player.status || '') + ' ' + (player.statusInfo || '')).toLowerCase();
     if (statusLower.includes('duda') || statusLower.includes('molestias')) {
-      baseScore = Math.round(baseScore * 0.40); // Penalización preventiva del 60%
+      matchExpected = matchExpected * 0.40;
     }
 
-    // 5. Aplicar Modificador por Pronóstico de Partido / Dificultad del Rival
+    // 4. Modificador por dificultad del rival / factor campo
     const matchMod = this.getMatchDifficultyModifier(player, matchData);
-    baseScore = Math.round(baseScore * matchMod);
+    matchExpected = matchExpected * matchMod;
 
-    return baseScore;
+    return parseFloat(matchExpected.toFixed(1));
   }
 
   /**
