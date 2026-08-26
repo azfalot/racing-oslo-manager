@@ -18,33 +18,87 @@ export class ComunioClient {
   getToken() { return this.token; }
 
   async login() {
-    console.log(`[CLIENT] Iniciando sesión para el usuario ${this.username} a través de la API...`);
-    try {
-      const response = await axios.post('https://api.comunio.es/login', {
-        username: this.username,
-        password: this.password,
-        tzoffset: 2
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    const sessionCachePath = '.session_cache.json';
+    
+    // 1. Intentar reutilizar token de sesión guardado si es reciente (< 4 horas)
+    if (fs.existsSync(sessionCachePath)) {
+      try {
+        const cached = JSON.parse(fs.readFileSync(sessionCachePath, 'utf8'));
+        const ageMs = Date.now() - (cached.timestamp || 0);
+        if (cached.token && ageMs < 4 * 60 * 60 * 1000) {
+          this.token = cached.token;
+          this.userId = cached.userId;
+          this.communityId = cached.communityId;
+          this.isLoggedIn = true;
+          
+          // Verificar rápidamente con GET /
+          const testRes = await axios.get('https://api.comunio.es/', {
+            headers: this.getHeaders(),
+            timeout: 5000
+          });
+          if (testRes.status === 200 && testRes.data?.user) {
+            console.log('[CLIENT] Sesión activa reutilizada con éxito (evitando límite de login en picos de tráfico).');
+            return;
+          }
         }
-      });
-
-      if (response.status === 200 && response.data.access_token) {
-        this.token = response.data.access_token;
-        this.isLoggedIn = true;
-        console.log('[CLIENT] Token de autenticación obtenido con éxito.');
-
-        // Obtener IDs de usuario y comunidad llamando al endpoint raíz
-        await this.fetchUserAndCommunityIds();
-      } else {
-        throw new Error('No se recibió el token de acceso.');
+      } catch (e) {
+        // Fallback a login nuevo si la sesión caducó
       }
-    } catch (err) {
-      const errMsg = err.response ? JSON.stringify(err.response.data) : err.message;
-      throw new Error(`Error en el login directo: ${errMsg}`);
     }
+
+    // 2. Realizar nuevo login si no hay sesión válida o caducó
+    console.log(`[CLIENT] Iniciando nueva sesión para el usuario ${this.username} a través de la API...`);
+    let lastErr = null;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const response = await axios.post('https://api.comunio.es/login', {
+          username: this.username,
+          password: this.password,
+          tzoffset: 2
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+          },
+          timeout: 8000
+        });
+
+        if (response.status === 200 && response.data.access_token) {
+          this.token = response.data.access_token;
+          this.isLoggedIn = true;
+          console.log('[CLIENT] Token de autenticación obtenido con éxito.');
+
+          // Obtener IDs de usuario y comunidad llamando al endpoint raíz
+          await this.fetchUserAndCommunityIds();
+
+          // Guardar en caché local para próximas llamadas
+          try {
+            fs.writeFileSync(sessionCachePath, JSON.stringify({
+              token: this.token,
+              userId: this.userId,
+              communityId: this.communityId,
+              timestamp: Date.now()
+            }, null, 2));
+          } catch (e) {}
+
+          return;
+        } else {
+          throw new Error('No se recibió el token de acceso.');
+        }
+      } catch (err) {
+        lastErr = err;
+        const rawErr = err.response?.data?.error_description?.msg || err.message;
+        if (typeof rawErr === 'string' && rawErr.includes('limited to Plus') && attempt === 1) {
+          console.log('[CLIENT] Tráfico alto en Comunio (Plus/Pro limit), reintentando en 2s...');
+          await new Promise(r => setTimeout(r, 2000));
+          continue;
+        }
+        break;
+      }
+    }
+
+    const errMsg = lastErr?.response ? JSON.stringify(lastErr.response.data) : (lastErr?.message || 'Error desconocido');
+    throw new Error(`Error en el login directo: ${errMsg}`);
   }
 
   async fetchUserAndCommunityIds() {
