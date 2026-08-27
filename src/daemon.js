@@ -1116,28 +1116,13 @@ async function handleTelegramMessage(message) {
         const dashboard = await client.getDashboardData();
         const balance = dashboard?.money || 0;
 
-        let wishlist = [];
-        try {
-          if (fs.existsSync('config.json')) {
-            const cfg = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-            wishlist = cfg.scoutingWishlist || [];
-          }
-        } catch (e) {}
-
-        if (wishlist.length === 0) {
-          wishlist = [
-            { name: "Grimaldo", fullName: "Álex Grimaldo", position: "defender", priority: 1, targetPrice: 11070000, estimatedPts: 195, compTarget: "Álvaro Núñez / Mandi" },
-            { name: "Fornals", fullName: "Pablo Fornals", position: "midfielder", priority: 2, targetPrice: 11460000, estimatedPts: 175, compTarget: "Moi Gómez / Hugo Álvarez" },
-            { name: "Kang-In Lee", fullName: "Kang-In Lee", position: "midfielder", priority: 3, targetPrice: 15370000, estimatedPts: 165, compTarget: "Moi Gómez" },
-            { name: "Aubameyang", fullName: "Pierre-Emerick Aubameyang", position: "striker", priority: 4, targetPrice: 17160000, estimatedPts: 185, compTarget: "Pablo Durán" },
-            { name: "Gordon", fullName: "Anthony Gordon", position: "striker", priority: 5, targetPrice: 17080000, estimatedPts: 180, compTarget: "Pablo Durán" }
-          ];
-        }
+        const { auditAndSyncScoutingRadar } = await import('./scoutingRadar.js');
+        const wishlist = auditAndSyncScoutingRadar(marketPlayers, squad, engine);
 
         const posEmoji = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' };
         let rep = `💼 🕵️‍♂️ <b>[Mateo Oslomany] · RADAR DE OBJETIVOS OJEADOS</b>\n\n`;
         rep += `💵 <b>Caja actual:</b> ${balance.toLocaleString()} €\n`;
-        rep += `🎯 <b>Lista de Seguimiento Prioritaria (${wishlist.length} objetivos):</b>\n\n`;
+        rep += `🎯 <b>Lista de Seguimiento Prioritaria (+35 pts de mejora | ${wishlist.length} objetivos):</b>\n\n`;
 
         const keyboard = [];
 
@@ -1477,6 +1462,16 @@ async function runMarketCheck() {
     const balance = dashboard?.money || 0;
 
     const result = await checkMarket(client, squad, balance, botPaused);
+
+    // 0. Auditar y auto-descubrir objetivos élite (+35 pts upgrade) para el Radar de Scouting
+    try {
+      const { auditAndSyncScoutingRadar } = await import('./scoutingRadar.js');
+      const marketRaw = await client.getMarket();
+      const engine = new ComunioEngine();
+      auditAndSyncScoutingRadar(marketRaw?.players || [], squad, engine);
+    } catch (scoutErr) {
+      console.warn('[DAEMON-SCOUT-SYNC] Error actualizando radar de scouting:', scoutErr.message);
+    }
 
     // 1. PUJAS AUTOMÁTICAS (Operaciones Estándar no críticas)
     for (const bid of result.autoBids) {
