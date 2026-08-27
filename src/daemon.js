@@ -1483,7 +1483,7 @@ async function runMarketCheck() {
                 category: 'Mercado',
                 summary: `${tx.buyer} completa el fichaje de ${tx.player} procedente de ${tx.seller} tras una puja de ${tx.price}.`,
                 body: `Movimiento oficial confirmado en la comunidad de Comunio. ${tx.buyer} se ha impuesto en la puja por ${tx.player} tras desembolsar ${tx.price} a ${tx.seller}.\n\nEl Racing de Oslo mantiene su plan financiero con la tesorería saneada mientras audita las siguientes oportunidades del mercado.`,
-                image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80'
+                image: '/media/comunio_rival_transfers.png'
               });
             }
           } catch (newsErr) {
