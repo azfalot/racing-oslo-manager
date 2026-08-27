@@ -330,24 +330,28 @@ async function handleTelegramMessage(message) {
   }
 
   // ── /plantilla ────────────────────────────────────────────────────────────
-  else if (text.startsWith('/plantilla')) {
+  else if (cleanText.startsWith('/plantilla')) {
     const client = new ComunioClient();
     const engine = new ComunioEngine();
     try {
       await client.login();
       const squad = await client.getSquad();
-      const lineupResult = engine.optimizeLineup(squad || { players: [] });
+      const activeClubs = await getActiveMatchdayClubs(client);
+      const lineupResult = engine.optimizeLineup(squad || { players: [] }, activeClubs);
 
       const posEmoji = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' };
       
       let rep = `💼 <b>[Mateo Oslomany] · Tu Plantilla</b>\n`;
-      rep += `<i>Formación óptima: ${lineupResult.formation || '—'}</i>\n\n`;
+      rep += `<i>Formación óptima (Jornada Activa): <b>${lineupResult.formation || '—'}</b> (~${Math.round(lineupResult.score)} pts)</i>\n\n`;
 
       rep += `<b>⬛ TITULARES:</b>\n`;
       (lineupResult.starting11 || []).forEach(p => {
         const emoji = posEmoji[p.type] || '👤';
+        const club = (p.club?.name || p.clubName || '').toLowerCase();
+        const hasGame = activeClubs.length === 0 || activeClubs.some(c => club.includes(c) || c.includes(club));
+        const restTag = hasGame ? '' : ' <i>(Descansa)</i>';
         const status = p.available ? '' : ' ❌';
-        rep += ` ${emoji} <b>${escapeHtml(p.name)}</b>${status} — ${p.price.toLocaleString()} €\n`;
+        rep += ` ${emoji} <b>${escapeHtml(p.name)}</b>${status}${restTag} — ${p.price.toLocaleString()} €\n`;
       });
 
       rep += `\n<b>🔲 BANQUILLO:</b>\n`;
@@ -961,14 +965,15 @@ async function handleTelegramMessage(message) {
   }
 
   // ── /tactica · /esquema ─────────────────────────────────────────────────
-  else if (text.startsWith('/tactica') || text.startsWith('/esquema')) {
+  else if (cleanText.startsWith('/tactica') || cleanText.startsWith('/esquema')) {
     await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Analizando esquema táctico...</i>');
     const client = new ComunioClient();
     const engine = new ComunioEngine();
     try {
       await client.login();
       const squad = await client.getSquad();
-      const lineupResult = engine.optimizeLineup(squad || { players: [] });
+      const activeClubs = await getActiveMatchdayClubs(client);
+      const lineupResult = engine.optimizeLineup(squad || { players: [] }, activeClubs);
 
       const starters = lineupResult.starting11 || [];
       const keeper = starters.filter(p => p.type === 'keeper');
