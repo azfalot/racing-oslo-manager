@@ -187,14 +187,12 @@ async function handleTelegramMessage(message) {
       ` • /plantilla — Plantilla completa (titulares y banquillo)\n` +
       ` • /tactica — Esquema táctico por líneas\n` +
       ` • /rivales — Clasificación y valor de rivales\n` +
-      ` • /sugerencias — Sugerencias de ventas recomendadas\n` +
+      ` • /sugerencias — Sugerencias de ventas (poner / retirar del mercado)\n` +
       ` • /salud — Parte médico y bajas físicas\n\n` +
-      `🛒 <b>Mercado & Finanzas:</b>\n` +
-      ` • /mercado — Oportunidades del mercado actual\n` +
-      ` • /finanzas — Balance, margen y tesorería\n` +
+      `🎯 <b>Pujas & Finanzas:</b>\n` +
+      ` • /pujas — Centro unificado de pujas activas y mercado\n` +
+      ` • /finanzas — Balance, margen y proyecciones de tesorería\n` +
       ` • /ofertas — Ofertas de compra recibidas\n` +
-      ` • /mis_pujas — Mis pujas activas pendientes\n` +
-      ` • /pujar &lt;jugador&gt; — Ofertar por un jugador\n` +
       ` • /vender &lt;jugador&gt; — Poner a la venta de inmediato\n\n` +
       `⚡ <i>Toca cualquier botón abajo para ejecutar al instante:</i>`;
 
@@ -207,7 +205,7 @@ async function handleTelegramMessage(message) {
         ],
         [
           { text: '👥 Plantilla', callback_data: 'cmd:plantilla' },
-          { text: '🛒 Mercado', callback_data: 'cmd:mercado' },
+          { text: '🎯 Pujas & Mercado', callback_data: 'cmd:pujas' },
           { text: '💰 Finanzas', callback_data: 'cmd:finanzas' }
         ],
         [
