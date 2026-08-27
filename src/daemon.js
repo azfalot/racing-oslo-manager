@@ -417,26 +417,63 @@ async function handleTelegramMessage(message) {
     }
   }
 
-  // ── /mis_pujas ────────────────────────────────────────────────────────────
-  else if (text.startsWith('/mis_pujas')) {
-    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Consultando pujas activas...</i>');
+  // ── /pujas · /mis_pujas ───────────────────────────────────────────────────
+  else if (cleanText.startsWith('/pujas') || cleanText.startsWith('/mis_pujas')) {
+    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Consultando estado de pujas y oportunidades de mercado...</i>');
     const client = new ComunioClient();
+    const engine = new ComunioEngine();
     try {
       await client.login();
+      const squad = await client.getSquad();
+      const dashboard = await client.getDashboardData();
+      const balance = dashboard?.money || 0;
       const bids = await client.getPendingBids();
-      let rep = `💼 <b>[Mateo Oslomany] · Pujas Activas</b>\n\n`;
+      const market = await client.getMarket();
+      const marketPlayers = market?.players || [];
+
+      const bidsVal = bids.reduce((s, b) => s + (b.price || 0), 0);
+      const effectiveCash = balance - bidsVal;
+
+      let rep = `💼 <b>[Mateo Oslomany] · Centro de Pujas y Mercado</b>\n\n`;
+      rep += `💵 <b>Saldo en Caja:</b> ${balance.toLocaleString()} €\n`;
+      rep += `📊 <b>Saldo Efectivo tras Pujas:</b> <b>${effectiveCash.toLocaleString()} €</b>\n\n`;
+
       const keyboard = [];
 
+      // 1. MIS PUJAS ACTIVAS
+      rep += `⏳ <b>1. Mis Pujas Activas (${bids.length}):</b>\n`;
       if (bids.length > 0) {
         bids.forEach(b => {
-          rep += ` ⏳ <b>${escapeHtml(b.playerName)}</b> — Oferta: <b>${b.price.toLocaleString()} €</b>\n`;
+          rep += ` • <b>${escapeHtml(b.playerName)}</b> — Oferta: <b>${b.price.toLocaleString()} €</b>\n`;
           keyboard.push([
-            { text: `❌ CANCELAR PUJA POR ${b.playerName.toUpperCase()}`, callback_data: `cancel_bid:${b.offerId}:${b.playerName}:${b.playerId || 0}` }
+            { text: `❌ CANCELAR PUJA POR ${b.playerName.toUpperCase()} (${b.price.toLocaleString()} €)`, callback_data: `cancel_bid:${b.offerId}:${b.playerName}:${b.playerId || 0}` }
           ]);
         });
-        rep += `\n<i>💡 Pulsa en los botones inferiores para cancelar una puja con 1 clic.</i>`;
       } else {
-        rep += `No tienes pujas activas en este momento.`;
+        rep += ` <i>No tienes pujas pendientes activas en este momento.</i>\n`;
+      }
+      rep += `\n`;
+
+      // 2. OPORTUNIDADES DESTACADAS DE MERCADO
+      const result = engine.analyzeMarket(marketPlayers, squad, effectiveCash > 0 ? effectiveCash : balance);
+      const recs = (result.recommendations || []).slice(0, 4);
+
+      rep += `🎯 <b>2. Opciones de Puja Recomendadas (${recs.length}):</b>\n`;
+      if (recs.length > 0) {
+        recs.forEach((rec, i) => {
+          const posTag = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' }[rec.type] || '👤';
+          const bidP = rec.bidAmount || rec.price;
+          const affordable = bidP <= effectiveCash;
+          const tag = affordable ? '✅ Al alcance' : '⚠️ Requiere ventas';
+          rep += ` ${i + 1}. ${posTag} <b>${escapeHtml(rec.name)}</b> (${(rec.price/1000000).toFixed(2)}M €) — <i>${tag}</i>\n`;
+          rep += `    📈 Mejora: +${(rec.marginalValue || rec.upgradePoints || 0).toFixed(0)} pts XI | <i>${escapeHtml(rec.reason)}</i>\n`;
+
+          keyboard.push([
+            { text: `🎯 PUJAR POR ${rec.name.toUpperCase()} (${bidP.toLocaleString()} €)`, callback_data: `bid:${rec.playerId || rec.id}:${rec.name}:${bidP}:${rec.type}` }
+          ]);
+        });
+      } else {
+        rep += ` <i>No hay fichajes viables recomendados dentro de tu presupuesto actual.</i>\n`;
       }
 
       const markup = keyboard.length > 0 ? { inline_keyboard: keyboard } : null;
@@ -672,29 +709,43 @@ async function handleTelegramMessage(message) {
   }
 
   // ── /sugerencias ──────────────────────────────────────────────────────────
-  else if (text.startsWith('/sugerencias')) {
+  else if (cleanText.startsWith('/sugerencias')) {
     await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Analizando tu plantilla para sugerirte ventas...</i>');
     const client = new ComunioClient();
     const engine = new ComunioEngine();
     try {
       await client.login();
       const squad = await client.getSquad();
-      const lineup = await client.getCurrentLineup();
-      const startingIds = lineup?.players ? lineup.players.map(p => p.playerId) : [];
+      const activeClubs = await getActiveMatchdayClubs(client);
+      const lineupResult = engine.optimizeLineup(squad || { players: [] }, activeClubs);
+      const startingIds = (lineupResult.starting11 || []).map(p => p.playerId || p.id);
       
+      const currentMarket = await client.getMarket();
+      const myListedIds = new Set((currentMarket?.players || []).filter(p => p.owner?.id === client.userId || p.owner === client.userId).map(p => p.playerId || p.id));
+
       const suggestions = engine.getLiquiditySuggestions(squad, startingIds);
       if (suggestions.length > 0) {
         let rep = `💼 <b>[Mateo Oslomany] · Sugerencias de Venta</b>\n\n`;
-        rep += `Los siguientes jugadores son suplentes prescindibles de alto valor. ¿Deseas poner alguno en el mercado de Comunio para liberar liquidez?\n\n`;
+        rep += `Los siguientes jugadores son suplentes prescindibles. Puedes ponerlos en el mercado para recibir ofertas matinales o retirarlos si cambias de idea:\n\n`;
         
         const keyboard = [];
         suggestions.forEach(s => {
           const pid = s.playerId || s.id;
           const minPrice = s.price || 0;
-          rep += ` • <b>${escapeHtml(s.name)}</b> — ${minPrice.toLocaleString()} €\n   <i>${escapeHtml(s.reason)}</i>\n\n`;
-          keyboard.push([
-            { text: `🏷️ PONER A LA VENTA A ${s.name.toUpperCase()} (${minPrice.toLocaleString()} €)`, callback_data: `put_on_sale:${pid}:${s.name}:${minPrice}` }
-          ]);
+          const isListed = myListedIds.has(pid);
+          const marketStatus = isListed ? '🟡 <b>[YA EN EL MERCADO]</b>' : '⚪ <b>[EN BANQUILLO]</b>';
+          
+          rep += ` • <b>${escapeHtml(s.name)}</b> — ${minPrice.toLocaleString()} € | ${marketStatus}\n   <i>${escapeHtml(s.reason)}</i>\n\n`;
+          
+          if (isListed) {
+            keyboard.push([
+              { text: `❌ RETIRAR A ${s.name.toUpperCase()} DEL MERCADO`, callback_data: `delist:${pid}:${s.name}` }
+            ]);
+          } else {
+            keyboard.push([
+              { text: `🏷️ PONER A LA VENTA A ${s.name.toUpperCase()} (${minPrice.toLocaleString()} €)`, callback_data: `put_on_sale:${pid}:${s.name}:${minPrice}` }
+            ]);
+          }
         });
 
         const markup = { inline_keyboard: keyboard };
@@ -885,26 +936,48 @@ async function handleTelegramMessage(message) {
   }
 
   // ── /finanzas · /saldo ──────────────────────────────────────────────────
-  else if (text.startsWith('/finanzas') || text.startsWith('/saldo')) {
-    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Calculando balance financiero...</i>');
+  else if (cleanText.startsWith('/finanzas') || cleanText.startsWith('/saldo')) {
+    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Calculando balance y proyecciones de tesorería...</i>');
     const client = new ComunioClient();
+    const engine = new ComunioEngine();
     try {
       await client.login();
       const squad = await client.getSquad();
       const dashboard = await client.getDashboardData();
       const pendingBids = await client.getPendingBids();
+      const activeClubs = await getActiveMatchdayClubs(client);
+      const lineupResult = engine.optimizeLineup(squad || { players: [] }, activeClubs);
 
       const balance = dashboard?.money || 0;
       const squadVal = (squad?.players || []).reduce((s, p) => s + (p.price || 0), 0);
       const bidsVal = pendingBids.reduce((s, b) => s + (b.price || 0), 0);
       const netBalance = balance - bidsVal;
 
-      let rep = `💰 <b>[Mateo Oslomany] · Estado Financiero</b>\n\n`;
-      rep += `💵 <b>Saldo Disponible:</b> ${balance.toLocaleString()} €\n`;
-      rep += `⏳ <b>Pujas Comprometidas:</b> ${bidsVal.toLocaleString()} € (${pendingBids.length} pujas)\n`;
-      rep += `📊 <b>Saldo Efectivo Estimado:</b> ${netBalance.toLocaleString()} €\n`;
-      rep += `🏆 <b>Valor Plantilla:</b> ${squadVal.toLocaleString()} €\n`;
+      // Estimación de ingresos semanales por puntos y premios
+      const expPoints = Math.round(lineupResult.score || 30);
+      const pointsRewardEst = expPoints * 20000; // 20.000 € por punto (estándar Comunio)
+      const basePrizeEst = 250000; // Premio base estimado por clasificación de jornada
+      const totalWeeklyEst = pointsRewardEst + basePrizeEst;
+
+      let rep = `💰 <b>[Mateo Oslomany] · ESTADO FINANCIERO Y PROYECCIONES</b>\n\n`;
+      rep += `💵 <b>Saldo en Caja:</b> ${balance.toLocaleString()} €\n`;
+      rep += `⏳ <b>Pujas Comprometidas:</b> ${bidsVal.toLocaleString()} € (${pendingBids.length} ${pendingBids.length === 1 ? 'puja' : 'pujas'})\n`;
+      if (pendingBids.length > 0) {
+        pendingBids.forEach(b => {
+          rep += `   • <i>${escapeHtml(b.playerName)}: ${b.price.toLocaleString()} €</i>\n`;
+        });
+      }
+      rep += `📊 <b>Saldo Efectivo Real Restante:</b> <b>${netBalance.toLocaleString()} €</b>\n`;
+      rep += `🏆 <b>Valor Plantilla:</b> ${squadVal.toLocaleString()} € (${(squad?.players || []).length} jugadores)\n`;
       rep += `💎 <b>Patrimonio Total:</b> ${(balance + squadVal).toLocaleString()} €\n\n`;
+
+      rep += `📈 <b>PROYECCIÓN SEMANAL DE INGRESOS (Jornada):</b>\n`;
+      rep += ` • Puntos proyectados XI: ~${expPoints} pts\n`;
+      rep += ` • Ingresos estimados por puntos (~20k €/pto): +${pointsRewardEst.toLocaleString()} €\n`;
+      rep += ` • Premio estimado por jornada: +${basePrizeEst.toLocaleString()} €\n`;
+      rep += ` 💰 <b>Cashflow semanal proyectado:</b> <b>+${totalWeeklyEst.toLocaleString()} € / semana</b>\n`;
+      rep += ` 🏦 <b>Saldo proyectado tras liquidar jornada:</b> <b>~${(netBalance + totalWeeklyEst).toLocaleString()} €</b>\n\n`;
+
       rep += balance < 0
         ? `⚠️ <b>ATENCIÓN:</b> Saldo negativo. Vende jugadores antes del inicio de la jornada para puntuar.`
         : `✅ Balance saneado y sin riesgo de sanción.`;
@@ -1254,6 +1327,25 @@ async function handleCallbackQuery(callbackQuery) {
     } finally {
       await client.close();
     }
+  } else if (data.startsWith('delist:')) {
+    const [, playerId, playerName] = data.split(':');
+    await answerCallbackQuery(callbackQuery.id, '⏳ Retirando del mercado...');
+    await updateTelegramMessageMarkup(chatId, messageId, `⚪ RETIRADO DEL MERCADO (${playerName})`);
+
+    const client = new ComunioClient();
+    try {
+      await client.login();
+      const success = await client.removeFromMarket(parseInt(playerId));
+      if (success) {
+        await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> <b>${escapeHtml(playerName)}</b> ha sido retirado del mercado de Comunio.`);
+      } else {
+        await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> No se pudo retirar del mercado a ${escapeHtml(playerName)}.`);
+      }
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error al retirar del mercado: <code>${e.message}</code>`);
+    } finally {
+      await client.close();
+    }
   } else if (data.startsWith('cancel_bid:')) {
     const [, offerId, playerName, playerId] = data.split(':');
     await answerCallbackQuery(callbackQuery.id, '⏳ Cancelando puja...');
@@ -1553,26 +1645,34 @@ async function executeStrategicAnalysisReport() {
 
     // 3. OPORTUNIDADES CLAVE DEL MERCADO
     msg += `🛒 <b>3. Oportunidades Clave del Mercado Hoy (${marketPlayers.length} en venta):</b>\n`;
+    const keyboard = [];
     const marketKeepers = marketPlayers.filter(p => p.type === 'keeper').sort((a, b) => a.price - b.price);
     if (marketKeepers.length > 0) {
-      msg += ` • 🧤 <b>Portero disponible:</b> ${escapeHtml(marketKeepers[0].name)} (${(marketKeepers[0].price/1000000).toFixed(2)}M €)\n`;
+      const k = marketKeepers[0];
+      msg += ` • 🧤 <b>Portero disponible:</b> ${escapeHtml(k.name)} (${(k.price/1000000).toFixed(2)}M €)\n`;
+      keyboard.push([{ text: `🧤 PUJAR POR ${k.name.toUpperCase()} (${(k.price/1000000).toFixed(2)}M €)`, callback_data: `bid:${k.playerId || k.id}:${k.name}:${k.price}:keeper` }]);
     }
     const marketDefs = marketPlayers.filter(p => p.type === 'defender' && p.price > 1000000).sort((a, b) => a.price - b.price);
     if (marketDefs.length > 0) {
-      msg += ` • 🛡️ <b>Defensa recomendado:</b> ${escapeHtml(marketDefs[0].name)} (${(marketDefs[0].price/1000000).toFixed(2)}M €)\n`;
+      const d = marketDefs[0];
+      msg += ` • 🛡️ <b>Defensa recomendado:</b> ${escapeHtml(d.name)} (${(d.price/1000000).toFixed(2)}M €)\n`;
+      keyboard.push([{ text: `🛡️ PUJAR POR ${d.name.toUpperCase()} (${(d.price/1000000).toFixed(2)}M €)`, callback_data: `bid:${d.playerId || d.id}:${d.name}:${d.price}:defender` }]);
     }
     const marketMids = marketPlayers.filter(p => p.type === 'midfielder' && p.price > 1000000).sort((a, b) => a.price - b.price);
     if (marketMids.length > 0) {
-      msg += ` • ⚙️ <b>Centrocampista recomendado:</b> ${escapeHtml(marketMids[0].name)} (${(marketMids[0].price/1000000).toFixed(2)}M €)\n`;
+      const m = marketMids[0];
+      msg += ` • ⚙️ <b>Centrocampista recomendado:</b> ${escapeHtml(m.name)} (${(m.price/1000000).toFixed(2)}M €)\n`;
+      keyboard.push([{ text: `⚙️ PUJAR POR ${m.name.toUpperCase()} (${(m.price/1000000).toFixed(2)}M €)`, callback_data: `bid:${m.playerId || m.id}:${m.name}:${m.price}:midfielder` }]);
     }
 
     // 4. PLAN DE ACCIÓN
     msg += `\n📋 <b>4. Plan de Acción Inmediato:</b>\n`;
     msg += ` 1️⃣ Mantener en venta los descartes (Kike Barja) para tesorería.\n`;
-    msg += ` 2️⃣ Tras liquidar puntos de la jornada, cerrar el 2º portero (Leo Román / Dituro).\n`;
+    msg += ` 2️⃣ Tras liquidar puntos de la jornada, cerrar el 2º portero (Leo Román / Dituro / Szczesny).\n`;
     msg += ` 3️⃣ Once titular guardado (${lineup.formation}) con prioridad a clubes activos.`;
 
-    await sendTelegramMessage(msg);
+    const markup = keyboard.length > 0 ? { inline_keyboard: keyboard } : null;
+    await sendTelegramMessage(msg, markup);
 
   } catch (err) {
     console.error('[DAEMON-ANALISIS ERROR]', err.message);
