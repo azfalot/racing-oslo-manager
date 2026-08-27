@@ -1099,17 +1099,82 @@ async function handleTelegramMessage(message) {
     }
   }
 
-  // ── /scout <nombre> ──────────────────────────────────────────────────────
-  else if (text.startsWith('/scout')) {
-    const parts = text.split(' ');
+  // ── /scout [<nombre>] ───────────────────────────────────────────────────
+  else if (cleanText.startsWith('/scout')) {
+    const parts = text.trim().split(/\s+/);
+    const client = new ComunioClient();
+    const engine = new ComunioEngine();
+    
+    // Si se llama a /scout sin argumentos -> Mostrar RADAR DE OBJETIVOS OJEADOS
     if (parts.length < 2) {
-      await sendTelegramMessage('💼 🕵️ <b>[Mateo Oslomany]:</b> Uso: <code>/scout &lt;nombre_jugador&gt;</code>\nEjemplo: <code>/scout Christensen</code> o <code>/scout Gerard Moreno</code>');
+      await sendTelegramMessage('💼 🕵️‍♂️ <i>[Mateo Oslomany]: Consultando el Radar de Objetivos Ojeados y comparativa de plantilla...</i>');
+      try {
+        await client.login();
+        const squad = await client.getSquad();
+        const market = await client.getMarket();
+        const marketPlayers = market?.players || [];
+        const dashboard = await client.getDashboardData();
+        const balance = dashboard?.money || 0;
+
+        let wishlist = [];
+        try {
+          if (fs.existsSync('config.json')) {
+            const cfg = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+            wishlist = cfg.scoutingWishlist || [];
+          }
+        } catch (e) {}
+
+        if (wishlist.length === 0) {
+          wishlist = [
+            { name: "Grimaldo", fullName: "Álex Grimaldo", position: "defender", priority: 1, targetPrice: 11070000, estimatedPts: 195, compTarget: "Álvaro Núñez / Mandi" },
+            { name: "Fornals", fullName: "Pablo Fornals", position: "midfielder", priority: 2, targetPrice: 11460000, estimatedPts: 175, compTarget: "Moi Gómez / Hugo Álvarez" },
+            { name: "Kang-In Lee", fullName: "Kang-In Lee", position: "midfielder", priority: 3, targetPrice: 15370000, estimatedPts: 165, compTarget: "Moi Gómez" },
+            { name: "Aubameyang", fullName: "Pierre-Emerick Aubameyang", position: "striker", priority: 4, targetPrice: 17160000, estimatedPts: 185, compTarget: "Pablo Durán" },
+            { name: "Gordon", fullName: "Anthony Gordon", position: "striker", priority: 5, targetPrice: 17080000, estimatedPts: 180, compTarget: "Pablo Durán" }
+          ];
+        }
+
+        const posEmoji = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' };
+        let rep = `💼 🕵️‍♂️ <b>[Mateo Oslomany] · RADAR DE OBJETIVOS OJEADOS</b>\n\n`;
+        rep += `💵 <b>Caja actual:</b> ${balance.toLocaleString()} €\n`;
+        rep += `🎯 <b>Lista de Seguimiento Prioritaria (${wishlist.length} objetivos):</b>\n\n`;
+
+        const keyboard = [];
+
+        wishlist.forEach((target, idx) => {
+          const emoji = posEmoji[target.position] || '👤';
+          const onMarket = marketPlayers.find(p => p.name.toLowerCase().includes(target.name.toLowerCase()));
+          
+          let statusText = '⏳ <i>En cartera de Computer (Esperando salida a subasta)</i>';
+          if (onMarket) {
+            statusText = `🟢 <b>¡EN EL MERCADO HOY!</b> (Precio: <b>${onMarket.price.toLocaleString()} €</b>)`;
+            keyboard.push([
+              { text: `🎯 PUJAR POR ${target.name.toUpperCase()} (${onMarket.price.toLocaleString()} €)`, callback_data: `bid:${onMarket.playerId || onMarket.id}:${onMarket.name}:${onMarket.price}:${target.position}` }
+            ]);
+          }
+
+          rep += `<b>#${target.priority || (idx + 1)} ${emoji} ${escapeHtml(target.fullName || target.name)}</b>\n`;
+          rep += ` • Valor estimado: <b>${(target.targetPrice / 1000000).toFixed(2)}M €</b> | Proyección: <b>~${target.estimatedPts} pts</b>\n`;
+          rep += ` • Sustituye / Mejora a: <i>${escapeHtml(target.compTarget || 'Plantilla')}</i>\n`;
+          rep += ` • Estado: ${statusText}\n\n`;
+        });
+
+        rep += `<i>💡 Usa <code>/scout &lt;nombre&gt;</code> (ej: <code>/scout Fornals</code>) para ver prensa, riesgo de rotación y probabilidad de titularidad.</i>`;
+
+        const markup = keyboard.length > 0 ? { inline_keyboard: keyboard } : null;
+        await sendTelegramMessage(rep, markup);
+      } catch (err) {
+        await sendTelegramMessage(`💼 ❌ Error en radar de scouting: <code>${escapeHtml(err.message)}</code>`);
+      } finally {
+        await client.close();
+      }
       return;
     }
+
+    // Si se proporciona un nombre -> Scouting profundo online
     const nameQuery = parts.slice(1).join(' ').trim();
     await sendTelegramMessage(`💼 🕵️ <i>[Mateo Oslomany]: Rastreando prensa deportiva y scouting online para "${escapeHtml(nameQuery)}"...</i>`);
 
-    const client = new ComunioClient();
     try {
       await client.login();
       const squad = await client.getSquad();
