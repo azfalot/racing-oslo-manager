@@ -106,18 +106,21 @@ export async function consumeComunioNews(client) {
       // 2. TRANSACCIONES Y FICHAJES DE LA COMUNIDAD
       if (entry.type === 'TRANSACTION' && entry.message?.text) {
         const rawText = entry.message.text;
-        const pattern = /<a[^>]*>([^<]+)<\/a>\s*cambia por\s*([\d\.]+)\s*€\s*de\s*(?:<a[^>]*>)?([^<]+)(?:<\/a>)?\s*a\s*(?:<a[^>]*>)?([^<]+)(?:<\/a>)?/gi;
+        // Regex mejorada para capturar el ID exacto del jugador desde el enlace href="/players/<id>"
+        const pattern = /<a[^>]*href="[^"]*\/players\/(\d+)"[^>]*>([^<]+)<\/a>\s*cambia por\s*([\d\.]+)\s*€\s*de\s*(?:<a[^>]*>)?([^<]+)(?:<\/a>)?\s*a\s*(?:<a[^>]*>)?([^<]+)(?:<\/a>)?/gi;
         
         let match;
         while ((match = pattern.exec(rawText)) !== null) {
-          const playerName = match[1].trim();
-          const price = parseInt(match[2].replace(/\./g, ''));
-          const sellerName = match[3].trim();
-          const buyerName = match[4].trim();
+          const playerId = parseInt(match[1]);
+          const playerName = match[2].trim();
+          const price = parseInt(match[3].replace(/\./g, ''));
+          const sellerName = match[4].trim();
+          const buyerName = match[5].trim();
 
           processedEvents.push({
             type: 'TRANSACTION',
             date: entry.date,
+            playerId,
             playerName,
             price,
             sellerName,
