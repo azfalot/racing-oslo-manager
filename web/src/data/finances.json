@@ -2,12 +2,12 @@
   "club": {
     "name": "Racing de Oslo",
     "coach": "Mateo Oslomany",
-    "balance": 914990,
-    "committedBids": 180001,
-    "effectiveBalance": 734989,
+    "balance": 1084989,
+    "committedBids": 0,
+    "effectiveBalance": 1084989,
     "teamValue": 54360000,
-    "netWorth": 55274990,
-    "squadSize": 11,
+    "netWorth": 55444989,
+    "squadSize": 15,
     "debt": 0,
     "isHealthy": true,
     "prizePerPoint": 10000
@@ -37,16 +37,16 @@
   "projections": {
     "nextMatchday": {
       "matchday": "Jornada 3",
-      "expectedPoints": 30,
-      "expectedPrize": 300000,
-      "projectedCashAfter": 1034989
+      "expectedPoints": 54,
+      "expectedPrize": 540000,
+      "projectedCashAfter": 1624989
     },
     "monthlyOutlook": {
       "jornadas": 4,
-      "projectedPoints": 125,
-      "projectedPrize": 1250000,
+      "projectedPoints": 214,
+      "projectedPrize": 2140000,
       "estimatedSales": 980000,
-      "totalProjectedLiquidity": 2964989
+      "totalProjectedLiquidity": 4204989
     },
     "galacticoTarget": {
       "targetName": "Álex Grimaldo / Pablo Fornals",
@@ -60,13 +60,14 @@
     {
       "pos": 1,
       "teamName": "Fermín Gadura F.C.",
-      "owner": "Fermín",
+      "owner": "Fermín Gadura F.C.",
       "squadValue": 65520000,
       "points": 113,
       "totalPrize": 1130000,
-      "estimatedCash": 1450000,
-      "totalWealth": 66970000,
-      "power": "Muy Alta"
+      "estimatedCash": 1965600,
+      "totalWealth": 67485600,
+      "power": "Muy Alta",
+      "isMe": false
     },
     {
       "pos": 2,
@@ -75,76 +76,106 @@
       "squadValue": 54360000,
       "points": 86,
       "totalPrize": 860000,
-      "estimatedCash": 914990,
-      "totalWealth": 55274990,
+      "estimatedCash": 1084989,
+      "totalWealth": 55444989,
       "power": "Alta (Saneada)",
       "isMe": true
     },
     {
       "pos": 3,
-      "teamName": "Puente Avios FC",
-      "owner": "Puente",
-      "squadValue": 48210000,
-      "points": 74,
-      "totalPrize": 740000,
-      "estimatedCash": 820000,
-      "totalWealth": 49030000,
-      "power": "Media-Alta"
+      "teamName": "NIN Team",
+      "owner": "NIN Team",
+      "squadValue": 52990000,
+      "points": 71,
+      "totalPrize": 710000,
+      "estimatedCash": 1589700,
+      "totalWealth": 54579700,
+      "power": "Media-Alta",
+      "isMe": false
     },
     {
       "pos": 4,
       "teamName": "Ana",
       "owner": "Ana",
-      "squadValue": 46890000,
-      "points": 69,
-      "totalPrize": 690000,
-      "estimatedCash": 450000,
-      "totalWealth": 47340000,
-      "power": "Media"
+      "squadValue": 54390000,
+      "points": 61,
+      "totalPrize": 610000,
+      "estimatedCash": 1631700,
+      "totalWealth": 56021700,
+      "power": "Media-Alta",
+      "isMe": false
     },
     {
       "pos": 5,
-      "teamName": "Pachangueros F.C.",
-      "owner": "Pachanga",
-      "squadValue": 41200000,
-      "points": 62,
-      "totalPrize": 620000,
-      "estimatedCash": 610000,
-      "totalWealth": 41810000,
-      "power": "Media"
+      "teamName": "M4 TEAM",
+      "owner": "M4 TEAM",
+      "squadValue": 45560000,
+      "points": 60,
+      "totalPrize": 600000,
+      "estimatedCash": 1366800,
+      "totalWealth": 46926800,
+      "power": "Media-Alta",
+      "isMe": false
     },
     {
       "pos": 6,
-      "teamName": "M4 TEAM",
-      "owner": "M4",
-      "squadValue": 38450000,
-      "points": 58,
-      "totalPrize": 580000,
-      "estimatedCash": 780000,
-      "totalWealth": 39230000,
-      "power": "Moderada"
+      "teamName": "Hache FC",
+      "owner": "Hache FC",
+      "squadValue": 53900000,
+      "points": 59,
+      "totalPrize": 590000,
+      "estimatedCash": 1617000,
+      "totalWealth": 55517000,
+      "power": "Media-Alta",
+      "isMe": false
     },
     {
       "pos": 7,
-      "teamName": "Hache FC",
-      "owner": "Hache",
-      "squadValue": 34100000,
-      "points": 51,
-      "totalPrize": 510000,
-      "estimatedCash": 520000,
-      "totalWealth": 34620000,
-      "power": "Baja"
+      "teamName": "Pachangueros F.C.",
+      "owner": "Pachangueros F.C.",
+      "squadValue": 60860000,
+      "points": 52,
+      "totalPrize": 520000,
+      "estimatedCash": 1825800,
+      "totalWealth": 62685800,
+      "power": "Muy Alta",
+      "isMe": false
     },
     {
       "pos": 8,
+      "teamName": "Puente Avios FC",
+      "owner": "Puente Avios FC",
+      "squadValue": 56610000,
+      "points": 46,
+      "totalPrize": 460000,
+      "estimatedCash": 1698300,
+      "totalWealth": 58308300,
+      "power": "Media-Alta",
+      "isMe": false
+    },
+    {
+      "pos": 9,
       "teamName": "Suances nin",
-      "owner": "Suances",
-      "squadValue": 52100000,
-      "points": 45,
-      "totalPrize": 450000,
-      "estimatedCash": 210000,
-      "totalWealth": 52310000,
-      "power": "Endeudada (Mbappé)"
+      "owner": "Suances nin",
+      "squadValue": 55320000,
+      "points": 43,
+      "totalPrize": 430000,
+      "estimatedCash": 1659600,
+      "totalWealth": 56979600,
+      "power": "Media-Alta",
+      "isMe": false
+    },
+    {
+      "pos": 10,
+      "teamName": "Melano Plabloroza",
+      "owner": "Melano Plabloroza",
+      "squadValue": 45410000,
+      "points": 38,
+      "totalPrize": 380000,
+      "estimatedCash": 1362300,
+      "totalWealth": 46772300,
+      "power": "Media-Alta",
+      "isMe": false
     }
   ]
 }
