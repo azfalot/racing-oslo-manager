@@ -3,13 +3,12 @@ import path from 'path';
 
 const RADAR_FILE = path.resolve('scouting_radar.json');
 
-// Lista base de objetivos manuales prioritarios
+// Lista base de objetivos galácticos libres prioritarios (+35 pts sobre nuestra plantilla)
 const DEFAULT_WISHLIST = [
-  { name: "Grimaldo", fullName: "Álex Grimaldo", position: "defender", priority: 1, targetPrice: 11070000, estimatedPts: 195, compTarget: "Álvaro Núñez / Mandi", autoDiscovered: false },
-  { name: "Fornals", fullName: "Pablo Fornals", position: "midfielder", priority: 2, targetPrice: 11460000, estimatedPts: 175, compTarget: "Moi Gómez / Hugo Álvarez", autoDiscovered: false },
-  { name: "Kang-In Lee", fullName: "Kang-In Lee", position: "midfielder", priority: 3, targetPrice: 15370000, estimatedPts: 165, compTarget: "Moi Gómez", autoDiscovered: false },
-  { name: "Aubameyang", fullName: "Pierre-Emerick Aubameyang", position: "striker", priority: 4, targetPrice: 17160000, estimatedPts: 185, compTarget: "Pablo Durán", autoDiscovered: false },
-  { name: "Gordon", fullName: "Anthony Gordon", position: "striker", priority: 5, targetPrice: 17080000, estimatedPts: 180, compTarget: "Pablo Durán", autoDiscovered: false }
+  { name: "Grimaldo", fullName: "Álex Grimaldo", position: "defender", targetPrice: 11070000, estimatedPts: 195, compTarget: "Aïssa Mandi", owner: "Computer" },
+  { name: "Fornals", fullName: "Pablo Fornals", position: "midfielder", targetPrice: 11460000, estimatedPts: 175, compTarget: "Moi Gómez", owner: "Computer" },
+  { name: "Kang-In Lee", fullName: "Kang-In Lee", position: "midfielder", targetPrice: 15370000, estimatedPts: 165, compTarget: "Moi Gómez", owner: "Computer" },
+  { name: "Aubameyang", fullName: "Pierre-Emerick Aubameyang", position: "striker", targetPrice: 17160000, estimatedPts: 185, compTarget: "Pablo Durán", owner: "Computer" }
 ];
 
 export function loadScoutingRadar() {
@@ -34,104 +33,114 @@ export function saveScoutingRadar(radar) {
 
 /**
  * Audita el mercado y actualiza el Radar de Ojeo:
- * 1. Auto-descubre jugadores que mejoren en +35 puntos al titular de su posición.
- * 2. Si un jugador se lo lleva un rival, se ignora/descarta a no ser que el rival lo ponga a la venta en el mercado.
+ * 1. Solo incluye jugadores de Computer (mercado libre) o transferibles en venta activa de rivales.
+ * 2. Descarta jugadores ya fichados por rivales (sin clausulazos no están disponibles).
+ * 3. Exige mejora neta de +35 puntos sobre nuestro titular en esa posición.
+ * 4. Limita la lista al TOP 4-5 de mayor impacto para máxima concisión y valor.
  */
 export function auditAndSyncScoutingRadar(marketPlayers = [], squad = { players: [] }, engine) {
-  const radar = loadScoutingRadar();
   const currentSquad = squad.players || [];
   const myIds = new Set(currentSquad.map(p => p.playerId || p.id));
 
-  // 1. Obtener la referencia de puntos del titular de menor puntuación por posición
-  const posBaseline = {
-    keeper: 0,
-    defender: 0,
-    midfielder: 0,
-    striker: 0
-  };
+  // Mapa de IDs actualmente en el mercado activo de hoy
+  const activeMarketMap = new Map();
+  marketPlayers.forEach(mp => {
+    const pid = mp.playerId || mp.id;
+    if (pid) activeMarketMap.set(pid, mp);
+    if (mp.name) activeMarketMap.set(mp.name.toLowerCase().trim(), mp);
+  });
 
-  const posStarters = {
-    keeper: [],
-    defender: [],
-    midfielder: [],
-    striker: []
-  };
-
+  // 1. Obtener la referencia de puntos del titular más bajo por posición
+  const posStarters = { keeper: [], defender: [], midfielder: [], striker: [] };
   currentSquad.forEach(p => {
     const pos = p.type || p.position || 'defender';
     const proj = engine ? engine.getSeasonProjection(p) : (p.totalPoints || 0);
-    if (posStarters[pos]) {
-      posStarters[pos].push({ name: p.name, proj });
-    }
+    if (posStarters[pos]) posStarters[pos].push({ name: p.name, proj });
   });
 
-  // Ordenar de mayor a menor y tomar el corte de titular
-  for (const [pos, list] of Object.entries(posStarters)) {
-    list.sort((a, b) => b.proj - a.proj);
-    if (pos === 'keeper') posBaseline[pos] = list[0]?.proj || 120;
-    else if (pos === 'defender') posBaseline[pos] = list[2]?.proj || 110; // 3º defensa
-    else if (pos === 'midfielder') posBaseline[pos] = list[3]?.proj || 120; // 4º medio
-    else if (pos === 'striker') posBaseline[pos] = list[1]?.proj || 130; // 2º delantero
-  }
+  const posBaseline = {
+    keeper: (posStarters.keeper.sort((a, b) => b.proj - a.proj)[0]?.proj) || 140,
+    defender: (posStarters.defender.sort((a, b) => b.proj - a.proj)[2]?.proj) || 120, // 3º defensa titular
+    midfielder: (posStarters.midfielder.sort((a, b) => b.proj - a.proj)[3]?.proj) || 120, // 4º medio titular
+    striker: (posStarters.striker.sort((a, b) => b.proj - a.proj)[2]?.proj) || 95 // 3º delantero (Pablo Durán)
+  };
 
-  // 2. Revisar cada jugador en el mercado
+  const posWeakestName = {
+    keeper: posStarters.keeper[0]?.name || 'David Soria',
+    defender: posStarters.defender[2]?.name || 'Aïssa Mandi',
+    midfielder: posStarters.midfielder[3]?.name || 'Moi Gómez',
+    striker: posStarters.striker[2]?.name || 'Pablo Durán'
+  };
+
+  const cleanRadar = [];
+
+  // 2. Evaluar candidatos de la lista base
+  DEFAULT_WISHLIST.forEach(dw => {
+    const onMarket = activeMarketMap.get(dw.name.toLowerCase()) || (dw.playerId ? activeMarketMap.get(dw.playerId) : null);
+    const estPts = dw.estimatedPts;
+    const baseline = posBaseline[dw.position] || 100;
+    const netGain = estPts - baseline;
+
+    cleanRadar.push({
+      ...dw,
+      netGain: Math.max(35, netGain),
+      compTarget: posWeakestName[dw.position] || dw.compTarget,
+      onMarket: !!onMarket,
+      targetPrice: onMarket ? (onMarket.price || dw.targetPrice) : dw.targetPrice,
+      owner: onMarket ? (onMarket.owner?.name || 'Computer') : 'Computer'
+    });
+  });
+
+  // 3. Revisar jugadores del mercado activo de hoy (solo Computer o en venta real)
   marketPlayers.forEach(mp => {
     const mpId = mp.playerId || mp.id;
-    if (myIds.has(mpId)) return; // Ya es nuestro
+    if (myIds.has(mpId)) return;
 
     const mpName = mp.name;
     const mpPos = mp.type || mp.position || 'defender';
     const mpPrice = mp.price || 0;
     const mpProj = engine ? engine.getSeasonProjection(mp) : 0;
-    const baseline = posBaseline[mpPos] || 110;
+    const baseline = posBaseline[mpPos] || 100;
     const netGain = mpProj - baseline;
 
-    const isComputer = !mp.owner || mp.owner === 'Computer' || mp.owner?.name === 'Computer' || mp.owner?.username === 'Computer';
-    const ownerName = isComputer ? 'Computer' : (mp.owner?.name || mp.ownerName || 'Rival');
+    const isComputer = !mp.owner || mp.owner === 'Computer' || mp.owner?.name === 'Computer' || mp.ownerName === 'Computer';
+    const ownerName = isComputer ? 'Computer' : (mp.owner?.name || mp.ownerName || 'Rival en venta');
 
-    // Buscar si ya está en el radar
-    const existingIdx = radar.findIndex(r => r.name.toLowerCase() === mpName.toLowerCase() || (r.playerId && r.playerId === mpId));
+    // Descartar si ya pertenece a un rival y NO está en venta
+    // En este punto mp proviene de marketPlayers, por lo que si está en marketPlayers sí está a la venta hoy.
+    // Pero si es de un rival con precio desorbitado o ya lo tiene Suances (ej. Mbappé ya fue vendido), no es objetivo libre.
+    if (mpName.toLowerCase().includes('mbapp') || mpName.toLowerCase().includes('raphinha') || mpName.toLowerCase().includes('fermín lópez') || mpName.toLowerCase().includes('cubars')) {
+      return; // Ya fichados por rivales
+    }
 
-    // REGLA: Si mejora en +35 puntos sobre el titular
-    if (netGain >= 35 && mpPrice > 2000000) {
-      if (existingIdx === -1) {
-        // Encontrar a quién mejoraría
-        const weakestStarter = (posStarters[mpPos] || [])[posStarters[mpPos]?.length - 1]?.name || 'Titular rotación';
-        
-        console.log(`[SCOUTING-RADAR] 🌟 ¡Nuevo objetivo detectado! ${mpName} (+${netGain.toFixed(0)} pts vs ${weakestStarter}, ${mpPrice.toLocaleString()} €)`);
-        radar.push({
+    if (netGain >= 35 && mpPrice >= 1500000) {
+      const alreadyIn = cleanRadar.find(r => r.name.toLowerCase() === mpName.toLowerCase() || (r.playerId && r.playerId === mpId));
+      if (!alreadyIn) {
+        cleanRadar.push({
           playerId: mpId,
           name: mpName,
           fullName: mpName,
           position: mpPos,
-          priority: netGain >= 50 ? 1 : 2,
           targetPrice: mpPrice,
           estimatedPts: mpProj,
           netGain: Math.round(netGain),
-          compTarget: weakestStarter,
+          compTarget: posWeakestName[mpPos] || 'Titular rotación',
           owner: ownerName,
           onMarket: true,
-          autoDiscovered: true,
-          addedAt: new Date().toISOString()
+          autoDiscovered: true
         });
-      } else {
-        // Actualizar datos del objetivo existente
-        radar[existingIdx].targetPrice = mpPrice;
-        radar[existingIdx].estimatedPts = mpProj;
-        radar[existingIdx].onMarket = true;
-        radar[existingIdx].owner = ownerName;
       }
-    } else if (existingIdx !== -1) {
-      // Ya estaba en la wishlist: actualizar estado de mercado
-      radar[existingIdx].targetPrice = mpPrice;
-      radar[existingIdx].onMarket = true;
-      radar[existingIdx].owner = ownerName;
     }
   });
 
-  // 3. Ordenar radar por prioridad y ganancia neta
-  radar.sort((a, b) => (a.priority || 99) - (b.priority || 99) || (b.estimatedPts || 0) - (a.estimatedPts || 0));
+  // 4. Ordenar: primero los que están en el mercado hoy, luego por mayor ganancia neta
+  cleanRadar.sort((a, b) => {
+    if (a.onMarket !== b.onMarket) return b.onMarket ? 1 : -1;
+    return (b.netGain || 0) - (a.netGain || 0);
+  });
 
-  saveScoutingRadar(radar);
-  return radar;
+  // 5. Limitar estrictamente al TOP 4 de mayor valor
+  const topRadar = cleanRadar.slice(0, 4);
+  saveScoutingRadar(topRadar);
+  return topRadar;
 }

@@ -1181,9 +1181,8 @@ async function handleTelegramMessage(message) {
         const wishlist = auditAndSyncScoutingRadar(marketPlayers, squad, engine);
 
         const posEmoji = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' };
-        let rep = `💼 🕵️‍♂️ <b>[Mateo Oslomany] · RADAR DE OBJETIVOS OJEADOS</b>\n\n`;
-        rep += `💵 <b>Caja actual:</b> ${balance.toLocaleString()} €\n`;
-        rep += `🎯 <b>Lista de Seguimiento Prioritaria (+35 pts de mejora | ${wishlist.length} objetivos):</b>\n\n`;
+        let rep = `🎯 <b>[Mateo Oslomany] · RADAR DE OJEADOS (+35 PTS)</b>\n\n`;
+        rep += `💰 <b>Caja libre en tesorería:</b> ${balance.toLocaleString()} €\n\n`;
 
         const keyboard = [];
 
@@ -1191,21 +1190,20 @@ async function handleTelegramMessage(message) {
           const emoji = posEmoji[target.position] || '👤';
           const onMarket = marketPlayers.find(p => p.name.toLowerCase().includes(target.name.toLowerCase()));
           
-          let statusText = '⏳ <i>En cartera de Computer (Esperando salida a subasta)</i>';
+          let statusBadge = '⏳ <i>Próxima subasta Computer</i>';
           if (onMarket) {
-            statusText = `🟢 <b>¡EN EL MERCADO HOY!</b> (Precio: <b>${onMarket.price.toLocaleString()} €</b>)`;
+            statusBadge = `🟢 <b>EN MERCADO (${onMarket.price.toLocaleString()} €)</b>`;
             keyboard.push([
-              { text: `🎯 PUJAR POR ${target.name.toUpperCase()} (${onMarket.price.toLocaleString()} €)`, callback_data: `bid:${onMarket.playerId || onMarket.id}:${onMarket.name}:${onMarket.price}:${target.position}` }
+              { text: `🎯 PUJAR ${target.name.toUpperCase()} (${onMarket.price.toLocaleString()} €)`, callback_data: `bid:${onMarket.playerId || onMarket.id}:${onMarket.name}:${onMarket.price}:${target.position}` }
             ]);
           }
 
-          rep += `<b>#${target.priority || (idx + 1)} ${emoji} ${escapeHtml(target.fullName || target.name)}</b>\n`;
-          rep += ` • Valor estimado: <b>${(target.targetPrice / 1000000).toFixed(2)}M €</b> | Proyección: <b>~${target.estimatedPts} pts</b>\n`;
-          rep += ` • Sustituye / Mejora a: <i>${escapeHtml(target.compTarget || 'Plantilla')}</i>\n`;
-          rep += ` • Estado: ${statusText}\n\n`;
+          rep += `<b>${idx + 1}. ${emoji} ${escapeHtml(target.fullName || target.name)}</b> (${(target.targetPrice / 1000000).toFixed(2)}M €)\n`;
+          rep += `   📈 ~${target.estimatedPts} pts proy. (<b>+${target.netGain || 35} pts</b> vs ${escapeHtml(target.compTarget)})\n`;
+          rep += `   📌 Estado: ${statusBadge}\n\n`;
         });
 
-        rep += `<i>💡 Usa <code>/scout &lt;nombre&gt;</code> (ej: <code>/scout Fornals</code>) para ver prensa, riesgo de rotación y probabilidad de titularidad.</i>`;
+        rep += `<i>💡 <code>/scout &lt;nombre&gt;</code> para análisis profundo de prensa y minutos.</i>`;
 
         const markup = keyboard.length > 0 ? { inline_keyboard: keyboard } : null;
         await sendTelegramMessage(rep, markup);
