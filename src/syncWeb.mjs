@@ -262,12 +262,10 @@ async function fetchRealData() {
           estimatedSales: 980000,
           totalProjectedLiquidity: effectiveBal + Math.round((optimalLineup.score || 30) * 4 * prizePerPoint) + 980000
         },
-        galacticoTarget: {
-          targetName: "Álex Grimaldo / Pablo Fornals",
-          targetPrice: 11070000,
-          requiredCash: 11070000,
-          matchdaysNeededDirect: 4,
-          matchdaysNeededLeverage: 1
+        financialPolicy: {
+          reserveRequirement: "Saldo Positivo Obligatorio (Corte Jornada)",
+          reinvestmentStrategy: "Criterio de rentabilidad deportiva y valor patrimonial",
+          solvencyStatus: "Club 100% saneado con fondo de maniobra positivo"
         }
       },
       rivals: standingsDataEnriched.map((t) => {
@@ -276,11 +274,11 @@ async function fetchRealData() {
         const prizeEarned = rivalPts * prizePerPoint;
         const squadValRival = t.value || 0;
         const estCash = isMe ? myMoney : Math.max(300000, Math.round(squadValRival * 0.03));
-        let powerTag = 'Media';
-        if (isMe) powerTag = 'Alta (Saneada)';
-        else if (squadValRival > 60000000) powerTag = 'Muy Alta';
-        else if (squadValRival > 45000000) powerTag = 'Media-Alta';
-        else if (t.team.toLowerCase().includes('suances')) powerTag = 'Endeudada (Mbappé)';
+        let powerTag = 'Patrimonio Regular';
+        if (isMe) powerTag = 'Solvente (0 € Deuda)';
+        else if (squadValRival > 60000000) powerTag = 'Patrimonio Alto';
+        else if (squadValRival > 45000000) powerTag = 'Patrimonio Medio';
+        else if (t.team.toLowerCase().includes('suances')) powerTag = 'Apalancado';
 
         return {
           pos: t.pos,

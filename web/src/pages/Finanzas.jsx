@@ -184,12 +184,12 @@ export default function Finanzas() {
               </div>
             </div>
 
-            <div className="bg-black/60 border border-gold/30 p-4 rounded-sm space-y-2 mt-4">
-              <span className="text-[10px] font-mono uppercase text-gold font-bold tracking-wider flex items-center gap-1.5">
-                <ArrowUpRight size={14} /> HOJA DE RUTA PARA FICHAJES GALÁCTICOS
+            <div className="bg-black/60 border border-forest-light/30 p-4 rounded-sm space-y-2 mt-4">
+              <span className="text-[10px] font-mono uppercase text-forest-light font-bold tracking-wider flex items-center gap-1.5">
+                <ShieldCheck size={14} /> POLÍTICA INSTITUCIONAL DE TESORERÍA
               </span>
-              <p className="text-xs text-cream leading-relaxed font-sans">
-                Para acometer el fichaje de un objetivo TOP como <b>{projections.galacticoTarget.targetName}</b> ({ (projections.galacticoTarget.targetPrice / 1000000).toFixed(2) }M €), el club necesita <b>1 sola jornada</b> utilizando una operación palanca (puja + venta compensatoria) o <b>4 jornadas</b> mediante ahorro neto de primas.
+              <p className="text-xs text-cream/90 leading-relaxed font-sans">
+                El Racing de Oslo aplica un estricto principio de <b>solvencia y sostenibilidad</b>: garantía de balance positivo previo a cada corte de jornada, reinversión prudente de ingresos oficiales y gestión rigurosa del patrimonio del club.
               </p>
             </div>
           </div>
@@ -224,7 +224,7 @@ export default function Finanzas() {
                   <th className="py-3 px-3 text-right">Valor Plantilla</th>
                   <th className="py-3 px-3 text-right">Caja Estimada</th>
                   <th className="py-3 px-3 text-right">Patrimonio Total</th>
-                  <th className="py-3 px-3 text-center">Poder de Fichaje</th>
+                  <th className="py-3 px-3 text-center">Solvencia Patrimonial</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
@@ -251,8 +251,8 @@ export default function Finanzas() {
                       <td className="py-3.5 px-3 text-center">
                         <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                           r.isMe ? 'bg-forest-light/20 text-forest-light border border-forest-light/30' :
-                          r.power.includes('Alta') ? 'bg-gold/10 text-gold border border-gold/20' :
-                          r.power.includes('Endeudada') ? 'bg-red-500/20 text-red-400 border border-red-500/30' :
+                          (r.power || '').includes('Alto') ? 'bg-gold/10 text-gold border border-gold/20' :
+                          (r.power || '').includes('Apalancado') ? 'bg-red-500/20 text-red-400 border border-red-500/30' :
                           'bg-white/5 text-cream-dark'
                         }`}>
                           {r.power}
