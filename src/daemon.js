@@ -2034,7 +2034,18 @@ function startCronScheduler() {
          else console.log('[DAEMON-CRON] Web sincronizada con éxito.');
       });
 
-      // 5. Pre-Jornada: Registro oficial de Pronóstico
+      // 5. A las 18:00: Publicación del Comunicado Oficial de Scouting 360 en el tablón de Comunio
+      if (currentTimeStr === '18:00') {
+        try {
+          const { postDailyRivalesAuditAnnouncement } = await import('./comunioCommunityPoster.js');
+          await postDailyRivalesAuditAnnouncement();
+          console.log('[DAEMON-CRON] 📢 Comunicado diario de Scouting 360 publicado en Comunio a las 18:00.');
+        } catch (postErr) {
+          console.warn('[DAEMON-CRON] Info publicación comunicado Comunio:', postErr.message);
+        }
+      }
+
+      // 6. Pre-Jornada: Registro oficial de Pronóstico
       if (isPreMatchdaySlot) {
         try {
           const { recordMatchdayPrediction } = await import('./matchdayPredictionAuditor.js');

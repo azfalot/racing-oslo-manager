@@ -100,3 +100,29 @@ export async function postStarSigningAnnouncement(playerName, priceFormatted, pl
 
   return publishPostToComunioApi(title, htmlMessage);
 }
+
+/**
+ * PUNTO 3: Publica diariamente a las 18:00 el informe táctico y de scouting 360º de la comunidad
+ */
+export async function postDailyRivalesAuditAnnouncement() {
+  const title = '📊 INFORME TÁCTICO & SCOUTING 360º: Radiografía de la Comunidad';
+  const imgPath = '/media/news_graphics/club_sede_digital_oficial.jpg';
+  const fullImgUrl = `${PUBLIC_BASE_URL}${imgPath}`;
+
+  // 1. Generar tarjeta gráfica oficial
+  await generateTemplateGraphic('club', 'SCOUTING & AUDITORÍA 360º', 'Radiografía Táctica de la Liga');
+
+  // 2. Formato HTML para el tablón oficial de Comunio
+  const htmlMessage = 
+    '<p>La Dirección Deportiva del <strong>Racing de Oslo</strong> publica la actualización de la <strong>Auditoría Táctica y Scouting 360º</strong> para todos los clubes de la liga.<br><br>' +
+    '🔍 <strong>SERVICIOS EN ABIERTO EN LA SEDE DIGITAL:</strong><br>' +
+    ' • <strong>Radiografía por Clubes:</strong> Pizarra del 11 titular estimado de cada rival y techo de puntos.<br>' +
+    ' • <strong>Salud Financiera & Deuda:</strong> Semáforo de solvencia y apalancamiento.<br>' +
+    ' • <strong>Asistencia IA de Fichajes:</strong> Recomendaciones de mercado según carencias tácticas.<br>' +
+    ' • <strong>Mercado en Vivo:</strong> Listado actualizado de oportunidades.<br><br>' +
+    `🌐 <strong>CONSULTAR EL INFORME COMPLETO DE TU CLUB:</strong> <a title="Auditoría de Rivales" href="${PUBLIC_BASE_URL}/rivales" target="_blank" rel="noopener">racing-oslo.cotero91.workers.dev/rivales</a><br><br>` +
+    `<img src="${fullImgUrl}" alt="Auditoría 360 de Rivales" width="1024" height="682"><br><br>` +
+    '<em>Secretaría Técnica · Racing de Oslo</em></p>';
+
+  return publishPostToComunioApi(title, htmlMessage);
+}
