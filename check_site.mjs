@@ -8,8 +8,9 @@ import puppeteer from 'puppeteer';
   page.on('pageerror', error => console.log('PAGE ERROR:', error.message));
   page.on('requestfailed', request => console.log('REQUEST FAILED:', request.url(), request.failure()?.errorText));
   
-  console.log('Navegando a la web...');
-  await page.goto('https://racing-oslo.cotero91.workers.dev/', { waitUntil: 'networkidle2' });
+  console.log('Navegando a /finanzas...');
+  await page.setCacheEnabled(false);
+  await page.goto(`https://racing-oslo.cotero91.workers.dev/finanzas?v=${Date.now()}`, { waitUntil: 'networkidle2' });
   
   const title = await page.title();
   console.log('TITLE:', title);
