@@ -96,9 +96,9 @@ export async function generateRivalsAuditData() {
         tacticDescription = 'Estructura defensiva sólida de 5 zagueros (5-3-2).';
       } else if (isMe) {
         financialHealth = '100% Saneado (0 € Deuda)';
-        strengths.push('Bloque de gala homogéneo en todas las líneas con Fede Valverde (240 pts), Soria y Gerard Moreno.');
-        weaknesses.push('Búsqueda activa de un lateral galáctico (Grimaldo) para redondear el Once de 65 pts.');
-        tacticDescription = '3-4-3 dinámico de máxima posesión y equilibrio de Primera.';
+        strengths.push('Bloque de gala homogéneo y consolidado en todas las líneas de juego.');
+        weaknesses.push('Gestión institucional orientada a la máxima eficiencia y rigor presupuestario.');
+        tacticDescription = '3-4-3 dinámico de máxima posesión y regularidad competitiva.';
       } else {
         if (atkVal > 25000000) strengths.push('Gran inversión en atacantes con gol.');
         else if (midVal > 25000000) strengths.push('Centro del campo con alta capacidad de distribución.');
@@ -112,17 +112,26 @@ export async function generateRivalsAuditData() {
 
       // Recomendaciones de Mercado para el rival (asistencia de fichajes)
       const recommendations = [];
-      if (weaknesses.some(w => w.includes('defensiva') || w.includes('Zaga'))) {
-        const targetDef = marketPlayers.find(mp => (mp.position === 'defender' || mp.type === 'defender') && mp.price > 1000000);
-        if (targetDef) recommendations.push({ name: targetDef.name, pos: 'Defensa', price: targetDef.price, reason: 'Reforzar la zaga con un central titular de garantías.' });
-      }
-      if (weaknesses.some(w => w.includes('delantero') || w.includes('despobladas'))) {
-        const targetFwd = marketPlayers.find(mp => (mp.position === 'striker' || mp.type === 'striker') && mp.price > 1500000);
-        if (targetFwd) recommendations.push({ name: targetFwd.name, pos: 'Delantero', price: targetFwd.price, reason: 'Aportar pólvora y remate al área rival.' });
-      }
-      if (recommendations.length === 0) {
-        const targetMid = marketPlayers.find(mp => (mp.position === 'midfielder' || mp.type === 'midfielder') && mp.price > 1200000);
-        if (targetMid) recommendations.push({ name: targetMid.name, pos: 'Centrocampista', price: targetMid.price, reason: 'Mejorar el control del balón y balones parados.' });
+      if (isMe) {
+        recommendations.push({
+          name: 'Criterio Institucional',
+          pos: 'Dirección Deportiva',
+          price: 0,
+          reason: 'Política de confidencialidad en mercado: inversión selectiva sin desvelar posiciones estratégicas.'
+        });
+      } else {
+        if (weaknesses.some(w => w.includes('defensiva') || w.includes('Zaga'))) {
+          const targetDef = marketPlayers.find(mp => (mp.position === 'defender' || mp.type === 'defender') && mp.price > 1000000);
+          if (targetDef) recommendations.push({ name: targetDef.name, pos: 'Defensa', price: targetDef.price, reason: 'Reforzar la zaga con un central titular de garantías.' });
+        }
+        if (weaknesses.some(w => w.includes('delantero') || w.includes('despobladas'))) {
+          const targetFwd = marketPlayers.find(mp => (mp.position === 'striker' || mp.type === 'striker') && mp.price > 1500000);
+          if (targetFwd) recommendations.push({ name: targetFwd.name, pos: 'Delantero', price: targetFwd.price, reason: 'Aportar pólvora y remate al área rival.' });
+        }
+        if (recommendations.length === 0) {
+          const targetMid = marketPlayers.find(mp => (mp.position === 'midfielder' || mp.type === 'midfielder') && mp.price > 1200000);
+          if (targetMid) recommendations.push({ name: targetMid.name, pos: 'Centrocampista', price: targetMid.price, reason: 'Mejorar el control del balón y balones parados.' });
+        }
       }
 
       auditClubs.push({
