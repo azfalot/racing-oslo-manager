@@ -37,23 +37,21 @@
   "projections": {
     "nextMatchday": {
       "matchday": "Jornada 3",
-      "expectedPoints": 54,
-      "expectedPrize": 540000,
-      "projectedCashAfter": 1624989
+      "expectedPoints": 57,
+      "expectedPrize": 570000,
+      "projectedCashAfter": 1654989
     },
     "monthlyOutlook": {
       "jornadas": 4,
-      "projectedPoints": 214,
-      "projectedPrize": 2140000,
+      "projectedPoints": 228,
+      "projectedPrize": 2284000,
       "estimatedSales": 980000,
-      "totalProjectedLiquidity": 4204989
+      "totalProjectedLiquidity": 4348989
     },
-    "galacticoTarget": {
-      "targetName": "Álex Grimaldo / Pablo Fornals",
-      "targetPrice": 11070000,
-      "requiredCash": 11070000,
-      "matchdaysNeededDirect": 4,
-      "matchdaysNeededLeverage": 1
+    "financialPolicy": {
+      "reserveRequirement": "Saldo Positivo Obligatorio (Corte Jornada)",
+      "reinvestmentStrategy": "Criterio de rentabilidad deportiva y valor patrimonial",
+      "solvencyStatus": "Club 100% saneado con fondo de maniobra positivo"
     }
   },
   "rivals": [
@@ -66,7 +64,7 @@
       "totalPrize": 1130000,
       "estimatedCash": 1965600,
       "totalWealth": 67485600,
-      "power": "Muy Alta",
+      "power": "Patrimonio Alto",
       "isMe": false
     },
     {
@@ -78,7 +76,7 @@
       "totalPrize": 860000,
       "estimatedCash": 1084989,
       "totalWealth": 55444989,
-      "power": "Alta (Saneada)",
+      "power": "Solvente (0 € Deuda)",
       "isMe": true
     },
     {
@@ -90,7 +88,7 @@
       "totalPrize": 710000,
       "estimatedCash": 1589700,
       "totalWealth": 54579700,
-      "power": "Media-Alta",
+      "power": "Patrimonio Medio",
       "isMe": false
     },
     {
@@ -102,7 +100,7 @@
       "totalPrize": 610000,
       "estimatedCash": 1631700,
       "totalWealth": 56021700,
-      "power": "Media-Alta",
+      "power": "Patrimonio Medio",
       "isMe": false
     },
     {
@@ -114,7 +112,7 @@
       "totalPrize": 600000,
       "estimatedCash": 1366800,
       "totalWealth": 46926800,
-      "power": "Media-Alta",
+      "power": "Patrimonio Medio",
       "isMe": false
     },
     {
@@ -126,7 +124,7 @@
       "totalPrize": 590000,
       "estimatedCash": 1617000,
       "totalWealth": 55517000,
-      "power": "Media-Alta",
+      "power": "Patrimonio Medio",
       "isMe": false
     },
     {
@@ -138,7 +136,7 @@
       "totalPrize": 520000,
       "estimatedCash": 1825800,
       "totalWealth": 62685800,
-      "power": "Muy Alta",
+      "power": "Patrimonio Alto",
       "isMe": false
     },
     {
@@ -150,7 +148,7 @@
       "totalPrize": 460000,
       "estimatedCash": 1698300,
       "totalWealth": 58308300,
-      "power": "Media-Alta",
+      "power": "Patrimonio Medio",
       "isMe": false
     },
     {
@@ -162,7 +160,7 @@
       "totalPrize": 430000,
       "estimatedCash": 1659600,
       "totalWealth": 56979600,
-      "power": "Media-Alta",
+      "power": "Patrimonio Medio",
       "isMe": false
     },
     {
@@ -174,7 +172,7 @@
       "totalPrize": 380000,
       "estimatedCash": 1362300,
       "totalWealth": 46772300,
-      "power": "Media-Alta",
+      "power": "Patrimonio Medio",
       "isMe": false
     }
   ]
