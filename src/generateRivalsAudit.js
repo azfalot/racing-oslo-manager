@@ -96,9 +96,10 @@ export async function generateRivalsAuditData() {
         tacticDescription = 'Estructura defensiva sólida de 5 zagueros (5-3-2).';
       } else if (isMe) {
         financialHealth = '100% Saneado (0 € Deuda)';
-        strengths.push('Bloque de gala homogéneo y consolidado en todas las líneas de juego.');
-        weaknesses.push('Gestión institucional orientada a la máxima eficiencia y rigor presupuestario.');
-        tacticDescription = '3-4-3 dinámico de máxima posesión y regularidad competitiva.';
+        strengths.push('Bloque de gala homogéneo y consolidado con columna vertebral de Primera (Soria, Valverde, Gerard Moreno).');
+        weaknesses.push('Margen de mejora en la línea de laterales defensivos para redondear la regularidad del Once.');
+        weaknesses.push('Fondo de armario justo en la zaga ante posibles ciclos de tarjetas o sanciones.');
+        tacticDescription = '3-4-3 dinámico de máxima posesión y equilibrio entre líneas.';
       } else {
         if (atkVal > 25000000) strengths.push('Gran inversión en atacantes con gol.');
         else if (midVal > 25000000) strengths.push('Centro del campo con alta capacidad de distribución.');
@@ -114,10 +115,10 @@ export async function generateRivalsAuditData() {
       const recommendations = [];
       if (isMe) {
         recommendations.push({
-          name: 'Criterio Institucional',
-          pos: 'Dirección Deportiva',
+          name: 'Lateral / Zaguero de Primera',
+          pos: 'Defensa',
           price: 0,
-          reason: 'Política de confidencialidad en mercado: inversión selectiva sin desvelar posiciones estratégicas.'
+          reason: 'Incorporación de un perfil defensivo de largo recorrido para apuntalar el flanco y elevar el techo del 3-4-3.'
         });
       } else {
         if (weaknesses.some(w => w.includes('defensiva') || w.includes('Zaga'))) {
