@@ -957,10 +957,19 @@ async function handleTelegramMessage(message) {
       const bidsVal = pendingBids.reduce((s, b) => s + (b.price || 0), 0);
       const netBalance = balance - bidsVal;
 
-      // Estimación de ingresos semanales por puntos y premios
+      // Estimación de ingresos oficiales de Comunio (10.000 € por punto)
+      let prizePerPoint = 10000;
+      let basePrizeEst = 0;
+      try {
+        if (fs.existsSync('config.json')) {
+          const cfg = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+          prizePerPoint = cfg.strategy?.finance?.prizePerPoint || 10000;
+          basePrizeEst = cfg.strategy?.finance?.baseMatchdayBonus || 0;
+        }
+      } catch (e) {}
+
       const expPoints = Math.round(lineupResult.score || 30);
-      const pointsRewardEst = expPoints * 20000; // 20.000 € por punto (estándar Comunio)
-      const basePrizeEst = 250000; // Premio base estimado por clasificación de jornada
+      const pointsRewardEst = expPoints * prizePerPoint; // 10.000 € por punto (reglamento oficial Comunio)
       const totalWeeklyEst = pointsRewardEst + basePrizeEst;
 
       let rep = `💰 <b>[Mateo Oslomany] · ESTADO FINANCIERO Y PROYECCIONES</b>\n\n`;
@@ -975,15 +984,17 @@ async function handleTelegramMessage(message) {
       rep += `🏆 <b>Valor Plantilla:</b> ${squadVal.toLocaleString()} € (${(squad?.players || []).length} jugadores)\n`;
       rep += `💎 <b>Patrimonio Total:</b> ${(balance + squadVal).toLocaleString()} €\n\n`;
 
-      rep += `📈 <b>PROYECCIÓN SEMANAL DE INGRESOS (Jornada):</b>\n`;
-      rep += ` • Puntos proyectados XI: ~${expPoints} pts\n`;
-      rep += ` • Ingresos estimados por puntos (~20k €/pto): +${pointsRewardEst.toLocaleString()} €\n`;
-      rep += ` • Premio estimado por jornada: +${basePrizeEst.toLocaleString()} €\n`;
-      rep += ` 💰 <b>Cashflow semanal proyectado:</b> <b>+${totalWeeklyEst.toLocaleString()} € / semana</b>\n`;
+      rep += `📈 <b>PROYECCIÓN OFICIAL DE INGRESOS (Jornada):</b>\n`;
+      rep += ` • Puntos proyectados Once Titular: ~${expPoints} pts\n`;
+      rep += ` • Prima oficial Comunio (10.000 €/pto): <b>+${pointsRewardEst.toLocaleString()} €</b>\n`;
+      if (basePrizeEst > 0) {
+        rep += ` • Prima adicional de comunidad: +${basePrizeEst.toLocaleString()} €\n`;
+      }
+      rep += ` 💰 <b>Ingreso neto estimado por jornada:</b> <b>+${totalWeeklyEst.toLocaleString()} €</b>\n`;
       rep += ` 🏦 <b>Saldo proyectado tras liquidar jornada:</b> <b>~${(netBalance + totalWeeklyEst).toLocaleString()} €</b>\n\n`;
 
       rep += balance < 0
-        ? `⚠️ <b>ATENCIÓN:</b> Saldo negativo. Vende jugadores antes del inicio de la jornada para puntuar.`
+        ? `⚠️ <b>ATENCIÓN:</b> Saldo negativo. Vende jugadores antes del inicio de la jornada para puntuar y recibir la prima.`
         : `✅ Balance saneado y sin riesgo de sanción.`;
 
       await sendTelegramMessage(rep);
