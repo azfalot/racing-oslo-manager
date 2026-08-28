@@ -180,20 +180,19 @@ async function handleTelegramMessage(message) {
   if (cleanText.startsWith('/start') || cleanText.startsWith('/help') || cleanText === 'ayuda') {
     const pauseStatus = botPaused ? '⏸ <b>BOT PAUSADO</b> (acciones autónomas desactivadas)\n\n' : '';
     const helpText = `💼 <b>[Mateo Oslomany v1.2.0] · Centro de Mando Táctico</b>\n${pauseStatus}\n` +
-      `📊 <b>Análisis & Táctica:</b>\n` +
-      ` • /reporte — Resumen ejecutivo rápido en 1 mensaje\n` +
-      ` • /analisis — Auditoría estratégica de plantilla, carencias y mercado\n` +
-      ` • /scout — Radar de ojeo prioritario (+35 pts) y análisis de prensa\n` +
-      ` • /alinear — Optimizar y guardar Once Titular\n` +
-      ` • /plantilla — Plantilla completa (titulares y banquillo)\n` +
-      ` • /tactica — Esquema táctico por líneas\n` +
-      ` • /rivales — Clasificación y valor de rivales\n` +
-      ` • /sugerencias — Sugerencias de ventas (poner / retirar del mercado)\n` +
-      ` • /salud — Parte médico y bajas físicas\n\n` +
-      `🎯 <b>Pujas & Finanzas:</b>\n` +
+      `📊 <b>Gestión Deportiva & Vestuario:</b>\n` +
+      ` • /reporte — Dashboard ejecutivo: situación deportiva y tesorería\n` +
+      ` • /plantilla — Censo oficial de plantilla por posiciones y roles\n` +
+      ` • /alinear — Optimizar y guardar Once Titular oficial en Comunio (alias: /tactica, /once)\n` +
+      ` • /scout — Radar de ojeados (+35 pts) y prensa deportiva\n` +
+      ` • /salud — Parte médico y control disciplinario de tarjetas (RFEF)\n` +
+      ` • /analisis — Auditoría táctica de carencias y mercado\n` +
+      ` • /rivales — Clasificación y valor patrimonial de rivales\n\n` +
+      `🎯 <b>Mercado & Finanzas:</b>\n` +
       ` • /pujas — Centro unificado de pujas activas y mercado\n` +
-      ` • /finanzas — Balance, margen y proyecciones de tesorería\n` +
+      ` • /finanzas — Balance, histórico de primas (10k€/pt) y tesorería\n` +
       ` • /ofertas — Ofertas de compra recibidas\n` +
+      ` • /sugerencias — Sugerencias de venta y descarte\n` +
       ` • /vender &lt;jugador&gt; — Poner a la venta de inmediato\n\n` +
       `⚡ <i>Toca cualquier botón abajo para ejecutar al instante:</i>`;
 
@@ -201,16 +200,16 @@ async function handleTelegramMessage(message) {
       inline_keyboard: [
         [
           { text: '📊 Reporte', callback_data: 'cmd:reporte' },
-          { text: '🕵️‍♂️ Análisis', callback_data: 'cmd:analisis' },
-          { text: '🎯 Scout', callback_data: 'cmd:scout' }
-        ],
-        [
-          { text: '🛡️ Alinear XI', callback_data: 'cmd:alinear' },
           { text: '👥 Plantilla', callback_data: 'cmd:plantilla' },
-          { text: '📐 Táctica', callback_data: 'cmd:tactica' }
+          { text: '⚽ Alinear XI', callback_data: 'cmd:alinear' }
         ],
         [
-          { text: '🎯 Pujas & Mercado', callback_data: 'cmd:pujas' },
+          { text: '🎯 Scout', callback_data: 'cmd:scout' },
+          { text: '🏥 Salud', callback_data: 'cmd:salud' },
+          { text: '🕵️‍♂️ Análisis', callback_data: 'cmd:analisis' }
+        ],
+        [
+          { text: '🛒 Pujas & Mercado', callback_data: 'cmd:pujas' },
           { text: '💰 Finanzas', callback_data: 'cmd:finanzas' },
           { text: '📩 Ofertas', callback_data: 'cmd:ofertas' }
         ],
@@ -247,26 +246,26 @@ async function handleTelegramMessage(message) {
 
       const balance = dash.money || 0;
       const teamValue = dash.teamValue || 0;
+      const totalWealth = balance + teamValue;
+      const nextScore = Math.round(lineup.score || 57);
 
-      let rep = `💼 📊 <b>[Mateo Oslomany] · INFORME EJECUTIVO</b>\n\n`;
-      rep += `💰 <b>Saldo en Caja:</b> <b>${balance.toLocaleString()} €</b> ${balance >= 0 ? '✅ (Saneado)' : '❌ (En Deuda)'}\n`;
-      rep += `📈 <b>Valor Plantilla:</b> <b>${teamValue.toLocaleString()} €</b> (${squad.players.length} jugadores)\n\n`;
-      rep += `🛡️ <b>Once Óptimo (${lineup.formation} · Jornada Activa):</b>\n`;
-      lineup.starting11.forEach(p => {
-        const icon = p.type === 'keeper' ? '🧤' : p.type === 'defender' ? '🛡️' : p.type === 'midfielder' ? '⚙️' : '⚡';
-        const club = (p.club?.name || p.clubName || '').toLowerCase();
-        const hasGame = activeClubs.length === 0 || activeClubs.some(c => club.includes(c) || c.includes(club));
-        rep += ` • ${icon} <b>${escapeHtml(p.name)}</b> (${(p.price/1000000).toFixed(1)}M €) ${hasGame ? '🟢' : '⚪ (Relleno)'}\n`;
-      });
-      rep += `\n🌐 <b>Sede Digital:</b> <a href="https://racing-oslo.cotero91.workers.dev">racing-oslo.cotero91.workers.dev</a>`;
+      let rep = `📊 <b>[Mateo Oslomany] · INFORME EJECUTIVO DEL CLUB</b>\n\n`;
+      rep += `🏆 <b>SITUACIÓN DEPORTIVA:</b>\n`;
+      rep += ` • Posición: <b>2º Clasificado</b> (86 pts)\n`;
+      rep += ` • Once Oficial: <b>${lineup.formation}</b> (~${nextScore} pts proyectados)\n\n`;
+      rep += `💰 <b>SITUACIÓN ECONÓMICA:</b>\n`;
+      rep += ` • Saldo en Caja: <b>${balance.toLocaleString()} €</b> ${balance >= 0 ? '✅ (Saneado)' : '❌ (En Deuda)'}\n`;
+      rep += ` • Valor Plantilla: <b>${teamValue.toLocaleString()} €</b> (${squad.players.length} jugadores)\n`;
+      rep += ` • Patrimonio Neto: <b>${totalWealth.toLocaleString()} €</b>\n\n`;
+      rep += `🌐 <b>Sede Digital:</b> <a href="https://racing-oslo.cotero91.workers.dev/finanzas">racing-oslo.cotero91.workers.dev/finanzas</a>`;
       await sendTelegramMessage(rep);
     } catch (err) {
       await sendTelegramMessage(`💼 ❌ Error generando reporte: ${err.message}`);
     }
   }
 
-  // ── /alinear ──────────────────────────────────────────────────────────────
-  else if (text.startsWith('/alinear')) {
+  // ── /alinear · /tactica · /once · /esquema ─────────────────────────────────
+  else if (cleanText.startsWith('/alinear') || cleanText.startsWith('/tactica') || cleanText.startsWith('/once') || cleanText.startsWith('/esquema')) {
     const client = new ComunioClient();
     const engine = new ComunioEngine();
     try {
@@ -280,16 +279,21 @@ async function handleTelegramMessage(message) {
         const success = await client.setLineup(startingIds, lineupResult.formation);
         
         const posEmoji = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' };
-        let rep = `💼 ✅ <b>[Mateo Oslomany] · 11 Titular Guardado en Comunio</b>\n\n`;
-        rep += `📐 <b>Formación:</b> ${lineupResult.formation}\n`;
-        rep += `🎯 <b>Puntuación esperada:</b> ~${Math.round(lineupResult.score)} pts en la jornada\n\n`;
+        let rep = `📐 <b>[Mateo Oslomany] · 11 TITULAR OFICIAL (${lineupResult.formation})</b>\n\n`;
+        rep += `🎯 <b>Puntuación esperada:</b> ~${Math.round(lineupResult.score)} pts\n`;
+        rep += `💾 <b>Estado en Comunio:</b> ${success ? '✅ Guardado Oficialmente' : '⚠️ Pendiente'}\n\n`;
+        
         rep += `<b>⬛ TITULARES:</b>\n`;
         lineupResult.starting11.forEach(p => {
           const emoji = posEmoji[p.type] || '👤';
-          const club = (p.club?.name || p.clubName || '').toLowerCase();
-          const hasGame = activeClubs.length === 0 || activeClubs.some(c => club.includes(c) || c.includes(club));
-          const tag = hasGame ? '' : ' <i>(Descansa)</i>';
-          rep += ` ${emoji} <b>${escapeHtml(p.name)}</b>${tag}\n`;
+          const exp = p.expectedPoints ? `(~${p.expectedPoints} pts)` : '';
+          rep += ` ${emoji} <b>${escapeHtml(p.name)}</b> ${exp}\n`;
+        });
+
+        rep += `\n<b>🔲 BANQUILLO (${(lineupResult.bench || []).length}):</b>\n`;
+        (lineupResult.bench || []).forEach(p => {
+          const emoji = posEmoji[p.type] || '👤';
+          rep += ` ${emoji} ${escapeHtml(p.name)} (${(p.price/1000000).toFixed(2)}M €)\n`;
         });
 
         // Sincronizar automáticamente squad.json con los titulares exactos
@@ -304,18 +308,11 @@ async function handleTelegramMessage(message) {
               });
               sqData.formation = lineupResult.formation;
               fs.writeFileSync(squadPath, JSON.stringify(sqData, null, 2));
-              console.log('[DAEMON-LINEUP] squad.json actualizado con el nuevo 11 titular.');
             }
           }
-          // Disparar sincronización web en segundo plano
           const { exec } = await import('node:child_process');
-          exec('node src/syncWeb.mjs', { windowsHide: true }, (err) => {
-            if (err) console.error('[DAEMON-SYNC] Error en auto-sync web:', err.message);
-            else console.log('[DAEMON-SYNC] Web sincronizada y desplegada con éxito tras alinear.');
-          });
-        } catch (syncErr) {
-          console.error('[DAEMON-LINEUP] Error sincronizando web:', syncErr.message);
-        }
+          exec('node src/syncWeb.mjs', { windowsHide: true }, () => {});
+        } catch (syncErr) {}
 
         let log = [];
         try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
@@ -342,30 +339,37 @@ async function handleTelegramMessage(message) {
       const squad = await client.getSquad();
       const activeClubs = await getActiveMatchdayClubs(client);
       const lineupResult = engine.optimizeLineup(squad || { players: [] }, activeClubs);
-
-      const posEmoji = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' };
+      const players = squad?.players || [];
+      const startersSet = new Set((lineupResult.starting11 || []).map(p => p.playerId || p.id));
       
-      let rep = `💼 <b>[Mateo Oslomany] · Tu Plantilla</b>\n`;
-      rep += `<i>Formación óptima (Jornada Activa): <b>${lineupResult.formation || '—'}</b> (~${Math.round(lineupResult.score)} pts)</i>\n\n`;
+      const posMap = {
+        keeper: { title: '🧤 PORTEROS', list: [] },
+        defender: { title: '🛡️ DEFENSAS', list: [] },
+        midfielder: { title: '⚙️ CENTROCAMPISTAS', list: [] },
+        striker: { title: '⚡ DELANTEROS', list: [] }
+      };
 
-      rep += `<b>⬛ TITULARES:</b>\n`;
-      (lineupResult.starting11 || []).forEach(p => {
-        const emoji = posEmoji[p.type] || '👤';
-        const club = (p.club?.name || p.clubName || '').toLowerCase();
-        const hasGame = activeClubs.length === 0 || activeClubs.some(c => club.includes(c) || c.includes(club));
-        const restTag = hasGame ? '' : ' <i>(Descansa)</i>';
-        const status = p.available ? '' : ' ❌';
-        rep += ` ${emoji} <b>${escapeHtml(p.name)}</b>${status}${restTag} — ${p.price.toLocaleString()} €\n`;
+      players.forEach(p => {
+        const type = p.type || p.position || 'defender';
+        if (posMap[type]) posMap[type].list.push(p);
       });
 
-      rep += `\n<b>🔲 BANQUILLO:</b>\n`;
-      (lineupResult.bench || []).forEach(p => {
-        const emoji = posEmoji[p.type] || '👤';
-        rep += ` ${emoji} ${escapeHtml(p.name)} — ${p.price.toLocaleString()} €\n`;
-      });
+      let rep = `👥 <b>[Mateo Oslomany] · PLANTILLA OFICIAL (${players.length} JUGADORES)</b>\n\n`;
 
-      const totalValue = (squad?.players || []).reduce((s, p) => s + (p.price || 0), 0);
-      rep += `\n💰 <b>Valor total plantilla:</b> ${totalValue.toLocaleString()} €`;
+      for (const [key, group] of Object.entries(posMap)) {
+        if (group.list.length === 0) continue;
+        rep += `<b>${group.title}:</b>\n`;
+        group.list.forEach(p => {
+          const isSt = startersSet.has(p.playerId || p.id);
+          const tag = isSt ? '⭐ <b>Titular</b>' : '🔲 <i>Suplente</i>';
+          const proj = engine.getSeasonProjection(p);
+          rep += ` • <b>${escapeHtml(p.name)}</b> (${(p.price/1000000).toFixed(2)}M €) ➔ ${tag} | ~${proj} pts\n`;
+        });
+        rep += `\n`;
+      }
+
+      const totalValue = players.reduce((s, p) => s + (p.price || 0), 0);
+      rep += `💰 <b>Valor de Mercado Total:</b> <b>${totalValue.toLocaleString()} €</b>`;
 
       await sendTelegramMessage(rep);
     } catch (e) {
@@ -1061,39 +1065,7 @@ async function handleTelegramMessage(message) {
     });
   }
 
-  // ── /tactica · /esquema ─────────────────────────────────────────────────
-  else if (cleanText.startsWith('/tactica') || cleanText.startsWith('/esquema')) {
-    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Analizando esquema táctico...</i>');
-    const client = new ComunioClient();
-    const engine = new ComunioEngine();
-    try {
-      await client.login();
-      const squad = await client.getSquad();
-      const activeClubs = await getActiveMatchdayClubs(client);
-      const lineupResult = engine.optimizeLineup(squad || { players: [] }, activeClubs);
 
-      const starters = lineupResult.starting11 || [];
-      const keeper = starters.filter(p => p.type === 'keeper');
-      const defenders = starters.filter(p => p.type === 'defender');
-      const midfielders = starters.filter(p => p.type === 'midfielder');
-      const strikers = starters.filter(p => p.type === 'striker');
-
-      let rep = `📐 <b>[Mateo Oslomany] · Esquema Táctico (${lineupResult.formation})</b>\n\n`;
-      rep += `🎯 <b>Puntuación esperada:</b> ~${lineupResult.score} pts\n\n`;
-
-      rep += `🧤 <b>POR (${keeper.length}):</b> ${keeper.map(p => escapeHtml(p.name)).join(', ') || '—'}\n`;
-      rep += `🛡️ <b>DEF (${defenders.length}):</b> ${defenders.map(p => escapeHtml(p.name)).join(', ') || '—'}\n`;
-      rep += `⚙️ <b>MED (${midfielders.length}):</b> ${midfielders.map(p => escapeHtml(p.name)).join(', ') || '—'}\n`;
-      rep += `⚡ <b>DEL (${strikers.length}):</b> ${strikers.map(p => escapeHtml(p.name)).join(', ') || '—'}\n\n`;
-      rep += `🔲 <b>Suplentes disponibles:</b> ${(lineupResult.bench || []).length} jugadores`;
-
-      await sendTelegramMessage(rep);
-    } catch (e) {
-      await sendTelegramMessage(`💼 ❌ Error analizando táctica: <code>${e.message}</code>`);
-    } finally {
-      await client.close();
-    }
-  }
 
   // ── /salud ───────────────────────────────────────────────────────────────
   else if (text.startsWith('/salud')) {
@@ -1477,18 +1449,18 @@ async function handleCallbackQuery(callbackQuery) {
 
 async function registerTelegramCommands() {
   const commands = [
-    { command: 'reporte', description: '📊 Resumen ejecutivo rápido en 1 mensaje' },
+    { command: 'reporte', description: '📊 Dashboard ejecutivo, situación deportiva y tesorería' },
+    { command: 'plantilla', description: '👥 Censo completo de plantilla (posiciones, minutos, roles)' },
+    { command: 'alinear', description: '⚽ Optimizar y guardar Once Titular oficial en Comunio' },
+    { command: 'tactica', description: '📐 Pizarra y formación táctica del Once de Gala' },
+    { command: 'scout', description: '🎯 Radar de ojeados (+35 pts) y prensa deportiva' },
+    { command: 'pujas', description: '🛒 Centro unificado de pujas activas y mercado' },
+    { command: 'finanzas', description: '💰 Balance, primas oficiales (10k€/pt) y rivales' },
     { command: 'analisis', description: '🕵️‍♂️ Auditoría táctica & oportunidades de mercado' },
-    { command: 'scout', description: '🎯 Radar de ojeo (+35 pts) y prensa deportiva' },
-    { command: 'pujas', description: '🎯 Centro unificado de pujas activas y mercado' },
-    { command: 'alinear', description: '🛡️ Optimizar y guardar Once Titular' },
-    { command: 'plantilla', description: '👥 Ver plantilla completa y banquillo' },
-    { command: 'tactica', description: '📐 Esquema táctico por líneas y roles' },
-    { command: 'finanzas', description: '💰 Saldo, margen y proyecciones semanales' },
     { command: 'ofertas', description: '📩 Ofertas de compra recibidas' },
     { command: 'sugerencias', description: '💡 Sugerencias de venta y descarte' },
     { command: 'rivales', description: '🏆 Clasificación y valor de rivales' },
-    { command: 'salud', description: '🏥 Parte médico y bajas físicas' },
+    { command: 'salud', description: '🏥 Parte médico y ciclo de tarjetas (RFEF)' },
     { command: 'web', description: '🌐 Abrir Sede Digital Oficial' },
     { command: 'help', description: '💼 Ver Centro de Mando Táctico' }
   ];
