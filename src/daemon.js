@@ -183,6 +183,7 @@ async function handleTelegramMessage(message) {
       `📊 <b>Análisis & Táctica:</b>\n` +
       ` • /reporte — Resumen ejecutivo rápido en 1 mensaje\n` +
       ` • /analisis — Auditoría estratégica de plantilla, carencias y mercado\n` +
+      ` • /scout — Radar de ojeo prioritario (+35 pts) y análisis de prensa\n` +
       ` • /alinear — Optimizar y guardar Once Titular\n` +
       ` • /plantilla — Plantilla completa (titulares y banquillo)\n` +
       ` • /tactica — Esquema táctico por líneas\n` +
@@ -201,12 +202,17 @@ async function handleTelegramMessage(message) {
         [
           { text: '📊 Reporte', callback_data: 'cmd:reporte' },
           { text: '🕵️‍♂️ Análisis', callback_data: 'cmd:analisis' },
-          { text: '🛡️ Alinear XI', callback_data: 'cmd:alinear' }
+          { text: '🎯 Scout', callback_data: 'cmd:scout' }
         ],
         [
+          { text: '🛡️ Alinear XI', callback_data: 'cmd:alinear' },
           { text: '👥 Plantilla', callback_data: 'cmd:plantilla' },
+          { text: '📐 Táctica', callback_data: 'cmd:tactica' }
+        ],
+        [
           { text: '🎯 Pujas & Mercado', callback_data: 'cmd:pujas' },
-          { text: '💰 Finanzas', callback_data: 'cmd:finanzas' }
+          { text: '💰 Finanzas', callback_data: 'cmd:finanzas' },
+          { text: '📩 Ofertas', callback_data: 'cmd:ofertas' }
         ],
         [
           { text: '🏆 Rivales', callback_data: 'cmd:rivales' },
@@ -1416,10 +1422,38 @@ async function handleCallbackQuery(callbackQuery) {
   }
 }
 
+async function registerTelegramCommands() {
+  const commands = [
+    { command: 'reporte', description: '📊 Resumen ejecutivo rápido en 1 mensaje' },
+    { command: 'analisis', description: '🕵️‍♂️ Auditoría táctica & oportunidades de mercado' },
+    { command: 'scout', description: '🎯 Radar de ojeo (+35 pts) y prensa deportiva' },
+    { command: 'pujas', description: '🎯 Centro unificado de pujas activas y mercado' },
+    { command: 'alinear', description: '🛡️ Optimizar y guardar Once Titular' },
+    { command: 'plantilla', description: '👥 Ver plantilla completa y banquillo' },
+    { command: 'tactica', description: '📐 Esquema táctico por líneas y roles' },
+    { command: 'finanzas', description: '💰 Saldo, margen y proyecciones semanales' },
+    { command: 'ofertas', description: '📩 Ofertas de compra recibidas' },
+    { command: 'sugerencias', description: '💡 Sugerencias de venta y descarte' },
+    { command: 'rivales', description: '🏆 Clasificación y valor de rivales' },
+    { command: 'salud', description: '🏥 Parte médico y bajas físicas' },
+    { command: 'web', description: '🌐 Abrir Sede Digital Oficial' },
+    { command: 'help', description: '💼 Ver Centro de Mando Táctico' }
+  ];
+  try {
+    const res = await axios.post(`https://api.telegram.org/bot${telegramToken}/setMyCommands`, { commands });
+    if (res.data?.ok) {
+      console.log('[DAEMON] ✅ Comandos oficiales con /scout registrados en Telegram API.');
+    }
+  } catch (err) {
+    console.warn('[DAEMON] Error registrando comandos en Telegram:', err.message);
+  }
+}
+
 // ── LONG POLLING ──────────────────────────────────────────────────────────────
 
 async function startPolling() {
   console.log('[DAEMON] Iniciando escucha de comandos de Telegram (Long Polling v3.5.0)...');
+  await registerTelegramCommands();
   await sendTelegramMessage('💼 🟢 <b>[Mateo Oslomany v3.5]:</b> Servicio iniciado y en línea (v3.5.0). Envía <code>/help</code> para ver el Centro de Mando.');
 
   while (true) {
