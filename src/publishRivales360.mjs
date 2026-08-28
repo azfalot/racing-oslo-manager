@@ -143,8 +143,8 @@ async function createAndPublish() {
   console.log('✅ Imagen gráfica generada:', outPath);
 
   // Now publish to Comunio API
-  const title = '📊 COMUNICADO OFICIAL: Lanzamiento de Rivales 360º';
-  const fullImgUrl = 'https://racing-oslo.cotero91.workers.dev/media/news_graphics/rivales_360_portal.jpg';
+  const title = '📊 RIVALES 360º: Radiografía Táctica & Asistencia a Clubes';
+  const fullImgUrl = `https://racing-oslo.cotero91.workers.dev/media/news_graphics/rivales_360_portal.jpg?v=${Date.now()}`;
   
   const htmlMessage = 
     '<p>La Junta Directiva y la Secretaría Técnica del <strong>Racing de Oslo</strong> anuncian la apertura pública del nuevo módulo interactivo <strong>RIVALES 360º</strong> en nuestra Sede Digital.<br><br>' +
@@ -155,7 +155,7 @@ async function createAndPublish() {
     ' • <strong>Banquillo de Reservas:</strong> Censo de alternativas y rotación.<br><br>' +
     '🌐 <strong>ACCESO LIBRE PARA TODOS LOS MÁNAGERS:</strong><br>' +
     '👉 <a title="Auditoría de Rivales 360" href="https://racing-oslo.cotero91.workers.dev/rivales" target="_blank" rel="noopener"><strong>racing-oslo.cotero91.workers.dev/rivales</strong></a><br><br>' +
-    `<img src="${fullImgUrl}" alt="Rivales 360 Scouting Portal" width="1024" height="538"><br><br>` +
+    `<a href="https://racing-oslo.cotero91.workers.dev/rivales" target="_blank" rel="noopener"><img src="${fullImgUrl}" alt="Rivales 360 Scouting Portal" width="1024" height="538" style="width: 100%; max-width: 650px; height: auto; border-radius: 8px; border: 1px solid #10b981;"></a><br><br>` +
     '<em>Secretaría Técnica & Área de Análisis · Racing de Oslo</em></p>';
 
   console.log('Publicando comunicado en el tablón de Comunio...');
