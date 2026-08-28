@@ -15,6 +15,20 @@ import {
   Layers
 } from 'lucide-react';
 
+const CLUB_CRESTS = {
+  'Racing de Oslo': '/media/crest.jpg',
+  'Fermín Gadura F.C.': '/media/crests/fermin_gadura.svg',
+  'Puente Avios FC': '/media/crests/puente_avios.svg',
+  'Puente Avios': '/media/crests/puente_avios.svg',
+  'Hache FC': '/media/crests/hache_fc.svg',
+  'Ana': '/media/crests/ana.svg',
+  'NIN Team': '/media/crests/nin_team.svg',
+  'Pachangueros F.C.': '/media/crests/pachangueros.svg',
+  'M4 TEAM': '/media/crests/m4_team.svg',
+  'Melano Plabloroza': '/media/crests/melano_plabloroza.svg',
+  'Suances nin': '/media/crests/suances_nin.svg'
+};
+
 export default function Rivales() {
   const [selectedId, setSelectedId] = useState(rivalsData[0]?.id || 21163674);
   const club = rivalsData.find(c => c.id === selectedId) || rivalsData[0];
@@ -71,7 +85,7 @@ export default function Rivales() {
                 }`}
               >
                 <img 
-                  src={c.crest} 
+                  src={CLUB_CRESTS[c.teamName] || c.crest || '/media/crest.jpg'} 
                   alt={c.teamName} 
                   onError={(e) => { e.currentTarget.src = '/media/crest.jpg'; }}
                   className="w-7 h-7 rounded-full object-cover border border-white/20 flex-shrink-0" 
@@ -94,7 +108,7 @@ export default function Rivales() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-forest/30">
           <div className="flex items-center gap-4">
             <img 
-              src={club.crest} 
+              src={CLUB_CRESTS[club.teamName] || club.crest || '/media/crest.jpg'} 
               alt={club.teamName} 
               onError={(e) => { e.currentTarget.src = '/media/crest.jpg'; }}
               className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-forest-light object-cover shadow-2xl bg-black/60" 
