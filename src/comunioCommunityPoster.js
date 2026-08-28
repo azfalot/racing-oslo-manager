@@ -64,19 +64,7 @@ export async function postPortalLaunchAnnouncement() {
   // 1. Generar tarjeta gráfica oficial
   await generateTemplateGraphic('club', 'SEDE DIGITAL OFICIAL', 'Portal Web Oficial y Sala de Prensa');
 
-  // 2. Publicar en nuestra propia web
-  const rawBody = 
-    'La Junta Directiva del Racing de Oslo hace público el lanzamiento oficial de su portal digital para toda la comunidad de la Segunda Regional Cántabra.\n\n' +
-    '📊 CONTENIDO EN ABIERTO:\n' +
-    ' • Seguimiento en tiempo real de la plantilla y cotizaciones.\n' +
-    ' • Crónicas oficiales, actas de partidos y auditoría de puntos.\n' +
-    ' • Gráfica histórica de valor de mercado de todos los clubes de la liga.\n\n' +
-    '🌐 Acceso al Portal: https://racing-oslo.cotero91.workers.dev\n\n' +
-    '¡Bienvenidos al Oslo Arena!';
-
-  await publishClubNews(title, 'Lanzamiento del portal web institucional del club.', rawBody, 'Institucional', 'club');
-
-  // 3. Formato HTML para el tablón oficial de Comunio
+  // 2. Formato HTML para el tablón oficial de Comunio
   const htmlMessage = 
     '<p>La Junta Directiva del <strong>Racing de Oslo</strong> pone a disposición de toda la comunidad el portal interactivo oficial del club.<br><br>' +
     '📊 <strong>CONTENIDO EN ABIERTO:</strong><br>' +
@@ -100,18 +88,7 @@ export async function postStarSigningAnnouncement(playerName, priceFormatted, pl
   const graphicRelPath = await generateTemplateGraphic('signing', playerName, priceFormatted, playerId);
   const fullImgUrl = `${PUBLIC_BASE_URL}${graphicRelPath}`;
 
-  // 2. Publicar en nuestra web
-  const rawBody = 
-    `El Racing de Oslo y la Secretaría Técnica encabezada por Mateo Oslomany han cerrado un acuerdo para la incorporación definitiva de ${playerName}.\n\n` +
-    `💼 DETALLES DE LA OPERACIÓN:\n` +
-    ` • Futbolista: ${playerName} (${position})\n` +
-    ` • Inversión: ${priceFormatted}\n\n` +
-    `El jugador se incorporará de inmediato a la disciplina del equipo en el Oslo Arena para preparar la próxima jornada.\n\n` +
-    `📰 Ficha completa y perfil técnico en: ${PUBLIC_BASE_URL}`;
-
-  await publishClubNews(title, `Acuerdo oficial para el traspaso de ${playerName}.`, rawBody, 'Fichajes', 'signing');
-
-  // 3. Formato HTML para Comunio
+  // 2. Formato HTML para Comunio
   const htmlMessage = 
     `<p>El <strong>Racing de Oslo</strong> y la Secretaría Técnica liderada por Mateo Oslomany han cerrado con éxito la incorporación de <strong>${playerName}</strong>.<br><br>` +
     `💼 <strong>DETALLES DE LA OPERACIÓN:</strong><br>` +

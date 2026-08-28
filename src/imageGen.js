@@ -27,27 +27,40 @@ export function insertOrUpdateNews(article) {
     }
   }
 
-  // Sanitizar campos de texto para evitar '\n' literales escapados
+  // Sanitizar campos de texto para evitar '\n' literales escapados y espacios raros
   for (const k of ['content', 'summary', 'excerpt', 'body', 'title']) {
     if (article[k] && typeof article[k] === 'string') {
-      article[k] = article[k].split('\\n').join('\n');
+      article[k] = article[k].split('\\n').join('\n').trim();
     }
   }
 
-  // Deduplicación estricta por ID base, título o par jugador-categoría
+  // Extraer nombre clave del jugador si existe para deduplicación semántica
+  const playerKeywords = ['szczęsny', 'szczesny', 'marc santos', 'fede valverde', 'valverde', 'hugo duro', 'álex grimaldo', 'grimaldo', 'andrés castrín', 'castrin', 'álvaro núñez', 'kike barja', 'oriol rey', 'tete morente', 'germán valera', 'gerard moreno'];
+  const artTitleLower = (article.title || '').toLowerCase();
+  const matchedPlayer = playerKeywords.find(k => artTitleLower.includes(k));
+
+  // Deduplicación estricta y semántica:
   const cleanList = newsList.filter(n => {
+    // 1. Mismo ID exacto
     if (n.id === article.id) return false;
-    if (n.title.trim().toLowerCase() === article.title.trim().toLowerCase()) return false;
-    if (article.category === n.category && article.id && n.id) {
-      const artBase = article.id.split('_').slice(0, 2).join('_');
-      const curBase = n.id.split('_').slice(0, 2).join('_');
-      if (artBase === curBase) return false;
+    
+    // 2. Mismo título normalizado
+    const normCurTitle = (n.title || '').toLowerCase().replace(/[^\w\s]/gi, '').trim();
+    const normArtTitle = (article.title || '').toLowerCase().replace(/[^\w\s]/gi, '').trim();
+    if (normCurTitle === normArtTitle) return false;
+
+    // 3. Misma categoría y mismo jugador objetivo (evita duplicar "Fichajes" o "Ventas" del mismo jugador)
+    if (article.category && n.category && article.category.toLowerCase() === n.category.toLowerCase()) {
+      if (matchedPlayer && (n.title || '').toLowerCase().includes(matchedPlayer)) {
+        return false;
+      }
     }
+
     return true;
   });
 
   cleanList.unshift(article);
-  const finalList = cleanList.slice(0, 25);
+  const finalList = cleanList.slice(0, 30);
   fs.writeFileSync(newsPath, JSON.stringify(finalList, null, 2));
   console.log(`[NEWS] Noticia guardada y deduplicada con éxito: "${article.title}"`);
   
