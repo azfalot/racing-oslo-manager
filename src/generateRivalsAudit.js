@@ -6,16 +6,16 @@ import fs from 'fs';
 import path from 'path';
 
 const CLUB_CRESTS = {
-  'Fermín Gadura F.C.': '/media/crests/fermin.png',
-  'Ana': '/media/crests/ana.png',
-  'Pachangueros F.C.': '/media/crests/pachangueros.png',
-  'NIN Team': '/media/crests/nin.png',
-  'Puente Avios FC': '/media/crests/puente_avios.png',
-  'Puente Avios': '/media/crests/puente_avios.png',
-  'M4 TEAM': '/media/crests/m4.png',
-  'Melano Plabloroza': '/media/crests/melano.png',
-  'Suances nin': '/media/crests/suances.png',
-  'Hache FC': '/media/crests/hache.png',
+  'Fermín Gadura F.C.': '/media/crests/fermin_gadura.svg',
+  'Ana': '/media/crests/ana.svg',
+  'Pachangueros F.C.': '/media/crests/pachangueros.svg',
+  'NIN Team': '/media/crests/nin_team.svg',
+  'Puente Avios FC': '/media/crests/puente_avios.svg',
+  'Puente Avios': '/media/crests/puente_avios.svg',
+  'M4 TEAM': '/media/crests/m4_team.svg',
+  'Melano Plabloroza': '/media/crests/melano_plabloroza.svg',
+  'Suances nin': '/media/crests/suances_nin.svg',
+  'Hache FC': '/media/crests/hache_fc.svg',
   'Racing de Oslo': '/media/crest.jpg'
 };
 

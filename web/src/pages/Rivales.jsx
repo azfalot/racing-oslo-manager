@@ -70,7 +70,12 @@ export default function Rivales() {
                     : 'bg-forest-dark/30 border-forest/20 text-cream/80 hover:bg-forest-dark/60 hover:border-forest/40'
                 }`}
               >
-                <img src={c.crest} alt={c.teamName} className="w-7 h-7 rounded-full object-cover border border-white/20 flex-shrink-0" />
+                <img 
+                  src={c.crest} 
+                  alt={c.teamName} 
+                  onError={(e) => { e.currentTarget.src = '/media/crest.jpg'; }}
+                  className="w-7 h-7 rounded-full object-cover border border-white/20 flex-shrink-0" 
+                />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-1">
                     <span className="text-xs font-bold truncate">{c.teamName}</span>
@@ -91,6 +96,7 @@ export default function Rivales() {
             <img 
               src={club.crest} 
               alt={club.teamName} 
+              onError={(e) => { e.currentTarget.src = '/media/crest.jpg'; }}
               className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-forest-light object-cover shadow-2xl bg-black/60" 
             />
             <div>
