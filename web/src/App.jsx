@@ -7,8 +7,8 @@ import Noticias from './pages/Noticias'
 import Plantilla from './pages/Plantilla'
 import Mercado from './pages/Mercado'
 import Clasificacion from './pages/Clasificacion'
-import Entradas from './pages/Entradas'
 import Alineacion from './pages/Alineacion'
+import Finanzas from './pages/Finanzas'
 
 import JugadorPage from './pages/JugadorPage'
 
@@ -23,6 +23,7 @@ function App() {
           <Route path="/plantilla" element={<Plantilla />} />
           <Route path="/clasificacion" element={<Clasificacion />} />
           <Route path="/mercado" element={<Mercado />} />
+          <Route path="/finanzas" element={<Finanzas />} />
           <Route path="/jugador/:id" element={<JugadorPage />} />
           <Route path="/entradas" element={<Entradas />} />
           <Route path="/tienda" element={<Tienda />} />

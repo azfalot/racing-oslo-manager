@@ -972,8 +972,13 @@ async function handleTelegramMessage(message) {
       const pointsRewardEst = expPoints * prizePerPoint; // 10.000 € por punto (reglamento oficial Comunio)
       const totalWeeklyEst = pointsRewardEst + basePrizeEst;
 
+      const totalPts = dashboard?.points || 86;
+      const lastPts = dashboard?.lastPoints !== undefined ? dashboard.lastPoints : 38;
+      const lastEarned = lastPts * prizePerPoint;
+      const totalEarned = totalPts * prizePerPoint;
+
       let rep = `💰 <b>[Mateo Oslomany] · ESTADO FINANCIERO Y PROYECCIONES</b>\n\n`;
-      rep += `💵 <b>Saldo en Caja:</b> ${balance.toLocaleString()} €\n`;
+      rep += `💵 <b>Saldo en Caja:</b> <b>${balance.toLocaleString()} €</b>\n`;
       rep += `⏳ <b>Pujas Comprometidas:</b> ${bidsVal.toLocaleString()} € (${pendingBids.length} ${pendingBids.length === 1 ? 'puja' : 'pujas'})\n`;
       if (pendingBids.length > 0) {
         pendingBids.forEach(b => {
@@ -984,13 +989,17 @@ async function handleTelegramMessage(message) {
       rep += `🏆 <b>Valor Plantilla:</b> ${squadVal.toLocaleString()} € (${(squad?.players || []).length} jugadores)\n`;
       rep += `💎 <b>Patrimonio Total:</b> ${(balance + squadVal).toLocaleString()} €\n\n`;
 
-      rep += `📈 <b>PROYECCIÓN OFICIAL DE INGRESOS (Jornada):</b>\n`;
-      rep += ` • Puntos proyectados Once Titular: ~${expPoints} pts\n`;
-      rep += ` • Prima oficial Comunio (10.000 €/pto): <b>+${pointsRewardEst.toLocaleString()} €</b>\n`;
+      rep += `🏁 <b>HISTÓRICO DE INGRESOS COBRADOS:</b>\n`;
+      rep += ` • Última Jornada disputada: <b>${lastPts} pts</b> ➔ <b>+${lastEarned.toLocaleString()} €</b> cobrados\n`;
+      rep += ` • Total acumulado temporada: <b>${totalPts} pts</b> ➔ <b>+${totalEarned.toLocaleString()} €</b> generados\n\n`;
+
+      rep += `📈 <b>PROYECCIÓN PRÓXIMA JORNADA (Oficial Comunio 10k €/pto):</b>\n`;
+      rep += ` • Puntos proyectados Once: ~${expPoints} pts\n`;
+      rep += ` • Prima estimada por puntos: <b>+${pointsRewardEst.toLocaleString()} €</b>\n`;
       if (basePrizeEst > 0) {
         rep += ` • Prima adicional de comunidad: +${basePrizeEst.toLocaleString()} €\n`;
       }
-      rep += ` 💰 <b>Ingreso neto estimado por jornada:</b> <b>+${totalWeeklyEst.toLocaleString()} €</b>\n`;
+      rep += ` 💰 <b>Ingreso neto estimado:</b> <b>+${totalWeeklyEst.toLocaleString()} €</b>\n`;
       rep += ` 🏦 <b>Saldo proyectado tras liquidar jornada:</b> <b>~${(netBalance + totalWeeklyEst).toLocaleString()} €</b>\n\n`;
 
       rep += balance < 0

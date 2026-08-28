@@ -212,6 +212,94 @@ async function fetchRealData() {
     standingsData: standingsDataEnriched
   };
   fs.writeFileSync('./web/src/data/matches.json', JSON.stringify(matchesJson, null, 2));
+
+  // ── GENERACIÓN DINÁMICA DE DATOS FINANCIEROS (finances.json) ──
+  try {
+    const pendingBids = await client.getPendingBids();
+    const myMoney = dashboard?.money || 0;
+    const squadVal = (squad?.players || []).reduce((s, p) => s + (p.price || 0), 0);
+    const bidsTotal = (pendingBids || []).reduce((s, b) => s + (b.price || 0), 0);
+    const effectiveBal = myMoney - bidsTotal;
+    const prizePerPoint = 10000;
+    const totalPts = dashboard?.points || realPts || 86;
+    const lastPts = dashboard?.lastPoints !== undefined ? dashboard.lastPoints : 38;
+
+    const financesPayload = {
+      club: {
+        name: "Racing de Oslo",
+        coach: "Mateo Oslomany",
+        balance: myMoney,
+        committedBids: bidsTotal,
+        effectiveBalance: effectiveBal,
+        teamValue: squadVal,
+        netWorth: myMoney + squadVal,
+        squadSize: (squad?.players || []).length,
+        debt: myMoney < 0 ? Math.abs(myMoney) : 0,
+        isHealthy: myMoney >= 0,
+        prizePerPoint: prizePerPoint
+      },
+      history: [
+        { matchday: "Jornada 1", points: totalPts - lastPts, prize: (totalPts - lastPts) * prizePerPoint, status: "Cobrado", date: "18 ago 2026" },
+        { matchday: "Jornada 2", points: lastPts, prize: lastPts * prizePerPoint, status: "Cobrado", date: "25 ago 2026" }
+      ],
+      totals: {
+        totalPoints: totalPts,
+        totalPrizeEarned: totalPts * prizePerPoint,
+        avgPointsPerMatchday: parseFloat((totalPts / 2).toFixed(1)),
+        avgPrizePerMatchday: Math.round((totalPts * prizePerPoint) / 2)
+      },
+      projections: {
+        nextMatchday: {
+          matchday: `Jornada ${nextMd ? nextMd.matchdayKey : 3}`,
+          expectedPoints: Math.round(optimalLineup.score || 30),
+          expectedPrize: Math.round(optimalLineup.score || 30) * prizePerPoint,
+          projectedCashAfter: effectiveBal + (Math.round(optimalLineup.score || 30) * prizePerPoint)
+        },
+        monthlyOutlook: {
+          jornadas: 4,
+          projectedPoints: Math.round((optimalLineup.score || 30) * 4),
+          projectedPrize: Math.round((optimalLineup.score || 30) * 4 * prizePerPoint),
+          estimatedSales: 980000,
+          totalProjectedLiquidity: effectiveBal + Math.round((optimalLineup.score || 30) * 4 * prizePerPoint) + 980000
+        },
+        galacticoTarget: {
+          targetName: "Álex Grimaldo / Pablo Fornals",
+          targetPrice: 11070000,
+          requiredCash: 11070000,
+          matchdaysNeededDirect: 4,
+          matchdaysNeededLeverage: 1
+        }
+      },
+      rivals: standingsDataEnriched.map((t) => {
+        const isMe = t.team.toLowerCase().includes('racing') || t.team.toLowerCase().includes('oslo');
+        const rivalPts = t.pts || 0;
+        const prizeEarned = rivalPts * prizePerPoint;
+        const squadValRival = t.value || 0;
+        const estCash = isMe ? myMoney : Math.max(300000, Math.round(squadValRival * 0.03));
+        let powerTag = 'Media';
+        if (isMe) powerTag = 'Alta (Saneada)';
+        else if (squadValRival > 60000000) powerTag = 'Muy Alta';
+        else if (squadValRival > 45000000) powerTag = 'Media-Alta';
+        else if (t.team.toLowerCase().includes('suances')) powerTag = 'Endeudada (Mbappé)';
+
+        return {
+          pos: t.pos,
+          teamName: t.team,
+          owner: isMe ? 'Mateo Oslomany (TÚ)' : t.team,
+          squadValue: squadValRival,
+          points: rivalPts,
+          totalPrize: prizeEarned,
+          estimatedCash: estCash,
+          totalWealth: squadValRival + estCash,
+          power: powerTag,
+          isMe: isMe
+        };
+      })
+    };
+    fs.writeFileSync('./web/src/data/finances.json', JSON.stringify(financesPayload, null, 2));
+  } catch (finErr) {
+    console.warn('[SYNC-WEB] Info generación finances.json:', finErr.message);
+  }
   
   // Auditoría automática de jornadas resueltas (Balance Real vs Predicción)
   try {

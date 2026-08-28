@@ -1,0 +1,150 @@
+{
+  "club": {
+    "name": "Racing de Oslo",
+    "coach": "Mateo Oslomany",
+    "balance": 914990,
+    "committedBids": 180001,
+    "effectiveBalance": 734989,
+    "teamValue": 54360000,
+    "netWorth": 55274990,
+    "squadSize": 11,
+    "debt": 0,
+    "isHealthy": true,
+    "prizePerPoint": 10000
+  },
+  "history": [
+    {
+      "matchday": "Jornada 1",
+      "points": 48,
+      "prize": 480000,
+      "status": "Cobrado",
+      "date": "18 ago 2026"
+    },
+    {
+      "matchday": "Jornada 2",
+      "points": 38,
+      "prize": 380000,
+      "status": "Cobrado",
+      "date": "25 ago 2026"
+    }
+  ],
+  "totals": {
+    "totalPoints": 86,
+    "totalPrizeEarned": 860000,
+    "avgPointsPerMatchday": 43,
+    "avgPrizePerMatchday": 430000
+  },
+  "projections": {
+    "nextMatchday": {
+      "matchday": "Jornada 3",
+      "expectedPoints": 30,
+      "expectedPrize": 300000,
+      "projectedCashAfter": 1034989
+    },
+    "monthlyOutlook": {
+      "jornadas": 4,
+      "projectedPoints": 125,
+      "projectedPrize": 1250000,
+      "estimatedSales": 980000,
+      "totalProjectedLiquidity": 2964989
+    },
+    "galacticoTarget": {
+      "targetName": "Álex Grimaldo / Pablo Fornals",
+      "targetPrice": 11070000,
+      "requiredCash": 11070000,
+      "matchdaysNeededDirect": 4,
+      "matchdaysNeededLeverage": 1
+    }
+  },
+  "rivals": [
+    {
+      "pos": 1,
+      "teamName": "Fermín Gadura F.C.",
+      "owner": "Fermín",
+      "squadValue": 65520000,
+      "points": 113,
+      "totalPrize": 1130000,
+      "estimatedCash": 1450000,
+      "totalWealth": 66970000,
+      "power": "Muy Alta"
+    },
+    {
+      "pos": 2,
+      "teamName": "Racing de Oslo",
+      "owner": "Mateo Oslomany (TÚ)",
+      "squadValue": 54360000,
+      "points": 86,
+      "totalPrize": 860000,
+      "estimatedCash": 914990,
+      "totalWealth": 55274990,
+      "power": "Alta (Saneada)",
+      "isMe": true
+    },
+    {
+      "pos": 3,
+      "teamName": "Puente Avios FC",
+      "owner": "Puente",
+      "squadValue": 48210000,
+      "points": 74,
+      "totalPrize": 740000,
+      "estimatedCash": 820000,
+      "totalWealth": 49030000,
+      "power": "Media-Alta"
+    },
+    {
+      "pos": 4,
+      "teamName": "Ana",
+      "owner": "Ana",
+      "squadValue": 46890000,
+      "points": 69,
+      "totalPrize": 690000,
+      "estimatedCash": 450000,
+      "totalWealth": 47340000,
+      "power": "Media"
+    },
+    {
+      "pos": 5,
+      "teamName": "Pachangueros F.C.",
+      "owner": "Pachanga",
+      "squadValue": 41200000,
+      "points": 62,
+      "totalPrize": 620000,
+      "estimatedCash": 610000,
+      "totalWealth": 41810000,
+      "power": "Media"
+    },
+    {
+      "pos": 6,
+      "teamName": "M4 TEAM",
+      "owner": "M4",
+      "squadValue": 38450000,
+      "points": 58,
+      "totalPrize": 580000,
+      "estimatedCash": 780000,
+      "totalWealth": 39230000,
+      "power": "Moderada"
+    },
+    {
+      "pos": 7,
+      "teamName": "Hache FC",
+      "owner": "Hache",
+      "squadValue": 34100000,
+      "points": 51,
+      "totalPrize": 510000,
+      "estimatedCash": 520000,
+      "totalWealth": 34620000,
+      "power": "Baja"
+    },
+    {
+      "pos": 8,
+      "teamName": "Suances nin",
+      "owner": "Suances",
+      "squadValue": 52100000,
+      "points": 45,
+      "totalPrize": 450000,
+      "estimatedCash": 210000,
+      "totalWealth": 52310000,
+      "power": "Endeudada (Mbappé)"
+    }
+  ]
+}
