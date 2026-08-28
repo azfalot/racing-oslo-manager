@@ -10,6 +10,7 @@ import Clasificacion from './pages/Clasificacion'
 import Alineacion from './pages/Alineacion'
 import Finanzas from './pages/Finanzas'
 import Entradas from './pages/Entradas'
+import Rivales from './pages/Rivales'
 
 import JugadorPage from './pages/JugadorPage'
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/noticias" element={<Noticias />} />
           <Route path="/plantilla" element={<Plantilla />} />
           <Route path="/clasificacion" element={<Clasificacion />} />
+          <Route path="/rivales" element={<Rivales />} />
           <Route path="/mercado" element={<Mercado />} />
           <Route path="/finanzas" element={<Finanzas />} />
           <Route path="/jugador/:id" element={<JugadorPage />} />

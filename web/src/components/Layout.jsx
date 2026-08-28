@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Home, Newspaper, Users, Trophy, ShoppingBag, Ticket, Shirt, Briefcase, DollarSign } from 'lucide-react'
+import { Menu, X, Home, Newspaper, Users, Trophy, ShoppingBag, Ticket, Shirt, Briefcase, DollarSign, BarChart3 } from 'lucide-react'
 
 export default function Layout({ children }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -12,6 +12,7 @@ export default function Layout({ children }) {
     { to: '/alineacion', label: 'EL ONCE', icon: Users },
     { to: '/plantilla', label: 'PLANTILLA', icon: Users },
     { to: '/clasificacion', label: 'CLASIFICACIÓN', icon: Trophy },
+    { to: '/rivales', label: 'RIVALES 360', icon: BarChart3 },
     { to: '/mercado', label: 'MERCADO', icon: Briefcase },
     { to: '/finanzas', label: 'FINANZAS', icon: DollarSign },
     { to: '/entradas', label: 'ENTRADAS', icon: Ticket },

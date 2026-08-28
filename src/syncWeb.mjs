@@ -307,6 +307,14 @@ async function fetchRealData() {
   } catch (finErr) {
     console.warn('[SYNC-WEB] Info generación finances.json:', finErr.message);
   }
+
+  // Generación de la auditoría 360º de rivales (Dashboard de Rivales)
+  try {
+    const { generateRivalsAuditData } = await import('./generateRivalsAudit.js');
+    await generateRivalsAuditData();
+  } catch (rivErr) {
+    console.warn('[SYNC-WEB] Info generación rivalsAudit.json:', rivErr.message);
+  }
   
   // Auditoría automática de jornadas resueltas (Balance Real vs Predicción)
   try {
