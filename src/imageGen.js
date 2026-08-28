@@ -545,21 +545,206 @@ export async function publishSaleNews(playerName, price, playerId, buyerName = '
   return null;
 }
 
-export async function publishMarketDealNews(data) {
+const CLUB_CREST_MAP = {
+  'ana': 'ana.svg',
+  'fermin': 'fermin_gadura.svg',
+  'fermin gadura': 'fermin_gadura.svg',
+  'fermin gadura f.c.': 'fermin_gadura.svg',
+  'gadura': 'fermin_gadura.svg',
+  'hache': 'hache_fc.svg',
+  'hache fc': 'hache_fc.svg',
+  'm4': 'm4_team.svg',
+  'm4 team': 'm4_team.svg',
+  'melano': 'melano_plabloroza.svg',
+  'melano plabloroza': 'melano_plabloroza.svg',
+  'nin': 'nin_team.svg',
+  'nin team': 'nin_team.svg',
+  'pachangueros': 'pachangueros.svg',
+  'pachangueros f.c.': 'pachangueros.svg',
+  'puente': 'puente_avios.svg',
+  'puente avios': 'puente_avios.svg',
+  'puente avios fc': 'puente_avios.svg',
+  'suances': 'suances_nin.svg',
+  'suances nin': 'suances_nin.svg'
+};
+
+export function getCrestPathForClub(clubName) {
+  if (!clubName) return null;
+  const clean = clubName.toLowerCase().trim();
+  for (const [k, file] of Object.entries(CLUB_CREST_MAP)) {
+    if (clean.includes(k) || k.includes(clean)) {
+      const p = path.resolve('web/public/media/crests', file);
+      if (fs.existsSync(p)) return p;
+    }
+  }
+  return null;
+}
+
+export async function generateRivalTransferGraphic(buyerClub, sellerClub, playerName, price, playerId) {
+  const width = 1024;
+  const height = 682;
+  const canvas = createCanvas(width, height);
+  const ctx = canvas.getContext('2d');
+
+  // 1. Fondo elegante Comunio (Gradiente verde deportivo profundo)
+  const bgGrad = ctx.createLinearGradient(0, 0, width, height);
+  bgGrad.addColorStop(0, '#062013');
+  bgGrad.addColorStop(0.5, '#0c3520');
+  bgGrad.addColorStop(1, '#05160d');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, width, height);
+
+  // Fondo Comunio con opacidad
+  const comunioBgPath = path.resolve('web/public/media/comunio_rival_transfers.png');
+  if (fs.existsSync(comunioBgPath)) {
+    try {
+      const bgImg = await loadImage(comunioBgPath);
+      ctx.globalAlpha = 0.25;
+      ctx.drawImage(bgImg, 0, 0, width, height);
+      ctx.globalAlpha = 1.0;
+    } catch(e) {}
+  }
+
+  // Marco decorativo
+  ctx.strokeStyle = 'rgba(134, 239, 172, 0.25)';
+  ctx.lineWidth = 4;
+  ctx.strokeRect(20, 20, width - 40, height - 40);
+
+  // 2. Cabecera
+  ctx.fillStyle = '#86efac';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('MERCADO OFICIAL DE COMUNIO · TRASPASO CONFIRMADO', width / 2, 65);
+
+  // 3. Logo del Club Rival (Comprador)
+  const crestPath = getCrestPathForClub(buyerClub);
+  if (crestPath) {
+    try {
+      const crestBuf = fs.readFileSync(crestPath);
+      const crestImg = await loadImage(crestBuf);
+      
+      ctx.save();
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+      ctx.shadowBlur = 25;
+      ctx.fillStyle = '#0f291c';
+      ctx.beginPath();
+      ctx.arc(280, 235, 105, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#d4af37';
+      ctx.lineWidth = 4;
+      ctx.stroke();
+      ctx.restore();
+
+      ctx.drawImage(crestImg, 195, 150, 170, 170);
+    } catch (e) {
+      console.warn('Error dibujando escudo:', e.message);
+    }
+  }
+
+  // 4. Foto del Jugador (a la derecha)
+  if (playerId) {
+    await ensurePlayerPhoto(playerId);
+    const photoPath = path.resolve(`web/public/media/players/${playerId}.png`);
+    if (fs.existsSync(photoPath)) {
+      try {
+        const playerImg = await loadImage(photoPath);
+        ctx.save();
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+        ctx.shadowBlur = 25;
+        ctx.fillStyle = '#0f291c';
+        ctx.beginPath();
+        ctx.arc(744, 235, 105, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#86efac';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+        ctx.restore();
+
+        ctx.drawImage(playerImg, 659, 150, 170, 170);
+      } catch (e) {}
+    }
+  }
+
+  // 5. Textos Centrales
+  // Nombre del Club Comprador
+  ctx.fillStyle = '#fef08a';
+  ctx.font = 'bold 36px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+  ctx.shadowBlur = 10;
+  ctx.fillText((buyerClub || 'CLUB RIVAL').toUpperCase(), width / 2, 405);
+
+  // Subtexto
+  ctx.fillStyle = '#d4ceb8';
+  ctx.font = '18px sans-serif';
+  ctx.shadowBlur = 0;
+  ctx.fillText('FICHA A', width / 2, 445);
+
+  // Nombre del Jugador
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 42px sans-serif';
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+  ctx.shadowBlur = 12;
+  ctx.fillText((playerName || 'JUGADOR').toUpperCase(), width / 2, 498);
+
+  // Placa de Precio
+  ctx.save();
+  ctx.fillStyle = '#081a10';
+  ctx.strokeStyle = '#d4af37';
+  ctx.lineWidth = 2;
+  const pStr = typeof price === 'number' ? price.toLocaleString() + ' €' : price;
+  const badgeW = 320;
+  const badgeH = 54;
+  const badgeX = (width - badgeW) / 2;
+  const badgeY = 535;
+  ctx.fillRect(badgeX, badgeY, badgeW, badgeH);
+  ctx.strokeRect(badgeX, badgeY, badgeW, badgeH);
+
+  ctx.fillStyle = '#fef08a';
+  ctx.font = 'bold 26px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText(`💰 ${pStr}`, width / 2, badgeY + 36);
+  ctx.restore();
+
+  // Procedencia
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = 'italic 16px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(`Procedente de ${sellerClub || 'Computer'}`, width / 2, 630);
+
+  const outDir = path.resolve('web/public/media/news_graphics');
+  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+  const fileName = `rival_${playerId || playerName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}.jpg`;
+  const outPath = path.resolve(outDir, fileName);
+  fs.writeFileSync(outPath, canvas.toBuffer('image/jpeg', { quality: 0.95 }));
+  return `/media/news_graphics/${fileName}`;
+}
+
+export async function publishRivalTransferNews(buyerClub, sellerClub, playerName, price, playerId = null) {
   try {
-    const graphicUrl = await generateTemplateGraphic('market', data.playerName, data.price, data.playerId, data);
+    const graphicUrl = await generateRivalTransferGraphic(buyerClub, sellerClub, playerName, price, playerId);
+    const pFormatted = typeof price === 'number' ? price.toLocaleString() + ' €' : price;
     const article = {
-      id: `market_deal_${data.playerId || data.playerName.replace(/\s+/g, '_')}`,
-      title: `MERCADO: ${data.buyerName} ficha a ${data.playerName} por ${typeof data.price === 'number' ? data.price.toLocaleString() + ' €' : data.price}`,
-      date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }),
-      category: 'Rivales',
-      excerpt: `${data.buyerName} completa la incorporación de ${data.playerName} procedente de ${data.prevClub || 'LaLiga'}.`,
-      summary: `${data.buyerName} completa la incorporación de ${data.playerName} procedente de ${data.prevClub || 'LaLiga'}.`,
-      content: `Movimiento de mercado confirmado en la comunidad. ${data.buyerName} se ha hecho con los servicios de ${data.playerName} tras una puja de ${typeof data.price === 'number' ? data.price.toLocaleString() + ' €' : data.price}.\n\nEl Racing de Oslo audita los movimientos de los rivales mientras mantiene una sólida posición de liquidez.`,
+      id: `rival_signing_${playerId || playerName.replace(/\s+/g, '_')}`,
+      title: `MERCADO: ${buyerClub} ficha a ${playerName} por ${pFormatted}`,
+      date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }),
+      category: 'Mercado',
+      summary: `${buyerClub} completa el fichaje de ${playerName} procedente de ${sellerClub} tras una puja de ${pFormatted}.`,
+      body: `Movimiento oficial confirmado en la comunidad de Comunio. ${buyerClub} se ha impuesto en la puja por ${playerName} tras desembolsar ${pFormatted} a ${sellerClub}.\n\nEl Racing de Oslo mantiene su plan financiero con la tesorería saneada mientras audita las siguientes oportunidades del mercado.`,
+      content: `Movimiento oficial confirmado en la comunidad de Comunio. ${buyerClub} se ha impuesto en la puja por ${playerName} tras desembolsar ${pFormatted} a ${sellerClub}.\n\nEl Racing de Oslo mantiene su plan financiero con la tesorería saneada mientras audita las siguientes oportunidades del mercado.`,
       image: graphicUrl,
       author: 'Fabrizio Oslomano'
     };
     return insertOrUpdateNews(article);
+  } catch (err) {
+    console.error('[NEWS ERROR] Error publicando fichaje rival:', err.message);
+  }
+  return null;
+}
+
+export async function publishMarketDealNews(data) {
+  try {
+    return await publishRivalTransferNews(data.buyerName || 'Rival', data.prevClub || 'Computer', data.playerName, data.price, data.playerId);
   } catch (e) {
     console.error('[NEWS ERROR] Error publicando fichaje de mercado:', e.message);
   }

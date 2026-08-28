@@ -1630,16 +1630,9 @@ async function runMarketCheck() {
                 console.warn('[DAEMON] Info post comunidad fichaje:', commErr.message);
               }
             } else if (!isComputer) {
-              // Solo publicar si es un mánager rival humano de la comunidad
-              insertOrUpdateNews({
-                id: `rival_signing_${p.playerId || tx.player.replace(/\s+/g, '_')}`,
-                title: `MERCADO: ${tx.buyer} ficha a ${tx.player} por ${tx.price}`,
-                date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }),
-                category: 'Mercado',
-                summary: `${tx.buyer} completa el fichaje de ${tx.player} procedente de ${tx.seller} tras una puja de ${tx.price}.`,
-                body: `Movimiento oficial confirmado en la comunidad de Comunio. ${tx.buyer} se ha impuesto en la puja por ${tx.player} tras desembolsar ${tx.price} a ${tx.seller}.\n\nEl Racing de Oslo mantiene su plan financiero con la tesorería saneada mientras audita las siguientes oportunidades del mercado.`,
-                image: '/media/comunio_rival_transfers.png'
-              });
+              // Solo publicar si es un mánager rival humano de la comunidad con su escudo oficial
+              const { publishRivalTransferNews } = await import('./imageGen.js');
+              await publishRivalTransferNews(tx.buyer, tx.seller, tx.player, tx.price, p.playerId);
             }
           } catch (newsErr) {
             console.error('[DAEMON-NEWS] Error publicando transacción:', newsErr.message);
