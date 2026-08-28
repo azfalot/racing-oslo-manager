@@ -1097,26 +1097,61 @@ async function handleTelegramMessage(message) {
 
   // ── /salud ───────────────────────────────────────────────────────────────
   else if (text.startsWith('/salud')) {
-    await sendTelegramMessage('💼 🩺 <i>[Mateo Oslomany]: Analizando parte médico y estado físico de la plantilla...</i>');
+    await sendTelegramMessage('💼 🩺 <i>[Mateo Oslomany]: Analizando parte médico, estado físico y disciplina de la plantilla...</i>');
     const client = new ComunioClient();
     const engine = new ComunioEngine();
     try {
       await client.login();
       const squad = await client.getSquad();
       const players = squad?.players || [];
-      const injuredOrDoubt = players.filter(p => !engine.isPlayerAvailable(p));
+      const { DisciplineMonitor } = await import('./disciplineMonitor.js');
+      const { MinuteTracker } = await import('./minuteTracker.js');
+      const { LineupScraper } = await import('./lineupScraper.js');
 
-      let rep = `🩺 <b>[Mateo Oslomany] · Parte Médico Oficial</b>\n\n`;
+      const injuredOrDoubt = players.filter(p => !engine.isPlayerAvailable(p));
+      const warnings = players.filter(p => DisciplineMonitor.getDisciplinaryStatus(p).isWarning);
+      const suspended = players.filter(p => DisciplineMonitor.getDisciplinaryStatus(p).isSuspended);
+
+      let rep = `🩺 <b>[Mateo Oslomany] · INFORME MÉDICO & DISCIPLINARIO</b>\n\n`;
+
+      // 1. Estado Físico
+      rep += `🏥 <b>ESTADO FÍSICO Y ENFERMERÍA:</b>\n`;
       if (injuredOrDoubt.length > 0) {
-        rep += `⚠️ Se han detectado <b>${injuredOrDoubt.length} futbolistas</b> con problemas físicos o sanciones:\n\n`;
         injuredOrDoubt.forEach(p => {
           const statusDesc = p.statusInfo || p.status || 'No disponible';
-          rep += ` • <b>${escapeHtml(p.name)}</b> (${(p.type || '').toUpperCase()})\n   <i>Estado: ${escapeHtml(statusDesc)}</i>\n\n`;
+          rep += ` • ⚠️ <b>${escapeHtml(p.name)}</b> (${(p.type || '').toUpperCase()})\n   <i>Estado: ${escapeHtml(statusDesc)}</i>\n`;
         });
-        rep += `💡 El optimizador táctico los excluye automáticamente del 11 titular para no arriesgar 0 puntos.`;
       } else {
-        rep += `✅ <b>¡Plantilla al 100% Fit!</b> No hay lesionados, dudas médicas ni sancionados en el equipo.`;
+        rep += ` • ✅ <b>¡Plantilla al 100% Fit!</b> Sin lesionados ni dudas médicas.\n`;
       }
+
+      // 2. Control Disciplinario (Ciclo 5 Amarillas RFEF)
+      rep += `\n🟨 <b>CONTROL DISCIPLINARIO (Ciclo 5 Amarillas RFEF):</b>\n`;
+      if (suspended.length > 0) {
+        suspended.forEach(p => {
+          const st = DisciplineMonitor.getDisciplinaryStatus(p);
+          rep += ` • 🚫 <b>${escapeHtml(p.name)}:</b> <b>${st.label}</b> (Excluido del XI)\n`;
+        });
+      }
+      if (warnings.length > 0) {
+        warnings.forEach(p => {
+          const st = DisciplineMonitor.getDisciplinaryStatus(p);
+          rep += ` • ⚠️ <b>${escapeHtml(p.name)}:</b> <b>EN CAPILLA</b> (${st.yellows} 🟨 - A 1 amarilla de suspensión)\n`;
+        });
+      }
+      if (suspended.length === 0 && warnings.length === 0) {
+        rep += ` • ✅ <b>Disciplina impecable:</b> Ningún futbolista sancionado ni en capilla.\n`;
+      }
+
+      // 3. Resumen de Minutaje y Titularidad
+      rep += `\n⏱️ <b>INTELIGENCIA DE TITULARIDAD (PRENSA & MINUTAJE):</b>\n`;
+      const keyPlayers = players.slice(0, 6);
+      keyPlayers.forEach(p => {
+        const mins = MinuteTracker.getEstimatedMinutesPerGame(p);
+        const tag = LineupScraper.getLineupStatusTag(p);
+        rep += ` • <b>${escapeHtml(p.name)}:</b> ~${mins} min/p ➔ <i>${tag.label}</i>\n`;
+      });
+
       await sendTelegramMessage(rep);
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ Error consultando parte médico: <code>${e.message}</code>`);

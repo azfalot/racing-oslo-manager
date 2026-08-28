@@ -15,6 +15,9 @@ import {
   evaluateSalePortfolio,
   evaluatePostSigningSale
 } from './squadOptimizer.js';
+import { MinuteTracker } from './minuteTracker.js';
+import { DisciplineMonitor } from './disciplineMonitor.js';
+import { LineupScraper } from './lineupScraper.js';
 
 export class ComunioEngine {
 
@@ -151,11 +154,16 @@ export class ComunioEngine {
   getExpectedPoints(player, matchData = null) {
     if (!player) return 0;
 
+    // 0. Si está sancionado por tarjetas o expulsión federativa -> 0 puntos
+    if (DisciplineMonitor.isPlayerSuspended(player)) {
+      return 0;
+    }
+
     // 1. Proyección base de la temporada -> Media esperada por partido (34 partidos estimados)
     const seasonProj = this.getSeasonProjection(player);
     let matchExpected = parseFloat((seasonProj / 34).toFixed(2));
 
-    // 2. Si lleva racha reciente sobresaliente en la temporada actual, ponderar
+    // 2. Si lleva racha reciente en la temporada actual, ponderar
     const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
     if (!isNaN(avgPoints) && avgPoints > 0) {
       matchExpected = (matchExpected * 0.60) + (avgPoints * 0.40);
@@ -169,7 +177,14 @@ export class ComunioEngine {
 
     // 4. Modificador por dificultad del rival / factor campo
     const matchMod = this.getMatchDifficultyModifier(player, matchData);
-    matchExpected = matchExpected * matchMod;
+
+    // 5. Ponderación por Minutaje Real (MinuteTracker)
+    const minuteMod = MinuteTracker.getMinuteMultiplier(player);
+
+    // 6. Ponderación por Probabilidad de Titularidad en Prensa (LineupScraper)
+    const lineupProbMod = LineupScraper.getLineupProbabilityMultiplier(player);
+
+    matchExpected = matchExpected * matchMod * minuteMod * lineupProbMod;
 
     return parseFloat(matchExpected.toFixed(1));
   }
@@ -180,8 +195,8 @@ export class ComunioEngine {
   isPlayerAvailable(player) {
     if (!player) return false;
 
-    // 1. Comprobar tarjetas rojas directas o doble amarilla activa
-    if (player.cards && (player.cards.red > 0 || player.cards.yellowRed > 0)) {
+    // 1. Control disciplinario (Rojas, doble amarilla o ciclo de 5 amarillas)
+    if (DisciplineMonitor.isPlayerSuspended(player)) {
       return false;
     }
 
