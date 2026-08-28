@@ -9,6 +9,7 @@ import Mercado from './pages/Mercado'
 import Clasificacion from './pages/Clasificacion'
 import Alineacion from './pages/Alineacion'
 import Finanzas from './pages/Finanzas'
+import Entradas from './pages/Entradas'
 
 import JugadorPage from './pages/JugadorPage'
 
