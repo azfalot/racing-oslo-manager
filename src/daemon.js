@@ -1334,6 +1334,41 @@ async function updateTelegramMessageMarkup(chatId, messageId, statusLabel) {
   }
 }
 
+async function updateSpecificTelegramButton(callbackQuery, newButtonText, newCallbackData = 'done') {
+  const chatId = callbackQuery.message?.chat?.id;
+  const messageId = callbackQuery.message?.message_id;
+  const oldKeyboard = callbackQuery.message?.reply_markup?.inline_keyboard;
+
+  if (!chatId || !messageId) return;
+
+  if (!oldKeyboard || oldKeyboard.length <= 1) {
+    return updateTelegramMessageMarkup(chatId, messageId, newButtonText);
+  }
+
+  // Actualizar solo el botón clickeado conservando el resto de opciones
+  const updatedKeyboard = oldKeyboard.map(row => {
+    return row.map(btn => {
+      if (btn.callback_data === callbackQuery.data) {
+        return { text: newButtonText, callback_data: newCallbackData };
+      }
+      return btn;
+    });
+  });
+
+  try {
+    const url = `https://api.telegram.org/bot${telegramToken}/editMessageReplyMarkup`;
+    await axios.post(url, {
+      chat_id: chatId,
+      message_id: messageId,
+      reply_markup: {
+        inline_keyboard: updatedKeyboard
+      }
+    });
+  } catch (err) {
+    console.error('[DAEMON-TG] Error actualizando botón individual:', err.message);
+  }
+}
+
 // ── MANEJADOR DE BOTONES INLINE (callback_query) ──────────────────────────────
 
 async function handleCallbackQuery(callbackQuery) {
@@ -1356,7 +1391,7 @@ async function handleCallbackQuery(callbackQuery) {
   if (data.startsWith('bid:')) {
     const [, playerId, playerName, price, position] = data.split(':');
     await answerCallbackQuery(callbackQuery.id, '⏳ Procesando puja...');
-    await updateTelegramMessageMarkup(chatId, messageId, `✅ PUJA CONFIRMADA (${parseInt(price).toLocaleString()} €)`);
+    await updateSpecificTelegramButton(callbackQuery, `✅ PUJA CONFIRMADA (${parseInt(price).toLocaleString()} €)`);
 
     const client = new ComunioClient();
     try {
@@ -1369,30 +1404,33 @@ async function handleCallbackQuery(callbackQuery) {
       fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
 
       if (success) {
-        await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> ¡Puja enviada! <b>${playerName}</b> por <b>${parseInt(price).toLocaleString()} €</b>.`);
-        await sendSigningCard(playerName, position || '', parseInt(price),
-          `✍️ <b>${escapeHtml(playerName)}</b> firma con el Racing de Oslo por <b>${parseInt(price).toLocaleString()} €</b>`,
-          parseInt(playerId), client.getToken());
+        await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Puja enviada con éxito por <b>${escapeHtml(playerName)}</b> por <b>${parseInt(price).toLocaleString()} €</b>.`);
+
+        // Generar comunicado oficial de fichaje en la web
+        try {
+          const { publishSigningNews } = await import('./imageGen.js');
+          await publishSigningNews(playerName, `${parseInt(price).toLocaleString()} €`, parseInt(playerId), position || 'centrocampista');
+        } catch (e) {
+          console.error('[DAEMON] Error publicando noticia de fichaje:', e.message);
+        }
       } else {
-        await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> La puja por ${playerName} fue rechazada por Comunio.`);
+        await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al enviar la puja por ${escapeHtml(playerName)}.`);
       }
     } catch (e) {
-      await sendTelegramMessage(`💼 ❌ Error al pujar: <code>${e.message}</code>`);
+      await sendTelegramMessage(`💼 ❌ Error al procesar puja: <code>${e.message}</code>`);
     } finally {
       await client.close();
     }
-
   } else if (data.startsWith('ignore:')) {
     const [, playerId, playerName] = data.split(':');
     ignorePlayer(parseInt(playerId));
     await answerCallbackQuery(callbackQuery.id, '✅ Ignorado por 24h');
-    await updateTelegramMessageMarkup(chatId, messageId, `🚫 OPCIÓN IGNORADA`);
-    await sendTelegramMessage(`💼 🚫 <b>[Mateo Oslomany]:</b> <b>${playerName}</b> añadido a la lista de ignorados por 24h. No volveré a alertarte por este jugador.`);
+    await updateSpecificTelegramButton(callbackQuery, `🚫 OPCIÓN IGNORADA`);
+    await sendTelegramMessage(`💼 🚫 <b>[Mateo Oslomany]:</b> <b>${escapeHtml(playerName)}</b> añadido a la lista de ignorados por 24h.`);
   } else if (data.startsWith('acc_sale:')) {
-    // Formato ultra-compacto: acc_sale:offerId:playerId:price
     const [, offerId, playerId, price] = data.split(':');
     await answerCallbackQuery(callbackQuery.id, '⏳ Procesando aceptación de venta...');
-    await updateTelegramMessageMarkup(chatId, messageId, `✅ VENTA ACEPTADA (${parseInt(price).toLocaleString()} €)`);
+    await updateSpecificTelegramButton(callbackQuery, `✅ VENTA ACEPTADA (${parseInt(price).toLocaleString()} €)`);
 
     const client = new ComunioClient();
     try {
@@ -1404,8 +1442,6 @@ async function handleCallbackQuery(callbackQuery) {
       const success = await client.acceptSaleOffer(offerId, playerId, price);
       if (success) {
         await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Venta de <b>${playerName}</b> por <b>${parseInt(price).toLocaleString()} €</b> ACEPTADA con éxito.`);
-        
-        // Generar cartel de venta, foto de API y Noticia Web idéntica a las compras
         try {
           const { publishSaleNews } = await import('./imageGen.js');
           await publishSaleNews(playerName, parseInt(price), playerId);
@@ -1421,10 +1457,9 @@ async function handleCallbackQuery(callbackQuery) {
       await client.close();
     }
   } else if (data.startsWith('rej_sale:')) {
-    // Formato ultra-compacto: rej_sale:offerId:playerId
     const [, offerId, playerId] = data.split(':');
     await answerCallbackQuery(callbackQuery.id, '⛔ Venta rechazada');
-    await updateTelegramMessageMarkup(chatId, messageId, `❌ VENTA RECHAZADA`);
+    await updateSpecificTelegramButton(callbackQuery, `❌ VENTA RECHAZADA`);
 
     const client = new ComunioClient();
     try {
@@ -1433,9 +1468,8 @@ async function handleCallbackQuery(callbackQuery) {
       const player = (squad?.players || []).find(p => p.id === parseInt(playerId) || p.playerId === parseInt(playerId));
       const playerName = player?.name || `Jugador #${playerId}`;
 
-      // Quitar del mercado y rechazar oferta
       await client.removeFromMarket(playerId);
-      await sendTelegramMessage(`💼 ⛔ <b>[Mateo Oslomany]:</b> Oferta por <b>${playerName}</b> RECHAZADA. El jugador ha sido retirado del mercado y permanece intocable en la plantilla.`);
+      await sendTelegramMessage(`💼 ⛔ <b>[Mateo Oslomany]:</b> Oferta por <b>${playerName}</b> RECHAZADA. El jugador ha sido retirado del mercado.`);
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ Error al rechazar venta: <code>${e.message}</code>`);
     } finally {
@@ -1444,7 +1478,7 @@ async function handleCallbackQuery(callbackQuery) {
   } else if (data.startsWith('put_on_sale:')) {
     const [, playerId, playerName, minPrice] = data.split(':');
     await answerCallbackQuery(callbackQuery.id, '⏳ Poniendo en mercado...');
-    await updateTelegramMessageMarkup(chatId, messageId, `🏷️ PUESTO EN MERCADO (${playerName})`);
+    await updateSpecificTelegramButton(callbackQuery, `✅ EN VENTA (${playerName})`, `delist:${playerId}:${playerName}`);
 
     const client = new ComunioClient();
     try {
@@ -1453,7 +1487,6 @@ async function handleCallbackQuery(callbackQuery) {
       if (success) {
         await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> <b>${escapeHtml(playerName)}</b> ha sido puesto en el mercado de Comunio por <b>${parseInt(minPrice).toLocaleString()} €</b>.`);
 
-        // Generar noticia periodística oficial de rumor de salida en la web
         try {
           const { publishRumorNews } = await import('./imageGen.js');
           await publishRumorNews(playerName, `Precio de salida: ${parseInt(minPrice).toLocaleString()} €`, parseInt(playerId), false);
@@ -1461,7 +1494,7 @@ async function handleCallbackQuery(callbackQuery) {
           console.error('[DAEMON] Error publicando rumor de salida:', e.message);
         }
       } else {
-        await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> No se pudo poner a en venta a ${escapeHtml(playerName)}.`);
+        await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> No se pudo poner en venta a ${escapeHtml(playerName)}.`);
       }
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ Error al poner en venta: <code>${e.message}</code>`);
@@ -1471,7 +1504,7 @@ async function handleCallbackQuery(callbackQuery) {
   } else if (data.startsWith('delist:')) {
     const [, playerId, playerName] = data.split(':');
     await answerCallbackQuery(callbackQuery.id, '⏳ Retirando del mercado...');
-    await updateTelegramMessageMarkup(chatId, messageId, `⚪ RETIRADO DEL MERCADO (${playerName})`);
+    await updateSpecificTelegramButton(callbackQuery, `⚪ RETIRADO (${playerName})`, `put_on_sale:${playerId}:${playerName}:160000`);
 
     const client = new ComunioClient();
     try {
@@ -1490,7 +1523,7 @@ async function handleCallbackQuery(callbackQuery) {
   } else if (data.startsWith('cancel_bid:')) {
     const [, offerId, playerName, playerId] = data.split(':');
     await answerCallbackQuery(callbackQuery.id, '⏳ Cancelando puja...');
-    await updateTelegramMessageMarkup(chatId, messageId, `❌ PUJA CANCELADA (${playerName})`);
+    await updateSpecificTelegramButton(callbackQuery, `❌ PUJA CANCELADA (${playerName})`);
 
     const client = new ComunioClient();
     try {

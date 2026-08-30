@@ -384,12 +384,16 @@ export class ComunioEngine {
       const isComputer = player.owner?.id === 1 || ownerName.toLowerCase() === 'computer';
 
       const isAvailable = this.isPlayerAvailable(player);
-      if (!isAvailable) continue; // Ignorar lesionados o sancionados del mercado
+      const isSpeculativeGem = (player.name || '').toLowerCase().includes('endrick') || 
+        (!isAvailable && player.price < 4000000 && player.price > 800000);
+
+      // Si no está disponible y no es una ganga especulativa, ignorar
+      if (!isAvailable && !isSpeculativeGem) continue;
 
       // 2. Filtro de calidad general
       const expectedPoints = this.getExpectedPoints(player);
       const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
-      if (expectedPoints < 25 && avgPoints < 3.0 && player.price > 1500000) {
+      if (!isSpeculativeGem && expectedPoints < 25 && avgPoints < 2.5 && player.price > 1500000) {
         continue;
       }
 
@@ -401,8 +405,8 @@ export class ComunioEngine {
       const purchaseScore = calculateStrategicPurchaseScore(this, player, squad, balance, rivalIntel);
       const bidCalc = calculateMaxRationalBid(player, purchaseScore, balance, rivalIntel);
 
-      const marginalValue = purchaseScore.marginalValue;
-      const upgradePoints = marginalValue; // Mapping para compatibilidad con código existente
+      let marginalValue = purchaseScore.marginalValue;
+      const upgradePoints = marginalValue;
       const ppm = purchaseScore.performance.ppm;
       const efficiency = purchaseScore.performance.efficiency;
 
@@ -410,15 +414,18 @@ export class ComunioEngine {
       let category = 'EL_RESTO';
       let impactTag = '⛔ EL RESTO (Sin Mejora Significativa)';
 
-      if (purchaseScore.entersXI && marginalValue >= 8) {
+      if (isSpeculativeGem) {
+        category = 'MEJORA_MODERADA';
+        impactTag = '💎 GANGA ESPECULATIVA (DIP-BUYING)';
+      } else if (purchaseScore.entersXI && marginalValue >= 8) {
         category = 'SALTO_CUALITATIVO';
         impactTag = marginalValue >= 15 ? '🏆 SALTO CUALITATIVO ESTRELLA (+15 pts XI)' : '🚀 SALTO CUALITATIVO (+8 pts XI)';
       } else if (purchaseScore.entersXI || marginalValue >= 3 || purchaseScore.score >= 35) {
         category = 'MEJORA_MODERADA';
         impactTag = '📈 MEJORA TÁCTICA / ROTACIÓN';
-      } else if (purchaseScore.score >= 25) {
+      } else if (purchaseScore.score >= 20 || (player.price <= 1500000 && player.type === 'defender' && (player.average?.points >= 2.5 || expectedPoints >= 30))) {
         category = 'MEJORA_MODERADA';
-        impactTag = '📈 OPORTUNIDAD DE MERCADO / FONDO DE ARMARIO';
+        impactTag = '🛡️ FONDO DE ARMARIO / ROTACIÓN SÓLIDA';
       }
 
       const isSquadFull = currentSquad.length >= 15;
