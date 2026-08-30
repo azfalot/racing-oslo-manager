@@ -106,9 +106,11 @@ export function auditAndSyncScoutingRadar(marketPlayers = [], squad = { players:
     const isComputer = !mp.owner || mp.owner === 'Computer' || mp.owner?.name === 'Computer' || mp.ownerName === 'Computer';
     const ownerName = isComputer ? 'Computer' : (mp.owner?.name || mp.ownerName || 'Rival en venta');
 
-    // Descartar si ya pertenece a un rival y NO está en venta
-    // En este punto mp proviene de marketPlayers, por lo que si está en marketPlayers sí está a la venta hoy.
-    // Pero si es de un rival con precio desorbitado o ya lo tiene Suances (ej. Mbappé ya fue vendido), no es objetivo libre.
+    // Descartar si pertenece a un rival humano y no es una necesidad crítica / gran salto (+50 pts)
+    if (!isComputer && netGain < 50) {
+      return;
+    }
+
     if (mpName.toLowerCase().includes('mbapp') || mpName.toLowerCase().includes('raphinha') || mpName.toLowerCase().includes('fermín lópez') || mpName.toLowerCase().includes('cubars')) {
       return; // Ya fichados por rivales
     }

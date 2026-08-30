@@ -410,6 +410,17 @@ export class ComunioEngine {
       const ppm = purchaseScore.performance.ppm;
       const efficiency = purchaseScore.performance.efficiency;
 
+      // 🚫 REGLA ESTRICTA: Sin clausulazo, los rivales no venden voluntariamente a bajo coste.
+      // Excluir por defecto todo jugador de un rival humano salvo que sea una oportunidad excepcional
+      // de salto cualitativo real (>= +8 pts XI o refuerzo crítico de defensa titular).
+      if (!isComputer) {
+        const isExceptionalUpgrade = (purchaseScore.entersXI && marginalValue >= 8) || 
+          (player.type === 'defender' && purchaseScore.entersXI);
+        if (!isExceptionalUpgrade) {
+          continue;
+        }
+      }
+
       // 5. Categorización racional
       let category = 'EL_RESTO';
       let impactTag = '⛔ EL RESTO (Sin Mejora Significativa)';
