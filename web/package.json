@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",
@@ -26,6 +27,8 @@
     "vite": "^8.2.0"
   },
   "devDependencies": {
-    "oxlint": "^1.75.0"
+    "@cloudflare/vite-plugin": "^1.54.2",
+    "oxlint": "^1.75.0",
+    "wrangler": "^4.127.1"
   }
 }
