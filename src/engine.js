@@ -378,11 +378,11 @@ export class ComunioEngine {
 
     if (name.includes('endrick')) {
       returnMatchdays = 1;
-      estimatedReturn = '< 2 jornadas (J3/J4)';
+      estimatedReturn = 'Menos de 2 jornadas (J3/J4)';
       injuryType = 'Molestias musculares';
     } else if (status.includes('CRUZADO') || status.includes('LIGAMENTO') || status.includes('MESES') || status.includes('GRAVE')) {
       returnMatchdays = 12;
-      estimatedReturn = '> 10 jornadas';
+      estimatedReturn = 'Más de 10 jornadas';
       injuryType = 'Lesión grave de larga duración';
     } else if (status.includes('ROTURA') || status.includes('MENISCO')) {
       returnMatchdays = 4;
@@ -390,7 +390,7 @@ export class ComunioEngine {
       injuryType = 'Rotura fibrilar / Menisco';
     } else if (status.includes('DUDA') || status.includes('MOLESTIA')) {
       returnMatchdays = 1;
-      estimatedReturn = '< 2 jornadas';
+      estimatedReturn = 'Menos de 2 jornadas';
       injuryType = 'Duda / Molestia puntual';
     }
 

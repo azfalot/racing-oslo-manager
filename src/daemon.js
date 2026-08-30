@@ -80,7 +80,18 @@ async function sendTelegramMessage(text, replyMarkup = null) {
     if (replyMarkup) payload.reply_markup = replyMarkup;
 
     if (text.length <= 4000) {
-      await axios.post(url, payload);
+      try {
+        await axios.post(url, payload);
+      } catch (postErr) {
+        if (postErr.response?.data?.description?.includes("can't parse entities")) {
+          console.warn('[DAEMON-TG] Reintentando envío sin parse_mode HTML por error de formato...');
+          // Strip HTML tags for fallback
+          const plainText = text.replace(/<[^>]*>/g, '');
+          await axios.post(url, { ...payload, text: plainText, parse_mode: undefined });
+        } else {
+          throw postErr;
+        }
+      }
       return;
     }
 
@@ -98,7 +109,12 @@ async function sendTelegramMessage(text, replyMarkup = null) {
     if (currentChunk.trim().length > 0) chunks.push(currentChunk);
 
     for (const chunk of chunks) {
-      await axios.post(url, { ...payload, text: chunk, reply_markup: undefined });
+      try {
+        await axios.post(url, { ...payload, text: chunk, reply_markup: undefined });
+      } catch (chunkErr) {
+        const plainChunk = chunk.replace(/<[^>]*>/g, '');
+        await axios.post(url, { ...payload, text: plainChunk, parse_mode: undefined, reply_markup: undefined });
+      }
       await new Promise(r => setTimeout(r, 500));
     }
   } catch (err) {
@@ -472,7 +488,7 @@ async function handleTelegramMessage(message) {
           const bidP = Math.round(gem.price * 1.01);
           const affordable = bidP <= effectiveCash;
           rep += ` • ⚡ <b>${escapeHtml(gem.name)}</b> (${(gem.price/1000000).toFixed(2)}M €)\n`;
-          rep += `   ⏱️ <i>Retorno previsto: <b>${gemEval.estimatedReturn}</b> | ${gemEval.injuryType}</i>\n`;
+          rep += `   ⏱️ <i>Retorno previsto: <b>${escapeHtml(gemEval.estimatedReturn)}</b> | ${escapeHtml(gemEval.injuryType)}</i>\n`;
           rep += `   📈 <i>Potencial: +150% tras alta médica. ${affordable ? '✅ Saldo disponible' : '⚠️ Requiere ventas'}</i>\n`;
           keyboard.push([
             { text: `💎 PUJAR POR ${gem.name.toUpperCase()} (${bidP.toLocaleString()} €)`, callback_data: `bid:${gem.playerId || gem.id}:${gem.name}:${bidP}:${gem.type || 'striker'}` }
