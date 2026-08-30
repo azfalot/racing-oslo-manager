@@ -425,8 +425,8 @@ async function handleTelegramMessage(message) {
     }
   }
 
-  // ── /pujas · /mis_pujas ───────────────────────────────────────────────────
-  else if (cleanText.startsWith('/pujas') || cleanText.startsWith('/mis_pujas')) {
+  // ── /pujas · /mis_pujas · /mercado · /market ─────────────────────────────
+  else if (cleanText.startsWith('/pujas') || cleanText.startsWith('/mis_pujas') || cleanText.startsWith('/mercado') || cleanText.startsWith('/market')) {
     await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Consultando estado de pujas y oportunidades de mercado...</i>');
     const client = new ComunioClient();
     const engine = new ComunioEngine();
@@ -436,8 +436,8 @@ async function handleTelegramMessage(message) {
       const dashboard = await client.getDashboardData();
       const balance = dashboard?.money || 0;
       const bids = await client.getPendingBids();
-      const market = await client.getMarket();
-      const marketPlayers = market?.players || [];
+      const marketRes = await client.getMarket();
+      const marketPlayers = Array.isArray(marketRes) ? marketRes : (marketRes?.players || marketRes?.marketPlayers || []);
 
       const bidsVal = bids.reduce((s, b) => s + (b.price || 0), 0);
       const effectiveCash = balance - bidsVal;
@@ -462,11 +462,11 @@ async function handleTelegramMessage(message) {
       }
       rep += `\n`;
 
-      // 2. OPORTUNIDADES DESTACADAS DE MERCADO
+      // 2. OPORTUNIDADES DESTACADAS DE MERCADO (ONCE TITULAR)
       const result = engine.analyzeMarket(marketPlayers, squad, effectiveCash > 0 ? effectiveCash : balance);
       const recs = (result.recommendations || []).slice(0, 4);
 
-      rep += `🎯 <b>2. Opciones de Puja Recomendadas (${recs.length}):</b>\n`;
+      rep += `🎯 <b>2. Opciones de Refuerzo Directo (${recs.length}):</b>\n`;
       if (recs.length > 0) {
         recs.forEach((rec, i) => {
           const posTag = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' }[rec.type] || '👤';
@@ -481,7 +481,28 @@ async function handleTelegramMessage(message) {
           ]);
         });
       } else {
-        rep += ` <i>No hay fichajes viables recomendados dentro de tu presupuesto actual.</i>\n`;
+        rep += ` <i>No hay refuerzos viables inmediatos para el once titular.</i>\n`;
+      }
+
+      // 3. GANGAS ESPECULATIVAS (DIP-BUYING / LESIONADOS TOP EN MÍNIMOS)
+      const specGems = marketPlayers.filter(p => {
+        const s = ((p.status || '') + ' ' + (p.statusInfo || '')).toLowerCase();
+        const isInjured = s.includes('injur') || s.includes('lesion') || s.includes('duda');
+        const isTopTalent = (p.name || '').toLowerCase().includes('endrick') || (p.price < 4000000 && p.price > 800000 && isInjured);
+        return isTopTalent;
+      });
+
+      if (specGems.length > 0) {
+        rep += `\n💎 <b>3. Gangas Especulativas / Dip-Buying (${specGems.length}):</b>\n`;
+        specGems.slice(0, 3).forEach(gem => {
+          const bidP = Math.round(gem.price * 1.01);
+          const affordable = bidP <= effectiveCash;
+          rep += ` • ⚡ <b>${escapeHtml(gem.name)}</b> (${(gem.price/1000000).toFixed(2)}M €) [${gem.status || 'Lesionado'}]\n`;
+          rep += `   📈 <i>Potencial de revalorización al recuperarse (+100% a +250%). ${affordable ? '✅ Liquidez OK' : '⚠️ Requiere ventas'}</i>\n`;
+          keyboard.push([
+            { text: `💎 PUJA ESPECULATIVA: ${gem.name.toUpperCase()} (${bidP.toLocaleString()} €)`, callback_data: `bid:${gem.playerId || gem.id}:${gem.name}:${bidP}:${gem.type || 'striker'}` }
+          ]);
+        });
       }
 
       const markup = keyboard.length > 0 ? { inline_keyboard: keyboard } : null;
@@ -1496,6 +1517,7 @@ async function registerTelegramCommands() {
     { command: 'alinear', description: '⚽ Optimizar y guardar Once Titular oficial en Comunio' },
     { command: 'tactica', description: '📐 Pizarra y formación táctica del Once de Gala' },
     { command: 'scout', description: '🎯 Radar de ojeados (+35 pts) y prensa deportiva' },
+    { command: 'mercado', description: '🛒 Jugadores a la venta, oportunidades y gangas' },
     { command: 'pujas', description: '🛒 Centro unificado de pujas activas y mercado' },
     { command: 'finanzas', description: '💰 Balance, primas oficiales (10k€/pt) y rivales' },
     { command: 'analisis', description: '🕵️‍♂️ Auditoría táctica & oportunidades de mercado' },
