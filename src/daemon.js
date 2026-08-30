@@ -484,23 +484,22 @@ async function handleTelegramMessage(message) {
         rep += ` <i>No hay refuerzos viables inmediatos para el once titular.</i>\n`;
       }
 
-      // 3. GANGAS ESPECULATIVAS (DIP-BUYING / LESIONADOS TOP EN MÍNIMOS)
-      const specGems = marketPlayers.filter(p => {
-        const s = ((p.status || '') + ' ' + (p.statusInfo || '')).toLowerCase();
-        const isInjured = s.includes('injur') || s.includes('lesion') || s.includes('duda');
-        const isTopTalent = (p.name || '').toLowerCase().includes('endrick') || (p.price < 4000000 && p.price > 800000 && isInjured);
-        return isTopTalent;
-      });
+      // 3. GANGAS ESPECULATIVAS (DIP-BUYING / LESIONADOS CON RETORNO < 2 JORNADAS)
+      const specGems = marketPlayers.map(p => {
+        const evalRes = engine.getInjurySpeculationEvaluation(p, effectiveCash > 0 ? effectiveCash : balance);
+        return { player: p, eval: evalRes };
+      }).filter(item => item.eval.isInjured && item.eval.isApproved);
 
       if (specGems.length > 0) {
-        rep += `\n💎 <b>3. Gangas Especulativas / Dip-Buying (${specGems.length}):</b>\n`;
-        specGems.slice(0, 3).forEach(gem => {
+        rep += `\n💎 <b>3. Especulación con Lesionados (&lt; 2 Jornadas / Dip-Buying) (${specGems.length}):</b>\n`;
+        specGems.slice(0, 3).forEach(({ player: gem, eval: gemEval }) => {
           const bidP = Math.round(gem.price * 1.01);
           const affordable = bidP <= effectiveCash;
-          rep += ` • ⚡ <b>${escapeHtml(gem.name)}</b> (${(gem.price/1000000).toFixed(2)}M €) [${gem.status || 'Lesionado'}]\n`;
-          rep += `   📈 <i>Potencial de revalorización al recuperarse (+100% a +250%). ${affordable ? '✅ Liquidez OK' : '⚠️ Requiere ventas'}</i>\n`;
+          rep += ` • ⚡ <b>${escapeHtml(gem.name)}</b> (${(gem.price/1000000).toFixed(2)}M €)\n`;
+          rep += `   ⏱️ <i>Retorno previsto: <b>${gemEval.estimatedReturn}</b> | ${gemEval.injuryType}</i>\n`;
+          rep += `   📈 <i>Potencial: +150% tras alta médica. ${affordable ? '✅ Saldo disponible' : '⚠️ Requiere ventas'}</i>\n`;
           keyboard.push([
-            { text: `💎 PUJA ESPECULATIVA: ${gem.name.toUpperCase()} (${bidP.toLocaleString()} €)`, callback_data: `bid:${gem.playerId || gem.id}:${gem.name}:${bidP}:${gem.type || 'striker'}` }
+            { text: `💎 PUJAR POR ${gem.name.toUpperCase()} (${bidP.toLocaleString()} €)`, callback_data: `bid:${gem.playerId || gem.id}:${gem.name}:${bidP}:${gem.type || 'striker'}` }
           ]);
         });
       }

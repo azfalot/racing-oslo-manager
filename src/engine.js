@@ -361,11 +361,60 @@ export class ComunioEngine {
   }
 
   /**
-   * Analiza el mercado de fichajes utilizando el motor de optimización de plantilla (Mejora Real sobre el Mejor Once).
+   * Evaluación de Especulación con Lesionados con horizonte de recuperación (<= 2 jornadas)
    */
-  analyzeMarket(marketPlayers, squad, balance, rivalIntel = null) {
-    if (!marketPlayers || marketPlayers.length === 0) {
-      return { recommendations: [], message: 'No hay jugadores en el mercado para analizar.' };
+  getInjurySpeculationEvaluation(player, availableCash) {
+    const status = ((player.status || '') + ' ' + (player.statusInfo || '')).toUpperCase();
+    const isInjured = status.includes('INJUR') || status.includes('LESI') || status.includes('DUDA') || status.includes('BAJA');
+    const name = (player.name || '').toLowerCase();
+
+    if (!isInjured && !name.includes('endrick')) {
+      return { isInjured: false, returnMatchdays: 0, isApproved: false };
+    }
+
+    let returnMatchdays = 1;
+    let estimatedReturn = '1-2 jornadas (J3/J4)';
+    let injuryType = 'Sobrecarga muscular / Duda';
+
+    if (name.includes('endrick')) {
+      returnMatchdays = 1;
+      estimatedReturn = '< 2 jornadas (J3/J4)';
+      injuryType = 'Molestias musculares';
+    } else if (status.includes('CRUZADO') || status.includes('LIGAMENTO') || status.includes('MESES') || status.includes('GRAVE')) {
+      returnMatchdays = 12;
+      estimatedReturn = '> 10 jornadas';
+      injuryType = 'Lesión grave de larga duración';
+    } else if (status.includes('ROTURA') || status.includes('MENISCO')) {
+      returnMatchdays = 4;
+      estimatedReturn = '3-5 jornadas';
+      injuryType = 'Rotura fibrilar / Menisco';
+    } else if (status.includes('DUDA') || status.includes('MOLESTIA')) {
+      returnMatchdays = 1;
+      estimatedReturn = '< 2 jornadas';
+      injuryType = 'Duda / Molestia puntual';
+    }
+
+    const isShortTerm = returnMatchdays <= 2;
+    const isAffordable = (player.price || 0) <= (availableCash * 1.6);
+    const isApproved = isShortTerm && isAffordable;
+
+    return {
+      isInjured: true,
+      returnMatchdays,
+      estimatedReturn,
+      injuryType,
+      isShortTerm,
+      isAffordable,
+      isApproved
+    };
+  }
+
+  /**
+   * Analiza el mercado completo en busca de refuerzos reales para el Once Titular
+   */
+  analyzeMarket(marketPlayers, squad, balance = 0, rivalIntel = null) {
+    if (!Array.isArray(marketPlayers) || marketPlayers.length === 0) {
+      return { recommendations: [], bestDeal: null, targetCount: 0 };
     }
 
     const currentSquad = squad?.players || [];
@@ -384,16 +433,21 @@ export class ComunioEngine {
       const isComputer = player.owner?.id === 1 || ownerName.toLowerCase() === 'computer';
 
       const isAvailable = this.isPlayerAvailable(player);
-      const isSpeculativeGem = (player.name || '').toLowerCase().includes('endrick') || 
-        (!isAvailable && player.price < 4000000 && player.price > 800000);
+      const injuryEval = this.getInjurySpeculationEvaluation(player, balance);
 
-      // Si no está disponible y no es una ganga especulativa, ignorar
-      if (!isAvailable && !isSpeculativeGem) continue;
+      // 🎯 CONTROL DE LESIONADOS: Si está lesionado, SOLO permitir si vuelve en <= 2 jornadas y precio asequible
+      if (injuryEval.isInjured) {
+        if (!injuryEval.isApproved) {
+          continue; // Descartado: Lesión > 2 jornadas o precio fuera de rango
+        }
+      } else if (!isAvailable) {
+        continue; // Sancionado o no disponible
+      }
 
       // 2. Filtro de calidad general
       const expectedPoints = this.getExpectedPoints(player);
       const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
-      if (!isSpeculativeGem && expectedPoints < 25 && avgPoints < 2.5 && player.price > 1500000) {
+      if (!injuryEval.isInjured && expectedPoints < 25 && avgPoints < 2.5 && player.price > 1500000) {
         continue;
       }
 
@@ -410,14 +464,12 @@ export class ComunioEngine {
       const ppm = purchaseScore.performance.ppm;
       const efficiency = purchaseScore.performance.efficiency;
 
-      // 🚫 REGLA ESTRICTA: Sin clausulazo, los rivales no venden voluntariamente a bajo coste.
-      // Excluir por defecto todo jugador de un rival humano salvo que sea una oportunidad excepcional
-      // de salto cualitativo real (>= +8 pts XI o refuerzo crítico de defensa titular).
+      // 🚫 REGLA ESTRICTA DE RIVALES HUMANOS (Sin clausulazo):
+      // Solo tener en cuenta si el jugador aporta un Salto Cualitativo Real (+30 a +50 pts netos en temporada, marginalValue >= 8)
       if (!isComputer) {
-        const isExceptionalUpgrade = (purchaseScore.entersXI && marginalValue >= 8) || 
-          (player.type === 'defender' && purchaseScore.entersXI);
-        if (!isExceptionalUpgrade) {
-          continue;
+        const qualifiesForRivalException = purchaseScore.entersXI && marginalValue >= 8;
+        if (!qualifiesForRivalException) {
+          continue; // Descartado: No alcanza el umbral de +30 a +50 pts de salto cualitativo
         }
       }
 
@@ -425,9 +477,9 @@ export class ComunioEngine {
       let category = 'EL_RESTO';
       let impactTag = '⛔ EL RESTO (Sin Mejora Significativa)';
 
-      if (isSpeculativeGem) {
+      if (injuryEval.isInjured && injuryEval.isApproved) {
         category = 'MEJORA_MODERADA';
-        impactTag = '💎 GANGA ESPECULATIVA (DIP-BUYING)';
+        impactTag = `💎 GANGA ESPECULATIVA (Retorno: ${injuryEval.estimatedReturn})`;
       } else if (purchaseScore.entersXI && marginalValue >= 8) {
         category = 'SALTO_CUALITATIVO';
         impactTag = marginalValue >= 15 ? '🏆 SALTO CUALITATIVO ESTRELLA (+15 pts XI)' : '🚀 SALTO CUALITATIVO (+8 pts XI)';
