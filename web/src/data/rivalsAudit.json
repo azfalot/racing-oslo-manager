@@ -280,11 +280,132 @@
     "isMe": true
   },
   {
+    "id": 21163650,
+    "teamName": "Amigos de NIN",
+    "manager": "Shockerevo",
+    "crest": "/media/crests/amigos_de_nin.svg",
+    "pos": 3,
+    "points": 71,
+    "squadValue": 43290000,
+    "playerCount": 11,
+    "financialHealth": "100% Saneado (Solvente)",
+    "debtAlert": null,
+    "projectedScore": 41,
+    "formation": "4-4-2",
+    "tacticDescription": "Formación 4-4-2 orientada a maximizar puntos según plantilla disponible.",
+    "strengths": [
+      "Equipo con buena regularidad en puntuaciones medias."
+    ],
+    "weaknesses": [
+      "Plantilla corta con poco margen de rotación ante lesiones o sanciones."
+    ],
+    "recommendations": [
+      {
+        "name": "Denis Suárez",
+        "pos": "Centrocampista",
+        "price": 1220000,
+        "reason": "Mejorar el control del balón y balones parados."
+      }
+    ],
+    "starters": [
+      {
+        "id": 2669,
+        "name": "Unai Simón",
+        "position": "keeper",
+        "price": 4090000,
+        "expectedPoints": 4.7,
+        "image": "/media/players/2669.png"
+      },
+      {
+        "id": 2158,
+        "name": "Marcos Llorente",
+        "position": "defender",
+        "price": 7960000,
+        "expectedPoints": 6,
+        "image": "/media/players/2158.png"
+      },
+      {
+        "id": 2990,
+        "name": "Sergio Gómez",
+        "position": "defender",
+        "price": 3520000,
+        "expectedPoints": 3.8,
+        "image": "/media/players/2990.png"
+      },
+      {
+        "id": 2447,
+        "name": "Djené",
+        "position": "defender",
+        "price": 1850000,
+        "expectedPoints": 2.8,
+        "image": "/media/players/2447.png"
+      },
+      {
+        "id": 3173,
+        "name": "Jesús Vázquez",
+        "position": "defender",
+        "price": 1210000,
+        "expectedPoints": 1.7,
+        "image": "/media/players/3173.png"
+      },
+      {
+        "id": 3387,
+        "name": "Pape Gueye",
+        "position": "midfielder",
+        "price": 10470000,
+        "expectedPoints": 6,
+        "image": "/media/players/3387.png"
+      },
+      {
+        "id": 1969,
+        "name": "Unai López",
+        "position": "midfielder",
+        "price": 3340000,
+        "expectedPoints": 3.8,
+        "image": "/media/players/1969.png"
+      },
+      {
+        "id": 3278,
+        "name": "Swedberg",
+        "position": "midfielder",
+        "price": 3080000,
+        "expectedPoints": 3.8,
+        "image": "/media/players/3278.png"
+      },
+      {
+        "id": 4092,
+        "name": "Amatucci",
+        "position": "midfielder",
+        "price": 3920000,
+        "expectedPoints": 3.8,
+        "image": "/media/players/4092.png"
+      },
+      {
+        "id": 3563,
+        "name": "Isaac Romero",
+        "position": "striker",
+        "price": 3310000,
+        "expectedPoints": 3.8,
+        "image": "/media/players/3563.png"
+      },
+      {
+        "id": 4043,
+        "name": "Juan Carlos Arana",
+        "position": "striker",
+        "price": 540000,
+        "expectedPoints": 0.4,
+        "image": "/media/players/4043.png"
+      }
+    ],
+    "bench": [],
+    "isMe": false
+  },
+  {
     "id": 21163653,
     "teamName": "Pachangueros F.C.",
     "manager": "Javilyon",
     "crest": "/media/crests/pachangueros.svg",
-    "pos": 3,
+    "pos": 4,
     "points": 52,
     "squadValue": 61530000,
     "playerCount": 19,
@@ -458,261 +579,11 @@
     "isMe": false
   },
   {
-    "id": 21163606,
-    "teamName": "Suances nin",
-    "manager": "Carlos2",
-    "crest": "/media/crests/suances_nin.svg",
-    "pos": 4,
-    "points": 43,
-    "squadValue": 56780000,
-    "playerCount": 12,
-    "financialHealth": "Apalancamiento Extremo (Riesgo)",
-    "debtAlert": "Deuda estimada de ~6.0M € por el traspaso récord de Mbappé (34.75M €). Requiere venta inmediata de Juan Foyth o Andrés Martín para no puntuar 0.",
-    "projectedScore": 33,
-    "formation": "4-3-3",
-    "tacticDescription": "Esquema ofensivo centrado en abastecer a Mbappé en punta.",
-    "strengths": [
-      "Poder goleador supremo con Kylian Mbappé (29.6M €)."
-    ],
-    "weaknesses": [
-      "Defensa y medular despobladas para costear a Mbappé; plantilla corta de 12 jugadores."
-    ],
-    "recommendations": [
-      {
-        "name": "Ezequiel Ponce",
-        "pos": "Delantero",
-        "price": 1520000,
-        "reason": "Aportar pólvora y remate al área rival."
-      }
-    ],
-    "starters": [
-      {
-        "id": 3428,
-        "name": "Álvaro Valles",
-        "position": "keeper",
-        "price": 3760000,
-        "expectedPoints": 3.8,
-        "image": "/media/players/3428.png"
-      },
-      {
-        "id": 3017,
-        "name": "Juan Foyth",
-        "position": "defender",
-        "price": 5710000,
-        "expectedPoints": 4.7,
-        "image": "/media/players/3017.png"
-      },
-      {
-        "id": 4030,
-        "name": "Facu González",
-        "position": "defender",
-        "price": 1780000,
-        "expectedPoints": 2.8,
-        "image": "/media/players/4030.png"
-      },
-      {
-        "id": 3980,
-        "name": "Alex Freeman",
-        "position": "defender",
-        "price": 740000,
-        "expectedPoints": 1.1,
-        "image": "/media/players/3980.png"
-      },
-      {
-        "id": 4003,
-        "name": "Julio Díaz",
-        "position": "defender",
-        "price": 620000,
-        "expectedPoints": 1.1,
-        "image": "/media/players/4003.png"
-      },
-      {
-        "id": 3465,
-        "name": "Dotor",
-        "position": "midfielder",
-        "price": 3290000,
-        "expectedPoints": 3.8,
-        "image": "/media/players/3465.png"
-      },
-      {
-        "id": 4127,
-        "name": "Sergio Martínez",
-        "position": "midfielder",
-        "price": 2410000,
-        "expectedPoints": 2.8,
-        "image": "/media/players/4127.png"
-      },
-      {
-        "id": 3204,
-        "name": "Jofre Carreras",
-        "position": "midfielder",
-        "price": 420000,
-        "expectedPoints": 0.2,
-        "image": "/media/players/3204.png"
-      },
-      {
-        "id": 3469,
-        "name": "Mbappé",
-        "position": "striker",
-        "price": 30370000,
-        "expectedPoints": 7.3,
-        "image": "/media/players/3469.png"
-      },
-      {
-        "id": 3109,
-        "name": "Andrés Martín",
-        "position": "striker",
-        "price": 6860000,
-        "expectedPoints": 4.7,
-        "image": "/media/players/3109.png"
-      },
-      {
-        "id": 4102,
-        "name": "Musuayi",
-        "position": "striker",
-        "price": 600000,
-        "expectedPoints": 0.4,
-        "image": "/media/players/4102.png"
-      }
-    ],
-    "bench": [
-      {
-        "id": 4133,
-        "name": "Kevin Sánchez",
-        "position": "striker",
-        "price": 220000,
-        "image": "/media/players/4133.png"
-      }
-    ],
-    "isMe": false
-  },
-  {
-    "id": 21163650,
-    "teamName": "Amigos de NIN",
-    "manager": "Shockerevo",
-    "crest": "/media/crests/amigos_de_nin.svg",
-    "pos": 5,
-    "points": 71,
-    "squadValue": 43290000,
-    "playerCount": 11,
-    "financialHealth": "100% Saneado (Solvente)",
-    "debtAlert": null,
-    "projectedScore": 41,
-    "formation": "4-4-2",
-    "tacticDescription": "Formación 4-4-2 orientada a maximizar puntos según plantilla disponible.",
-    "strengths": [
-      "Equipo con buena regularidad en puntuaciones medias."
-    ],
-    "weaknesses": [
-      "Plantilla corta con poco margen de rotación ante lesiones o sanciones."
-    ],
-    "recommendations": [
-      {
-        "name": "Denis Suárez",
-        "pos": "Centrocampista",
-        "price": 1220000,
-        "reason": "Mejorar el control del balón y balones parados."
-      }
-    ],
-    "starters": [
-      {
-        "id": 2669,
-        "name": "Unai Simón",
-        "position": "keeper",
-        "price": 4090000,
-        "expectedPoints": 4.7,
-        "image": "/media/players/2669.png"
-      },
-      {
-        "id": 2158,
-        "name": "Marcos Llorente",
-        "position": "defender",
-        "price": 7960000,
-        "expectedPoints": 6,
-        "image": "/media/players/2158.png"
-      },
-      {
-        "id": 2990,
-        "name": "Sergio Gómez",
-        "position": "defender",
-        "price": 3520000,
-        "expectedPoints": 3.8,
-        "image": "/media/players/2990.png"
-      },
-      {
-        "id": 2447,
-        "name": "Djené",
-        "position": "defender",
-        "price": 1850000,
-        "expectedPoints": 2.8,
-        "image": "/media/players/2447.png"
-      },
-      {
-        "id": 3173,
-        "name": "Jesús Vázquez",
-        "position": "defender",
-        "price": 1210000,
-        "expectedPoints": 1.7,
-        "image": "/media/players/3173.png"
-      },
-      {
-        "id": 3387,
-        "name": "Pape Gueye",
-        "position": "midfielder",
-        "price": 10470000,
-        "expectedPoints": 6,
-        "image": "/media/players/3387.png"
-      },
-      {
-        "id": 1969,
-        "name": "Unai López",
-        "position": "midfielder",
-        "price": 3340000,
-        "expectedPoints": 3.8,
-        "image": "/media/players/1969.png"
-      },
-      {
-        "id": 3278,
-        "name": "Swedberg",
-        "position": "midfielder",
-        "price": 3080000,
-        "expectedPoints": 3.8,
-        "image": "/media/players/3278.png"
-      },
-      {
-        "id": 4092,
-        "name": "Amatucci",
-        "position": "midfielder",
-        "price": 3920000,
-        "expectedPoints": 3.8,
-        "image": "/media/players/4092.png"
-      },
-      {
-        "id": 3563,
-        "name": "Isaac Romero",
-        "position": "striker",
-        "price": 3310000,
-        "expectedPoints": 3.8,
-        "image": "/media/players/3563.png"
-      },
-      {
-        "id": 4043,
-        "name": "Juan Carlos Arana",
-        "position": "striker",
-        "price": 540000,
-        "expectedPoints": 0.4,
-        "image": "/media/players/4043.png"
-      }
-    ],
-    "bench": [],
-    "isMe": false
-  },
-  {
     "id": 21163563,
     "teamName": "Puente Avios FC",
     "manager": "Baratey",
     "crest": "/media/crests/puente_avios.svg",
-    "pos": 6,
+    "pos": 5,
     "points": 46,
     "squadValue": 56590000,
     "playerCount": 14,
@@ -851,168 +722,11 @@
     "isMe": false
   },
   {
-    "id": 21163825,
-    "teamName": "Hache FC",
-    "manager": "hassansm",
-    "crest": "/media/crests/hache_fc.svg",
-    "pos": 7,
-    "points": 59,
-    "squadValue": 52830000,
-    "playerCount": 16,
-    "financialHealth": "100% Saneado (Solvente)",
-    "debtAlert": null,
-    "projectedScore": 41,
-    "formation": "5-4-1",
-    "tacticDescription": "Formación 5-4-1 orientada a maximizar puntos según plantilla disponible.",
-    "strengths": [
-      "Equipo con buena regularidad en puntuaciones medias."
-    ],
-    "weaknesses": [
-      "Margen de mejora en la eficiencia de puntos por millón invertido (PPM)."
-    ],
-    "recommendations": [
-      {
-        "name": "Denis Suárez",
-        "pos": "Centrocampista",
-        "price": 1220000,
-        "reason": "Mejorar el control del balón y balones parados."
-      }
-    ],
-    "starters": [
-      {
-        "id": 2416,
-        "name": "Dmitrovic",
-        "position": "keeper",
-        "price": 3630000,
-        "expectedPoints": 3.8,
-        "image": "/media/players/2416.png"
-      },
-      {
-        "id": 4063,
-        "name": "Konaté",
-        "position": "defender",
-        "price": 10980000,
-        "expectedPoints": 6,
-        "image": "/media/players/4063.png"
-      },
-      {
-        "id": 3215,
-        "name": "Nahuel Tenaglia",
-        "position": "defender",
-        "price": 4880000,
-        "expectedPoints": 4.7,
-        "image": "/media/players/3215.png"
-      },
-      {
-        "id": 3816,
-        "name": "Huijsen",
-        "position": "defender",
-        "price": 6630000,
-        "expectedPoints": 4.7,
-        "image": "/media/players/3816.png"
-      },
-      {
-        "id": 3515,
-        "name": "César Tárrega",
-        "position": "defender",
-        "price": 3360000,
-        "expectedPoints": 3.8,
-        "image": "/media/players/3515.png"
-      },
-      {
-        "id": 4071,
-        "name": "Rafita Garrido",
-        "position": "defender",
-        "price": 1980000,
-        "expectedPoints": 2.8,
-        "image": "/media/players/4071.png"
-      },
-      {
-        "id": 3357,
-        "name": "Pablo Barrios",
-        "position": "midfielder",
-        "price": 9190000,
-        "expectedPoints": 6,
-        "image": "/media/players/3357.png"
-      },
-      {
-        "id": 3885,
-        "name": "Tyrhys Dolan",
-        "position": "midfielder",
-        "price": 3800000,
-        "expectedPoints": 3.8,
-        "image": "/media/players/3885.png"
-      },
-      {
-        "id": 2727,
-        "name": "Yangel Herrera",
-        "position": "midfielder",
-        "price": 2780000,
-        "expectedPoints": 2.8,
-        "image": "/media/players/2727.png"
-      },
-      {
-        "id": 3625,
-        "name": "Raúl Moro",
-        "position": "midfielder",
-        "price": 2150000,
-        "expectedPoints": 2.8,
-        "image": "/media/players/3625.png"
-      },
-      {
-        "id": 3610,
-        "name": "Álvaro Djaló",
-        "position": "striker",
-        "price": 260000,
-        "expectedPoints": 0.2,
-        "image": "/media/players/3610.png"
-      }
-    ],
-    "bench": [
-      {
-        "id": 3123,
-        "name": "Matías Dituro",
-        "position": "keeper",
-        "price": 1240000,
-        "image": "/media/players/3123.png"
-      },
-      {
-        "id": 2377,
-        "name": "Aleñá",
-        "position": "midfielder",
-        "price": 680000,
-        "image": "/media/players/2377.png"
-      },
-      {
-        "id": 4135,
-        "name": "Francho Serrano",
-        "position": "midfielder",
-        "price": 590000,
-        "image": "/media/players/4135.png"
-      },
-      {
-        "id": 3507,
-        "name": "Marc Casadó",
-        "position": "midfielder",
-        "price": 370000,
-        "image": "/media/players/3507.png"
-      },
-      {
-        "id": 3785,
-        "name": "Maroan Sannadi",
-        "position": "striker",
-        "price": 310000,
-        "image": "/media/players/3785.png"
-      }
-    ],
-    "isMe": false
-  },
-  {
     "id": 21163646,
     "teamName": "M4 TEAM",
     "manager": "M4anu",
     "crest": "/media/crests/m4_team.svg",
-    "pos": 8,
+    "pos": 6,
     "points": 60,
     "squadValue": 68100000,
     "playerCount": 19,
@@ -1181,6 +895,292 @@
         "position": "midfielder",
         "price": 170000,
         "image": "/media/players/4048.png"
+      }
+    ],
+    "isMe": false
+  },
+  {
+    "id": 21163606,
+    "teamName": "Suances nin",
+    "manager": "Carlos2",
+    "crest": "/media/crests/suances_nin.svg",
+    "pos": 7,
+    "points": 43,
+    "squadValue": 56780000,
+    "playerCount": 12,
+    "financialHealth": "Apalancamiento Extremo (Riesgo)",
+    "debtAlert": "Deuda estimada de ~6.0M € por el traspaso récord de Mbappé (34.75M €). Requiere venta inmediata de Juan Foyth o Andrés Martín para no puntuar 0.",
+    "projectedScore": 33,
+    "formation": "4-3-3",
+    "tacticDescription": "Esquema ofensivo centrado en abastecer a Mbappé en punta.",
+    "strengths": [
+      "Poder goleador supremo con Kylian Mbappé (29.6M €)."
+    ],
+    "weaknesses": [
+      "Defensa y medular despobladas para costear a Mbappé; plantilla corta de 12 jugadores."
+    ],
+    "recommendations": [
+      {
+        "name": "Ezequiel Ponce",
+        "pos": "Delantero",
+        "price": 1520000,
+        "reason": "Aportar pólvora y remate al área rival."
+      }
+    ],
+    "starters": [
+      {
+        "id": 3428,
+        "name": "Álvaro Valles",
+        "position": "keeper",
+        "price": 3760000,
+        "expectedPoints": 3.8,
+        "image": "/media/players/3428.png"
+      },
+      {
+        "id": 3017,
+        "name": "Juan Foyth",
+        "position": "defender",
+        "price": 5710000,
+        "expectedPoints": 4.7,
+        "image": "/media/players/3017.png"
+      },
+      {
+        "id": 4030,
+        "name": "Facu González",
+        "position": "defender",
+        "price": 1780000,
+        "expectedPoints": 2.8,
+        "image": "/media/players/4030.png"
+      },
+      {
+        "id": 3980,
+        "name": "Alex Freeman",
+        "position": "defender",
+        "price": 740000,
+        "expectedPoints": 1.1,
+        "image": "/media/players/3980.png"
+      },
+      {
+        "id": 4003,
+        "name": "Julio Díaz",
+        "position": "defender",
+        "price": 620000,
+        "expectedPoints": 1.1,
+        "image": "/media/players/4003.png"
+      },
+      {
+        "id": 3465,
+        "name": "Dotor",
+        "position": "midfielder",
+        "price": 3290000,
+        "expectedPoints": 3.8,
+        "image": "/media/players/3465.png"
+      },
+      {
+        "id": 4127,
+        "name": "Sergio Martínez",
+        "position": "midfielder",
+        "price": 2410000,
+        "expectedPoints": 2.8,
+        "image": "/media/players/4127.png"
+      },
+      {
+        "id": 3204,
+        "name": "Jofre Carreras",
+        "position": "midfielder",
+        "price": 420000,
+        "expectedPoints": 0.2,
+        "image": "/media/players/3204.png"
+      },
+      {
+        "id": 3469,
+        "name": "Mbappé",
+        "position": "striker",
+        "price": 30370000,
+        "expectedPoints": 7.3,
+        "image": "/media/players/3469.png"
+      },
+      {
+        "id": 3109,
+        "name": "Andrés Martín",
+        "position": "striker",
+        "price": 6860000,
+        "expectedPoints": 4.7,
+        "image": "/media/players/3109.png"
+      },
+      {
+        "id": 4102,
+        "name": "Musuayi",
+        "position": "striker",
+        "price": 600000,
+        "expectedPoints": 0.4,
+        "image": "/media/players/4102.png"
+      }
+    ],
+    "bench": [
+      {
+        "id": 4133,
+        "name": "Kevin Sánchez",
+        "position": "striker",
+        "price": 220000,
+        "image": "/media/players/4133.png"
+      }
+    ],
+    "isMe": false
+  },
+  {
+    "id": 21163825,
+    "teamName": "Hache FC",
+    "manager": "hassansm",
+    "crest": "/media/crests/hache_fc.svg",
+    "pos": 8,
+    "points": 59,
+    "squadValue": 52830000,
+    "playerCount": 16,
+    "financialHealth": "100% Saneado (Solvente)",
+    "debtAlert": null,
+    "projectedScore": 41,
+    "formation": "5-4-1",
+    "tacticDescription": "Formación 5-4-1 orientada a maximizar puntos según plantilla disponible.",
+    "strengths": [
+      "Equipo con buena regularidad en puntuaciones medias."
+    ],
+    "weaknesses": [
+      "Margen de mejora en la eficiencia de puntos por millón invertido (PPM)."
+    ],
+    "recommendations": [
+      {
+        "name": "Denis Suárez",
+        "pos": "Centrocampista",
+        "price": 1220000,
+        "reason": "Mejorar el control del balón y balones parados."
+      }
+    ],
+    "starters": [
+      {
+        "id": 2416,
+        "name": "Dmitrovic",
+        "position": "keeper",
+        "price": 3630000,
+        "expectedPoints": 3.8,
+        "image": "/media/players/2416.png"
+      },
+      {
+        "id": 4063,
+        "name": "Konaté",
+        "position": "defender",
+        "price": 10980000,
+        "expectedPoints": 6,
+        "image": "/media/players/4063.png"
+      },
+      {
+        "id": 3215,
+        "name": "Nahuel Tenaglia",
+        "position": "defender",
+        "price": 4880000,
+        "expectedPoints": 4.7,
+        "image": "/media/players/3215.png"
+      },
+      {
+        "id": 3816,
+        "name": "Huijsen",
+        "position": "defender",
+        "price": 6630000,
+        "expectedPoints": 4.7,
+        "image": "/media/players/3816.png"
+      },
+      {
+        "id": 3515,
+        "name": "César Tárrega",
+        "position": "defender",
+        "price": 3360000,
+        "expectedPoints": 3.8,
+        "image": "/media/players/3515.png"
+      },
+      {
+        "id": 4071,
+        "name": "Rafita Garrido",
+        "position": "defender",
+        "price": 1980000,
+        "expectedPoints": 2.8,
+        "image": "/media/players/4071.png"
+      },
+      {
+        "id": 3357,
+        "name": "Pablo Barrios",
+        "position": "midfielder",
+        "price": 9190000,
+        "expectedPoints": 6,
+        "image": "/media/players/3357.png"
+      },
+      {
+        "id": 3885,
+        "name": "Tyrhys Dolan",
+        "position": "midfielder",
+        "price": 3800000,
+        "expectedPoints": 3.8,
+        "image": "/media/players/3885.png"
+      },
+      {
+        "id": 2727,
+        "name": "Yangel Herrera",
+        "position": "midfielder",
+        "price": 2780000,
+        "expectedPoints": 2.8,
+        "image": "/media/players/2727.png"
+      },
+      {
+        "id": 3625,
+        "name": "Raúl Moro",
+        "position": "midfielder",
+        "price": 2150000,
+        "expectedPoints": 2.8,
+        "image": "/media/players/3625.png"
+      },
+      {
+        "id": 3610,
+        "name": "Álvaro Djaló",
+        "position": "striker",
+        "price": 260000,
+        "expectedPoints": 0.2,
+        "image": "/media/players/3610.png"
+      }
+    ],
+    "bench": [
+      {
+        "id": 3123,
+        "name": "Matías Dituro",
+        "position": "keeper",
+        "price": 1240000,
+        "image": "/media/players/3123.png"
+      },
+      {
+        "id": 2377,
+        "name": "Aleñá",
+        "position": "midfielder",
+        "price": 680000,
+        "image": "/media/players/2377.png"
+      },
+      {
+        "id": 4135,
+        "name": "Francho Serrano",
+        "position": "midfielder",
+        "price": 590000,
+        "image": "/media/players/4135.png"
+      },
+      {
+        "id": 3507,
+        "name": "Marc Casadó",
+        "position": "midfielder",
+        "price": 370000,
+        "image": "/media/players/3507.png"
+      },
+      {
+        "id": 3785,
+        "name": "Maroan Sannadi",
+        "position": "striker",
+        "price": 310000,
+        "image": "/media/players/3785.png"
       }
     ],
     "isMe": false
