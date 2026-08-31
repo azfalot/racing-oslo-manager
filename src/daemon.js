@@ -1593,6 +1593,18 @@ async function startPolling() {
 
 let marketMonitorRunning = false; // Guardia anti-solapamiento
 
+async function auditAndSyncSquadEvents(client, squad, balance, lineupResult = null) {
+  try {
+    const { exec } = await import('node:child_process');
+    exec('node src/syncWeb.mjs', { windowsHide: true }, (err) => {
+      if (err) console.warn('[DAEMON-SYNC] Error en syncWeb:', err.message);
+      else console.log('[DAEMON-SYNC] ✅ Web y datos de plantilla sincronizados.');
+    });
+  } catch (syncErr) {
+    console.warn('[DAEMON-SYNC] Error ejecutando syncWeb:', syncErr.message);
+  }
+}
+
 async function runMarketCheck() {
   if (marketMonitorRunning) {
     console.log('[DAEMON-MARKET] Comprobación anterior aún en curso, saltando...');
@@ -1601,6 +1613,7 @@ async function runMarketCheck() {
   marketMonitorRunning = true;
   console.log('[DAEMON-MARKET] Ejecutando comprobación de mercado...');
   const client = new ComunioClient();
+  const engine = new ComunioEngine();
   try {
     await client.login();
     const squad = await client.getSquad();
@@ -1613,7 +1626,6 @@ async function runMarketCheck() {
     try {
       const { auditAndSyncScoutingRadar } = await import('./scoutingRadar.js');
       const marketRaw = await client.getMarket();
-      const engine = new ComunioEngine();
       auditAndSyncScoutingRadar(marketRaw?.players || [], squad, engine);
     } catch (scoutErr) {
       console.warn('[DAEMON-SCOUT-SYNC] Error actualizando radar de scouting:', scoutErr.message);
