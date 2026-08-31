@@ -2077,13 +2077,10 @@ function startCronScheduler() {
       // 1. Ejecutar escáner y acciones de mercado / ofertas recibidas
       await runMarketCheck();
 
-      // 2. Ejecutar optimización y confirmación de alineación
-      await executeInLineupOptimization();
-
-      // 3. Escaneo de salud y bajas físicas
+      // 2. Escaneo de salud y bajas físicas
       await runSquadHealthCheck();
 
-      // 4. Sincronización con el portal web
+      // 3. Sincronización con el portal web
       console.log('[DAEMON-CRON] Sincronizando datos con la web y portal...');
       const { exec } = await import('node:child_process');
       exec('node src/syncWeb.mjs', { windowsHide: true }, (syncErr) => {
@@ -2091,7 +2088,7 @@ function startCronScheduler() {
          else console.log('[DAEMON-CRON] Web sincronizada con éxito.');
       });
 
-      // 5. A las 18:00: Publicación del Comunicado Oficial de Scouting 360 en el tablón de Comunio
+      // 4. A las 18:00: Publicación del Comunicado Oficial de Scouting 360 en el tablón de Comunio
       if (currentTimeStr === '18:00') {
         try {
           const { postDailyRivalesAuditAnnouncement } = await import('./comunioCommunityPoster.js');
@@ -2102,8 +2099,11 @@ function startCronScheduler() {
         }
       }
 
-      // 6. Pre-Jornada: Registro oficial de Pronóstico
+      // 5. EXCLUSIVO PRE-JORNADA (15-30 min antes del kickoff): Guardado Oficial del Once y Pronóstico
       if (isPreMatchdaySlot) {
+        console.log(`[DAEMON-CRON] 🎯 Ventana Pre-Jornada: Guardando Once Oficial y emitiendo pronóstico definitivo...`);
+        await executeInLineupOptimization();
+
         try {
           const { recordMatchdayPrediction } = await import('./matchdayPredictionAuditor.js');
           const client = new ComunioClient();
