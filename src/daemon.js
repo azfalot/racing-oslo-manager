@@ -1292,6 +1292,59 @@ async function handleTelegramMessage(message) {
     }
   }
 
+  // ── /banquillo o /tendencias ──────────────────────────────────────────────
+  else if (text.startsWith('/banquillo') || text.startsWith('/tendencias') || text.startsWith('/suplentes')) {
+    const client = new ComunioClient();
+    const engine = new ComunioEngine();
+    try {
+      await client.login();
+      const squad = await client.getSquad();
+      const lineup = engine.optimizeLineup(squad);
+      const startingIds = lineup.starting11.map(p => p.playerId || p.id);
+
+      const { generateBenchAuditReport } = await import('./benchTrendAuditor.js');
+      const report = generateBenchAuditReport(squad, startingIds);
+
+      let rep = `🪑 📊 <b>[Auditor de Banquillo & Tendencias]</b>\n\n`;
+      rep += `👥 <b>Rendimiento de la Plantilla:</b>\n`;
+      rep += ` • ⚽ <b>11 Titular Alineado:</b> ${report.starterPoints} pts\n`;
+      rep += ` • 🪑 <b>Banquillo (Suplentes):</b> ${report.benchPoints} pts\n`;
+      rep += ` • 🎯 <b>Once Ideal Posible:</b> ${report.optimalPossiblePoints} pts (Formación: ${report.optimalFormation})\n\n`;
+
+      if (report.pointsLostInBench > 0) {
+        rep += `⚠️ <b>Puntos Dejados en Banquillo:</b> <code>-${report.pointsLostInBench} pts</code>\n\n`;
+      } else {
+        rep += `✅ <b>Alineación Perfecta:</b> No se perdieron puntos en el banquillo.\n\n`;
+      }
+
+      if (report.missedOpportunities.length > 0) {
+        rep += `🔄 <b>Oportunidades de Rotación Detectadas:</b>\n`;
+        report.missedOpportunities.slice(0, 3).forEach(opp => {
+          rep += ` • <b>${escapeHtml(opp.benchPlayer.name)}</b> (${opp.benchPlayer.points} pts) ➔ superó a <i>${escapeHtml(opp.lowestStarter.name)}</i> (${opp.lowestStarter.points} pts) [<b>+${opp.pointsDiff} pts</b>]\n`;
+        });
+        rep += `\n`;
+      }
+
+      rep += `🔥 <b>Detector de Momentum & Racha:</b>\n`;
+      report.trends.slice(0, 6).forEach(t => {
+        rep += ` • ${t.trendEmoji} <b>${escapeHtml(t.name)}</b> (${(t.position || '').toUpperCase()} · ${escapeHtml(t.clubName)}): ${t.lastPoints} pts — <i>${t.trendStatus}</i>\n`;
+      });
+
+      if (report.recommendations.length > 0) {
+        rep += `\n💡 <b>Recomendación Táctica:</b>\n`;
+        report.recommendations.forEach(rec => {
+          rep += ` • <i>${escapeHtml(rec)}</i>\n`;
+        });
+      }
+
+      await sendTelegramMessage(rep);
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error auditando banquillo: <code>${escapeHtml(e.message)}</code>`);
+    } finally {
+      await client.close();
+    }
+  }
+
   // ── /web ─────────────────────────────────────────────────────────────────
   else if (text.startsWith('/web')) {
     const webUrl = 'https://racing-oslo.cotero91.workers.dev/';
@@ -1538,6 +1591,7 @@ async function registerTelegramCommands() {
     { command: 'reporte', description: '📊 Dashboard ejecutivo, situación deportiva y tesorería' },
     { command: 'puntos', description: '🏆 Puntos de última jornada, histórico y acumulado' },
     { command: 'plantilla', description: '👥 Censo completo de plantilla (posiciones, minutos, roles)' },
+    { command: 'banquillo', description: '🪑 Auditoría de suplentes, puntos perdidos y tendencias' },
     { command: 'alinear', description: '⚽ Pizarra táctica, optimización y guardado del Once Oficial' },
     { command: 'scout', description: '🎯 Radar de ojeados (+35 pts) y prensa deportiva' },
     { command: 'mercado', description: '🛒 Jugadores a la venta, oportunidades y gangas' },

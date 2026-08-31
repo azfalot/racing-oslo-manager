@@ -326,6 +326,15 @@ async function fetchRealData() {
   } catch (auditErr) {
     console.warn('[SYNC-WEB] Info auditoría jornada:', auditErr.message);
   }
+
+  // Generación de auditoría de suplentes, puntos en banquillo y tendencias
+  try {
+    const { generateBenchAuditReport } = await import('./benchTrendAuditor.js');
+    generateBenchAuditReport(squad, Array.from(optimalStarterIds));
+    console.log('[SYNC-WEB] ✅ Auditoría de banquillo y tendencias exportada a benchTrends.json.');
+  } catch (benchErr) {
+    console.warn('[SYNC-WEB] Info auditoría banquillo:', benchErr.message);
+  }
   
   // Verificación y aseguramiento de que todas las imágenes de noticias existan en disco
   try {

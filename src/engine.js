@@ -138,11 +138,11 @@ export class ComunioEngine {
       // Jugador de rotación frecuente (Moi Gómez): 95 - 130 pts
       proj = Math.max(proj * 0.85, 105);
     } else if (price > 500000) {
-      // Joven promesa / Revulsivo (Hugo Álvarez, Pablo Durán, Álvaro Núñez): 60 - 95 pts
-      proj = Math.min(Math.max(proj, 65), 95);
+      // Joven promesa / Revulsivo (Hugo Álvarez, Pablo Durán, Arguibide): 65 - 110 pts
+      proj = Math.min(Math.max(proj, 70), 110);
     } else {
-      // Parche / En recuperación / Sin minutos (Kike Barja): 20 - 45 pts
-      proj = Math.min(proj > 0 ? proj * 0.35 : 30, 45);
+      // Revulsivo en progresión o parche: 45 - 85 pts si tiene minutos/histórico
+      proj = recentHist > 50 ? Math.min(recentHist * 0.70, 85) : (proj > 0 ? Math.min(proj * 0.60, 65) : 45);
     }
 
     return Math.round(proj);
@@ -167,6 +167,16 @@ export class ComunioEngine {
     const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
     if (!isNaN(avgPoints) && avgPoints > 0) {
       matchExpected = (matchExpected * 0.60) + (avgPoints * 0.40);
+    }
+
+    // 2.1. Impulso dinámico por Momentum / Puntos recientes (detecta suplentes en racha tipo Kike Barja)
+    const lastPts = typeof player.lastPoints === 'number' ? player.lastPoints : (player.points || 0);
+    if (lastPts >= 8) {
+      matchExpected += 1.5;
+    } else if (lastPts >= 5) {
+      matchExpected += 0.8;
+    } else if (lastPts >= 3) {
+      matchExpected += 0.3;
     }
 
     // 3. Penalización por duda médica o molestias físicas
