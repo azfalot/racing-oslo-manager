@@ -669,15 +669,13 @@ export function evaluateIncomingOffer(engine, player, offer, squad, balance) {
     };
   }
 
-  // 3. Debt handling — RATIONAL, not desperate
+  // 3. Debt handling — NUNCA aceptar por debajo del 100% del valor de mercado (0% pérdidas permitidas)
   if (balance < 0) {
     const requiredCash = Math.abs(balance);
     const assetLoss = marketValue - offerPrice;
-    const assetLossPct = marketValue > 0 ? assetLoss / marketValue : 0;
 
-    if (assetLossPct > maxAssetLoss) {
-      // Offer destroys too much asset value — reject even in debt
-      reasoning.push(`⛔ Oferta destruye ${(assetLossPct * 100).toFixed(0)}% del valor del activo (máx permitido: ${(maxAssetLoss * 100)}%). RECHAZADA incluso con deuda.`);
+    if (offerPrice < marketValue) {
+      reasoning.push(`⛔ Oferta (${offerPrice.toLocaleString()} €) es INFERIOR al valor de mercado (${marketValue.toLocaleString()} €). RECHAZADA.`);
       return {
         shouldAccept: false,
         action: 'REJECT_OFFER',
