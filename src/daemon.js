@@ -280,8 +280,9 @@ async function handleTelegramMessage(message) {
     }
   }
 
-  // ── /alinear · /tactica · /once · /pizarra ─────────────────────────────────
-  else if (cleanText.startsWith('/alinear') || cleanText.startsWith('/tactica') || cleanText.startsWith('/once') || cleanText.startsWith('/pizarra')) {
+  // ── /once · /tactica · /pizarra · /alinear ─────────────────────────────────
+  else if (cleanText.startsWith('/once') || cleanText.startsWith('/tactica') || cleanText.startsWith('/pizarra') || cleanText.startsWith('/alinear') || cleanText.startsWith('/guardar_once')) {
+    const isExplicitSave = cleanText.startsWith('/guardar_once');
     const client = new ComunioClient();
     const engine = new ComunioEngine();
     try {
@@ -293,7 +294,11 @@ async function handleTelegramMessage(message) {
       if (lineupResult.starting11 && lineupResult.starting11.length > 0) {
         const star11 = lineupResult.starting11;
         const startingIds = star11.map(p => p.playerId || p.id);
-        const success = await client.setLineup(startingIds, lineupResult.formation);
+        
+        let success = false;
+        if (isExplicitSave) {
+          success = await client.setLineup(startingIds, lineupResult.formation);
+        }
 
         const gk = star11.filter(p => p.type === 'keeper');
         const defs = star11.filter(p => p.type === 'defender');
@@ -306,8 +311,8 @@ async function handleTelegramMessage(message) {
         const attPts = atts.reduce((s, p) => s + (p.expectedPoints || 6), 0);
         const totalExp = Math.round(lineupResult.score || (gkPts + defPts + midPts + attPts));
 
-        let rep = `💾 <b>[ONCE OFICIAL & TÁCTICA] · Racing de Oslo (${lineupResult.formation})</b>\n`;
-        rep += `🎯 <b>Puntuación esperada:</b> ~${totalExp} pts | <b>Estado:</b> ${success ? '✅ Guardado en Comunio' : '⚠️ Pendiente'}\n\n`;
+        let rep = `📋 <b>[ONCE PROYECTADO] · Racing de Oslo (${lineupResult.formation})</b>\n`;
+        rep += `🎯 <b>Puntuación esperada:</b> ~${totalExp} pts | <b>Estado:</b> ${isExplicitSave ? (success ? '✅ Guardado en Comunio' : '❌ Error al guardar') : '👀 Modo Consulta (Sin modificar Comunio)'}\n\n`;
 
         rep += `🧤 <b>PORTERÍA (~${gkPts} pts):</b>\n`;
         gk.forEach(p => rep += ` • <b>${escapeHtml(p.name)}</b> (${p.clubName || 'Getafe'}) · ~${p.expectedPoints || 4} pts\n`);
@@ -1696,63 +1701,64 @@ async function runMarketCheck() {
       console.warn('[DAEMON-SCOUT-SYNC] Error actualizando radar de scouting:', scoutErr.message);
     }
 
-    // 1. PUJAS AUTOMÁTICAS (Operaciones Estándar no críticas)
+    // 1. PUJAS AUTOMÁTICAS (Exclusivas a Computer y al 100.0% del precio exacto según Reglas 2 y 3)
     for (const bid of result.autoBids) {
       if (botPaused) continue;
-      const success = await client.placeBid(bid.playerId, bid.name, bid.bidAmount);
+      // 🛡️ REGLA 2: COMPRAS EXCLUSIVAS A COMPUTER
+      const isComp = bid.isComputer || bid.ownerName === 'Computer' || !bid.ownerName || bid.ownerId === 1 || bid.ownerId === 0;
+      if (!isComp) {
+        console.log(`[DAEMON-MARKET] Omitiendo auto-puja por ${bid.name}: pertenece a un rival (${bid.ownerName}).`);
+        continue;
+      }
+
+      // 🛡️ REGLA 3: PRECIO EXACTO (0% SOBREPRECIO)
+      const exactBidAmount = bid.price;
+      const success = await client.placeBid(bid.playerId, bid.name, exactBidAmount);
       if (success) {
         let log = [];
         try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
-        log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Auto-Puja', player: bid.name, amount: `${bid.bidAmount.toLocaleString()} €`, status: 'Éxito' });
+        log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Auto-Puja Computer (Precio Exacto)', player: bid.name, amount: `${exactBidAmount.toLocaleString()} €`, status: 'Éxito' });
         fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
 
         try {
           const { publishRumorNews } = await import('./imageGen.js');
-          await publishRumorNews(bid.name, `Oferta emitida en el mercado oficial por ${bid.bidAmount.toLocaleString()} € (+${(bid.marginalValue || bid.upgradePoints || 0).toFixed(0)} pts al Once)`, bid.playerId, true);
+          await publishRumorNews(bid.name, `Oferta emitida a Computer por ${exactBidAmount.toLocaleString()} € (+${(bid.marginalValue || bid.upgradePoints || 0).toFixed(0)} pts al Once)`, bid.playerId, true);
         } catch (e) {
           console.error('[DAEMON-NEWS ERROR]', e.message);
         }
 
-        const msg = `💼 🤖 <b>[Mateo Oslomany] Auto-Puja Ejecutada</b>\n\n` +
+        const msg = `💼 🤖 <b>[Mateo Oslomany] Auto-Puja a Computer Ejecutada</b>\n\n` +
           `👤 <b>${escapeHtml(bid.name)}</b> (${(bid.type || '').toUpperCase()})\n` +
-          `💰 <b>Importe Pujado:</b> ${bid.bidAmount.toLocaleString()} € (+${bid.dynamicMargin || 0}%)\n` +
+          `💰 <b>Importe Pujado:</b> <b>${exactBidAmount.toLocaleString()} €</b> (Precio Exacto)\n` +
           `📈 <b>Mejora Real del XI:</b> +${(bid.marginalValue || bid.upgradePoints || 0).toFixed(0)} ptos\n` +
           `📊 <b>Eficiencia:</b> ${bid.efficiency || 0} pts/M€ (Puntuación Estratégica: ${bid.strategicScore || 0}/100)`;
         await sendTelegramMessage(msg);
       }
     }
 
-    // 2. OPERACIONES ESTRATÉGICAS / SALTO CUALITATIVO (Ejecución 100% Autónoma + Resumen Ejecutivo)
+    // 2. OPERACIONES ESTRATÉGICAS / SALTO CUALITATIVO (Notificación con Botón para Confirmación Humana)
     for (const alert of result.manualAlerts) {
-      if (botPaused) continue;
       const posTag = { keeper: '🧤', defender: '🛡️', midfielder: '⚙️', striker: '⚡' }[alert.type] || '👤';
-      const sellerTag = alert.isComputer ? 'Computadora' : `<b>${escapeHtml(alert.ownerName)}</b> (Rival de la Liga)`;
+      const sellerTag = alert.isComputer ? 'Computadora' : `<b>${escapeHtml(alert.ownerName)}</b> (Rival)`;
+      const exactBidAmount = alert.price;
 
-      const success = await client.placeBid(alert.playerId, alert.name, alert.bidAmount);
-      if (success) {
-        let log = [];
-        try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
-        log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Auto-Puja Estratégica', player: alert.name, amount: `${alert.bidAmount.toLocaleString()} €`, status: 'Éxito' });
-        fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
+      const msg = `💼 💎 <b>[Mateo Oslomany] Oportunidad Estratégica Detectada</b>\n\n` +
+        `${posTag} <b>${escapeHtml(alert.name)}</b> (${(alert.type || '').toUpperCase()})\n` +
+        `👤 <b>Vendedor:</b> ${sellerTag}\n` +
+        `💰 <b>Precio de Salida:</b> <b>${exactBidAmount.toLocaleString()} €</b>\n` +
+        `🏆 <b>Categoría:</b> ${alert.impactTag}\n` +
+        `📈 <b>Mejora Real del XI:</b> +${(alert.marginalValue || alert.upgradePoints || 0).toFixed(0)} ptos\n` +
+        `📊 <b>Rendimiento:</b> ~${(alert.expectedPoints || 0).toFixed(0)} ptos (PPM: ${alert.ppm || 0} | Eficiencia: ${alert.efficiency || 0} pts/M€)\n` +
+        `💎 <b>Puntuación Estratégica:</b> ${alert.strategicScore || 0}/100\n\n` +
+        `💡 <i>${escapeHtml(alert.reason || '')} Saldo actual: ${balance.toLocaleString()} €.</i>`;
 
-        try {
-          const { publishRumorNews } = await import('./imageGen.js');
-          await publishRumorNews(alert.name, `Oferta emitida por ${alert.bidAmount.toLocaleString()} € (+${(alert.marginalValue || alert.upgradePoints || 0).toFixed(0)} pts al Once)`, alert.playerId, true);
-        } catch (e) {
-          console.error('[DAEMON-NEWS ERROR]', e.message);
-        }
-
-        const msg = `💼 🤖 <b>[Mateo Oslomany] Auto-Puja Estratégica Ejecutada</b>\n\n` +
-          `${posTag} <b>${escapeHtml(alert.name)}</b> (${(alert.type || '').toUpperCase()})\n` +
-          `👤 <b>Vendedor:</b> ${sellerTag}\n` +
-          `💰 <b>Importe Pujado:</b> ${alert.bidAmount.toLocaleString()} € (+${alert.dynamicMargin || 0}%)\n` +
-          `🏆 <b>Categoría:</b> ${alert.impactTag}\n` +
-          `📈 <b>Mejora Real del XI:</b> +${(alert.marginalValue || alert.upgradePoints || 0).toFixed(0)} ptos\n` +
-          `📊 <b>Rendimiento:</b> ~${(alert.expectedPoints || 0).toFixed(0)} ptos (PPM: ${alert.ppm || 0} | Eficiencia: ${alert.efficiency || 0} pts/M€)\n` +
-          `💎 <b>Puntuación Estratégica:</b> ${alert.strategicScore || 0}/100\n\n` +
-          `💡 <i>${escapeHtml(alert.reason || '')} Saldo restante: ${(balance - alert.bidAmount).toLocaleString()} €.</i>`;
-        await sendTelegramMessage(msg);
-      }
+      const keyboard = [
+        [
+          { text: `✅ PUJAR POR ${exactBidAmount.toLocaleString()} €`, callback_data: `bid_player:${alert.playerId}:${exactBidAmount}:${alert.name}` },
+          { text: `❌ DESCARTAR`, callback_data: `ignore_player:${alert.playerId}:${alert.name}` }
+        ]
+      ];
+      await sendTelegramMessage(msg, { inline_keyboard: keyboard });
     }
 
     // 3. AUTO-VENTAS Y AUTO-LISTADO DESACTIVADOS PERMANENTEMENTE
@@ -1972,25 +1978,22 @@ async function runSquadHealthCheck() {
     }
 
     if (healthChangesCount > 0) {
-      console.log(`[DAEMON-HEALTH] Re-optimizando el XI titular tras detectar ${healthChangesCount} bajas físicas...`);
+      console.log(`[DAEMON-HEALTH] Re-calculando el XI ideal tras detectar ${healthChangesCount} cambios físicos...`);
       const activeClubs = await getActiveMatchdayClubs(client);
       const lineupResult = engine.optimizeLineup(squad, activeClubs);
-      const starting11Ids = lineupResult.starting11.map(p => p.playerId || p.id);
       
-      const saved = await client.setLineup(starting11Ids, lineupResult.formation);
-      if (saved) {
-        await sendTelegramMessage(
-          `<b>⚽ XI TITULAR REAJUSTADO TRAS PARTE MÉDICO</b>\n\n` +
-          `<b>Formación:</b> ${lineupResult.formation} (~${Math.round(lineupResult.score)} pts esperados)\n\n` +
-          `<b>🛡️ NUEVO ONCE TITULAR 100% SANO:</b>\n` +
-          lineupResult.starting11.map(p => ` • <b>${p.name}</b> (${p.expectedPoints} pts)`).join('\n')
-        );
+      await sendTelegramMessage(
+        `<b>⚽ REAJUSTE DE ONCE PROYECTADO TRAS PARTE MÉDICO</b>\n\n` +
+        `<b>Formación:</b> ${lineupResult.formation} (~${Math.round(lineupResult.score)} pts esperados)\n\n` +
+        `<b>🛡️ ONCE RECOMENDADO SANO:</b>\n` +
+        lineupResult.starting11.map(p => ` • <b>${p.name}</b> (${p.expectedPoints} pts)`).join('\n') +
+        `\n\n<i>⚠️ La alineación oficial se guardará en Comunio automáticamente 15-30 min antes del kickoff para evitar spam.</i>`
+      );
 
-        const { exec } = await import('node:child_process');
-        exec('node src/syncWeb.mjs', { windowsHide: true }, (syncErr) => {
-          if (syncErr) console.error('[DAEMON-HEALTH] Error en auto-sync web:', syncErr.message);
-        });
-      }
+      const { exec } = await import('node:child_process');
+      exec('node src/syncWeb.mjs', { windowsHide: true }, (syncErr) => {
+        if (syncErr) console.error('[DAEMON-HEALTH] Error en auto-sync web:', syncErr.message);
+      });
     }
 
     fs.writeFileSync(healthCachePath, JSON.stringify(currentHealthState, null, 2));

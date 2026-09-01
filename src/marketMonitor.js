@@ -42,13 +42,14 @@ export function ignorePlayer(playerId, playerName) {
     });
     fs.writeFileSync(ignoredPlayersFile, JSON.stringify(list, null, 2));
   } catch (e) {}
-}
-
-function getAutoBidLimit() {
+export function getAutoBidLimit() {
   try {
     if (fs.existsSync('config.json')) {
       const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
-      return typeof config.autoBidLimit === 'number' ? config.autoBidLimit * 1000000 : 8000000;
+      const val = config.strategy?.liquidity?.autoBidLimit ?? config.autoBidLimit;
+      if (typeof val === 'number') {
+        return val < 1000 ? val * 1000000 : val;
+      }
     }
   } catch (e) {}
   return 8000000;
@@ -155,15 +156,15 @@ export async function checkMarket(client, squad, balance, botPaused) {
       continue;
     }
 
-    // 🚫 ESCUDO ANTI-FINANCIACIÓN DE RIVALES:
-    // No pujar automáticamente sumas altas (> 1.5M€) a jugadores de otros usuarios para no darles liquidez.
-    if (!rec.isComputer && rec.ownerId && rec.ownerId !== 1 && (rec.price > 1500000 || (rec.bidAmount || 0) > 1500000)) {
-      console.log(`[MARKET MONITOR] Omitiendo ${rec.name}: Jugador propiedad de rival (${rec.ownerName || 'Usuario'}). Bloqueado para evitar financiar competidores.`);
+    // 🛡️ REGLA 2: COMPRAS EXCLUSIVAS A COMPUTER (Cero Financiación a Rivales)
+    if (!rec.isComputer && rec.ownerId && rec.ownerId !== 1 && (rec.ownerName || '').toLowerCase() !== 'computer') {
+      console.log(`[MARKET MONITOR] 🚫 Omitiendo ${rec.name}: Jugador propiedad de rival (${rec.ownerName || 'Usuario'}). Bloqueado según Regla 2.`);
       continue;
     }
 
-    const bidAmount = rec.bidAmount || rec.price;
-    const dynamicMargin = rec.marginPct || 0;
+    // 🛡️ REGLA 3: PRECIO EXACTO (0% SOBREPRECIO)
+    const bidAmount = rec.price;
+    const dynamicMargin = 0;
 
     // 🛡️ CONTROL DE CAPACIDAD ESTRICTO: Verificar que la puja cabe en la liquidez disponible
     if (bidAmount > availableBiddingPower) {

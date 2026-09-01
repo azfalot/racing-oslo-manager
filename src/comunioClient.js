@@ -778,51 +778,8 @@ export class ComunioClient {
     }
     return false;
   }
-
-  /**
-   * Revisa todas las ofertas de venta recibidas y acepta las ofertas validadas estratégicamente.
-   */
-  async acceptBestOffers() {
-    if (!this.isLoggedIn) await this.login();
-    try {
-      console.log('[CLIENT] Obteniendo ofertas de venta recibidas vía API...');
-      const url = `https://api.comunio.es/communities/${this.communityId}/users/${this.userId}/offers?current`;
-      const response = await axios.get(url, { headers: this.getHeaders() });
-
-      if (response.status !== 200 || !response.data?.items) {
-        console.log('[CLIENT] No hay ofertas activas.');
-        return 0;
-      }
-
-      // Filtrar únicamente ofertas de tipo SALE (ofertas que nos hacen por nuestros jugadores)
-      const saleOffers = response.data.items.filter(item => item.type === 'SALE' && item.state === 'PENDING');
-      if (saleOffers.length === 0) {
-        console.log('[CLIENT] No hay ofertas de venta pendientes por responder.');
-        return 0;
-      }
-
-      let acceptedCount = 0;
-
-      // Procesar cada oferta de venta con la API directa capturada
-      for (const offer of saleOffers) {
-        const offerId = offer.id;
-        const playerId = offer.tradable?.id;
-        const price = offer.price;
-        const playerName = offer.tradable?.name || 'Jugador';
-
-        console.log(`[CLIENT] Procesando aceptación de oferta por ${playerName} (${price} €)...`);
-        const success = await this.acceptSaleOffer(offerId, playerId, price);
-        if (success) acceptedCount++;
-      }
-
-      return acceptedCount;
-    } catch (err) {
-      console.error('[CLIENT] Error al procesar ofertas vía API:', err.message);
-      return 0;
-    }
-  }
   
-    async cancelBid(offerId, playerName, playerId = 0) {
+  async cancelBid(offerId, playerName, playerId = 0) {
     if (!this.isLoggedIn) await this.login();
     console.log(`[CLIENT] Cancelando puja (offerId: ${offerId}) por ${playerName}...`);
     try {

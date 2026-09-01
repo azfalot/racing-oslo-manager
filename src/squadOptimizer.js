@@ -149,7 +149,13 @@ export function calculateReplacementLoss(engine, squad, playerToRemove) {
   const reducedSquad = { ...squad, players: reducedPlayers };
   const reducedValue = calculateSquadValue(engine, reducedSquad);
 
-  const replacementLoss = currentValue - reducedValue;
+  let replacementLoss = currentValue - reducedValue;
+
+  // Si la posición queda totalmente huérfana (ej: único portero de la plantilla), la pérdida deportiva es crítica
+  const remainingInPos = reducedPlayers.filter(p => (p.type || p.position) === (playerToRemove.type || playerToRemove.position));
+  if (remainingInPos.length === 0 && (playerToRemove.type === 'keeper' || playerToRemove.position === 'keeper')) {
+    replacementLoss = Math.max(50, replacementLoss * 10);
+  }
 
   return { replacementLoss, wasInXI };
 }
@@ -411,14 +417,13 @@ export function calculateStrategicPurchaseScore(engine, candidate, squad, balanc
     };
   }
 
-  // 1. Squad upgrade (0-100)
+  // 1. Squad upgrade (0-100) — Normalizado por mejora de puntos por jornada (3.0+ pts/jornada = 100)
   const { marginalValue, entersXI } = calculateMarginalValue(engine, squad, candidate);
-  // Normalize: 0 pts upgrade = 0, 30+ pts = 100
-  const squadUpgradeRaw = Math.max(0, Math.min(100, (marginalValue / 30) * 100));
+  const squadUpgradeRaw = Math.max(0, Math.min(100, (marginalValue / 3.0) * 100));
 
   // 2. Absolute quality (0-100)
   const perf = getExpectedPerformance(candidate, strategy);
-  // PPM of 6+ = 100, 0 = 0
+  // PPM de 6+ = 100, 0 = 0
   const absoluteQualityRaw = Math.max(0, Math.min(100, (perf.ppm / 6) * 100));
 
   // 3. Position need (0-100)
@@ -498,7 +503,7 @@ export function calculateStrategicPurchaseScore(engine, candidate, squad, balanc
   // Determine action type
   const minUpgrade = strategy.purchase?.minMarginalXIUpgrade || 3;
   let action;
-  if (marginalValue < minUpgrade && posNeed.need < 0.50) {
+  if (marginalValue < minUpgrade && posNeed.need < 0.50 && score < 45) {
     action = 'PASS';
     reasoning.push(`⛔ Mejora insuficiente (${marginalValue} < ${minUpgrade} pts) y posición cubierta.`);
   } else {
@@ -535,7 +540,8 @@ export function calculateMaxRationalBid(candidate, purchaseScore, balance, rival
   const maxOverMarketPct = strategy.purchase?.maxBidOverMarketPct || 15.0;
   const safetyReservePct = strategy.purchase?.safetyReservePct || 0.15;
   const safetyReserveMin = strategy.purchase?.safetyReserveMin || 1000000;
-  const autoBidLimit = (strategy.liquidity?.autoBidLimit || 8) * 1000000;
+  const rawAutoBidLimit = strategy.liquidity?.autoBidLimit ?? 8;
+  const autoBidLimit = rawAutoBidLimit < 1000 ? rawAutoBidLimit * 1000000 : rawAutoBidLimit;
   const criticalPctBalance = strategy.liquidity?.criticalPurchasePctBalance || 0.40;
 
   const reasoning = [];

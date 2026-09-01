@@ -7,6 +7,18 @@ import { getTransfermarktData } from './transfermarkt.js';
 import fs from 'fs';
 import path from 'path';
 
+const lockFilePath = '.sync_web.lock';
+if (fs.existsSync(lockFilePath)) {
+  try {
+    const mtime = fs.statSync(lockFilePath).mtimeMs;
+    if (Date.now() - mtime < 120000) {
+      console.log('[SYNC-WEB] ⏳ Ya hay una sincronización en curso. Omitiendo ejecución concurrente.');
+      process.exit(0);
+    }
+  } catch (e) {}
+}
+try { fs.writeFileSync(lockFilePath, String(process.pid)); } catch (e) {}
+
 async function fetchRealData() {
   const client = new ComunioClient();
   await client.login();
@@ -371,6 +383,10 @@ async function fetchRealData() {
     console.log("[SYNC-WEB] 🚀 ¡Despliegue enviado a Cloudflare con éxito!");
   } catch (err) {
     console.warn("[SYNC-WEB] Info auto-push git:", err.message);
+  } finally {
+    try {
+      if (fs.existsSync(lockFilePath)) fs.unlinkSync(lockFilePath);
+    } catch (e) {}
   }
 }
 
