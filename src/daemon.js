@@ -1744,78 +1744,8 @@ async function runMarketCheck() {
       }
     }
 
-    // 3. OFERTAS DE VENTA RECIBIDAS (Evaluación y Ejecución 100% Autónoma)
-    try {
-      const incomingOffersUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers?current`;
-      const offersRes = await axios.get(incomingOffersUrl, { headers: client.getHeaders() });
-      const saleOffers = (offersRes.data?.items || []).filter(item => item.type === 'SALE' && item.state === 'PENDING');
-
-      for (const offer of saleOffers) {
-        const offerId = offer.id;
-        const playerId = offer.tradable?.id;
-        const playerName = offer.tradable?.name || 'Jugador';
-        const offerPrice = offer.price;
-        const buyerName = offer.user?.name || offer.tradingPartner?.name || 'Computadora';
-        const marketValue = offer.tradable?.quotedPrice || offer.tradable?.price || offerPrice;
-
-        // Buscar al jugador en nuestra plantilla
-        const squadPlayer = squad.players.find(p => p.id === playerId || p.playerId === playerId);
-        if (!squadPlayer) continue;
-
-        // Evaluación racional con el motor de optimización
-        const saleEval = engine.evaluateSaleOffer(squadPlayer, [offer], squad, balance);
-
-        if (saleEval.shouldAccept) {
-          // VENTA AUTÓNOMA RACIONADA (Descarte, rotación favorable o saneamiento de deuda)
-          const accepted = await client.acceptSaleOffer(offerId, playerId, offerPrice);
-          if (!accepted) continue;
-
-          let log = [];
-          try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
-          log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Auto-Venta Racional', player: playerName, amount: `${offerPrice.toLocaleString()} €`, status: 'Éxito' });
-          fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
-
-          try {
-            const { publishSaleNews } = await import('./imageGen.js');
-            await publishSaleNews(playerName, offerPrice, playerId, buyerName);
-          } catch (e) {
-            console.error('[DAEMON-NEWS ERROR]', e.message);
-          }
-
-          await sendTelegramMessage(`💼 🤖 <b>[Mateo Oslomany] Auto-Venta Ejecutada:</b> ${escapeHtml(playerName)} traspasado a ${escapeHtml(buyerName)} por ${offerPrice.toLocaleString()} €.\n<i>${escapeHtml(saleEval.reason)}</i>`);
-        } else {
-          console.log(`[DAEMON-MARKET] Oferta por ${playerName} (${offerPrice.toLocaleString()} €) rechazada para blindar el Once: ${saleEval.reason}`);
-        }
-      }
-    } catch (offerErr) {
-      console.warn('[DAEMON-MARKET] Error revisando ofertas entrantes:', offerErr.message);
-    }
-
-    // 4. AUTO-LISTADO DE DESCARTES EN EL MERCADO (Solo para descartes reales de bajo valor, nunca estrellas)
-    try {
-      const lineup = engine.optimizeLineup(squad);
-      const startingIds = new Set((lineup.starting11 || []).map(p => p.playerId || p.id));
-      const currentMarket = await client.getMarket();
-      const myListedIds = new Set((currentMarket?.players || []).filter(p => p.owner?.id === client.userId || p.owner === client.userId).map(p => p.playerId || p.id));
-      
-      // NUNCA auto-listar estrellas, jugadores franquicia (> 3M €) o pilares del equipo
-      const benchDescartes = squad.players.filter(p => {
-        const pId = p.playerId || p.id;
-        const isStarter = startingIds.has(pId);
-        const isCoreOrHighValue = (p.price || 0) > 3000000 || (p.lastSeasonPoints || 0) > 100;
-        return !isStarter && !isCoreOrHighValue;
-      });
-
-      for (const descarte of benchDescartes) {
-        const dId = descarte.playerId || descarte.id;
-        if (!myListedIds.has(dId)) {
-          console.log(`[DAEMON-SALES] 🏷️ Auto-listando descarte de bajo coste en el mercado: ${descarte.name} (${(descarte.price || 0).toLocaleString()} €)`);
-          await client.sellPlayer(dId, descarte.name, descarte.price || 160000);
-        }
-      }
-    } catch (listErr) {
-      console.warn('[DAEMON-SALES] Error auto-listando descartes:', listErr.message);
-    }
+    // 3. AUTO-VENTAS Y AUTO-LISTADO DESACTIVADOS PERMANENTEMENTE
+    // Las ventas se realizan exclusivamente de forma MANUAL por el usuario a través de Telegram (/ofertas o /vender).
 
     // Notificar jugadores desaparecidos del mercado con detalles de traspaso (Precio, Comprador, Vendedor)
     if (result.soldPlayers.length > 0) {
