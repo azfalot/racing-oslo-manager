@@ -1040,10 +1040,13 @@ async function handleTelegramMessage(message) {
       const res = await axios.get(url, { headers: client.getHeaders() });
       const saleOffers = (res.data?.items || []).filter(item => item.type === 'SALE' && item.state === 'PENDING');
 
-      let rep = `💼 <b>[Mateo Oslomany] · Ofertas de Venta Recibidas</b>\n\n`;
+      let rep = `💼 <b>[Mateo Oslomany] · Ofertas de Venta Recibidas (${saleOffers.length})</b>\n\n`;
+      const keyboard = [];
+
       if (saleOffers.length > 0) {
         for (const offer of saleOffers) {
           const playerName = offer.tradable?.name || 'Jugador';
+          const playerId = offer.tradable?.id;
           const offerPrice = offer.price;
           const buyerName = offer.user?.name || offer.tradingPartner?.name || 'Computadora';
           const marketValue = offer.tradable?.quotedPrice || offer.tradable?.price || offerPrice;
@@ -1051,13 +1054,21 @@ async function handleTelegramMessage(message) {
           const diffStr = diff >= 0 ? `+${diff.toLocaleString()} €` : `${diff.toLocaleString()} €`;
 
           rep += `👤 <b>${escapeHtml(playerName)}</b>\n`;
-          rep += `   💰 Oferta: ${offerPrice.toLocaleString()} € | Valor: ${marketValue.toLocaleString()} € (<i>${diffStr}</i>)\n`;
+          rep += `   💰 Oferta: <b>${offerPrice.toLocaleString()} €</b> | Valor: ${marketValue.toLocaleString()} € (<i>${diffStr}</i>)\n`;
           rep += `   🤝 Comprador: ${escapeHtml(buyerName)}\n\n`;
+
+          keyboard.push([
+            { text: `✅ ACEPTAR VENTA (${offerPrice.toLocaleString()} €)`, callback_data: `acc_sale:${offer.id}:${playerId}:${offerPrice}` },
+            { text: `❌ RECHAZAR`, callback_data: `rej_sale:${offer.id}:${playerName}` }
+          ]);
         }
+        rep += `<i>⚠️ Las ventas NUNCA se ejecutan solas. Pulsa el botón para autorizar la venta.</i>`;
       } else {
-        rep += `No tienes ofertas de venta pendientes en este momento.`;
+        rep += `<i>No tienes ofertas de venta pendientes en este momento.</i>`;
       }
-      await sendTelegramMessage(rep);
+      
+      const markup = keyboard.length > 0 ? { inline_keyboard: keyboard } : null;
+      await sendTelegramMessage(rep, markup);
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ Error consultando ofertas: <code>${e.message}</code>`);
     } finally {
