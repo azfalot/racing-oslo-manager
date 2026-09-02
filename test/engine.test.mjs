@@ -225,7 +225,8 @@ test('10. A high-scoring but redundant player can be sold if not core to XI', ()
   // Good offer on Duro (above market value)
   const goodOffer = { price: 4600000, user: { id: 1, name: 'Computer' } }; // VM is 4M (+15%)
   const evalResult = evaluateIncomingOffer(engine, duro, goodOffer, squad, 5000000);
-  assert.equal(evalResult.shouldAccept, true, 'Should accept profitable offer for redundant/bench player');
+  assert.equal(evalResult.shouldAccept, false, 'No offer may be accepted without a human Telegram confirmation');
+  assert.equal(evalResult.action, 'REQUIRE_CONFIRMATION', 'A valid offer must require manual approval');
 });
 
 test('11. A lower-scoring core player is protected because replacement loss is high', () => {
@@ -262,6 +263,7 @@ test('13. High-value transaction requires confirmation according to autoBidLimit
 
   // Star candidate priced at 12M (> 8M autoBidLimit in manual mode)
   const star = createPlayer(106, 'Superstar Mid', 'midfielder', 12000000, 6.8, 200);
+  star.owner = { id: 1, name: 'Computer' };
 
   const purchaseScore = calculateStrategicPurchaseScore(engine, star, squad, balance);
   
@@ -365,4 +367,3 @@ test('16. Positional club competition evaluates depth chart, direct rivals and s
   assert.equal(compVillarreal.isUndisputed, true, 'Gerard Moreno must be classified as undisputed starter');
   assert.equal(compVillarreal.competitionLevel, 'BAJA', 'Undisputed starter must have BAJA competition level');
 });
-

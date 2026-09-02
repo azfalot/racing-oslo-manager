@@ -6,18 +6,45 @@ import axios from 'axios';
 import { getTransfermarktData } from './transfermarkt.js';
 import fs from 'fs';
 import path from 'path';
+import { randomUUID } from 'node:crypto';
 
-const lockFilePath = '.sync_web.lock';
-if (fs.existsSync(lockFilePath)) {
+export function acquireSyncLock(lockPath = '.sync_web.lock') {
   try {
-    const mtime = fs.statSync(lockFilePath).mtimeMs;
-    if (Date.now() - mtime < 120000) {
+    const fd = fs.openSync(lockPath, 'wx');
+    const token = randomUUID();
+    fs.writeFileSync(fd, JSON.stringify({ pid: process.pid, token, createdAt: Date.now() }));
+    fs.closeSync(fd);
+    return token;
+  } catch (err) {
+    if (err.code === 'EEXIST') {
+      try {
+        const existing = JSON.parse(fs.readFileSync(lockPath, 'utf8'));
+        if (Number.isInteger(existing.pid)) {
+          try {
+            process.kill(existing.pid, 0);
+          } catch {
+            fs.unlinkSync(lockPath);
+            return acquireSyncLock(lockPath);
+          }
+        }
+      } catch (e) {}
       console.log('[SYNC-WEB] ⏳ Ya hay una sincronización en curso. Omitiendo ejecución concurrente.');
-      process.exit(0);
+      return false;
     }
-  } catch (e) {}
+    throw err;
+  }
 }
-try { fs.writeFileSync(lockFilePath, String(process.pid)); } catch (e) {}
+
+export function releaseSyncLock(lockPath = '.sync_web.lock', token) {
+  try {
+    if (!token || !fs.existsSync(lockPath)) return false;
+    const existing = JSON.parse(fs.readFileSync(lockPath, 'utf8'));
+    if (existing.token !== token) return false;
+    fs.unlinkSync(lockPath);
+    return true;
+  } catch (e) {}
+  return false;
+}
 
 async function fetchRealData() {
   const client = new ComunioClient();
@@ -383,11 +410,19 @@ async function fetchRealData() {
     console.log("[SYNC-WEB] 🚀 ¡Despliegue enviado a Cloudflare con éxito!");
   } catch (err) {
     console.warn("[SYNC-WEB] Info auto-push git:", err.message);
-  } finally {
-    try {
-      if (fs.existsSync(lockFilePath)) fs.unlinkSync(lockFilePath);
-    } catch (e) {}
   }
 }
 
-fetchRealData().catch(console.error);
+if (process.argv[1] && process.argv[1].endsWith('syncWeb.mjs')) {
+  const lockToken = acquireSyncLock();
+  if (!lockToken) {
+    process.exit(0);
+  }
+  try {
+    await fetchRealData();
+  } catch (err) {
+    console.error('[SYNC-WEB] Error fatal:', err);
+  } finally {
+    releaseSyncLock('.sync_web.lock', lockToken);
+  }
+}

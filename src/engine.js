@@ -18,6 +18,7 @@ import {
 import { MinuteTracker } from './minuteTracker.js';
 import { DisciplineMonitor } from './disciplineMonitor.js';
 import { LineupScraper } from './lineupScraper.js';
+import { isVerifiedComputerOwner } from './ownership.js';
 
 export class ComunioEngine {
 
@@ -439,8 +440,13 @@ export class ComunioEngine {
       if (mySquadIds.has(pid)) continue;
       if (player.owner?.id && squad?.userId && player.owner.id === squad.userId) continue;
 
-      const ownerName = (player.owner?.name || 'Computer').trim();
-      const isComputer = player.owner?.id === 1 || ownerName.toLowerCase() === 'computer';
+      // 🛡️ REGLA 2: DENY-BY-DEFAULT. Solo Computer verificado es apto para fichaje.
+      const isComputer = isVerifiedComputerOwner(player);
+      if (!isComputer) {
+        continue; // Descartado: Solo se compran jugadores a Computer (Cero Financiación a Rivales)
+      }
+      const ownerName = player.owner.name;
+      const ownerId = player.owner.id;
 
       const isAvailable = this.isPlayerAvailable(player);
       const injuryEval = this.getInjurySpeculationEvaluation(player, balance);
@@ -473,15 +479,6 @@ export class ComunioEngine {
       const upgradePoints = marginalValue;
       const ppm = purchaseScore.performance.ppm;
       const efficiency = purchaseScore.performance.efficiency;
-
-      // 🚫 REGLA ESTRICTA DE RIVALES HUMANOS (Sin clausulazo):
-      // Solo tener en cuenta si el jugador aporta un Salto Cualitativo Real (+30 a +50 pts netos en temporada, marginalValue >= 8)
-      if (!isComputer) {
-        const qualifiesForRivalException = purchaseScore.entersXI && marginalValue >= 8;
-        if (!qualifiesForRivalException) {
-          continue; // Descartado: No alcanza el umbral de +30 a +50 pts de salto cualitativo
-        }
-      }
 
       // 5. Categorización racional
       let category = 'EL_RESTO';
@@ -522,6 +519,7 @@ export class ComunioEngine {
         impactTag,
         action: bidCalc.action,
         ownerName,
+        ownerId,
         isComputer,
         requiresSaleFirst: isSquadFull,
         reasoning: purchaseScore.reasoning.concat(bidCalc.reasoning),

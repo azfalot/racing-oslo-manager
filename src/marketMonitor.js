@@ -2,6 +2,7 @@ import fs from 'fs';
 import axios from 'axios';
 import { ComunioEngine } from './engine.js';
 import { getRivalBiddingIntelligence } from './rivals.js';
+import { isVerifiedComputerOwner } from './ownership.js';
 
 const lastMarketFile = 'last_market.json';
 const ignoredPlayersFile = 'ignored_players.json';
@@ -42,10 +43,12 @@ export function ignorePlayer(playerId, playerName) {
     });
     fs.writeFileSync(ignoredPlayersFile, JSON.stringify(list, null, 2));
   } catch (e) {}
-export function getAutoBidLimit() {
+}
+
+export function getAutoBidLimit(configPath = 'config.json') {
   try {
-    if (fs.existsSync('config.json')) {
-      const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
+    if (fs.existsSync(configPath)) {
+      const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
       const val = config.strategy?.liquidity?.autoBidLimit ?? config.autoBidLimit;
       if (typeof val === 'number') {
         return val < 1000 ? val * 1000000 : val;
@@ -157,7 +160,7 @@ export async function checkMarket(client, squad, balance, botPaused) {
     }
 
     // 🛡️ REGLA 2: COMPRAS EXCLUSIVAS A COMPUTER (Cero Financiación a Rivales)
-    if (!rec.isComputer && rec.ownerId && rec.ownerId !== 1 && (rec.ownerName || '').toLowerCase() !== 'computer') {
+    if (!isVerifiedComputerOwner(rec)) {
       console.log(`[MARKET MONITOR] 🚫 Omitiendo ${rec.name}: Jugador propiedad de rival (${rec.ownerName || 'Usuario'}). Bloqueado según Regla 2.`);
       continue;
     }

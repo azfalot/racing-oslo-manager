@@ -7,7 +7,7 @@
     "build": "npm --prefix web run build",
     "discover": "node src/discover.js",
     "start": "node src/app.js",
-    "test": "node --test test/engine.test.mjs",
+    "test": "node --test test/engine.test.mjs test/system_rules.test.mjs",
     "whatsapp": "node src/whatsappPair.js"
   },
   "dependencies": {

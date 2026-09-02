@@ -115,18 +115,6 @@ async function runBot() {
   const client = new ComunioClient();
   const engine = new ComunioEngine();
 
-  // Cargar margen de puja desde config.json
-  let bidMargin = 0;
-  try {
-    if (fs.existsSync('config.json')) {
-      const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
-      bidMargin = typeof config.bidMargin === 'number' ? config.bidMargin : 0;
-    }
-  } catch (e) {
-    console.warn('[INFO] No se pudo cargar config.json, usando margen del 0% por defecto.');
-  }
-  console.log(`[INFO] Margen de puja activo: ${bidMargin}%`);
-
   try {
     await client.login();
     
@@ -175,11 +163,10 @@ async function runBot() {
     const economyResult = engine.manageEconomy(squad || { players: [] }, balance);
     const marketResult = engine.analyzeMarket(marketPlayers, squad, balance);
 
-    // Aplicar margen de puja a las recomendaciones si no tienen ya puja calculada
+    // Fijar recomendaciones estrictamente al 100.0% del Valor de Mercado (Regla 3)
     if (marketResult.recommendations) {
       marketResult.recommendations = marketResult.recommendations.map(rec => {
-        const withMargin = rec.bidAmount || Math.ceil(rec.price * (1 + bidMargin / 100));
-        return { ...rec, bidAmount: withMargin };
+        return { ...rec, bidAmount: rec.price, marginPct: 0 };
       });
     }
 
@@ -204,22 +191,9 @@ async function runBot() {
       })
     );
 
-    // ── MODO AUTÓNOMO: Únicamente guardar la alineación óptima (Cero ventas/compras autónomas) ──────
+    // ── MODO AUTÓNOMO: Cálculo y visualización del 11 titular (Guardado reservado a ventana pre-partido) ──────
     if (mode === 'autonomo') {
-      console.log('[AUTÓNOMO] Guardando únicamente la alineación de tu 11 titular...');
-      
-      // Guardar la alineación óptima
-      if (lineupResult.starting11 && lineupResult.starting11.length > 0) {
-        try {
-          const startingIds = lineupResult.starting11.map(p => p.playerId);
-          console.log('[AUTÓNOMO] Guardando alineación ideal...');
-          const success = await client.setLineup(startingIds, lineupResult.formation);
-          logAction('Alineación Guardada', lineupResult.formation, null, success ? 'Éxito' : 'Fallo');
-        } catch (e) {
-          console.error('[AUTÓNOMO] Error guardando alineación:', e.message);
-          logAction('Alineación Guardada', lineupResult.formation, null, 'Fallo (Error)');
-        }
-      }
+      console.log(`[AUTÓNOMO] XI Ideal calculado (${lineupResult.formation} ~${Math.round(lineupResult.score || 0)} pts). Guardado programado para ventana pre-partido.`);
     }
 
     // ── RESUMEN EJECUTIVO COMPACTO ───────────────────────────────────────────
@@ -271,7 +245,7 @@ async function runBot() {
     let report = `💼 <b>Mateo Oslomany · Resumen Ejecutivo</b>\n`;
     report += `<i>${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</i>\n\n`;
     report += `💰 <b>Presupuesto disponible:</b> ${balance.toLocaleString()} € ${economyResult.inDebt ? '⚠️ EN DEUDA' : '✅'}\n`;
-    if (teamValue > 0) report += `📊 <b>Valor de plantilla:</b> ${teamValue.toLocaleString()} € | Margen puja: <b>${bidMargin}%</b>\n`;
+    if (teamValue > 0) report += `📊 <b>Valor de plantilla:</b> ${teamValue.toLocaleString()} € | Pujas automáticas: <b>100% VM</b>\n`;
     report += `⚽ <b>Alineación:</b> ${lineupResult.formation || '—'} ${mode === 'autonomo' ? '(guardada ✅)' : '(modo asistente)'}\n`;
     report += `📈 <b>Predicción Jornada:</b> ~${predictedPoints} pts esperados 🎯\n`;
     report += `🛒 <b>Mercado:</b> ${marketLine}\n`;

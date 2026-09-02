@@ -8,6 +8,7 @@
 
 import fs from 'fs';
 import { evaluateClubCompetition } from './clubCompetition.js';
+import { isVerifiedComputerOwner } from './ownership.js';
 
 // ── CONFIGURATION ──────────────────────────────────────────────────────────────
 
@@ -32,14 +33,10 @@ const DEFAULT_STRATEGY = {
       riskAdjustment: -0.05
     },
     minMarginalXIUpgrade: 3,
-    maxBidOverMarketPct: 15.0,
-    safetyReservePct: 0.15,
     safetyReserveMin: 1000000
   },
   sale: {
-    minReplacementLossForProtection: 10,
-    maxAssetLossPctInDebt: 0.25,
-    autoAcceptAboveMarketPct: 1.10
+    minReplacementLossForProtection: 10
   },
   risk: {
     injuredPlayerWeight: 0.1,
@@ -395,7 +392,7 @@ export function calculateStrategicPurchaseScore(engine, candidate, squad, balanc
 
   // Comprobar disponibilidad estricta (sanciones, rojas, lesiones)
   const isAvailable = engine.isPlayerAvailable(candidate);
-  const isComputer = candidate.owner?.id === 1 || (candidate.owner?.name || '').toLowerCase() === 'computer';
+  const isComputer = isVerifiedComputerOwner(candidate);
 
   if (!isAvailable) {
     const statusDesc = candidate.status || candidate.statusInfo || 'Sancionado/No disponible';
@@ -523,147 +520,75 @@ export function calculateStrategicPurchaseScore(engine, candidate, squad, balanc
 
 // ── MAXIMUM RATIONAL BID ───────────────────────────────────────────────────────
 
-/**
- * Determines the maximum price Racing de Oslo should rationally pay.
- *
- * Separates sporting value from financial feasibility.
- *
- * @param {Object} candidate
- * @param {{ score: number, components: Object, performance: Object }} purchaseScore
- * @param {number} balance  Current cash balance
- * @param {Object|null} rivalIntel
- * @returns {{ maxRationalBid: number, recommendedBid: number, marginPct: number, action: string, canAfford: boolean, reasoning: string[] }}
- */
 export function calculateMaxRationalBid(candidate, purchaseScore, balance, rivalIntel = null, strategyOverride = null) {
   const strategy = strategyOverride || getStrategy();
   const marketValue = candidate.price || 0;
-  const maxOverMarketPct = strategy.purchase?.maxBidOverMarketPct || 15.0;
-  const safetyReservePct = strategy.purchase?.safetyReservePct || 0.15;
-  const safetyReserveMin = strategy.purchase?.safetyReserveMin || 1000000;
   const rawAutoBidLimit = strategy.liquidity?.autoBidLimit ?? 8;
   const autoBidLimit = rawAutoBidLimit < 1000 ? rawAutoBidLimit * 1000000 : rawAutoBidLimit;
   const criticalPctBalance = strategy.liquidity?.criticalPurchasePctBalance || 0.40;
 
   const reasoning = [];
-  const isComputer = candidate.owner?.id === 1 || (candidate.owner?.name || '').toLowerCase() === 'computer';
+  const isComputer = isVerifiedComputerOwner(candidate);
 
-  // 1. Sporting value -> margin percentage
-  // Strategic score typically 0-60. Map to 0% - maxOverMarketPct%
-  const normalizedScore = Math.max(0, Math.min(60, purchaseScore.score));
-  let sportingMarginPct = (normalizedScore / 60) * maxOverMarketPct;
+  // 🛡️ REGLA 3: PRECIO EXACTO (0% SOBREPRECIO)
+  const maxRationalBid = marketValue;
+  const recommendedBid = marketValue;
+  const marginPct = 0;
+  reasoning.push(`💰 Puja recomendada fijada estrictamente al 100.0% del Valor de Mercado: ${recommendedBid.toLocaleString()} € (0% sobreprecio).`);
 
-  // 🛡️ REGLA RIVAL HUMANO: Si el jugador pertenece a un rival humano, NO sobrepagar margen extra
+  // Affordability check
+  const safetyReserveMin = strategy.purchase?.safetyReserveMin || 1000000;
+  const minRequiredCash = recommendedBid + safetyReserveMin;
+  const canAfford = balance >= minRequiredCash;
+
+  if (!canAfford) {
+    reasoning.push(`⛔ Fondos insuficientes: Requiere ${minRequiredCash.toLocaleString()} € (incl. reserva), caja: ${balance.toLocaleString()} €.`);
+  }
+
+  let action = 'PASS';
   if (!isComputer) {
-    sportingMarginPct = 0;
-    reasoning.push(`🛡️ Vendedor rival (${candidate.owner?.name || 'Manager'}): Puja ajustada exactamente a VM para no financiar a un competidor directo.`);
-  }
-
-  // 2. Rival pressure adjustment (solo frente a la Computadora)
-  if (rivalIntel && isComputer) {
-    const avgOverbid = rivalIntel.avgCommunityOverbid || 5;
-    if (sportingMarginPct < avgOverbid && purchaseScore.score > 25) {
-      sportingMarginPct = Math.min(maxOverMarketPct, avgOverbid + 1.0);
-      reasoning.push(`📊 Margen ajustado para superar sobrepuja rival media (+${avgOverbid.toFixed(1)}%).`);
-    }
-  }
-
-  const maxRationalBid = Math.ceil(marketValue * (1 + sportingMarginPct / 100));
-
-  // 3. Estimate expected winning bid (when history exists)
-  let expectedWinningBid = Math.ceil(marketValue * 1.05); // Default +5%
-  if (rivalIntel?.avgCommunityOverbid) {
-    expectedWinningBid = Math.ceil(marketValue * (1 + rivalIntel.avgCommunityOverbid / 100));
-  }
-
-  // 4. Decision: bid only if expected winning bid <= max rational bid
-  let recommendedBid;
-  if (expectedWinningBid <= maxRationalBid) {
-    // Bid slightly above expected winning to increase chances
-    recommendedBid = Math.min(maxRationalBid, Math.ceil(expectedWinningBid * 1.02));
-    reasoning.push(`💰 Puja recomendada: ${recommendedBid.toLocaleString()} € (esperable ganar con +${sportingMarginPct.toFixed(1)}%).`);
-  } else {
-    // Would need to overpay beyond rational limit
-    recommendedBid = maxRationalBid;
-    reasoning.push(`⚠️ Puja esperada para ganar (${expectedWinningBid.toLocaleString()} €) supera el máximo racional (${maxRationalBid.toLocaleString()} €).`);
-  }
-
-  // 5. Financial feasibility (does NOT change the sporting value)
-  const safetyReserve = Math.max(safetyReserveMin, Math.round(balance * safetyReservePct));
-  const maxAffordable = balance - safetyReserve;
-  const canAfford = recommendedBid <= maxAffordable;
-
-  if (!canAfford && balance > 0) {
-    reasoning.push(`🏦 No se puede permitir: Puja (${recommendedBid.toLocaleString()} €) > Disponible (${maxAffordable.toLocaleString()} €) tras reserva de seguridad.`);
-    // For high-value strategic opportunities, check if we can afford at market value at least
-    if (marketValue <= maxAffordable) {
-      recommendedBid = marketValue; // Bid at market value minimum
-      reasoning.push(`💡 Se ajusta a precio de mercado (${marketValue.toLocaleString()} €) para no perder la oportunidad.`);
-    }
-  }
-
-  // 6. Determine final action
-  let action = purchaseScore.action;
-  const isFullAutonomous = strategy.liquidity?.fullAutonomousMode === true;
-
-  if (action === 'PASS') {
-    // Already determined by strategic score
-  } else if (!canAfford && marketValue > maxAffordable) {
+    reasoning.push('⛔ Vendedor no verificado como Computer. No se permite puja autónoma ni recomendada.');
+  } else if (!canAfford) {
     action = 'PASS';
-    reasoning.push(`⛔ PASS: No hay liquidez suficiente.`);
-  } else if (isFullAutonomous) {
-    action = 'AUTO_BID';
-    reasoning.push(`🤖 AUTO_BID: Operación 100% autónoma ejecutada sin requerir confirmación.`);
+  } else if (purchaseScore.score < 25) {
+    action = 'PASS';
+    reasoning.push(`⛔ Puntuación estratégica insuficiente (${purchaseScore.score} < 25).`);
   } else if (recommendedBid >= autoBidLimit || recommendedBid >= (balance * criticalPctBalance)) {
     action = 'REQUIRE_CONFIRMATION';
-    reasoning.push(`⚠️ Operación CRÍTICA: Requiere confirmación manual en Telegram.`);
+    reasoning.push(`⚠️ Operación crítica (${recommendedBid.toLocaleString()} € >= límite ${autoBidLimit.toLocaleString()} € o 40% caja). Requiere confirmación.`);
+  } else if (strategy.liquidity?.fullAutonomousMode === false) {
+    action = 'REQUIRE_CONFIRMATION';
+    reasoning.push(`ℹ️ Modo semi-autónomo: Requiere confirmación.`);
   } else {
     action = 'AUTO_BID';
-    reasoning.push(`✅ AUTO_BID: Operación estándar dentro de límites.`);
   }
-
-  const marginPct = marketValue > 0 ? parseFloat(((recommendedBid / marketValue - 1) * 100).toFixed(1)) : 0;
 
   return {
     maxRationalBid,
     recommendedBid,
     marginPct,
-    expectedWinningBid,
     action,
     canAfford,
-    safetyReserve,
     reasoning
   };
 }
 
-// ── SALE: INCOMING OFFER EVALUATION ────────────────────────────────────────────
+// ── EVALUATE INCOMING OFFER ───────────────────────────────────────────────────
 
-/**
- * Evaluates an incoming sale offer using replacement loss.
- *
- * @param {ComunioEngine} engine
- * @param {Object} player     Our squad player being offered for
- * @param {Object} offer      { price, user: { id, name } }
- * @param {{ players: Array }} squad
- * @param {number} balance
- * @returns {{ shouldAccept: boolean, action: string, reasoning: string[] }}
- */
 export function evaluateIncomingOffer(engine, player, offer, squad, balance) {
   const strategy = getStrategy();
   const reasoning = [];
 
   const marketValue = player.quotedPrice || player.price || 0;
   const offerPrice = offer.price || 0;
-  const offerPctOfMV = marketValue > 0 ? (offerPrice / marketValue) : 1;
 
   // 1. Calculate replacement loss
   const { replacementLoss, wasInXI } = calculateReplacementLoss(engine, squad, player);
   const minProtection = strategy.sale?.minReplacementLossForProtection || 10;
-  const autoAcceptPct = strategy.sale?.autoAcceptAboveMarketPct || 1.10;
-  const maxAssetLoss = strategy.sale?.maxAssetLossPctInDebt || 0.25;
 
   reasoning.push(`📉 Pérdida por reemplazo: ${replacementLoss} pts${wasInXI ? ' (TITULAR)' : ' (suplente)'}.`);
 
-  // 2. Core player protection — based on squad impact, NOT absolute points
+  // 2. Core player protection with positive balance
   if (replacementLoss >= minProtection && balance >= 0) {
     reasoning.push(`🛡️ Jugador CORE: perder ${replacementLoss} pts del XI es inaceptable con saldo positivo.`);
     return {
@@ -675,71 +600,9 @@ export function evaluateIncomingOffer(engine, player, offer, squad, balance) {
     };
   }
 
-  // 3. Debt handling — NUNCA aceptar por debajo del 100% del valor de mercado (0% pérdidas permitidas)
-  if (balance < 0) {
-    const requiredCash = Math.abs(balance);
-    const assetLoss = marketValue - offerPrice;
-
-    if (offerPrice < marketValue) {
-      reasoning.push(`⛔ Oferta (${offerPrice.toLocaleString()} €) es INFERIOR al valor de mercado (${marketValue.toLocaleString()} €). RECHAZADA.`);
-      return {
-        shouldAccept: false,
-        action: 'REJECT_OFFER',
-        chosenOffer: offer,
-        replacementLoss,
-        reasoning
-      };
-    }
-
-    // If core player: escalate to manual confirmation even in debt (or auto-accept if fullAutonomousMode)
-    if (replacementLoss >= minProtection) {
-      if (strategy.liquidity?.fullAutonomousMode === true) {
-        reasoning.push(`🤖 Modo 100% Autónomo: Venta aceptada automáticamente para sanear balance y evitar sanción de 0 puntos.`);
-        return {
-          shouldAccept: true,
-          action: 'ACCEPT_OFFER',
-          chosenOffer: offer,
-          replacementLoss,
-          reasoning
-        };
-      }
-      reasoning.push(`⚠️ Jugador CORE con deuda. Se requiere confirmación manual.`);
-      return {
-        shouldAccept: false,
-        action: 'REQUIRE_CONFIRMATION',
-        chosenOffer: offer,
-        replacementLoss,
-        reasoning
-      };
-    }
-
-    // Non-core player, acceptable price, in debt → accept
-    reasoning.push(`💸 Saldo negativo (${balance.toLocaleString()} €). Oferta aceptable para liquidez.`);
-    return {
-      shouldAccept: true,
-      action: 'ACCEPT_OFFER',
-      chosenOffer: offer,
-      replacementLoss,
-      reasoning
-    };
-  }
-
-  // 4. Con saldo positivo (superávit de liquidez): POLÍTICA DE PROTECCIÓN & REVALORIZACIÓN
-  // Se retiene a los jugadores del banquillo para especular con su subida de cotización en los siguientes partidos.
-  // Solo se acepta venta si la oferta trae prima/plusvalía clara (>= autoAcceptPct de VM, ej. >= 105%).
-  if (balance >= 0) {
-    if (offerPctOfMV >= autoAcceptPct) {
-      reasoning.push(`✅ Oferta (${offerPrice.toLocaleString()} €) supera el ${(autoAcceptPct * 100).toFixed(0)}% del VM. Venta con plusvalía aceptada.`);
-      return {
-        shouldAccept: true,
-        action: 'ACCEPT_OFFER',
-        chosenOffer: offer,
-        replacementLoss,
-        reasoning
-      };
-    }
-
-    reasoning.push(`🛡️ Política de Revalorización: Con saldo positivo (+${balance.toLocaleString()} €), se retiene a ${player.name} para especular con su revalorización y subida de cotización. Oferta (${offerPrice.toLocaleString()} €) sin prima suficiente.`);
+  // 3. Ofertas por debajo de VM -> RECHAZO ESTRICTO
+  if (offerPrice < marketValue) {
+    reasoning.push(`⛔ Oferta (${offerPrice.toLocaleString()} €) es INFERIOR al valor de mercado (${marketValue.toLocaleString()} €). RECHAZADA.`);
     return {
       shouldAccept: false,
       action: 'REJECT_OFFER',
@@ -749,17 +612,15 @@ export function evaluateIncomingOffer(engine, player, offer, squad, balance) {
     };
   }
 
-  // 5. Normal conditions (deuda o necesidad): aceptar si oferta es justa
-  if (offerPctOfMV >= 0.95) {
-    reasoning.push(`💸 Venta aceptada por necesidad de liquidez/saneamiento.`);
-    return {
-      shouldAccept: true,
-      action: 'ACCEPT_OFFER',
-      chosenOffer: offer,
-      replacementLoss,
-      reasoning
-    };
-  }
+  // 4. 🛡️ REGLA 1: NUNCA auto-aceptar (devolver REQUIRE_CONFIRMATION para control humano en Telegram)
+  reasoning.push(`ℹ️ Oferta válida (${offerPrice.toLocaleString()} € >= VM). Requiere confirmación manual del mánager en Telegram.`);
+  return {
+    shouldAccept: false,
+    action: 'REQUIRE_CONFIRMATION',
+    chosenOffer: offer,
+    replacementLoss,
+    reasoning
+  };
 }
 
 // ── SALE PORTFOLIO OPTIMIZATION ────────────────────────────────────────────────
