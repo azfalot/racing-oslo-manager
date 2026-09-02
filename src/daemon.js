@@ -6,6 +6,8 @@ import { ComunioEngine } from './engine.js';
 import { analyzeRivals } from './rivals.js';
 import { checkMarket, ignorePlayer, fetchRecentTransactions } from './marketMonitor.js';
 import { generateSigningCard } from './signingCard.js';
+import { isVerifiedComputerOwner } from './ownership.js';
+import { isWithinPreMatchdayWindow } from './preMatchdayWindow.js';
 import fs from 'fs';
 
 dotenv.config();
@@ -177,6 +179,14 @@ async function getActiveMatchdayClubs(client) {
   }
 }
 
+async function isOfficialLineupSaveAllowed(client) {
+  const { getNextMatchdayInfo } = await import('./comunioNewsConsumer.js');
+  const info = await getNextMatchdayInfo(client);
+  if (!info?.kickoffDate) return false;
+  const diffMinutes = Math.round((info.kickoffDate.getTime() - Date.now()) / (1000 * 60));
+  return isWithinPreMatchdayWindow(diffMinutes);
+}
+
 // ── MANEJADOR DE COMANDOS ─────────────────────────────────────────────────────
 
 async function handleTelegramMessage(message) {
@@ -282,7 +292,7 @@ async function handleTelegramMessage(message) {
 
   // ── /once · /tactica · /pizarra · /alinear ─────────────────────────────────
   else if (cleanText.startsWith('/once') || cleanText.startsWith('/tactica') || cleanText.startsWith('/pizarra') || cleanText.startsWith('/alinear') || cleanText.startsWith('/guardar_once')) {
-    const isExplicitSave = cleanText.startsWith('/guardar_once');
+    const isExplicitSave = cleanText.startsWith('/guardar_once') || cleanText.startsWith('/alinear');
     const client = new ComunioClient();
     const engine = new ComunioEngine();
     try {
@@ -296,8 +306,13 @@ async function handleTelegramMessage(message) {
         const startingIds = star11.map(p => p.playerId || p.id);
         
         let success = false;
+        let saveBlockedByWindow = false;
         if (isExplicitSave) {
-          success = await client.setLineup(startingIds, lineupResult.formation);
+          if (await isOfficialLineupSaveAllowed(client)) {
+            success = await client.setLineup(startingIds, lineupResult.formation);
+          } else {
+            saveBlockedByWindow = true;
+          }
         }
 
         const gk = star11.filter(p => p.type === 'keeper');
@@ -312,7 +327,7 @@ async function handleTelegramMessage(message) {
         const totalExp = Math.round(lineupResult.score || (gkPts + defPts + midPts + attPts));
 
         let rep = `📋 <b>[ONCE PROYECTADO] · Racing de Oslo (${lineupResult.formation})</b>\n`;
-        rep += `🎯 <b>Puntuación esperada:</b> ~${totalExp} pts | <b>Estado:</b> ${isExplicitSave ? (success ? '✅ Guardado en Comunio' : '❌ Error al guardar') : '👀 Modo Consulta (Sin modificar Comunio)'}\n\n`;
+        rep += `🎯 <b>Puntuación esperada:</b> ~${totalExp} pts | <b>Estado:</b> ${isExplicitSave ? (success ? '✅ Guardado en Comunio' : (saveBlockedByWindow ? '⏳ Guardado bloqueado: solo 15–30 min antes del kickoff' : '❌ Error al guardar')) : '👀 Modo Consulta (Sin modificar Comunio)'}\n\n`;
 
         rep += `🧤 <b>PORTERÍA (~${gkPts} pts):</b>\n`;
         gk.forEach(p => rep += ` • <b>${escapeHtml(p.name)}</b> (${p.clubName || 'Getafe'}) · ~${p.expectedPoints || 4} pts\n`);
@@ -787,32 +802,7 @@ async function handleTelegramMessage(message) {
 
   // ── /margen ───────────────────────────────────────────────────────────────
   else if (text.startsWith('/margen')) {
-    const parts = text.split(' ');
-    if (parts.length < 2) {
-      let currentMargin = 0;
-      try {
-        if (fs.existsSync('config.json')) {
-          const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
-          currentMargin = typeof config.bidMargin === 'number' ? config.bidMargin : 0;
-        }
-      } catch (e) {}
-      await sendTelegramMessage(`💼 📊 <b>[Mateo Oslomany]:</b> Margen de puja actual: <b>${currentMargin}%</b> sobre el mínimo.\nUsa <code>/margen 1.5</code> para cambiarlo.`);
-      return;
-    }
-    const marginValue = parseFloat(parts[1]);
-    if (isNaN(marginValue) || marginValue < 0 || marginValue > 50) {
-      await sendTelegramMessage('💼 ⚠️ <b>[Mateo Oslomany]:</b> Valor incorrecto. Debe ser entre 0 y 50.\nEjemplo: <code>/margen 1.5</code>');
-      return;
-    }
-    try {
-      let config = {};
-      if (fs.existsSync('config.json')) config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
-      config.bidMargin = marginValue;
-      fs.writeFileSync('config.json', JSON.stringify(config, null, 2));
-      await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Margen de puja configurado en <b>${marginValue}%</b>.`);
-    } catch (e) {
-      await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> No pude guardar la configuración: <code>${e.message}</code>`);
-    }
+    await sendTelegramMessage('💼 🛡️ <b>[Mateo Oslomany]:</b> El margen de puja está desactivado. Todas las pujas automáticas usan exactamente el 100% del Valor de Mercado.');
   }
 
   // ── /limite ───────────────────────────────────────────────────────────────
@@ -1447,42 +1437,59 @@ async function handleCallbackQuery(callbackQuery) {
     return;
   }
 
-  // Formato: "bid:<playerId>:<playerName>:<price>:<position>" o "ignore:<playerId>:<playerName>"
-  if (data.startsWith('bid:')) {
-    const [, playerId, playerName, price, position] = data.split(':');
+  // Formato: "bid:<playerId>:<playerName>:<price>:<position>" o "bid_player:<playerId>:<price>:<playerName>"
+  if (data.startsWith('bid:') || data.startsWith('bid_player:')) {
+    const parts = data.split(':');
+    let playerId, playerName, price, position;
+    if (data.startsWith('bid_player:')) {
+      [, playerId, price, playerName] = parts;
+      position = 'centrocampista';
+    } else {
+      [, playerId, playerName, price, position] = parts;
+    }
+
     await answerCallbackQuery(callbackQuery.id, '⏳ Procesando puja...');
     await updateSpecificTelegramButton(callbackQuery, `✅ PUJA CONFIRMADA (${parseInt(price).toLocaleString()} €)`);
 
     const client = new ComunioClient();
     try {
       await client.login();
-      const success = await client.placeBid(parseInt(playerId), playerName, parseInt(price));
+      const market = await client.getMarket();
+      const target = (market?.players || []).find(p => parseInt(p.playerId || p.id) === parseInt(playerId));
+      if (!target || !isVerifiedComputerOwner(target)) {
+        throw new Error('El objetivo ya no está disponible o su vendedor no es Computer verificado.');
+      }
+      const exactPrice = target.price;
+      const exactName = target.name;
+      const success = await client.placeBid(parseInt(playerId), exactName, exactPrice);
 
       let log = [];
       try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
-      log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Puja Manual (Botón)', player: playerName, amount: `${parseInt(price).toLocaleString()} €`, status: success ? 'Éxito' : 'Fallo' });
+      log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Puja Manual (Botón, precio exacto)', player: exactName, amount: `${exactPrice.toLocaleString()} €`, status: success ? 'Éxito' : 'Fallo' });
       fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
 
       if (success) {
-        await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Puja enviada con éxito por <b>${escapeHtml(playerName)}</b> por <b>${parseInt(price).toLocaleString()} €</b>.`);
+        await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Puja enviada con éxito por <b>${escapeHtml(exactName)}</b> por <b>${exactPrice.toLocaleString()} €</b>.`);
 
         // Generar comunicado oficial de fichaje en la web
         try {
           const { publishSigningNews } = await import('./imageGen.js');
-          await publishSigningNews(playerName, `${parseInt(price).toLocaleString()} €`, parseInt(playerId), position || 'centrocampista');
+          await publishSigningNews(exactName, `${exactPrice.toLocaleString()} €`, parseInt(playerId), position || 'centrocampista');
         } catch (e) {
           console.error('[DAEMON] Error publicando noticia de fichaje:', e.message);
         }
       } else {
-        await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al enviar la puja por ${escapeHtml(playerName)}.`);
+        await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al enviar la puja por ${escapeHtml(exactName)}.`);
       }
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ Error al procesar puja: <code>${e.message}</code>`);
     } finally {
       await client.close();
     }
-  } else if (data.startsWith('ignore:')) {
-    const [, playerId, playerName] = data.split(':');
+  } else if (data.startsWith('ignore:') || data.startsWith('ignore_player:')) {
+    const parts = data.split(':');
+    const playerId = parts[1];
+    const playerName = parts[2] || `Jugador #${playerId}`;
     ignorePlayer(parseInt(playerId));
     await answerCallbackQuery(callbackQuery.id, '✅ Ignorado por 24h');
     await updateSpecificTelegramButton(callbackQuery, `🚫 OPCIÓN IGNORADA`);
@@ -1705,8 +1712,7 @@ async function runMarketCheck() {
     for (const bid of result.autoBids) {
       if (botPaused) continue;
       // 🛡️ REGLA 2: COMPRAS EXCLUSIVAS A COMPUTER
-      const isComp = bid.isComputer || bid.ownerName === 'Computer' || !bid.ownerName || bid.ownerId === 1 || bid.ownerId === 0;
-      if (!isComp) {
+      if (!isVerifiedComputerOwner(bid)) {
         console.log(`[DAEMON-MARKET] Omitiendo auto-puja por ${bid.name}: pertenece a un rival (${bid.ownerName}).`);
         continue;
       }
@@ -1906,11 +1912,13 @@ async function executeInLineupOptimization() {
     const activeClubs = await getActiveMatchdayClubs(client);
     const lineupResult = engine.optimizeLineup(squad || { players: [] }, activeClubs);
     
-    if (lineupResult.starting11 && lineupResult.starting11.length > 0) {
+    if (lineupResult.starting11 && lineupResult.starting11.length > 0 && await isOfficialLineupSaveAllowed(client)) {
       const startingIds = lineupResult.starting11.map(p => p.playerId || p.id);
       const success = await client.setLineup(startingIds, lineupResult.formation);
       console.log(`[DAEMON-CRON] 11 Titular guardado (${lineupResult.formation}) -> Éxito: ${success}`);
       await sendTelegramMessage(`💼 ⚡ <b>[Mateo Oslomany]:</b> 11 Titular optimizado y guardado en Comunio (Formación: ${lineupResult.formation}).`);
+    } else if (lineupResult.starting11 && lineupResult.starting11.length > 0) {
+      console.warn('[DAEMON-CRON] Guardado de once bloqueado fuera de la ventana 15–30 min.');
     }
 
     // Auditar cambios de plantilla, fichajes resueltos y publicar noticias automáticas
@@ -2060,7 +2068,7 @@ function startCronScheduler() {
 
         if (info.kickoffDate) {
           const diffMinutes = Math.round((info.kickoffDate.getTime() - now.getTime()) / (1000 * 60));
-          if (diffMinutes > 0 && diffMinutes <= config.preMatchdayMinutes && lastPreMatchdayTriggeredKey !== info.nextMatchday) {
+          if (isWithinPreMatchdayWindow(diffMinutes, 15, 30) && lastPreMatchdayTriggeredKey !== info.nextMatchday) {
             isPreMatchdaySlot = true;
             lastPreMatchdayTriggeredKey = info.nextMatchday;
             console.log(`[DAEMON-CRON] 🚨 Alerta Pre-Jornada detectada: Quedan ${diffMinutes} min para el kickoff de la Jornada ${info.nextMatchday}.`);
