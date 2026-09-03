@@ -218,6 +218,7 @@ async function fetchRealData() {
   // Matches & Standings Enriched
   const matchdays = await client.getMatchdays();
   const nextMd = matchdays.find(md => !md.finished && !md.started) || matchdays.find(md => !md.finished);
+  const finishedMd = matchdays.filter(md => md.finished).pop();
   let opponent = "Resto de la Liga";
   if (realStandings && realStandings.length > 1) {
     const rivals = realStandings.filter(t => t.id !== 21163822);
@@ -269,8 +270,8 @@ async function fetchRealData() {
     const bidsTotal = (pendingBids || []).reduce((s, b) => s + (b.price || 0), 0);
     const effectiveBal = myMoney - bidsTotal;
     const prizePerPoint = 10000;
-    const totalPts = dashboard?.points || realPts || 86;
-    const lastPts = dashboard?.lastPoints !== undefined ? dashboard.lastPoints : 38;
+    const totalPts = dashboard?.points || realPts || 146;
+    const lastPts = dashboard?.lastPoints !== undefined ? dashboard.lastPoints : 48;
 
     const financesPayload = {
       club: {
@@ -375,6 +376,53 @@ async function fetchRealData() {
     console.warn('[SYNC-WEB] Info auditoría banquillo:', benchErr.message);
   }
   
+  // Sincronización en vivo del tablón de noticias de Comunio con news.json
+  try {
+    const rawEntries = [];
+    let start = 0;
+    let keepGoing = true;
+    while (keepGoing && start <= 600) {
+      const newsUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/news?start=${start}&limit=50`;
+      const newsRes = await axios.get(newsUrl, { headers: client.getHeaders() });
+      const entries = newsRes.data?.newsList?.entries || [];
+      if (entries.length === 0) break;
+      rawEntries.push(...entries);
+      if (entries.length < 10) break;
+      start += entries.length;
+    }
+    const newsPath = path.resolve('web/src/data/news.json');
+    let existingNews = fs.existsSync(newsPath) ? JSON.parse(fs.readFileSync(newsPath, 'utf8')) : [];
+
+    for (const e of rawEntries) {
+      const newsId = `comunio_news_${e.id}`;
+      const exists = existingNews.some(n => n.id === newsId || (n.title && n.title === e.title));
+      if (!exists && e.title) {
+        let cleanText = (e.message?.text || '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&iexcl;/g, '¡').replace(/&aacute;/g, 'á').replace(/&eacute;/g, 'é').replace(/&iacute;/g, 'í').replace(/&oacute;/g, 'ó').replace(/&uacute;/g, 'ú').replace(/&ntilde;/g, 'ñ').trim();
+        const isOfficial = e.type === 'ADMINISTRATION' || e.owner?.name === 'Computer';
+        
+        let dateFormatted = new Date(e.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
+        
+        existingNews.unshift({
+          id: newsId,
+          title: e.title.replace(/&iexcl;/g, '¡').replace(/&amp;/g, '&'),
+          date: dateFormatted,
+          category: e.type === 'ADMINISTRATION' ? 'Competición' : e.type === 'LINEUP' ? 'Alineación' : 'Oficial',
+          summary: cleanText.slice(0, 140) + (cleanText.length > 140 ? '...' : ''),
+          body: cleanText,
+          content: cleanText,
+          image: e.owner?.name?.includes('Racing') ? '/media/news_graphics/club_sede_digital_oficial.jpg' : '/media/news_graphics/comunio_rival_transfers.png',
+          author: e.owner?.name || 'Comunio Oficial'
+        });
+      }
+    }
+
+    // Ordenar noticias por id o fecha
+    fs.writeFileSync(newsPath, JSON.stringify(existingNews, null, 2));
+    console.log(`[SYNC-WEB] ✅ news.json sincronizado con ${existingNews.length} noticias totales.`);
+  } catch (newsSyncErr) {
+    console.warn('[SYNC-WEB] Info sincronización de noticias Comunio:', newsSyncErr.message);
+  }
+
   // Verificación y aseguramiento de que todas las imágenes de noticias existan en disco
   try {
     const { generateTemplateGraphic } = await import('./imageGen.js');
@@ -400,11 +448,21 @@ async function fetchRealData() {
     console.warn('[SYNC-WEB] Info verificación gráficas:', gfxErr.message);
   }
 
+  // Compilación local de la web para mantener web/dist/ siempre actualizado
+  try {
+    const { execSync } = await import('child_process');
+    console.log('[SYNC-WEB] Compilando web de producción (npm run build)...');
+    execSync('npm --prefix web run build', { stdio: 'pipe', windowsHide: true });
+    console.log('[SYNC-WEB] ✅ Web compilada en dist/ con éxito.');
+  } catch (bldErr) {
+    console.warn('[SYNC-WEB] Info compilación web:', bldErr.message);
+  }
+
   // Auto-commit y push a GitHub para desencadenar el despliegue automático en Cloudflare Pages / Workers
   try {
     const { execSync } = await import('child_process');
     console.log("[SYNC-WEB] Subiendo cambios a GitHub para despliegue en Cloudflare...");
-    execSync('git add web/src/data/*.json web/public/media/ web/public/media/news_graphics/', { stdio: 'pipe', windowsHide: true });
+    execSync('git add web/src/data/*.json web/public/media/ web/public/media/news_graphics/ web/dist/', { stdio: 'pipe', windowsHide: true });
     execSync('git commit -m "chore(web): Sincronizacion automatica de datos y medios"', { stdio: 'pipe', windowsHide: true });
     execSync('git push origin main', { stdio: 'pipe', windowsHide: true });
     console.log("[SYNC-WEB] 🚀 ¡Despliegue enviado a Cloudflare con éxito!");

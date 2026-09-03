@@ -37,9 +37,18 @@ export async function generateRivalsAuditData() {
   console.log('[RIVALS-AUDIT] Analizando histórico completo de traspasos y sobrepujas...');
   let transferNews = [];
   try {
-    const newsUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/news?limit=200`;
-    const newsRes = await axios.get(newsUrl, { headers });
-    transferNews = newsRes.data?.newsList?.entries || [];
+    let start = 0;
+    let keepGoing = true;
+    while (keepGoing && start <= 600) {
+      const newsUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/news?start=${start}&limit=50`;
+      const newsRes = await axios.get(newsUrl, { headers });
+      const entries = newsRes.data?.newsList?.entries || [];
+      if (entries.length === 0) break;
+      transferNews.push(...entries);
+      if (entries.length < 10) break;
+      start += entries.length;
+    }
+    console.log(`[RIVALS-AUDIT] Total de noticias históricas recuperadas: ${transferNews.length}`);
   } catch (err) {
     console.warn('[RIVALS-AUDIT] No se pudieron obtener noticias para el histórico:', err.message);
   }
