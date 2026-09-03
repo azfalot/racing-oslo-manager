@@ -202,6 +202,87 @@ export default function Rivales() {
             </ul>
           </div>
         </div>
+
+        {/* RADAR ESPECULATIVO & SOBREPUJAS */}
+        {club.speculation && (
+          <div className="bg-black/70 border border-forest/40 p-5 rounded-sm shadow-xl space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-forest/20">
+              <div className="flex items-center gap-2">
+                <Sparkles size={16} className="text-amber-300" />
+                <h3 className="text-sm sm:text-base font-display font-bold text-white uppercase tracking-wider">
+                  Radar Especulativo & Perfil de Sobrepujas
+                </h3>
+              </div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-bold font-mono" style={{ borderColor: club.speculation.badgeColor, color: club.speculation.badgeColor, backgroundColor: `${club.speculation.badgeColor}15` }}>
+                <span>{club.speculation.badge}</span>
+              </div>
+            </div>
+
+            {/* Barra Escala 0-100 */}
+            <div className="space-y-1.5">
+              <div className="flex justify-between items-center text-xs">
+                <span className="text-cream-dark font-medium">Índice de Especulación & Rotación:</span>
+                <span className="font-mono font-bold" style={{ color: club.speculation.badgeColor }}>
+                  {club.speculation.score} / 100 ({club.speculation.riskLevel})
+                </span>
+              </div>
+              <div className="w-full bg-black/80 h-3 rounded-full overflow-hidden p-0.5 border border-forest/30 relative">
+                <div 
+                  className="h-full rounded-full transition-all duration-700"
+                  style={{
+                    width: `${club.speculation.score}%`,
+                    background: club.speculation.score > 80 
+                      ? 'linear-gradient(90deg, #10b981 0%, #f59e0b 50%, #ef4444 100%)'
+                      : club.speculation.score > 50
+                      ? 'linear-gradient(90deg, #10b981 0%, #f59e0b 100%)'
+                      : 'linear-gradient(90deg, #10b981 0%, #3b82f6 100%)'
+                  }}
+                />
+              </div>
+              <div className="flex justify-between text-[10px] text-cream-dark/60 font-mono">
+                <span>0 (Conservador / Saneado)</span>
+                <span>50 (Moderado)</span>
+                <span>100 (Kamikaze / Deuda Extrema)</span>
+              </div>
+            </div>
+
+            {/* Métricas clave */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+              <div className="bg-black/50 border border-forest/20 p-2.5 rounded-sm text-center">
+                <span className="text-[10px] text-cream-dark uppercase block">Sobrepuja Media</span>
+                <span className="text-sm sm:text-base font-bold font-mono" style={{ color: club.speculation.score > 70 ? '#ef4444' : '#10b981' }}>
+                  {club.speculation.overbidRate}
+                </span>
+              </div>
+              <div className="bg-black/50 border border-forest/20 p-2.5 rounded-sm text-center">
+                <span className="text-[10px] text-cream-dark uppercase block">Total Gastado</span>
+                <span className="text-sm sm:text-base font-bold font-mono text-white">
+                  {(club.speculation.totalSpent / 1000000).toFixed(1)}M €
+                </span>
+                <span className="text-[9px] text-cream-dark/60 block">({club.speculation.purchasesCount} compras)</span>
+              </div>
+              <div className="bg-black/50 border border-forest/20 p-2.5 rounded-sm text-center">
+                <span className="text-[10px] text-cream-dark uppercase block">Total Ingresado</span>
+                <span className="text-sm sm:text-base font-bold font-mono text-emerald-400">
+                  {(club.speculation.totalReceived / 1000000).toFixed(1)}M €
+                </span>
+                <span className="text-[9px] text-cream-dark/60 block">({club.speculation.salesCount} ventas)</span>
+              </div>
+              <div className="bg-black/50 border border-forest/20 p-2.5 rounded-sm text-center">
+                <span className="text-[10px] text-cream-dark uppercase block">Apalancamiento</span>
+                <span className="text-sm sm:text-base font-bold font-mono" style={{ color: club.speculation.badgeColor }}>
+                  {club.speculation.riskLevel.split('/')[0]}
+                </span>
+              </div>
+            </div>
+
+            {/* Diagnóstico Textual */}
+            <div className="bg-forest-dark/20 border border-forest/20 p-3 rounded-sm text-xs text-cream-dark leading-relaxed flex items-start gap-2">
+              <Info size={14} className="text-amber-300 mt-0.5 flex-shrink-0" />
+              <span>{club.speculation.analysis}</span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* PIZARRA TÁCTICA DEL ONCE TITULAR DEL RIVAL */}

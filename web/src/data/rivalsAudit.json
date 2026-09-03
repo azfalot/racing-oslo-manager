@@ -6,27 +6,39 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 177,
-    "squadValue": 48880000,
-    "playerCount": 15,
-    "financialHealth": "100% Saneado (Solvente)",
-    "debtAlert": null,
-    "projectedScore": 44,
-    "formation": "3-5-2",
-    "tacticDescription": "Formación 3-5-2 orientada a maximizar puntos según plantilla disponible.",
+    "squadValue": 62130000,
+    "playerCount": 16,
+    "financialHealth": "Apalancamiento Extremo (Riesgo Crítico)",
+    "debtAlert": "Deuda masiva tras compras de Gordon (21.8M), Cabrera (3.5M) y Torró (1.2M). Obligado a ventas forzadas constantes.",
+    "projectedScore": 47,
+    "formation": "4-4-2",
+    "tacticDescription": "Esquema ultra-ofensivo vulnerable a sanciones por descubierto.",
     "strengths": [
-      "Gran inversión en atacantes con gol."
+      "Poderío ofensivo con Raphinha (24.9M €) y Gordon (21.8M €)."
     ],
     "weaknesses": [
-      "Margen de mejora en la eficiencia de puntos por millón invertido (PPM)."
+      "Desestabilización financiera crónica; plantilla descompensada por sobrepujas excesivas."
     ],
     "recommendations": [
       {
-        "name": "Pere Milla",
+        "name": "Canales",
         "pos": "Centrocampista",
-        "price": 2020000,
+        "price": 5920000,
         "reason": "Mejorar el control del balón y balones parados."
       }
     ],
+    "speculation": {
+      "score": 95,
+      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badgeColor": "#ef4444",
+      "overbidRate": "+32.4%",
+      "riskLevel": "Crítico / Extremo",
+      "totalSpent": 30981438,
+      "totalReceived": 30620000,
+      "purchasesCount": 9,
+      "salesCount": 6,
+      "analysis": "Especulador hiper-agresivo. Ha invertido más de 30M € en fichajes (incluyendo Gordon por 21.8M y Gorrotxategi con +110% de sobrepuja). Opera al borde de los números rojos."
+    },
     "starters": [
       {
         "id": 2444,
@@ -40,7 +52,7 @@
         "id": 1732,
         "name": "Johan Mojica",
         "position": "defender",
-        "price": 3320000,
+        "price": 3760000,
         "expectedPoints": 5.2,
         "image": "/media/players/1732.png"
       },
@@ -48,73 +60,73 @@
         "id": 3620,
         "name": "Javi Rueda",
         "position": "defender",
-        "price": 1930000,
+        "price": 1960000,
         "expectedPoints": 4.1,
         "image": "/media/players/3620.png"
+      },
+      {
+        "id": 1019,
+        "name": "Leandro Cabrera",
+        "position": "defender",
+        "price": 2660000,
+        "expectedPoints": 2.8,
+        "image": "/media/players/1019.png"
       },
       {
         "id": 3619,
         "name": "Yoel Lago",
         "position": "defender",
-        "price": 950000,
+        "price": 990000,
         "expectedPoints": 2,
         "image": "/media/players/3619.png"
-      },
-      {
-        "id": 4094,
-        "name": "Hjulmand",
-        "position": "midfielder",
-        "price": 6710000,
-        "expectedPoints": 6.4,
-        "image": "/media/players/4094.png"
-      },
-      {
-        "id": 3728,
-        "name": "Peio Canales",
-        "position": "midfielder",
-        "price": 3570000,
-        "expectedPoints": 5.2,
-        "image": "/media/players/3728.png"
       },
       {
         "id": 3311,
         "name": "Pablo Ibáñez",
         "position": "midfielder",
-        "price": 1660000,
+        "price": 1740000,
         "expectedPoints": 4.1,
         "image": "/media/players/3311.png"
+      },
+      {
+        "id": 2967,
+        "name": "Lucas Torró",
+        "position": "midfielder",
+        "price": 1180000,
+        "expectedPoints": 2.6,
+        "image": "/media/players/2967.png"
       },
       {
         "id": 3394,
         "name": "Iker Muñoz",
         "position": "midfielder",
-        "price": 1410000,
+        "price": 1460000,
         "expectedPoints": 2.6,
         "image": "/media/players/3394.png"
       },
       {
-        "id": 2924,
-        "name": "Víctor García",
+        "id": 3833,
+        "name": "Gorrotxategi",
         "position": "midfielder",
-        "price": 430000,
-        "expectedPoints": 0.6,
-        "image": "/media/players/2924.png"
+        "price": 890000,
+        "expectedPoints": 1.2,
+        "image": "/media/players/3833.png"
       },
       {
         "id": 3298,
         "name": "Raphinha",
         "position": "striker",
-        "price": 24880000,
+        "price": 25380000,
         "expectedPoints": 9,
         "image": "/media/players/3298.png"
       },
       {
-        "id": 3182,
-        "name": "Carlos Martín",
+        "id": 4058,
+        "name": "Gordon",
         "position": "striker",
-        "price": 310000,
-        "expectedPoints": 0.3,
-        "image": "/media/players/3182.png"
+        "price": 17950000,
+        "expectedPoints": 9,
+        "image": "/media/players/4058.png"
       }
     ],
     "bench": [
@@ -129,8 +141,15 @@
         "id": 3512,
         "name": "Unai Egiluz",
         "position": "defender",
-        "price": 160000,
+        "price": 170000,
         "image": "/media/players/3512.png"
+      },
+      {
+        "id": 2924,
+        "name": "Víctor García",
+        "position": "midfielder",
+        "price": 440000,
+        "image": "/media/players/2924.png"
       },
       {
         "id": 3997,
@@ -156,34 +175,46 @@
     "crest": "/media/crest.jpg",
     "pos": 2,
     "points": 146,
-    "squadValue": 53700000,
-    "playerCount": 13,
-    "financialHealth": "100% Saneado (0 € Deuda)",
-    "debtAlert": null,
-    "projectedScore": 65,
+    "squadValue": 56590000,
+    "playerCount": 14,
+    "financialHealth": "100% Saneado (+543.389 € en Caja)",
+    "debtAlert": "Saldo 100% positivo y libre de deudas. Preparado para puntuar el 100% en la Jornada Extra del Jueves.",
+    "projectedScore": 66,
     "formation": "4-4-2",
-    "tacticDescription": "3-4-3 dinámico de máxima posesión y equilibrio entre líneas.",
+    "tacticDescription": "4-4-2 / 3-4-3 de posesión dominante y alta regularidad.",
     "strengths": [
-      "Bloque de gala homogéneo y consolidado con columna vertebral de Primera (Soria, Valverde, Gerard Moreno)."
+      "Columna vertebral de Primera (Soria, Dela, Mandi, Jon Martín, Valverde, Gerard Moreno).",
+      "Eficiencia financiera líder: 0 € desperdiciados en sobreprecios."
     ],
     "weaknesses": [
-      "Margen de mejora en la línea de laterales defensivos para redondear la regularidad del Once.",
-      "Fondo de armario justo en la zaga ante posibles ciclos de tarjetas o sanciones."
+      "Plantilla ajustada a 14 jugadores (optimizada al máximo para evitar activos ociosos)."
     ],
     "recommendations": [
       {
-        "name": "Lateral / Zaguero de Primera",
+        "name": "Lateral / Zaguero de Primera (¡Cubierto con Álvaro Carreras!)",
         "pos": "Defensa",
-        "price": 0,
-        "reason": "Incorporación de un perfil defensivo de largo recorrido para apuntalar el flanco y elevar el techo del 3-4-3."
+        "price": 1440000,
+        "reason": "Fichaje estratégico cerrado con éxito para apontalar el carril izquierdo en el 3-4-3."
       }
     ],
+    "speculation": {
+      "score": 18,
+      "badge": "⚖️ Gestor Quirúrgico & Solvente",
+      "badgeColor": "#10b981",
+      "overbidRate": "+0.8%",
+      "riskLevel": "Mínimo / 100% Saneado",
+      "totalSpent": 2185000,
+      "totalReceived": 3093200,
+      "purchasesCount": 3,
+      "salesCount": 4,
+      "analysis": "Máxima eficiencia de capital (Puntos por Millón óptimo). Compras a valor exacto o con micro-sobrepujas anti-empate quirúrgicas (+1.7% en Carreras). Saldo siempre positivo."
+    },
     "starters": [
       {
         "id": 2206,
         "name": "David Soria",
         "position": "keeper",
-        "price": 4440000,
+        "price": 4680000,
         "expectedPoints": 6.4,
         "image": "/media/players/2206.png"
       },
@@ -191,7 +222,7 @@
         "id": 2251,
         "name": "Aïssa Mandi",
         "position": "defender",
-        "price": 4320000,
+        "price": 4520000,
         "expectedPoints": 6.4,
         "image": "/media/players/2251.png"
       },
@@ -199,7 +230,7 @@
         "id": 3578,
         "name": "Jon Martín",
         "position": "defender",
-        "price": 4500000,
+        "price": 4740000,
         "expectedPoints": 6.4,
         "image": "/media/players/3578.png"
       },
@@ -207,7 +238,7 @@
         "id": 3825,
         "name": "Adrián de la Fuente",
         "position": "defender",
-        "price": 3830000,
+        "price": 3860000,
         "expectedPoints": 6.4,
         "image": "/media/players/3825.png"
       },
@@ -215,15 +246,15 @@
         "id": 3597,
         "name": "Íñigo Arguibide",
         "position": "defender",
-        "price": 1310000,
-        "expectedPoints": 2.6,
+        "price": 1540000,
+        "expectedPoints": 4.1,
         "image": "/media/players/3597.png"
       },
       {
         "id": 2415,
         "name": "Fede Valverde",
         "position": "midfielder",
-        "price": 16380000,
+        "price": 17040000,
         "expectedPoints": 9,
         "image": "/media/players/2415.png"
       },
@@ -231,7 +262,7 @@
         "id": 1462,
         "name": "Moi Gómez",
         "position": "midfielder",
-        "price": 1150000,
+        "price": 1360000,
         "expectedPoints": 5.1,
         "image": "/media/players/1462.png"
       },
@@ -239,7 +270,7 @@
         "id": 1566,
         "name": "Ruiz de Galarreta",
         "position": "midfielder",
-        "price": 2400000,
+        "price": 2360000,
         "expectedPoints": 5.1,
         "image": "/media/players/1566.png"
       },
@@ -255,7 +286,7 @@
         "id": 1927,
         "name": "Gerard Moreno",
         "position": "striker",
-        "price": 9670000,
+        "price": 9110000,
         "expectedPoints": 7.7,
         "image": "/media/players/1927.png"
       },
@@ -263,7 +294,7 @@
         "id": 2550,
         "name": "Hugo Duro",
         "position": "striker",
-        "price": 4100000,
+        "price": 4430000,
         "expectedPoints": 5.6,
         "image": "/media/players/2550.png"
       }
@@ -273,14 +304,21 @@
         "id": 4029,
         "name": "Eriksson",
         "position": "keeper",
-        "price": 490000,
+        "price": 410000,
         "image": "/media/players/4029.png"
+      },
+      {
+        "id": 3529,
+        "name": "Álvaro Carreras",
+        "position": "defender",
+        "price": 1440000,
+        "image": "/media/players/3529.png"
       },
       {
         "id": 3932,
         "name": "Fabio Cardoso",
         "position": "defender",
-        "price": 230000,
+        "price": 220000,
         "image": "/media/players/3932.png"
       }
     ],
@@ -293,33 +331,41 @@
     "crest": "/media/crests/pachangueros.svg",
     "pos": 3,
     "points": 109,
-    "squadValue": 58010000,
+    "squadValue": 58450000,
     "playerCount": 13,
     "financialHealth": "100% Saneado (Solvente)",
     "debtAlert": null,
-    "projectedScore": 62,
+    "projectedScore": 63,
     "formation": "5-3-2",
     "tacticDescription": "Formación 5-3-2 orientada a maximizar puntos según plantilla disponible.",
-    "strengths": [
-      "Centro del campo con alta capacidad de distribución."
-    ],
-    "weaknesses": [
-      "Margen de mejora en la eficiencia de puntos por millón invertido (PPM)."
-    ],
+    "strengths": [],
+    "weaknesses": [],
     "recommendations": [
       {
-        "name": "Pere Milla",
+        "name": "Canales",
         "pos": "Centrocampista",
-        "price": 2020000,
+        "price": 5920000,
         "reason": "Mejorar el control del balón y balones parados."
       }
     ],
+    "speculation": {
+      "score": 20,
+      "badge": "📊 Inversor Estándar",
+      "badgeColor": "#3b82f6",
+      "overbidRate": "+5.0%",
+      "riskLevel": "Moderado",
+      "totalSpent": 0,
+      "totalReceived": 0,
+      "purchasesCount": 0,
+      "salesCount": 0,
+      "analysis": "Actividad equilibrada en el mercado sin sobrepujas desproporcionadas."
+    },
     "starters": [
       {
         "id": 1946,
         "name": "Dimitrievski",
         "position": "keeper",
-        "price": 1550000,
+        "price": 1530000,
         "expectedPoints": 4.1,
         "image": "/media/players/1946.png"
       },
@@ -327,7 +373,7 @@
         "id": 3029,
         "name": "Sergio Carreira",
         "position": "defender",
-        "price": 4660000,
+        "price": 5060000,
         "expectedPoints": 6.4,
         "image": "/media/players/3029.png"
       },
@@ -335,7 +381,7 @@
         "id": 3884,
         "name": "Hancko",
         "position": "defender",
-        "price": 6260000,
+        "price": 6300000,
         "expectedPoints": 6.4,
         "image": "/media/players/3884.png"
       },
@@ -343,7 +389,7 @@
         "id": 2371,
         "name": "Zubeldia",
         "position": "defender",
-        "price": 1850000,
+        "price": 1900000,
         "expectedPoints": 4.1,
         "image": "/media/players/2371.png"
       },
@@ -351,7 +397,7 @@
         "id": 3910,
         "name": "Andrés Castrín",
         "position": "defender",
-        "price": 1540000,
+        "price": 1570000,
         "expectedPoints": 4.1,
         "image": "/media/players/3910.png"
       },
@@ -359,7 +405,7 @@
         "id": 3349,
         "name": "Kike Salas",
         "position": "defender",
-        "price": 2000000,
+        "price": 1740000,
         "expectedPoints": 3.1,
         "image": "/media/players/3349.png"
       },
@@ -367,31 +413,31 @@
         "id": 2943,
         "name": "Álex Baena",
         "position": "midfielder",
-        "price": 15080000,
+        "price": 15290000,
         "expectedPoints": 9,
         "image": "/media/players/2943.png"
-      },
-      {
-        "id": 2379,
-        "name": "Edu Expósito",
-        "position": "midfielder",
-        "price": 6740000,
-        "expectedPoints": 6.4,
-        "image": "/media/players/2379.png"
       },
       {
         "id": 1602,
         "name": "Rubén García",
         "position": "midfielder",
-        "price": 3910000,
-        "expectedPoints": 5.2,
+        "price": 4060000,
+        "expectedPoints": 6.4,
         "image": "/media/players/1602.png"
+      },
+      {
+        "id": 2379,
+        "name": "Edu Expósito",
+        "position": "midfielder",
+        "price": 6190000,
+        "expectedPoints": 6.4,
+        "image": "/media/players/2379.png"
       },
       {
         "id": 2403,
         "name": "Enes Ünal",
         "position": "striker",
-        "price": 9090000,
+        "price": 9150000,
         "expectedPoints": 7.7,
         "image": "/media/players/2403.png"
       },
@@ -399,7 +445,7 @@
         "id": 3951,
         "name": "Miguel Sierra",
         "position": "striker",
-        "price": 3040000,
+        "price": 3490000,
         "expectedPoints": 5.2,
         "image": "/media/players/3951.png"
       }
@@ -409,14 +455,14 @@
         "id": 3695,
         "name": "Luiz Junior",
         "position": "keeper",
-        "price": 1530000,
+        "price": 1370000,
         "image": "/media/players/3695.png"
       },
       {
         "id": 3135,
         "name": "Randy Nteka",
         "position": "striker",
-        "price": 760000,
+        "price": 800000,
         "image": "/media/players/3135.png"
       }
     ],
@@ -429,33 +475,41 @@
     "crest": "/media/crests/amigos_de_nin.svg",
     "pos": 4,
     "points": 109,
-    "squadValue": 54340000,
-    "playerCount": 13,
+    "squadValue": 53860000,
+    "playerCount": 12,
     "financialHealth": "100% Saneado (Solvente)",
     "debtAlert": null,
     "projectedScore": 65,
-    "formation": "3-5-2",
-    "tacticDescription": "Formación 3-5-2 orientada a maximizar puntos según plantilla disponible.",
-    "strengths": [
-      "Centro del campo con alta capacidad de distribución."
-    ],
-    "weaknesses": [
-      "Margen de mejora en la eficiencia de puntos por millón invertido (PPM)."
-    ],
+    "formation": "4-4-2",
+    "tacticDescription": "Formación 4-4-2 orientada a maximizar puntos según plantilla disponible.",
+    "strengths": [],
+    "weaknesses": [],
     "recommendations": [
       {
-        "name": "Pere Milla",
+        "name": "Canales",
         "pos": "Centrocampista",
-        "price": 2020000,
+        "price": 5920000,
         "reason": "Mejorar el control del balón y balones parados."
       }
     ],
+    "speculation": {
+      "score": 43,
+      "badge": "📊 Inversor Estándar",
+      "badgeColor": "#3b82f6",
+      "overbidRate": "+5.0%",
+      "riskLevel": "Moderado",
+      "totalSpent": 11750100,
+      "totalReceived": 2815600,
+      "purchasesCount": 2,
+      "salesCount": 1,
+      "analysis": "Actividad equilibrada en el mercado sin sobrepujas desproporcionadas."
+    },
     "starters": [
       {
         "id": 2669,
         "name": "Unai Simón",
         "position": "keeper",
-        "price": 4330000,
+        "price": 4560000,
         "expectedPoints": 6.4,
         "image": "/media/players/2669.png"
       },
@@ -463,7 +517,7 @@
         "id": 2158,
         "name": "Marcos Llorente",
         "position": "defender",
-        "price": 7790000,
+        "price": 7720000,
         "expectedPoints": 7.7,
         "image": "/media/players/2158.png"
       },
@@ -471,7 +525,7 @@
         "id": 2990,
         "name": "Sergio Gómez",
         "position": "defender",
-        "price": 3750000,
+        "price": 3790000,
         "expectedPoints": 5.2,
         "image": "/media/players/2990.png"
       },
@@ -479,15 +533,23 @@
         "id": 2447,
         "name": "Djené",
         "position": "defender",
-        "price": 2100000,
+        "price": 2190000,
         "expectedPoints": 4.1,
         "image": "/media/players/2447.png"
+      },
+      {
+        "id": 3173,
+        "name": "Jesús Vázquez",
+        "position": "defender",
+        "price": 1340000,
+        "expectedPoints": 2.6,
+        "image": "/media/players/3173.png"
       },
       {
         "id": 3387,
         "name": "Pape Gueye",
         "position": "midfielder",
-        "price": 9750000,
+        "price": 9970000,
         "expectedPoints": 7.7,
         "image": "/media/players/3387.png"
       },
@@ -495,7 +557,7 @@
         "id": 1771,
         "name": "Álvaro García",
         "position": "midfielder",
-        "price": 4700000,
+        "price": 5210000,
         "expectedPoints": 6.4,
         "image": "/media/players/1771.png"
       },
@@ -503,7 +565,7 @@
         "id": 4092,
         "name": "Amatucci",
         "position": "midfielder",
-        "price": 4740000,
+        "price": 4730000,
         "expectedPoints": 6.4,
         "image": "/media/players/4092.png"
       },
@@ -511,48 +573,33 @@
         "id": 1969,
         "name": "Unai López",
         "position": "midfielder",
-        "price": 3170000,
+        "price": 3560000,
         "expectedPoints": 5.2,
         "image": "/media/players/1969.png"
-      },
-      {
-        "id": 3278,
-        "name": "Swedberg",
-        "position": "midfielder",
-        "price": 2810000,
-        "expectedPoints": 4.1,
-        "image": "/media/players/3278.png"
-      },
-      {
-        "id": 3714,
-        "name": "Oskarsson",
-        "position": "striker",
-        "price": 5790000,
-        "expectedPoints": 6.4,
-        "image": "/media/players/3714.png"
       },
       {
         "id": 3563,
         "name": "Isaac Romero",
         "position": "striker",
-        "price": 3780000,
-        "expectedPoints": 5.2,
+        "price": 4290000,
+        "expectedPoints": 6.4,
         "image": "/media/players/3563.png"
+      },
+      {
+        "id": 3714,
+        "name": "Oskarsson",
+        "position": "striker",
+        "price": 6040000,
+        "expectedPoints": 6.4,
+        "image": "/media/players/3714.png"
       }
     ],
     "bench": [
       {
-        "id": 3173,
-        "name": "Jesús Vázquez",
-        "position": "defender",
-        "price": 1210000,
-        "image": "/media/players/3173.png"
-      },
-      {
         "id": 4043,
         "name": "Juan Carlos Arana",
         "position": "striker",
-        "price": 420000,
+        "price": 460000,
         "image": "/media/players/4043.png"
       }
     ],
@@ -565,81 +612,85 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 5,
     "points": 108,
-    "squadValue": 57790000,
+    "squadValue": 59310000,
     "playerCount": 14,
     "financialHealth": "100% Saneado (Solvente)",
     "debtAlert": null,
     "projectedScore": 61,
-    "formation": "5-3-2",
-    "tacticDescription": "Formación 5-3-2 orientada a maximizar puntos según plantilla disponible.",
+    "formation": "4-3-3",
+    "tacticDescription": "4-4-2 contragolpeador.",
     "strengths": [
-      "Equipo con buena regularidad en puntuaciones medias."
+      "Solidez bajo palos con Oblak (7.3M €) y Chupe en racha."
     ],
     "weaknesses": [
-      "Margen de mejora en la eficiencia de puntos por millón invertido (PPM)."
+      "Falta de un generador de juego TOP en el medio."
     ],
     "recommendations": [
       {
-        "name": "Pere Milla",
+        "name": "Canales",
         "pos": "Centrocampista",
-        "price": 2020000,
+        "price": 5920000,
         "reason": "Mejorar el control del balón y balones parados."
       }
     ],
+    "speculation": {
+      "score": 48,
+      "badge": "🛡️ Inversor Selectivo",
+      "badgeColor": "#3b82f6",
+      "overbidRate": "+4.2%",
+      "riskLevel": "Moderado",
+      "totalSpent": 10000360,
+      "totalReceived": 3244500,
+      "purchasesCount": 1,
+      "salesCount": 1,
+      "analysis": "Pujas calculadas con picos moderados (Chupe por 10.0M € con sobrepuja mínima)."
+    },
     "starters": [
       {
         "id": 1897,
         "name": "Oblak",
         "position": "keeper",
-        "price": 7320000,
-        "expectedPoints": 7.7,
+        "price": 6250000,
+        "expectedPoints": 6.4,
         "image": "/media/players/1897.png"
       },
       {
         "id": 2743,
         "name": "Catena",
         "position": "defender",
-        "price": 6220000,
+        "price": 6340000,
         "expectedPoints": 6.4,
         "image": "/media/players/2743.png"
-      },
-      {
-        "id": 4125,
-        "name": "Cristian Romero",
-        "position": "defender",
-        "price": 5860000,
-        "expectedPoints": 4.7,
-        "image": "/media/players/4125.png"
       },
       {
         "id": 3345,
         "name": "Marcos Alonso",
         "position": "defender",
-        "price": 3900000,
-        "expectedPoints": 4.1,
+        "price": 4290000,
+        "expectedPoints": 5,
         "image": "/media/players/3345.png"
+      },
+      {
+        "id": 4125,
+        "name": "Cristian Romero",
+        "position": "defender",
+        "price": 6000000,
+        "expectedPoints": 4.7,
+        "image": "/media/players/4125.png"
       },
       {
         "id": 3875,
         "name": "Gabriel Suazo",
         "position": "defender",
-        "price": 2560000,
+        "price": 2740000,
         "expectedPoints": 4.1,
         "image": "/media/players/3875.png"
-      },
-      {
-        "id": 4089,
-        "name": "Bright Ede",
-        "position": "defender",
-        "price": 2460000,
-        "expectedPoints": 4.1,
-        "image": "/media/players/4089.png"
       },
       {
         "id": 3010,
         "name": "Íñigo Vicente",
         "position": "midfielder",
-        "price": 6660000,
+        "price": 6860000,
         "expectedPoints": 6.4,
         "image": "/media/players/3010.png"
       },
@@ -647,7 +698,7 @@
         "id": 3096,
         "name": "Pepelu",
         "position": "midfielder",
-        "price": 4530000,
+        "price": 5020000,
         "expectedPoints": 6.4,
         "image": "/media/players/3096.png"
       },
@@ -655,7 +706,7 @@
         "id": 4111,
         "name": "Orel Mangala",
         "position": "midfielder",
-        "price": 1840000,
+        "price": 1980000,
         "expectedPoints": 4.1,
         "image": "/media/players/4111.png"
       },
@@ -663,7 +714,7 @@
         "id": 4080,
         "name": "Chupe",
         "position": "striker",
-        "price": 8110000,
+        "price": 8340000,
         "expectedPoints": 7.7,
         "image": "/media/players/4080.png"
       },
@@ -671,32 +722,40 @@
         "id": 4116,
         "name": "Robbie Ure",
         "position": "striker",
-        "price": 4230000,
+        "price": 4690000,
         "expectedPoints": 5.6,
         "image": "/media/players/4116.png"
+      },
+      {
+        "id": 3831,
+        "name": "Brugui",
+        "position": "striker",
+        "price": 1520000,
+        "expectedPoints": 4.1,
+        "image": "/media/players/3831.png"
       }
     ],
     "bench": [
       {
+        "id": 4089,
+        "name": "Bright Ede",
+        "position": "defender",
+        "price": 2390000,
+        "image": "/media/players/4089.png"
+      },
+      {
         "id": 1876,
         "name": "Denis Suárez",
         "position": "midfielder",
-        "price": 1430000,
+        "price": 1440000,
         "image": "/media/players/1876.png"
       },
       {
         "id": 3078,
         "name": "Urko González",
         "position": "midfielder",
-        "price": 1350000,
+        "price": 1450000,
         "image": "/media/players/3078.png"
-      },
-      {
-        "id": 3831,
-        "name": "Brugui",
-        "position": "striker",
-        "price": 1320000,
-        "image": "/media/players/3831.png"
       }
     ],
     "isMe": false
@@ -708,27 +767,39 @@
     "crest": "/media/crests/ana.svg",
     "pos": 6,
     "points": 97,
-    "squadValue": 57880000,
-    "playerCount": 15,
-    "financialHealth": "Solvente con Fuerte Inversión en Zaga",
+    "squadValue": 57910000,
+    "playerCount": 14,
+    "financialHealth": "100% Saneado (Solvente)",
     "debtAlert": null,
-    "projectedScore": 52,
+    "projectedScore": 51,
     "formation": "4-3-3",
-    "tacticDescription": "Estructura defensiva sólida de 5 zagueros (5-3-2).",
+    "tacticDescription": "5-3-2 de repliegue bajo.",
     "strengths": [
-      "Muro defensivo galáctico con Pau Cubarsí (16.5M €) y Andreas Christensen."
+      "Zaga galáctica con Pau Cubarsí y Marc Pubill."
     ],
     "weaknesses": [
-      "Falta de un delantero centro goleador de referencia en LaLiga."
+      "Poco dinamismo en mercado para cubrir bajas."
     ],
     "recommendations": [
       {
-        "name": "Ezequiel Ponce",
-        "pos": "Delantero",
-        "price": 1700000,
-        "reason": "Aportar pólvora y remate al área rival."
+        "name": "Canales",
+        "pos": "Centrocampista",
+        "price": 5920000,
+        "reason": "Mejorar el control del balón y balones parados."
       }
     ],
+    "speculation": {
+      "score": 22,
+      "badge": "🏛️ Inversora Conservadora",
+      "badgeColor": "#10b981",
+      "overbidRate": "+1.0%",
+      "riskLevel": "Bajo",
+      "totalSpent": 0,
+      "totalReceived": 404500,
+      "purchasesCount": 0,
+      "salesCount": 1,
+      "analysis": "Muy baja rotación de mercado. Mantiene el bloque con Adeyemi y Cubarsí."
+    },
     "starters": [
       {
         "id": 2774,
@@ -742,7 +813,7 @@
         "id": 3190,
         "name": "Marc Pubill",
         "position": "defender",
-        "price": 7450000,
+        "price": 7400000,
         "expectedPoints": 7.7,
         "image": "/media/players/3190.png"
       },
@@ -758,7 +829,7 @@
         "id": 3331,
         "name": "Aitor Paredes",
         "position": "defender",
-        "price": 2810000,
+        "price": 2690000,
         "expectedPoints": 4.1,
         "image": "/media/players/3331.png"
       },
@@ -766,7 +837,7 @@
         "id": 4046,
         "name": "Lucas Noubi",
         "position": "defender",
-        "price": 2860000,
+        "price": 2710000,
         "expectedPoints": 4.1,
         "image": "/media/players/4046.png"
       },
@@ -774,7 +845,7 @@
         "id": 3451,
         "name": "Abde Rebbach",
         "position": "midfielder",
-        "price": 1340000,
+        "price": 1290000,
         "expectedPoints": 2.6,
         "image": "/media/players/3451.png"
       },
@@ -782,15 +853,15 @@
         "id": 3400,
         "name": "Mario Martín",
         "position": "midfielder",
-        "price": 580000,
-        "expectedPoints": 0.5,
+        "price": 650000,
+        "expectedPoints": 1.3,
         "image": "/media/players/3400.png"
       },
       {
         "id": 3888,
         "name": "Martim Neto",
         "position": "midfielder",
-        "price": 270000,
+        "price": 280000,
         "expectedPoints": 0.3,
         "image": "/media/players/3888.png"
       },
@@ -798,7 +869,7 @@
         "id": 4098,
         "name": "Adeyemi",
         "position": "striker",
-        "price": 17240000,
+        "price": 18330000,
         "expectedPoints": 9,
         "image": "/media/players/4098.png"
       },
@@ -806,7 +877,7 @@
         "id": 3389,
         "name": "Ayoze Pérez",
         "position": "striker",
-        "price": 6270000,
+        "price": 6170000,
         "expectedPoints": 6.4,
         "image": "/media/players/3389.png"
       },
@@ -814,8 +885,8 @@
         "id": 2293,
         "name": "Ezequiel Ponce",
         "position": "striker",
-        "price": 1700000,
-        "expectedPoints": 4.1,
+        "price": 1460000,
+        "expectedPoints": 2.6,
         "image": "/media/players/2293.png"
       }
     ],
@@ -824,22 +895,15 @@
         "id": 3244,
         "name": "Christensen",
         "position": "defender",
-        "price": 1350000,
+        "price": 1360000,
         "image": "/media/players/3244.png"
       },
       {
         "id": 3238,
         "name": "José Ángel Carmona",
         "position": "defender",
-        "price": 780000,
+        "price": 760000,
         "image": "/media/players/3238.png"
-      },
-      {
-        "id": 4134,
-        "name": "Jorge Domínguez",
-        "position": "defender",
-        "price": 420000,
-        "image": "/media/players/4134.png"
       },
       {
         "id": 4028,
@@ -858,33 +922,45 @@
     "crest": "/media/crests/m4_team.svg",
     "pos": 7,
     "points": 97,
-    "squadValue": 55320000,
-    "playerCount": 12,
-    "financialHealth": "100% Saneado (Solvente)",
+    "squadValue": 54930000,
+    "playerCount": 11,
+    "financialHealth": "Volumen Alto con Rotación Rápida",
     "debtAlert": null,
     "projectedScore": 52,
     "formation": "3-5-2",
-    "tacticDescription": "Formación 3-5-2 orientada a maximizar puntos según plantilla disponible.",
+    "tacticDescription": "4-3-3 de posesión técnica.",
     "strengths": [
-      "Centro del campo con alta capacidad de distribución."
+      "Dupla talentosa: Pedri (17.1M €) y Antony (14.1M €)."
     ],
     "weaknesses": [
-      "Plantilla corta con poco margen de rotación ante lesiones o sanciones."
+      "Inestabilidad en el once titular por cambios semanales."
     ],
     "recommendations": [
       {
-        "name": "Pere Milla",
+        "name": "Canales",
         "pos": "Centrocampista",
-        "price": 2020000,
+        "price": 5920000,
         "reason": "Mejorar el control del balón y balones parados."
       }
     ],
+    "speculation": {
+      "score": 74,
+      "badge": "📈 Trader de Alto Volumen",
+      "badgeColor": "#3b82f6",
+      "overbidRate": "+8.5%",
+      "riskLevel": "Moderado-Alto",
+      "totalSpent": 16639000,
+      "totalReceived": 13472000,
+      "purchasesCount": 2,
+      "salesCount": 8,
+      "analysis": "Alta rotación de plantilla (más de 10 traspasos). Mueve activamente el mercado entre compras y ventas para financiar a Pedri y Antony."
+    },
     "starters": [
       {
         "id": 4065,
         "name": "Alfonso Herrero",
         "position": "keeper",
-        "price": 2430000,
+        "price": 2390000,
         "expectedPoints": 4.1,
         "image": "/media/players/4065.png"
       },
@@ -892,7 +968,7 @@
         "id": 1470,
         "name": "Lejeune",
         "position": "defender",
-        "price": 5210000,
+        "price": 5300000,
         "expectedPoints": 5.6,
         "image": "/media/players/1470.png"
       },
@@ -900,7 +976,7 @@
         "id": 2876,
         "name": "Manu Sánchez",
         "position": "defender",
-        "price": 1640000,
+        "price": 1780000,
         "expectedPoints": 4.1,
         "image": "/media/players/2876.png"
       },
@@ -908,15 +984,15 @@
         "id": 2491,
         "name": "Gorosabel",
         "position": "defender",
-        "price": 490000,
-        "expectedPoints": 0.3,
+        "price": 510000,
+        "expectedPoints": 0.4,
         "image": "/media/players/2491.png"
       },
       {
         "id": 2969,
         "name": "Pedri",
         "position": "midfielder",
-        "price": 17080000,
+        "price": 17360000,
         "expectedPoints": 9,
         "image": "/media/players/2969.png"
       },
@@ -924,7 +1000,7 @@
         "id": 3780,
         "name": "Antony",
         "position": "midfielder",
-        "price": 14070000,
+        "price": 13120000,
         "expectedPoints": 7.7,
         "image": "/media/players/3780.png"
       },
@@ -932,7 +1008,7 @@
         "id": 4075,
         "name": "Dani Lorenzo",
         "position": "midfielder",
-        "price": 3090000,
+        "price": 3040000,
         "expectedPoints": 5.2,
         "image": "/media/players/4075.png"
       },
@@ -940,7 +1016,7 @@
         "id": 1801,
         "name": "Adama Traoré",
         "position": "midfielder",
-        "price": 2600000,
+        "price": 2820000,
         "expectedPoints": 2.8,
         "image": "/media/players/1801.png"
       },
@@ -948,7 +1024,7 @@
         "id": 4060,
         "name": "Bardeli",
         "position": "midfielder",
-        "price": 1010000,
+        "price": 1180000,
         "expectedPoints": 2.6,
         "image": "/media/players/4060.png"
       },
@@ -956,7 +1032,7 @@
         "id": 2895,
         "name": "Fer Niño",
         "position": "striker",
-        "price": 3910000,
+        "price": 3940000,
         "expectedPoints": 5.2,
         "image": "/media/players/2895.png"
       },
@@ -964,20 +1040,12 @@
         "id": 3150,
         "name": "Danjuma",
         "position": "striker",
-        "price": 3450000,
+        "price": 3490000,
         "expectedPoints": 5.2,
         "image": "/media/players/3150.png"
       }
     ],
-    "bench": [
-      {
-        "id": 3692,
-        "name": "Juan Berrocal",
-        "position": "defender",
-        "price": 340000,
-        "image": "/media/players/3692.png"
-      }
-    ],
+    "bench": [],
     "isMe": false
   },
   {
@@ -987,33 +1055,45 @@
     "crest": "/media/crests/suances_nin.svg",
     "pos": 8,
     "points": 95,
-    "squadValue": 46630000,
-    "playerCount": 12,
-    "financialHealth": "Apalancamiento Extremo (Riesgo)",
-    "debtAlert": "Deuda estimada de ~6.0M € por el traspaso récord de Mbappé (34.75M €). Requiere venta inmediata de Juan Foyth o Andrés Martín para no puntuar 0.",
-    "projectedScore": 37,
+    "squadValue": 54310000,
+    "playerCount": 14,
+    "financialHealth": "Apalancamiento Alto (Riesgo)",
+    "debtAlert": "Hipotecado por Mbappé (27.9M €) y Barrenetxea (4.78M €). Plantilla corta de 12 jugadores sin recambios.",
+    "projectedScore": 43,
     "formation": "4-3-3",
-    "tacticDescription": "Esquema ofensivo centrado en abastecer a Mbappé en punta.",
+    "tacticDescription": "Estructura orientada a abastecer a Mbappé en punta.",
     "strengths": [
-      "Poder goleador supremo con Kylian Mbappé (29.6M €)."
+      "Kylian Mbappé (27.9M €) como arma letal de la liga."
     ],
     "weaknesses": [
-      "Defensa y medular despobladas para costear a Mbappé; plantilla corta de 12 jugadores."
+      "Banquillo desierto y rotaciones inexistentes; alta dependencia de 2 jugadores."
     ],
     "recommendations": [
       {
-        "name": "Ezequiel Ponce",
-        "pos": "Delantero",
-        "price": 1700000,
-        "reason": "Aportar pólvora y remate al área rival."
+        "name": "Leandro Cabrera",
+        "pos": "Defensa",
+        "price": 2660000,
+        "reason": "Reforzar la zaga con un zaguero de garantías."
       }
     ],
+    "speculation": {
+      "score": 88,
+      "badge": "🎰 Especulador Compulsivo",
+      "badgeColor": "#f59e0b",
+      "overbidRate": "+23.5%",
+      "riskLevel": "Muy Alto",
+      "totalSpent": 6714554,
+      "totalReceived": 0,
+      "purchasesCount": 4,
+      "salesCount": 0,
+      "analysis": "Fichajes a golpe de talonario con sobrepujas de más del 20% (Mbappé y Barrenetxea por 4.78M €). Descuida la profundidad de banquillo para retener estrellas."
+    },
     "starters": [
       {
         "id": 3428,
         "name": "Álvaro Valles",
         "position": "keeper",
-        "price": 4070000,
+        "price": 4150000,
         "expectedPoints": 6.4,
         "image": "/media/players/3428.png"
       },
@@ -1021,7 +1101,7 @@
         "id": 3017,
         "name": "Juan Foyth",
         "position": "defender",
-        "price": 5830000,
+        "price": 6110000,
         "expectedPoints": 6.4,
         "image": "/media/players/3017.png"
       },
@@ -1029,7 +1109,7 @@
         "id": 4030,
         "name": "Facu González",
         "position": "defender",
-        "price": 1690000,
+        "price": 1700000,
         "expectedPoints": 4.1,
         "image": "/media/players/4030.png"
       },
@@ -1037,7 +1117,7 @@
         "id": 3980,
         "name": "Alex Freeman",
         "position": "defender",
-        "price": 720000,
+        "price": 710000,
         "expectedPoints": 1.6,
         "image": "/media/players/3980.png"
       },
@@ -1050,10 +1130,18 @@
         "image": "/media/players/4003.png"
       },
       {
+        "id": 2695,
+        "name": "Ander Barrenetxea",
+        "position": "midfielder",
+        "price": 4150000,
+        "expectedPoints": 6.4,
+        "image": "/media/players/2695.png"
+      },
+      {
         "id": 3465,
         "name": "Dotor",
         "position": "midfielder",
-        "price": 3370000,
+        "price": 3690000,
         "expectedPoints": 5.2,
         "image": "/media/players/3465.png"
       },
@@ -1061,23 +1149,15 @@
         "id": 3204,
         "name": "Jofre Carreras",
         "position": "midfielder",
-        "price": 360000,
+        "price": 350000,
         "expectedPoints": 0.4,
         "image": "/media/players/3204.png"
-      },
-      {
-        "id": 4118,
-        "name": "Tsitaishvili",
-        "position": "midfielder",
-        "price": 350000,
-        "expectedPoints": 0.3,
-        "image": "/media/players/4118.png"
       },
       {
         "id": 3469,
         "name": "Mbappé",
         "position": "striker",
-        "price": 27900000,
+        "price": 30060000,
         "expectedPoints": 9,
         "image": "/media/players/3469.png"
       },
@@ -1085,20 +1165,34 @@
         "id": 2769,
         "name": "Rodrygo",
         "position": "striker",
-        "price": 930000,
-        "expectedPoints": 1.2,
+        "price": 1100000,
+        "expectedPoints": 1.7,
         "image": "/media/players/2769.png"
       },
       {
         "id": 4102,
         "name": "Musuayi",
         "position": "striker",
-        "price": 550000,
+        "price": 570000,
         "expectedPoints": 0.4,
         "image": "/media/players/4102.png"
       }
     ],
     "bench": [
+      {
+        "id": 4158,
+        "name": "Roy Revivo",
+        "position": "defender",
+        "price": 500000,
+        "image": "/media/players/4158.png"
+      },
+      {
+        "id": 4118,
+        "name": "Tsitaishvili",
+        "position": "midfielder",
+        "price": 360000,
+        "image": "/media/players/4118.png"
+      },
       {
         "id": 4133,
         "name": "Kevin Sánchez",
@@ -1116,49 +1210,49 @@
     "crest": "/media/crests/hache_fc.svg",
     "pos": 9,
     "points": 86,
-    "squadValue": 59650000,
-    "playerCount": 18,
+    "squadValue": 51370000,
+    "playerCount": 17,
     "financialHealth": "100% Saneado (Solvente)",
     "debtAlert": null,
-    "projectedScore": 64,
-    "formation": "5-4-1",
-    "tacticDescription": "Formación 5-4-1 orientada a maximizar puntos según plantilla disponible.",
-    "strengths": [
-      "Equipo con buena regularidad en puntuaciones medias."
-    ],
-    "weaknesses": [
-      "Margen de mejora en la eficiencia de puntos por millón invertido (PPM)."
-    ],
+    "projectedScore": 59,
+    "formation": "4-5-1",
+    "tacticDescription": "Formación 4-5-1 orientada a maximizar puntos según plantilla disponible.",
+    "strengths": [],
+    "weaknesses": [],
     "recommendations": [
       {
-        "name": "Pere Milla",
+        "name": "Canales",
         "pos": "Centrocampista",
-        "price": 2020000,
+        "price": 5920000,
         "reason": "Mejorar el control del balón y balones parados."
       }
     ],
+    "speculation": {
+      "score": 43,
+      "badge": "📊 Inversor Estándar",
+      "badgeColor": "#3b82f6",
+      "overbidRate": "+5.0%",
+      "riskLevel": "Moderado",
+      "totalSpent": 11632900,
+      "totalReceived": 9306500,
+      "purchasesCount": 2,
+      "salesCount": 1,
+      "analysis": "Actividad equilibrada en el mercado sin sobrepujas desproporcionadas."
+    },
     "starters": [
       {
         "id": 2416,
         "name": "Dmitrovic",
         "position": "keeper",
-        "price": 3130000,
+        "price": 3350000,
         "expectedPoints": 5.2,
         "image": "/media/players/2416.png"
-      },
-      {
-        "id": 4063,
-        "name": "Konaté",
-        "position": "defender",
-        "price": 9430000,
-        "expectedPoints": 7.7,
-        "image": "/media/players/4063.png"
       },
       {
         "id": 3215,
         "name": "Nahuel Tenaglia",
         "position": "defender",
-        "price": 4280000,
+        "price": 4590000,
         "expectedPoints": 6.4,
         "image": "/media/players/3215.png"
       },
@@ -1174,7 +1268,7 @@
         "id": 3515,
         "name": "César Tárrega",
         "position": "defender",
-        "price": 3060000,
+        "price": 3270000,
         "expectedPoints": 5.2,
         "image": "/media/players/3515.png"
       },
@@ -1182,7 +1276,7 @@
         "id": 4071,
         "name": "Rafita Garrido",
         "position": "defender",
-        "price": 2000000,
+        "price": 1950000,
         "expectedPoints": 4.1,
         "image": "/media/players/4071.png"
       },
@@ -1190,7 +1284,7 @@
         "id": 3357,
         "name": "Pablo Barrios",
         "position": "midfielder",
-        "price": 9580000,
+        "price": 9670000,
         "expectedPoints": 7.7,
         "image": "/media/players/3357.png"
       },
@@ -1198,7 +1292,7 @@
         "id": 3081,
         "name": "Antonio Blanco",
         "position": "midfielder",
-        "price": 3240000,
+        "price": 3470000,
         "expectedPoints": 5.2,
         "image": "/media/players/3081.png"
       },
@@ -1206,7 +1300,7 @@
         "id": 3885,
         "name": "Tyrhys Dolan",
         "position": "midfielder",
-        "price": 3670000,
+        "price": 3740000,
         "expectedPoints": 5.2,
         "image": "/media/players/3885.png"
       },
@@ -1214,15 +1308,23 @@
         "id": 2727,
         "name": "Yangel Herrera",
         "position": "midfielder",
-        "price": 2940000,
+        "price": 2920000,
         "expectedPoints": 4.1,
         "image": "/media/players/2727.png"
+      },
+      {
+        "id": 3625,
+        "name": "Raúl Moro",
+        "position": "midfielder",
+        "price": 1900000,
+        "expectedPoints": 3.1,
+        "image": "/media/players/3625.png"
       },
       {
         "id": 2585,
         "name": "Cucho Hernández",
         "position": "striker",
-        "price": 6650000,
+        "price": 6570000,
         "expectedPoints": 6.4,
         "image": "/media/players/2585.png"
       }
@@ -1232,49 +1334,42 @@
         "id": 3123,
         "name": "Matías Dituro",
         "position": "keeper",
-        "price": 750000,
+        "price": 770000,
         "image": "/media/players/3123.png"
-      },
-      {
-        "id": 3625,
-        "name": "Raúl Moro",
-        "position": "midfielder",
-        "price": 1870000,
-        "image": "/media/players/3625.png"
       },
       {
         "id": 4135,
         "name": "Francho Serrano",
         "position": "midfielder",
-        "price": 650000,
+        "price": 670000,
         "image": "/media/players/4135.png"
       },
       {
         "id": 3507,
         "name": "Marc Casadó",
         "position": "midfielder",
-        "price": 640000,
+        "price": 760000,
         "image": "/media/players/3507.png"
       },
       {
         "id": 2377,
         "name": "Aleñá",
         "position": "midfielder",
-        "price": 580000,
+        "price": 560000,
         "image": "/media/players/2377.png"
       },
       {
         "id": 3785,
         "name": "Maroan Sannadi",
         "position": "striker",
-        "price": 270000,
+        "price": 280000,
         "image": "/media/players/3785.png"
       },
       {
         "id": 3610,
         "name": "Álvaro Djaló",
         "position": "striker",
-        "price": 240000,
+        "price": 230000,
         "image": "/media/players/3610.png"
       }
     ],
@@ -1287,41 +1382,53 @@
     "crest": "/media/crests/melano_plabloroza.svg",
     "pos": 10,
     "points": 76,
-    "squadValue": 36320000,
-    "playerCount": 13,
-    "financialHealth": "100% Saneado (Solvente)",
-    "debtAlert": null,
-    "projectedScore": 50,
-    "formation": "4-5-1",
-    "tacticDescription": "Formación 4-5-1 orientada a maximizar puntos según plantilla disponible.",
+    "squadValue": 39410000,
+    "playerCount": 12,
+    "financialHealth": "Patrimonio Débil (33.5M €)",
+    "debtAlert": "Sobreprecio continuo en compras que erosiona su balance patrimonial.",
+    "projectedScore": 54,
+    "formation": "3-5-2",
+    "tacticDescription": "Esquema defensivo de repliegue.",
     "strengths": [
-      "Equipo con buena regularidad en puntuaciones medias."
+      "Alineación combativa con Giuliano Simeone."
     ],
     "weaknesses": [
-      "Margen de mejora en la eficiencia de puntos por millón invertido (PPM)."
+      "Menor valor de mercado total de la liga (33.5M €); riesgo de estancamiento."
     ],
     "recommendations": [
       {
-        "name": "Pere Milla",
+        "name": "Canales",
         "pos": "Centrocampista",
-        "price": 2020000,
+        "price": 5920000,
         "reason": "Mejorar el control del balón y balones parados."
       }
     ],
+    "speculation": {
+      "score": 82,
+      "badge": "💸 Sobrepujador en Riesgo",
+      "badgeColor": "#ef4444",
+      "overbidRate": "+26.3%",
+      "riskLevel": "Alto / Déficit",
+      "totalSpent": 8070009,
+      "totalReceived": 8582400,
+      "purchasesCount": 2,
+      "salesCount": 3,
+      "analysis": "Sobrepaga por jugadores de clase media (Ferran Jutglà por 5.38M € y Luismi Cruz por 2.69M €), dejando su patrimonio total mermado en 33M €."
+    },
     "starters": [
       {
         "id": 3849,
         "name": "Radu",
         "position": "keeper",
-        "price": 3000000,
-        "expectedPoints": 4.1,
+        "price": 3130000,
+        "expectedPoints": 5.2,
         "image": "/media/players/3849.png"
       },
       {
         "id": 3399,
         "name": "Carlos Romero",
         "position": "defender",
-        "price": 5360000,
+        "price": 5280000,
         "expectedPoints": 6.4,
         "image": "/media/players/3399.png"
       },
@@ -1329,7 +1436,7 @@
         "id": 4072,
         "name": "Carlos Puga",
         "position": "defender",
-        "price": 2160000,
+        "price": 2210000,
         "expectedPoints": 4.1,
         "image": "/media/players/4072.png"
       },
@@ -1337,23 +1444,15 @@
         "id": 2326,
         "name": "Yeray Álvarez",
         "position": "defender",
-        "price": 2020000,
+        "price": 2100000,
         "expectedPoints": 3.5,
         "image": "/media/players/2326.png"
-      },
-      {
-        "id": 3498,
-        "name": "Ratiu",
-        "position": "defender",
-        "price": 2420000,
-        "expectedPoints": 2.8,
-        "image": "/media/players/3498.png"
       },
       {
         "id": 3240,
         "name": "Giuliano Simeone",
         "position": "midfielder",
-        "price": 8100000,
+        "price": 8330000,
         "expectedPoints": 7.7,
         "image": "/media/players/3240.png"
       },
@@ -1361,7 +1460,7 @@
         "id": 3927,
         "name": "Miguel Román",
         "position": "midfielder",
-        "price": 4010000,
+        "price": 4570000,
         "expectedPoints": 6.4,
         "image": "/media/players/3927.png"
       },
@@ -1369,7 +1468,7 @@
         "id": 2408,
         "name": "Pere Milla",
         "position": "midfielder",
-        "price": 2020000,
+        "price": 2160000,
         "expectedPoints": 4.1,
         "image": "/media/players/2408.png"
       },
@@ -1377,7 +1476,7 @@
         "id": 3223,
         "name": "Luismi Cruz",
         "position": "midfielder",
-        "price": 2640000,
+        "price": 2660000,
         "expectedPoints": 4.1,
         "image": "/media/players/3223.png"
       },
@@ -1385,9 +1484,17 @@
         "id": 4112,
         "name": "Facundo Buonanotte",
         "position": "midfielder",
-        "price": 1320000,
+        "price": 1480000,
         "expectedPoints": 2.2,
         "image": "/media/players/4112.png"
+      },
+      {
+        "id": 3184,
+        "name": "Ferran Jutglà",
+        "position": "striker",
+        "price": 4620000,
+        "expectedPoints": 6.4,
+        "image": "/media/players/3184.png"
       },
       {
         "id": 2338,
@@ -1405,13 +1512,6 @@
         "position": "midfielder",
         "price": 490000,
         "image": "/media/players/3186.png"
-      },
-      {
-        "id": 3915,
-        "name": "Ali Houary",
-        "position": "striker",
-        "price": 400000,
-        "image": "/media/players/3915.png"
       }
     ],
     "isMe": false
