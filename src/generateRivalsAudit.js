@@ -230,27 +230,27 @@ export async function generateRivalsAuditData() {
         tacticDescription = `Formación ${lineup.formation || '4-4-2'} orientada a maximizar puntos según plantilla disponible.`;
       }
 
-      // Asignación de Perfil Estándar Universal
-      let financialBadge = '🟢 Perfil Conservador / Solvente';
+      // Asignación de Taxonomía Universal de Perfiles Trader & Futboleros (0 a 100)
+      let financialBadge = '🏦 Banquero Suizo / Caja Fuerte';
       let badgeColor = '#10b981';
-      let riskLevel = 'Bajo Riesgo';
+      let riskLevel = 'Bajo Riesgo (Solvente)';
 
       if (specScore >= 75) {
-        financialBadge = '🔴 Perfil Apalancado / Alto Riesgo';
+        financialBadge = '🦈 Tiburón Kamikaze / Deuda';
         badgeColor = '#ef4444';
-        riskLevel = 'Alto Riesgo';
+        riskLevel = 'Alto Riesgo (Apalancado)';
       } else if (specScore >= 50) {
-        financialBadge = '🟠 Perfil Especulador / Activo';
+        financialBadge = '🎰 Especulador de Mercado';
         badgeColor = '#f59e0b';
         riskLevel = 'Riesgo Moderado-Alto';
       } else if (specScore >= 25) {
-        financialBadge = '🔵 Perfil Moderado / Equilibrado';
+        financialBadge = '📈 Trader Táctico';
         badgeColor = '#3b82f6';
         riskLevel = 'Riesgo Moderado';
       } else {
-        financialBadge = '🟢 Perfil Conservador / Solvente';
+        financialBadge = '🏦 Banquero Suizo / Caja Fuerte';
         badgeColor = '#10b981';
-        riskLevel = 'Bajo Riesgo';
+        riskLevel = 'Bajo Riesgo (Solvente)';
       }
 
       // Recomendaciones de Mercado para el rival (asistencia de fichajes)
