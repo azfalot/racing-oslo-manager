@@ -282,6 +282,41 @@ export default function Rivales() {
               <Info size={14} className="text-amber-300 mt-0.5 flex-shrink-0" />
               <span>{club.speculation.analysis}</span>
             </div>
+
+            {/* HITOS DE MERCADO: MEJOR COMPRA & PEOR MOVIMIENTO */}
+            {club.keyDeals && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                <div className="bg-emerald-950/30 border border-emerald-500/30 p-3 rounded-sm space-y-1.5">
+                  <div className="flex items-center justify-between text-xs font-bold text-emerald-400">
+                    <span className="flex items-center gap-1.5">
+                      <span>⭐ MEJOR OPERACIÓN:</span>
+                      <span className="text-white font-mono">{club.keyDeals.bestBuy.player}</span>
+                    </span>
+                    <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded-sm font-mono">
+                      {club.keyDeals.bestBuy.tag}
+                    </span>
+                  </div>
+                  <p className="text-xs text-cream-dark leading-relaxed">
+                    {club.keyDeals.bestBuy.impact}
+                  </p>
+                </div>
+
+                <div className="bg-red-950/30 border border-red-500/30 p-3 rounded-sm space-y-1.5">
+                  <div className="flex items-center justify-between text-xs font-bold text-red-400">
+                    <span className="flex items-center gap-1.5">
+                      <span>⚠️ PEOR MOVIMIENTO:</span>
+                      <span className="text-white font-mono">{club.keyDeals.worstMove.player}</span>
+                    </span>
+                    <span className="text-[10px] bg-red-500/20 text-red-300 px-1.5 py-0.5 rounded-sm font-mono">
+                      {club.keyDeals.worstMove.tag}
+                    </span>
+                  </div>
+                  <p className="text-xs text-cream-dark leading-relaxed">
+                    {club.keyDeals.worstMove.impact}
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

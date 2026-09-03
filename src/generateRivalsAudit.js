@@ -239,22 +239,52 @@ export async function generateRivalsAuditData() {
         weaknesses.push('Falta de un mediocentro de jerarquía para hilvanar posesiones largas.');
         weaknesses.push('Plantilla corta de 13 futbolistas.');
         tacticDescription = '4-4-2 de bloque medio y contragolpe.';
+      // Hitos de Mercado: Mejor Compra y Peor Movimiento
+      let keyDeals = {
+        bestBuy: { player: 'Fichaje a Valor de Mercado', price: 0, impact: 'Operación dentro de los parámetros estándar de la liga.', tag: 'Equilibrio' },
+        worstMove: { player: 'Operación Estándar', price: 0, impact: 'Sin sobreprecios críticos registrados.', tag: 'Riesgo Controlado' }
+      };
+
+      if (mKey.includes('Fermín Gadura')) {
+        keyDeals = {
+          bestBuy: { player: 'Javi Rueda', price: 1830020, impact: 'Fichado por 1.83M €, ya vale 1.96M € (+130k € plusvalía) y aporta 4.0 ppm en el lateral.', tag: '💎 Eficiencia & Plusvalía' },
+          worstMove: { player: 'Gordon', price: 21810030, impact: 'Sobrepuja destructiva de +3.86M € (+21.5% sobre VM) que forzó la venta obligada de Fermín López.', tag: '💥 Sobreprecio Crítico' }
+        };
+      } else if (mKey.includes('Suances nin')) {
+        keyDeals = {
+          bestBuy: { player: 'Carlos Martín', price: 436554, impact: 'Incorporación a coste mínimo (436k €) para aportar profundidad sin comprometer tesorería.', tag: '💎 Rotación Eficiente' },
+          worstMove: { player: 'Ander Barrenetxea', price: 4780000, impact: 'Sobreprecio de +900.000 € (+23.2% sobre VM) que agotó su liquidez y dejó el banquillo vacío.', tag: '💥 Sobrepuja Excesiva' }
+        };
+      } else if (mKey.includes('Melano Plabloroza')) {
+        keyDeals = {
+          bestBuy: { player: 'Luismi Cruz', price: 2690000, impact: 'Titular en banda izquierda a precio razonable para sostener el ataque.', tag: '💎 Compra Táctica' },
+          worstMove: { player: 'Ferran Jutglà', price: 5380009, impact: 'Sobrepago de +1.12M € (+26.3% sobre VM) por un delantero que rota minutos en el Celta.', tag: '💥 Sobreprecio Ineficiente' }
+        };
+      } else if (mKey.includes('M4 TEAM')) {
+        keyDeals = {
+          bestBuy: { player: 'Antony', price: 14100000, impact: 'Referencia en banda con alto volumen de desequilibrio individual.', tag: '💎 Fichaje Franquicia' },
+          worstMove: { player: 'Juan Berrocal', price: 326700, impact: 'Venta a Computer a precio mínimo debilitando la rotación de centrales.', tag: '⚠️ Venta a la Baja' }
+        };
+      } else if (isMe) {
+        keyDeals = {
+          bestBuy: { player: 'Álvaro Carreras', price: 1435000, impact: 'Fichaje quirúrgico con sobrepuja mínima (+25k € / +1.7%) para apontalar el flanco izquierdo en el 3-4-3.', tag: '💎 Precisión Quirúrgica' },
+          worstMove: { player: 'Endrick', price: 1650000, impact: 'Comprado por 1.65M € y vendido por 1.40M € (-246k € de ajuste) para cuadrar tesorería de inmediato.', tag: '⚠️ Ajuste con Pérdida' }
+        };
+      } else if (mKey.includes('Puente Avios')) {
+        keyDeals = {
+          bestBuy: { player: 'Chupe', price: 10000360, impact: 'Inversión potente con impacto goleador inmediato en punta.', tag: '💎 Rendimiento Inmediato' },
+          worstMove: { player: 'Jon Aramburu', price: 3244500, impact: 'Venta forzada de un zaguero titular de la Real Sociedad para financiar la delantera.', tag: '⚠️ Desmantelamiento de Zaga' }
+        };
+      } else if (mKey.includes('Amigos de NIN')) {
+        keyDeals = {
+          bestBuy: { player: 'Oskarsson', price: 6000100, impact: 'Apuesta ofensiva de la Real Sociedad con alto techo goleador.', tag: '💎 Apuesta de Futuro' },
+          worstMove: { player: 'Álvaro García', price: 5750000, impact: 'Compra a rival con prima elevada que mermó su remanente de caja.', tag: '⚠️ Prima Alta a Rival' }
+        };
       } else if (mKey.includes('Ana')) {
-        specScore = 22;
-        overbidEstimate = '+1.0%';
-        specAnalysis = 'Mínima actividad en compras y ventas. Bloque estático centrado en la zaga.';
-        financialHealth = 'Conservadora / Solvente';
-        debtAlert = 'Gran reserva de liquidez estimada pero con nula participación en el mercado de altas.';
-        strengths.push('Línea defensiva sólida liderada por Pau Cubarsí y Marc Pubill.');
-        weaknesses.push('Ausencia de un delantero centro de referencia y bajo dinamismo en el mercado.');
-        weaknesses.push('Dependencia de que su zaga mantenga portería a cero para sumar.');
-        tacticDescription = '5-3-2 de repliegue bajo y contención.';
-      } else {
-        specScore = Math.min(65, Math.max(20, Math.round((mHistory.totalSpent / 1000000) * 3 + mHistory.purchases.length * 4)));
-        overbidEstimate = '+5.0%';
-        specAnalysis = 'Actividad estándar en el mercado con sobreprecios dentro de la media de la liga.';
-        debtAlert = 'Equilibrio financiero estándar sin riesgo inmediato de descubierto.';
-        tacticDescription = `Formación ${lineup.formation || '4-4-2'} orientada a maximizar puntos según plantilla disponible.`;
+        keyDeals = {
+          bestBuy: { player: 'Pau Cubarsí', price: 16500000, impact: 'Muro defensivo galáctico y líder de regularidad en su zaga de 5.', tag: '💎 Pilar Defensivo' },
+          worstMove: { player: 'Inacción de Mercado', price: 0, impact: 'Cero incorporaciones en ataque que lastran su producción goleadora.', tag: '⚠️ Pasividad Ofensiva' }
+        };
       }
 
       // Asignación de Taxonomía Universal de Perfiles Trader & Futboleros (0 a 100)
@@ -338,6 +368,7 @@ export async function generateRivalsAuditData() {
           netWealth: netWealth,
           analysis: specAnalysis
         },
+        keyDeals,
         starters: (lineup.starting11 || []).map(p => ({
           id: p.playerId || p.id,
           name: p.name,
