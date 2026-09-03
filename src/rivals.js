@@ -66,53 +66,67 @@ export async function getRivalBiddingIntelligence(client) {
   const intel = {
     rivalProfiles: {},
     highThreatPositions: { keeper: false, defender: false, midfielder: false, striker: false },
-    avgCommunityOverbid: 5.0 // Base por defecto +5%
+    avgCommunityOverbid: 15.0
   };
 
   try {
-    const url = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/news`;
-    const response = await axios.get(url, { headers: client.getHeaders() });
-    const entries = response.data?.newsList?.entries || [];
+    const fs = await import('fs');
+    const path = await import('path');
+    const txPath = path.resolve('web/src/data/historicalTransactions.json');
+    let transactions = [];
+
+    if (fs.existsSync(txPath)) {
+      transactions = JSON.parse(fs.readFileSync(txPath, 'utf8'));
+    }
+
+    if (transactions.length === 0 && client) {
+      const url = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/news?start=0&limit=50`;
+      const response = await axios.get(url, { headers: client.getHeaders() });
+      const entries = response.data?.newsList?.entries || [];
+      // parse fallback
+    }
 
     let totalOverbidSum = 0;
     let validTxCount = 0;
 
-    for (const entry of entries) {
-      const text = entry.message?.text || entry.title || '';
-      const lines = text.split(/<br\s*\/?>/i);
-      
-      for (const line of lines) {
-        const clean = line.replace(/<[^>]*>/g, '').trim();
-        const match = clean.match(/(.+?)\s+cambia por\s+([\d.,]+)\s*€\s+de\s+(.+?)\s+a\s+(.+)/i);
-        if (match) {
-          const playerName = match[1].replace(/^\d{2}:\d{2}\s*-\s*/, '').trim();
-          const priceRaw = match[2].replace(/\./g, '').replace(/,/g, '.').trim();
-          const pricePaid = parseInt(priceRaw) || 0;
-          const seller = match[3].trim();
-          const buyer = match[4].replace(/\.$/, '').trim();
+    for (const tx of transactions) {
+      const buyer = tx.buyer;
+      const pricePaid = tx.price || 0;
+      if (!buyer || buyer.toLowerCase() === 'computer' || pricePaid <= 0) continue;
 
-          // Ignorar transacciones de la computadora vendiendo a sí misma o precios erróneos
-          if (buyer.toLowerCase() === 'computer' || pricePaid <= 0) continue;
-
-          if (!intel.rivalProfiles[buyer]) {
-            intel.rivalProfiles[buyer] = { name: buyer, totalPurchases: 0, totalSpent: 0, maxSpent: 0, aggressiveLevel: 'Normal', avgOverbidPct: 5.0 };
-          }
-
-          intel.rivalProfiles[buyer].totalPurchases += 1;
-          intel.rivalProfiles[buyer].totalSpent += pricePaid;
-          if (pricePaid > intel.rivalProfiles[buyer].maxSpent) {
-            intel.rivalProfiles[buyer].maxSpent = pricePaid;
-          }
-
-          // Si la compra fue por encima de 5M €, marcar como manager agresivo
-          if (pricePaid >= 5000000) {
-            intel.rivalProfiles[buyer].aggressiveLevel = 'Alto (Pujas Agresivas)';
-          }
-
-          totalOverbidSum += pricePaid;
-          validTxCount++;
-        }
+      if (!intel.rivalProfiles[buyer]) {
+        intel.rivalProfiles[buyer] = {
+          name: buyer,
+          totalPurchases: 0,
+          totalSpent: 0,
+          maxSpent: 0,
+          overbidCount: 0,
+          aggressiveLevel: 'Normal',
+          avgOverbidPct: 0
+        };
       }
+
+      intel.rivalProfiles[buyer].totalPurchases += 1;
+      intel.rivalProfiles[buyer].totalSpent += pricePaid;
+      if (pricePaid > intel.rivalProfiles[buyer].maxSpent) {
+        intel.rivalProfiles[buyer].maxSpent = pricePaid;
+      }
+      if (tx.isOverbid) {
+        intel.rivalProfiles[buyer].overbidCount += 1;
+      }
+
+      if (pricePaid >= 15000000 || intel.rivalProfiles[buyer].totalSpent >= 50000000) {
+        intel.rivalProfiles[buyer].aggressiveLevel = 'Alto (Tiburón de Mercado)';
+      } else if (pricePaid >= 5000000) {
+        intel.rivalProfiles[buyer].aggressiveLevel = 'Moderado (Pujas Selectivas)';
+      }
+
+      totalOverbidSum += (tx.diffPct || 0);
+      validTxCount++;
+    }
+
+    if (validTxCount > 0) {
+      intel.avgCommunityOverbid = parseFloat((totalOverbidSum / validTxCount).toFixed(1));
     }
   } catch (err) {
     console.warn('[RIVALS INTEL] Error calculando inteligencia de pujas:', err.message);

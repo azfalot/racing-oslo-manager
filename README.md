@@ -1,88 +1,125 @@
-# 💼 Racing de Oslo Manager Bot
+# 💼 Racing de Oslo Manager
 
-> **Director Deportivo:** Mateo Oslomany
-> **Club:** Racing de Oslo (azfalot)
-> **Plataforma:** Comunio España
-
-Bienvenido al centro de operaciones e inteligencia deportiva del **Racing de Oslo**. Este bot gestiona la plantilla, optimiza alineaciones en base a rendimiento e información médica, realiza análisis de mercado en tiempo real contra Transfermarkt y ejecuta pujas y ventas estratégicas directamente mediante la API de Comunio.
-
----
-
-## 🚀 Características Clave
-
-* **API-First Architecture:** Todas las operaciones críticas (alineación, pujas, ventas, lectura de saldos) se realizan directamente a través de peticiones HTTP (`Axios`) rápidas y ligeras, evitando el uso de navegadores virtuales pesados en el 99% de las ejecuciones.
-* **Control Inteligente de Pujas Duplicadas:** Descarga y compara en tiempo real las ofertas pendientes en los servidores de Comunio para evitar reenviar pujas duplicadas.
-* **Margen de Puja Dinámico (`/margen`):** Permite configurar un sobreprecio estratégico por encima del mínimo de mercado directamente desde Telegram para asegurar el fichaje de estrellas.
-* **Historial de Fichajes y Ventas:** Registra instantáneas de la plantilla en cada ejecución y reporta altas y bajas directamente al móvil.
-* **Análisis de Rivales:** Escaneo completo de las plantillas de todos los miembros de la liga, ordenados por valoración total y listando sus tres estrellas principales.
-* **Fórmula de Eficiencia (PPM):** Evalúa candidatos en el mercado basándose en su rendimiento esperado de puntos dividido por su valor de mercado.
+> **Director Deportivo Autónomo:** Mateo Oslomany  
+> **Club Oficial:** Racing de Oslo (`azfalot`)  
+> **Plataforma:** Comunio España (Comunidad *Segunda Regional Cántabra*)  
+> **Portal Web en Producción:** [https://racing-oslo.cotero91.workers.dev](https://racing-oslo.cotero91.workers.dev)
 
 ---
 
-## 🤖 Comandos de Telegram (Mateo Oslomany)
+## 🌟 Visión General del Proyecto
 
-El bot responde a comandos directos en el chat con tu director deportivo de confianza:
-
-### 📊 Análisis y Consultas (Lectura)
-* `/reporte` - Mateo compila y te envía el informe completo de dirección deportiva del día (sólo lectura).
-* `/rivales` - Analiza la valoración y estrellas de las plantillas del resto de miembros de la liga.
-* `/sugerencias` - Sugiere qué jugadores suplentes de alto valor o lesionados conviene vender para ganar liquidez.
-
-### ⚡ Acciones e Interacción (Escritura)
-* `/alinear` - Optimiza y guarda directamente en Comunio el 11 titular ideal de la jornada según estado físico y rendimiento.
-* `/vender <nombre_jugador>` - Pone en venta de inmediato al jugador indicado en el mercado de Comunio por su precio mínimo.
-* `/margen <porcentaje>` - Modifica el sobreprecio extra a aplicar sobre las ofertas de compra (ej: `/margen 1.5`).
+**Racing de Oslo Manager** es una plataforma integral de ingeniería deportiva, optimización algorítmica y contabilidad forense para Comunio. Combina un daemon inteligente en Node.js, un motor táctico probabilístico, un libro mayor permanente y un portal web reactivo desplegado en Cloudflare Workers.
 
 ---
 
-## 🕒 Horarios de Ejecución Programada
+## 🚀 Arquitectura y Componentes Clave
 
-El daemon en segundo plano realiza ciclos de optimización y reportes automáticos tres veces al día (Hora de Madrid):
-* **09:00 a.m. ➔ Informe Matinal:** Descarga las novedades de mercado de la Computadora y envía el informe diario inicial.
-* **15:00 p.m. ➔ Informe de Tarde:** Actualización de mercado y noticias.
-* **02:50 a.m. ➔ Cierre de Mercado (Crítico):** A solo 10 minutos del límite de los servidores de Comunio, Mateo realiza la alineación final con las últimas noticias de lesionados y envía las pujas definitivas.
+### 1. 🧠 Motor Matemático & Táctico (`src/engine.js`)
+* **Optimización Determinista de Alineaciones:** Algoritmo multi-formación (`3-4-3`, `3-5-2`, `4-4-2`, `4-3-3`, `5-3-2`, `5-4-1`) que maximiza los puntos esperados ponderando puntos por minuto, probabilidad de titularidad, competencia interna de plantilla y estados médicos.
+* **Política de Seguridad Financiera (Regla de Oro):** Prohíbe la aceptación automática de ofertas de Computer a la baja y exige confirmación previa para ventas de piezas clave.
+* **Pujas Racionales (0% Margen Especulativo):** Sistema de valoración estricta que ajusta ofertas al valor oficial del mercado evitando sobreprecios destructivos.
+
+### 2. 📊 Auditoría Contable y Radar de Rivales (`src/generateRivalsAudit.js` & `src/rivals.js`)
+* **Paginación Multi-Página de la API (`?start=X`):** Descarga el histórico de noticias (395+ comunicados) recuperando todas las operaciones desde el día 1 de la temporada.
+* **Libro Mayor Permanente (`web/src/data/historicalTransactions.json`):** Persistencia inmutable que previene la pérdida de datos por la ventana deslizante del servidor de Comunio.
+* **Cálculo Financiero Homogéneo (10 Clubes):**
+  $$\text{Caja Estimada} = 20.000.000\text{ €} + \text{Ventas} + (\text{Puntos}\times 10.000\text{ €}) - \text{Compras}$$
+  $$\text{Sobrepuja Media} = \frac{\sum (\text{Precio Pagado} - \text{Valor de Mercado})}{\sum \text{Valor de Mercado}} \times 100$$
+  $$\text{Patrimonio Total} = \text{Valor de Plantilla} + \text{Caja Estimada}$$
+* **Taxonomía Universal de Perfiles Trader (0-100):**
+  * 🏦 **Banquero Suizo / Caja Fuerte (Score < 25):** Solvencia máxima, compras a valor y alta liquidez.
+  * 📈 **Trader Táctico (Score 25-49):** Rotación moderada y sobreprecios controlados.
+  * 🎰 **Especulador de Mercado (Score 50-74):** Alto volumen de operaciones y sobrepujas recurrentes.
+  * 🦈 **Tiburón Kamikaze / Deuda (Score ≥ 75):** Saldo en descubierto, apalancamiento al límite del crédito permitido.
+* **Detección de Diferenciales en Transacciones:**
+  * 🔴 `+X.X% SOBREPRECIO` (Compras por encima de VM).
+  * 🟢 `-X.X% GANGA` (Compras a precio de saldo o con plusvalía).
+  * 🔵 `A VALOR` (Compras exactas al 100.0% de VM).
+
+### 3. 🛡️ Modo Sigilo y Consumo Inteligente (`src/daemon.js`)
+* **Cero Spam en Tablón Público:** Las auditorías tácticas y radares financieros se alojan exclusivamente en el portal web privado. Solo se emite comunicado público en Comunio ante fichajes galácticos (>15M €).
+* **Ciclos de Sincronización Automática:**
+  * **09:00h:** Sincronización matinal de mercado y actualización de noticias.
+  * **15:00h:** Comprobación de estado médico y noticias de prensa deportiva.
+  * **02:50h (Pre-Cierre):** Verificación de alineaciones y saldo positivo antes del corte diario.
+  * **15-30 min pre-kickoff:** Blindaje de alineación y registro de pronósticos oficiales.
 
 ---
 
-## 🛠️ Instalación y Configuración Local
+## 💻 Portal Web Oficial (`/web`)
 
-### 1. Requisitos Previos
-* NodeJS (v18 o superior)
-* Git
+Desarrollado en React 19 + Tailwind CSS + Vite y alojado en Cloudflare Workers:
+* 🏆 **Clasificación & Plantillas en Vivo:** Puntos, valoración y alineaciones de las 10 entidades.
+* 🛡️ **Rivales 360º:** Auditoría de liquidez, radar de sobrepuja, hitos de mercado (mejor compra vs peor movimiento) e historial desplegable con badges diferenciales.
+* 📰 **Noticiario del Club:** Comunicados oficiales con infografías generadas dinámicamente.
+* 🔮 **Predicciones & Auditoría de Jornada:** Comparativa de pronósticos vs puntos reales conseguidos.
 
-### 2. Configurar variables de entorno
-Crea un archivo `.env` en la raíz del proyecto:
-```env
-COMUNIO_USERNAME=tu_usuario
-COMUNIO_PASSWORD=tu_contraseña
-COMUNIO_MODE=autonomo # 'asistente' o 'autonomo'
-TELEGRAM_BOT_TOKEN=tu_token_de_bot_de_telegram
-TELEGRAM_CHAT_ID=tu_chat_id_de_telegram
-```
+---
 
-### 3. Ejecutar el Daemon
+## 🧪 Suite de Pruebas Automatizadas
 
-#### Opción Básica:
-Haz doble clic en el archivo `run_daemon.bat` en Windows.
+El proyecto cuenta con una batería de tests unitarios que validan las reglas de negocio y algoritmos de optimización:
 
-#### Opción en Segundo Plano (Recomendada con PM2):
 ```powershell
-# Instalar PM2 de forma global
-npm install -g pm2
+npm test
+```
 
-# Iniciar el bot en segundo plano
-pm2 start src/daemon.js --name "comunio-bot"
+```
+✔ 1. Candidate beats worst player but does NOT improve best XI -> no aggressive bid
+✔ 2. Candidate genuinely upgrades starting XI -> strategic score increases
+✔ 3. Superstar opportunity with low cash -> valuation remains high but constrained
+✔ 4. Expensive player with poor PPM -> valuation penalized appropriately
+✔ 5. Strong positional need increases valuation
+✔ 6. Rival pressure never exceeds maximum rational bid
+✔ 7. Negative balance does NOT accept terrible offers automatically
+✔ 8. Small debt prefers low-impact sale over sacrificing stars
+✔ 9. Two cheap sales preferred over one expensive key player
+✔ 10. High-scoring redundant player can be sold if not core to XI
+✔ 11. Lower-scoring core player protected against loss
+✔ 12. No sale triggered when liquidity and squad are balanced
+✔ 13. High-value transaction requires explicit confirmation
+✔ 14. Deterministic lineup optimization validity
+✔ 15. Discard sanctioned / banned players
+✔ 16. Positional club competition depth chart
+✔ System Rule 1: evaluateIncomingOffer NEVER accepts offers automatically
+✔ System Rule 2: Deny-by-default on non-Computer auto-bidding
+✔ System Rule 3: Recommended bid is strictly 100.0% of market value
+✔ System Rule 4: isWithinPreMatchdayWindow checks exact 15-30 min boundary
+✔ System Rule 5: getAutoBidLimit standardization
+✔ System Rule 6: acquireSyncLock single-process exclusion
 
-# Ver estado y logs
-pm2 status
-pm2 logs comunio-bot
+Total: 22 tests passing (0 failures)
 ```
 
 ---
 
-## 📂 Estructura del Código
+## 🛠️ Despliegue y Comandos de Producción
 
-* `src/comunioClient.js` - Cliente de conexión directa con la API de Comunio (con fallback en Playwright).
-* `src/engine.js` - Motor matemático de toma de decisiones (alineación, economía, ofertas).
-* `src/daemon.js` - Listener de comandos de Telegram y planificador de ejecuciones diarias.
-* `src/app.js` - Orquestador del reporte diario y flujo principal de optimización.
+```powershell
+# Ejecutar suite de pruebas
+npm test
+
+# Generar auditoría de rivales y libro mayor
+node src/generateRivalsAudit.js
+
+# Compilar portal web
+npm run build
+
+# Reiniciar daemon en PM2
+pm2 restart comunio-bot
+```
+
+---
+
+## 📁 Estructura del Repositorio
+
+* `src/comunioClient.js`: Conexión directa y gestión de sesiones con la API de Comunio.
+* `src/engine.js`: Motor de decisión, optimización de once y lógica de pujas.
+* `src/generateRivalsAudit.js`: Auditoría matemática, cálculo de sobreprecios e hitos de mercado.
+* `src/rivals.js`: Inteligencia de rivales basada en histórico permanente.
+* `src/daemon.js`: Planificador en segundo plano y bot interactivo de Telegram.
+* `src/syncWeb.mjs`: Orquestador de sincronización web, noticias y despliegue continuo.
+* `web/`: Aplicación React SPA con la suite visual del club.
+* `web/src/data/historicalTransactions.json`: Libro mayor permanente con todas las transferencias de la temporada.
+* `web/src/data/rivalsAudit.json`: Dataset estructurado de las 10 entidades.
