@@ -130,6 +130,8 @@ export async function generateRivalsAuditData() {
       if (!knownTxKeys.has(txKey)) {
         knownTxKeys.add(txKey);
         const vm = playerPriceMap[playerName.toLowerCase()] || price;
+        const gain = vm - price;
+        const gainPct = price > 0 ? parseFloat(((gain / price) * 100).toFixed(1)) : 0;
         const diff = price - vm;
         const pct = vm > 0 ? parseFloat(((diff / vm) * 100).toFixed(1)) : 0;
 
@@ -137,10 +139,12 @@ export async function generateRivalsAuditData() {
           playerName,
           price,
           marketValue: vm,
+          gain,
+          gainPct,
           diff,
           diffPct: pct,
-          isOverbid: diff > 10000,
-          isDiscount: diff < -10000,
+          isOverbid: diff > 30000,
+          isGain: gain > 30000,
           seller,
           buyer,
           date: e.date
@@ -379,17 +383,32 @@ export async function generateRivalsAuditData() {
           };
         }
 
-        // 2. Mayor Ganga Financiera (Descuento o menor sobreprecio respecto a VM)
-        const sortedBuys = [...mHistory.purchases].sort((a, b) => (a.diffPct || 0) - (b.diffPct || 0));
-        const topBuy = sortedBuys[0];
-        bestBuy = {
-          player: topBuy.playerName,
-          price: topBuy.price,
-          impact: topBuy.diff < 0 
-            ? `Fichaje cerrado con descuento (-${Math.abs(topBuy.diff).toLocaleString()} € / ${topBuy.diffPct}%) respecto a su cotización.`
-            : `Adquisición a valor exacto (${(topBuy.price / 1000000).toFixed(2)}M €) sin sobrecoste patrimonial.`,
-          tag: topBuy.diff < 0 ? '💎 Ganga / Eficiencia' : '💎 Compra a Valor'
-        };
+        // 2. Mayor Plusvalía / Revalorización Patrimonial
+        const purchasesWithGain = mHistory.purchases.map(tx => {
+          const currentVM = playerPriceMap[tx.playerName.toLowerCase()] || tx.marketValue || tx.price;
+          const gain = currentVM - tx.price;
+          const gainPct = tx.price > 0 ? parseFloat(((gain / tx.price) * 100).toFixed(1)) : 0;
+          return { ...tx, currentVM, gain, gainPct };
+        });
+
+        const sortedByGain = [...purchasesWithGain].sort((a, b) => (b.gain || 0) - (a.gain || 0));
+        const topGain = sortedByGain[0];
+
+        if (topGain && topGain.gain > 30000) {
+          bestBuy = {
+            player: topGain.playerName,
+            price: topGain.price,
+            impact: `Fichado por ${(topGain.price / 1000000).toFixed(2)}M €, hoy cotiza en ${(topGain.currentVM / 1000000).toFixed(2)}M € (+${topGain.gain.toLocaleString()} € / +${topGain.gainPct}% de plusvalía).`,
+            tag: `📈 +${topGain.gainPct}% Plusvalía`
+          };
+        } else {
+          bestBuy = {
+            player: topGain?.playerName || 'Estabilidad',
+            price: topGain?.price || 0,
+            impact: 'Operaciones ajustadas a cotización oficial sin minusvalías registradas.',
+            tag: '💎 A Valor'
+          };
+        }
 
         // 3. Mayor Sobreprecio / Riesgo
         const sortedOverbids = [...mHistory.purchases].sort((a, b) => (b.diff || 0) - (a.diff || 0));

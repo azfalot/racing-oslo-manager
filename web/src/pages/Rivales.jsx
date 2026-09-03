@@ -313,11 +313,11 @@ export default function Rivales() {
                   </div>
                 )}
 
-                {/* 2. MAYOR GANGA / PLUSVALÍA */}
+                {/* 2. MAYOR PLUSVALÍA / REVALORIZACIÓN */}
                 <div className="bg-emerald-950/30 border border-emerald-500/30 p-3 rounded-sm space-y-1.5">
                   <div className="flex items-center justify-between gap-2 border-b border-emerald-500/20 pb-1">
                     <span className="text-[10px] sm:text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1">
-                      <span>💎 MAYOR GANGA</span>
+                      <span>📈 MAYOR PLUSVALÍA</span>
                     </span>
                     <span className="text-[9px] sm:text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded-sm font-mono font-bold shrink-0">
                       {club.keyDeals.bestBuy.tag}
@@ -395,12 +395,12 @@ export default function Rivales() {
                                       +{tx.diffPct}% SOBREPRECIO
                                     </span>
                                   )}
-                                  {tx.isDiscount && (
+                                  {(tx.isGain || tx.gain > 30000) && !tx.isOverbid && (
                                     <span className="text-[8px] sm:text-[9px] bg-emerald-500/20 text-emerald-300 px-1 py-0.2 rounded font-mono font-bold">
-                                      {tx.diffPct}% GANGA
+                                      +{tx.gainPct || Math.abs(tx.diffPct)}% PLUSVALÍA
                                     </span>
                                   )}
-                                  {!tx.isOverbid && !tx.isDiscount && (
+                                  {!tx.isOverbid && !tx.isGain && !(tx.gain > 30000) && (
                                     <span className="text-[8px] sm:text-[9px] bg-blue-500/20 text-blue-300 px-1 py-0.2 rounded font-mono">
                                       A VALOR
                                     </span>
