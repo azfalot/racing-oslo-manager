@@ -159,6 +159,16 @@ export async function generateRivalsAuditData() {
       const mKey = normKey(teamName);
       const mHistory = managerStats[mKey] || { purchases: [], sales: [], totalSpent: 0, totalReceived: 0, computerPurchases: 0 };
 
+      // Contabilidad dinámica: Dotación inicial + Ventas + Premios de Jornada - Compras
+      const INITIAL_BUDGET = 20000000;
+      const PRIZE_PER_POINT = 10000;
+      const pts = std.points || std.totalPoints || 0;
+      const prizesEarned = pts * PRIZE_PER_POINT;
+      const netTransfers = mHistory.totalReceived - mHistory.totalSpent;
+      const estimatedCash = isMe ? 543389 : (INITIAL_BUDGET + netTransfers + prizesEarned);
+      const maxCreditLimit = Math.round(totalSquadValue * 0.25);
+      const netWealth = totalSquadValue + estimatedCash;
+
       // Clasificación Estándar Universal basada en métricas objetivas (0-100)
       let specScore = 15;
       let overbidEstimate = '+1.5%';
@@ -322,6 +332,10 @@ export async function generateRivalsAuditData() {
           totalReceived: mHistory.totalReceived,
           purchasesCount: mHistory.purchases.length,
           salesCount: mHistory.sales.length,
+          estimatedCash: estimatedCash,
+          prizesEarned: prizesEarned,
+          maxCreditLimit: maxCreditLimit,
+          netWealth: netWealth,
           analysis: specAnalysis
         },
         starters: (lineup.starting11 || []).map(p => ({

@@ -269,10 +269,11 @@ export default function Rivales() {
                 <span className="text-[9px] text-cream-dark/60 block">({club.speculation.salesCount} ventas)</span>
               </div>
               <div className="bg-black/50 border border-forest/20 p-2.5 rounded-sm text-center">
-                <span className="text-[10px] text-cream-dark uppercase block">Apalancamiento</span>
-                <span className="text-sm sm:text-base font-bold font-mono" style={{ color: club.speculation.badgeColor }}>
-                  {club.speculation.riskLevel.split('/')[0]}
+                <span className="text-[10px] text-cream-dark uppercase block">Caja Estimada</span>
+                <span className="text-sm sm:text-base font-bold font-mono text-amber-300">
+                  {club.speculation.estimatedCash !== undefined ? `${(club.speculation.estimatedCash / 1000000).toFixed(1)}M €` : 'N/D'}
                 </span>
+                <span className="text-[9px] text-cream-dark/60 block">(+{((club.speculation.prizesEarned || 0) / 1000).toFixed(0)}k € premios)</span>
               </div>
             </div>
 
