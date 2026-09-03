@@ -56,18 +56,37 @@ export async function generateRivalsAuditData() {
   // Regex para transacciones: <a ...>PLAYER</a> cambia por PRICE € de SELLER a BUYER.
   const txRegex = /<a[^>]*>([^<]+)<\/a>\s+cambia por\s+([\d\.]+)\s+€\s+de\s+(?:<a[^>]*>)?([^<]+?)(?:<\/a>)?\s+a\s+(?:<a[^>]*>)?([^<\.]+?)(?:<\/a>)?\./g;
 
-  // Mapear valor de mercado de todos los futbolistas conocidos
+  // Mapear valor de mercado y puntos de todos los futbolistas conocidos
   const playerPriceMap = {};
-  marketPlayers.forEach(p => { if (p.name) playerPriceMap[p.name.toLowerCase()] = p.price || 0; });
+  const playerPointsMap = {};
+  marketPlayers.forEach(p => { 
+    if (p.name) {
+      playerPriceMap[p.name.toLowerCase().trim()] = parseInt(p.price || 0, 10);
+      playerPointsMap[p.name.toLowerCase().trim()] = parseInt(p.points || 0, 10);
+    }
+  });
 
   for (const m of members) {
     try {
       const squadRes = await axios.get(`https://api.comunio.es/users/${m.id}/squad`, { headers });
       (squadRes.data?.items || []).forEach(p => {
-        if (p.name) playerPriceMap[p.name.toLowerCase()] = p.quotedprice || 0;
+        if (p.name) {
+          playerPriceMap[p.name.toLowerCase().trim()] = parseInt(p.quotedprice || 0, 10);
+          playerPointsMap[p.name.toLowerCase().trim()] = parseInt(p.points || 0, 10);
+        }
       });
     } catch(e) {}
   }
+
+  const lookupPoints = (playerName) => {
+    if (!playerName) return 0;
+    const low = playerName.toLowerCase().trim();
+    if (playerPointsMap[low] !== undefined) return playerPointsMap[low];
+    for (const [k, pts] of Object.entries(playerPointsMap)) {
+      if (k.includes(low) || low.includes(k)) return pts;
+    }
+    return 0;
+  };
 
   // Persistencia acumulativa de transferencias históricas (evita pérdida por ventana deslizante de la API)
   const txHistoryPath = path.resolve('web/src/data/historicalTransactions.json');
@@ -307,22 +326,47 @@ export async function generateRivalsAuditData() {
 
       const specAnalysis = `Operativa histórica de ${mHistory.purchases.length} compras (${(mHistory.totalSpent/1000000).toFixed(1)}M €) y ${mHistory.sales.length} ventas (${(mHistory.totalReceived/1000000).toFixed(1)}M €). Dinero total rotado: ${(totalTurnover/1000000).toFixed(1)}M € con sobrepuja media de ${overbidEstimate}.`;
 
-      // Hitos de Mercado Dinámicos (Mejor Compra y Peor Movimiento calculados matemáticamente)
+      // Hitos de Mercado Dinámicos: Fichaje Maestro (ROI), Mejor Ganga y Mayor Sobreprecio
+      let smartBuy = null;
       let bestBuy = null;
       let worstMove = null;
 
       if (mHistory.purchases.length > 0) {
+        // 1. Fichaje Maestro (ROI Deportivo: Puntos generados por millón invertido)
+        const purchasesWithRoi = mHistory.purchases.map(tx => {
+          const pts = lookupPoints(tx.playerName);
+          const costM = tx.price / 1000000;
+          const roi = costM > 0 ? parseFloat((pts / costM).toFixed(2)) : 0;
+          return { ...tx, points: pts, roi };
+        });
+
+        const sortedByRoi = [...purchasesWithRoi].sort((a, b) => b.roi - a.roi);
+        const topRoiDeal = sortedByRoi.find(b => b.points > 0) || sortedByRoi[0];
+
+        if (topRoiDeal && topRoiDeal.points > 0) {
+          smartBuy = {
+            player: topRoiDeal.playerName,
+            price: topRoiDeal.price,
+            points: topRoiDeal.points,
+            roi: topRoiDeal.roi,
+            impact: `Costó ${(topRoiDeal.price / 1000000).toFixed(2)}M € y acumula ${topRoiDeal.points} pts en liga (${topRoiDeal.roi} pts/M€ invertido).`,
+            tag: `🎯 ${topRoiDeal.roi} pts/M€ (ROI Máximo)`
+          };
+        }
+
+        // 2. Mayor Ganga Financiera (Descuento o menor sobreprecio respecto a VM)
         const sortedBuys = [...mHistory.purchases].sort((a, b) => (a.diffPct || 0) - (b.diffPct || 0));
         const topBuy = sortedBuys[0];
         bestBuy = {
           player: topBuy.playerName,
           price: topBuy.price,
           impact: topBuy.diff < 0 
-            ? `Fichaje cerrado con descuento (-${Math.abs(topBuy.diff).toLocaleString()} € / ${topBuy.diffPct}%) respecto a su valor de mercado.`
+            ? `Fichaje cerrado con descuento (-${Math.abs(topBuy.diff).toLocaleString()} € / ${topBuy.diffPct}%) respecto a su cotización.`
             : `Adquisición a valor exacto (${(topBuy.price / 1000000).toFixed(2)}M €) sin sobrecoste patrimonial.`,
           tag: topBuy.diff < 0 ? '💎 Ganga / Eficiencia' : '💎 Compra a Valor'
         };
 
+        // 3. Mayor Sobreprecio / Riesgo
         const sortedOverbids = [...mHistory.purchases].sort((a, b) => (b.diff || 0) - (a.diff || 0));
         const worstOverbid = sortedOverbids[0];
         if (worstOverbid && worstOverbid.diff > 50000) {
@@ -335,6 +379,9 @@ export async function generateRivalsAuditData() {
         }
       }
 
+      if (!smartBuy) {
+        smartBuy = { player: 'Plantilla Base', price: 0, impact: 'Rendimiento sustentado en la asignación inicial de jugadores.', tag: 'Bloque Base' };
+      }
       if (!bestBuy) {
         bestBuy = { player: 'Bloque Base', price: 0, impact: 'Mantiene la columna vertebral inicial sin compras registradas.', tag: 'Continuidad' };
       }
@@ -342,7 +389,7 @@ export async function generateRivalsAuditData() {
         worstMove = { player: 'Gestión Controlada', price: 0, impact: 'Sin sobreprecios críticos ni minusvalías detectadas en sus operaciones.', tag: 'Riesgo Mínimo' };
       }
 
-      const keyDeals = { bestBuy, worstMove };
+      const keyDeals = { smartBuy, bestBuy, worstMove };
 
       // Fortalezas y Debilidades Deportivas Basadas en Datos Reales
       if (pos <= 3) {
