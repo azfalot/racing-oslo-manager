@@ -333,27 +333,40 @@ export async function generateRivalsAuditData() {
 
       if (mHistory.purchases.length > 0) {
         // 1. Fichaje Maestro (ROI Deportivo: Puntos generados por millón invertido)
-        // Criterio de Maduración: Se priorizan fichajes realizados antes de la última jornada disputada
-        // para garantizar que los puntos computados hayan sido sumados defendiendo la camiseta del club.
+        // Criterios de Excelencia:
+        // a) TITULAR en el 11 Inicial (en lineup.starting11)
+        // b) Fichado antes de la última jornada disputada (ha competido defendiendo el club)
+        // c) Rendimiento contrastado en puntos
         const j3EndTime = new Date('2026-09-01T23:59:59+02:00').getTime();
+        const starterList = (lineup.starting11 || []);
 
         const purchasesWithRoi = mHistory.purchases.map(tx => {
+          const lowName = tx.playerName.toLowerCase().trim();
           const pts = lookupPoints(tx.playerName);
           const costM = tx.price / 1000000;
           const roi = costM > 0 ? parseFloat((pts / costM).toFixed(2)) : 0;
           const txTime = new Date(tx.date || 0).getTime();
           const hasPlayedMatchdays = txTime > 0 && txTime <= j3EndTime;
-          return { ...tx, points: pts, roi, hasPlayedMatchdays };
+          const isStarter = starterList.some(p => {
+            const pLow = p.name.toLowerCase().trim();
+            return pLow === lowName || pLow.includes(lowName) || lowName.includes(pLow);
+          });
+          
+          return { ...tx, points: pts, roi, hasPlayedMatchdays, isStarter };
         });
 
-        // Filtrar primero los que ya han jugado y puntuado con el club
+        // Prioridad 1: Fichajes que se han ganado la TITULARIDAD en el 11 inicial con puntos
+        const starterBuys = purchasesWithRoi.filter(b => b.isStarter && b.hasPlayedMatchdays && b.points > 0);
+        // Prioridad 2: Jugadores que han disputado jornadas con el club
         const playedBuys = purchasesWithRoi.filter(b => b.hasPlayedMatchdays && b.points > 0);
-        const candidatePool = playedBuys.length > 0 ? playedBuys : purchasesWithRoi;
+        
+        const candidatePool = starterBuys.length > 0 ? starterBuys : (playedBuys.length > 0 ? playedBuys : purchasesWithRoi);
         const sortedByRoi = [...candidatePool].sort((a, b) => b.roi - a.roi);
         const topRoiDeal = sortedByRoi.find(b => b.points > 0) || sortedByRoi[0];
 
         if (topRoiDeal && topRoiDeal.points > 0) {
           const isNewArrival = !topRoiDeal.hasPlayedMatchdays;
+          const roleLabel = topRoiDeal.isStarter ? 'Titular en el 11' : 'Rotación';
           smartBuy = {
             player: topRoiDeal.playerName,
             price: topRoiDeal.price,
@@ -361,8 +374,8 @@ export async function generateRivalsAuditData() {
             roi: topRoiDeal.roi,
             impact: isNewArrival
               ? `Recién fichado por ${(topRoiDeal.price / 1000000).toFixed(2)}M € con ${topRoiDeal.points} pts en liga (${topRoiDeal.roi} pts/M€ potencial).`
-              : `Costó ${(topRoiDeal.price / 1000000).toFixed(2)}M € y suma ${topRoiDeal.points} pts con el club (${topRoiDeal.roi} pts/M€ invertido).`,
-            tag: isNewArrival ? `⚡ ${topRoiDeal.roi} pts/M€ (Potencial)` : `🎯 ${topRoiDeal.roi} pts/M€ (ROI Consolidado)`
+              : `Pilar clave (${roleLabel}): Costó ${(topRoiDeal.price / 1000000).toFixed(2)}M € y suma ${topRoiDeal.points} pts con el club (${topRoiDeal.roi} pts/M€ invertido).`,
+            tag: isNewArrival ? `⚡ ${topRoiDeal.roi} pts/M€ (Potencial)` : `🎯 ${topRoiDeal.roi} pts/M€ (Titular ROI)`
           };
         }
 
@@ -619,6 +632,7 @@ export async function generateRivalsAuditData() {
           name: p.name,
           position: p.type || p.position,
           price: p.price || 0,
+          points: p.points || 0,
           expectedPoints: p.expectedPoints || 3.5,
           image: `/media/players/${p.playerId || p.id}.png`
         })),
@@ -627,6 +641,7 @@ export async function generateRivalsAuditData() {
           name: p.name,
           position: p.type || p.position,
           price: p.price || 0,
+          points: p.points || 0,
           image: `/media/players/${p.playerId || p.id}.png`
         })),
         isMe
