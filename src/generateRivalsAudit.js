@@ -239,6 +239,24 @@ export async function generateRivalsAuditData() {
         weaknesses.push('Falta de un mediocentro de jerarquía para hilvanar posesiones largas.');
         weaknesses.push('Plantilla corta de 13 futbolistas.');
         tacticDescription = '4-4-2 de bloque medio y contragolpe.';
+      } else if (mKey.includes('Ana')) {
+        specScore = 22;
+        overbidEstimate = '+1.0%';
+        specAnalysis = 'Mínima actividad en compras y ventas. Bloque estático centrado en la zaga.';
+        financialHealth = 'Conservadora / Solvente';
+        debtAlert = 'Gran reserva de liquidez estimada pero con nula participación en el mercado de altas.';
+        strengths.push('Línea defensiva sólida liderada por Pau Cubarsí y Marc Pubill.');
+        weaknesses.push('Ausencia de un delantero centro de referencia y bajo dinamismo en el mercado.');
+        weaknesses.push('Dependencia de que su zaga mantenga portería a cero para sumar.');
+        tacticDescription = '5-3-2 de repliegue bajo y contención.';
+      } else {
+        specScore = Math.min(65, Math.max(20, Math.round((mHistory.totalSpent / 1000000) * 3 + mHistory.purchases.length * 4)));
+        overbidEstimate = '+5.0%';
+        specAnalysis = 'Actividad estándar en el mercado con sobreprecios dentro de la media de la liga.';
+        debtAlert = 'Equilibrio financiero estándar sin riesgo inmediato de descubierto.';
+        tacticDescription = `Formación ${lineup.formation || '4-4-2'} orientada a maximizar puntos según plantilla disponible.`;
+      }
+
       // Hitos de Mercado: Mejor Compra y Peor Movimiento
       let keyDeals = {
         bestBuy: { player: 'Fichaje a Valor de Mercado', price: 0, impact: 'Operación dentro de los parámetros estándar de la liga.', tag: 'Equilibrio' },
