@@ -2016,25 +2016,44 @@ async function runSquadHealthCheck() {
 
 let lastPreMatchdayTriggeredKey = null;
 let lastDailyTriggeredSlots = {};
+let todayMorningRandomSlot = null;
+let todayMorningDate = null;
+
+function getTodayMorningSlot(config, todayDateStr) {
+  if (todayMorningDate !== todayDateStr || !todayMorningRandomSlot) {
+    todayMorningDate = todayDateStr;
+    const morningCfg = config.morningRandomSlot || { hour: 9, minMinute: 5, maxMinute: 25 };
+    const randomMinute = Math.floor(Math.random() * (morningCfg.maxMinute - morningCfg.minMinute + 1)) + morningCfg.minMinute;
+    todayMorningRandomSlot = `${(morningCfg.hour || 9).toString().padStart(2, '0')}:${randomMinute.toString().padStart(2, '0')}`;
+    console.log(`[DAEMON-SCHEDULER] 🎲 Franja matutina aleatoria para hoy (${todayDateStr}) fijada a las ${todayMorningRandomSlot}h (ventana 09:05 - 09:25).`);
+  }
+  return todayMorningRandomSlot;
+}
 
 function getScheduleConfig() {
   try {
     if (fs.existsSync('config.json')) {
       const cfg = JSON.parse(fs.readFileSync('config.json', 'utf8'));
       return {
-        dailySlots: cfg.schedule?.dailySlots || ['09:00', '23:50'],
+        dailySlots: cfg.schedule?.dailySlots || ['18:00', '23:50'],
+        morningRandomSlot: cfg.schedule?.morningRandomSlot || { enabled: true, hour: 9, minMinute: 5, maxMinute: 25 },
         preMatchdayMinutes: cfg.schedule?.preMatchdayMinutesBeforeKickoff || 60,
         enabled: cfg.schedule?.enabled !== false
       };
     }
   } catch (e) {}
-  return { dailySlots: ['09:00', '23:50'], preMatchdayMinutes: 60, enabled: true };
+  return { 
+    dailySlots: ['18:00', '23:50'], 
+    morningRandomSlot: { enabled: true, hour: 9, minMinute: 5, maxMinute: 25 },
+    preMatchdayMinutes: 60, 
+    enabled: true 
+  };
 }
 
-// ── PLANIFICADOR CONFIGURABLE (HORAS FIJAS + PRE-JORNADA DINÁMICO) ────────────
+// ── PLANIFICADOR CONFIGURABLE (HORAS FIJAS + MATUTINO ALEATORIO + PRE-JORNADA DINÁMICO) ────────────
 function startCronScheduler() {
   const sched = getScheduleConfig();
-  console.log(`[DAEMON] Iniciando planificador configurable: ${sched.dailySlots.join(', ')} (Madrid) + ${sched.preMatchdayMinutes} min antes de cada jornada.`);
+  console.log(`[DAEMON] Iniciando planificador: Fijos [${sched.dailySlots.join(', ')}] + Matutino Aleatorio (09:05-09:25) + ${sched.preMatchdayMinutes} min antes de cada jornada.`);
   
   setInterval(async () => {
     const config = getScheduleConfig();
@@ -2047,12 +2066,23 @@ function startCronScheduler() {
     const currentTimeStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
     const todayDateStr = madridTime.toISOString().slice(0, 10);
 
-    // 1. Comprobar franja diaria fija configurada con bloqueo diario único
+    // 1. Comprobar franjas diarias fijas configuradas con bloqueo diario único
     let isDailySlot = false;
     if (config.dailySlots.includes(currentTimeStr)) {
       if (lastDailyTriggeredSlots[currentTimeStr] !== todayDateStr) {
         isDailySlot = true;
         lastDailyTriggeredSlots[currentTimeStr] = todayDateStr;
+      }
+    }
+
+    // 1.1 Comprobar franja matutina aleatoria diaria (ej: entre 09:05 y 09:25)
+    let isMorningRandomSlot = false;
+    if (config.morningRandomSlot?.enabled !== false) {
+      const scheduledMorning = getTodayMorningSlot(config, todayDateStr);
+      if (currentTimeStr === scheduledMorning && lastDailyTriggeredSlots['morning_random'] !== todayDateStr) {
+        isMorningRandomSlot = true;
+        lastDailyTriggeredSlots['morning_random'] = todayDateStr;
+        console.log(`[DAEMON-SCHEDULER] 🎲 Activando ejecución matutina aleatoria programada para las ${scheduledMorning}h.`);
       }
     }
 
@@ -2077,7 +2107,7 @@ function startCronScheduler() {
       }
     } catch (err) {}
 
-    if (isDailySlot || isPreMatchdaySlot) {
+    if (isDailySlot || isMorningRandomSlot || isPreMatchdaySlot) {
       console.log(`[DAEMON-CRON] ⏰ Ventana de ejecución activada (${currentTimeStr} | Pre-Jornada: ${isPreMatchdaySlot ? 'SÍ' : 'NO'}). Ejecutando operativa...`);
 
       // 1. Ejecutar escáner y acciones de mercado / ofertas recibidas
