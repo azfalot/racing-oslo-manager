@@ -60,79 +60,90 @@ export async function generateRivalsAuditData() {
     } catch(e) {}
   }
 
+  // Persistencia acumulativa de transferencias históricas (evita pérdida por ventana deslizante de la API)
+  const txHistoryPath = path.resolve('web/src/data/historicalTransactions.json');
+  let accumulatedTransactions = [];
+  if (fs.existsSync(txHistoryPath)) {
+    try {
+      accumulatedTransactions = JSON.parse(fs.readFileSync(txHistoryPath, 'utf8'));
+    } catch (e) {}
+  }
+
   const managerStats = {};
+  const knownTxKeys = new Set(accumulatedTransactions.map(t => `${t.playerName}_${t.price}_${t.seller}_${t.buyer}_${t.date.slice(0, 10)}`));
+
+  // Normalizar nombres y alias de clubes / mánagers
+  const norm = (n) => {
+    if (!n) return n;
+    const low = n.toLowerCase();
+    if (low.includes('fermin') || low.includes('fermín')) return 'Fermín Gadura F.C.';
+    if (low.includes('suances')) return 'Suances nin';
+    if (low.includes('puente')) return 'Puente Avios FC';
+    if (low.includes('melano')) return 'Melano Plabloroza';
+    if (low.includes('hache')) return 'Hache FC';
+    if (low.includes('m4')) return 'M4 TEAM';
+    if (low.includes('amigos') || low.includes('nin')) return 'Amigos de NIN';
+    if (low.includes('pachang') || low.includes('javilyon')) return 'Pachangueros F.C.';
+    if (low.includes('ana')) return 'Ana';
+    if (low.includes('racing') || low.includes('oslo') || low.includes('azfalot')) return 'Racing de Oslo';
+    return n;
+  };
+
   for (const e of transferNews) {
     const text = e.message?.text || '';
     let match;
     while ((match = txRegex.exec(text)) !== null) {
       const playerName = match[1].trim();
       const price = parseInt(match[2].replace(/\./g, ''), 10);
-      let seller = match[3].trim().replace(/\.$/, '');
-      let buyer = match[4].trim().replace(/\.$/, '');
+      let seller = norm(match[3].trim().replace(/\.$/, ''));
+      let buyer = norm(match[4].trim().replace(/\.$/, ''));
 
-      // Normalizar nombres
-      const norm = (n) => {
-        const low = n.toLowerCase();
-        if (low.includes('fermin') || low.includes('fermín')) return 'Fermín Gadura F.C.';
-        if (low.includes('suances')) return 'Suances nin';
-        if (low.includes('puente')) return 'Puente Avios FC';
-        if (low.includes('melano')) return 'Melano Plabloroza';
-        if (low.includes('hache')) return 'Hache FC';
-        if (low.includes('m4')) return 'M4 TEAM';
-        if (low.includes('amigos') || low.includes('nin')) return 'Amigos de NIN';
-        if (low.includes('pachangueros')) return 'Pachangueros F.C.';
-        if (low.includes('ana')) return 'Ana';
-        if (low.includes('racing') || low.includes('oslo')) return 'Racing de Oslo';
-        return n;
-      };
+      const txKey = `${playerName}_${price}_${seller}_${buyer}_${e.date.slice(0, 10)}`;
+      if (!knownTxKeys.has(txKey)) {
+        knownTxKeys.add(txKey);
+        const vm = playerPriceMap[playerName.toLowerCase()] || price;
+        const diff = price - vm;
+        const pct = vm > 0 ? parseFloat(((diff / vm) * 100).toFixed(1)) : 0;
 
-      buyer = norm(buyer);
-      seller = norm(seller);
-
-      if (!managerStats[buyer]) {
-        managerStats[buyer] = { purchases: [], sales: [], totalSpent: 0, totalReceived: 0, computerPurchases: 0 };
+        accumulatedTransactions.push({
+          playerName,
+          price,
+          marketValue: vm,
+          diff,
+          diffPct: pct,
+          isOverbid: diff > 10000,
+          isDiscount: diff < -10000,
+          seller,
+          buyer,
+          date: e.date
+        });
       }
-      if (!managerStats[seller]) {
-        managerStats[seller] = { purchases: [], sales: [], totalSpent: 0, totalReceived: 0, computerPurchases: 0 };
-      }
+    }
+  }
 
-      const vm = playerPriceMap[playerName.toLowerCase()] || price;
-      const diff = price - vm;
-      const pct = vm > 0 ? parseFloat(((diff / vm) * 100).toFixed(1)) : 0;
+  // Guardar histórico permanente acumulado
+  fs.writeFileSync(txHistoryPath, JSON.stringify(accumulatedTransactions, null, 2));
 
-      const txBuy = {
-        playerName,
-        price,
-        marketValue: vm,
-        diff,
-        diffPct: pct,
-        isOverbid: diff > 10000,
-        isDiscount: diff < -10000,
-        seller,
-        date: e.date
-      };
+  // Procesar compras y ventas agrupadas por club sobre todo el histórico acumulado
+  for (const tx of accumulatedTransactions) {
+    const buyer = tx.buyer;
+    const seller = tx.seller;
 
-      const txSell = {
-        playerName,
-        price,
-        marketValue: vm,
-        diff,
-        diffPct: pct,
-        isOverbid: diff > 10000,
-        isDiscount: diff < -10000,
-        buyer,
-        date: e.date
-      };
+    if (!managerStats[buyer]) {
+      managerStats[buyer] = { purchases: [], sales: [], totalSpent: 0, totalReceived: 0, computerPurchases: 0 };
+    }
+    if (!managerStats[seller]) {
+      managerStats[seller] = { purchases: [], sales: [], totalSpent: 0, totalReceived: 0, computerPurchases: 0 };
+    }
 
-      if (buyer !== 'Computer') {
-        managerStats[buyer].purchases.push(txBuy);
-        managerStats[buyer].totalSpent += price;
-        if (seller === 'Computer') managerStats[buyer].computerPurchases++;
-      }
-      if (seller !== 'Computer') {
-        managerStats[seller].sales.push(txSell);
-        managerStats[seller].totalReceived += price;
-      }
+    if (buyer !== 'Computer') {
+      managerStats[buyer].purchases.push(tx);
+      managerStats[buyer].totalSpent += tx.price;
+      if (seller === 'Computer') managerStats[buyer].computerPurchases++;
+    }
+    if (seller !== 'Computer') {
+      managerStats[seller].sales.push(tx);
+      managerStats[seller].totalReceived += tx.price;
     }
   }
 
