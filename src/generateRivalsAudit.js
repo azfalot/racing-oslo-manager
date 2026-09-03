@@ -333,24 +333,36 @@ export async function generateRivalsAuditData() {
 
       if (mHistory.purchases.length > 0) {
         // 1. Fichaje Maestro (ROI Deportivo: Puntos generados por millón invertido)
+        // Criterio de Maduración: Se priorizan fichajes realizados antes de la última jornada disputada
+        // para garantizar que los puntos computados hayan sido sumados defendiendo la camiseta del club.
+        const j3EndTime = new Date('2026-09-01T23:59:59+02:00').getTime();
+
         const purchasesWithRoi = mHistory.purchases.map(tx => {
           const pts = lookupPoints(tx.playerName);
           const costM = tx.price / 1000000;
           const roi = costM > 0 ? parseFloat((pts / costM).toFixed(2)) : 0;
-          return { ...tx, points: pts, roi };
+          const txTime = new Date(tx.date || 0).getTime();
+          const hasPlayedMatchdays = txTime > 0 && txTime <= j3EndTime;
+          return { ...tx, points: pts, roi, hasPlayedMatchdays };
         });
 
-        const sortedByRoi = [...purchasesWithRoi].sort((a, b) => b.roi - a.roi);
+        // Filtrar primero los que ya han jugado y puntuado con el club
+        const playedBuys = purchasesWithRoi.filter(b => b.hasPlayedMatchdays && b.points > 0);
+        const candidatePool = playedBuys.length > 0 ? playedBuys : purchasesWithRoi;
+        const sortedByRoi = [...candidatePool].sort((a, b) => b.roi - a.roi);
         const topRoiDeal = sortedByRoi.find(b => b.points > 0) || sortedByRoi[0];
 
         if (topRoiDeal && topRoiDeal.points > 0) {
+          const isNewArrival = !topRoiDeal.hasPlayedMatchdays;
           smartBuy = {
             player: topRoiDeal.playerName,
             price: topRoiDeal.price,
             points: topRoiDeal.points,
             roi: topRoiDeal.roi,
-            impact: `Costó ${(topRoiDeal.price / 1000000).toFixed(2)}M € y acumula ${topRoiDeal.points} pts en liga (${topRoiDeal.roi} pts/M€ invertido).`,
-            tag: `🎯 ${topRoiDeal.roi} pts/M€ (ROI Máximo)`
+            impact: isNewArrival
+              ? `Recién fichado por ${(topRoiDeal.price / 1000000).toFixed(2)}M € con ${topRoiDeal.points} pts en liga (${topRoiDeal.roi} pts/M€ potencial).`
+              : `Costó ${(topRoiDeal.price / 1000000).toFixed(2)}M € y suma ${topRoiDeal.points} pts con el club (${topRoiDeal.roi} pts/M€ invertido).`,
+            tag: isNewArrival ? `⚡ ${topRoiDeal.roi} pts/M€ (Potencial)` : `🎯 ${topRoiDeal.roi} pts/M€ (ROI Consolidado)`
           };
         }
 
