@@ -47,6 +47,19 @@ export async function generateRivalsAuditData() {
   // Regex para transacciones: <a ...>PLAYER</a> cambia por PRICE € de SELLER a BUYER.
   const txRegex = /<a[^>]*>([^<]+)<\/a>\s+cambia por\s+([\d\.]+)\s+€\s+de\s+(?:<a[^>]*>)?([^<]+?)(?:<\/a>)?\s+a\s+(?:<a[^>]*>)?([^<\.]+?)(?:<\/a>)?\./g;
 
+  // Mapear valor de mercado de todos los futbolistas conocidos
+  const playerPriceMap = {};
+  marketPlayers.forEach(p => { if (p.name) playerPriceMap[p.name.toLowerCase()] = p.price || 0; });
+
+  for (const m of members) {
+    try {
+      const squadRes = await axios.get(`https://api.comunio.es/users/${m.id}/squad`, { headers });
+      (squadRes.data?.items || []).forEach(p => {
+        if (p.name) playerPriceMap[p.name.toLowerCase()] = p.quotedprice || 0;
+      });
+    } catch(e) {}
+  }
+
   const managerStats = {};
   for (const e of transferNews) {
     const text = e.message?.text || '';
@@ -83,13 +96,41 @@ export async function generateRivalsAuditData() {
         managerStats[seller] = { purchases: [], sales: [], totalSpent: 0, totalReceived: 0, computerPurchases: 0 };
       }
 
+      const vm = playerPriceMap[playerName.toLowerCase()] || price;
+      const diff = price - vm;
+      const pct = vm > 0 ? parseFloat(((diff / vm) * 100).toFixed(1)) : 0;
+
+      const txBuy = {
+        playerName,
+        price,
+        marketValue: vm,
+        diff,
+        diffPct: pct,
+        isOverbid: diff > 10000,
+        isDiscount: diff < -10000,
+        seller,
+        date: e.date
+      };
+
+      const txSell = {
+        playerName,
+        price,
+        marketValue: vm,
+        diff,
+        diffPct: pct,
+        isOverbid: diff > 10000,
+        isDiscount: diff < -10000,
+        buyer,
+        date: e.date
+      };
+
       if (buyer !== 'Computer') {
-        managerStats[buyer].purchases.push({ playerName, price, seller, date: e.date });
+        managerStats[buyer].purchases.push(txBuy);
         managerStats[buyer].totalSpent += price;
         if (seller === 'Computer') managerStats[buyer].computerPurchases++;
       }
       if (seller !== 'Computer') {
-        managerStats[seller].sales.push({ playerName, price, buyer, date: e.date });
+        managerStats[seller].sales.push(txSell);
         managerStats[seller].totalReceived += price;
       }
     }

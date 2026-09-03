@@ -357,16 +357,42 @@ export default function Rivales() {
                       {club.transfersHistory.purchases.length === 0 ? (
                         <p className="text-[11px] text-cream-dark/60 italic py-2">Sin compras registradas en este periodo.</p>
                       ) : (
-                        <div className="space-y-1.5 max-h-60 overflow-y-auto pr-1">
+                        <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1">
                           {club.transfersHistory.purchases.map((tx, idx) => (
-                            <div key={idx} className="flex items-center justify-between text-xs p-1.5 rounded bg-black/40 border border-white/5 hover:border-emerald-500/30">
+                            <div key={idx} className="flex items-center justify-between text-xs p-2 rounded bg-black/40 border border-white/5 hover:border-emerald-500/30 gap-2">
                               <div className="min-w-0 flex-1">
-                                <p className="font-bold text-white truncate">{tx.playerName}</p>
-                                <p className="text-[10px] text-cream-dark/70 font-mono">de {tx.seller} · {new Date(tx.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })}</p>
+                                <div className="flex items-center gap-1.5 flex-wrap">
+                                  <p className="font-bold text-white truncate">{tx.playerName}</p>
+                                  {tx.isOverbid && (
+                                    <span className="text-[9px] bg-red-500/20 text-red-300 px-1 py-0.5 rounded font-mono font-bold">
+                                      +{tx.diffPct}% SOBREPRECIO
+                                    </span>
+                                  )}
+                                  {tx.isDiscount && (
+                                    <span className="text-[9px] bg-emerald-500/20 text-emerald-300 px-1 py-0.5 rounded font-mono font-bold">
+                                      {tx.diffPct}% GANGA
+                                    </span>
+                                  )}
+                                  {!tx.isOverbid && !tx.isDiscount && (
+                                    <span className="text-[9px] bg-blue-500/20 text-blue-300 px-1 py-0.5 rounded font-mono">
+                                      A VALOR
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-[10px] text-cream-dark/70 font-mono mt-0.5">
+                                  de {tx.seller} · VM: {(tx.marketValue || tx.price).toLocaleString()} € · {new Date(tx.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })}
+                                </p>
                               </div>
-                              <span className="font-mono font-bold text-red-400 text-xs ml-2">
-                                -{(tx.price).toLocaleString()} €
-                              </span>
+                              <div className="text-right flex-shrink-0">
+                                <span className="font-mono font-bold text-red-400 text-xs block">
+                                  -{(tx.price).toLocaleString()} €
+                                </span>
+                                {tx.diff !== 0 && (
+                                  <span className={`text-[9px] font-mono block ${tx.diff > 0 ? 'text-red-400/80' : 'text-emerald-400/80'}`}>
+                                    {tx.diff > 0 ? `(+${(tx.diff).toLocaleString()} €)` : `(-${Math.abs(tx.diff).toLocaleString()} €)`}
+                                  </span>
+                                )}
+                              </div>
                             </div>
                           ))}
                         </div>
@@ -387,16 +413,37 @@ export default function Rivales() {
                       {club.transfersHistory.sales.length === 0 ? (
                         <p className="text-[11px] text-cream-dark/60 italic py-2">Sin ventas registradas en este periodo.</p>
                       ) : (
-                        <div className="space-y-1.5 max-h-60 overflow-y-auto pr-1">
+                        <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1">
                           {club.transfersHistory.sales.map((tx, idx) => (
-                            <div key={idx} className="flex items-center justify-between text-xs p-1.5 rounded bg-black/40 border border-white/5 hover:border-blue-500/30">
+                            <div key={idx} className="flex items-center justify-between text-xs p-2 rounded bg-black/40 border border-white/5 hover:border-blue-500/30 gap-2">
                               <div className="min-w-0 flex-1">
-                                <p className="font-bold text-white truncate">{tx.playerName}</p>
-                                <p className="text-[10px] text-cream-dark/70 font-mono">a {tx.buyer} · {new Date(tx.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })}</p>
+                                <div className="flex items-center gap-1.5 flex-wrap">
+                                  <p className="font-bold text-white truncate">{tx.playerName}</p>
+                                  {tx.diff > 10000 && (
+                                    <span className="text-[9px] bg-emerald-500/20 text-emerald-300 px-1 py-0.5 rounded font-mono font-bold">
+                                      +{tx.diffPct}% SOBRE VALOR
+                                    </span>
+                                  )}
+                                  {tx.diff < -10000 && (
+                                    <span className="text-[9px] bg-amber-500/20 text-amber-300 px-1 py-0.5 rounded font-mono font-bold">
+                                      {tx.diffPct}% OFERTA
+                                    </span>
+                                  )}
+                                  {Math.abs(tx.diff) <= 10000 && (
+                                    <span className="text-[9px] bg-blue-500/20 text-blue-300 px-1 py-0.5 rounded font-mono">
+                                      A VALOR
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-[10px] text-cream-dark/70 font-mono mt-0.5">
+                                  a {tx.buyer} · VM: {(tx.marketValue || tx.price).toLocaleString()} € · {new Date(tx.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })}
+                                </p>
                               </div>
-                              <span className="font-mono font-bold text-emerald-400 text-xs ml-2">
-                                +{(tx.price).toLocaleString()} €
-                              </span>
+                              <div className="text-right flex-shrink-0">
+                                <span className="font-mono font-bold text-emerald-400 text-xs block">
+                                  +{(tx.price).toLocaleString()} €
+                                </span>
+                              </div>
                             </div>
                           ))}
                         </div>
