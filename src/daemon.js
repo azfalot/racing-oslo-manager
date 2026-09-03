@@ -1788,11 +1788,14 @@ async function runMarketCheck() {
 
             if (isMe) {
               await publishSigningNews(tx.player, tx.price, p.playerId, p.type || 'defender');
-              try {
-                const { postStarSigningAnnouncement } = await import('./comunioCommunityPoster.js');
-                await postStarSigningAnnouncement(tx.player, tx.price, p.playerId, p.type || 'jugador');
-              } catch (commErr) {
-                console.warn('[DAEMON] Info post comunidad fichaje:', commErr.message);
+              const rawPrice = parseInt(String(tx.price).replace(/[^\d]/g, ''), 10) || 0;
+              if (rawPrice >= 15000000) {
+                try {
+                  const { postStarSigningAnnouncement } = await import('./comunioCommunityPoster.js');
+                  await postStarSigningAnnouncement(tx.player, tx.price, p.playerId, p.type || 'jugador');
+                } catch (commErr) {
+                  console.warn('[DAEMON] Info post comunidad fichaje:', commErr.message);
+                }
               }
             } else if (!isComputer) {
               // Solo publicar si es un mánager rival humano de la comunidad con su escudo oficial
@@ -2124,16 +2127,7 @@ function startCronScheduler() {
          else console.log('[DAEMON-CRON] Web sincronizada con éxito.');
       });
 
-      // 4. A las 18:00: Publicación del Comunicado Oficial de Scouting 360 en el tablón de Comunio
-      if (currentTimeStr === '18:00') {
-        try {
-          const { postDailyRivalesAuditAnnouncement } = await import('./comunioCommunityPoster.js');
-          await postDailyRivalesAuditAnnouncement();
-          console.log('[DAEMON-CRON] 📢 Comunicado diario de Scouting 360 publicado en Comunio a las 18:00.');
-        } catch (postErr) {
-          console.warn('[DAEMON-CRON] Info publicación comunicado Comunio:', postErr.message);
-        }
-      }
+      // 4. Modo Sigilo: Desactivada la publicación automática diaria en Comunio para evitar spam y mantener perfil bajo.
 
       // 5. EXCLUSIVO PRE-JORNADA (15-30 min antes del kickoff): Guardado Oficial del Once y Pronóstico
       if (isPreMatchdaySlot) {
