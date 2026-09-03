@@ -230,141 +230,29 @@ export async function generateRivalsAuditData() {
       const maxCreditLimit = Math.round(totalSquadValue * 0.25);
       const netWealth = totalSquadValue + estimatedCash;
 
-      // Clasificación Estándar Universal basada en métricas objetivas (0-100)
-      let specScore = 15;
-      let overbidEstimate = '+1.5%';
-      let specAnalysis = 'Baja rotación de mercado y adquisiciones a valor de mercado.';
+      // Cálculo Matemático Objetivo de Sobrepuja Media
+      let totalVM = 0;
+      let totalOverbidDiff = 0;
+      (mHistory.purchases || []).forEach(b => {
+        const vm = b.marketValue || b.price;
+        totalVM += vm;
+        if (b.price > vm) {
+          totalOverbidDiff += (b.price - vm);
+        }
+      });
+      const rawOverbidPct = totalVM > 0 ? ((totalOverbidDiff / totalVM) * 100) : 0;
+      const overbidEstimate = `+${rawOverbidPct.toFixed(1)}%`;
 
-      if (mKey.includes('Fermín Gadura')) {
-        specScore = 95;
-        overbidEstimate = '+32.4%';
-        specAnalysis = 'Alta agresividad de mercado (+30.9M € en fichajes). Sobrepujas medias del +32.4% que elevan su apalancamiento al límite del saldo negativo.';
-        financialHealth = 'Apalancamiento Elevado (Riesgo de Descubierto)';
-        debtAlert = 'Inversión récord en Gordon (21.8M), Cabrera (3.5M) y Torró (1.2M). Requiere ventas continuas para mantener balance positivo antes de cada jornada.';
-        strengths.push('Líder con 177 puntos gracias al rendimiento diferencial de Raphinha (24.9M €).');
-        strengths.push('Incorporación de Gordon (21.8M €) para duplicar la amenaza ofensiva.');
-        weaknesses.push('Defensa descompensada con piezas de bajo coste para financiar el ataque.');
-        weaknesses.push('Plantilla sometida a rotación forzada por compras a crédito.');
-        tacticDescription = 'Esquema ultra-ofensivo dependiente de la inspiración de Raphinha y Gordon.';
-      } else if (mKey.includes('Suances nin')) {
-        specScore = 88;
-        overbidEstimate = '+23.5%';
-        specAnalysis = 'Sobrepujas medias del +23.5% (Mbappé y Barrenetxea). Alta concentración de capital en 2 futbolistas con plantilla corta.';
-        financialHealth = 'Apalancamiento Alto (Concentración Patrimonial)';
-        debtAlert = 'Patrimonio concentrado en Mbappé (27.9M €) y Barrenetxea (4.78M €). Plantilla de solo 12 futbolistas con riesgo si hay rotaciones.';
-        strengths.push('Kylian Mbappé (27.9M €) como mayor amenaza individual del campeonato.');
-        weaknesses.push('Plantilla corta de 12 jugadores sin fondo de armario ante sanciones o lesiones.');
-        weaknesses.push('Medular y zaga con bajo valor de mercado y promedios inferiores a 3.5 ppm.');
-        tacticDescription = 'Estructura focalizada en abastecer balones a Mbappé.';
-      } else if (mKey.includes('Melano Plabloroza')) {
-        specScore = 82;
-        overbidEstimate = '+26.3%';
-        specAnalysis = 'Sobreprecio medio del +26.3% en incorporaciones de clase media (Jutglà y Luismi Cruz). Patrimonio total de 33.5M €.';
-        financialHealth = 'Patrimonio Bajo (33.5M €)';
-        debtAlert = 'Sobreprecios que merman su capacidad de puja frente a los líderes de la comunidad.';
-        strengths.push('Alineación combativa y comprometida en segundas jugadas con Giuliano Simeone.');
-        weaknesses.push('Menor valor de mercado total de la liga (33.5M €) y 10º clasificado con 76 puntos.');
-        weaknesses.push('Falta de un generador de juego contrastado en la medular.');
-        tacticDescription = 'Esquema de repliegue bajo buscando transiciones rápidas.';
-      } else if (mKey.includes('M4 TEAM')) {
-        specScore = 74;
-        overbidEstimate = '+8.5%';
-        specAnalysis = 'Alta rotación de plantilla (+10 movimientos). Financiación de incorporaciones clave mediante ventas recurrentes.';
-        financialHealth = 'Rotación Frecuente (Tensión de Tesorería)';
-        debtAlert = 'Ventas recurrentes para cuadrar la tesorería tras fichar a Pedri y Antony.';
-        strengths.push('Calidad técnica en tres cuartos de campo con Pedri (17.1M €) y Antony (14.1M €).');
-        weaknesses.push('Inestabilidad semanal en el once inicial por continuos cambios de alineación.');
-        weaknesses.push('Irregularidad defensiva con goles encajados en las 3 primeras jornadas.');
-        tacticDescription = '4-3-3 de posesión técnica y circulación de balón.';
-      } else if (isMe) {
-        specScore = 18;
-        overbidEstimate = '+0.8%';
-        specAnalysis = 'Operativa a valor de mercado (+0.8% medio). Tesorería en saldo positivo (+543.389 €) sin riesgo de descubierto, pero con liquidez inmediata ajustada.';
-        financialHealth = 'Solvente (+543.389 € en Cuenta | Límite Crédito: 14.15M €)';
-        debtAlert = 'Saldo en positivo y sin riesgo de sanción. Liquidez inmediata en caja ajustada (543k €), por lo que acometer fichajes >1.5M € requiere ejecutar ventas previas.';
-        strengths.push('Bloque defensivo de alto rendimiento: David Soria (8.33 ppm) y Adrián Dela (9.00 ppm) lideran sus posiciones.');
-        strengths.push('Fede Valverde (7.67 ppm) como eje indiscutible y regular de la medular.');
-        strengths.push('2º puesto consolidado con 146 puntos (48.6 pts/jornada de media).');
-        weaknesses.push('Baja producción ofensiva en el arranque: Gerard Moreno y Hugo Duro suman 24 puntos entre ambos en 3 jornadas.');
-        weaknesses.push('Banquillo corto con solo 3 suplentes (Cardoso, Eriksson, Arguibide) de escaso impacto en puntos ante bajas.');
-        weaknesses.push('Margen de caja corto que limita la capacidad de respuesta rápida ante subastas de cracks sin vender antes.');
-        tacticDescription = '4-4-2 / 3-4-3 de posesión y equilibrio defensivo.';
-      } else if (mKey.includes('Puente Avios')) {
-        specScore = 48;
-        overbidEstimate = '+4.2%';
-        specAnalysis = 'Pujas selectivas con sobreprecio moderado (+4.2%). Mantiene liquidez controlada.';
-        financialHealth = 'Equilibrio Presupuestario';
-        debtAlert = 'Inversión contenida con capacidad para abordar fichajes de perfil medio.';
-        strengths.push('Seguridad contrastada bajo palos con Jan Oblak (7.3M €).');
-        strengths.push('Buen arranque goleador de Chupe en ataque.');
-        weaknesses.push('Falta de un mediocentro de jerarquía para hilvanar posesiones largas.');
-        weaknesses.push('Plantilla corta de 13 futbolistas.');
-        tacticDescription = '4-4-2 de bloque medio y contragolpe.';
-      } else if (mKey.includes('Ana')) {
-        specScore = 22;
-        overbidEstimate = '+1.0%';
-        specAnalysis = 'Mínima actividad en compras y ventas. Bloque estático centrado en la zaga.';
-        financialHealth = 'Conservadora / Solvente';
-        debtAlert = 'Gran reserva de liquidez estimada pero con nula participación en el mercado de altas.';
-        strengths.push('Línea defensiva sólida liderada por Pau Cubarsí y Marc Pubill.');
-        weaknesses.push('Ausencia de un delantero centro de referencia y bajo dinamismo en el mercado.');
-        weaknesses.push('Dependencia de que su zaga mantenga portería a cero para sumar.');
-        tacticDescription = '5-3-2 de repliegue bajo y contención.';
-      } else {
-        specScore = Math.min(65, Math.max(20, Math.round((mHistory.totalSpent / 1000000) * 3 + mHistory.purchases.length * 4)));
-        overbidEstimate = '+5.0%';
-        specAnalysis = 'Actividad estándar en el mercado con sobreprecios dentro de la media de la liga.';
-        debtAlert = 'Equilibrio financiero estándar sin riesgo inmediato de descubierto.';
-        tacticDescription = `Formación ${lineup.formation || '4-4-2'} orientada a maximizar puntos según plantilla disponible.`;
+      // Cálculo Matemático de Puntuación de Especulación (0 a 100)
+      let debtRiskFactor = 0;
+      if (estimatedCash < 0) {
+        debtRiskFactor = Math.min(35, Math.round(Math.abs(estimatedCash) / 400000) * 3);
+      } else if (estimatedCash < 1000000) {
+        debtRiskFactor = 10;
       }
-
-      // Hitos de Mercado: Mejor Compra y Peor Movimiento
-      let keyDeals = {
-        bestBuy: { player: 'Fichaje a Valor de Mercado', price: 0, impact: 'Operación dentro de los parámetros estándar de la liga.', tag: 'Equilibrio' },
-        worstMove: { player: 'Operación Estándar', price: 0, impact: 'Sin sobreprecios críticos registrados.', tag: 'Riesgo Controlado' }
-      };
-
-      if (mKey.includes('Fermín Gadura')) {
-        keyDeals = {
-          bestBuy: { player: 'Javi Rueda', price: 1830020, impact: 'Fichado por 1.83M €, ya vale 1.96M € (+130k € plusvalía) y aporta 4.0 ppm en el lateral.', tag: '💎 Eficiencia & Plusvalía' },
-          worstMove: { player: 'Gordon', price: 21810030, impact: 'Sobrepuja destructiva de +3.86M € (+21.5% sobre VM) que forzó la venta obligada de Fermín López.', tag: '💥 Sobreprecio Crítico' }
-        };
-      } else if (mKey.includes('Suances nin')) {
-        keyDeals = {
-          bestBuy: { player: 'Carlos Martín', price: 436554, impact: 'Incorporación a coste mínimo (436k €) para aportar profundidad sin comprometer tesorería.', tag: '💎 Rotación Eficiente' },
-          worstMove: { player: 'Ander Barrenetxea', price: 4780000, impact: 'Sobreprecio de +900.000 € (+23.2% sobre VM) que agotó su liquidez y dejó el banquillo vacío.', tag: '💥 Sobrepuja Excesiva' }
-        };
-      } else if (mKey.includes('Melano Plabloroza')) {
-        keyDeals = {
-          bestBuy: { player: 'Luismi Cruz', price: 2690000, impact: 'Titular en banda izquierda a precio razonable para sostener el ataque.', tag: '💎 Compra Táctica' },
-          worstMove: { player: 'Ferran Jutglà', price: 5380009, impact: 'Sobrepago de +1.12M € (+26.3% sobre VM) por un delantero que rota minutos en el Celta.', tag: '💥 Sobreprecio Ineficiente' }
-        };
-      } else if (mKey.includes('M4 TEAM')) {
-        keyDeals = {
-          bestBuy: { player: 'Antony', price: 14100000, impact: 'Referencia en banda con alto volumen de desequilibrio individual.', tag: '💎 Fichaje Franquicia' },
-          worstMove: { player: 'Juan Berrocal', price: 326700, impact: 'Venta a Computer a precio mínimo debilitando la rotación de centrales.', tag: '⚠️ Venta a la Baja' }
-        };
-      } else if (isMe) {
-        keyDeals = {
-          bestBuy: { player: 'Álvaro Carreras', price: 1435000, impact: 'Fichaje quirúrgico con sobrepuja mínima (+25k € / +1.7%) para apontalar el flanco izquierdo en el 3-4-3.', tag: '💎 Precisión Quirúrgica' },
-          worstMove: { player: 'Endrick', price: 1650000, impact: 'Comprado por 1.65M € y vendido por 1.40M € (-246k € de ajuste) para cuadrar tesorería de inmediato.', tag: '⚠️ Ajuste con Pérdida' }
-        };
-      } else if (mKey.includes('Puente Avios')) {
-        keyDeals = {
-          bestBuy: { player: 'Chupe', price: 10000360, impact: 'Inversión potente con impacto goleador inmediato en punta.', tag: '💎 Rendimiento Inmediato' },
-          worstMove: { player: 'Jon Aramburu', price: 3244500, impact: 'Venta forzada de un zaguero titular de la Real Sociedad para financiar la delantera.', tag: '⚠️ Desmantelamiento de Zaga' }
-        };
-      } else if (mKey.includes('Amigos de NIN')) {
-        keyDeals = {
-          bestBuy: { player: 'Oskarsson', price: 6000100, impact: 'Apuesta ofensiva de la Real Sociedad con alto techo goleador.', tag: '💎 Apuesta de Futuro' },
-          worstMove: { player: 'Álvaro García', price: 5750000, impact: 'Compra a rival con prima elevada que mermó su remanente de caja.', tag: '⚠️ Prima Alta a Rival' }
-        };
-      } else if (mKey.includes('Ana')) {
-        keyDeals = {
-          bestBuy: { player: 'Pau Cubarsí', price: 16500000, impact: 'Muro defensivo galáctico y líder de regularidad en su zaga de 5.', tag: '💎 Pilar Defensivo' },
-          worstMove: { player: 'Inacción de Mercado', price: 0, impact: 'Cero incorporaciones en ataque que lastran su producción goleadora.', tag: '⚠️ Pasividad Ofensiva' }
-        };
-      }
+      
+      let calculatedScore = Math.round(rawOverbidPct * 1.8 + (mHistory.purchases.length * 1.6) + debtRiskFactor);
+      const specScore = Math.max(5, Math.min(98, calculatedScore));
 
       // Asignación de Taxonomía Universal de Perfiles Trader & Futboleros (0 a 100)
       let financialBadge = '🏦 Banquero Suizo / Caja Fuerte';
@@ -388,6 +276,97 @@ export async function generateRivalsAuditData() {
         badgeColor = '#10b981';
         riskLevel = 'Bajo Riesgo (Solvente)';
       }
+
+      // Diagnóstico Financiero Dinámico
+      if (estimatedCash < 0) {
+        const debtAmount = Math.abs(estimatedCash);
+        const creditPct = ((debtAmount / maxCreditLimit) * 100).toFixed(1);
+        financialHealth = `Apalancado / Saldo Negativo (-${(debtAmount / 1000000).toFixed(2)}M €)`;
+        debtAlert = `Saldo en descubierto (-${(debtAmount / 1000000).toFixed(2)}M €). Consume el ${creditPct}% del límite de crédito permitido (${(maxCreditLimit / 1000000).toFixed(2)}M €). Exige ventas antes de puntuar.`;
+      } else if (estimatedCash < 1000000) {
+        financialHealth = `Solvente Ajustado (+${(estimatedCash / 1000).toFixed(0)}k € en Caja)`;
+        debtAlert = `Saldo positivo (+${(estimatedCash / 1000).toFixed(0)}k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.`;
+      } else {
+        financialHealth = `Saneado / Alta Liquidez (+${(estimatedCash / 1000000).toFixed(2)}M € en Caja)`;
+        debtAlert = `Excelente remanente de liquidez (+${(estimatedCash / 1000000).toFixed(2)}M €) y solvencia plena para acudir a subastas sin deuda.`;
+      }
+
+      const specAnalysis = `Operativa histórica de ${mHistory.purchases.length} compras (${(mHistory.totalSpent/1000000).toFixed(1)}M €) y ${mHistory.sales.length} ventas (${(mHistory.totalReceived/1000000).toFixed(1)}M €) con sobrepuja media de ${overbidEstimate}.`;
+
+      // Hitos de Mercado Dinámicos (Mejor Compra y Peor Movimiento calculados matemáticamente)
+      let bestBuy = null;
+      let worstMove = null;
+
+      if (mHistory.purchases.length > 0) {
+        const sortedBuys = [...mHistory.purchases].sort((a, b) => (a.diffPct || 0) - (b.diffPct || 0));
+        const topBuy = sortedBuys[0];
+        bestBuy = {
+          player: topBuy.playerName,
+          price: topBuy.price,
+          impact: topBuy.diff < 0 
+            ? `Fichaje cerrado con descuento (-${Math.abs(topBuy.diff).toLocaleString()} € / ${topBuy.diffPct}%) respecto a su valor de mercado.`
+            : `Adquisición a valor exacto (${(topBuy.price / 1000000).toFixed(2)}M €) sin sobrecoste patrimonial.`,
+          tag: topBuy.diff < 0 ? '💎 Ganga / Eficiencia' : '💎 Compra a Valor'
+        };
+
+        const sortedOverbids = [...mHistory.purchases].sort((a, b) => (b.diff || 0) - (a.diff || 0));
+        const worstOverbid = sortedOverbids[0];
+        if (worstOverbid && worstOverbid.diff > 50000) {
+          worstMove = {
+            player: worstOverbid.playerName,
+            price: worstOverbid.price,
+            impact: `Sobrepuja de +${(worstOverbid.diff).toLocaleString()} € (+${worstOverbid.diffPct}%) por encima de su cotización oficial.`,
+            tag: '💥 Sobreprecio Registrado'
+          };
+        }
+      }
+
+      if (!bestBuy) {
+        bestBuy = { player: 'Bloque Base', price: 0, impact: 'Mantiene la columna vertebral inicial sin compras registradas.', tag: 'Continuidad' };
+      }
+      if (!worstMove) {
+        worstMove = { player: 'Gestión Controlada', price: 0, impact: 'Sin sobreprecios críticos ni minusvalías detectadas en sus operaciones.', tag: 'Riesgo Mínimo' };
+      }
+
+      const keyDeals = { bestBuy, worstMove };
+
+      // Fortalezas y Debilidades Deportivas Basadas en Datos Reales
+      if (pos <= 3) {
+        strengths.push(`${pos}º en la clasificación general con ${pts} puntos acumulados (${(pts/3).toFixed(1)} pts/jornada).`);
+      }
+      if (totalSquadValue > 55000000) {
+        strengths.push(`Patrimonio de plantilla consolidado en Primera (${(totalSquadValue/1000000).toFixed(2)}M €).`);
+      }
+      if (keepers.some(k => (k.points || 0) >= 15 || k.price > 4000000)) {
+        strengths.push('Seguridad contrastada bajo palos en portería.');
+      }
+      if (midfielders.some(m => m.price > 10000000 || (m.points || 0) >= 20)) {
+        strengths.push('Medular con futbolistas de jerarquía técnica y capacidad de puntuación.');
+      }
+      if (strikers.some(s => s.price > 15000000 || (s.points || 0) >= 30)) {
+        strengths.push('Poderío goleador diferencial en ataque.');
+      }
+
+      if (squad.length < 13) {
+        weaknesses.push(`Plantilla corta (${squad.length} jugadores) con escaso fondo de armario ante rotaciones.`);
+      }
+      if (strikers.length === 0 || strikers.reduce((sum, s) => sum + (s.points || 0), 0) < 15) {
+        weaknesses.push('Baja producción goleadora de los delanteros en las 3 primeras jornadas.');
+      }
+      if (defenders.length < 4 || defVal < 8000000) {
+        weaknesses.push('Línea defensiva con bajo valor de mercado o margen de mejora en solidez.');
+      }
+      if (estimatedCash < 0) {
+        weaknesses.push(`Tensión de tesorería: Saldo negativo de -${(Math.abs(estimatedCash)/1000000).toFixed(2)}M € que obliga a vender piezas.`);
+      }
+      if (weaknesses.length === 0) {
+        weaknesses.push('Plantilla equilibrada sujeta al rendimiento semanal en liga.');
+      }
+      if (strengths.length === 0) {
+        strengths.push('Bloque combativo en fase de ajuste táctico.');
+      }
+
+      tacticDescription = `Estructura ${lineup.formation || '4-4-2'} orientada a maximizar ${Math.round(lineup.score || 40)} puntos según plantilla disponible.`;
 
       // Recomendaciones de Mercado Inteligentes y Genéricas (Scouting objetivo universal)
       const recommendations = [];
