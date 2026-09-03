@@ -12,7 +12,12 @@ import {
   BarChart3, 
   ArrowRight,
   Info,
-  Layers
+  Layers,
+  ChevronDown,
+  ChevronUp,
+  History,
+  ArrowDownLeft,
+  ArrowUpRight
 } from 'lucide-react';
 
 const CLUB_CRESTS = {
@@ -32,6 +37,7 @@ const CLUB_CRESTS = {
 
 export default function Rivales() {
   const [selectedId, setSelectedId] = useState(rivalsData[0]?.id || 21163674);
+  const [showTransfers, setShowTransfers] = useState(false);
   const club = rivalsData.find(c => c.id === selectedId) || rivalsData[0];
   const osloClub = rivalsData.find(c => c.isMe) || rivalsData[1];
 
@@ -315,6 +321,89 @@ export default function Rivales() {
                     {club.keyDeals.worstMove.impact}
                   </p>
                 </div>
+              </div>
+            )}
+
+            {/* DESPLEGABLE INTERACTIVO: HISTORIAL COMPLETO DE FICHAJES Y VENTAS */}
+            {club.transfersHistory && (club.transfersHistory.purchases.length > 0 || club.transfersHistory.sales.length > 0) && (
+              <div className="pt-2 border-t border-forest/20">
+                <button
+                  onClick={() => setShowTransfers(!showTransfers)}
+                  className="w-full flex items-center justify-between p-2.5 rounded-sm bg-black/60 hover:bg-forest-dark/40 border border-forest/30 text-cream transition-all text-xs font-bold"
+                >
+                  <span className="flex items-center gap-2">
+                    <History size={15} className="text-amber-300" />
+                    <span>VER HISTORIAL COMPLETO DE TRANSFERENCIAS ({club.transfersHistory.purchases.length} compras · {club.transfersHistory.sales.length} ventas)</span>
+                  </span>
+                  <span className="text-cream-dark flex items-center gap-1 text-[11px] font-mono">
+                    {showTransfers ? 'Ocultar' : 'Desplegar'}
+                    {showTransfers ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                  </span>
+                </button>
+
+                {showTransfers && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3 animate-fade-in">
+                    {/* COLUMNA COMPRAS */}
+                    <div className="bg-black/50 border border-emerald-500/20 p-3 rounded-sm space-y-2">
+                      <div className="flex items-center justify-between text-xs font-bold text-emerald-400 border-b border-emerald-500/20 pb-1.5">
+                        <span className="flex items-center gap-1.5">
+                          <ArrowDownLeft size={14} />
+                          <span>ALTAS / COMPRAS ({club.transfersHistory.purchases.length})</span>
+                        </span>
+                        <span className="font-mono text-white">
+                          -{(club.speculation.totalSpent / 1000000).toFixed(2)}M €
+                        </span>
+                      </div>
+                      {club.transfersHistory.purchases.length === 0 ? (
+                        <p className="text-[11px] text-cream-dark/60 italic py-2">Sin compras registradas en este periodo.</p>
+                      ) : (
+                        <div className="space-y-1.5 max-h-60 overflow-y-auto pr-1">
+                          {club.transfersHistory.purchases.map((tx, idx) => (
+                            <div key={idx} className="flex items-center justify-between text-xs p-1.5 rounded bg-black/40 border border-white/5 hover:border-emerald-500/30">
+                              <div className="min-w-0 flex-1">
+                                <p className="font-bold text-white truncate">{tx.playerName}</p>
+                                <p className="text-[10px] text-cream-dark/70 font-mono">de {tx.seller} · {new Date(tx.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })}</p>
+                              </div>
+                              <span className="font-mono font-bold text-red-400 text-xs ml-2">
+                                -{(tx.price).toLocaleString()} €
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* COLUMNA VENTAS */}
+                    <div className="bg-black/50 border border-blue-500/20 p-3 rounded-sm space-y-2">
+                      <div className="flex items-center justify-between text-xs font-bold text-blue-400 border-b border-blue-500/20 pb-1.5">
+                        <span className="flex items-center gap-1.5">
+                          <ArrowUpRight size={14} />
+                          <span>BAJAS / VENTAS ({club.transfersHistory.sales.length})</span>
+                        </span>
+                        <span className="font-mono text-emerald-400">
+                          +{(club.speculation.totalReceived / 1000000).toFixed(2)}M €
+                        </span>
+                      </div>
+                      {club.transfersHistory.sales.length === 0 ? (
+                        <p className="text-[11px] text-cream-dark/60 italic py-2">Sin ventas registradas en este periodo.</p>
+                      ) : (
+                        <div className="space-y-1.5 max-h-60 overflow-y-auto pr-1">
+                          {club.transfersHistory.sales.map((tx, idx) => (
+                            <div key={idx} className="flex items-center justify-between text-xs p-1.5 rounded bg-black/40 border border-white/5 hover:border-blue-500/30">
+                              <div className="min-w-0 flex-1">
+                                <p className="font-bold text-white truncate">{tx.playerName}</p>
+                                <p className="text-[10px] text-cream-dark/70 font-mono">a {tx.buyer} · {new Date(tx.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })}</p>
+                              </div>
+                              <span className="font-mono font-bold text-emerald-400 text-xs ml-2">
+                                +{(tx.price).toLocaleString()} €
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>

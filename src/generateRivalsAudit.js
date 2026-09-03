@@ -37,7 +37,7 @@ export async function generateRivalsAuditData() {
   console.log('[RIVALS-AUDIT] Analizando histórico completo de traspasos y sobrepujas...');
   let transferNews = [];
   try {
-    const newsUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/news`;
+    const newsUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/news?limit=200`;
     const newsRes = await axios.get(newsUrl, { headers });
     transferNews = newsRes.data?.newsList?.entries || [];
   } catch (err) {
@@ -387,6 +387,10 @@ export async function generateRivalsAuditData() {
           analysis: specAnalysis
         },
         keyDeals,
+        transfersHistory: {
+          purchases: mHistory.purchases || [],
+          sales: mHistory.sales || []
+        },
         starters: (lineup.starting11 || []).map(p => ({
           id: p.playerId || p.id,
           name: p.name,
