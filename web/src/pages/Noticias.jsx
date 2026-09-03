@@ -151,7 +151,7 @@ export default function Noticias() {
   const [filterCategory, setFilterCategory] = useState('ALL')
   const [filterAuthor, setFilterAuthor] = useState('ALL')
 
-  const categories = ['ALL', 'Fichajes', 'Rivales', 'Finanzas', 'MVP', 'Ventas', 'Enfermería', 'Rumores', 'Previa', 'Institucional']
+  const categories = ['ALL', 'Fichajes', 'Mercado', 'Rivales', 'Competición', 'Ventas', 'Finanzas', 'Rumores']
 
   // Filtrado compuesto por Categoría y Periodista Autor
   const filteredNews = newsData.filter(n => {
@@ -165,7 +165,11 @@ export default function Noticias() {
     if (filterCategory !== 'ALL') {
       const cat = (n.category || '').toLowerCase()
       const target = filterCategory.toLowerCase()
-      const matches = cat.includes(target) || (target === 'rivales' && cat.includes('mercado'))
+      const title = (n.title || '').toLowerCase()
+      const matches = cat.includes(target) || 
+        (target === 'rivales' && (cat.includes('rival') || title.includes('táctico') || title.includes('scouting'))) || 
+        (target === 'fichajes' && (cat.includes('fichaj') || title.includes('fichaje') || title.includes('oficial') || title.includes('nuevo jugador'))) ||
+        (target === 'mercado' && (cat.includes('mercado') || title.includes('mercado') || cat.includes('fichaje')))
       if (!matches) return false
     }
 

@@ -398,27 +398,49 @@ async function fetchRealData() {
       const exists = existingNews.some(n => n.id === newsId || (n.title && n.title === e.title));
       if (!exists && e.title) {
         let cleanText = (e.message?.text || '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&iexcl;/g, '¡').replace(/&aacute;/g, 'á').replace(/&eacute;/g, 'é').replace(/&iacute;/g, 'í').replace(/&oacute;/g, 'ó').replace(/&uacute;/g, 'ú').replace(/&ntilde;/g, 'ñ').trim();
-        const isOfficial = e.type === 'ADMINISTRATION' || e.owner?.name === 'Computer';
+        const titleStr = e.title.replace(/&iexcl;/g, '¡').replace(/&amp;/g, '&');
+        const titleLow = titleStr.toLowerCase();
+        const bodyLow = cleanText.toLowerCase();
+
+        let category = 'Oficial';
+        let author = e.owner?.name || 'Comunio Oficial';
+
+        if (titleLow.includes('oficial') && (titleLow.includes('ficha') || titleLow.includes('jugador') || titleLow.includes('racing'))) {
+          category = 'Fichajes';
+          author = 'Mateo Oslomany';
+        } else if (titleLow.includes('informe táctico') || titleLow.includes('scouting')) {
+          category = 'Rivales';
+          author = 'Julio Osldini';
+        } else if (titleLow.includes('fichaje') || bodyLow.includes('cambia por')) {
+          category = 'Mercado';
+          author = 'Fabrizio Oslomano';
+        } else if (e.type === 'ADMINISTRATION' || titleLow.includes('puntos') || titleLow.includes('jornada') || titleLow.includes('champions')) {
+          category = 'Competición';
+          author = 'Josep Pedroslo';
+        }
         
         let dateFormatted = new Date(e.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
         
-        existingNews.unshift({
+        existingNews.push({
           id: newsId,
-          title: e.title.replace(/&iexcl;/g, '¡').replace(/&amp;/g, '&'),
+          title: titleStr,
           date: dateFormatted,
-          category: e.type === 'ADMINISTRATION' ? 'Competición' : e.type === 'LINEUP' ? 'Alineación' : 'Oficial',
+          rawDate: e.date,
+          category,
           summary: cleanText.slice(0, 140) + (cleanText.length > 140 ? '...' : ''),
           body: cleanText,
           content: cleanText,
           image: e.owner?.name?.includes('Racing') ? '/media/news_graphics/club_sede_digital_oficial.jpg' : '/media/news_graphics/comunio_rival_transfers.png',
-          author: e.owner?.name || 'Comunio Oficial'
+          author
         });
       }
     }
 
-    // Ordenar noticias por id o fecha
+    // Ordenar noticias cronológicamente de más reciente a más antigua
+    existingNews.sort((a, b) => new Date(b.rawDate || b.date || 0) - new Date(a.rawDate || a.date || 0));
+
     fs.writeFileSync(newsPath, JSON.stringify(existingNews, null, 2));
-    console.log(`[SYNC-WEB] ✅ news.json sincronizado con ${existingNews.length} noticias totales.`);
+    console.log(`[SYNC-WEB] ✅ news.json sincronizado y ordenado cronológicamente (${existingNews.length} noticias totales).`);
   } catch (newsSyncErr) {
     console.warn('[SYNC-WEB] Info sincronización de noticias Comunio:', newsSyncErr.message);
   }
