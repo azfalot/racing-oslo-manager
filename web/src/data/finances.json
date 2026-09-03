@@ -3,8 +3,8 @@
     "name": "Racing de Oslo",
     "coach": "Mateo Oslomany",
     "balance": 543389,
-    "committedBids": 0,
-    "effectiveBalance": 543389,
+    "committedBids": 1060000,
+    "effectiveBalance": -516611,
     "teamValue": 56590000,
     "netWorth": 57133389,
     "squadSize": 14,
@@ -37,16 +37,16 @@
   "projections": {
     "nextMatchday": {
       "matchday": "Jornada 4",
-      "expectedPoints": 55,
-      "expectedPrize": 550000,
-      "projectedCashAfter": 1093389
+      "expectedPoints": 56,
+      "expectedPrize": 560000,
+      "projectedCashAfter": 43389
     },
     "monthlyOutlook": {
       "jornadas": 4,
-      "projectedPoints": 222,
-      "projectedPrize": 2216000,
+      "projectedPoints": 224,
+      "projectedPrize": 2244000,
       "estimatedSales": 980000,
-      "totalProjectedLiquidity": 3739389
+      "totalProjectedLiquidity": 2707389
     },
     "financialPolicy": {
       "reserveRequirement": "Saldo Positivo Obligatorio (Corte Jornada)",
@@ -81,18 +81,6 @@
     },
     {
       "pos": 3,
-      "teamName": "Pachangueros F.C.",
-      "owner": "Pachangueros F.C.",
-      "squadValue": 58450000,
-      "points": 109,
-      "totalPrize": 1090000,
-      "estimatedCash": 1753500,
-      "totalWealth": 60203500,
-      "power": "Patrimonio Medio",
-      "isMe": false
-    },
-    {
-      "pos": 4,
       "teamName": "Amigos de NIN",
       "owner": "Amigos de NIN",
       "squadValue": 53860000,
@@ -100,6 +88,18 @@
       "totalPrize": 1090000,
       "estimatedCash": 1615800,
       "totalWealth": 55475800,
+      "power": "Patrimonio Medio",
+      "isMe": false
+    },
+    {
+      "pos": 4,
+      "teamName": "Pachangueros F.C.",
+      "owner": "Pachangueros F.C.",
+      "squadValue": 58450000,
+      "points": 109,
+      "totalPrize": 1090000,
+      "estimatedCash": 1753500,
+      "totalWealth": 60203500,
       "power": "Patrimonio Medio",
       "isMe": false
     },
@@ -129,18 +129,6 @@
     },
     {
       "pos": 7,
-      "teamName": "Ana",
-      "owner": "Ana",
-      "squadValue": 57910000,
-      "points": 97,
-      "totalPrize": 970000,
-      "estimatedCash": 1737300,
-      "totalWealth": 59647300,
-      "power": "Patrimonio Medio",
-      "isMe": false
-    },
-    {
-      "pos": 8,
       "teamName": "Suances nin",
       "owner": "Suances nin",
       "squadValue": 54310000,
@@ -152,19 +140,19 @@
       "isMe": false
     },
     {
-      "pos": 9,
-      "teamName": "Hache FC",
-      "owner": "Hache FC",
-      "squadValue": 51370000,
-      "points": 86,
-      "totalPrize": 860000,
-      "estimatedCash": 1541100,
-      "totalWealth": 52911100,
+      "pos": 8,
+      "teamName": "Ana",
+      "owner": "Ana",
+      "squadValue": 57910000,
+      "points": 97,
+      "totalPrize": 970000,
+      "estimatedCash": 1737300,
+      "totalWealth": 59647300,
       "power": "Patrimonio Medio",
       "isMe": false
     },
     {
-      "pos": 10,
+      "pos": 9,
       "teamName": "Melano Plabloroza",
       "owner": "Melano Plabloroza",
       "squadValue": 39410000,
@@ -173,6 +161,18 @@
       "estimatedCash": 1182300,
       "totalWealth": 40592300,
       "power": "Patrimonio Regular",
+      "isMe": false
+    },
+    {
+      "pos": 10,
+      "teamName": "Hache FC",
+      "owner": "Hache FC",
+      "squadValue": 51370000,
+      "points": 86,
+      "totalPrize": 860000,
+      "estimatedCash": 1541100,
+      "totalWealth": 52911100,
+      "power": "Patrimonio Medio",
       "isMe": false
     }
   ]
