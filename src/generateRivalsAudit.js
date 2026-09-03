@@ -416,9 +416,11 @@ export async function generateRivalsAuditData() {
       if (hasBenchWeakness && recommendations.length < 3) {
         const cheapTarget = marketPlayers.find(mp => (mp.owner?.name === 'Computer' || !mp.owner) && mp.price > 200000 && mp.price < 1200000);
         if (cheapTarget && !recommendations.some(r => r.name === cheapTarget.name)) {
+          const posMap = { keeper: 'Portero', defender: 'Defensa', midfielder: 'Centrocampista', striker: 'Delantero' };
+          const normPos = posMap[cheapTarget.position || cheapTarget.type] || 'Polivalente';
           recommendations.push({
             name: cheapTarget.name,
-            pos: cheapTarget.position || cheapTarget.type || 'Polivalente',
+            pos: normPos,
             price: cheapTarget.price,
             reason: `Fondo de armario económico para ampliar la rotación sin comprometer la solvencia.`
           });
