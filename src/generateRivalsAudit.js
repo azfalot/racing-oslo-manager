@@ -369,27 +369,59 @@ export async function generateRivalsAuditData() {
         riskLevel = 'Bajo Riesgo (Solvente)';
       }
 
-      // Recomendaciones de Mercado para el rival (asistencia de fichajes)
+      // Recomendaciones de Mercado Inteligentes y Genéricas (Scouting objetivo universal)
       const recommendations = [];
-      if (isMe) {
-        recommendations.push({
-          name: 'Lateral / Zaguero de Primera (¡Cubierto con Álvaro Carreras!)',
-          pos: 'Defensa',
-          price: 1440000,
-          reason: 'Fichaje estratégico cerrado con éxito para apontalar el carril izquierdo en el 3-4-3.'
-        });
-      } else {
-        if (weaknesses.some(w => w.includes('defensiva') || w.includes('Zaga') || w.includes('desierto'))) {
-          const targetDef = marketPlayers.find(mp => (mp.position === 'defender' || mp.type === 'defender') && mp.price > 1000000);
-          if (targetDef) recommendations.push({ name: targetDef.name, pos: 'Defensa', price: targetDef.price, reason: 'Reforzar la zaga con un zaguero de garantías.' });
+      
+      const hasDefWeakness = weaknesses.some(w => w.toLowerCase().includes('defens') || w.toLowerCase().includes('zaga') || w.toLowerCase().includes('central'));
+      const hasFwdWeakness = weaknesses.some(w => w.toLowerCase().includes('ofensiv') || w.toLowerCase().includes('delanter') || w.toLowerCase().includes('gol') || w.toLowerCase().includes('pólvora'));
+      const hasMidWeakness = weaknesses.some(w => w.toLowerCase().includes('medio') || w.toLowerCase().includes('medular') || w.toLowerCase().includes('generador') || w.toLowerCase().includes('posesión'));
+      const hasBenchWeakness = weaknesses.some(w => w.toLowerCase().includes('banquillo') || w.toLowerCase().includes('fondo de armario') || w.toLowerCase().includes('corta') || w.toLowerCase().includes('rotación'));
+
+      if (hasFwdWeakness) {
+        const targetFwd = marketPlayers.find(mp => (mp.position === 'striker' || mp.type === 'striker') && (mp.owner?.name === 'Computer' || !mp.owner));
+        if (targetFwd) {
+          recommendations.push({
+            name: targetFwd.name,
+            pos: 'Delantero',
+            price: targetFwd.price,
+            reason: `Reforzar la pegada ofensiva y generar competencia en el frente de ataque.`
+          });
         }
-        if (weaknesses.some(w => w.includes('delantero') || w.includes('despobladas'))) {
-          const targetFwd = marketPlayers.find(mp => (mp.position === 'striker' || mp.type === 'striker') && mp.price > 1500000);
-          if (targetFwd) recommendations.push({ name: targetFwd.name, pos: 'Delantero', price: targetFwd.price, reason: 'Aportar pólvora y remate al área rival.' });
+      }
+
+      if (hasMidWeakness || recommendations.length === 0) {
+        const targetMid = marketPlayers.find(mp => (mp.position === 'midfielder' || mp.type === 'midfielder') && (mp.owner?.name === 'Computer' || !mp.owner) && mp.price > 2000000);
+        if (targetMid && !recommendations.some(r => r.name === targetMid.name)) {
+          recommendations.push({
+            name: targetMid.name,
+            pos: 'Centrocampista',
+            price: targetMid.price,
+            reason: `Aportar mayor volumen de creación, llegada y puntos regulares en la medular.`
+          });
         }
-        if (recommendations.length === 0) {
-          const targetMid = marketPlayers.find(mp => (mp.position === 'midfielder' || mp.type === 'midfielder') && mp.price > 1200000);
-          if (targetMid) recommendations.push({ name: targetMid.name, pos: 'Centrocampista', price: targetMid.price, reason: 'Mejorar el control del balón y balones parados.' });
+      }
+
+      if (hasDefWeakness || recommendations.length < 2) {
+        const targetDef = marketPlayers.find(mp => (mp.position === 'defender' || mp.type === 'defender') && (mp.owner?.name === 'Computer' || !mp.owner) && mp.price > 1000000);
+        if (targetDef && !recommendations.some(r => r.name === targetDef.name)) {
+          recommendations.push({
+            name: targetDef.name,
+            pos: 'Defensa',
+            price: targetDef.price,
+            reason: `Garantizar solidez en los duelos y cobertura ante posibles sanciones o bajas.`
+          });
+        }
+      }
+
+      if (hasBenchWeakness && recommendations.length < 3) {
+        const cheapTarget = marketPlayers.find(mp => (mp.owner?.name === 'Computer' || !mp.owner) && mp.price > 200000 && mp.price < 1200000);
+        if (cheapTarget && !recommendations.some(r => r.name === cheapTarget.name)) {
+          recommendations.push({
+            name: cheapTarget.name,
+            pos: cheapTarget.position || cheapTarget.type || 'Polivalente',
+            price: cheapTarget.price,
+            reason: `Fondo de armario económico para ampliar la rotación sin comprometer la solvencia.`
+          });
         }
       }
 
