@@ -295,15 +295,17 @@ export default function Rivales() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3 pt-1 sm:pt-2">
                 {/* 1. FICHAJE MAESTRO (ROI DEPORTIVO) */}
                 {club.keyDeals.smartBuy && (
-                  <div className="bg-amber-950/30 border border-amber-500/40 p-2.5 sm:p-3 rounded-sm space-y-1 sm:space-y-1.5 shadow-sm">
-                    <div className="flex items-center justify-between text-[11px] sm:text-xs font-bold text-amber-300">
-                      <span className="flex items-center gap-1 truncate">
-                        <span>🎯 FICHAJE MAESTRO:</span>
-                        <span className="text-white font-mono truncate">{club.keyDeals.smartBuy.player}</span>
+                  <div className="bg-amber-950/30 border border-amber-500/40 p-3 rounded-sm space-y-1.5 shadow-sm">
+                    <div className="flex items-center justify-between gap-2 border-b border-amber-500/20 pb-1">
+                      <span className="text-[10px] sm:text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1">
+                        <span>🎯 FICHAJE MAESTRO</span>
                       </span>
-                      <span className="text-[9px] sm:text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded-sm font-mono flex-shrink-0">
+                      <span className="text-[9px] sm:text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded-sm font-mono font-bold shrink-0">
                         {club.keyDeals.smartBuy.tag}
                       </span>
+                    </div>
+                    <div className="text-sm font-bold text-white font-mono">
+                      {club.keyDeals.smartBuy.player}
                     </div>
                     <p className="text-[11px] sm:text-xs text-cream-dark leading-relaxed">
                       {club.keyDeals.smartBuy.impact}
@@ -312,15 +314,17 @@ export default function Rivales() {
                 )}
 
                 {/* 2. MAYOR GANGA / PLUSVALÍA */}
-                <div className="bg-emerald-950/30 border border-emerald-500/30 p-2.5 sm:p-3 rounded-sm space-y-1 sm:space-y-1.5">
-                  <div className="flex items-center justify-between text-[11px] sm:text-xs font-bold text-emerald-400">
-                    <span className="flex items-center gap-1 truncate">
-                      <span>💎 MAYOR GANGA:</span>
-                      <span className="text-white font-mono truncate">{club.keyDeals.bestBuy.player}</span>
+                <div className="bg-emerald-950/30 border border-emerald-500/30 p-3 rounded-sm space-y-1.5">
+                  <div className="flex items-center justify-between gap-2 border-b border-emerald-500/20 pb-1">
+                    <span className="text-[10px] sm:text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1">
+                      <span>💎 MAYOR GANGA</span>
                     </span>
-                    <span className="text-[9px] sm:text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded-sm font-mono flex-shrink-0">
+                    <span className="text-[9px] sm:text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded-sm font-mono font-bold shrink-0">
                       {club.keyDeals.bestBuy.tag}
                     </span>
+                  </div>
+                  <div className="text-sm font-bold text-white font-mono">
+                    {club.keyDeals.bestBuy.player}
                   </div>
                   <p className="text-[11px] sm:text-xs text-cream-dark leading-relaxed">
                     {club.keyDeals.bestBuy.impact}
@@ -328,15 +332,17 @@ export default function Rivales() {
                 </div>
 
                 {/* 3. MAYOR SOBREPRECIO / RIESGO */}
-                <div className="bg-red-950/30 border border-red-500/30 p-2.5 sm:p-3 rounded-sm space-y-1.5">
-                  <div className="flex items-center justify-between text-[11px] sm:text-xs font-bold text-red-400">
-                    <span className="flex items-center gap-1 truncate">
-                      <span>⚠️ MAYOR SOBREPRECIO:</span>
-                      <span className="text-white font-mono truncate">{club.keyDeals.worstMove.player}</span>
+                <div className="bg-red-950/30 border border-red-500/30 p-3 rounded-sm space-y-1.5">
+                  <div className="flex items-center justify-between gap-2 border-b border-red-500/20 pb-1">
+                    <span className="text-[10px] sm:text-xs font-bold text-red-400 uppercase tracking-wider flex items-center gap-1">
+                      <span>⚠️ MAYOR SOBREPRECIO</span>
                     </span>
-                    <span className="text-[9px] sm:text-[10px] bg-red-500/20 text-red-300 px-1.5 py-0.5 rounded-sm font-mono flex-shrink-0">
+                    <span className="text-[9px] sm:text-[10px] bg-red-500/20 text-red-300 px-1.5 py-0.5 rounded-sm font-mono font-bold shrink-0">
                       {club.keyDeals.worstMove.tag}
                     </span>
+                  </div>
+                  <div className="text-sm font-bold text-white font-mono">
+                    {club.keyDeals.worstMove.player}
                   </div>
                   <p className="text-[11px] sm:text-xs text-cream-dark leading-relaxed">
                     {club.keyDeals.worstMove.impact}
@@ -350,11 +356,11 @@ export default function Rivales() {
               <div className="pt-2 border-t border-forest/20">
                 <button
                   onClick={() => setShowTransfers(!showTransfers)}
-                  className="w-full flex items-center justify-between p-2 sm:p-2.5 rounded-sm bg-black/60 hover:bg-forest-dark/40 border border-forest/30 text-cream transition-all text-[11px] sm:text-xs font-bold"
+                  className="w-full flex items-center justify-between p-2.5 rounded-sm bg-black/60 hover:bg-forest-dark/40 border border-forest/30 text-cream transition-all text-[11px] sm:text-xs font-bold"
                 >
-                  <span className="flex items-center gap-1.5 sm:gap-2 truncate">
+                  <span className="flex items-center gap-1.5 sm:gap-2">
                     <History size={14} className="text-amber-300 shrink-0" />
-                    <span className="truncate">VER HISTORIAL DE TRASPASOS ({club.transfersHistory.purchases.length} C · {club.transfersHistory.sales.length} V)</span>
+                    <span>HISTORIAL DE TRASPASOS ({club.transfersHistory.purchases.length} C · {club.transfersHistory.sales.length} V)</span>
                   </span>
                   <span className="text-cream-dark flex items-center gap-1 text-[10px] sm:text-[11px] font-mono shrink-0 ml-2">
                     {showTransfers ? 'Ocultar' : 'Desplegar'}
@@ -378,12 +384,12 @@ export default function Rivales() {
                       {club.transfersHistory.purchases.length === 0 ? (
                         <p className="text-[11px] text-cream-dark/60 italic py-2">Sin compras registradas en este periodo.</p>
                       ) : (
-                        <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1">
+                        <div className="space-y-1.5 max-h-80 overflow-y-auto pr-1">
                           {club.transfersHistory.purchases.map((tx, idx) => (
-                            <div key={idx} className="flex items-center justify-between text-xs p-1.5 sm:p-2 rounded bg-black/40 border border-white/5 hover:border-emerald-500/30 gap-2">
-                              <div className="min-w-0 flex-1">
-                                <div className="flex items-center gap-1 flex-wrap">
-                                  <p className="font-bold text-white text-[11px] sm:text-xs truncate">{tx.playerName}</p>
+                            <div key={idx} className="p-2 rounded bg-black/40 border border-white/5 hover:border-emerald-500/30 space-y-1">
+                              <div className="flex items-center justify-between gap-2">
+                                <div className="flex items-center gap-1.5 flex-wrap min-w-0">
+                                  <span className="font-bold text-white text-xs">{tx.playerName}</span>
                                   {tx.isOverbid && (
                                     <span className="text-[8px] sm:text-[9px] bg-red-500/20 text-red-300 px-1 py-0.2 rounded font-mono font-bold">
                                       +{tx.diffPct}% SOBREPRECIO
@@ -400,19 +406,22 @@ export default function Rivales() {
                                     </span>
                                   )}
                                 </div>
-                                <p className="text-[9px] sm:text-[10px] text-cream-dark/70 font-mono mt-0.5 truncate">
-                                  de {tx.seller} · VM: {(tx.marketValue || tx.price).toLocaleString()} € · {new Date(tx.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })}
-                                </p>
-                              </div>
-                              <div className="text-right flex-shrink-0">
-                                <span className="font-mono font-bold text-red-400 text-[11px] sm:text-xs block">
-                                  -{(tx.price).toLocaleString()} €
-                                </span>
-                                {tx.diff !== 0 && (
-                                  <span className={`text-[8px] sm:text-[9px] font-mono block ${tx.diff > 0 ? 'text-red-400/80' : 'text-emerald-400/80'}`}>
-                                    {tx.diff > 0 ? `(+${(tx.diff).toLocaleString()} €)` : `(-${Math.abs(tx.diff).toLocaleString()} €)`}
+                                <div className="text-right flex-shrink-0">
+                                  <span className="font-mono font-bold text-red-400 text-xs">
+                                    -{(tx.price).toLocaleString()} €
                                   </span>
-                                )}
+                                </div>
+                              </div>
+                              <div className="flex items-center justify-between text-[10px] text-cream-dark/70 font-mono">
+                                <span className="truncate">de {tx.seller} · VM: {(tx.marketValue || tx.price).toLocaleString()} €</span>
+                                <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                                  {tx.diff !== 0 && (
+                                    <span className={tx.diff > 0 ? 'text-red-400/80' : 'text-emerald-400/80'}>
+                                      {tx.diff > 0 ? `(+${(tx.diff).toLocaleString()} €)` : `(-${Math.abs(tx.diff).toLocaleString()} €)`}
+                                    </span>
+                                  )}
+                                  <span className="text-cream-dark/50">· {new Date(tx.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })}</span>
+                                </div>
                               </div>
                             </div>
                           ))}
@@ -434,12 +443,12 @@ export default function Rivales() {
                       {club.transfersHistory.sales.length === 0 ? (
                         <p className="text-[11px] text-cream-dark/60 italic py-2">Sin ventas registradas en este periodo.</p>
                       ) : (
-                        <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1">
+                        <div className="space-y-1.5 max-h-80 overflow-y-auto pr-1">
                           {club.transfersHistory.sales.map((tx, idx) => (
-                            <div key={idx} className="flex items-center justify-between text-xs p-1.5 sm:p-2 rounded bg-black/40 border border-white/5 hover:border-blue-500/30 gap-2">
-                              <div className="min-w-0 flex-1">
-                                <div className="flex items-center gap-1 flex-wrap">
-                                  <p className="font-bold text-white text-[11px] sm:text-xs truncate">{tx.playerName}</p>
+                            <div key={idx} className="p-2 rounded bg-black/40 border border-white/5 hover:border-blue-500/30 space-y-1">
+                              <div className="flex items-center justify-between gap-2">
+                                <div className="flex items-center gap-1.5 flex-wrap min-w-0">
+                                  <span className="font-bold text-white text-xs">{tx.playerName}</span>
                                   {tx.diff > 10000 && (
                                     <span className="text-[8px] sm:text-[9px] bg-emerald-500/20 text-emerald-300 px-1 py-0.2 rounded font-mono font-bold">
                                       +{tx.diffPct}% SOBRE VALOR
@@ -456,14 +465,15 @@ export default function Rivales() {
                                     </span>
                                   )}
                                 </div>
-                                <p className="text-[9px] sm:text-[10px] text-cream-dark/70 font-mono mt-0.5 truncate">
-                                  a {tx.buyer} · VM: {(tx.marketValue || tx.price).toLocaleString()} € · {new Date(tx.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })}
-                                </p>
+                                <div className="text-right flex-shrink-0">
+                                  <span className="font-mono font-bold text-emerald-400 text-xs">
+                                    +{(tx.price).toLocaleString()} €
+                                  </span>
+                                </div>
                               </div>
-                              <div className="text-right flex-shrink-0">
-                                <span className="font-mono font-bold text-emerald-400 text-[11px] sm:text-xs block">
-                                  +{(tx.price).toLocaleString()} €
-                                </span>
+                              <div className="flex items-center justify-between text-[10px] text-cream-dark/70 font-mono">
+                                <span className="truncate">a {tx.buyer} · VM: {(tx.marketValue || tx.price).toLocaleString()} €</span>
+                                <span className="text-cream-dark/50 shrink-0 ml-2">· {new Date(tx.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })}</span>
                               </div>
                             </div>
                           ))}
