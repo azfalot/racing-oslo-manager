@@ -502,6 +502,71 @@ export default function Rivales() {
           </div>
         </div>
 
+        {/* ALERTAS TÁCTICAS & RIESGOS EN EL ONCE */}
+        {club.tacticalAlerts && club.tacticalAlerts.length > 0 && (
+          <div className="bg-black/80 border border-forest/40 p-3 sm:p-4 rounded-sm shadow-xl space-y-2.5">
+            <div className="flex items-center justify-between border-b border-forest/20 pb-2">
+              <div className="flex items-center gap-2">
+                <AlertTriangle size={15} className="text-amber-300 shrink-0" />
+                <h4 className="text-xs sm:text-sm font-display font-bold text-white uppercase tracking-wider">
+                  Auditoría de Disponibilidad & Riesgos del Once
+                </h4>
+              </div>
+              <span className="text-[10px] font-mono text-cream-dark/70">
+                {club.tacticalAlerts.filter(a => a.type !== 'success').length} incidencias
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-2.5">
+              {club.tacticalAlerts.map((alert, idx) => (
+                <div 
+                  key={idx} 
+                  className={`p-2.5 sm:p-3 rounded-sm border space-y-1 transition-all ${
+                    alert.type === 'danger'
+                      ? 'bg-red-950/30 border-red-500/40 text-red-200'
+                      : alert.type === 'warning'
+                      ? 'bg-amber-950/30 border-amber-500/40 text-amber-200'
+                      : alert.type === 'caution'
+                      ? 'bg-yellow-950/30 border-yellow-500/40 text-yellow-200'
+                      : alert.type === 'suboptimal'
+                      ? 'bg-purple-950/30 border-purple-500/40 text-purple-200'
+                      : 'bg-emerald-950/20 border-emerald-500/30 text-emerald-200'
+                  }`}
+                >
+                  <div className="flex items-center justify-between text-[11px] sm:text-xs font-bold gap-1">
+                    <span className="flex items-center gap-1.5 truncate">
+                      <span className="text-white font-mono font-bold truncate">{alert.player}</span>
+                      {alert.position && <span className="text-[9px] text-cream-dark/60">({alert.position})</span>}
+                    </span>
+                    <span className={`text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-sm font-mono font-bold shrink-0 ${
+                      alert.type === 'danger'
+                        ? 'bg-red-500/20 text-red-300 border border-red-500/30'
+                        : alert.type === 'warning'
+                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                        : alert.type === 'caution'
+                        ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30'
+                        : alert.type === 'suboptimal'
+                        ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
+                        : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                    }`}>
+                      {alert.badge}
+                    </span>
+                  </div>
+                  <p className="text-[10px] sm:text-[11px] text-cream-dark leading-relaxed">
+                    {alert.description}
+                  </p>
+                  {alert.action && (
+                    <div className="text-[9px] sm:text-[10px] text-white/90 font-mono bg-black/40 p-1 rounded-sm border border-white/5 flex items-center gap-1">
+                      <span className="text-amber-300 shrink-0">💡 Sugerencia:</span>
+                      <span className="truncate">{alert.action}</span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* CAMPO DE FÚTBOL RIVAL (Escalado adaptable para móvil) */}
         <div 
           className="bg-green-900 rounded-lg p-3 sm:p-6 relative shadow-2xl overflow-hidden border-2 sm:border-4 border-white/10 max-w-4xl mx-auto"
@@ -521,6 +586,17 @@ export default function Rivales() {
                 <div key={p.id} className="flex flex-col items-center animate-fade-in group">
                   <div className="relative">
                     <img src={p.image} alt={p.name} className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full border-2 border-white/40 object-cover shadow-lg bg-black/60" />
+                    {p.riskBadge && (
+                      <span className={`absolute -top-1 -right-1 text-[8px] font-bold px-1 py-0.2 rounded-full border shadow font-mono ${
+                        p.riskBadge.includes('Sanción') || p.riskBadge.includes('Lesión') 
+                          ? 'bg-red-600 text-white border-red-300' 
+                          : p.riskBadge.includes('Duda')
+                          ? 'bg-amber-600 text-white border-amber-300'
+                          : 'bg-yellow-500 text-black border-yellow-200'
+                      }`}>
+                        {p.riskBadge}
+                      </span>
+                    )}
                   </div>
                   <div className="mt-1 bg-black/85 px-1.5 sm:px-2 py-0.5 rounded-sm text-center border border-forest/40 min-w-[55px] sm:min-w-[70px]">
                     <p className="text-[9px] sm:text-[11px] font-bold text-white truncate max-w-[65px] sm:max-w-[90px]">{p.name}</p>
@@ -536,6 +612,17 @@ export default function Rivales() {
                 <div key={p.id} className="flex flex-col items-center animate-fade-in group">
                   <div className="relative">
                     <img src={p.image} alt={p.name} className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full border-2 border-white/40 object-cover shadow-lg bg-black/60" />
+                    {p.riskBadge && (
+                      <span className={`absolute -top-1 -right-1 text-[8px] font-bold px-1 py-0.2 rounded-full border shadow font-mono ${
+                        p.riskBadge.includes('Sanción') || p.riskBadge.includes('Lesión') 
+                          ? 'bg-red-600 text-white border-red-300' 
+                          : p.riskBadge.includes('Duda')
+                          ? 'bg-amber-600 text-white border-amber-300'
+                          : 'bg-yellow-500 text-black border-yellow-200'
+                      }`}>
+                        {p.riskBadge}
+                      </span>
+                    )}
                   </div>
                   <div className="mt-1 bg-black/85 px-1.5 sm:px-2 py-0.5 rounded-sm text-center border border-forest/40 min-w-[55px] sm:min-w-[70px]">
                     <p className="text-[9px] sm:text-[11px] font-bold text-white truncate max-w-[65px] sm:max-w-[90px]">{p.name}</p>
@@ -551,6 +638,17 @@ export default function Rivales() {
                 <div key={p.id} className="flex flex-col items-center animate-fade-in group">
                   <div className="relative">
                     <img src={p.image} alt={p.name} className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full border-2 border-white/40 object-cover shadow-lg bg-black/60" />
+                    {p.riskBadge && (
+                      <span className={`absolute -top-1 -right-1 text-[8px] font-bold px-1 py-0.2 rounded-full border shadow font-mono ${
+                        p.riskBadge.includes('Sanción') || p.riskBadge.includes('Lesión') 
+                          ? 'bg-red-600 text-white border-red-300' 
+                          : p.riskBadge.includes('Duda')
+                          ? 'bg-amber-600 text-white border-amber-300'
+                          : 'bg-yellow-500 text-black border-yellow-200'
+                      }`}>
+                        {p.riskBadge}
+                      </span>
+                    )}
                   </div>
                   <div className="mt-1 bg-black/85 px-1.5 sm:px-2 py-0.5 rounded-sm text-center border border-forest/40 min-w-[55px] sm:min-w-[70px]">
                     <p className="text-[9px] sm:text-[11px] font-bold text-white truncate max-w-[65px] sm:max-w-[90px]">{p.name}</p>
@@ -566,6 +664,17 @@ export default function Rivales() {
                 <div key={p.id} className="flex flex-col items-center animate-fade-in group">
                   <div className="relative">
                     <img src={p.image} alt={p.name} className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full border-2 border-white/40 object-cover shadow-lg bg-black/60" />
+                    {p.riskBadge && (
+                      <span className={`absolute -top-1 -right-1 text-[8px] font-bold px-1 py-0.2 rounded-full border shadow font-mono ${
+                        p.riskBadge.includes('Sanción') || p.riskBadge.includes('Lesión') 
+                          ? 'bg-red-600 text-white border-red-300' 
+                          : p.riskBadge.includes('Duda')
+                          ? 'bg-amber-600 text-white border-amber-300'
+                          : 'bg-yellow-500 text-black border-yellow-200'
+                      }`}>
+                        {p.riskBadge}
+                      </span>
+                    )}
                   </div>
                   <div className="mt-1 bg-black/85 px-1.5 sm:px-2 py-0.5 rounded-sm text-center border border-forest/40 min-w-[55px] sm:min-w-[70px]">
                     <p className="text-[9px] sm:text-[11px] font-bold text-white truncate max-w-[65px] sm:max-w-[90px]">{p.name}</p>
@@ -585,11 +694,18 @@ export default function Rivales() {
             </h4>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
               {club.bench.map(p => (
-                <div key={p.id} className="flex items-center gap-2 bg-forest-dark/40 border border-forest/20 p-1.5 sm:p-2 rounded-sm">
-                  <img src={p.image} alt={p.name} className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border border-white/20 shrink-0" />
+                <div key={p.id} className="flex items-center gap-2 bg-forest-dark/40 border border-forest/20 p-1.5 sm:p-2 rounded-sm relative">
+                  <div className="relative shrink-0">
+                    <img src={p.image} alt={p.name} className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border border-white/20" />
+                    {p.riskBadge && (
+                      <span className="absolute -top-1 -right-1 text-[7px] font-bold px-1 rounded-full bg-red-600 text-white border border-red-300 font-mono">
+                        !
+                      </span>
+                    )}
+                  </div>
                   <div className="min-w-0 flex-1">
                     <p className="text-[11px] sm:text-xs font-bold text-white truncate">{p.name}</p>
-                    <p className="text-[9px] sm:text-[10px] text-cream-dark font-mono">{(p.price/1000000).toFixed(2)}M €</p>
+                    <p className="text-[9px] sm:text-[10px] text-cream-dark font-mono">{(p.price/1000000).toFixed(2)}M € · {p.points} pts</p>
                   </div>
                 </div>
               ))}

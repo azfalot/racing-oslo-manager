@@ -190,15 +190,39 @@ export async function generateRivalsAuditData() {
       const pos = standings.findIndex(s => s.id === m.id) + 1;
       const isMe = teamName.toLowerCase().includes('racing') || teamName.toLowerCase().includes('oslo');
 
-      const squad = rawPlayers.map(p => ({
-        playerId: p.id,
-        name: p.name,
-        type: p.position || p.type,
-        position: p.position || p.type,
-        price: p.quotedprice || 0,
-        points: p.points || 0,
-        image: `/media/players/${p.id}.png`
-      }));
+      const squad = rawPlayers.map(p => {
+        const isAvailable = engine.isPlayerAvailable({ status: p.status, statusInfo: p.statusInfo });
+        const isDoubt = p.status === 'DOUBT' || (p.statusInfo && p.statusInfo.toLowerCase().includes('duda'));
+        const isBanned = !isAvailable && (p.status === 'BANNED' || p.status === 'RED_BANNED' || p.status === 'YELLOW_BANNED' || (p.statusInfo && (p.statusInfo.toLowerCase().includes('sancion') || p.statusInfo.toLowerCase().includes('roja') || p.statusInfo.toLowerCase().includes('banned'))));
+        const isInjured = !isAvailable && !isBanned;
+        const yellowCards = parseInt(p.cards?.yellow || p.yellowCards || 0, 10);
+        const isCardRisk = yellowCards === 4 || yellowCards === 9;
+
+        let riskBadge = null;
+        if (isBanned) riskBadge = '🔴 Sanción';
+        else if (isInjured) riskBadge = '🚑 Lesión';
+        else if (isDoubt) riskBadge = '🟡 Duda';
+        else if (isCardRisk) riskBadge = '🟨 4 Amarillas';
+
+        return {
+          playerId: p.id,
+          name: p.name,
+          type: p.position || p.type,
+          position: p.position || p.type,
+          price: parseInt(p.quotedprice || p.price || 0, 10),
+          points: parseInt(p.points || 0, 10),
+          status: p.status || 'ACTIVE',
+          statusInfo: p.statusInfo || '',
+          isAvailable,
+          isDoubt,
+          isBanned,
+          isInjured,
+          isCardRisk,
+          yellowCards,
+          riskBadge,
+          image: `/media/players/${p.id}.png`
+        };
+      });
 
       // Asegurar descarga de fotos de jugadores clave
       for (const p of squad.slice(0, 8)) {
@@ -607,6 +631,86 @@ export async function generateRivalsAuditData() {
         }
       }
 
+      // Cálculo de Alertas Tácticas, Bajas, Sanciones y Desalineaciones en el Once
+      const tacticalAlerts = [];
+      const startersList = lineup.starting11 || [];
+      const benchList = lineup.bench || [];
+
+      // 1. Alertas de bajas o dudas en el once
+      for (const p of startersList) {
+        if (p.isBanned) {
+          tacticalAlerts.push({
+            type: 'danger',
+            badge: '🔴 Sanción',
+            player: p.name,
+            position: p.position || p.type,
+            title: 'Sanción Disciplinaria',
+            description: `${p.name} arrastra sanción (${p.statusInfo || 'Tarjetas / Expulsión'}) y puntuará 0 si no es sustituido.`,
+            action: 'Reemplazar en el once por un suplente habilitado.'
+          });
+        } else if (p.isInjured) {
+          tacticalAlerts.push({
+            type: 'danger',
+            badge: '🚑 Lesión',
+            player: p.name,
+            position: p.position || p.type,
+            title: 'Baja Médica Confirmada',
+            description: `${p.name} sufre una lesión (${p.statusInfo || 'Baja médica'}) que le impedirá disputar la jornada.`,
+            action: 'Dar entrada a un jugador sano del banquillo.'
+          });
+        } else if (p.isDoubt) {
+          tacticalAlerts.push({
+            type: 'warning',
+            badge: '🟡 Duda',
+            player: p.name,
+            position: p.position || p.type,
+            title: 'Molestias / Duda Física',
+            description: `${p.name} arrastra molestias (${p.statusInfo || 'Estado dudoso'}) y su titularidad no está 100% asegurada.`,
+            action: 'Monitorizar alineaciones oficiales antes del inicio del encuentro.'
+          });
+        } else if (p.isCardRisk) {
+          tacticalAlerts.push({
+            type: 'caution',
+            badge: '🟨 Apercibido',
+            player: p.name,
+            position: p.position || p.type,
+            title: 'Riesgo de Suspensión (4 🟨)',
+            description: `${p.name} acumula 4 tarjetas amarillas y será suspendido en la próxima jornada si es amonestado.`,
+            action: 'Tener preparado un relevo en la posición ante posible sanción.'
+          });
+        }
+      }
+
+      // 2. Alertas de banquillo desperdiciado / desalineación
+      for (const b of benchList) {
+        if (b.points >= 15 && b.isAvailable) {
+          const worseStarter = startersList.find(s => (s.position === b.position || s.type === b.type) && s.points < b.points - 6);
+          if (worseStarter && !tacticalAlerts.some(a => a.player === b.name)) {
+            tacticalAlerts.push({
+              type: 'suboptimal',
+              badge: '⚠️ Banquillo Desperdiciado',
+              player: b.name,
+              position: b.position || b.type,
+              title: 'Rendimiento en Reserva',
+              description: `Tiene a ${b.name} (${b.points} pts) en el banquillo mientras alinea a ${worseStarter.name} (${worseStarter.points} pts).`,
+              action: `Valorar permuta táctica dando entrada a ${b.name} de inicio.`
+            });
+          }
+        }
+      }
+
+      // Si no hay ninguna alerta
+      if (tacticalAlerts.length === 0) {
+        tacticalAlerts.push({
+          type: 'success',
+          badge: '✅ Once Saneado',
+          player: 'Alineación Óptima',
+          title: 'Sin Bajas ni Riesgos Críticos',
+          description: 'Todos los futbolistas del 11 titular están activos, disponibles y en plenitud para la jornada.',
+          action: 'Mantener la estructura táctica establecida.'
+        });
+      }
+
       auditClubs.push({
         id: m.id,
         teamName,
@@ -623,6 +727,7 @@ export async function generateRivalsAuditData() {
         tacticDescription,
         strengths,
         weaknesses,
+        tacticalAlerts,
         recommendations,
         // Speculation & Overbid Metrics
         speculation: {
@@ -653,6 +758,14 @@ export async function generateRivalsAuditData() {
           price: p.price || 0,
           points: p.points || 0,
           expectedPoints: p.expectedPoints || 3.5,
+          status: p.status || 'ACTIVE',
+          statusInfo: p.statusInfo || '',
+          isAvailable: p.isAvailable !== false,
+          isDoubt: Boolean(p.isDoubt),
+          isBanned: Boolean(p.isBanned),
+          isInjured: Boolean(p.isInjured),
+          isCardRisk: Boolean(p.isCardRisk),
+          riskBadge: p.riskBadge || null,
           image: `/media/players/${p.playerId || p.id}.png`
         })),
         bench: (lineup.bench || []).map(p => ({
@@ -661,6 +774,14 @@ export async function generateRivalsAuditData() {
           position: p.type || p.position,
           price: p.price || 0,
           points: p.points || 0,
+          status: p.status || 'ACTIVE',
+          statusInfo: p.statusInfo || '',
+          isAvailable: p.isAvailable !== false,
+          isDoubt: Boolean(p.isDoubt),
+          isBanned: Boolean(p.isBanned),
+          isInjured: Boolean(p.isInjured),
+          isCardRisk: Boolean(p.isCardRisk),
+          riskBadge: p.riskBadge || null,
           image: `/media/players/${p.playerId || p.id}.png`
         })),
         isMe
