@@ -3,8 +3,8 @@
     "name": "Racing de Oslo",
     "coach": "Mateo Oslomany",
     "balance": 593389,
-    "committedBids": 0,
-    "effectiveBalance": 593389,
+    "committedBids": 5000001,
+    "effectiveBalance": -4406612,
     "teamValue": 54520000,
     "netWorth": 55113389,
     "squadSize": 14,
@@ -37,16 +37,16 @@
   "projections": {
     "nextMatchday": {
       "matchday": "Jornada 5",
-      "expectedPoints": 57,
-      "expectedPrize": 570000,
-      "projectedCashAfter": 1163389
+      "expectedPoints": 59,
+      "expectedPrize": 590000,
+      "projectedCashAfter": -3816612
     },
     "monthlyOutlook": {
       "jornadas": 4,
-      "projectedPoints": 228,
-      "projectedPrize": 2276000,
+      "projectedPoints": 234,
+      "projectedPrize": 2344000,
       "estimatedSales": 980000,
-      "totalProjectedLiquidity": 3849389
+      "totalProjectedLiquidity": -1082612
     },
     "financialPolicy": {
       "reserveRequirement": "Saldo Positivo Obligatorio (Corte Jornada)",
@@ -129,6 +129,18 @@
     },
     {
       "pos": 7,
+      "teamName": "Melano Plabloroza",
+      "owner": "Melano Plabloroza",
+      "squadValue": 37950000,
+      "points": 94,
+      "totalPrize": 940000,
+      "estimatedCash": 1138500,
+      "totalWealth": 39088500,
+      "power": "Patrimonio Regular",
+      "isMe": false
+    },
+    {
+      "pos": 8,
       "teamName": "M4 TEAM",
       "owner": "M4 TEAM",
       "squadValue": 64140000,
@@ -140,7 +152,7 @@
       "isMe": false
     },
     {
-      "pos": 8,
+      "pos": 9,
       "teamName": "Hache FC",
       "owner": "Hache FC",
       "squadValue": 50590000,
@@ -152,7 +164,7 @@
       "isMe": false
     },
     {
-      "pos": 9,
+      "pos": 10,
       "teamName": "Ana",
       "owner": "Ana",
       "squadValue": 44870000,
@@ -160,18 +172,6 @@
       "totalPrize": 970000,
       "estimatedCash": 1346100,
       "totalWealth": 46216100,
-      "power": "Patrimonio Regular",
-      "isMe": false
-    },
-    {
-      "pos": 10,
-      "teamName": "Melano Plabloroza",
-      "owner": "Melano Plabloroza",
-      "squadValue": 37950000,
-      "points": 94,
-      "totalPrize": 940000,
-      "estimatedCash": 1138500,
-      "totalWealth": 39088500,
       "power": "Patrimonio Regular",
       "isMe": false
     }
