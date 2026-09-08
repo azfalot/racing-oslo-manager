@@ -1116,22 +1116,21 @@
     "crest": "/media/crest.jpg",
     "pos": 2,
     "points": 188,
-    "squadValue": 60720000,
-    "playerCount": 16,
+    "squadValue": 51610000,
+    "playerCount": 10,
     "financialHealth": "Solvente Ajustado (+543k € en Caja)",
     "debtAlert": "Saldo positivo (+543k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
-    "projectedScore": 64,
+    "projectedScore": 57,
     "formation": "4-3-3",
-    "tacticDescription": "Estructura 4-3-3 orientada a maximizar 64 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 4-3-3 orientada a maximizar 57 puntos según plantilla disponible.",
     "strengths": [
       "2º en la clasificación general con 188 puntos acumulados (62.7 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (60.72M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
+      "Plantilla corta (10 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -1143,31 +1142,38 @@
         "action": "Mantener la estructura táctica establecida."
       }
     ],
-    "recommendations": [],
+    "recommendations": [
+      {
+        "name": "Kike García",
+        "pos": "Delantero",
+        "price": 500000,
+        "reason": "Fondo de armario económico (500k €) para no quedarse sin cambios en caso de bajas imprevistas."
+      }
+    ],
     "speculation": {
-      "score": 75,
+      "score": 87,
       "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+15.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 69457012,
-      "totalReceived": 37225400,
+      "totalReceived": 46225200,
       "purchasesCount": 19,
-      "salesCount": 18,
+      "salesCount": 24,
       "estimatedCash": 543389,
       "prizesEarned": 1880000,
-      "maxCreditLimit": 15180000,
-      "netWealth": 61263389,
-      "analysis": "Operativa histórica de 19 compras (69.5M €) y 18 ventas (37.2M €). Dinero total rotado: 106.7M € con sobrepuja media de +15.2%."
+      "maxCreditLimit": 12902500,
+      "netWealth": 52153389,
+      "analysis": "Operativa histórica de 19 compras (69.5M €) y 24 ventas (46.2M €). Dinero total rotado: 115.7M € con sobrepuja media de +15.2%."
     },
     "keyDeals": {
       "smartBuy": {
-        "player": "Adrián de la Fuente",
-        "price": 3860000,
-        "points": 34,
-        "roi": 8.81,
-        "impact": "Pilar clave (Titular en el 11): Costó 3.86M € y suma 34 pts con el club (8.81 pts/M€ invertido).",
-        "tag": "🎯 8.81 pts/M€ (Titular ROI)"
+        "player": "Íñigo Arguibide",
+        "price": 1070000,
+        "points": 12,
+        "roi": 11.21,
+        "impact": "Pilar clave (Titular en el 11): Costó 1.07M € y suma 12 pts con el club (11.21 pts/M€ invertido).",
+        "tag": "🎯 11.21 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
         "player": "Íñigo Arguibide",
@@ -1633,6 +1639,90 @@
           "seller": "Racing de Oslo",
           "buyer": "Computer",
           "date": "2026-08-20T04:34:28+02:00"
+        },
+        {
+          "playerName": "Fabio Cardoso",
+          "price": 196600,
+          "marketValue": 196600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Racing de Oslo",
+          "buyer": "Computer",
+          "date": "2026-09-08T04:35:10+02:00"
+        },
+        {
+          "playerName": "Eriksson",
+          "price": 295500,
+          "marketValue": 295500,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Racing de Oslo",
+          "buyer": "Computer",
+          "date": "2026-09-08T04:35:10+02:00"
+        },
+        {
+          "playerName": "Jon Martín",
+          "price": 4567300,
+          "marketValue": 4567300,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Racing de Oslo",
+          "buyer": "Computer",
+          "date": "2026-09-08T04:35:10+02:00"
+        },
+        {
+          "playerName": "Hugo Álvarez",
+          "price": 783600,
+          "marketValue": 783600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Racing de Oslo",
+          "buyer": "Computer",
+          "date": "2026-09-08T04:35:10+02:00"
+        },
+        {
+          "playerName": "Álvaro Carreras",
+          "price": 1489800,
+          "marketValue": 1489800,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Racing de Oslo",
+          "buyer": "Computer",
+          "date": "2026-09-08T04:35:10+02:00"
+        },
+        {
+          "playerName": "Moi Gómez",
+          "price": 1667000,
+          "marketValue": 1667000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Racing de Oslo",
+          "buyer": "Computer",
+          "date": "2026-09-08T04:35:10+02:00"
         }
       ]
     },
@@ -1706,10 +1796,10 @@
         "image": "/media/players/3817.png"
       },
       {
-        "id": 3529,
-        "name": "Álvaro Carreras",
+        "id": 3597,
+        "name": "Íñigo Arguibide",
         "position": "defender",
-        "price": 1560000,
+        "price": 1600000,
         "points": 0,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -1720,7 +1810,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/3529.png"
+        "image": "/media/players/3597.png"
       },
       {
         "id": 2415,
@@ -1755,23 +1845,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/1566.png"
-      },
-      {
-        "id": 3179,
-        "name": "Hugo Álvarez",
-        "position": "midfielder",
-        "price": 760000,
-        "points": 0,
-        "expectedPoints": 3.9,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3179.png"
       },
       {
         "id": 1927,
@@ -1825,88 +1898,7 @@
         "image": "/media/players/2550.png"
       }
     ],
-    "bench": [
-      {
-        "id": 4029,
-        "name": "Eriksson",
-        "position": "keeper",
-        "price": 300000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4029.png"
-      },
-      {
-        "id": 3597,
-        "name": "Íñigo Arguibide",
-        "position": "defender",
-        "price": 1600000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3597.png"
-      },
-      {
-        "id": 3932,
-        "name": "Fabio Cardoso",
-        "position": "defender",
-        "price": 200000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3932.png"
-      },
-      {
-        "id": 3578,
-        "name": "Jon Martín",
-        "position": "defender",
-        "price": 4670000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3578.png"
-      },
-      {
-        "id": 1462,
-        "name": "Moi Gómez",
-        "position": "midfielder",
-        "price": 1620000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/1462.png"
-      }
-    ],
+    "bench": [],
     "isMe": true
   },
   {
