@@ -6,22 +6,22 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 245,
-    "squadValue": 65110000,
-    "playerCount": 17,
-    "financialHealth": "Apalancado / Saldo Negativo (-2.43M €)",
-    "debtAlert": "Saldo en descubierto (-2.43M €). Consume el 14.9% del límite de crédito permitido (16.28M €). Exige ventas antes de puntuar.",
+    "squadValue": 64370000,
+    "playerCount": 16,
+    "financialHealth": "Apalancado / Saldo Negativo (-1.69M €)",
+    "debtAlert": "Saldo en descubierto (-1.69M €). Consume el 10.5% del límite de crédito permitido (16.09M €). Exige ventas antes de puntuar.",
     "projectedScore": 51,
     "formation": "4-4-2",
     "tacticDescription": "Estructura 4-4-2 orientada a maximizar 51 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 245 puntos acumulados (81.7 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (65.11M €).",
+      "Patrimonio de plantilla consolidado en Primera (64.37M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -2.43M € que obliga a vender piezas."
+      "Tensión de tesorería: Saldo negativo de -1.69M € que obliga a vender piezas."
     ],
     "tacticalAlerts": [
       {
@@ -33,7 +33,26 @@
         "action": "Mantener la estructura táctica establecida."
       }
     ],
-    "recommendations": [],
+    "recommendations": [
+      {
+        "name": "Samu Becerra",
+        "pos": "Centrocampista",
+        "price": 260000,
+        "reason": "Centrocampista con llegada (0.26M €) para asociarse con Raphinha y dominar la posesión."
+      },
+      {
+        "name": "Pol Lozano",
+        "pos": "Centrocampista",
+        "price": 310000,
+        "reason": "Oportunidad de mercado (0.31M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+      },
+      {
+        "name": "Jean Ives Valou",
+        "pos": "Defensa",
+        "price": 390000,
+        "reason": "Pieza competitiva en el mercado (0.39M €) adaptable al esquema 4-4-2."
+      }
+    ],
     "speculation": {
       "score": 98,
       "badge": "🦈 Tiburón Kamikaze / Deuda",
@@ -41,14 +60,14 @@
       "overbidRate": "+8.1%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 116370632,
-      "totalReceived": 91494300,
+      "totalReceived": 92234300,
       "purchasesCount": 31,
-      "salesCount": 29,
-      "estimatedCash": -2426332,
+      "salesCount": 30,
+      "estimatedCash": -1686332,
       "prizesEarned": 2450000,
-      "maxCreditLimit": 16277500,
+      "maxCreditLimit": 16092500,
       "netWealth": 62683668,
-      "analysis": "Operativa histórica de 31 compras (116.4M €) y 29 ventas (91.5M €). Dinero total rotado: 207.9M € con sobrepuja media de +8.1%."
+      "analysis": "Operativa histórica de 31 compras (116.4M €) y 30 ventas (92.2M €). Dinero total rotado: 208.6M € con sobrepuja media de +8.1%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -817,6 +836,20 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-09-07T04:36:25+02:00"
+        },
+        {
+          "playerName": "Gorrotxategi",
+          "price": 740000,
+          "marketValue": 740000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-09-08T04:35:10+02:00"
         }
       ]
     },
@@ -1075,22 +1108,6 @@
         "image": "/media/players/3800.png"
       },
       {
-        "id": 3833,
-        "name": "Gorrotxategi",
-        "position": "midfielder",
-        "price": 740000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3833.png"
-      },
-      {
         "id": 3145,
         "name": "Lobete",
         "position": "striker",
@@ -1144,10 +1161,22 @@
     ],
     "recommendations": [
       {
-        "name": "Kike García",
-        "pos": "Delantero",
-        "price": 500000,
-        "reason": "Fondo de armario económico (500k €) para no quedarse sin cambios en caso de bajas imprevistas."
+        "name": "Samu Becerra",
+        "pos": "Centrocampista",
+        "price": 260000,
+        "reason": "Centrocampista con llegada (0.26M €) para asociarse con Fede Valverde y dominar la posesión."
+      },
+      {
+        "name": "Emil Audero",
+        "pos": "Portero",
+        "price": 950000,
+        "reason": "Alternativa para la portería (0.95M €) para asegurar titularidad y rotación fiable."
+      },
+      {
+        "name": "Pol Lozano",
+        "pos": "Centrocampista",
+        "price": 310000,
+        "reason": "Oportunidad de mercado (0.31M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       }
     ],
     "speculation": {
@@ -1941,7 +1970,19 @@
         "name": "Kike García",
         "pos": "Delantero",
         "price": 500000,
-        "reason": "Fondo de armario económico (500k €) para no quedarse sin cambios en caso de bajas imprevistas."
+        "reason": "Refuerzo de ataque (0.50M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+      },
+      {
+        "name": "Jean Ives Valou",
+        "pos": "Defensa",
+        "price": 390000,
+        "reason": "Zaguero de jerarquía (0.39M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
+      },
+      {
+        "name": "Samu Becerra",
+        "pos": "Centrocampista",
+        "price": 260000,
+        "reason": "Oportunidad de mercado (0.26M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       }
     ],
     "speculation": {
@@ -2562,7 +2603,26 @@
         "action": "Mantener la estructura táctica establecida."
       }
     ],
-    "recommendations": [],
+    "recommendations": [
+      {
+        "name": "Kike García",
+        "pos": "Delantero",
+        "price": 500000,
+        "reason": "Refuerzo de ataque (0.50M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+      },
+      {
+        "name": "Samu Becerra",
+        "pos": "Centrocampista",
+        "price": 260000,
+        "reason": "Centrocampista con llegada (0.26M €) para asociarse con Álex Baena y dominar la posesión."
+      },
+      {
+        "name": "Pol Lozano",
+        "pos": "Centrocampista",
+        "price": 310000,
+        "reason": "Oportunidad de mercado (0.31M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+      }
+    ],
     "speculation": {
       "score": 24,
       "badge": "🏦 Banquero Suizo / Caja Fuerte",
@@ -3069,10 +3129,22 @@
     ],
     "recommendations": [
       {
-        "name": "Kike García",
-        "pos": "Delantero",
-        "price": 500000,
-        "reason": "Fondo de armario económico (500k €) para no quedarse sin cambios en caso de bajas imprevistas."
+        "name": "Emil Audero",
+        "pos": "Portero",
+        "price": 950000,
+        "reason": "Alternativa para la portería (0.95M €) para asegurar titularidad y rotación fiable."
+      },
+      {
+        "name": "Samu Becerra",
+        "pos": "Centrocampista",
+        "price": 260000,
+        "reason": "Oportunidad de mercado (0.26M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+      },
+      {
+        "name": "Pol Lozano",
+        "pos": "Centrocampista",
+        "price": 310000,
+        "reason": "Pieza competitiva en el mercado (0.31M €) adaptable al esquema 4-4-2."
       }
     ],
     "speculation": {
@@ -3639,7 +3711,26 @@
         "action": "Mantener la estructura táctica establecida."
       }
     ],
-    "recommendations": [],
+    "recommendations": [
+      {
+        "name": "Kike García",
+        "pos": "Delantero",
+        "price": 500000,
+        "reason": "Refuerzo de ataque (0.50M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+      },
+      {
+        "name": "Samu Becerra",
+        "pos": "Centrocampista",
+        "price": 260000,
+        "reason": "Oportunidad de mercado (0.26M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+      },
+      {
+        "name": "Pol Lozano",
+        "pos": "Centrocampista",
+        "price": 310000,
+        "reason": "Pieza competitiva en el mercado (0.31M €) adaptable al esquema 4-5-1."
+      }
+    ],
     "speculation": {
       "score": 48,
       "badge": "📈 Inversor Táctico / Eficiente",
@@ -4129,7 +4220,19 @@
         "name": "Kike García",
         "pos": "Delantero",
         "price": 500000,
-        "reason": "Fondo de armario económico (500k €) para no quedarse sin cambios en caso de bajas imprevistas."
+        "reason": "Refuerzo de ataque (0.50M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+      },
+      {
+        "name": "Emil Audero",
+        "pos": "Portero",
+        "price": 950000,
+        "reason": "Alternativa para la portería (0.95M €) para asegurar titularidad y rotación fiable."
+      },
+      {
+        "name": "Samu Becerra",
+        "pos": "Centrocampista",
+        "price": 260000,
+        "reason": "Oportunidad de mercado (0.26M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       }
     ],
     "speculation": {
@@ -4706,7 +4809,26 @@
         "action": "Mantener la estructura táctica establecida."
       }
     ],
-    "recommendations": [],
+    "recommendations": [
+      {
+        "name": "Samu Becerra",
+        "pos": "Centrocampista",
+        "price": 260000,
+        "reason": "Centrocampista con llegada (0.26M €) para asociarse con Adeyemi y dominar la posesión."
+      },
+      {
+        "name": "Emil Audero",
+        "pos": "Portero",
+        "price": 950000,
+        "reason": "Alternativa para la portería (0.95M €) para asegurar titularidad y rotación fiable."
+      },
+      {
+        "name": "Pol Lozano",
+        "pos": "Centrocampista",
+        "price": 310000,
+        "reason": "Oportunidad de mercado (0.31M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+      }
+    ],
     "speculation": {
       "score": 89,
       "badge": "🦈 Tiburón Kamikaze / Deuda",
@@ -5373,7 +5495,26 @@
         "action": "Mantener la estructura táctica establecida."
       }
     ],
-    "recommendations": [],
+    "recommendations": [
+      {
+        "name": "Jean Ives Valou",
+        "pos": "Defensa",
+        "price": 390000,
+        "reason": "Zaguero de jerarquía (0.39M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
+      },
+      {
+        "name": "Emil Audero",
+        "pos": "Portero",
+        "price": 950000,
+        "reason": "Alternativa para la portería (0.95M €) para asegurar titularidad y rotación fiable."
+      },
+      {
+        "name": "Samu Becerra",
+        "pos": "Centrocampista",
+        "price": 260000,
+        "reason": "Oportunidad de mercado (0.26M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+      }
+    ],
     "speculation": {
       "score": 78,
       "badge": "🦈 Tiburón Kamikaze / Deuda",
@@ -5980,7 +6121,26 @@
         "action": "Mantener la estructura táctica establecida."
       }
     ],
-    "recommendations": [],
+    "recommendations": [
+      {
+        "name": "Emil Audero",
+        "pos": "Portero",
+        "price": 950000,
+        "reason": "Alternativa para la portería (0.95M €) para asegurar titularidad y rotación fiable."
+      },
+      {
+        "name": "Samu Becerra",
+        "pos": "Centrocampista",
+        "price": 260000,
+        "reason": "Oportunidad de mercado (0.26M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+      },
+      {
+        "name": "Pol Lozano",
+        "pos": "Centrocampista",
+        "price": 310000,
+        "reason": "Pieza competitiva en el mercado (0.31M €) adaptable al esquema 3-4-3."
+      }
+    ],
     "speculation": {
       "score": 74,
       "badge": "🎰 Especulador de Mercado",
