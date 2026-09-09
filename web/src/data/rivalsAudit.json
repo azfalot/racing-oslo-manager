@@ -6,22 +6,22 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 245,
-    "squadValue": 66200000,
-    "playerCount": 17,
-    "financialHealth": "Apalancado / Saldo Negativo (-2.64M €)",
-    "debtAlert": "Saldo en descubierto (-2.64M €). Consume el 16.0% del límite de crédito permitido (16.55M €). Exige ventas antes de puntuar.",
+    "squadValue": 64740000,
+    "playerCount": 16,
+    "financialHealth": "Apalancado / Saldo Negativo (-1.17M €)",
+    "debtAlert": "Saldo en descubierto (-1.17M €). Consume el 7.2% del límite de crédito permitido (16.18M €). Exige ventas antes de puntuar.",
     "projectedScore": 50,
     "formation": "4-4-2",
     "tacticDescription": "Estructura 4-4-2 orientada a maximizar 50 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 245 puntos acumulados (81.7 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (66.20M €).",
+      "Patrimonio de plantilla consolidado en Primera (64.74M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -2.64M € que obliga a vender piezas."
+      "Tensión de tesorería: Saldo negativo de -1.17M € que obliga a vender piezas."
     ],
     "tacticalAlerts": [
       {
@@ -60,14 +60,14 @@
       "overbidRate": "+8.0%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 117328633,
-      "totalReceived": 92234300,
+      "totalReceived": 93706000,
       "purchasesCount": 32,
-      "salesCount": 30,
-      "estimatedCash": -2644333,
+      "salesCount": 31,
+      "estimatedCash": -1172633,
       "prizesEarned": 2450000,
-      "maxCreditLimit": 16550000,
-      "netWealth": 63555667,
-      "analysis": "Operativa histórica de 32 compras (117.3M €) y 30 ventas (92.2M €). Dinero total rotado: 209.6M € con sobrepuja media de +8.0%."
+      "maxCreditLimit": 16185000,
+      "netWealth": 63567367,
+      "analysis": "Operativa histórica de 32 compras (117.3M €) y 31 ventas (93.7M €). Dinero total rotado: 211.0M € con sobrepuja media de +8.0%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -864,6 +864,20 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-09-08T04:35:10+02:00"
+        },
+        {
+          "playerName": "Kochorashvili",
+          "price": 1471700,
+          "marketValue": 1471700,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-09-09T04:36:36+02:00"
         }
       ]
     },
@@ -1005,12 +1019,12 @@
         "image": "/media/players/4151.png"
       },
       {
-        "id": 3087,
-        "name": "Kochorashvili",
+        "id": 3800,
+        "name": "Alex Marchal",
         "position": "midfielder",
-        "price": 1460000,
+        "price": 680000,
         "points": 0,
-        "expectedPoints": 2.2,
+        "expectedPoints": 2,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -1019,7 +1033,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/3087.png"
+        "image": "/media/players/3800.png"
       },
       {
         "id": 3298,
@@ -1120,22 +1134,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3512.png"
-      },
-      {
-        "id": 3800,
-        "name": "Alex Marchal",
-        "position": "midfielder",
-        "price": 680000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3800.png"
       },
       {
         "id": 3145,
@@ -4242,22 +4240,6 @@
         "image": "/media/players/2377.png"
       },
       {
-        "id": 3785,
-        "name": "Maroan Sannadi",
-        "position": "striker",
-        "price": 170000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3785.png"
-      },
-      {
         "id": 3610,
         "name": "Álvaro Djaló",
         "position": "striker",
@@ -4272,6 +4254,22 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3610.png"
+      },
+      {
+        "id": 3785,
+        "name": "Maroan Sannadi",
+        "position": "striker",
+        "price": 170000,
+        "points": 0,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3785.png"
       }
     ],
     "isMe": false
