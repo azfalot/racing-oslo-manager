@@ -5702,21 +5702,21 @@
     "crest": "/media/crests/suances_nin.svg",
     "pos": 9,
     "points": 129,
-    "squadValue": 52470000,
-    "playerCount": 14,
-    "financialHealth": "Apalancado / Saldo Negativo (-3.11M €)",
-    "debtAlert": "Saldo en descubierto (-3.11M €). Consume el 23.7% del límite de crédito permitido (13.12M €). Exige ventas antes de puntuar.",
-    "projectedScore": 36,
+    "squadValue": 47140000,
+    "playerCount": 12,
+    "financialHealth": "Saneado / Alta Liquidez (+2.04M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+2.04M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 30,
     "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 36 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 30 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez.",
-      "Tensión de tesorería: Saldo negativo de -3.11M € que obliga a vender piezas."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones.",
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -5736,33 +5736,33 @@
         "reason": "Zaguero de jerarquía (0.44M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
       },
       {
+        "name": "Nico Guillén",
+        "pos": "Centrocampista",
+        "price": 1070000,
+        "reason": "Centrocampista con llegada (1.07M €) para asociarse con Mbappé y dominar la posesión."
+      },
+      {
         "name": "Otorbi",
         "pos": "Delantero",
         "price": 620000,
         "reason": "Oportunidad de mercado (0.62M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
-      },
-      {
-        "name": "Nico Guillén",
-        "pos": "Centrocampista",
-        "price": 1070000,
-        "reason": "Pieza competitiva en el mercado (1.07M €) adaptable al esquema 3-4-3."
       }
     ],
     "speculation": {
-      "score": 78,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
-      "badgeColor": "#ef4444",
+      "score": 63,
+      "badge": "🎰 Especulador de Mercado",
+      "badgeColor": "#f59e0b",
       "overbidRate": "+15.9%",
-      "riskLevel": "Alto Riesgo (Apalancado)",
+      "riskLevel": "Riesgo Moderado-Alto",
       "totalSpent": 51903883,
-      "totalReceived": 27501500,
+      "totalReceived": 32658600,
       "purchasesCount": 11,
-      "salesCount": 12,
-      "estimatedCash": -3112383,
+      "salesCount": 14,
+      "estimatedCash": 2044717,
       "prizesEarned": 1290000,
-      "maxCreditLimit": 13117500,
-      "netWealth": 49357617,
-      "analysis": "Operativa histórica de 11 compras (51.9M €) y 12 ventas (27.5M €). Dinero total rotado: 79.4M € con sobrepuja media de +15.9%."
+      "maxCreditLimit": 11785000,
+      "netWealth": 49184717,
+      "analysis": "Operativa histórica de 11 compras (51.9M €) y 14 ventas (32.7M €). Dinero total rotado: 84.6M € con sobrepuja media de +15.9%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -6077,6 +6077,34 @@
           "seller": "Suances nin",
           "buyer": "Computer",
           "date": "2026-09-06T04:34:11+02:00"
+        },
+        {
+          "playerName": "Rodrygo",
+          "price": 963200,
+          "marketValue": 963200,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Suances nin",
+          "buyer": "Computer",
+          "date": "2026-09-10T04:34:51+02:00"
+        },
+        {
+          "playerName": "Ander Barrenetxea",
+          "price": 4193900,
+          "marketValue": 4193900,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Suances nin",
+          "buyer": "Computer",
+          "date": "2026-09-10T04:34:51+02:00"
         }
       ]
     },
@@ -6150,23 +6178,6 @@
         "image": "/media/players/4158.png"
       },
       {
-        "id": 2695,
-        "name": "Ander Barrenetxea",
-        "position": "midfielder",
-        "price": 4410000,
-        "points": 0,
-        "expectedPoints": 6.4,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2695.png"
-      },
-      {
         "id": 3465,
         "name": "Dotor",
         "position": "midfielder",
@@ -6216,6 +6227,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/4118.png"
+      },
+      {
+        "id": 3728,
+        "name": "Peio Canales",
+        "position": "midfielder",
+        "price": 2690000,
+        "points": 0,
+        "expectedPoints": 0.7,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3728.png"
       },
       {
         "id": 3469,
@@ -6285,38 +6313,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3017.png"
-      },
-      {
-        "id": 3728,
-        "name": "Peio Canales",
-        "position": "midfielder",
-        "price": 2690000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3728.png"
-      },
-      {
-        "id": 2769,
-        "name": "Rodrygo",
-        "position": "striker",
-        "price": 920000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2769.png"
       }
     ],
     "isMe": false
