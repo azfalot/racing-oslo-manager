@@ -1,0 +1,144 @@
+{
+  "lastSyncTimestamp": "2026-09-11T06:31:45.557Z",
+  "lastSyncFormatted": "11/9/26, 8:31:45",
+  "bot": {
+    "name": "comunio-bot",
+    "version": "1.2.0",
+    "status": "ONLINE",
+    "mode": "autonomo",
+    "environment": "production",
+    "pid": 15992,
+    "uptime": "0h 0m",
+    "pm2Process": "comunio-bot (id 0, fork)",
+    "schedule": {
+      "slots": [
+        "12:00",
+        "18:00",
+        "23:50"
+      ],
+      "morningSlot": "09:05 - 09:25 (Aleatorio)",
+      "preMatchdayWindow": "15 min antes del inicio",
+      "nextMatchday": "Jornada 5 (Sábado 12 Sep, 14:00 CEST)"
+    },
+    "guardrails": {
+      "autoBidLimit": "50.0M € (Ventas requieren confirmación obligatoria)",
+      "safetyReserveMin": "1.000.000 €",
+      "autoAcceptAboveMarket": "Confirmación de usuario obligatoria",
+      "bidMargin": "0.0% (100% exacto de VM, sin sobrepujas)",
+      "noDirectRivalBonus": "Activo (0% margen a rivales directos)",
+      "banDiscard": "Activo (Descarta sancionados, rojas y lesionados)"
+    },
+    "integrations": {
+      "telegram": "Activo (Mateo Oslomany Bot · Poller / Webhook)",
+      "whatsapp": "Activo (Notificaciones del Club)",
+      "comunioApi": "Conectado (200 OK · Sesión Bearer Activa)",
+      "transfermarkt": "Scout Activo (Valores de mercado & posiciones)"
+    }
+  },
+  "web": {
+    "version": "v1.2.0",
+    "platform": "Cloudflare Workers / Pages",
+    "targetUrl": "https://racing-oslo.cotero91.workers.dev",
+    "buildStatus": "OPTIMIZED (Vite 8 + React 19)",
+    "distStatus": "Sincronizado con origin/main",
+    "dataFiles": {
+      "squad": "11 jugadores en plantilla",
+      "news": "170 noticias históricas sincronizadas",
+      "rivals": "10 clubes auditados con sugerencias dinámicas",
+      "market": "Mercado escaneado",
+      "finances": "Actualizado (+280.288 € consolidado con Galarreta)"
+    }
+  },
+  "club": {
+    "name": "Racing de Oslo",
+    "manager": "azfalot",
+    "standingsPosition": 2,
+    "points": 188,
+    "squadValue": 55890000,
+    "balanceStatus": "Positivo / Saneado (+280.288 €)",
+    "activeFormation": "4-3-3",
+    "starterCount": 11,
+    "topScorer": "Mariano Díaz (46 pts)"
+  },
+  "subsystems": [
+    {
+      "id": "daemon",
+      "name": "Daemon Scheduler & PM2",
+      "status": "OK",
+      "detail": "Ejecución continua de crons, long-polling de Telegram y sincronizador"
+    },
+    {
+      "id": "comunio_api",
+      "name": "Conexión Comunio API",
+      "status": "OK",
+      "detail": "Autenticación Bearer activa con token reutilizable (evita límite Plus/Pro)"
+    },
+    {
+      "id": "lineup_engine",
+      "name": "Motor Táctico ComunioEngine",
+      "status": "OK",
+      "detail": "Once óptimo 4-3-3 calculado y guardado para Jornada 5"
+    },
+    {
+      "id": "rivals_360",
+      "name": "Auditoría 360º de Rivales",
+      "status": "OK",
+      "detail": "10 clubes procesados con 3 sugerencias contextuales dinámicas por equipo"
+    },
+    {
+      "id": "news_crawler",
+      "name": "Crawler de Noticias & Tablón",
+      "status": "OK",
+      "detail": "170 noticias históricas sincronizadas y deduplicadas"
+    },
+    {
+      "id": "bench_trends",
+      "name": "Auditoría de Banquillo & Rotación",
+      "status": "OK",
+      "detail": "Auditoría de puntos perdidos y tendencias exportada a benchTrends.json"
+    },
+    {
+      "id": "cloudflare_web",
+      "name": "Despliegue Cloudflare Workers",
+      "status": "OK",
+      "detail": "Sincronización Git automática en origin/main -> Producción en vivo"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Autenticación Comunio API",
+      "status": "OK",
+      "time": "En vivo"
+    },
+    {
+      "name": "Extracción y enriquecimiento de plantilla",
+      "status": "OK",
+      "detail": "11 jugadores activos"
+    },
+    {
+      "name": "Auditoría 360º de Rivales",
+      "status": "OK",
+      "detail": "10 clubes procesados"
+    },
+    {
+      "name": "Radar y deduplicación de noticias",
+      "status": "OK",
+      "detail": "170 noticias históricas"
+    },
+    {
+      "name": "Auditoría de banquillo y tendencias",
+      "status": "OK",
+      "detail": "benchTrends.json exportado"
+    },
+    {
+      "name": "Generación de activos gráficos",
+      "status": "OK",
+      "detail": "Media y escudos listos"
+    },
+    {
+      "name": "Compilación Vite & Despliegue Cloudflare",
+      "status": "OK",
+      "detail": "Despliegue automático"
+    }
+  ]
+}
