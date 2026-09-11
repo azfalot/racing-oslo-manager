@@ -266,9 +266,14 @@ async function handleTelegramMessage(message) {
       await client.login();
       const squad = await client.getSquad();
       const dash = await client.getDashboardData();
+      const standings = await client.getStandings('total');
       const activeClubs = await getActiveMatchdayClubs(client);
       const lineup = engine.optimizeLineup(squad, activeClubs);
       await client.close();
+
+      const myRankIdx = (standings || []).findIndex(s => s.id === client.userId || s.name?.includes('Racing'));
+      const myRank = myRankIdx >= 0 ? myRankIdx + 1 : 2;
+      const myPoints = myRankIdx >= 0 ? standings[myRankIdx].totalPoints : 188;
 
       const balance = dash.money || 0;
       const teamValue = dash.teamValue || 0;
@@ -277,7 +282,7 @@ async function handleTelegramMessage(message) {
 
       let rep = `📊 <b>[Mateo Oslomany] · INFORME EJECUTIVO DEL CLUB</b>\n\n`;
       rep += `🏆 <b>SITUACIÓN DEPORTIVA:</b>\n`;
-      rep += ` • Posición: <b>2º Clasificado</b> (86 pts)\n`;
+      rep += ` • Posición: <b>${myRank}º Clasificado</b> (${myPoints} pts)\n`;
       rep += ` • Once Oficial: <b>${lineup.formation}</b> (~${nextScore} pts proyectados)\n\n`;
       rep += `💰 <b>SITUACIÓN ECONÓMICA:</b>\n`;
       rep += ` • Saldo en Caja: <b>${balance.toLocaleString()} €</b> ${balance >= 0 ? '✅ (Saneado)' : '❌ (En Deuda)'}\n`;
@@ -1089,31 +1094,27 @@ async function handleTelegramMessage(message) {
     const engine = new ComunioEngine();
     try {
       await client.login();
-      const standings = await client.getStandings();
+      const standings = await client.getStandings('total');
       const squad = await client.getSquad();
       const activeClubs = await getActiveMatchdayClubs(client);
       const lineup = engine.optimizeLineup(squad, activeClubs);
       await client.close();
 
-      const myTeam = (standings || []).find(s => s.name?.toLowerCase().includes('racing') || s.name?.toLowerCase().includes('oslo') || s.id === 21163822);
-      const totalPts = myTeam?.totalPoints || myTeam?.points || 86;
-      const lastPts = 38; // Jornada 2
-      const j1Pts = totalPts - lastPts;
+      const myRankIdx = (standings || []).findIndex(s => s.id === client.userId || s.name?.includes('Racing'));
+      const myRank = myRankIdx >= 0 ? myRankIdx + 1 : 2;
+      const totalPts = myRankIdx >= 0 ? standings[myRankIdx].totalPoints : 188;
+      const lastPts = 37; // Jornada 4
       const expNext = Math.round(lineup.score || 57);
 
       let rep = `🏆 <b>[Mateo Oslomany] · RENDIMIENTO Y PUNTOS OFICIALES</b>\n\n`;
-      rep += `🏁 <b>ÚLTIMA JORNADA (J2):</b> <b>${lastPts} puntos</b>\n`;
+      rep += `🏁 <b>ÚLTIMA JORNADA (J4):</b> <b>${lastPts} puntos</b>\n`;
       rep += ` • Primas oficiales cobradas: <b>+${(lastPts * 10000).toLocaleString()} €</b>\n\n`;
 
-      rep += `📈 <b>HISTÓRICO DE JORNADAS:</b>\n`;
-      rep += ` • <b>Jornada 1:</b> ${j1Pts} pts (+${(j1Pts * 10000).toLocaleString()} €)\n`;
-      rep += ` • <b>Jornada 2:</b> ${lastPts} pts (+${(lastPts * 10000).toLocaleString()} €)\n\n`;
-
-      rep += `🥇 <b>TOTAL ACUMULADO:</b> <b>${totalPts} puntos</b> (2º Clasificado)\n`;
+      rep += `🥇 <b>TOTAL ACUMULADO:</b> <b>${totalPts} puntos</b> (${myRank}º Clasificado)\n`;
       rep += ` • Total primas generadas: <b>+${(totalPts * 10000).toLocaleString()} €</b>\n`;
-      rep += ` • Media de rendimiento: <b>${(totalPts / 2).toFixed(1)} pts / jornada</b>\n\n`;
+      rep += ` • Media de rendimiento: <b>${(totalPts / 4).toFixed(1)} pts / jornada</b>\n\n`;
 
-      rep += `🎯 <b>PREVISIÓN JORNADA 3:</b> <b>~${expNext} puntos proyectados</b>\n\n`;
+      rep += `🎯 <b>PREVISIÓN PRÓXIMA JORNADA (J5):</b> <b>~${expNext} puntos proyectados</b>\n\n`;
       rep += `🌐 <i>Ver histórico en la web: <a href="https://racing-oslo.cotero91.workers.dev/finanzas">racing-oslo.cotero91.workers.dev/finanzas</a></i>`;
 
       await sendTelegramMessage(rep);
@@ -2144,7 +2145,8 @@ function startCronScheduler() {
           const lineupRes = engine.optimizeLineup(currentSquad, activeClubs);
           await client.close();
 
-          await recordMatchdayPrediction(3, `Jornada 3`, lineupRes);
+          const matchdayNum = lastPreMatchdayTriggeredKey || 5;
+          await recordMatchdayPrediction(matchdayNum, `Jornada ${matchdayNum}`, lineupRes);
         } catch (predErr) {
           console.warn('[DAEMON-CRON] Info registro predicción:', predErr.message);
         }

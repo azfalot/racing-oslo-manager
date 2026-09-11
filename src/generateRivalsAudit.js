@@ -497,138 +497,96 @@ export async function generateRivalsAuditData() {
 
       tacticDescription = `Estructura ${lineup.formation || '4-4-2'} orientada a maximizar ${Math.round(lineup.score || 40)} puntos según plantilla disponible.`;
 
-      // Recomendaciones de Mercado Inteligentes y Personalizadas por Capacidad Económica y Perfil Táctico
+      // Recomendaciones de Mercado Inteligentes y Dinámicas por Capacidad Económica y Necesidad Táctica
       const recommendations = [];
       const posMap = { keeper: 'Portero', defender: 'Defensa', midfielder: 'Centrocampista', striker: 'Delantero' };
-      const compMarket = marketPlayers.filter(mp => mp.owner?.name === 'Computer' || !mp.owner);
+      const compMarket = (marketPlayers || []).filter(mp => (mp.owner?.name === 'Computer' || !mp.owner) && mp.price > 0);
 
-      // Jugadores de referencia del club para contexto táctico
-      const topStar = squad.sort((a, b) => b.price - a.price)[0]?.name || 'el equipo';
+      // Evaluar necesidades posicionales reales del club
+      const posCounts = {
+        keeper: squad.filter(p => (p.position === 'keeper' || p.type === 'keeper')).length,
+        defender: squad.filter(p => (p.position === 'defender' || p.type === 'defender')).length,
+        midfielder: squad.filter(p => (p.position === 'midfielder' || p.type === 'midfielder')).length,
+        striker: squad.filter(p => (p.position === 'striker' || p.type === 'striker')).length
+      };
 
-      if (estimatedCash > 8000000) {
-        // Club con liquidez masiva (>8M €) -> Cracks top de mercado (Yeremay / Mario Soriano / Canales)
-        const topMid = compMarket.find(mp => (mp.name.includes('Yeremay') || mp.name.includes('Soriano') || mp.name.includes('Canales')) && !recommendations.some(r => r.name === mp.name));
-        if (topMid) {
-          recommendations.push({
-            name: topMid.name,
-            pos: posMap[topMid.position || topMid.type] || 'Centrocampista',
-            price: topMid.price,
-            reason: `Fichaje galáctico financiable con su liquidez (+${(estimatedCash/1000000).toFixed(1)}M €) para formar una medular intratable junto a ${topStar}.`
-          });
-        }
-        const topDef = compMarket.find(mp => (mp.name.includes('Hinojo') || mp.name.includes('Galán')) && !recommendations.some(r => r.name === mp.name));
-        if (topDef) {
-          recommendations.push({
-            name: topDef.name,
-            pos: 'Defensa',
-            price: topDef.price,
-            reason: `Zaguero de primer nivel para blindar la retaguardia sin comprometer su remanente en caja.`
-          });
-        }
-      } else if (estimatedCash > 2000000) {
-        // Club con liquidez media (2M - 8M €) -> Jugadores de clase media consolidada (Galán, Hinojo, Durán)
-        const medDef = compMarket.find(mp => (mp.name.includes('Galán') || mp.name.includes('Hinojo')) && !recommendations.some(r => r.name === mp.name));
-        if (medDef) {
-          recommendations.push({
-            name: medDef.name,
-            pos: 'Defensa',
-            price: medDef.price,
-            reason: `Refuerzo de jerarquía para el once titular asumiendo un desembolso perfectamente cubierto por su caja.`
-          });
-        }
-        const medFwd = compMarket.find(mp => mp.name.includes('Durán') && !recommendations.some(r => r.name === mp.name));
-        if (medFwd) {
-          recommendations.push({
-            name: medFwd.name,
-            pos: 'Delantero',
-            price: medFwd.price,
-            reason: `Punta en racha para oxigenar el ataque y elevar la producción ofensiva semanal.`
-          });
-        }
-      } else if (estimatedCash >= 0) {
-        // Club solvente pero con caja ajustada (< 2M €) -> Fichajes quirúrgicos asequibles (Durán, Salinas, Enríquez, Novoa)
-        const isOslo = mKey.includes('Racing') || mKey.includes('Oslo');
-        if (isOslo) {
-          const fwd = compMarket.find(mp => mp.name.includes('Durán'));
-          if (fwd) {
-            recommendations.push({
-              name: fwd.name,
-              pos: 'Delantero',
-              price: fwd.price,
-              reason: `Ariete asequible (${(fwd.price/1000000).toFixed(2)}M €) para generar competencia directa con Gerard Moreno y Hugo Duro.`
-            });
-          }
-          const salinas = compMarket.find(mp => mp.name.includes('Salinas'));
-          if (salinas) {
-            recommendations.push({
-              name: salinas.name,
-              pos: 'Defensa',
-              price: salinas.price,
-              reason: `Carrilero zurdo de 1.0M € para rotar en el 3-4-3 y dar profundidad al lateral.`
-            });
-          }
-          const enriquez = compMarket.find(mp => mp.name.includes('Enríquez'));
-          if (enriquez) {
-            recommendations.push({
-              name: enriquez.name,
-              pos: 'Centrocampista',
-              price: enriquez.price,
-              reason: `Volante de bajo coste (790k €) para ampliar el banquillo de 3 suplentes sin tensión de tesorería.`
-            });
-          }
+      const topStarName = squad.slice().sort((a, b) => (b.price || 0) - (a.price || 0))[0]?.name || teamName;
+
+      // 1. Recomendación prioritaria por carencia táctica directa
+      let neededPositions = [];
+      if (posCounts.striker < 3 || strikers.reduce((s, p) => s + (p.points || 0), 0) < 18) neededPositions.push('striker');
+      if (posCounts.defender < 4 || defVal < 8000000) neededPositions.push('defender');
+      if (posCounts.midfielder < 4 || midVal < 10000000) neededPositions.push('midfielder');
+      if (posCounts.keeper < 2) neededPositions.push('keeper');
+      if (neededPositions.length === 0) neededPositions = ['striker', 'midfielder', 'defender'];
+
+      // Filtrar opciones de mercado ordenadas por calidad y puntos
+      const sortedMarket = [...compMarket].sort((a, b) => (b.points || 0) - (a.points || 0) || a.price - b.price);
+
+      for (const neededPos of neededPositions) {
+        if (recommendations.length >= 2) break;
+
+        let candidate = null;
+        if (estimatedCash > 5000000) {
+          // Puede permitirse primeras espadas
+          candidate = sortedMarket.find(mp => (mp.position === neededPos || mp.type === neededPos) && !recommendations.some(r => r.name === mp.name));
+        } else if (estimatedCash > 1000000) {
+          // Clase media (precio <= 3.5M)
+          candidate = sortedMarket.find(mp => (mp.position === neededPos || mp.type === neededPos) && mp.price <= 3500000 && !recommendations.some(r => r.name === mp.name));
         } else {
-          const budgetDef = compMarket.find(mp => (mp.name.includes('Novoa') || mp.name.includes('Salinas')) && !recommendations.some(r => r.name === mp.name));
-          if (budgetDef) {
-            recommendations.push({
-              name: budgetDef.name,
-              pos: 'Defensa',
-              price: budgetDef.price,
-              reason: `Zaguero de bajo coste (${(budgetDef.price/1000).toFixed(0)}k €) para apuntalar la retaguardia sin forzar ventas.`
-            });
-          }
-          const budgetMid = compMarket.find(mp => (mp.name.includes('Enríquez') || mp.name.includes('Josan')) && !recommendations.some(r => r.name === mp.name));
-          if (budgetMid) {
-            recommendations.push({
-              name: budgetMid.name,
-              pos: 'Centrocampista',
-              price: budgetMid.price,
-              reason: `Pieza de rotación económica para sostener el fondo de armario ante sanciones o rotaciones.`
-            });
-          }
+          // Presupuesto ajustado o déficit (precio <= 1.5M)
+          candidate = sortedMarket.find(mp => (mp.position === neededPos || mp.type === neededPos) && mp.price <= 1500000 && !recommendations.some(r => r.name === mp.name));
         }
-      } else {
-        // Club en descubierto / apalancado (< 0 €) -> Parches a coste mínimo (< 400k €)
-        const cheap1 = compMarket.find(mp => mp.name.includes('Novoa') || mp.name.includes('Josan'));
-        if (cheap1) {
+
+        if (candidate) {
+          let reasonText = '';
+          if (neededPos === 'striker') {
+            reasonText = `Refuerzo de ataque (${(candidate.price/1000000).toFixed(2)}M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo.`;
+          } else if (neededPos === 'defender') {
+            reasonText = `Zaguero de jerarquía (${(candidate.price/1000000).toFixed(2)}M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás.`;
+          } else if (neededPos === 'midfielder') {
+            reasonText = `Centrocampista con llegada (${(candidate.price/1000000).toFixed(2)}M €) para asociarse con ${topStarName} y dominar la posesión.`;
+          } else {
+            reasonText = `Alternativa para la portería (${(candidate.price/1000000).toFixed(2)}M €) para asegurar titularidad y rotación fiable.`;
+          }
+
           recommendations.push({
-            name: cheap1.name,
-            pos: posMap[cheap1.position || cheap1.type] || 'Parche',
-            price: cheap1.price,
-            reason: `Incorporación a coste mínimo (${(cheap1.price/1000).toFixed(0)}k €) para cubrir puestos vacantes sin incrementar el descubierto en tesorería.`
-          });
-        }
-        const cheap2 = compMarket.find(mp => (mp.name.includes('Letacek') || mp.name.includes('Diangana') || mp.name.includes('Sow')) && !recommendations.some(r => r.name === mp.name));
-        if (cheap2) {
-          recommendations.push({
-            name: cheap2.name,
-            pos: posMap[cheap2.position || cheap2.type] || 'Parche',
-            price: cheap2.price,
-            reason: `Ficha a precio simbólico (${(cheap2.price/1000).toFixed(0)}k €) para cumplir con el mínimo de 11 jugadores alineados.`
+            name: candidate.name,
+            pos: posMap[candidate.position || candidate.type] || 'Jugador',
+            price: candidate.price,
+            reason: reasonText
           });
         }
       }
 
-      // Si tiene banquillo corto, añadir una pieza económica de fondo de armario
-      if (squad.length < 14 && recommendations.length < 3) {
-        const cheapExtra = compMarket.find(mp => mp.price > 150000 && mp.price < 800000 && !recommendations.some(r => r.name === mp.name));
-        if (cheapExtra) {
+      // 2. Si aún falta completar hasta 3 sugerencias, añadir oportunidades de mercado u opciones de fondo de armario
+      if (recommendations.length < 3) {
+        // Buscar ganga por ratio puntos/precio o parche ultra-eficiente
+        const bargain = sortedMarket.find(mp => !recommendations.some(r => r.name === mp.name) && (
+          (estimatedCash > 4000000 && mp.price > 2000000) ||
+          (estimatedCash <= 4000000 && mp.price <= 1800000)
+        ));
+
+        if (bargain) {
           recommendations.push({
-            name: cheapExtra.name,
-            pos: posMap[cheapExtra.position || cheapExtra.type] || 'Fondo de Armario',
-            price: cheapExtra.price,
-            reason: `Fondo de armario económico (${(cheapExtra.price/1000).toFixed(0)}k €) para no quedarse sin cambios en caso de bajas imprevistas.`
+            name: bargain.name,
+            pos: posMap[bargain.position || bargain.type] || 'Fondo de Armario',
+            price: bargain.price,
+            reason: `Oportunidad de mercado (${(bargain.price/1000000).toFixed(2)}M € · ${bargain.points || 0} pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería.`
           });
         }
+      }
+
+      // 3. Salvaguarda final: si aún no hay 3, rellenar con las mejores opciones de mercado libres
+      while (recommendations.length < 3 && sortedMarket.length > recommendations.length) {
+        const fallback = sortedMarket.find(mp => !recommendations.some(r => r.name === mp.name));
+        if (!fallback) break;
+        recommendations.push({
+          name: fallback.name,
+          pos: posMap[fallback.position || fallback.type] || 'Oportunidad',
+          price: fallback.price,
+          reason: `Pieza competitiva en el mercado (${(fallback.price/1000000).toFixed(2)}M €) adaptable al esquema ${lineup.formation || 'táctico'}.`
+        });
       }
 
       // Cálculo de Alertas Tácticas, Bajas, Sanciones y Desalineaciones en el Once

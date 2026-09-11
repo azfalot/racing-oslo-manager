@@ -13,6 +13,7 @@ import Entradas from './pages/Entradas'
 import Rivales from './pages/Rivales'
 
 import JugadorPage from './pages/JugadorPage'
+import Auditoria from './pages/Auditoria'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/jugador/:id" element={<JugadorPage />} />
           <Route path="/entradas" element={<Entradas />} />
           <Route path="/tienda" element={<Tienda />} />
+          <Route path="/auditoria" element={<Auditoria />} />
         </Routes>
       </Layout>
     </Router>

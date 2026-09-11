@@ -280,7 +280,8 @@ async function runBot() {
         const newSignings = currentPlayers.filter(p => !lastIds.includes(p.playerId));
         const completedSales = lastPlayers.filter(p => !currentIds.includes(p.playerId));
 
-        if (newSignings.length > 0 || completedSales.length > 0) {
+        // Solo alertar de cambios si ya existía una foto previa con jugadores cargados
+        if (lastPlayers.length > 0 && (newSignings.length > 0 || completedSales.length > 0)) {
           let changeReport = `💼 <b>[Mateo Oslomany]:</b> ¡Noticias de última hora sobre nuestra plantilla!\n\n`;
           
           if (newSignings.length > 0) {
