@@ -6,21 +6,21 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 245,
-    "squadValue": 66970000,
-    "playerCount": 19,
-    "financialHealth": "Apalancado / Saldo Negativo (-3.33M €)",
-    "debtAlert": "Saldo en descubierto (-3.33M €). Consume el 19.9% del límite de crédito permitido (16.74M €). Exige ventas antes de puntuar.",
-    "projectedScore": 53,
-    "formation": "4-5-1",
-    "tacticDescription": "Estructura 4-5-1 orientada a maximizar 53 puntos según plantilla disponible.",
+    "squadValue": 63460000,
+    "playerCount": 16,
+    "financialHealth": "Solvente Ajustado (+94k € en Caja)",
+    "debtAlert": "Saldo positivo (+94k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
+    "projectedScore": 52,
+    "formation": "3-5-2",
+    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 52 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 245 puntos acumulados (81.7 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (66.97M €).",
+      "Patrimonio de plantilla consolidado en Primera (63.46M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -3.33M € que obliga a vender piezas."
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -34,39 +34,39 @@
     ],
     "recommendations": [
       {
-        "name": "Oluwaseyi",
-        "pos": "Delantero",
-        "price": 740000,
-        "reason": "Refuerzo de ataque (0.74M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+        "name": "Abdel Abqar",
+        "pos": "Defensa",
+        "price": 400000,
+        "reason": "Zaguero de jerarquía (0.40M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
       },
       {
         "name": "Jofre Carreras",
         "pos": "Centrocampista",
         "price": 320000,
-        "reason": "Centrocampista con llegada (0.32M €) para asociarse con Bellingham y dominar la posesión."
+        "reason": "Oportunidad de mercado (0.32M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       },
       {
-        "name": "Abdel Abqar",
+        "name": "De Haas",
         "pos": "Defensa",
-        "price": 400000,
-        "reason": "Oportunidad de mercado (0.40M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "price": 650000,
+        "reason": "Pieza competitiva en el mercado (0.65M €) adaptable al esquema 3-5-2."
       }
     ],
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+7.1%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 148889787,
-      "totalReceived": 123106700,
+      "totalReceived": 126533500,
       "purchasesCount": 37,
-      "salesCount": 33,
-      "estimatedCash": -3333087,
+      "salesCount": 36,
+      "estimatedCash": 93713,
       "prizesEarned": 2450000,
-      "maxCreditLimit": 16742500,
-      "netWealth": 63636913,
-      "analysis": "Operativa histórica de 37 compras (148.9M €) y 33 ventas (123.1M €). Dinero total rotado: 272.0M € con sobrepuja media de +7.1%."
+      "maxCreditLimit": 15865000,
+      "netWealth": 63553713,
+      "analysis": "Operativa histórica de 37 compras (148.9M €) y 36 ventas (126.5M €). Dinero total rotado: 275.4M € con sobrepuja media de +7.1%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -975,6 +975,48 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-09-11T00:55:59+02:00"
+        },
+        {
+          "playerName": "Quagliata",
+          "price": 1327600,
+          "marketValue": 1327600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-09-11T04:36:36+02:00"
+        },
+        {
+          "playerName": "Iker Muñoz",
+          "price": 1658200,
+          "marketValue": 1658200,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-09-11T04:36:36+02:00"
+        },
+        {
+          "playerName": "Letacek",
+          "price": 441000,
+          "marketValue": 441000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-09-11T04:36:36+02:00"
         }
       ]
     },
@@ -1048,23 +1090,6 @@
         "image": "/media/players/3619.png"
       },
       {
-        "id": 4047,
-        "name": "Quagliata",
-        "position": "defender",
-        "price": 1380000,
-        "points": 0,
-        "expectedPoints": 2.6,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4047.png"
-      },
-      {
         "id": 3444,
         "name": "Bellingham",
         "position": "midfielder",
@@ -1133,10 +1158,10 @@
         "image": "/media/players/3311.png"
       },
       {
-        "id": 3394,
-        "name": "Iker Muñoz",
+        "id": 4151,
+        "name": "Harvey Elliot",
         "position": "midfielder",
-        "price": 1680000,
+        "price": 3940000,
         "points": 0,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -1147,7 +1172,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/3394.png"
+        "image": "/media/players/4151.png"
       },
       {
         "id": 4058,
@@ -1165,15 +1190,14 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/4058.png"
-      }
-    ],
-    "bench": [
+      },
       {
-        "id": 3660,
-        "name": "Letacek",
-        "position": "keeper",
-        "price": 450000,
+        "id": 3557,
+        "name": "Otorbi",
+        "position": "striker",
+        "price": 870000,
         "points": 0,
+        "expectedPoints": 2,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -1182,8 +1206,10 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/3660.png"
-      },
+        "image": "/media/players/3557.png"
+      }
+    ],
+    "bench": [
       {
         "id": 2331,
         "name": "Álvaro Ferllo",
@@ -1217,22 +1243,6 @@
         "image": "/media/players/3512.png"
       },
       {
-        "id": 4151,
-        "name": "Harvey Elliot",
-        "position": "midfielder",
-        "price": 3940000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4151.png"
-      },
-      {
         "id": 3800,
         "name": "Alex Marchal",
         "position": "midfielder",
@@ -1263,22 +1273,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3949.png"
-      },
-      {
-        "id": 3557,
-        "name": "Otorbi",
-        "position": "striker",
-        "price": 870000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3557.png"
       },
       {
         "id": 3145,
@@ -2671,23 +2665,6 @@
         "image": "/media/players/2876.png"
       },
       {
-        "id": 2491,
-        "name": "Gorosabel",
-        "position": "defender",
-        "price": 460000,
-        "points": 0,
-        "expectedPoints": 0.3,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2491.png"
-      },
-      {
         "id": 2918,
         "name": "Jon Pacheco",
         "position": "defender",
@@ -2703,6 +2680,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2918.png"
+      },
+      {
+        "id": 2491,
+        "name": "Gorosabel",
+        "position": "defender",
+        "price": 460000,
+        "points": 0,
+        "expectedPoints": 0.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/2491.png"
       },
       {
         "id": 2969,
@@ -5065,20 +5059,20 @@
     "crest": "/media/crests/ana.svg",
     "pos": 8,
     "points": 138,
-    "squadValue": 47250000,
-    "playerCount": 15,
-    "financialHealth": "Apalancado / Saldo Negativo (-3.56M €)",
-    "debtAlert": "Saldo en descubierto (-3.56M €). Consume el 30.1% del límite de crédito permitido (11.81M €). Exige ventas antes de puntuar.",
-    "projectedScore": 55,
-    "formation": "4-4-2",
-    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 55 puntos según plantilla disponible.",
+    "squadValue": 43030000,
+    "playerCount": 13,
+    "financialHealth": "Solvente Ajustado (+547k € en Caja)",
+    "debtAlert": "Saldo positivo (+547k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
+    "projectedScore": 49,
+    "formation": "3-5-2",
+    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 49 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -3.56M € que obliga a vender piezas."
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -5092,39 +5086,39 @@
     ],
     "recommendations": [
       {
-        "name": "Jofre Carreras",
-        "pos": "Centrocampista",
-        "price": 320000,
-        "reason": "Centrocampista con llegada (0.32M €) para asociarse con Adeyemi y dominar la posesión."
-      },
-      {
-        "name": "Emil Audero",
-        "pos": "Portero",
-        "price": 1410000,
-        "reason": "Alternativa para la portería (1.41M €) para asegurar titularidad y rotación fiable."
+        "name": "Oluwaseyi",
+        "pos": "Delantero",
+        "price": 740000,
+        "reason": "Refuerzo de ataque (0.74M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
       },
       {
         "name": "Abdel Abqar",
         "pos": "Defensa",
         "price": 400000,
-        "reason": "Oportunidad de mercado (0.40M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "reason": "Zaguero de jerarquía (0.40M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
+      },
+      {
+        "name": "Jofre Carreras",
+        "pos": "Centrocampista",
+        "price": 320000,
+        "reason": "Oportunidad de mercado (0.32M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       }
     ],
     "speculation": {
-      "score": 92,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "score": 83,
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+14.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 65934001,
-      "totalReceived": 40994700,
+      "totalReceived": 45101300,
       "purchasesCount": 15,
-      "salesCount": 15,
-      "estimatedCash": -3559301,
+      "salesCount": 17,
+      "estimatedCash": 547299,
       "prizesEarned": 1380000,
-      "maxCreditLimit": 11812500,
-      "netWealth": 43690699,
-      "analysis": "Operativa histórica de 15 compras (65.9M €) y 15 ventas (41.0M €). Dinero total rotado: 106.9M € con sobrepuja media de +14.2%."
+      "maxCreditLimit": 10757500,
+      "netWealth": 43577299,
+      "analysis": "Operativa histórica de 15 compras (65.9M €) y 17 ventas (45.1M €). Dinero total rotado: 111.0M € con sobrepuja media de +14.2%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -5537,6 +5531,34 @@
           "seller": "Ana",
           "buyer": "Computer",
           "date": "2026-09-10T04:34:51+02:00"
+        },
+        {
+          "playerName": "Lucas Noubi",
+          "price": 2478100,
+          "marketValue": 2478100,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Ana",
+          "buyer": "Computer",
+          "date": "2026-09-11T04:36:36+02:00"
+        },
+        {
+          "playerName": "Ezequiel Ponce",
+          "price": 1628500,
+          "marketValue": 1628500,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Ana",
+          "buyer": "Computer",
+          "date": "2026-09-11T04:36:36+02:00"
         }
       ]
     },
@@ -5610,23 +5632,6 @@
         "image": "/media/players/3244.png"
       },
       {
-        "id": 4046,
-        "name": "Lucas Noubi",
-        "position": "defender",
-        "price": 2560000,
-        "points": 0,
-        "expectedPoints": 4.1,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4046.png"
-      },
-      {
         "id": 2313,
         "name": "Marc Roca",
         "position": "midfielder",
@@ -5695,6 +5700,23 @@
         "image": "/media/players/4074.png"
       },
       {
+        "id": 3400,
+        "name": "Mario Martín",
+        "position": "midfielder",
+        "price": 740000,
+        "points": 0,
+        "expectedPoints": 1.6,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3400.png"
+      },
+      {
         "id": 4098,
         "name": "Adeyemi",
         "position": "striker",
@@ -5712,12 +5734,12 @@
         "image": "/media/players/4098.png"
       },
       {
-        "id": 2293,
-        "name": "Ezequiel Ponce",
+        "id": 4028,
+        "name": "Abiel Osorio",
         "position": "striker",
-        "price": 1660000,
+        "price": 370000,
         "points": 0,
-        "expectedPoints": 4.1,
+        "expectedPoints": 0.3,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -5726,26 +5748,10 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/2293.png"
+        "image": "/media/players/4028.png"
       }
     ],
     "bench": [
-      {
-        "id": 3400,
-        "name": "Mario Martín",
-        "position": "midfielder",
-        "price": 740000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3400.png"
-      },
       {
         "id": 2981,
         "name": "Josan",
@@ -5777,22 +5783,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3888.png"
-      },
-      {
-        "id": 4028,
-        "name": "Abiel Osorio",
-        "position": "striker",
-        "price": 370000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4028.png"
       }
     ],
     "isMe": false
