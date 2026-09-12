@@ -37,16 +37,16 @@
   "projections": {
     "nextMatchday": {
       "matchday": "Jornada 6",
-      "expectedPoints": 51,
-      "expectedPrize": 510000,
-      "projectedCashAfter": 790288
+      "expectedPoints": 50,
+      "expectedPrize": 500000,
+      "projectedCashAfter": 780288
     },
     "monthlyOutlook": {
       "jornadas": 4,
-      "projectedPoints": 204,
-      "projectedPrize": 2044000,
+      "projectedPoints": 200,
+      "projectedPrize": 2004000,
       "estimatedSales": 980000,
-      "totalProjectedLiquidity": 3304288
+      "totalProjectedLiquidity": 3264288
     },
     "financialPolicy": {
       "reserveRequirement": "Saldo Positivo Obligatorio (Corte Jornada)",
@@ -69,18 +69,6 @@
     },
     {
       "pos": 2,
-      "teamName": "Racing de Oslo",
-      "owner": "Mateo Oslomany (TÚ)",
-      "squadValue": 53660000,
-      "points": 188,
-      "totalPrize": 1880000,
-      "estimatedCash": 280288,
-      "totalWealth": 53940288,
-      "power": "Solvente (0 € Deuda)",
-      "isMe": true
-    },
-    {
-      "pos": 3,
       "teamName": "Pachangueros F.C.",
       "owner": "Pachangueros F.C.",
       "squadValue": 58810000,
@@ -92,14 +80,26 @@
       "isMe": false
     },
     {
+      "pos": 3,
+      "teamName": "Racing de Oslo",
+      "owner": "Mateo Oslomany (TÚ)",
+      "squadValue": 53660000,
+      "points": 188,
+      "totalPrize": 1880000,
+      "estimatedCash": 280288,
+      "totalWealth": 53940288,
+      "power": "Solvente (0 € Deuda)",
+      "isMe": true
+    },
+    {
       "pos": 4,
-      "teamName": "M4 TEAM",
-      "owner": "M4 TEAM",
-      "squadValue": 54050000,
-      "points": 170,
-      "totalPrize": 1700000,
-      "estimatedCash": 1621500,
-      "totalWealth": 55671500,
+      "teamName": "Puente Avios FC",
+      "owner": "Puente Avios FC",
+      "squadValue": 49270000,
+      "points": 139,
+      "totalPrize": 1390000,
+      "estimatedCash": 1478100,
+      "totalWealth": 50748100,
       "power": "Patrimonio Medio",
       "isMe": false
     },
@@ -117,13 +117,13 @@
     },
     {
       "pos": 6,
-      "teamName": "Puente Avios FC",
-      "owner": "Puente Avios FC",
-      "squadValue": 49270000,
-      "points": 139,
-      "totalPrize": 1390000,
-      "estimatedCash": 1478100,
-      "totalWealth": 50748100,
+      "teamName": "M4 TEAM",
+      "owner": "M4 TEAM",
+      "squadValue": 54050000,
+      "points": 170,
+      "totalPrize": 1700000,
+      "estimatedCash": 1621500,
+      "totalWealth": 55671500,
       "power": "Patrimonio Medio",
       "isMe": false
     },
@@ -143,28 +143,16 @@
       "pos": 8,
       "teamName": "Ana",
       "owner": "Ana",
-      "squadValue": 52090000,
+      "squadValue": 51320000,
       "points": 138,
       "totalPrize": 1380000,
-      "estimatedCash": 1562700,
-      "totalWealth": 53652700,
+      "estimatedCash": 1539600,
+      "totalWealth": 52859600,
       "power": "Patrimonio Medio",
       "isMe": false
     },
     {
       "pos": 9,
-      "teamName": "Suances nin",
-      "owner": "Suances nin",
-      "squadValue": 48600000,
-      "points": 129,
-      "totalPrize": 1290000,
-      "estimatedCash": 1458000,
-      "totalWealth": 50058000,
-      "power": "Patrimonio Medio",
-      "isMe": false
-    },
-    {
-      "pos": 10,
       "teamName": "Melano Plabloroza",
       "owner": "Melano Plabloroza",
       "squadValue": 43770000,
@@ -173,6 +161,18 @@
       "estimatedCash": 1313100,
       "totalWealth": 45083100,
       "power": "Patrimonio Regular",
+      "isMe": false
+    },
+    {
+      "pos": 10,
+      "teamName": "Suances nin",
+      "owner": "Suances nin",
+      "squadValue": 48600000,
+      "points": 129,
+      "totalPrize": 1290000,
+      "estimatedCash": 1458000,
+      "totalWealth": 50058000,
+      "power": "Patrimonio Medio",
       "isMe": false
     }
   ]
