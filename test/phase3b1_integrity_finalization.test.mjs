@@ -11,6 +11,8 @@
  * 7. ACTUAL_BASELINE does not special-case Racing optimizeLineup score in Monte Carlo.
  * 8. EXPECTED_AVAILABLE_XI returns NOT_REPORTABLE_ASYMMETRIC_INPUTS without comparable rival XI data.
  * 9. Production model status gate is enforced (HEURISTIC_BASELINE, not unvetted experimental).
+ * 10. xiForecastAudit.restOfSeasonAggregateExpectedPpm === ACTUAL_BASELINE Racing meanPpm (loadLiveClubBaselines).
+ * 11. modelCalibration.playerModel.selectedK === argmin(candidateMetrics by MAE, then RMSE).
  */
 
 import test from 'node:test';
@@ -20,7 +22,8 @@ import { CalibrationEngine } from '../src/calibrationEngine.js';
 import { ComunioEngine } from '../src/engine.js';
 import {
   runChampionshipSimulation,
-  calibrateClubBaseline
+  calibrateClubBaseline,
+  loadLiveClubBaselines
 } from '../src/championshipSimulator.js';
 
 // ── TEST 1: ZERO SYNTHETIC TEAM OBSERVATIONS IN PRODUCTION CALIBRATION ────────
@@ -102,6 +105,12 @@ test('Phase 3B.1 Rule 6: selectedK is derived programmatically and labeled HEURI
   assert.ok(typeof kResult.selectedK === 'number', 'selectedK must be a valid number');
   assert.equal(kResult.status, 'HEURISTIC_PRIOR', 'Shrinkage K status must be HEURISTIC_PRIOR');
   assert.ok(kResult.candidateMetrics, 'Must report candidateMetrics for all K');
+
+  const candidateList = Object.values(kResult.candidateMetrics);
+  const minMae = Math.min(...candidateList.map(c => c.mae));
+  const winningCandidate = candidateList.find(c => c.mae === minMae);
+
+  assert.equal(kResult.selectedK, winningCandidate.k, 'selectedK must equal argmin(MAE)');
 });
 
 // ── TEST 7: ACTUAL_BASELINE DOES NOT SPECIAL-CASE RACING XI SCORE ────────────
@@ -142,4 +151,35 @@ test('Phase 3B.1 Rule 9: Experimental model cannot silently replace production b
   assert.equal(sim.productionModelVersion, 'RDO-FORECAST-3.0');
   assert.equal(sim.productionModelStatus, 'HEURISTIC_BASELINE');
   assert.equal(sim.experimentalModelVersion, 'RDO-EXP-3.1');
+});
+
+// ── TEST 10: SINGLE SOURCE OF TRUTH FOR REST-OF-SEASON AGGREGATE PPM ─────────
+test('Phase 3B.1 Rule 10: xiForecastAudit.restOfSeasonAggregateExpectedPpm === ACTUAL_BASELINE Racing meanPpm', () => {
+  const audit = JSON.parse(fs.readFileSync('data/xiForecastAudit.json', 'utf8'));
+  const clubs = loadLiveClubBaselines();
+  const racingClub = clubs.find(c => c.id === 21163822 || c.name?.includes('Racing'));
+
+  assert.ok(racingClub, 'Racing club must exist in live baselines');
+  assert.equal(
+    audit.restOfSeasonAggregateExpectedPpm,
+    racingClub.meanPpm,
+    `Audit aggregate PPM (${audit.restOfSeasonAggregateExpectedPpm}) must strictly equal live baseline meanPpm (${racingClub.meanPpm})`
+  );
+});
+
+// ── TEST 11: PROGRAMMATIC K IN CALIBRATION REPORT ─────────────────────────────
+test('Phase 3B.1 Rule 11: modelCalibration.playerModel.selectedK === argmin(candidateMetrics by MAE, then RMSE)', () => {
+  const calEngine = new CalibrationEngine();
+  const report = calEngine.runFullCalibrationProtocol();
+  const kResult = calEngine.optimizeShrinkageK();
+
+  const candidateList = Object.values(kResult.candidateMetrics);
+  const sorted = [...candidateList].sort((a, b) => a.mae - b.mae || a.rmse - b.rmse);
+  const expectedK = sorted[0].k;
+
+  assert.equal(
+    report.playerModel.selectedK,
+    expectedK,
+    `Calibration report selectedK (${report.playerModel.selectedK}) must equal optimal candidate (${expectedK})`
+  );
 });
