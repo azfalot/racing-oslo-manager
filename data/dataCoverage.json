@@ -1,0 +1,122 @@
+{
+  "inventoryDate": "2026-09-13T22:04:00.000Z",
+  "season": "2026/2027",
+  "league": "Segunda Regional Cántabra",
+  "currentMatchday": 5,
+  "datasets": {
+    "historicalTransactions": {
+      "path": "web/src/data/historicalTransactions.json",
+      "firstTimestamp": "2026-08-20T04:30:00+02:00",
+      "lastTimestamp": "2026-09-13T04:35:57+02:00",
+      "observations": 314,
+      "matchdaysCovered": [1, 2, 3, 4, 5],
+      "clubsCovered": [
+        "Fermín Gadura F.C.",
+        "Racing de Oslo",
+        "M4 TEAM",
+        "Pachangueros F.C.",
+        "Amigos de NIN",
+        "Hache FC",
+        "Puente Avios FC",
+        "Ana",
+        "Suances nin",
+        "Melano Plabloroza",
+        "Computer"
+      ],
+      "missingnessPct": 0.0,
+      "suitabilityForBacktesting": "HIGH - Full market transaction history with exact purchase prices, market values, overbids and dates."
+    },
+    "rivalsAudit": {
+      "path": "web/src/data/rivalsAudit.json",
+      "firstTimestamp": "2026-08-20T00:00:00Z",
+      "lastTimestamp": "2026-09-13T21:00:00Z",
+      "observations": 10,
+      "matchdaysCovered": [1, 2, 3, 4, 5],
+      "clubsCovered": [
+        "Fermín Gadura F.C.",
+        "Racing de Oslo",
+        "M4 TEAM",
+        "Pachangueros F.C.",
+        "Amigos de NIN",
+        "Hache FC",
+        "Puente Avios FC",
+        "Ana",
+        "Suances nin",
+        "Melano Plabloroza"
+      ],
+      "missingnessPct": 0.0,
+      "suitabilityForBacktesting": "HIGH - Full team-level points, squad values, active/injured starter rosters, tactical formations, and financial debt states across all 10 clubs."
+    },
+    "playerPointHistories": {
+      "path": "web/src/data/squad.json & last_squad.json",
+      "firstTimestamp": "2014-08-15T00:00:00Z",
+      "lastTimestamp": "2026-09-13T20:00:00Z",
+      "observations": 116,
+      "matchdaysCovered": "12 LaLiga Seasons (14/15 through 25/26)",
+      "clubsCovered": ["Racing de Oslo", "LaLiga"],
+      "missingnessPct": 12.5,
+      "suitabilityForBacktesting": "HIGH - Multi-season official Comunio historical points per player for calibrating Bayesian priors, season PPM decay, and position benchmarks."
+    },
+    "matchdayPredictions": {
+      "path": "matchday_predictions.json",
+      "firstTimestamp": "2026-09-04T18:30:48.366Z",
+      "lastTimestamp": "2026-09-11T18:30:19.813Z",
+      "observations": 2,
+      "matchdaysCovered": [3, 5],
+      "clubsCovered": ["Racing de Oslo"],
+      "missingnessPct": 0.0,
+      "suitabilityForBacktesting": "MEDIUM - Lineup projection records with confirmed starting 11 expected points before matchday deadlines."
+    },
+    "squadSnapshots": {
+      "path": "web/src/data/squad.json & last_squad.json",
+      "firstTimestamp": "2026-08-20T00:00:00Z",
+      "lastTimestamp": "2026-09-13T21:00:00Z",
+      "observations": 15,
+      "matchdaysCovered": [1, 2, 3, 4, 5],
+      "clubsCovered": ["Racing de Oslo"],
+      "missingnessPct": 0.0,
+      "suitabilityForBacktesting": "HIGH - Player positions, current prices, availability, yellow cards, injury flags, and multi-season points."
+    },
+    "newsFeed": {
+      "path": "web/src/data/news.json",
+      "firstTimestamp": "2026-08-20T09:43:00Z",
+      "lastTimestamp": "2026-09-13T19:35:00Z",
+      "observations": 170,
+      "matchdaysCovered": [1, 2, 3, 4, 5],
+      "clubsCovered": "All 10 clubs",
+      "missingnessPct": 0.0,
+      "suitabilityForBacktesting": "MEDIUM - Timestamped transfer announcements and signing valuations across the entire league."
+    },
+    "benchTrends": {
+      "path": "web/src/data/benchTrends.json",
+      "firstTimestamp": "2026-09-13T19:35:53.797Z",
+      "lastTimestamp": "2026-09-13T19:35:53.797Z",
+      "observations": 10,
+      "matchdaysCovered": [5],
+      "clubsCovered": ["Racing de Oslo"],
+      "missingnessPct": 0.0,
+      "suitabilityForBacktesting": "LOW - Single current snapshot of bench vs starter momentum points."
+    },
+    "auditLogs": {
+      "path": "audit_log.json & comunio_actions_log.json",
+      "firstTimestamp": "2026-08-20T09:43:43.822Z",
+      "lastTimestamp": "2026-09-13T21:00:00.000Z",
+      "observations": 198,
+      "matchdaysCovered": [1, 2, 3, 4, 5],
+      "clubsCovered": ["Racing de Oslo"],
+      "missingnessPct": 0.0,
+      "suitabilityForBacktesting": "MEDIUM - Bot execution telemetry, bid placements, offer evaluations, and HTTP action timestamps."
+    }
+  },
+  "summary": {
+    "totalDatasets": 8,
+    "totalObservations": 829,
+    "backtestFeasibility": "FEASIBLE_WITH_STRICT_TEMPORAL_BOUNDS",
+    "leakageControls": [
+      "All historical prediction evaluations use only data timestamps prior to the target matchday deadline",
+      "Player predictions use prior season points and pre-matchday averages only",
+      "Team forecast walk-forward tests use progressive expanding windows (J1-J2 -> J3, J1-J3 -> J4, J1-J4 -> J5)",
+      "Zero future scoring information is accessible to training/calibration routines"
+    ]
+  }
+}

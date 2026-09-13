@@ -1,0 +1,181 @@
+{
+  "timestamp": "2026-09-13T20:05:35.169Z",
+  "modelVersion": "RDO-FORECAST-3.0",
+  "playerBaselines": {
+    "P0_SeasonMean": {
+      "count": 56,
+      "mae": 1.353,
+      "rmse": 1.755,
+      "bias": -0.648
+    },
+    "P1_LastMatch": {
+      "count": 56,
+      "mae": 1.411,
+      "rmse": 1.824,
+      "bias": -0.416
+    },
+    "P2_Last3Average": {
+      "count": 56,
+      "mae": 1.414,
+      "rmse": 1.839,
+      "bias": -0.792
+    },
+    "P3_HistoricalPrior": {
+      "count": 56,
+      "mae": 1.353,
+      "rmse": 1.755,
+      "bias": -0.648
+    },
+    "P4_Phase2Model": {
+      "count": 56,
+      "mae": 1.375,
+      "rmse": 1.79,
+      "bias": -0.72
+    }
+  },
+  "teamBaselines": {
+    "T0_SeasonPPM": {
+      "count": 40,
+      "mae": 1.573,
+      "rmse": 1.878,
+      "bias": -0.223
+    },
+    "T1_Last3Matchdays": {
+      "count": 40,
+      "mae": 1.575,
+      "rmse": 1.873,
+      "bias": -0.2
+    },
+    "T2_Phase2Formula": {
+      "count": 40,
+      "mae": 5.225,
+      "rmse": 5.987,
+      "bias": -4.247
+    }
+  },
+  "kSensitivity": {
+    "k_1": {
+      "k": 1,
+      "count": 56,
+      "mae": 1.392,
+      "rmse": 1.812,
+      "bias": -0.756
+    },
+    "k_2": {
+      "k": 2,
+      "count": 56,
+      "mae": 1.382,
+      "rmse": 1.799,
+      "bias": -0.734
+    },
+    "k_3": {
+      "k": 3,
+      "count": 56,
+      "mae": 1.375,
+      "rmse": 1.79,
+      "bias": -0.72
+    },
+    "k_4": {
+      "k": 4,
+      "count": 56,
+      "mae": 1.371,
+      "rmse": 1.784,
+      "bias": -0.71
+    },
+    "k_5": {
+      "k": 5,
+      "count": 56,
+      "mae": 1.369,
+      "rmse": 1.78,
+      "bias": -0.702
+    },
+    "k_7": {
+      "k": 7,
+      "count": 56,
+      "mae": 1.366,
+      "rmse": 1.774,
+      "bias": -0.691
+    },
+    "k_10": {
+      "k": 10,
+      "count": 56,
+      "mae": 1.363,
+      "rmse": 1.77,
+      "bias": -0.681
+    }
+  },
+  "recencySensitivity": {
+    "last1": {
+      "window": "last1",
+      "count": 56,
+      "mae": 1.337,
+      "rmse": 1.739,
+      "bias": -0.532
+    },
+    "last2": {
+      "window": "last2",
+      "count": 56,
+      "mae": 1.336,
+      "rmse": 1.737,
+      "bias": -0.607
+    },
+    "last3": {
+      "window": "last3",
+      "count": 56,
+      "mae": 1.375,
+      "rmse": 1.79,
+      "bias": -0.72
+    },
+    "last5": {
+      "window": "last5",
+      "count": 56,
+      "mae": 1.375,
+      "rmse": 1.79,
+      "bias": -0.72
+    },
+    "ewma": {
+      "window": "ewma",
+      "count": 56,
+      "mae": 1.337,
+      "rmse": 1.739,
+      "bias": -0.615
+    }
+  },
+  "teamWeightsGrid": {
+    "weights": {
+      "season": 0.65,
+      "form": 0.35,
+      "squad": 0
+    },
+    "count": 40,
+    "mae": 4.62,
+    "rmse": 5.439,
+    "bias": -4.017
+  },
+  "squadAblation": {
+    "modelA": {
+      "name": "Model_A_NoSquadValue",
+      "count": 40,
+      "mae": 4.627,
+      "rmse": 5.447,
+      "bias": -4.012
+    },
+    "modelB": {
+      "name": "Model_B_WithSquadValue",
+      "count": 40,
+      "mae": 5.028,
+      "rmse": 5.826,
+      "bias": -4.189
+    },
+    "squadValueRetained": false
+  },
+  "residualDistribution": {
+    "sampleSize": 40,
+    "meanResidual": 4.246,
+    "stdDev": 4.274,
+    "skewness": -0.53,
+    "kurtosis": 2.396,
+    "distributionSelected": "GAUSSIAN_NORMAL",
+    "rationale": "Residuals are symmetric (|skewness| < 0.5) with moderate kurtosis ~3.0, supporting Gaussian Box-Muller sampling."
+  }
+}

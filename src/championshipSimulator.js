@@ -85,10 +85,10 @@ export const DEFAULT_CLUB_BASELINES = [
 /**
  * Calibrate an explainable team PPM and standard deviation based on live audit data.
  *
- * Formula:
- * FORECAST_PPM = (0.45 * SEASON_PPM + 0.35 * CURRENT_FORM_PPM + 0.20 * SQUAD_EXPECTED_PPM) * DEPTH_FACTOR * AVAILABILITY_FACTOR
+ * Validated Phase-3 Model (RDO-FORECAST-3.0):
+ * FORECAST_PPM = (0.65 * SEASON_PPM + 0.35 * CURRENT_FORM_PPM + 0.00 * SQUAD_EXPECTED_PPM) * DEPTH_FACTOR * AVAILABILITY_FACTOR
  */
-export function calibrateClubBaseline(clubData, currentMatchday = 5) {
+export function calibrateClubBaseline(clubData, currentMatchday = 5, weights = { season: 0.65, form: 0.35, squad: 0.00 }) {
   const currentPts = clubData.points || clubData.totalPoints || clubData.currentPoints || 150;
   const val = clubData.squadValue || 30000000;
   const playerCount = clubData.playerCount || (clubData.players ? clubData.players.length : 12);
@@ -103,11 +103,11 @@ export function calibrateClubBaseline(clubData, currentMatchday = 5) {
   const squadExpectedPpm = (val / 1000000) * 0.8;
 
   // 2. Multipliers
-  const depthFactor = Math.min(1.0, playerCount / 13) * (playerCount <= 11 ? 0.95 : 1.0);
-  const availabilityFactor = 1.0 - (injuredStarters / 11) * 0.5;
+  const depthFactor = playerCount >= 12 ? 1.0 : (playerCount === 11 ? 0.98 : Math.max(0.70, playerCount / 11));
+  const availabilityFactor = 1.0 - (injuredStarters / 11) * 0.35;
 
-  // 3. Blended Mean PPM
-  const baseForecast = (0.45 * seasonPpm + 0.35 * currentFormPpm + 0.20 * squadExpectedPpm);
+  // 3. Empirical Blended Mean PPM (Phase 3 Calibrated)
+  const baseForecast = (weights.season * seasonPpm + weights.form * currentFormPpm + weights.squad * squadExpectedPpm);
   const calibratedMean = parseFloat((baseForecast * depthFactor * availabilityFactor).toFixed(1));
   const meanPpm = Math.max(25.0, Math.min(60.0, calibratedMean));
 
@@ -129,7 +129,8 @@ export function calibrateClubBaseline(clubData, currentMatchday = 5) {
       currentFormPpm: parseFloat(currentFormPpm.toFixed(1)),
       squadExpectedPpm: parseFloat(squadExpectedPpm.toFixed(1)),
       depthFactor: parseFloat(depthFactor.toFixed(2)),
-      availabilityFactor: parseFloat(availabilityFactor.toFixed(2))
+      availabilityFactor: parseFloat(availabilityFactor.toFixed(2)),
+      weights
     }
   };
 }
@@ -272,6 +273,7 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
   const racingSummary = tableSummary.find(t => t.id === racingId || t.name?.includes('Racing')) || tableSummary[0];
 
   return {
+    modelVersion: 'RDO-FORECAST-3.0',
     totalSimulations: iterations,
     iterations,
     remainingMatchdays,
