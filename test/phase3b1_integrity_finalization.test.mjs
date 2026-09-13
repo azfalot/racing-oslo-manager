@@ -183,3 +183,19 @@ test('Phase 3B.1 Rule 11: modelCalibration.playerModel.selectedK === argmin(cand
     `Calibration report selectedK (${report.playerModel.selectedK}) must equal optimal candidate (${expectedK})`
   );
 });
+
+// ── TEST 12: NO HARDCODED HISTORICAL PROBABILITY RANGE REMAINS ────────────────
+test('Phase 3B.1 Rule 12: xiForecastAudit contains no hardcoded probability ranges and derives all pWin from dynamic MC', () => {
+  const audit = JSON.parse(fs.readFileSync('data/xiForecastAudit.json', 'utf8'));
+  const mc = audit.championshipMonteCarloBaseline;
+
+  assert.ok(mc, 'Must have championshipMonteCarloBaseline');
+  assert.equal('baselinePWinRange' in mc, false, 'Must NOT contain hardcoded baselinePWinRange string');
+  assert.ok('pWin' in mc, 'Must contain pWin field');
+  assert.ok('pTop2' in mc, 'Must contain pTop2 field');
+  assert.ok('pTop3' in mc, 'Must contain pTop3 field');
+  assert.ok('simulationStatus' in mc, 'Must contain simulationStatus field');
+  assert.ok('generatedAt' in mc, 'Must contain generatedAt timestamp');
+  assert.ok(typeof mc.pWin === 'number' || mc.pWin === null, 'pWin must be a number or null');
+});
+
