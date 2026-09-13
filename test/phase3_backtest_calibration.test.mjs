@@ -3,15 +3,14 @@
  *
  * Tests:
  * 1. Zero Future Leakage in observation building
- * 2. Chronological expanding window walk-forward validation
+ * 2. Chronological expanding window walk-forward validation (tested on isolated synthetic fixture)
  * 3. Deterministic calibration repeatability
  * 4. Model coefficient sum constraint (wSeason + wForm + wSquad == 1.0)
  * 5. Non-negative weights constraint (all wi >= 0)
  * 6. Graceful fallback under small / missing sample sizes
  * 7. Model metadata completeness (RDO-FORECAST-3.0 schema)
- * 8. Baseline comparison (Phase-3 calibrated beats naive average and Phase-2)
- * 9. Out-of-sample error minimization
- * 10. Championship simulator consumes calibrated parameters
+ * 8. Baseline comparison on test fixtures
+ * 9. Simulation consumes calibrated parameters
  */
 
 import test from 'node:test';
@@ -26,7 +25,7 @@ import {
 test('1. Zero Future Leakage: Historical observations contain only pre-deadline information', () => {
   const calEngine = new CalibrationEngine();
   const playerObs = calEngine.buildPlayerObservations();
-  const clubObs = calEngine.buildClubObservations();
+  const clubObs = calEngine.buildSyntheticClubObservationsForTesting();
 
   assert.ok(playerObs.length > 0, 'Must extract player observations');
   assert.ok(clubObs.length > 0, 'Must extract club observations');
@@ -47,7 +46,7 @@ test('1. Zero Future Leakage: Historical observations contain only pre-deadline 
 // ── TEST 2: CHRONOLOGICAL WALK-FORWARD SPLIT ──────────────────────────────────
 test('2. Chronological Walk-Forward: Evaluates sequential expanding windows without future shuffling', () => {
   const calEngine = new CalibrationEngine();
-  const clubObs = calEngine.buildClubObservations();
+  const clubObs = calEngine.buildSyntheticClubObservationsForTesting();
 
   const matchdays = [...new Set(clubObs.map(o => o.matchday))].sort((a, b) => a - b);
   assert.deepEqual(matchdays, [2, 3, 4, 5], 'Must evaluate strictly expanding windows from J2 to J5');
@@ -67,14 +66,15 @@ test('3. Deterministic Calibration: Identical runs produce bit-for-bit identical
   const report2 = calEngine2.runFullCalibrationProtocol();
 
   assert.equal(report1.playerModel.bestMAE, report2.playerModel.bestMAE, 'Player MAE must be identical');
-  assert.equal(report1.teamModel.bestMAE, report2.teamModel.bestMAE, 'Team MAE must be identical');
+  assert.equal(report1.teamModel.status, report2.teamModel.status, 'Team status must be identical');
   assert.deepEqual(report1.teamModel.selectedWeights, report2.teamModel.selectedWeights, 'Weights must be identical');
 });
 
 // ── TEST 4: COEFFICIENT SUM CONSTRAINT ────────────────────────────────────────
 test('4. Coefficient Sum Constraint: Forecast weights sum strictly to 1.0', () => {
   const calEngine = new CalibrationEngine();
-  const teamWeightsResult = calEngine.optimizeTeamForecastWeights();
+  const testObs = calEngine.buildSyntheticClubObservationsForTesting();
+  const teamWeightsResult = calEngine.optimizeTeamForecastWeights(testObs);
   const weights = teamWeightsResult.bestModel.weights;
 
   const sum = parseFloat((weights.season + weights.form + weights.squad).toFixed(4));
@@ -84,7 +84,8 @@ test('4. Coefficient Sum Constraint: Forecast weights sum strictly to 1.0', () =
 // ── TEST 5: NON-NEGATIVE WEIGHTS CONSTRAINT ───────────────────────────────────
 test('5. Non-Negative Weights: All model weights are non-negative', () => {
   const calEngine = new CalibrationEngine();
-  const teamWeightsResult = calEngine.optimizeTeamForecastWeights();
+  const testObs = calEngine.buildSyntheticClubObservationsForTesting();
+  const teamWeightsResult = calEngine.optimizeTeamForecastWeights(testObs);
   const weights = teamWeightsResult.bestModel.weights;
 
   assert.ok(weights.season >= 0, 'wSeason must be >= 0');
@@ -117,15 +118,15 @@ test('7. Model Metadata Completeness: Telemetry includes RDO-FORECAST-3.0 schema
   assert.equal(report.modelVersion, 'RDO-FORECAST-3.0', 'Model version must be RDO-FORECAST-3.0');
   assert.ok(report.trainingObservations > 0, 'Must record training observations');
   assert.ok(report.playerModel.bestMAE > 0, 'Must record player MAE');
-  assert.ok(report.teamModel.bestMAE > 0, 'Must record team MAE');
+  assert.equal(report.teamModel.status, 'INSUFFICIENT_DATA', 'Must record team status');
   assert.ok(report.teamModel.selectedWeights, 'Must record team weights');
   assert.equal(report.residualDistribution.distributionSelected, 'GAUSSIAN_NORMAL', 'Must record residual distribution');
 });
 
-// ── TEST 8: BASELINE COMPARISON & OUT-OF-SAMPLE IMPROVEMENT ────────────────────
-test('8. Baseline Comparison: Calibrated team model beats Phase-2 formula and naive average', () => {
+// ── TEST 8: BASELINE COMPARISON ON TEST FIXTURES ──────────────────────────────
+test('8. Baseline Comparison: Calibrated team model beats Phase-2 formula on synthetic test fixture', () => {
   const calEngine = new CalibrationEngine();
-  const clubObs = calEngine.buildClubObservations();
+  const clubObs = calEngine.buildSyntheticClubObservationsForTesting();
   const teamBaselines = calEngine.evaluateTeamBaselines(clubObs);
   const optWeights = calEngine.optimizeTeamForecastWeights(clubObs);
 
@@ -142,11 +143,12 @@ test('8. Baseline Comparison: Calibrated team model beats Phase-2 formula and na
   );
 });
 
-// ── TEST 9: SIMULATION CONSUMES CALIBRATED PARAMETERS ──────────────────────────
+// ── TEST 9: SIMULATION INTEGRATION ───────────────────────────────────────────
 test('9. Simulation Integration: Championship simulation consumes RDO-FORECAST-3.0 metadata and weights', () => {
   const sim = runChampionshipSimulation(30, null, 500, 5, { seed: 1234 });
 
-  assert.equal(sim.modelVersion, 'RDO-FORECAST-3.0', 'Simulation must output RDO-FORECAST-3.0 metadata');
+  assert.equal(sim.productionModelVersion, 'RDO-FORECAST-3.0', 'Simulation must output productionModelVersion');
+  assert.equal(sim.productionModelStatus, 'HEURISTIC_BASELINE', 'Simulation must output productionModelStatus');
   assert.ok(sim.racing.pWin >= 0 && sim.racing.pWin <= 1, 'P(Win) must be a valid probability');
   assert.ok(sim.racingWilsonCI95.lowerPct <= sim.racingWilsonCI95.upperPct, 'Wilson CI bounds must be consistent');
 });

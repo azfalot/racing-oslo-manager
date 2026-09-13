@@ -1,51 +1,58 @@
-# 🛡️ PHASE 3B — CALIBRATION INTEGRITY AUDIT & FALSE-VALIDATION REMEDIATION REPORT
+# 🛡️ PHASE 3B / 3B.1 — CALIBRATION INTEGRITY & MODEL SELECTION AUDIT REPORT
 
 **Repository:** `azfalot/racing-oslo-manager`  
 **Audit Date:** 2026-09-13  
 **Auditor:** Quantitative Integrity & Validation System  
-**Model Version:** `RDO-FORECAST-3.0`  
-**Model Operational Status:** `EXPERIMENTAL / HEURISTIC-CALIBRATED`  
+**Production Model Version:** `RDO-FORECAST-3.0`  
+**Production Model Status:** `HEURISTIC_BASELINE`  
+**Experimental Model Version:** `RDO-EXP-3.1`  
 **Data Provenance Manifest:** [`data/calibrationDatasetManifest.json`](file:///d:/racing-oslo-manager/data/calibrationDatasetManifest.json)  
 **Starting XI Forecast Audit:** [`data/xiForecastAudit.json`](file:///d:/racing-oslo-manager/data/xiForecastAudit.json)
 
 ---
 
-## 1. Executive Summary & Epistemological Taxonomy
+## 1. Epistemological Taxonomy & Integrity Summary
 
-This audit remediates methodological over-claims and false validation artifacts identified in earlier iterations. All statements and parameters across the Racing de Oslo championship engine are now strictly classified under five rigorous categories:
-
-| Category | Definition | Items in Scope |
+| Category | Definition | Verified In-Scope Items |
 | :--- | :--- | :--- |
-| **FACT (Ground Truth)** | Directly observed from verified Comunio API, news, or transaction records with verified timestamps and source files. | • 314 historical transactions (`web/src/data/historicalTransactions.json`)<br>• 116 player historical season totals across 12 LaLiga seasons (`web/src/data/squad.json`, `web/src/data/rivalsAudit.json`)<br>• Confirmed J5 cumulative standings (Fermín: 245 pts, Racing: 188 pts, etc.)<br>• Confirmed J3 and J5 starting lineups (`data/matchday_predictions.json`) |
-| **EMPIRICALLY VALIDATED** | Parameter derived from genuine out-of-sample prediction error minimization on un-leaked historical records. | • Player multi-season prior weights ($0.50 / 0.30 / 0.20$ on seasons $t-1, t-2, t-3$)<br>• Bayesian shrinkage weight $k = 3$ on multi-season player history ($\text{MAE} = 1.353$) |
-| **HEURISTIC PRIOR** | Domain-informed rule calibrated for decision safety, explicitly flagged as a prior rather than a statistical fact. | • $P_{35}$ replacement level pricing (~500,000 € to 1.5 M€)<br>• Squad depth penalty factor ($0.95$ for 11 players; $1.0$ for $\ge 12$ players)<br>• Availability penalty ($1.0 - (\text{injuries}/11) \times 0.35$)<br>• Auto-bid guardrails (100% – 125% VM) |
-| **ASSUMPTION** | Mathematical convenience or engineering modeling premise adopted in the absence of complete joint distributions. | • Standard Normal Box-Muller transform for matchday score residuals ($\text{Status: ASSUMED\_NOT\_VALIDATED}$)<br>• Cross-team independence in Monte Carlo simulations ($\text{Assumption: INDEPENDENT}$) |
-| **INSUFFICIENT DATA** | Data that cannot be honestly observed or verified; explicitly prevented from being fabricated. | • Individual round-by-round matchday scores (J1, J2, J4) for all rival clubs (`INSUFFICIENT_DATA_FOR_EMPIRICAL_RECALIBRATION`)<br>• Empirical cross-club covariance matrix |
+| **FACT (Ground Truth)** | Directly observed from verified Comunio API, news, or transaction records. | • 314 historical transactions<br>• 116 player historical season totals over 12 LaLiga seasons<br>• Confirmed J5 standings snapshot (Fermín: 245 pts, Racing: 188 pts)<br>• Confirmed J3 and J5 pre-deadline starting lineups |
+| **EMPIRICALLY VALIDATED** | Programmatically derived from out-of-sample prediction error minimization on genuine un-leaked historical records. | • Player multi-season prior weights ($0.60 / 0.30 / 0.10$ on seasons $t-1, t-2, t-3$; $\text{MAE} = 1.353$, $\text{RMSE} = 1.754$, $\text{Bias} = -0.606$)<br>• Candidate configurations tested dynamically |
+| **HEURISTIC PRIOR** | Domain-informed rule calibrated for decision safety, explicitly flagged as a prior rather than a statistical fact. | • $P_{35}$ replacement level pricing (~500k € to 1.5 M€)<br>• Bayesian shrinkage weight $k = 3$ (labeled `HEURISTIC_PRIOR` due to cross-season sample limitations)<br>• Squad depth penalty factor ($0.95$ for 11 players; $1.0$ for $\ge 12$ players)<br>• Availability penalty ($1.0 - (\text{injuries}/11) \times 0.35$)<br>• Auto-bid guardrails (100% – 125% VM) |
+| **ASSUMPTION** | Mathematical convenience or engineering modeling premise adopted in the absence of complete joint distributions. | • Standard Normal Box-Muller transform for matchday score residuals ($\text{Status: ASSUMED\_NOT\_VALIDATED}$, $\text{sampleSize} = 0$, $\text{empiricalMetrics} = \text{null}$)<br>• Cross-team independence in Monte Carlo simulations ($\text{Assumption: INDEPENDENT}$) |
+| **INSUFFICIENT DATA** | Data that cannot be honestly observed or verified; explicitly prevented from being fabricated. | • Real intermediate round-by-round point logs (J1, J2, J4) for all rival clubs (`teamModel.status = "INSUFFICIENT_DATA"`, `gridSearchBest = null`)<br>• Empirical cross-club covariance matrix |
 
 ---
 
-## 2. Critical Audit Findings & Resolutions
+## 2. Phase 3B.1 Integrity Remediation Checklist
 
-### Finding 1: Target Leakage via Synthetic Club Matchday Arrays
-- **Issue:** Earlier backtesting scripts created synthetic arrays (`[48, 52, 45, 50, 50]`, `[38, 36, 40, ...]`) to simulate round-by-round walk-forward testing. Because these numbers were back-calculated to hit the J5 cumulative total, this represented target leakage.
-- **Remediation:** Synthetic arrays are **strictly excluded** from canonical empirical claims. `CalibrationEngine.buildClubObservations({ allowSynthetic: false })` loads only confirmed real snapshots. In `data/calibrationDatasetManifest.json`, intermediate rival rounds are formally registered with status `INSUFFICIENT_DATA_FOR_EMPIRICAL_RECALIBRATION`.
+1. **Zero Synthetic Data in Production Calibration:**
+   - `CalibrationEngine.runFullCalibrationProtocol()` consumes **0** synthetic observations.
+   - `buildSyntheticClubObservationsForTesting()` is strictly isolated for test fixtures.
+   - Real intermediate round targets available: **0**.
+   - `teamModel.status` = `"INSUFFICIENT_DATA"`, `bestMAE` = `null`, `bestRMSE` = `null`.
 
-### Finding 2: Starting XI Point Expectation Audit (51.7 vs 66.7)
-- **Issue:** The figure 66.7 pts appeared in unconstrained scratch scripts that summed departed players or failed to apply the Comunio 11-player constraint.
-- **Remediation:** Full audit persisted in `data/xiForecastAudit.json`. Racing's actual 11 starters produce **51.7 pts** (`currentXiScore`).
-- **Symmetric Season Modeling:** An 11-player squad with zero bench has depth fragility. The rest-of-season expected matchday score is **49.1 pts** (`restOfSeasonExpectedPPM` $= 51.7 \times 0.95$). This prevents asymmetric comparisons against rival season averages.
+2. **No Synthetic Residual Metrics:**
+   - `residualDistribution` returns `{ distributionSelected: "GAUSSIAN_NORMAL", distributionStatus: "ASSUMED_NOT_VALIDATED", sampleSize: 0, empiricalMetrics: null }`.
 
-### Finding 3: Dynamic Prior Weight Optimization
-- **Issue:** Prior weight testing previously returned static values without recomputing per configuration.
-- **Remediation:** `CalibrationEngine.optimizeHistoricalPriorWeights()` now recalculates the weighted sum dynamically for every configuration (`50_30_20`, `60_30_10`, `40_35_25`, `equal_33`) using each player's true prior season points series.
+3. **Accurate Player Metric Semantics:**
+   - The `/ 34` historical seasonal divisor is formally defined as `seasonPointsPerLeagueRound`.
+   - Explicitly records `pointsPerAppearance: null` and `pointsPerStart: null` to avoid implying conditional scoring per appearance.
 
-### Finding 4: Replacement Level & Residual Diagnostics Status
-- **Issue:** $P_{35}$ was previously labeled `OPTIMAL_CALIBRATED_BENCHMARK` and Gaussian residuals were claimed as empirically proven.
-- **Remediation:** $P_{35}$ is now labeled `HEURISTIC_PRIOR`. Residual distribution is labeled `ASSUMED_NOT_VALIDATED` with explicit documentation that Box-Muller sampling is an operational assumption. Cross-team correlation returns `{ estimate: null, confidence: "INSUFFICIENT_DATA", simulationAssumption: "INDEPENDENT" }`.
+4. **Programmatic Parameter Selection:**
+   - Historical prior weights: Candidate evaluation selected **`60_30_10`** ($\text{MAE} = 1.353$) over `50_30_20` ($\text{MAE} = 1.368$), `40_35_25` ($\text{MAE} = 1.392$), and `equal_33` ($\text{MAE} = 1.414$).
+   - Shrinkage $K$: Selected programmatically and flagged with `status: "HEURISTIC_PRIOR"`.
+
+5. **Symmetric Monte Carlo Season Simulation:**
+   - `ACTUAL_BASELINE` runs symmetric aggregate forecasting for ALL clubs (Racing aggregate PPM: $36.8 - 48.5$, Fermín: $48.0 - 52.5$).
+   - Racing's peak Starting XI score ($51.7$ pts) is separated into `racing.currentXiExpectedPoints` and is NOT used to artificially uplift Racing against aggregate rivals.
+   - `EXPECTED_AVAILABLE_XI` and `FULL_STRENGTH_XI` refuse asymmetric comparisons, returning `status: "NOT_REPORTABLE_ASYMMETRIC_INPUTS"`, `racing.pWin = null` unless comparable XI data exists for all clubs.
+
+6. **Production Model Status Gate:**
+   - Output explicitly tracks `productionModelVersion: "RDO-FORECAST-3.0"`, `productionModelStatus: "HEURISTIC_BASELINE"`, and `experimentalModelVersion: "RDO-EXP-3.1"`.
 
 ---
 
-## 3. Verified Starting XI Audit Table (`data/xiForecastAudit.json`)
+## 3. Starting XI Audit Table (`data/xiForecastAudit.json`)
 
 | Player | Position | Market Value | Match Expected | Season Projected | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -60,28 +67,5 @@ This audit remediates methodological over-claims and false validation artifacts 
 | **Gerard Moreno** | DEL | 8,940,000 € | **6.3 pts** | 190 pts | Disponible |
 | **Mariano Díaz** | DEL | 6,650,000 € | **7.0 pts** | 145 pts | Disponible |
 | **Hugo Duro** | DEL | 2,750,000 € | **4.0 pts** | 147 pts | Disponible |
-| **Total XI (Single Match)** | **4-3-3** | **52,900,000 €** | **51.7 pts** | **1,671 pts** | **11 Starters** |
-| **Rest of Season Expected PPM** | Fragility Factor: $0.95$ | — | **49.1 pts** | — | — |
-
----
-
-## 4. Championship Monte Carlo Baseline
-
-Using Common Random Numbers (CRN) with 10,000 iterations over 33 remaining matchdays:
-- **Leader (Fermín Gadura F.C.):** 245 pts current, $52.5$ mean PPM $\to \mathbf{1,978\text{ expected final points}}$.
-- **Racing de Oslo (Actual Baseline):** 188 pts current, $48.5 - 49.1$ mean PPM $\to \mathbf{1,808\text{ expected final points}}$.
-- **Deficit:** $-57$ pts.
-- **Baseline Title Probability:** $P(\text{Win}) = \mathbf{2.8\%}$ (95% Wilson CI: $[2.5\%, 3.1\%]$).
-
----
-
-## 5. Integrity Verification Checklist
-
-- [x] All synthetic matchday progressions tagged `isSynthetic: true` and excluded from empirical claims.
-- [x] Dataset manifest created at [`data/calibrationDatasetManifest.json`](file:///d:/racing-oslo-manager/data/calibrationDatasetManifest.json).
-- [x] Dynamic prior weight optimization tested on real season logs.
-- [x] Multi-season naming standardized (`previousSeasonPPM`, `previous3SeasonMeanPPM`).
-- [x] Replacement level and residual modeling categorized as `HEURISTIC_PRIOR` and `ASSUMED_NOT_VALIDATED`.
-- [x] Team correlation marked `INSUFFICIENT_DATA` with explicit `INDEPENDENT` assumption.
-- [x] Model operational status set to `EXPERIMENTAL`.
-- [x] 11/11 Phase 3B integrity tests passing in [`test/phase3b_integrity_audit.test.mjs`](file:///d:/racing-oslo-manager/test/phase3b_integrity_audit.test.mjs).
+| **Current Starting XI (Single Match)** | **4-3-3** | **52,900,000 €** | **51.7 pts** | **1,671 pts** | **11 Starters** |
+| **Rest of Season Aggregate Baseline PPM** | Symmetric Baseline | — | **36.8 – 48.5 pts** | — | — |

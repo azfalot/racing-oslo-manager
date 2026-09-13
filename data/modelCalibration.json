@@ -1,10 +1,13 @@
 {
   "modelVersion": "RDO-FORECAST-3.0",
   "status": "EXPERIMENTAL",
+  "productionModelStatus": "HEURISTIC_BASELINE",
   "isEmpiricallyValidated": false,
-  "timestamp": "2026-09-13T20:19:45.489Z",
+  "timestamp": "2026-09-13T20:31:58.194Z",
   "trainedThroughMatchday": 5,
   "trainingObservations": 56,
+  "realClubMatchdayTargetsAvailable": 0,
+  "syntheticClubTargetsUsedInCalibration": 0,
   "dataProvenanceManifest": "data/calibrationDatasetManifest.json",
   "playerModel": {
     "baselines": {
@@ -39,7 +42,8 @@
         "bias": -0.72
       }
     },
-    "selectedK": 3,
+    "selectedK": 10,
+    "kStatus": "HEURISTIC_PRIOR",
     "kOptimization": {
       "k_1": {
         "k": 1,
@@ -91,7 +95,7 @@
         "bias": -0.681
       }
     },
-    "selectedRecencyWindow": "last3",
+    "selectedRecencyWindow": "last2",
     "recencyWindowsOptimization": {
       "last1": {
         "window": "last1",
@@ -130,10 +134,12 @@
       }
     },
     "selectedPriorWeights": [
-      0.5,
+      0.6,
       0.3,
-      0.2
+      0.1
     ],
+    "selectedPriorConfig": "60_30_10",
+    "priorSelectionReason": "Selected programmatically by lowest out-of-sample MAE (1.353) on N=56 real player seasons.",
     "priorWeightsOptimization": {
       "50_30_20": {
         "config": "50_30_20",
@@ -184,48 +190,22 @@
         "bias": -0.792
       }
     },
-    "bestMAE": 1.375,
-    "bestRMSE": 1.79,
-    "bias": -0.72
+    "bestMAE": 1.353,
+    "bestRMSE": 1.754,
+    "bias": -0.606
   },
   "teamModel": {
-    "status": "HEURISTIC_CALIBRATED",
+    "status": "INSUFFICIENT_DATA",
+    "gridSearchBest": null,
+    "bestMAE": null,
+    "bestRMSE": null,
+    "bias": null,
     "selectedWeights": {
       "season": 0.65,
       "form": 0.35,
       "squad": 0
     },
-    "gridSearchBest": {
-      "weights": {
-        "season": 0.95,
-        "form": 0,
-        "squad": 0.05
-      },
-      "count": 40,
-      "mae": 2.074,
-      "rmse": 2.502,
-      "bias": -1.101
-    },
-    "squadValueAblation": {
-      "modelA": {
-        "name": "Model_A_NoSquadValue",
-        "count": 40,
-        "mae": 2.175,
-        "rmse": 2.572,
-        "bias": -0.978
-      },
-      "modelB": {
-        "name": "Model_B_WithSquadValue",
-        "count": 40,
-        "mae": 2.411,
-        "rmse": 2.922,
-        "bias": -1.222
-      },
-      "squadValueRetained": false
-    },
-    "bestMAE": 2.074,
-    "bestRMSE": 2.502,
-    "bias": -1.101
+    "rationale": "Real intermediate club matchday scores (J1-J4) are unobserved in repo logs. Empirical model selection cannot be performed without genuine time-series."
   },
   "depthPenalty": {
     "model": "playerCount >= 12 ? 1.0 : (playerCount === 11 ? 0.98 : max(0.70, playerCount / 11))",
@@ -293,14 +273,11 @@
     }
   },
   "residualDistribution": {
-    "sampleSize": 40,
-    "meanResidual": 0.979,
-    "stdDev": 2.408,
-    "skewness": -0.453,
-    "kurtosis": 2.64,
     "distributionSelected": "GAUSSIAN_NORMAL",
     "distributionStatus": "ASSUMED_NOT_VALIDATED",
-    "rationale": "Box-Muller Gaussian sampling is adopted as an operational engineering assumption. Full out-of-sample empirical validation requires real round-by-round point snapshots across all clubs."
+    "sampleSize": 0,
+    "empiricalMetrics": null,
+    "rationale": "Residual distribution cannot be empirically computed without genuine round-by-round matchday residuals for all clubs. Standard Normal Box-Muller sampling is adopted as an operational modelling assumption."
   },
   "teamCorrelation": {
     "estimate": null,

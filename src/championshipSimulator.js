@@ -5,11 +5,11 @@
  * Features:
  * - Deterministic PRNG (Mulberry32) for reproducible simulations
  * - Common Random Numbers (CRN) for noise-free Delta Championship evaluations
- * - Symmetric rival and Racing scoring models accounting for depth & availability
+ * - Symmetric rival and Racing scoring models (no asymmetric lineup-vs-aggregate comparisons)
  * - Dynamic matchday resolution via matchdayResolver
  * - Configurable simulation tiers: FAST (1k), STANDARD (10k), DECISION (50k)
  * - 95% Wilson score confidence intervals for title probabilities
- * - Explicit scenario types: ACTUAL_BASELINE, EXPECTED_AVAILABLE_XI, FULL_STRENGTH_XI
+ * - Strict scenario gates: ACTUAL_BASELINE, EXPECTED_AVAILABLE_XI, FULL_STRENGTH_XI
  */
 
 import fs from 'fs';
@@ -85,9 +85,6 @@ export const DEFAULT_CLUB_BASELINES = [
 
 /**
  * Calibrate an explainable team PPM and standard deviation based on live audit data.
- *
- * Forecast Formula:
- * FORECAST_PPM = (0.65 * SEASON_PPM + 0.35 * CURRENT_FORM_PPM + 0.00 * SQUAD_EXPECTED_PPM) * DEPTH_FACTOR * AVAILABILITY_FACTOR
  */
 export function calibrateClubBaseline(clubData, currentMatchday = 5, weights = { season: 0.65, form: 0.35, squad: 0.00 }) {
   const currentPts = clubData.points || clubData.totalPoints || clubData.currentPoints || 150;
@@ -175,11 +172,12 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
   let remainingMatchdays = 33;
   let customClubs = null;
   let iterations = 1000;
-  let racingMean = null;
   let seed = options?.seed ?? 42;
   const scenarioType = options?.scenarioType || 'ACTUAL_BASELINE';
 
   const resolvedMatchday = typeof arg3 === 'number' ? arg3 : resolveCurrentMatchday();
+
+  let racingCurrentXiScore = 51.7;
 
   if (arg0 && typeof arg0.optimizeLineup === 'function') {
     // Signature 1: (engine, squad, iterations, currentMatchday, options)
@@ -189,13 +187,7 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
     remainingMatchdays = Math.max(1, 38 - resolvedMatchday);
     if (squad) {
       const lineup = engine.optimizeLineup(squad);
-      const rawScore = lineup.score || 48.5;
-      const pCount = (squad.players || []).length;
-      // Symmetric depth modeling: single 11 with 0 bench has higher season variance & fatigue risk
-      const depthFactor = scenarioType === 'FULL_STRENGTH_XI'
-        ? 1.0
-        : (pCount >= 12 ? 1.0 : (pCount === 11 ? 0.95 : Math.max(0.70, pCount / 11)));
-      racingMean = parseFloat((rawScore * depthFactor).toFixed(1));
+      racingCurrentXiScore = typeof lineup.score === 'number' ? parseFloat(lineup.score.toFixed(1)) : 51.7;
     }
   } else {
     // Signature 2: (remainingMatchdays, customClubs, iterations, currentMatchday, options)
@@ -204,7 +196,39 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
     iterations = typeof arg2 === 'number' ? arg2 : 1000;
   }
 
-  const clubs = customClubs || loadLiveClubBaselines(racingMean, resolvedMatchday);
+  // Symmetric input gate: EXPECTED_AVAILABLE_XI & FULL_STRENGTH_XI require comparable XI scores for all clubs
+  if (scenarioType === 'EXPECTED_AVAILABLE_XI' || scenarioType === 'FULL_STRENGTH_XI') {
+    const hasAllClubsXiData = options?.allClubsXiData === true || (Array.isArray(customClubs) && customClubs.every(c => typeof c.xiExpectedScore === 'number'));
+    if (!hasAllClubsXiData) {
+      return {
+        productionModelVersion: 'RDO-FORECAST-3.0',
+        productionModelStatus: 'HEURISTIC_BASELINE',
+        experimentalModelVersion: 'RDO-EXP-3.1',
+        status: 'NOT_REPORTABLE_ASYMMETRIC_INPUTS',
+        scenarioType,
+        championshipProbability: null,
+        probChampion: null,
+        probTop2: null,
+        probTop3: null,
+        racing: {
+          currentXiExpectedPoints: racingCurrentXiScore,
+          restOfSeasonAggregateExpectedPpm: 48.5,
+          pWin: null,
+          pTop2: null,
+          pTop3: null,
+          status: 'NOT_REPORTABLE_ASYMMETRIC_INPUTS'
+        },
+        reason: 'Rival starting XI expected scores are unobserved. Comparing Racing XI against aggregate rival forecasts introduces asymmetric bias.'
+      };
+    }
+  }
+
+  // ACTUAL_BASELINE: Use symmetric aggregate forecasting methodology for ALL clubs (no special Racing XI override)
+  const clubs = customClubs || loadLiveClubBaselines(null, resolvedMatchday);
+  const racingId = 21163822;
+  const racingClub = clubs.find(c => c.id === racingId || c.name?.includes('Racing')) || clubs[1];
+  const racingRestOfSeasonAggregatePpm = racingClub.meanPpm || 48.5;
+
   const rng = createMulberry32(seed ?? 42);
 
   const titleCounts = {};
@@ -247,9 +271,6 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
     });
   }
 
-  const racingId = 21163822;
-  const racingClub = clubs.find(c => c.id === racingId || c.name?.includes('Racing')) || clubs[1];
-
   const tableSummary = clubs.map(c => {
     const pts = finalPointsTotals[c.id].sort((a, b) => a - b);
     const meanPts = Math.round(pts.reduce((a, b) => a + b, 0) / iterations);
@@ -281,14 +302,19 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
   const racingSummary = tableSummary.find(t => t.id === racingId || t.name?.includes('Racing')) || tableSummary[0];
 
   return {
+    productionModelVersion: 'RDO-FORECAST-3.0',
+    productionModelStatus: 'HEURISTIC_BASELINE',
+    experimentalModelVersion: 'RDO-EXP-3.1',
+    status: 'PRODUCTION_BASELINE',
     modelVersion: 'RDO-FORECAST-3.0',
-    status: 'EXPERIMENTAL',
     scenarioType,
     totalSimulations: iterations,
     iterations,
     remainingMatchdays,
     seed,
     racing: {
+      currentXiExpectedPoints: racingCurrentXiScore,
+      restOfSeasonAggregateExpectedPpm: racingRestOfSeasonAggregatePpm,
       pWin: parseFloat((racingSummary.probChampion / 100).toFixed(3)),
       pTop2: parseFloat((racingSummary.probTop2 / 100).toFixed(3)),
       pTop3: parseFloat((racingSummary.probTop3 / 100).toFixed(3)),
@@ -316,7 +342,6 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
 export function evaluateTransferChampionshipImpact(engine, squad, candidate, iterations = 1000, currentMatchday = null, seed = 1337) {
   const resolvedMatchday = currentMatchday || resolveCurrentMatchday();
 
-  // Run pre-transfer and post-transfer with identical seed (CRN)
   const preSim = runChampionshipSimulation(engine, squad, iterations, resolvedMatchday, { seed });
   
   const hypotheticalSquad = {
@@ -325,16 +350,18 @@ export function evaluateTransferChampionshipImpact(engine, squad, candidate, ite
   };
   const postSim = runChampionshipSimulation(engine, hypotheticalSquad, iterations, resolvedMatchday, { seed });
 
-  const deltaPWin = parseFloat((postSim.racing.pWin - preSim.racing.pWin).toFixed(3));
-  const deltaExpectedPoints = postSim.racing.expectedFinalPoints - preSim.racing.expectedFinalPoints;
+  const prePWin = preSim.racing?.pWin ?? 0;
+  const postPWin = postSim.racing?.pWin ?? 0;
+  const deltaPWin = parseFloat((postPWin - prePWin).toFixed(3));
+  const deltaExpectedPoints = (postSim.racing?.expectedFinalPoints ?? 0) - (preSim.racing?.expectedFinalPoints ?? 0);
 
   return {
     candidateName: candidate.name,
-    basePWin: preSim.racing.pWin,
-    newPWin: postSim.racing.pWin,
+    basePWin: prePWin,
+    newPWin: postPWin,
     deltaPWin,
-    baseExpectedPoints: preSim.racing.expectedFinalPoints,
-    newExpectedPoints: postSim.racing.expectedFinalPoints,
+    baseExpectedPoints: preSim.racing?.expectedFinalPoints ?? 0,
+    newExpectedPoints: postSim.racing?.expectedFinalPoints ?? 0,
     deltaExpectedPoints,
     isPositiveEV: deltaPWin > 0 || deltaExpectedPoints > 0,
     seedUsed: seed
