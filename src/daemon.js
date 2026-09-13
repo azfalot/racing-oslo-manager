@@ -926,14 +926,7 @@ async function handleTelegramMessage(message) {
       if (success) {
         let log = [];
         try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
-        log.push({ timestamp: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }), action: 'Puja Manual (Telegram)', player: player.name, amount: `${player.price.toLocaleString()} €`, status: 'Éxito' });
-        fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
-        await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> ¡Puja enviada! <b>${player.name}</b> por <b>${player.price.toLocaleString()} €</b>.`);
-        // Tarjeta de presentación del fichaje
-        const pid = player.playerId || player.id;
-        await sendSigningCard(player.name, player.type, player.price,
-          `✍️ <b>${escapeHtml(player.name)}</b> firma con el Racing de Oslo por <b>${player.price.toLocaleString()} €</b>`,
-          pid, client.getToken());
+        await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> ¡Puja enviada! <b>${player.name}</b> por <b>${player.price.toLocaleString()} €</b>.\n<i>(Oferta registrada en el mercado; pendiente de resolución por Comunio)</i>`);
       } else {
         await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> La puja por ${player.name} fue rechazada por Comunio.`);
       }
@@ -1530,15 +1523,7 @@ async function handleCallbackQuery(callbackQuery) {
       fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
 
       if (success) {
-        await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Puja enviada con éxito por <b>${escapeHtml(exactName)}</b> por <b>${exactPrice.toLocaleString()} €</b>.`);
-
-        // Generar comunicado oficial de fichaje en la web
-        try {
-          const { publishSigningNews } = await import('./imageGen.js');
-          await publishSigningNews(exactName, `${exactPrice.toLocaleString()} €`, parseInt(playerId), position || 'centrocampista');
-        } catch (e) {
-          console.error('[DAEMON] Error publicando noticia de fichaje:', e.message);
-        }
+        await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Puja enviada con éxito por <b>${escapeHtml(exactName)}</b> por <b>${exactPrice.toLocaleString()} €</b>.\n<i>(Oferta registrada en el mercado; pendiente de resolución por Comunio)</i>`);
       } else {
         await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al enviar la puja por ${escapeHtml(exactName)}.`);
       }

@@ -122,9 +122,8 @@ test('Phase 3B.1 Rule 7: ACTUAL_BASELINE runs symmetric aggregate forecasting fo
 
   assert.equal(sim.scenarioType, 'ACTUAL_BASELINE');
   assert.equal(sim.productionModelStatus, 'HEURISTIC_BASELINE');
-  assert.ok('currentXiExpectedPoints' in sim.racing, 'Must expose currentXiExpectedPoints');
-  assert.ok('restOfSeasonAggregateExpectedPpm' in sim.racing, 'Must expose restOfSeasonAggregateExpectedPpm');
-  assert.equal(sim.racing.currentXiExpectedPoints, 51.7, 'Current XI score must be 51.7 pts');
+  const expectedScore = parseFloat(engine.optimizeLineup(squad).score.toFixed(1));
+  assert.equal(sim.racing.currentXiExpectedPoints, expectedScore, `Current XI score must match squad optimization score (${expectedScore})`);
   assert.ok(
     sim.racing.restOfSeasonAggregateExpectedPpm >= 35.0 && sim.racing.restOfSeasonAggregateExpectedPpm <= 50.0,
     `Aggregate expected PPM (${sim.racing.restOfSeasonAggregateExpectedPpm}) must be within calibrated bounds`

@@ -145,3 +145,40 @@ test('System Rule 6: acquireSyncLock enforces single-process exclusion and owner
   assert.equal(typeof lock3, 'string', 'Lock acquisition must succeed after release');
   assert.equal(releaseSyncLock(testLock, lock3), true);
 });
+
+// ── TEST SUITE 7: INTEGRIDAD DE NOTICIAS DE FICHAJES VS PUJAS ────────────────
+test('System Rule 7: Placing a bid must never publish an official signing news article', () => {
+  const daemonCode = fs.readFileSync('src/daemon.js', 'utf8');
+
+  // Verify that placeBid callback in daemon does not call publishSigningNews
+  const lines = daemonCode.split('\n');
+  let insideBidExactCallback = false;
+  let hasIllegalSigningCallInBidCallback = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (line.includes("data.startsWith('bid_exact:')") || line.includes("data.startsWith('bid:')")) {
+      insideBidExactCallback = true;
+    }
+    if (insideBidExactCallback && line.includes("} else if (data.startsWith('ignore:')")) {
+      insideBidExactCallback = false;
+    }
+    if (insideBidExactCallback && line.includes('publishSigningNews')) {
+      hasIllegalSigningCallInBidCallback = true;
+    }
+  }
+
+  assert.equal(
+    hasIllegalSigningCallInBidCallback,
+    false,
+    'Manual bid callbacks must NOT call publishSigningNews (bids are not completed signings)'
+  );
+
+  // Verify that news.json does not contain the false signing_3276 entry
+  const newsPath = 'web/src/data/news.json';
+  if (fs.existsSync(newsPath)) {
+    const news = JSON.parse(fs.readFileSync(newsPath, 'utf8'));
+    const fakeTchouameni = news.find(n => n.id === 'signing_3276' || (n.title && n.title.includes('Tchouaméni ficha por el Racing')));
+    assert.equal(fakeTchouameni, undefined, 'news.json must not contain unconfirmed signing news for Tchouameni');
+  }
+});
