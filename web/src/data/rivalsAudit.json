@@ -6445,19 +6445,19 @@
     "crest": "/media/crests/ana.svg",
     "pos": 10,
     "points": 138,
-    "squadValue": 51580000,
-    "playerCount": 15,
-    "financialHealth": "Apalancado / Saldo Negativo (-9.07M €)",
-    "debtAlert": "Saldo en descubierto (-9.07M €). Consume el 70.3% del límite de crédito permitido (12.89M €). Exige ventas antes de puntuar.",
-    "projectedScore": 55,
-    "formation": "4-4-2",
-    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 55 puntos según plantilla disponible.",
+    "squadValue": 36690000,
+    "playerCount": 13,
+    "financialHealth": "Saneado / Alta Liquidez (+5.70M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+5.70M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 46,
+    "formation": "4-5-1",
+    "tacticDescription": "Estructura 4-5-1 orientada a maximizar 46 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -9.07M € que obliga a vender piezas."
+      "Baja producción goleadora de los delanteros en las 3 primeras jornadas."
     ],
     "tacticalAlerts": [
       {
@@ -6471,39 +6471,39 @@
     ],
     "recommendations": [
       {
+        "name": "Kevin Sánchez",
+        "pos": "Delantero",
+        "price": 490000,
+        "reason": "Refuerzo de ataque (0.49M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+      },
+      {
         "name": "Iker Losada",
         "pos": "Centrocampista",
         "price": 170000,
-        "reason": "Centrocampista con llegada (0.17M €) para asociarse con Adeyemi y dominar la posesión."
+        "reason": "Centrocampista con llegada (0.17M €) para asociarse con Pau Cubarsí y dominar la posesión."
       },
       {
-        "name": "Esquivel",
-        "pos": "Portero",
-        "price": 160000,
-        "reason": "Alternativa para la portería (0.16M €) para asegurar titularidad y rotación fiable."
-      },
-      {
-        "name": "Jorge Montes",
+        "name": "José Giménez",
         "pos": "Defensa",
-        "price": 180000,
-        "reason": "Oportunidad de mercado (0.18M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "price": 2960000,
+        "reason": "Oportunidad de mercado (2.96M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       }
     ],
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+12.7%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 76334001,
-      "totalReceived": 45884100,
+      "totalReceived": 60653400,
       "purchasesCount": 19,
-      "salesCount": 19,
-      "estimatedCash": -9069901,
+      "salesCount": 21,
+      "estimatedCash": 5699399,
       "prizesEarned": 1380000,
-      "maxCreditLimit": 12895000,
-      "netWealth": 42510099,
-      "analysis": "Operativa histórica de 19 compras (76.3M €) y 19 ventas (45.9M €). Dinero total rotado: 122.2M € con sobrepuja media de +12.7%."
+      "maxCreditLimit": 9172500,
+      "netWealth": 42389399,
+      "analysis": "Operativa histórica de 19 compras (76.3M €) y 21 ventas (60.7M €). Dinero total rotado: 137.0M € con sobrepuja media de +12.7%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -7028,6 +7028,34 @@
           "seller": "Ana",
           "buyer": "Computer",
           "date": "2026-09-12T04:33:38+02:00"
+        },
+        {
+          "playerName": "Óscar Valentín",
+          "price": 1323300,
+          "marketValue": 1323300,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Ana",
+          "buyer": "Computer",
+          "date": "2026-09-13T04:35:57+02:00"
+        },
+        {
+          "playerName": "Adeyemi",
+          "price": 13446000,
+          "marketValue": 13446000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Ana",
+          "buyer": "Computer",
+          "date": "2026-09-13T04:35:57+02:00"
         }
       ]
     },
@@ -7169,12 +7197,12 @@
         "image": "/media/players/3891.png"
       },
       {
-        "id": 3107,
-        "name": "Óscar Valentín",
+        "id": 4074,
+        "name": "Ramón Enríquez",
         "position": "midfielder",
-        "price": 1390000,
+        "price": 580000,
         "points": 0,
-        "expectedPoints": 2.6,
+        "expectedPoints": 0.7,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -7183,15 +7211,15 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/3107.png"
+        "image": "/media/players/4074.png"
       },
       {
-        "id": 4098,
-        "name": "Adeyemi",
-        "position": "striker",
-        "price": 13500000,
+        "id": 2981,
+        "name": "Josan",
+        "position": "midfielder",
+        "price": 350000,
         "points": 0,
-        "expectedPoints": 7.7,
+        "expectedPoints": 0.6,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -7200,7 +7228,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/4098.png"
+        "image": "/media/players/2981.png"
       },
       {
         "id": 4157,
@@ -7221,38 +7249,6 @@
       }
     ],
     "bench": [
-      {
-        "id": 4074,
-        "name": "Ramón Enríquez",
-        "position": "midfielder",
-        "price": 580000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4074.png"
-      },
-      {
-        "id": 2981,
-        "name": "Josan",
-        "position": "midfielder",
-        "price": 350000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2981.png"
-      },
       {
         "id": 3204,
         "name": "Jofre Carreras",
