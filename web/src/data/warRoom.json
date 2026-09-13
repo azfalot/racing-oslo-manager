@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-13T20:58:18.254Z",
+  "timestamp": "2026-09-13T21:50:37.474Z",
   "currentMatchday": 5,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -17,7 +17,7 @@
   },
   "lineup": {
     "formation": "4-3-3",
-    "expectedPoints": 49.900000000000006,
+    "expectedPoints": 50.2,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -34,7 +34,7 @@
         "type": "midfielder",
         "price": 1440000,
         "available": true,
-        "expectedPoints": 1.5
+        "expectedPoints": 1.8
       },
       {
         "playerId": 2785,
@@ -53,23 +53,23 @@
       "position": "midfielder",
       "price": 250000,
       "expectedPoints": 0.2,
-      "vorp": 0,
-      "vorpPerMatchday": 0,
-      "replacementPpm": 2.5,
+      "vorp": -2,
+      "vorpPerMatchday": -0.06,
+      "replacementPpm": 2.55,
       "upgradeGap": 5.3,
-      "urgencyScore": 18.7
+      "urgencyScore": 19.3
     },
     {
       "playerId": 3553,
       "name": "Johnny Cardoso",
       "position": "midfielder",
       "price": 1440000,
-      "expectedPoints": 1.5,
-      "vorp": 20,
-      "vorpPerMatchday": 0.59,
-      "replacementPpm": 2.5,
-      "upgradeGap": 4,
-      "urgencyScore": 11.8
+      "expectedPoints": 1.8,
+      "vorp": 18,
+      "vorpPerMatchday": 0.53,
+      "replacementPpm": 2.55,
+      "upgradeGap": 3.7,
+      "urgencyScore": 12.2
     },
     {
       "playerId": 3597,
@@ -107,8 +107,8 @@
       "efficiency": 42.2,
       "upgradePoints": 4.1,
       "marginalValue": 4.1,
-      "vorp": 60,
-      "vorpPerMatchday": 1.76,
+      "vorp": 58,
+      "vorpPerMatchday": 1.71,
       "cpmp": 939024,
       "cpmpSeason": 27698,
       "replacedPlayer": {
@@ -183,8 +183,8 @@
       "efficiency": 20.3,
       "upgradePoints": 8,
       "marginalValue": 8,
-      "vorp": 125,
-      "vorpPerMatchday": 3.68,
+      "vorp": 123,
+      "vorpPerMatchday": 3.62,
       "cpmp": 1376250,
       "cpmpSeason": 40478,
       "replacedPlayer": {
@@ -259,8 +259,8 @@
       "efficiency": 28.6,
       "upgradePoints": 5.7,
       "marginalValue": 5.7,
-      "vorp": 107,
-      "vorpPerMatchday": 3.15,
+      "vorp": 105,
+      "vorpPerMatchday": 3.09,
       "cpmp": 964912,
       "cpmpSeason": 28351,
       "replacedPlayer": {
@@ -487,7 +487,7 @@
     "remainingMatchdays": 33,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 49.9,
+      "currentXiExpectedPoints": 50.2,
       "restOfSeasonAggregateExpectedPpm": 36.8,
       "pWin": 0,
       "pTop2": 0.933,
