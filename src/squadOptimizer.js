@@ -289,48 +289,24 @@ export function getExpectedPerformance(player, strategyConfig = null) {
   const matchdaysRemaining = Math.max(1, totalMatchdays - currentMatchday);
   const matchdaysPlayed = Math.max(1, currentMatchday);
 
-  // 1. Season PPM from current average
+  // 1. Historical recency-weighted prior PPM (0.50/0.30/0.20 last 3 seasons)
+  const historicalPPM = calculateHistoricalPriorPPM(player);
+
+  // 2. Current season average points
   const avgPoints = parseFloat(
     player.average?.points ? String(player.average.points).replace(',', '.') : '0'
   );
   const seasonPPM = (!isNaN(avgPoints) && avgPoints > 0) ? avgPoints : 0;
 
-  // 2. Historical baseline PPM (best season / 38)
-  const historyList = Array.isArray(player.historical)
-    ? player.historical
-    : (player.historical?.points || player.historicalPoints || []);
-  const validPoints = historyList.map(h => parseInt(h.points) || 0).filter(p => p > 0);
-  const bestHistorical = validPoints.length > 0 ? Math.max(...validPoints) : 0;
-  const historicalPPM = bestHistorical / totalMatchdays;
+  // 3. Recent match scores
+  const recentScores = Array.isArray(player.lastMatches || player.recentScores)
+    ? (player.lastMatches || player.recentScores).filter(s => typeof s === 'number')
+    : [];
 
-  // 3. Weighted PPM: prefer season data when enough matches played, lean on historical early
-  const seasonWeight = Math.min(0.70, matchdaysPlayed / totalMatchdays * 1.5);
-  const historicalWeight = 1 - seasonWeight;
-
-  let effectivePPM;
-  if (seasonPPM > 0 && historicalPPM > 0) {
-    effectivePPM = (seasonPPM * seasonWeight) + (historicalPPM * historicalWeight);
-  } else if (seasonPPM > 0) {
-    effectivePPM = seasonPPM;
-  } else if (historicalPPM > 0) {
-    effectivePPM = historicalPPM;
-  } else {
-    // Price-based fallback PPM
-    const price = player.price || 0;
-    if (price > 5000000) effectivePPM = 4.5;
-    else if (price > 2000000) effectivePPM = 3.5;
-    else if (price > 1000000) effectivePPM = 2.5;
-    else effectivePPM = 1.5;
-  }
-
-  // 4. Recent form adjustment
-  const recentScores = player.lastMatches || player.recentScores || [];
-  let recentForm = effectivePPM;
-  if (Array.isArray(recentScores) && recentScores.length > 0) {
-    recentForm = recentScores.reduce((a, b) => a + b, 0) / recentScores.length;
-    // Blend: 40% recent form, 60% effective PPM
-    effectivePPM = (recentForm * 0.40) + (effectivePPM * 0.60);
-  }
+  // 4. Empirical-Bayes shrinkage towards historical prior
+  const shrinkageResult = calculateRecencyWeightedPPM(player, recentScores.length > 0 ? recentScores : (seasonPPM > 0 ? [seasonPPM] : []), 3);
+  let effectivePPM = shrinkageResult.posteriorPPM;
+  let recentForm = shrinkageResult.sampleMean;
 
   // 5. Health adjustment
   const statusLower = ((player.status || '') + ' ' + (player.statusInfo || '')).toLowerCase();
@@ -355,6 +331,10 @@ export function getExpectedPerformance(player, strategyConfig = null) {
   let starterStatus = 'ROTACION_HABITUAL';
   let starterTag = '🔄 Rotación Habitual';
   let starterProbability = (competition.confidencePct / 100);
+
+  const bestHistorical = Array.isArray(player.historical)
+    ? Math.max(0, ...player.historical.map(h => parseInt(h.points) || 0))
+    : (historicalPPM * 34);
 
   if (effectivePPM >= 4.0 || bestHistorical >= 120 || competition.isUndisputed) {
     starterStatus = 'TITULAR_INDISCUTIBLE';
@@ -723,13 +703,102 @@ export function starReplacementTest(engine, squad, starToSell, candidatesToBuy =
   };
 }
 
+// ── HISTORICAL PRIOR & BAYESIAN SHRINKAGE ─────────────────────────────────────
+
+/**
+ * Calculates historical recency-weighted Prior PPM over the last 3 seasons (0.50 / 0.30 / 0.20).
+ * With fallback cascade for younger / unproven players.
+ *
+ * @param {Object} player
+ * @returns {number} Calibrated prior expected points per match
+ */
+export function calculateHistoricalPriorPPM(player) {
+  if (!player) return 3.5;
+
+  const historical = player.historicalPoints || player.historical || player.history || [];
+  const validSeasons = (Array.isArray(historical) ? historical : [])
+    .map(h => {
+      if (typeof h === 'number') return { points: h, gamesPlayed: 34 };
+      const pts = parseInt(h.points ?? h.totalPoints ?? 0, 10);
+      const gp = parseInt(h.gamesPlayed ?? h.matches ?? h.appearances ?? 34, 10);
+      return { points: pts, gamesPlayed: Math.max(15, gp) };
+    })
+    .filter(s => s.points > 0);
+
+  if (validSeasons.length > 0) {
+    const weights = [0.50, 0.30, 0.20];
+    const recentFirst = [...validSeasons].reverse();
+    let totalWeight = 0;
+    let weightedSum = 0;
+
+    for (let i = 0; i < Math.min(3, recentFirst.length); i++) {
+      const season = recentFirst[i];
+      const ppm = season.points / season.gamesPlayed;
+      const w = weights[i];
+      weightedSum += ppm * w;
+      totalWeight += w;
+    }
+
+    if (totalWeight > 0) {
+      return parseFloat((weightedSum / totalWeight).toFixed(2));
+    }
+  }
+
+  // Fallback cascade by market value tier and position
+  const price = player.price || player.quotedPrice || 0;
+  if (price > 15000000) return 6.5; // Galactico
+  if (price > 7000000) return 5.2;  // Star starter
+  if (price > 3000000) return 4.2;  // Established starter
+  if (price > 1000000) return 3.2;  // Regular rotation
+  if (price > 500000) return 2.4;   // Young prospect / sub
+  return 1.8;                      // Depth / fringe
+}
+
+/**
+ * Empirical-Bayes Shrinkage of observed sample scores towards historical prior PPM.
+ *
+ * posteriorPPM = (priorWeight * historicalPriorPPM + n * recentMean) / (priorWeight + n)
+ *
+ * @param {Object} player
+ * @param {number[]|number} sampleScores Array of recent match scores or single average
+ * @param {number} priorWeight Shrinkage weight factor (default = 3)
+ * @returns {{ posteriorPPM: number, sampleMean: number, priorPPM: number, sampleSize: number }}
+ */
+export function calculateRecencyWeightedPPM(player, sampleScores = [], priorWeight = 3) {
+  const priorPPM = calculateHistoricalPriorPPM(player);
+  const scores = Array.isArray(sampleScores)
+    ? sampleScores.filter(s => typeof s === 'number' && !isNaN(s))
+    : (typeof sampleScores === 'number' && sampleScores > 0 ? [sampleScores] : []);
+
+  const n = scores.length;
+  if (n === 0) {
+    return {
+      posteriorPPM: priorPPM,
+      sampleMean: priorPPM,
+      priorPPM,
+      sampleSize: 0
+    };
+  }
+
+  const sampleMean = scores.reduce((a, b) => a + b, 0) / n;
+  const posteriorPPM = parseFloat((((priorWeight * priorPPM) + (n * sampleMean)) / (priorWeight + n)).toFixed(2));
+
+  return {
+    posteriorPPM,
+    sampleMean: parseFloat(sampleMean.toFixed(2)),
+    priorPPM,
+    sampleSize: n
+  };
+}
+
 // ── SEASON UTILITY ─────────────────────────────────────────────────────────────
 
 /**
  * Dynamic time-decaying season utility function.
  * As matchday t -> 38, weight of points rises from 0.50 to 0.95 while financial asset weight drops.
+ * Normalizes points and wealth dimensions onto standard [0, 100] indexes.
  */
-export function calculateSeasonUtility(squadValue, points = 0, balance = 0, currentMatchday = 1) {
+export function calculateSeasonUtility(squadValue, points = 0, balance = 0, currentMatchday = 1, expectedXiPpm = null) {
   const totalMatchdays = 38;
   const t = Math.max(1, Math.min(totalMatchdays, currentMatchday));
 
@@ -737,16 +806,26 @@ export function calculateSeasonUtility(squadValue, points = 0, balance = 0, curr
   const wVal = 1.0 - wPts;
 
   const remainingMatchdays = totalMatchdays - t;
-  const projectedPoints = points + (squadValue * (remainingMatchdays / 38));
-  const totalWealthInM = Math.max(1, (squadValue * 1000000 + balance) / 1000000);
 
-  const compositeUtility = parseFloat(((projectedPoints * wPts) + (totalWealthInM * wVal)).toFixed(2));
+  // Normalized points score (benchmark: 1800 pts target for league title)
+  const xiPpm = typeof expectedXiPpm === 'number' && expectedXiPpm > 0 ? expectedXiPpm : (squadValue > 100 ? (squadValue / 1000000) * 0.8 : squadValue);
+  const projectedPoints = points + (xiPpm * (remainingMatchdays / 38));
+  const pointsScore = (projectedPoints / 1800) * 100;
+
+  // Normalized wealth score (benchmark: 55M EUR squad patrimony)
+  const squadValInEUR = squadValue > 1000 ? squadValue : squadValue * 1000000;
+  const totalWealthEUR = squadValInEUR + balance;
+  const wealthScore = (totalWealthEUR / 55000000) * 100;
+
+  const compositeUtility = parseFloat(((pointsScore * wPts) + (wealthScore * wVal)).toFixed(2));
 
   return {
     compositeUtility,
     wPts: parseFloat(wPts.toFixed(3)),
     wVal: parseFloat(wVal.toFixed(3)),
     projectedPoints: Math.round(projectedPoints),
+    pointsScore: parseFloat(pointsScore.toFixed(2)),
+    wealthScore: parseFloat(wealthScore.toFixed(2)),
     currentMatchday: t,
     remainingMatchdays
   };

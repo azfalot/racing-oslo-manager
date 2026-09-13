@@ -1,69 +1,152 @@
 /**
- * Championship Simulator — 1,000-iteration Monte Carlo Season Simulator
+ * Championship Simulator — Calibrated Monte Carlo Season Simulator
  *
  * Models end-of-season outcomes for all 10 league clubs in Comunio.
- * Evaluates decisions based on Delta Championship Probability:
- *
- *   Δ P(Championship) = P(Racing 1º | operation) - P(Racing 1º | current)
+ * Features:
+ * - Deterministic PRNG (Mulberry32) for reproducible simulations
+ * - Common Random Numbers (CRN) for noise-free Delta Championship evaluations
+ * - Explainable rival expected scoring model based on form, season PPM, squad depth & availability
+ * - Dynamic matchday resolution via matchdayResolver
+ * - Configurable simulation tiers: FAST (1k), STANDARD (10k), DECISION (50k)
+ * - 95% Wilson score confidence intervals for title probabilities
  */
 
 import fs from 'fs';
 import path from 'path';
+import { resolveCurrentMatchday } from './matchdayResolver.js';
 
 /**
- * Standard Normal Box-Muller transform for Monte Carlo sampling.
+ * Mulberry32 seeded Pseudo-Random Number Generator.
+ * @param {number} seed 32-bit unsigned integer seed
+ * @returns {() => number} Returns a pseudo-random float in [0, 1)
  */
-function randomNormal(mean = 0, stdDev = 1) {
+export function createMulberry32(seed = 1337) {
+  let a = (seed >>> 0) || 1337;
+  return function() {
+    a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/**
+ * Standard Normal Box-Muller transform using a specified PRNG function.
+ * @param {number} mean Distribution mean
+ * @param {number} stdDev Distribution standard deviation
+ * @param {Function} rng Pseudo-random float generator returning [0, 1)
+ * @returns {number} Sampled normal value
+ */
+export function sampleGaussian(mean = 0, stdDev = 1, rng = createMulberry32(1337)) {
   let u1 = 0, u2 = 0;
-  while (u1 === 0) u1 = Math.random();
-  while (u2 === 0) u2 = Math.random();
+  while (u1 === 0) u1 = rng();
+  while (u2 === 0) u2 = rng();
   const z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
   return mean + z0 * stdDev;
 }
 
 /**
+ * Computes 95% Wilson score confidence interval for a proportion p = wins / n.
+ * @param {number} successes Number of title wins
+ * @param {number} totalTrials Total simulation trials
+ * @returns {{ lower: number, upper: number, p: number }}
+ */
+export function calculateWilsonConfidenceInterval(successes, totalTrials, z = 1.96) {
+  if (totalTrials <= 0) return { lower: 0, upper: 0, p: 0 };
+  const p = successes / totalTrials;
+  const z2 = z * z;
+  const denominator = 1 + z2 / totalTrials;
+  const center = (p + z2 / (2 * totalTrials)) / denominator;
+  const spread = (z * Math.sqrt((p * (1 - p)) / totalTrials + z2 / (4 * totalTrials * totalTrials))) / denominator;
+
+  return {
+    p: parseFloat(p.toFixed(4)),
+    lower: parseFloat(Math.max(0, center - spread).toFixed(4)),
+    upper: parseFloat(Math.min(1, center + spread).toFixed(4))
+  };
+}
+
+/**
  * Default team baselines calibrated from live squad audits and historical scoring.
  */
-const DEFAULT_CLUB_BASELINES = [
-  { id: 21163674, name: 'Fermín Gadura F.C.', currentPoints: 245, meanPpm: 52.5, stdDev: 12.0, squadValue: 62000000 },
-  { id: 21163822, name: 'Racing de Oslo', currentPoints: 188, meanPpm: 48.5, stdDev: 10.5, squadValue: 55890000 },
-  { id: 21163646, name: 'M4 TEAM', currentPoints: 170, meanPpm: 42.0, stdDev: 9.5, squadValue: 38000000 },
-  { id: 21163653, name: 'Pachangueros F.C.', currentPoints: 167, meanPpm: 41.5, stdDev: 9.0, squadValue: 35000000 },
-  { id: 21163650, name: 'Amigos de NIN', currentPoints: 166, meanPpm: 40.0, stdDev: 9.0, squadValue: 32000000 },
-  { id: 21163825, name: 'Hache FC', currentPoints: 140, meanPpm: 38.0, stdDev: 8.5, squadValue: 28000000 },
-  { id: 21163563, name: 'Puente Avios FC', currentPoints: 139, meanPpm: 39.0, stdDev: 9.0, squadValue: 29000000 },
-  { id: 21163583, name: 'Ana', currentPoints: 138, meanPpm: 37.0, stdDev: 8.0, squadValue: 26000000 },
-  { id: 21163606, name: 'Suances nin', currentPoints: 129, meanPpm: 35.0, stdDev: 8.0, squadValue: 24000000 },
-  { id: 21163612, name: 'Melano Plabloroza', currentPoints: 128, meanPpm: 34.0, stdDev: 8.0, squadValue: 22000000 }
+export const DEFAULT_CLUB_BASELINES = [
+  { id: 21163674, name: 'Fermín Gadura F.C.', currentPoints: 245, meanPpm: 52.5, stdDev: 12.0, squadValue: 62000000, playerCount: 15, injuredStarters: 0 },
+  { id: 21163822, name: 'Racing de Oslo', currentPoints: 188, meanPpm: 48.5, stdDev: 10.5, squadValue: 55890000, playerCount: 11, injuredStarters: 0 },
+  { id: 21163646, name: 'M4 TEAM', currentPoints: 170, meanPpm: 42.0, stdDev: 9.5, squadValue: 38000000, playerCount: 14, injuredStarters: 1 },
+  { id: 21163653, name: 'Pachangueros F.C.', currentPoints: 167, meanPpm: 41.5, stdDev: 9.0, squadValue: 35000000, playerCount: 13, injuredStarters: 0 },
+  { id: 21163650, name: 'Amigos de NIN', currentPoints: 166, meanPpm: 40.0, stdDev: 9.0, squadValue: 32000000, playerCount: 12, injuredStarters: 1 },
+  { id: 21163825, name: 'Hache FC', currentPoints: 140, meanPpm: 38.0, stdDev: 8.5, squadValue: 28000000, playerCount: 11, injuredStarters: 0 },
+  { id: 21163563, name: 'Puente Avios FC', currentPoints: 139, meanPpm: 39.0, stdDev: 9.0, squadValue: 29000000, playerCount: 12, injuredStarters: 1 },
+  { id: 21163583, name: 'Ana', currentPoints: 138, meanPpm: 37.0, stdDev: 8.0, squadValue: 26000000, playerCount: 11, injuredStarters: 0 },
+  { id: 21163606, name: 'Suances nin', currentPoints: 129, meanPpm: 35.0, stdDev: 8.0, squadValue: 24000000, playerCount: 10, injuredStarters: 2 },
+  { id: 21163612, name: 'Melano Plabloroza', currentPoints: 128, meanPpm: 34.0, stdDev: 8.0, squadValue: 22000000, playerCount: 10, injuredStarters: 1 }
 ];
+
+/**
+ * Calibrate an explainable team PPM and standard deviation based on live audit data.
+ *
+ * Formula:
+ * FORECAST_PPM = (0.45 * SEASON_PPM + 0.35 * CURRENT_FORM_PPM + 0.20 * SQUAD_EXPECTED_PPM) * DEPTH_FACTOR * AVAILABILITY_FACTOR
+ */
+export function calibrateClubBaseline(clubData, currentMatchday = 5) {
+  const currentPts = clubData.points || clubData.totalPoints || clubData.currentPoints || 150;
+  const val = clubData.squadValue || 30000000;
+  const playerCount = clubData.playerCount || (clubData.players ? clubData.players.length : 12);
+  const injuredStarters = clubData.injuredStarters || 0;
+
+  // 1. Component PPMs
+  const mdDivisor = Math.max(1, currentMatchday);
+  const seasonPpm = currentPts / mdDivisor;
+  const currentFormPpm = typeof clubData.lastMatchdayPoints === 'number' && clubData.lastMatchdayPoints > 0
+    ? (clubData.lastMatchdayPoints * 0.6 + seasonPpm * 0.4)
+    : seasonPpm;
+  const squadExpectedPpm = (val / 1000000) * 0.8;
+
+  // 2. Multipliers
+  const depthFactor = Math.min(1.0, playerCount / 13) * (playerCount <= 11 ? 0.95 : 1.0);
+  const availabilityFactor = 1.0 - (injuredStarters / 11) * 0.5;
+
+  // 3. Blended Mean PPM
+  const baseForecast = (0.45 * seasonPpm + 0.35 * currentFormPpm + 0.20 * squadExpectedPpm);
+  const calibratedMean = parseFloat((baseForecast * depthFactor * availabilityFactor).toFixed(1));
+  const meanPpm = Math.max(25.0, Math.min(60.0, calibratedMean));
+
+  // 4. Calibrated Standard Deviation
+  const baseStdDev = 8.0 + 0.1 * meanPpm * (1.0 - depthFactor);
+  const stdDev = parseFloat(Math.max(6.0, Math.min(14.0, baseStdDev)).toFixed(1));
+
+  return {
+    id: clubData.id,
+    name: clubData.teamName || clubData.name || 'Club',
+    currentPoints: currentPts,
+    meanPpm,
+    stdDev,
+    squadValue: val,
+    playerCount,
+    injuredStarters,
+    calibrationFactors: {
+      seasonPpm: parseFloat(seasonPpm.toFixed(1)),
+      currentFormPpm: parseFloat(currentFormPpm.toFixed(1)),
+      squadExpectedPpm: parseFloat(squadExpectedPpm.toFixed(1)),
+      depthFactor: parseFloat(depthFactor.toFixed(2)),
+      availabilityFactor: parseFloat(availabilityFactor.toFixed(2))
+    }
+  };
+}
 
 /**
  * Loads the latest live standings and rivals audit data if available.
  */
-export function loadLiveClubBaselines(racingCustomMean = null) {
-  let clubs = [...DEFAULT_CLUB_BASELINES];
+export function loadLiveClubBaselines(racingCustomMean = null, currentMatchday = null) {
+  const resolvedMatchday = currentMatchday || resolveCurrentMatchday();
+  let clubs = DEFAULT_CLUB_BASELINES.map(c => calibrateClubBaseline(c, resolvedMatchday));
 
   try {
     const rivalsPath = path.resolve('web/src/data/rivalsAudit.json');
     if (fs.existsSync(rivalsPath)) {
       const rivals = JSON.parse(fs.readFileSync(rivalsPath, 'utf8'));
       if (Array.isArray(rivals) && rivals.length > 0) {
-        clubs = rivals.map(r => {
-          const currentPts = r.points || r.totalPoints || 150;
-          const val = r.squadValue || 30000000;
-          // Calibrate mean points per matchday based on squad value and current average
-          const avgPts = (currentPts / 5);
-          const calibratedMean = parseFloat(((avgPts * 0.7) + ((val / 1000000) * 0.8 * 0.3)).toFixed(1));
-          
-          return {
-            id: r.id,
-            name: r.teamName || r.name || 'Club',
-            currentPoints: currentPts,
-            meanPpm: Math.max(30, Math.min(58, calibratedMean)),
-            stdDev: r.teamName?.includes('Fermín') ? 12.5 : 10.0,
-            squadValue: val
-          };
-        });
+        clubs = rivals.map(r => calibrateClubBaseline(r, resolvedMatchday));
       }
     }
   } catch (e) {}
@@ -79,37 +162,41 @@ export function loadLiveClubBaselines(racingCustomMean = null) {
 }
 
 /**
- * Runs 1,000 Monte Carlo season simulations.
+ * Runs Monte Carlo season simulations with Common Random Numbers support.
  *
- * Supports both signatures:
- * 1. (engine, squad, iterations, currentMatchday)
- * 2. (remainingMatchdays, customClubs, iterations)
+ * Simulation Tiers:
+ * - FAST: 1,000 iterations (real-time UI / bot sweeps)
+ * - STANDARD: 10,000 iterations (War Room & daily reports)
+ * - DECISION: 50,000 iterations (critical multi-million transfers)
  */
-export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, arg3 = 4) {
+export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, arg3 = null, options = {}) {
   let remainingMatchdays = 33;
   let customClubs = null;
   let iterations = 1000;
   let racingMean = null;
+  let seed = options?.seed ?? 42;
+
+  const resolvedMatchday = typeof arg3 === 'number' ? arg3 : resolveCurrentMatchday();
 
   if (arg0 && typeof arg0.optimizeLineup === 'function') {
-    // Signature 1: (engine, squad, iterations, currentMatchday)
+    // Signature 1: (engine, squad, iterations, currentMatchday, options)
     const engine = arg0;
     const squad = arg1;
     iterations = typeof arg2 === 'number' ? arg2 : 1000;
-    const currentMatchday = typeof arg3 === 'number' ? arg3 : 4;
-    remainingMatchdays = Math.max(1, 38 - currentMatchday);
+    remainingMatchdays = Math.max(1, 38 - resolvedMatchday);
     if (squad) {
       const lineup = engine.optimizeLineup(squad);
       racingMean = lineup.score || 48.5;
     }
   } else {
-    // Signature 2: (remainingMatchdays, customClubs, iterations)
-    remainingMatchdays = typeof arg0 === 'number' ? arg0 : 33;
+    // Signature 2: (remainingMatchdays, customClubs, iterations, currentMatchday, options)
+    remainingMatchdays = typeof arg0 === 'number' ? arg0 : Math.max(1, 38 - resolvedMatchday);
     customClubs = Array.isArray(arg1) ? arg1 : null;
     iterations = typeof arg2 === 'number' ? arg2 : 1000;
   }
 
-  const clubs = customClubs || loadLiveClubBaselines(racingMean);
+  const clubs = customClubs || loadLiveClubBaselines(racingMean, resolvedMatchday);
+  const rng = createMulberry32(seed ?? 42);
 
   const titleCounts = {};
   const top2Counts = {};
@@ -127,8 +214,7 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
     const simResults = clubs.map(club => {
       let simPoints = club.currentPoints;
       for (let md = 0; md < remainingMatchdays; md++) {
-        // Draw matchday score from Gaussian distribution
-        const mdScore = Math.max(10, Math.round(randomNormal(club.meanPpm, club.stdDev)));
+        const mdScore = Math.max(10, Math.round(sampleGaussian(club.meanPpm, club.stdDev, rng)));
         simPoints += mdScore;
       }
       return {
@@ -138,10 +224,8 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
       };
     });
 
-    // Rank clubs by final points descending
     simResults.sort((a, b) => b.finalPoints - a.finalPoints);
 
-    // Record rankings
     if (simResults[0]) titleCounts[simResults[0].id]++;
     if (simResults[0]) top2Counts[simResults[0].id]++;
     if (simResults[1]) top2Counts[simResults[1].id]++;
@@ -165,17 +249,23 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
     const winProb = parseFloat(((titleCounts[c.id] / iterations) * 100).toFixed(1));
     const top2Prob = parseFloat(((top2Counts[c.id] / iterations) * 100).toFixed(1));
     const top3Prob = parseFloat(((top3Counts[c.id] / iterations) * 100).toFixed(1));
+    const confidenceInterval = calculateWilsonConfidenceInterval(titleCounts[c.id], iterations);
 
     return {
       id: c.id,
       name: c.name,
       currentPoints: c.currentPoints,
       meanPpm: c.meanPpm,
+      stdDev: c.stdDev,
       expectedFinalPoints: meanPts,
       range: `${p10} - ${p90} pts`,
       probChampion: winProb,
       probTop2: top2Prob,
-      probTop3: top3Prob
+      probTop3: top3Prob,
+      wilsonCI95: {
+        lowerPct: parseFloat((confidenceInterval.lower * 100).toFixed(1)),
+        upperPct: parseFloat((confidenceInterval.upper * 100).toFixed(1))
+      }
     };
   }).sort((a, b) => b.expectedFinalPoints - a.expectedFinalPoints);
 
@@ -185,18 +275,21 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
     totalSimulations: iterations,
     iterations,
     remainingMatchdays,
+    seed,
     racing: {
       pWin: parseFloat((racingSummary.probChampion / 100).toFixed(3)),
       pTop2: parseFloat((racingSummary.probTop2 / 100).toFixed(3)),
       pTop3: parseFloat((racingSummary.probTop3 / 100).toFixed(3)),
       expectedFinalPoints: racingSummary.expectedFinalPoints,
-      range: racingSummary.range
+      range: racingSummary.range,
+      wilsonCI95: racingSummary.wilsonCI95
     },
     probChampion: racingSummary.probChampion,
     probTop2: racingSummary.probTop2,
     probTop3: racingSummary.probTop3,
     racingExpectedFinalPoints: racingSummary.expectedFinalPoints,
     racingRange: racingSummary.range,
+    racingWilsonCI95: racingSummary.wilsonCI95,
     leaderName: tableSummary[0].name,
     leaderExpectedPoints: tableSummary[0].expectedFinalPoints,
     standings: tableSummary,
@@ -205,15 +298,20 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
 }
 
 /**
- * Evaluates the Delta Championship Probability when signing candidate.
+ * Evaluates the Delta Championship Probability when signing candidate using Common Random Numbers (CRN).
+ * Using identical RNG seeds ensures that variance in rival outcomes cancels out.
  */
-export function evaluateTransferChampionshipImpact(engine, squad, candidate, iterations = 1000, currentMatchday = 4) {
-  const preSim = runChampionshipSimulation(engine, squad, iterations, currentMatchday);
+export function evaluateTransferChampionshipImpact(engine, squad, candidate, iterations = 1000, currentMatchday = null, seed = 1337) {
+  const resolvedMatchday = currentMatchday || resolveCurrentMatchday();
+
+  // Run pre-transfer and post-transfer with identical seed (CRN)
+  const preSim = runChampionshipSimulation(engine, squad, iterations, resolvedMatchday, { seed });
+  
   const hypotheticalSquad = {
     ...squad,
     players: [...(squad?.players || []), candidate]
   };
-  const postSim = runChampionshipSimulation(engine, hypotheticalSquad, iterations, currentMatchday);
+  const postSim = runChampionshipSimulation(engine, hypotheticalSquad, iterations, resolvedMatchday, { seed });
 
   const deltaPWin = parseFloat((postSim.racing.pWin - preSim.racing.pWin).toFixed(3));
   const deltaExpectedPoints = postSim.racing.expectedFinalPoints - preSim.racing.expectedFinalPoints;
@@ -226,20 +324,18 @@ export function evaluateTransferChampionshipImpact(engine, squad, candidate, ite
     baseExpectedPoints: preSim.racing.expectedFinalPoints,
     newExpectedPoints: postSim.racing.expectedFinalPoints,
     deltaExpectedPoints,
-    isPositiveEV: deltaPWin > 0 || deltaExpectedPoints > 0
+    isPositiveEV: deltaPWin > 0 || deltaExpectedPoints > 0,
+    seedUsed: seed
   };
 }
 
 /**
- * Calculates the exact Delta Championship Probability for a prospective transfer operation.
- *
- * @param {number} currentXiExpectedPoints Current XI expected points per matchday
- * @param {number} newXiExpectedPoints Hypothetical XI expected points after transfer
- * @param {number} remainingMatchdays Remaining matchdays
+ * Calculates the exact Delta Championship Probability for a prospective transfer operation with CRN.
  */
-export function evaluateChampionshipDelta(currentXiExpectedPoints, newXiExpectedPoints, remainingMatchdays = 33) {
-  const preSim = runChampionshipSimulation(remainingMatchdays, loadLiveClubBaselines(currentXiExpectedPoints));
-  const postSim = runChampionshipSimulation(remainingMatchdays, loadLiveClubBaselines(newXiExpectedPoints));
+export function evaluateChampionshipDelta(currentXiExpectedPoints, newXiExpectedPoints, remainingMatchdays = null, iterations = 1000, seed = 1337) {
+  const resolvedRemaining = remainingMatchdays || Math.max(1, 38 - resolveCurrentMatchday());
+  const preSim = runChampionshipSimulation(resolvedRemaining, loadLiveClubBaselines(currentXiExpectedPoints), iterations, null, { seed });
+  const postSim = runChampionshipSimulation(resolvedRemaining, loadLiveClubBaselines(newXiExpectedPoints), iterations, null, { seed });
 
   const deltaProbChampion = parseFloat((postSim.probChampion - preSim.probChampion).toFixed(2));
   const deltaExpectedPoints = postSim.racingExpectedFinalPoints - preSim.racingExpectedFinalPoints;
@@ -251,6 +347,7 @@ export function evaluateChampionshipDelta(currentXiExpectedPoints, newXiExpected
     preExpectedPoints: preSim.racingExpectedFinalPoints,
     postExpectedPoints: postSim.racingExpectedFinalPoints,
     deltaExpectedPoints,
-    isPositiveEV: deltaProbChampion > 0 || deltaExpectedPoints > 0
+    isPositiveEV: deltaProbChampion > 0 || deltaExpectedPoints > 0,
+    seedUsed: seed
   };
 }

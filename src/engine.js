@@ -250,8 +250,16 @@ export class ComunioEngine {
       return { error: 'No se encontraron jugadores en la plantilla.' };
     }
 
+    const posMap = {
+      por: 'keeper', portero: 'keeper', keeper: 'keeper',
+      def: 'defender', defensa: 'defender', defender: 'defender',
+      mid: 'midfielder', centrocampista: 'midfielder', medio: 'midfielder', midfielder: 'midfielder',
+      del: 'striker', delantero: 'striker', striker: 'striker'
+    };
+
     const players = squad.players.map(p => {
-      const type = p.type || p.position;
+      const rawType = String(p.type || p.position || 'midfielder').toLowerCase().trim();
+      const type = posMap[rawType] || 'midfielder';
       const nextMatch = (p.nextMatches && p.nextMatches.length > 0) ? p.nextMatches[0] : null;
       let expPts = this.getExpectedPoints(p, nextMatch);
 

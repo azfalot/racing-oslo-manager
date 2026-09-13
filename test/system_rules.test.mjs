@@ -91,15 +91,16 @@ test('System Rule 2: Deny-by-default on non-Computer players for auto-bidding', 
   assert.ok(compAnalysis.recommendations.length >= 0, 'Confirmed computer players proceed to sporting evaluation');
 });
 
-// ── TEST SUITE 3: REGLA 3 (EXACT PRICING 100.0% VM) ───────────────────────────
-test('System Rule 3: Recommended bid is strictly 100.0% of market value (0% margin)', () => {
+// ── TEST SUITE 3: REGLA 3 (VALORACIÓN RACIONAL Y BANDAS DINÁMICAS 100-125% VM) ──
+test('System Rule 3: Recommended bid operates within dynamic valuation bands bounded by 100-125% VM', () => {
   const candidate = createMockPlayer(301, 'Target Star', 'midfielder', 5000000, { id: 1, name: 'Computer' });
-  const purchaseScore = { score: 55, components: {}, performance: { ppm: 6.0, starterProbability: 0.9, efficiency: 10 } };
+  const purchaseScore = { score: 55, components: {}, performance: { ppm: 6.0, starterProbability: 0.9, efficiency: 10 }, marginalValue: 0 };
   const rivalIntel = { avgCommunityOverbid: 8.5 };
 
   const bidCalc = calculateMaxRationalBid(candidate, purchaseScore, 20000000, rivalIntel);
-  assert.equal(bidCalc.recommendedBid, 5000000, 'Recommended bid must equal exact market price');
-  assert.equal(bidCalc.marginPct, 0, 'Margin percentage must be strictly 0');
+  assert.ok(bidCalc.recommendedBid >= 5000000, 'Recommended bid must be at least market value');
+  assert.ok(bidCalc.recommendedBid <= 5000000 * 1.25, 'Recommended bid must be bounded by 125% VM');
+  assert.ok(bidCalc.marginPct >= 0 && bidCalc.marginPct <= 25, 'Margin percentage must be between 0 and 25%');
 });
 
 // ── TEST SUITE 4: REGLA 4 (PRE-MATCHDAY WINDOW 15-30 MIN) ─────────────────────

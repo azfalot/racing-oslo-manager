@@ -7,12 +7,15 @@
 
 import { identifyPositionalWeaknesses, calculateDepthFragility } from './vorpEngine.js';
 import { runChampionshipSimulation } from './championshipSimulator.js';
+import { resolveCurrentMatchday } from './matchdayResolver.js';
 
 export function generateWarRoomReport(engine, squad, marketPlayers = [], balance = 0, committedBids = 0, rivalsData = null) {
   const effectiveBalance = balance - committedBids;
   const squadPlayers = squad?.players || [];
   const squadValue = squadPlayers.reduce((sum, p) => sum + (p.price || p.quotedPrice || 0), 0);
   const totalPatrimony = squadValue + balance;
+  const matchdayResult = resolveCurrentMatchday();
+  const currentMatchday = typeof matchdayResult === 'number' ? matchdayResult : (matchdayResult?.currentMatchday || 5);
 
   // 1. Lineup & Expected Points
   const optimalLineup = engine.optimizeLineup(squad);
@@ -56,8 +59,9 @@ export function generateWarRoomReport(engine, squad, marketPlayers = [], balance
   // 6. Recommended Sales & Liquidity
   const liquiditySuggestions = engine.getLiquiditySuggestions ? engine.getLiquiditySuggestions(squad, starters.map(s => s.playerId || s.id)) : [];
 
-  // 7. Monte Carlo Simulation
-  const simulation = runChampionshipSimulation(33);
+  // 7. Monte Carlo Simulation (using actual squad lineup expectation and dynamic matchday)
+  const simulation = runChampionshipSimulation(engine, squad, 1000, currentMatchday);
+  const confidenceLevel = currentMatchday >= 10 ? 'HIGH' : currentMatchday >= 5 ? 'MEDIUM' : 'LOW';
 
   // 8. Priority Action of the Day
   let priorityMovement = 'Mantener posiciones y acumular liquidez para oportunidades de alto Expected XI Delta.';
@@ -129,12 +133,14 @@ export function generateWarRoomReport(engine, squad, marketPlayers = [], balance
   }
   textReport += `\n`;
 
-  textReport += `🎲 SIMULACIÓN DE CAMPEONATO (Monte Carlo · 1.000 iteraciones)\n`;
-  textReport += `- P(Racing de Oslo 1º Campeón): ${simulation.probChampion}%\n`;
+  textReport += `🎲 SIMULACIÓN DE CAMPEONATO (Monte Carlo · ${simulation.iterations.toLocaleString()} iteraciones · Calibrado CRN)\n`;
+  textReport += `- P(Racing de Oslo 1º Campeón): ${simulation.probChampion}% (IC 95%: ${simulation.racingWilsonCI95?.lowerPct ?? 0}% - ${simulation.racingWilsonCI95?.upperPct ?? 0}%)\n`;
   textReport += `- P(Top 2): ${simulation.probTop2}%\n`;
   textReport += `- P(Top 3): ${simulation.probTop3}%\n`;
   textReport += `- Puntos Finales Estimados: ${simulation.racingExpectedFinalPoints} pts (${simulation.racingRange})\n`;
-  textReport += `- Puntos Líder (${simulation.leaderName}): ${simulation.leaderExpectedPoints} pts\n\n`;
+  textReport += `- Puntos Líder (${simulation.leaderName}): ${simulation.leaderExpectedPoints} pts\n`;
+  textReport += `- Jornadas Restantes: ${simulation.remainingMatchdays} (Jornada resuelta: ${currentMatchday})\n`;
+  textReport += `- Confianza del Modelo: [${confidenceLevel}] (${currentMatchday < 5 ? 'Fase inicial: priorizando históricos' : 'Muestra representativa consolidada'})\n\n`;
 
   textReport += `⭐ MOVIMIENTO PRIORITARIO DEL DÍA\n`;
   textReport += `👉 ${priorityMovement}\n`;
@@ -143,6 +149,8 @@ export function generateWarRoomReport(engine, squad, marketPlayers = [], balance
     rawText: textReport,
     data: {
       timestamp: new Date().toISOString(),
+      currentMatchday,
+      confidenceLevel,
       standings: { racingPoints, leaderPoints, leaderName, gap },
       finances: { balance, committedBids, effectiveBalance, squadValue, totalPatrimony },
       lineup: { formation, expectedPoints, starterCount: starters.length, starterRisks },
