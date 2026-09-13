@@ -1,9 +1,11 @@
 {
   "modelVersion": "RDO-FORECAST-3.0",
-  "timestamp": "2026-09-13T20:05:35.169Z",
+  "status": "EXPERIMENTAL",
+  "isEmpiricallyValidated": false,
+  "timestamp": "2026-09-13T20:19:45.489Z",
   "trainedThroughMatchday": 5,
-  "trainingObservations": 96,
-  "validationObservations": 40,
+  "trainingObservations": 56,
+  "dataProvenanceManifest": "data/calibrationDatasetManifest.json",
   "playerModel": {
     "baselines": {
       "P0_SeasonMean": {
@@ -141,9 +143,9 @@
           0.2
         ],
         "count": 56,
-        "mae": 1.353,
-        "rmse": 1.755,
-        "bias": -0.648
+        "mae": 1.368,
+        "rmse": 1.766,
+        "bias": -0.678
       },
       "60_30_10": {
         "config": "60_30_10",
@@ -154,8 +156,8 @@
         ],
         "count": 56,
         "mae": 1.353,
-        "rmse": 1.755,
-        "bias": -0.648
+        "rmse": 1.754,
+        "bias": -0.606
       },
       "40_35_25": {
         "config": "40_35_25",
@@ -165,9 +167,9 @@
           0.25
         ],
         "count": 56,
-        "mae": 1.353,
-        "rmse": 1.755,
-        "bias": -0.648
+        "mae": 1.392,
+        "rmse": 1.805,
+        "bias": -0.736
       },
       "equal_33": {
         "config": "equal_33",
@@ -177,9 +179,9 @@
           0.334
         ],
         "count": 56,
-        "mae": 1.353,
-        "rmse": 1.755,
-        "bias": -0.648
+        "mae": 1.414,
+        "rmse": 1.839,
+        "bias": -0.792
       }
     },
     "bestMAE": 1.375,
@@ -187,26 +189,7 @@
     "bias": -0.72
   },
   "teamModel": {
-    "baselines": {
-      "T0_SeasonPPM": {
-        "count": 40,
-        "mae": 1.573,
-        "rmse": 1.878,
-        "bias": -0.223
-      },
-      "T1_Last3Matchdays": {
-        "count": 40,
-        "mae": 1.575,
-        "rmse": 1.873,
-        "bias": -0.2
-      },
-      "T2_Phase2Formula": {
-        "count": 40,
-        "mae": 5.225,
-        "rmse": 5.987,
-        "bias": -4.247
-      }
-    },
+    "status": "HEURISTIC_CALIBRATED",
     "selectedWeights": {
       "season": 0.65,
       "form": 0.35,
@@ -214,112 +197,120 @@
     },
     "gridSearchBest": {
       "weights": {
-        "season": 0.65,
-        "form": 0.35,
-        "squad": 0
+        "season": 0.95,
+        "form": 0,
+        "squad": 0.05
       },
       "count": 40,
-      "mae": 4.62,
-      "rmse": 5.439,
-      "bias": -4.017
+      "mae": 2.074,
+      "rmse": 2.502,
+      "bias": -1.101
     },
     "squadValueAblation": {
       "modelA": {
         "name": "Model_A_NoSquadValue",
         "count": 40,
-        "mae": 4.627,
-        "rmse": 5.447,
-        "bias": -4.012
+        "mae": 2.175,
+        "rmse": 2.572,
+        "bias": -0.978
       },
       "modelB": {
         "name": "Model_B_WithSquadValue",
         "count": 40,
-        "mae": 5.028,
-        "rmse": 5.826,
-        "bias": -4.189
+        "mae": 2.411,
+        "rmse": 2.922,
+        "bias": -1.222
       },
       "squadValueRetained": false
     },
-    "bestMAE": 4.62,
-    "bestRMSE": 5.439,
-    "bias": -4.017
+    "bestMAE": 2.074,
+    "bestRMSE": 2.502,
+    "bias": -1.101
   },
   "depthPenalty": {
-    "model": "min(1.0, count/13) * (count <= 11 ? 0.95 : 1.0)",
-    "sampleSize": 40,
-    "confidence": "MEDIUM"
+    "model": "playerCount >= 12 ? 1.0 : (playerCount === 11 ? 0.98 : max(0.70, playerCount / 11))",
+    "sampleSize": 10,
+    "confidence": "HEURISTIC_PRIOR"
   },
   "availabilityPenalty": {
-    "model": "1.0 - (injuredStarters / 11) * 0.50",
-    "sampleSize": 40,
-    "confidence": "MEDIUM"
+    "model": "1.0 - (injuredStarters / 11) * 0.35",
+    "sampleSize": 10,
+    "confidence": "HEURISTIC_PRIOR"
   },
   "replacementLevel": {
     "selectedPercentile": "P35",
+    "status": "HEURISTIC_PRIOR",
     "percentiles": {
       "P20": {
         "percentile": 0.2,
         "sampleSize": 182,
         "estimatedReplacementPrice": 160300,
+        "status": "HEURISTIC_PRIOR",
         "suitability": "COMPARATIVE"
       },
       "P25": {
         "percentile": 0.25,
         "sampleSize": 182,
         "estimatedReplacementPrice": 400000,
+        "status": "HEURISTIC_PRIOR",
         "suitability": "COMPARATIVE"
       },
       "P30": {
         "percentile": 0.3,
         "sampleSize": 182,
         "estimatedReplacementPrice": 697700,
+        "status": "HEURISTIC_PRIOR",
         "suitability": "COMPARATIVE"
       },
       "P35": {
         "percentile": 0.35,
         "sampleSize": 182,
         "estimatedReplacementPrice": 160000,
-        "suitability": "OPTIMAL_CALIBRATED_BENCHMARK"
+        "status": "HEURISTIC_PRIOR",
+        "suitability": "HEURISTIC_PRIOR"
       },
       "P40": {
         "percentile": 0.4,
         "sampleSize": 182,
         "estimatedReplacementPrice": 268100,
+        "status": "HEURISTIC_PRIOR",
         "suitability": "COMPARATIVE"
       },
       "P45": {
         "percentile": 0.45,
         "sampleSize": 182,
         "estimatedReplacementPrice": 405200,
+        "status": "HEURISTIC_PRIOR",
         "suitability": "COMPARATIVE"
       },
       "P50": {
         "percentile": 0.5,
         "sampleSize": 182,
         "estimatedReplacementPrice": 1590000,
+        "status": "HEURISTIC_PRIOR",
         "suitability": "COMPARATIVE"
       }
-    },
-    "confidence": "HIGH"
+    }
   },
   "residualDistribution": {
     "sampleSize": 40,
-    "meanResidual": 4.246,
-    "stdDev": 4.274,
-    "skewness": -0.53,
-    "kurtosis": 2.396,
+    "meanResidual": 0.979,
+    "stdDev": 2.408,
+    "skewness": -0.453,
+    "kurtosis": 2.64,
     "distributionSelected": "GAUSSIAN_NORMAL",
-    "rationale": "Residuals are symmetric (|skewness| < 0.5) with moderate kurtosis ~3.0, supporting Gaussian Box-Muller sampling."
+    "distributionStatus": "ASSUMED_NOT_VALIDATED",
+    "rationale": "Box-Muller Gaussian sampling is adopted as an operational engineering assumption. Full out-of-sample empirical validation requires real round-by-round point snapshots across all clubs."
   },
   "teamCorrelation": {
-    "crossTeamCorrelation": 0.12,
-    "significance": "LOW",
-    "recommendation": "INDEPENDENCE_WITH_EXPLICIT_DOCUMENTATION",
-    "explanation": "Matchday common shocks (+/- 3 pts across all teams) explain < 2% of scoring variance; individual lineup quality dominates."
+    "estimate": null,
+    "confidence": "INSUFFICIENT_DATA",
+    "simulationAssumption": "INDEPENDENT",
+    "explanation": "Cross-team correlation cannot be empirically measured without simultaneous round-by-round point snapshots across all 10 clubs. Independence is assumed for Monte Carlo season simulation."
   },
   "modelSelectionRule": {
-    "rule": "Replace Phase-2 coefficients ONLY if walk-forward MAE improves, RMSE does not degrade, and bias is stable.",
-    "decision": "RECALIBRATE_WITH_OPTIMAL_GRID",
-    "confidenceLevel": "HIGH"
+    "rule": "Replace Phase-2 coefficients ONLY if out-of-sample walk-forward MAE improves on genuine verified historical matchday data.",
+    "decision": "MAINTAIN_HEURISTIC_BASELINE_AND_FLAG_EXPERIMENTAL",
+    "confidenceLevel": "LOW_SAMPLE_HEURISTIC"
   }
 }

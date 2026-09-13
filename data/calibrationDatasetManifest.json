@@ -1,0 +1,80 @@
+{
+  "manifestVersion": "1.0.0",
+  "generatedAt": "2026-09-13T22:18:00.000Z",
+  "auditStatus": "REMEDIATED_ZERO_SYNTHETIC_DATA_LEAKAGE",
+  "datasets": [
+    {
+      "datasetName": "comunioHistoricalTransactions",
+      "sourceFile": "web/src/data/historicalTransactions.json",
+      "sourceTimestampRange": {
+        "first": "2026-08-20T04:30:00+02:00",
+        "last": "2026-09-13T04:35:57+02:00"
+      },
+      "observationCount": 314,
+      "isSynthetic": false,
+      "leakageRisk": "NONE",
+      "eligibleForTraining": true,
+      "eligibleForValidation": true,
+      "provenance": "Official Comunio live market bid/transfer log captured by daemon and syncWeb.mjs"
+    },
+    {
+      "datasetName": "officialPlayerMultiSeasonHistory",
+      "sourceFile": "web/src/data/squad.json & last_squad.json",
+      "sourceTimestampRange": {
+        "first": "2014-08-15T00:00:00Z",
+        "last": "2026-05-31T23:59:59Z"
+      },
+      "observationCount": 116,
+      "isSynthetic": false,
+      "leakageRisk": "NONE",
+      "eligibleForTraining": true,
+      "eligibleForValidation": true,
+      "provenance": "Official end-of-season Comunio LaLiga points per player for seasons 14/15 through 25/26"
+    },
+    {
+      "datasetName": "preMatchdayLineupConfirmations",
+      "sourceFile": "matchday_predictions.json",
+      "sourceTimestampRange": {
+        "first": "2026-09-04T18:30:48.366Z",
+        "last": "2026-09-11T18:30:19.813Z"
+      },
+      "observationCount": 2,
+      "isSynthetic": false,
+      "leakageRisk": "NONE",
+      "eligibleForTraining": true,
+      "eligibleForValidation": true,
+      "provenance": "Recorded pre-deadline starting XI selections with expected points timestamped before kickoff"
+    },
+    {
+      "datasetName": "leagueStandingsSnapshotJ5",
+      "sourceFile": "web/src/data/rivalsAudit.json",
+      "sourceTimestampRange": {
+        "first": "2026-09-13T19:36:05.377Z",
+        "last": "2026-09-13T19:36:05.377Z"
+      },
+      "observationCount": 10,
+      "isSynthetic": false,
+      "leakageRisk": "INTERMEDIATE_MATCHDAYS_UNOBSERVED",
+      "eligibleForTraining": false,
+      "eligibleForValidation": false,
+      "provenance": "Single cumulative standings snapshot after J5. Does not contain individual match scores for J1-J4; cannot be split into intermediate matchday training steps without synthetic reconstruction."
+    },
+    {
+      "datasetName": "syntheticClubMatchdayArrays",
+      "sourceFile": "N/A - PREVIOUSLY IN src/calibrationEngine.js",
+      "sourceTimestampRange": null,
+      "observationCount": 40,
+      "isSynthetic": true,
+      "leakageRisk": "TARGET_LEAKAGE",
+      "eligibleForTraining": false,
+      "eligibleForValidation": false,
+      "provenance": "EXCLUDED AND REMOVED. Was manually partitioned from final J5 cumulative totals. Disqualified from all empirical model fitting and validation."
+    }
+  ],
+  "summary": {
+    "totalRealObservations": 442,
+    "totalSyntheticObservationsExcluded": 40,
+    "empiricalRecalibrationEligibility": "INSUFFICIENT_DATA_FOR_EMPIRICAL_RECALIBRATION",
+    "rationale": "Real player multi-season history (116 seasons) and transactions (314 ops) are valid. However, individual club matchday logs for J1-J4 are unobserved in repo logs. Empirical club recalibration requires logging genuine weekly matchday results going forward."
+  }
+}

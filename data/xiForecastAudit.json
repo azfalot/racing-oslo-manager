@@ -1,0 +1,119 @@
+{
+  "auditTimestamp": "2026-09-13T20:20:02.541Z",
+  "auditScope": "RACING_DE_OSLO_STARTING_XI_SCORE",
+  "formation": "4-3-3",
+  "currentSquadSize": 11,
+  "currentXiScore": 51.7,
+  "depthPenaltyFactor": 0.95,
+  "restOfSeasonExpectedPPM": 49.1,
+  "previousMisleadingValue": 66.7,
+  "misleadingValueExplanation": "The 66.7 value arose from an unconstrained script that included departed players without enforcing the 11-player Comunio lineup constraint.",
+  "starters": [
+    {
+      "playerId": 1927,
+      "name": "Gerard Moreno",
+      "position": "striker",
+      "price": 8940000,
+      "matchExpected": 6.3,
+      "projectedPoints": 190,
+      "status": "Disponible"
+    },
+    {
+      "playerId": 2206,
+      "name": "David Soria",
+      "position": "keeper",
+      "price": 4450000,
+      "matchExpected": 7.3,
+      "projectedPoints": 207,
+      "status": "Disponible"
+    },
+    {
+      "playerId": 2251,
+      "name": "Aïssa Mandi",
+      "position": "defender",
+      "price": 4450000,
+      "matchExpected": 5.3,
+      "projectedPoints": 145,
+      "status": "Disponible"
+    },
+    {
+      "playerId": 2304,
+      "name": "Mariano Díaz",
+      "position": "striker",
+      "price": 6650000,
+      "matchExpected": 7,
+      "projectedPoints": 145,
+      "status": "Disponible"
+    },
+    {
+      "playerId": 2415,
+      "name": "Fede Valverde",
+      "position": "midfielder",
+      "price": 14890000,
+      "matchExpected": 7.5,
+      "projectedPoints": 240,
+      "status": "Disponible"
+    },
+    {
+      "playerId": 2550,
+      "name": "Hugo Duro",
+      "position": "striker",
+      "price": 2750000,
+      "matchExpected": 4,
+      "projectedPoints": 147,
+      "status": "Disponible"
+    },
+    {
+      "playerId": 2785,
+      "name": "Pol Lozano",
+      "position": "midfielder",
+      "price": 250000,
+      "matchExpected": 0.2,
+      "projectedPoints": 85,
+      "status": "Disponible"
+    },
+    {
+      "playerId": 3553,
+      "name": "Johnny Cardoso",
+      "position": "midfielder",
+      "price": 1440000,
+      "matchExpected": 1.8,
+      "projectedPoints": 105,
+      "status": "Disponible"
+    },
+    {
+      "playerId": 3597,
+      "name": "Íñigo Arguibide",
+      "position": "defender",
+      "price": 1250000,
+      "matchExpected": 1.7,
+      "projectedPoints": 105,
+      "status": "Disponible"
+    },
+    {
+      "playerId": 3817,
+      "name": "Alexander-Arnold",
+      "position": "defender",
+      "price": 3930000,
+      "matchExpected": 4.5,
+      "projectedPoints": 145,
+      "status": "Disponible"
+    },
+    {
+      "playerId": 3825,
+      "name": "Adrián de la Fuente",
+      "position": "defender",
+      "price": 3900000,
+      "matchExpected": 6.1,
+      "projectedPoints": 157,
+      "status": "Disponible"
+    }
+  ],
+  "championshipMonteCarloBaseline": {
+    "symmetricRacingMeanPPM": 49.1,
+    "symmetricLeaderMeanPPM": 52.5,
+    "deficitPoints": 57,
+    "remainingMatchdays": 33,
+    "baselinePWinRange": "2.4% - 3.8%"
+  }
+}

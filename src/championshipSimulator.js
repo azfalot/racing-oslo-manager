@@ -5,10 +5,11 @@
  * Features:
  * - Deterministic PRNG (Mulberry32) for reproducible simulations
  * - Common Random Numbers (CRN) for noise-free Delta Championship evaluations
- * - Explainable rival expected scoring model based on form, season PPM, squad depth & availability
+ * - Symmetric rival and Racing scoring models accounting for depth & availability
  * - Dynamic matchday resolution via matchdayResolver
  * - Configurable simulation tiers: FAST (1k), STANDARD (10k), DECISION (50k)
  * - 95% Wilson score confidence intervals for title probabilities
+ * - Explicit scenario types: ACTUAL_BASELINE, EXPECTED_AVAILABLE_XI, FULL_STRENGTH_XI
  */
 
 import fs from 'fs';
@@ -85,7 +86,7 @@ export const DEFAULT_CLUB_BASELINES = [
 /**
  * Calibrate an explainable team PPM and standard deviation based on live audit data.
  *
- * Validated Phase-3 Model (RDO-FORECAST-3.0):
+ * Forecast Formula:
  * FORECAST_PPM = (0.65 * SEASON_PPM + 0.35 * CURRENT_FORM_PPM + 0.00 * SQUAD_EXPECTED_PPM) * DEPTH_FACTOR * AVAILABILITY_FACTOR
  */
 export function calibrateClubBaseline(clubData, currentMatchday = 5, weights = { season: 0.65, form: 0.35, squad: 0.00 }) {
@@ -106,7 +107,7 @@ export function calibrateClubBaseline(clubData, currentMatchday = 5, weights = {
   const depthFactor = playerCount >= 12 ? 1.0 : (playerCount === 11 ? 0.98 : Math.max(0.70, playerCount / 11));
   const availabilityFactor = 1.0 - (injuredStarters / 11) * 0.35;
 
-  // 3. Empirical Blended Mean PPM (Phase 3 Calibrated)
+  // 3. Empirical Blended Mean PPM
   const baseForecast = (weights.season * seasonPpm + weights.form * currentFormPpm + weights.squad * squadExpectedPpm);
   const calibratedMean = parseFloat((baseForecast * depthFactor * availabilityFactor).toFixed(1));
   const meanPpm = Math.max(25.0, Math.min(60.0, calibratedMean));
@@ -176,6 +177,7 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
   let iterations = 1000;
   let racingMean = null;
   let seed = options?.seed ?? 42;
+  const scenarioType = options?.scenarioType || 'ACTUAL_BASELINE';
 
   const resolvedMatchday = typeof arg3 === 'number' ? arg3 : resolveCurrentMatchday();
 
@@ -187,7 +189,13 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
     remainingMatchdays = Math.max(1, 38 - resolvedMatchday);
     if (squad) {
       const lineup = engine.optimizeLineup(squad);
-      racingMean = lineup.score || 48.5;
+      const rawScore = lineup.score || 48.5;
+      const pCount = (squad.players || []).length;
+      // Symmetric depth modeling: single 11 with 0 bench has higher season variance & fatigue risk
+      const depthFactor = scenarioType === 'FULL_STRENGTH_XI'
+        ? 1.0
+        : (pCount >= 12 ? 1.0 : (pCount === 11 ? 0.95 : Math.max(0.70, pCount / 11)));
+      racingMean = parseFloat((rawScore * depthFactor).toFixed(1));
     }
   } else {
     // Signature 2: (remainingMatchdays, customClubs, iterations, currentMatchday, options)
@@ -274,6 +282,8 @@ export function runChampionshipSimulation(arg0 = 33, arg1 = null, arg2 = 1000, a
 
   return {
     modelVersion: 'RDO-FORECAST-3.0',
+    status: 'EXPERIMENTAL',
+    scenarioType,
     totalSimulations: iterations,
     iterations,
     remainingMatchdays,
