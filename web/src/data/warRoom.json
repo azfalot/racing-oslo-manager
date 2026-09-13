@@ -1,0 +1,336 @@
+{
+  "timestamp": "2026-09-13T19:35:54.104Z",
+  "standings": {
+    "racingPoints": 188,
+    "leaderPoints": 245,
+    "leaderName": "Fermín Gadura F.C.",
+    "gap": 57
+  },
+  "finances": {
+    "balance": 280288,
+    "committedBids": 0,
+    "effectiveBalance": 280288,
+    "squadValue": 52900000,
+    "totalPatrimony": 53180288
+  },
+  "lineup": {
+    "formation": "4-3-3",
+    "expectedPoints": 50,
+    "starterCount": 11,
+    "starterRisks": [
+      {
+        "playerId": 3597,
+        "name": "Íñigo Arguibide",
+        "type": "defender",
+        "price": 1250000,
+        "available": true,
+        "expectedPoints": 1.3
+      },
+      {
+        "playerId": 3553,
+        "name": "Johnny Cardoso",
+        "type": "midfielder",
+        "price": 1440000,
+        "available": true,
+        "expectedPoints": 1.6
+      },
+      {
+        "playerId": 2785,
+        "name": "Pol Lozano",
+        "type": "midfielder",
+        "price": 250000,
+        "available": true,
+        "expectedPoints": 0.2
+      }
+    ]
+  },
+  "weaknesses": [
+    {
+      "playerId": 2785,
+      "name": "Pol Lozano",
+      "position": "midfielder",
+      "price": 250000,
+      "expectedPoints": 0.2,
+      "vorp": -7,
+      "vorpPerMatchday": -0.21,
+      "upgradeGap": 5.3,
+      "urgencyScore": 20.8
+    },
+    {
+      "playerId": 3553,
+      "name": "Johnny Cardoso",
+      "position": "midfielder",
+      "price": 1440000,
+      "expectedPoints": 1.6,
+      "vorp": 13,
+      "vorpPerMatchday": 0.38,
+      "upgradeGap": 3.9,
+      "urgencyScore": 13.8
+    },
+    {
+      "playerId": 3597,
+      "name": "Íñigo Arguibide",
+      "position": "defender",
+      "price": 1250000,
+      "expectedPoints": 1.3,
+      "vorp": 26,
+      "vorpPerMatchday": 0.76,
+      "upgradeGap": 4.2,
+      "urgencyScore": 10.1
+    }
+  ],
+  "depthAnalysis": {
+    "squadSize": 11,
+    "targetSize": 13,
+    "isFragile": true,
+    "missingDepthCount": 2,
+    "depthPenaltyPerMatchday": 1.12,
+    "recommendation": "🚨 Plantilla frágil (11 jugadores). Sin suplentes: cualquier baja imprevista costará -4 pts por hueco vacío. Priorizar 2 suplentes económicos (160k-400k €)."
+  },
+  "marketTargets": [],
+  "liquiditySuggestions": [],
+  "simulation": {
+    "totalSimulations": 1000,
+    "iterations": 1000,
+    "remainingMatchdays": 33,
+    "racing": {
+      "pWin": 0,
+      "pTop2": 0.65,
+      "pTop3": 0.912,
+      "expectedFinalPoints": 1475,
+      "range": "1395 - 1550 pts"
+    },
+    "probChampion": 0,
+    "probTop2": 65,
+    "probTop3": 91.2,
+    "racingExpectedFinalPoints": 1475,
+    "racingRange": "1395 - 1550 pts",
+    "leaderName": "Fermín Gadura F.C.",
+    "leaderExpectedPoints": 1898,
+    "standings": [
+      {
+        "id": 21163674,
+        "name": "Fermín Gadura F.C.",
+        "currentPoints": 245,
+        "meanPpm": 50,
+        "expectedFinalPoints": 1898,
+        "range": "1809 - 1985 pts",
+        "probChampion": 100,
+        "probTop2": 100,
+        "probTop3": 100
+      },
+      {
+        "id": 21163822,
+        "name": "Racing de Oslo",
+        "currentPoints": 188,
+        "meanPpm": 39,
+        "expectedFinalPoints": 1475,
+        "range": "1395 - 1550 pts",
+        "probChampion": 0,
+        "probTop2": 65,
+        "probTop3": 91.2
+      },
+      {
+        "id": 21163653,
+        "name": "Pachangueros F.C.",
+        "currentPoints": 167,
+        "meanPpm": 37.9,
+        "expectedFinalPoints": 1417,
+        "range": "1341 - 1489 pts",
+        "probChampion": 0,
+        "probTop2": 21.4,
+        "probTop3": 61.2
+      },
+      {
+        "id": 21163646,
+        "name": "M4 TEAM",
+        "currentPoints": 170,
+        "meanPpm": 37.3,
+        "expectedFinalPoints": 1402,
+        "range": "1330 - 1474 pts",
+        "probChampion": 0,
+        "probTop2": 13.5,
+        "probTop3": 45.9
+      },
+      {
+        "id": 21163650,
+        "name": "Amigos de NIN",
+        "currentPoints": 166,
+        "meanPpm": 34,
+        "expectedFinalPoints": 1289,
+        "range": "1218 - 1360 pts",
+        "probChampion": 0,
+        "probTop2": 0.1,
+        "probTop3": 1.7
+      },
+      {
+        "id": 21163563,
+        "name": "Puente Avios FC",
+        "currentPoints": 139,
+        "meanPpm": 31.6,
+        "expectedFinalPoints": 1183,
+        "range": "1108 - 1259 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0
+      },
+      {
+        "id": 21163825,
+        "name": "Hache FC",
+        "currentPoints": 140,
+        "meanPpm": 31.2,
+        "expectedFinalPoints": 1169,
+        "range": "1094 - 1242 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0
+      },
+      {
+        "id": 21163583,
+        "name": "Ana",
+        "currentPoints": 138,
+        "meanPpm": 30,
+        "expectedFinalPoints": 1130,
+        "range": "1061 - 1201 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0
+      },
+      {
+        "id": 21163606,
+        "name": "Suances nin",
+        "currentPoints": 129,
+        "meanPpm": 30,
+        "expectedFinalPoints": 1122,
+        "range": "1048 - 1197 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0
+      },
+      {
+        "id": 21163612,
+        "name": "Melano Plabloroza",
+        "currentPoints": 128,
+        "meanPpm": 30,
+        "expectedFinalPoints": 1121,
+        "range": "1051 - 1190 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0
+      }
+    ],
+    "table": [
+      {
+        "id": 21163674,
+        "name": "Fermín Gadura F.C.",
+        "currentPoints": 245,
+        "meanPpm": 50,
+        "expectedFinalPoints": 1898,
+        "range": "1809 - 1985 pts",
+        "probChampion": 100,
+        "probTop2": 100,
+        "probTop3": 100
+      },
+      {
+        "id": 21163822,
+        "name": "Racing de Oslo",
+        "currentPoints": 188,
+        "meanPpm": 39,
+        "expectedFinalPoints": 1475,
+        "range": "1395 - 1550 pts",
+        "probChampion": 0,
+        "probTop2": 65,
+        "probTop3": 91.2
+      },
+      {
+        "id": 21163653,
+        "name": "Pachangueros F.C.",
+        "currentPoints": 167,
+        "meanPpm": 37.9,
+        "expectedFinalPoints": 1417,
+        "range": "1341 - 1489 pts",
+        "probChampion": 0,
+        "probTop2": 21.4,
+        "probTop3": 61.2
+      },
+      {
+        "id": 21163646,
+        "name": "M4 TEAM",
+        "currentPoints": 170,
+        "meanPpm": 37.3,
+        "expectedFinalPoints": 1402,
+        "range": "1330 - 1474 pts",
+        "probChampion": 0,
+        "probTop2": 13.5,
+        "probTop3": 45.9
+      },
+      {
+        "id": 21163650,
+        "name": "Amigos de NIN",
+        "currentPoints": 166,
+        "meanPpm": 34,
+        "expectedFinalPoints": 1289,
+        "range": "1218 - 1360 pts",
+        "probChampion": 0,
+        "probTop2": 0.1,
+        "probTop3": 1.7
+      },
+      {
+        "id": 21163563,
+        "name": "Puente Avios FC",
+        "currentPoints": 139,
+        "meanPpm": 31.6,
+        "expectedFinalPoints": 1183,
+        "range": "1108 - 1259 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0
+      },
+      {
+        "id": 21163825,
+        "name": "Hache FC",
+        "currentPoints": 140,
+        "meanPpm": 31.2,
+        "expectedFinalPoints": 1169,
+        "range": "1094 - 1242 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0
+      },
+      {
+        "id": 21163583,
+        "name": "Ana",
+        "currentPoints": 138,
+        "meanPpm": 30,
+        "expectedFinalPoints": 1130,
+        "range": "1061 - 1201 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0
+      },
+      {
+        "id": 21163606,
+        "name": "Suances nin",
+        "currentPoints": 129,
+        "meanPpm": 30,
+        "expectedFinalPoints": 1122,
+        "range": "1048 - 1197 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0
+      },
+      {
+        "id": 21163612,
+        "name": "Melano Plabloroza",
+        "currentPoints": 128,
+        "meanPpm": 30,
+        "expectedFinalPoints": 1121,
+        "range": "1051 - 1190 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0
+      }
+    ]
+  },
+  "priorityMovement": "Fichar 1-2 suplentes económicos (160k-400k €) para blindar el banquillo y eliminar el riesgo de -4 pts por lesión."
+}

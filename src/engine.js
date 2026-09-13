@@ -11,10 +11,15 @@ import {
   getExpectedPerformance,
   calculateStrategicPurchaseScore,
   calculateMaxRationalBid,
+  calculateCostPerMarginalPoint,
+  classifySquadRoles,
+  starReplacementTest,
+  calculateSeasonUtility,
   evaluateIncomingOffer,
   evaluateSalePortfolio,
   evaluatePostSigningSale
 } from './squadOptimizer.js';
+import { calculateVORP, identifyPositionalWeaknesses, calculateDepthFragility } from './vorpEngine.js';
 import { MinuteTracker } from './minuteTracker.js';
 import { DisciplineMonitor } from './disciplineMonitor.js';
 import { LineupScraper } from './lineupScraper.js';
@@ -151,6 +156,7 @@ export class ComunioEngine {
 
   /**
    * Calcula la puntuación esperada para la jornada actual (en escala de 0 a 10 pts por partido)
+   * Incorpora regresión bayesiana de momentum (shrinkage factor k=3) hacia la media a priori.
    */
   getExpectedPoints(player, matchData = null) {
     if (!player) return 0;
@@ -162,11 +168,22 @@ export class ComunioEngine {
 
     // 1. Proyección base de la temporada -> Media esperada por partido (34 partidos estimados)
     const seasonProj = this.getSeasonProjection(player);
-    let matchExpected = parseFloat((seasonProj / 34).toFixed(2));
+    const priorMean = parseFloat((seasonProj / 34).toFixed(2));
+    let matchExpected = priorMean;
 
-    // 2. Si lleva racha reciente en la temporada actual, ponderar
+    // 2. Regresión Bayesiana de Momentum:
     const avgPoints = parseFloat(player.average?.points ? String(player.average.points).replace(',', '.') : 0);
-    if (!isNaN(avgPoints) && avgPoints > 0) {
+    const recentScores = Array.isArray(player.lastMatches || player.recentScores)
+      ? (player.lastMatches || player.recentScores).filter(s => typeof s === 'number')
+      : [];
+
+    if (recentScores.length > 0) {
+      const n = recentScores.length;
+      const recentMean = recentScores.reduce((a, b) => a + b, 0) / n;
+      const k = 3; // Shrinkage factor hacia el prior
+      const bayesianPpm = ((n * recentMean) + (k * priorMean)) / (n + k);
+      matchExpected = parseFloat(bayesianPpm.toFixed(2));
+    } else if (!isNaN(avgPoints) && avgPoints > 0) {
       matchExpected = (matchExpected * 0.60) + (avgPoints * 0.40);
     }
 
@@ -471,14 +488,16 @@ export class ComunioEngine {
       const calendarMod = this.getMatchDifficultyModifier(player, { opponent: player.nextOpponent || player.clubName || '' });
       const adjustedExpectedPoints = Math.round(expectedPoints * calendarMod);
 
-      // 4. Evaluación de Squad Optimization (Mejora Real sobre el Mejor Once)
+      // 4. Evaluación de Squad Optimization (Mejora Real sobre el Mejor Once) & VORP
       const purchaseScore = calculateStrategicPurchaseScore(this, player, squad, balance, rivalIntel);
       const bidCalc = calculateMaxRationalBid(player, purchaseScore, balance, rivalIntel);
+      const vorpData = calculateVORP(this, player, squad);
 
       let marginalValue = purchaseScore.marginalValue;
       const upgradePoints = marginalValue;
       const ppm = purchaseScore.performance.ppm;
       const efficiency = purchaseScore.performance.efficiency;
+      const cpmpData = calculateCostPerMarginalPoint(player, marginalValue, 34);
 
       // 5. Categorización racional
       let category = 'EL_RESTO';
@@ -508,11 +527,19 @@ export class ComunioEngine {
         bidAmount: bidCalc.recommendedBid,
         maxRationalBid: bidCalc.maxRationalBid,
         marginPct: bidCalc.marginPct,
+        band: bidCalc.band || 'BASE',
         expectedPoints: adjustedExpectedPoints,
         ppm,
         efficiency,
         upgradePoints,
         marginalValue,
+        vorp: vorpData.vorp,
+        vorpPerMatchday: vorpData.vorpPerMatchday,
+        cpmp: cpmpData.cpmpPerMatchday,
+        cpmpSeason: cpmpData.cpmpSeason,
+        replacedPlayer: purchaseScore.replacedPlayer,
+        replacedPlayerName: purchaseScore.replacedPlayerName,
+        replacedPlayerExpectedPoints: purchaseScore.replacedPlayerExpectedPoints,
         strategicScore: purchaseScore.score,
         strategicComponents: purchaseScore.components,
         category,
@@ -523,7 +550,7 @@ export class ComunioEngine {
         isComputer,
         requiresSaleFirst: isSquadFull,
         reasoning: purchaseScore.reasoning.concat(bidCalc.reasoning),
-        reason: `${impactTag}: Mejora real del XI: +${marginalValue.toFixed(0)} pts. ${bidCalc.reasoning[0] || ''}`
+        reason: `${impactTag}: Mejora real del XI: +${marginalValue.toFixed(0)} pts${purchaseScore.replacedPlayerName ? ` (sustituye a ${purchaseScore.replacedPlayerName})` : ''}. ${bidCalc.reasoning[0] || ''}`
       });
     }
 

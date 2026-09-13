@@ -205,17 +205,19 @@ async function handleTelegramMessage(message) {
   // ── /start · /help ────────────────────────────────────────────────────────
   if (cleanText.startsWith('/start') || cleanText.startsWith('/help') || cleanText === 'ayuda') {
     const pauseStatus = botPaused ? '⏸ <b>BOT PAUSADO</b> (acciones autónomas desactivadas)\n\n' : '';
-    const helpText = `💼 <b>[Mateo Oslomany v1.2.0] · Centro de Mando Táctico</b>\n${pauseStatus}\n` +
-      `📊 <b>Gestión Deportiva & Vestuario:</b>\n` +
+    const helpText = `💼 <b>[Mateo Oslomany v1.3.0] · Centro de Mando Táctico Cuantitativo</b>\n${pauseStatus}\n` +
+      `📊 <b>Gestión Deportiva & War Room:</b>\n` +
+      ` • /warroom — Gabinete de Crisis y Dirección Deportiva Cuantitativa\n` +
+      ` • /simulacion — Simulador Monte Carlo (1.000 runs) de Campeonato y título\n` +
       ` • /reporte — Dashboard ejecutivo: situación deportiva y tesorería\n` +
-      ` • /plantilla — Censo oficial de plantilla por posiciones y roles\n` +
+      ` • /plantilla — Censo oficial de plantilla por posiciones y roles VORP\n` +
       ` • /alinear — Optimizar y guardar Once Titular oficial en Comunio (alias: /tactica, /once)\n` +
       ` • /scout — Radar de ojeados (+35 pts) y prensa deportiva\n` +
       ` • /salud — Parte médico y control disciplinario de tarjetas (RFEF)\n` +
       ` • /analisis — Auditoría táctica de carencias y mercado\n` +
       ` • /rivales — Clasificación y valor patrimonial de rivales\n\n` +
       `🎯 <b>Mercado & Finanzas:</b>\n` +
-      ` • /pujas — Centro unificado de pujas activas y mercado\n` +
+      ` • /pujas — Centro unificado de pujas activas y valoración racional\n` +
       ` • /finanzas — Balance, histórico de primas (10k€/pt) y tesorería\n` +
       ` • /ofertas — Ofertas de compra recibidas\n` +
       ` • /sugerencias — Sugerencias de venta y descarte\n` +
@@ -225,24 +227,24 @@ async function handleTelegramMessage(message) {
     const helpMarkup = {
       inline_keyboard: [
         [
-          { text: '📊 Reporte', callback_data: 'cmd:reporte' },
+          { text: '🎖️ War Room', callback_data: 'cmd:warroom' },
+          { text: '🎲 Simulación', callback_data: 'cmd:simulacion' },
+          { text: '📊 Reporte', callback_data: 'cmd:reporte' }
+        ],
+        [
           { text: '👥 Plantilla', callback_data: 'cmd:plantilla' },
-          { text: '⚽ Alinear XI', callback_data: 'cmd:alinear' }
+          { text: '⚽ Alinear XI', callback_data: 'cmd:alinear' },
+          { text: '🕵️‍♂️ Análisis', callback_data: 'cmd:analisis' }
         ],
         [
           { text: '🎯 Scout', callback_data: 'cmd:scout' },
           { text: '🏥 Salud', callback_data: 'cmd:salud' },
-          { text: '🕵️‍♂️ Análisis', callback_data: 'cmd:analisis' }
+          { text: '🛒 Pujas', callback_data: 'cmd:pujas' }
         ],
         [
-          { text: '🛒 Pujas & Mercado', callback_data: 'cmd:pujas' },
           { text: '💰 Finanzas', callback_data: 'cmd:finanzas' },
-          { text: '📩 Ofertas', callback_data: 'cmd:ofertas' }
-        ],
-        [
-          { text: '🏆 Rivales', callback_data: 'cmd:rivales' },
-          { text: '💡 Sugerencias', callback_data: 'cmd:sugerencias' },
-          { text: '🏥 Salud', callback_data: 'cmd:salud' }
+          { text: '📩 Ofertas', callback_data: 'cmd:ofertas' },
+          { text: '🏆 Rivales', callback_data: 'cmd:rivales' }
         ],
         [
           { text: '🌐 Abrir Sede Digital', url: 'https://racing-oslo.cotero91.workers.dev' }
@@ -251,6 +253,64 @@ async function handleTelegramMessage(message) {
     };
 
     await sendTelegramMessage(helpText, helpMarkup);
+  }
+
+  // ── /warroom · /war_room ──────────────────────────────────────────────────
+  else if (cleanText.startsWith('/warroom') || cleanText.startsWith('/war_room')) {
+    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Convocando al Gabinete Estratégico War Room...</i>');
+    const client = new ComunioClient();
+    const engine = new ComunioEngine();
+    try {
+      await client.login();
+      const squad = await client.getSquad();
+      const dash = await client.getDashboardData();
+      const market = await client.getMarket();
+      const pendingBids = await client.getPendingBids();
+      const committedBids = (pendingBids || []).reduce((s, b) => s + (b.amount || 0), 0);
+      const rivalsData = await analyzeRivals(client);
+      await client.close();
+
+      const { generateWarRoomReport } = await import('./warRoom.js');
+      const warRoom = generateWarRoomReport(engine, squad, market?.players || [], dash.money || 0, committedBids, rivalsData);
+      await sendTelegramMessage(`<pre>${escapeHtml(warRoom.rawText)}</pre>`);
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error en War Room: <code>${e.message}</code>`);
+    } finally {
+      await client.close();
+    }
+  }
+
+  // ── /simulacion · /montecarlo · /simular ──────────────────────────────────
+  else if (cleanText.startsWith('/simulacion') || cleanText.startsWith('/montecarlo') || cleanText.startsWith('/simular')) {
+    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Ejecutando simulación Monte Carlo de 1.000 iteraciones...</i>');
+    const client = new ComunioClient();
+    const engine = new ComunioEngine();
+    try {
+      await client.login();
+      const squad = await client.getSquad();
+      await client.close();
+
+      const { runChampionshipSimulation } = await import('./championshipSimulator.js');
+      const sim = runChampionshipSimulation(engine, squad, 1000);
+
+      let rep = `🎲 <b>[SIMULACIÓN DE CAMPEONATO · MONTE CARLO 1.000 RUNS]</b>\n\n`;
+      rep += `🏆 <b>PROBABILIDADES RACING DE OSLO:</b>\n`;
+      rep += ` • <b>P(1º Campeón):</b> <b>${sim.probChampion}%</b>\n`;
+      rep += ` • <b>P(Top 2):</b> ${sim.probTop2}%\n`;
+      rep += ` • <b>P(Top 3):</b> ${sim.probTop3}%\n`;
+      rep += ` • <b>Puntos Finales Esperados:</b> ~${sim.racingExpectedFinalPoints} pts (${sim.racingRange})\n\n`;
+      rep += `📊 <b>TABLA CLASIFICATORIA ESPERADA:</b>\n`;
+      (sim.standings || []).slice(0, 5).forEach((c, idx) => {
+        const isRacing = c.name?.includes('Racing');
+        const tag = isRacing ? '⭐ ' : '';
+        rep += `${tag}${idx + 1}. <b>${escapeHtml(c.name)}</b>: ~${c.expectedFinalPoints} pts (P1º: ${c.probChampion}%)\n`;
+      });
+      await sendTelegramMessage(rep);
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error en simulación: <code>${e.message}</code>`);
+    } finally {
+      await client.close();
+    }
   }
 
   // ── /analisis ─────────────────────────────────────────────────────────────

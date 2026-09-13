@@ -470,6 +470,23 @@ async function fetchRealData() {
     console.warn('[SYNC-WEB] Info verificación gráficas:', gfxErr.message);
   }
 
+  // Generación del War Room Cuantitativo (warRoom.json)
+  try {
+    const { generateWarRoomReport } = await import('./warRoom.js');
+    const warRoomResult = generateWarRoomReport(
+      engine,
+      squad,
+      rawMarket?.players || [],
+      dashboard.money || 280288,
+      0,
+      rivalsData
+    );
+    fs.writeFileSync(path.resolve('web/src/data/warRoom.json'), JSON.stringify(warRoomResult.data, null, 2));
+    console.log('[SYNC-WEB] ✅ warRoom.json exportado con telemetría cuantitativa.');
+  } catch (wrErr) {
+    console.warn('[SYNC-WEB] Info generación warRoom:', wrErr.message);
+  }
+
   // Generación de estado del sistema y observabilidad (systemStatus.json)
   try {
     const configPath = path.resolve('config.json');
@@ -502,7 +519,7 @@ async function fetchRealData() {
           autoBidLimit: `${cfg.strategy?.liquidity?.autoBidLimit || 50}.0M € (Ventas requieren confirmación obligatoria)`,
           safetyReserveMin: `${(cfg.strategy?.purchase?.safetyReserveMin || 1000000).toLocaleString()} €`,
           autoAcceptAboveMarket: "Confirmación de usuario obligatoria",
-          bidMargin: "0.0% (100% exacto de VM, sin sobrepujas)",
+          bidBands: "Dinámicas 95%-125% VM (Especulación 95-102%, Fondo 100-105%, Upgrade 105-115%, Elite 115-125%)",
           noDirectRivalBonus: "Activo (0% margen a rivales directos)",
           banDiscard: "Activo (Descarta sancionados, rojas y lesionados)"
         },
@@ -524,6 +541,7 @@ async function fetchRealData() {
           news: `${newsCount} noticias históricas sincronizadas`,
           rivals: `${rivalsCount} clubes auditados con sugerencias dinámicas`,
           market: "Mercado escaneado",
+          warRoom: "War Room cuantitativo activo con Monte Carlo (1.000 iteraciones)",
           finances: "Actualizado (+280.288 € consolidado con Galarreta)"
         }
       },

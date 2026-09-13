@@ -9,6 +9,7 @@
 import fs from 'fs';
 import { evaluateClubCompetition } from './clubCompetition.js';
 import { isVerifiedComputerOwner } from './ownership.js';
+import { calculateVORP, identifyPositionalWeaknesses, calculateDepthFragility } from './vorpEngine.js';
 
 // ── CONFIGURATION ──────────────────────────────────────────────────────────────
 
@@ -33,7 +34,13 @@ const DEFAULT_STRATEGY = {
       riskAdjustment: -0.05
     },
     minMarginalXIUpgrade: 3,
-    safetyReserveMin: 1000000
+    safetyReserveMin: 1000000,
+    bands: {
+      speculationMaxPct: 2,
+      depthMaxPct: 5,
+      clearUpgradeMaxPct: 15,
+      eliteMaxPct: 25
+    }
   },
   sale: {
     minReplacementLossForProtection: 10
@@ -87,7 +94,7 @@ export function calculateSquadValue(engine, squad) {
 // ── MARGINAL VALUE ─────────────────────────────────────────────────────────────
 
 /**
- * How much adding `candidate` improves the best XI.
+ * How much adding `candidate` improves the best XI, and precisely who is replaced.
  *
  *   marginalValue = bestXI(squad + candidate) - bestXI(squad)
  *
@@ -96,10 +103,11 @@ export function calculateSquadValue(engine, squad) {
  * @param {ComunioEngine} engine
  * @param {{ players: Array }} squad
  * @param {Object} candidate  Market player object
- * @returns {{ marginalValue: number, entersXI: boolean, currentSquadValue: number, newSquadValue: number }}
+ * @returns {{ marginalValue: number, entersXI: boolean, currentSquadValue: number, newSquadValue: number, replacedPlayer: Object|null, replacedPlayerName: string|null, replacedPlayerExpectedPoints: number }}
  */
 export function calculateMarginalValue(engine, squad, candidate) {
-  const currentValue = calculateSquadValue(engine, squad);
+  const baseLineup = engine.optimizeLineup(squad);
+  const currentValue = baseLineup.score || 0;
 
   // Build hypothetical squad with candidate added
   const hypotheticalPlayers = [...(squad.players || []), candidate];
@@ -107,12 +115,36 @@ export function calculateMarginalValue(engine, squad, candidate) {
   const newLineup = engine.optimizeLineup(hypotheticalSquad);
   const newValue = newLineup.score || 0;
 
-  const marginalValue = newValue - currentValue;
+  const marginalValue = parseFloat((newValue - currentValue).toFixed(1));
+  const candidateId = candidate.playerId || candidate.id;
   const entersXI = (newLineup.starting11 || []).some(
-    p => (p.playerId || p.id) === (candidate.playerId || candidate.id)
+    p => (p.playerId || p.id) === candidateId
   );
 
-  return { marginalValue, entersXI, currentSquadValue: currentValue, newSquadValue: newValue };
+  // Identify who was replaced in the Starting XI
+  let replacedPlayer = null;
+  let replacedPlayerName = null;
+  let replacedPlayerExpectedPoints = 0;
+
+  if (entersXI && baseLineup.starting11) {
+    const newXIIds = new Set((newLineup.starting11 || []).map(p => p.playerId || p.id));
+    const droppedStarter = (baseLineup.starting11 || []).find(p => !newXIIds.has(p.playerId || p.id));
+    if (droppedStarter) {
+      replacedPlayer = droppedStarter;
+      replacedPlayerName = droppedStarter.name;
+      replacedPlayerExpectedPoints = droppedStarter.expectedPoints || 0;
+    }
+  }
+
+  return {
+    marginalValue,
+    entersXI,
+    currentSquadValue: currentValue,
+    newSquadValue: newValue,
+    replacedPlayer,
+    replacedPlayerName,
+    replacedPlayerExpectedPoints
+  };
 }
 
 // ── REPLACEMENT LOSS ───────────────────────────────────────────────────────────
@@ -415,7 +447,7 @@ export function calculateStrategicPurchaseScore(engine, candidate, squad, balanc
   }
 
   // 1. Squad upgrade (0-100) — Normalizado por mejora de puntos por jornada (3.0+ pts/jornada = 100)
-  const { marginalValue, entersXI } = calculateMarginalValue(engine, squad, candidate);
+  const { marginalValue, entersXI, replacedPlayer, replacedPlayerName, replacedPlayerExpectedPoints } = calculateMarginalValue(engine, squad, candidate);
   const squadUpgradeRaw = Math.max(0, Math.min(100, (marginalValue / 3.0) * 100));
 
   // 2. Absolute quality (0-100)
@@ -479,7 +511,8 @@ export function calculateStrategicPurchaseScore(engine, candidate, squad, balanc
   // Build reasoning
   const reasoning = [];
   if (entersXI) {
-    reasoning.push(`✅ Entra en el XI titular (+${marginalValue} pts al Once Ideal).`);
+    const replacedMsg = replacedPlayerName ? ` sustituyendo a ${replacedPlayerName}` : '';
+    reasoning.push(`✅ Entra en el XI titular (+${marginalValue} pts al Once Ideal${replacedMsg}).`);
   } else if (marginalValue > 0) {
     reasoning.push(`📈 Mejora el fondo de armario (+${marginalValue} pts de profundidad).`);
   } else {
@@ -514,15 +547,216 @@ export function calculateStrategicPurchaseScore(engine, candidate, squad, balanc
     reasoning,
     performance: perf,
     entersXI,
-    marginalValue
+    marginalValue,
+    replacedPlayer,
+    replacedPlayerName,
+    replacedPlayerExpectedPoints
   };
 }
 
-// ── MAXIMUM RATIONAL BID ───────────────────────────────────────────────────────
+// ── COST PER MARGINAL POINT (CPMP) ──────────────────────────────────────────
+
+/**
+ * Calculates Cost Per Marginal Point (CPMP) for candidate.
+ *
+ *   CPMP (Matchday) = Price / DeltaXI
+ *   CPMP (Season)   = Price / (DeltaXI * remainingMatchdays)
+ */
+export function calculateCostPerMarginalPoint(candidate, marginalValue, remainingMatchdays = 34) {
+  const price = candidate.price || candidate.quotedPrice || 0;
+  if (!marginalValue || marginalValue <= 0) {
+    return {
+      cpmpPerMatchday: Infinity,
+      cpmpSeason: Infinity,
+      totalPointsGained: 0,
+      efficiencyRating: 'POOR'
+    };
+  }
+
+  const cpmpPerMatchday = Math.round(price / marginalValue);
+  const totalPointsGained = Math.round(marginalValue * remainingMatchdays);
+  const cpmpSeason = totalPointsGained > 0 ? Math.round(price / totalPointsGained) : Infinity;
+
+  let efficiencyRating = 'POOR';
+  if (cpmpSeason < 50000) efficiencyRating = 'ELITE';
+  else if (cpmpSeason < 100000) efficiencyRating = 'HIGH';
+  else if (cpmpSeason < 200000) efficiencyRating = 'MODERATE';
+
+  return {
+    cpmpPerMatchday,
+    cpmpSeason,
+    totalPointsGained,
+    efficiencyRating
+  };
+}
+
+// ── SQUAD ROLE CLASSIFICATION ──────────────────────────────────────────────────
+
+/**
+ * Classifies all squad players into quantitative strategic roles:
+ * - CORE: Essential starter (high replacement loss >= 8 or only keeper or star asset)
+ * - STARTER: Regular starting XI member (replacement loss 3-8 pts)
+ * - UPGRADEABLE: Starting XI member with low ceiling / high upgrade gap
+ * - DEPTH: Essential backup for rotation / fragility prevention
+ * - SPECULATIVE: Short-term injury rehabilitation or high revaluation asset
+ * - SELL: Expendable asset / negative VORP to be monetized for upgrades
+ */
+export function classifySquadRoles(engine, squad) {
+  if (!squad || !squad.players || squad.players.length === 0) return [];
+
+  const lineup = engine.optimizeLineup(squad);
+  const starterIds = new Set((lineup.starting11 || []).map(p => p.playerId || p.id));
+  const weaknesses = identifyPositionalWeaknesses(engine, squad);
+  const weaknessMap = new Map(weaknesses.map(w => [w.playerId, w]));
+
+  return squad.players.map(player => {
+    const pid = player.playerId || player.id;
+    const isStarter = starterIds.has(pid);
+    const { replacementLoss } = calculateReplacementLoss(engine, squad, player);
+    const vorpData = calculateVORP(engine, player, squad);
+    const statusLower = ((player.status || '') + ' ' + (player.statusInfo || '')).toLowerCase();
+    const isInjured = statusLower.includes('duda') || statusLower.includes('lesion') || statusLower.includes('baja') || statusLower.includes('rotura');
+    const price = player.price || player.quotedPrice || 0;
+    const weakness = weaknessMap.get(pid);
+
+    let role = 'DEPTH';
+    let roleDescription = '';
+
+    if (player.type === 'keeper' || replacementLoss >= 8 || price >= 9000000 || vorpData.vorp >= 60) {
+      role = 'CORE';
+      roleDescription = `Pilar intocable (Pérdida por reemplazo: ${replacementLoss} pts, VORP: ${vorpData.vorp} pts).`;
+    } else if (isStarter && weakness && weakness.upgradeGap >= 2.0) {
+      role = 'UPGRADEABLE';
+      roleDescription = `Titular con techo bajo / brecha de mejora de ${weakness.upgradeGap} pts. Prioridad de sustitución.`;
+    } else if (isStarter) {
+      role = 'STARTER';
+      roleDescription = `Titular habitual solvente (Aporte XI: ${replacementLoss} pts, VORP: ${vorpData.vorp} pts).`;
+    } else if (isInjured && price <= 2000000) {
+      role = 'SPECULATIVE';
+      roleDescription = `Activo en recuperación física o revalorización potencial.`;
+    } else if (!isStarter && (vorpData.vorp < 10 || price > 3000000)) {
+      role = 'SELL';
+      roleDescription = `Suplente amortizable o prescindible para liberar tesorería (${price.toLocaleString()} €).`;
+    } else {
+      role = 'DEPTH';
+      roleDescription = `Fondo de armario necesario para rotaciones y prevención de penalizaciones.`;
+    }
+
+    return {
+      playerId: pid,
+      name: player.name,
+      position: player.type || player.position,
+      price,
+      role,
+      roleDescription,
+      isStarter,
+      replacementLoss,
+      vorp: vorpData.vorp,
+      vorpPerMatchday: vorpData.vorpPerMatchday
+    };
+  });
+}
+
+// ── STAR REPLACEMENT TEST ──────────────────────────────────────────────────────
+
+/**
+ * Evaluates whether selling an elite star to acquire multiple upgrades is mathematically positive.
+ * Condition: Net XI Delta >= +5.0 pts/round AND Cash Delta >= 0.
+ */
+export function starReplacementTest(engine, squad, starToSell, candidatesToBuy = []) {
+  if (!starToSell) {
+    return { shouldSell: false, netDelta: 0, cashDelta: 0, reason: 'Jugador no especificado.' };
+  }
+
+  const { replacementLoss } = calculateReplacementLoss(engine, squad, starToSell);
+  const starPrice = starToSell.price || starToSell.quotedPrice || 0;
+
+  // Evaluate candidates
+  let totalMarginalGain = 0;
+  let totalCandidatesCost = 0;
+  const candidateDetails = [];
+
+  // Simulate squad without star
+  const squadWithoutStar = {
+    ...squad,
+    players: (squad.players || []).filter(p => (p.playerId || p.id) !== (starToSell.playerId || starToSell.id))
+  };
+
+  let currentSimSquad = squadWithoutStar;
+  for (const candidate of candidatesToBuy) {
+    const { marginalValue, entersXI } = calculateMarginalValue(engine, currentSimSquad, candidate);
+    const candPrice = candidate.price || candidate.quotedPrice || 0;
+    totalMarginalGain += marginalValue;
+    totalCandidatesCost += candPrice;
+    candidateDetails.push({
+      playerId: candidate.playerId || candidate.id,
+      name: candidate.name,
+      marginalValue,
+      entersXI,
+      price: candPrice
+    });
+    // Add to simulation squad for subsequent candidate evaluation
+    currentSimSquad = {
+      ...currentSimSquad,
+      players: [...(currentSimSquad.players || []), candidate]
+    };
+  }
+
+  const netDelta = parseFloat((totalMarginalGain - replacementLoss).toFixed(1));
+  const cashDelta = starPrice - totalCandidatesCost;
+
+  // Strict quantitative hurdle: Net Delta >= +5.0 pts/round AND cash positive
+  const shouldSell = netDelta >= 5.0 && cashDelta >= 0;
+
+  const reason = shouldSell
+    ? `✅ Venta de estrella JUSTIFICADA: La combinación de ${candidatesToBuy.length} refuerzos aporta +${netDelta} pts netos/jornada con superávit de ${cashDelta.toLocaleString()} €.`
+    : `⛔ Venta de estrella RECHAZADA: Delta neto insuficiente (+${netDelta} pts < +5.0 pts) o déficit financiero (${cashDelta.toLocaleString()} €). Sacrificar a ${starToSell.name} destruye competitividad.`;
+
+  return {
+    shouldSell,
+    netDelta,
+    cashDelta,
+    starReplacementLoss: replacementLoss,
+    totalMarginalGain,
+    candidateDetails,
+    reason
+  };
+}
+
+// ── SEASON UTILITY ─────────────────────────────────────────────────────────────
+
+/**
+ * Dynamic time-decaying season utility function.
+ * As matchday t -> 38, weight of points rises from 0.50 to 0.95 while financial asset weight drops.
+ */
+export function calculateSeasonUtility(squadValue, points = 0, balance = 0, currentMatchday = 1) {
+  const totalMatchdays = 38;
+  const t = Math.max(1, Math.min(totalMatchdays, currentMatchday));
+
+  const wPts = 0.50 + 0.45 * (t / totalMatchdays);
+  const wVal = 1.0 - wPts;
+
+  const remainingMatchdays = totalMatchdays - t;
+  const projectedPoints = points + (squadValue * (remainingMatchdays / 38));
+  const totalWealthInM = Math.max(1, (squadValue * 1000000 + balance) / 1000000);
+
+  const compositeUtility = parseFloat(((projectedPoints * wPts) + (totalWealthInM * wVal)).toFixed(2));
+
+  return {
+    compositeUtility,
+    wPts: parseFloat(wPts.toFixed(3)),
+    wVal: parseFloat(wVal.toFixed(3)),
+    projectedPoints: Math.round(projectedPoints),
+    currentMatchday: t,
+    remainingMatchdays
+  };
+}
+
+// ── MAXIMUM RATIONAL BID (VALUATION ENGINE) ─────────────────────────────────────
 
 export function calculateMaxRationalBid(candidate, purchaseScore, balance, rivalIntel = null, strategyOverride = null) {
   const strategy = strategyOverride || getStrategy();
-  const marketValue = candidate.price || 0;
+  const marketValue = candidate.price || candidate.quotedPrice || 0;
   const rawAutoBidLimit = strategy.liquidity?.autoBidLimit ?? 8;
   const autoBidLimit = rawAutoBidLimit < 1000 ? rawAutoBidLimit * 1000000 : rawAutoBidLimit;
   const criticalPctBalance = strategy.liquidity?.criticalPurchasePctBalance || 0.40;
@@ -530,19 +764,62 @@ export function calculateMaxRationalBid(candidate, purchaseScore, balance, rival
   const reasoning = [];
   const isComputer = isVerifiedComputerOwner(candidate);
 
-  // 🛡️ REGLA 3: PRECIO EXACTO (0% SOBREPRECIO)
-  const maxRationalBid = marketValue;
-  const recommendedBid = marketValue;
-  const marginPct = 0;
-  reasoning.push(`💰 Puja recomendada fijada estrictamente al 100.0% del Valor de Mercado: ${recommendedBid.toLocaleString()} € (0% sobreprecio).`);
+  // 1. Dynamic Valuation & Strategic Bidding Bands
+  const marginalValue = purchaseScore.marginalValue || 0;
+  const ppm = purchaseScore.performance?.ppm || 0;
+  const posNeedRaw = purchaseScore.components?.positionNeed?.raw || 0;
+  const statusLower = ((candidate.status || '') + ' ' + (candidate.statusInfo || '')).toLowerCase();
+  const isInjuredOrDoubt = statusLower.includes('duda') || statusLower.includes('lesion') || statusLower.includes('baja');
 
-  // Affordability check
-  const safetyReserveMin = strategy.purchase?.safetyReserveMin || 1000000;
+  let band = 'BASE';
+  let baseMarginPct = 0;
+
+  if (strategy.purchase?.enforceStrictZeroMargin === true) {
+    baseMarginPct = 0;
+    band = 'EXACT_VM';
+  } else if (marginalValue >= 5.0 || (marketValue >= 12000000 && ppm >= 6.0)) {
+    // Band 4: Elite / League-Winning Star (115% - 125% VM)
+    band = 'ELITE_LEAGUE_WINNER';
+    baseMarginPct = Math.min(25, 15 + Math.round((marginalValue - 5.0) * 2.5));
+  } else if (marginalValue >= 2.5) {
+    // Band 3: Clear Starting XI Upgrade (105% - 115% VM)
+    band = 'CLEAR_UPGRADE';
+    baseMarginPct = Math.min(15, 5 + Math.round((marginalValue - 2.5) * 4.0));
+  } else if (marginalValue > 0 || posNeedRaw >= 50) {
+    // Band 2: Squad Depth / Rotation (100% - 105% VM)
+    band = 'DEPTH';
+    baseMarginPct = Math.min(5, Math.max(0, Math.round(marginalValue * 1.5)));
+  } else if (isInjuredOrDoubt || (marginalValue <= 0 && ppm >= 4.5)) {
+    // Band 1: Speculation (95% - 102% VM)
+    band = 'SPECULATION';
+    baseMarginPct = 2;
+  } else {
+    // Exact market price baseline
+    band = 'BASE';
+    baseMarginPct = 0;
+  }
+
+  // 2. Rival Denial Bonus (Game Theoretic Defense)
+  let denialBonusPct = 0;
+  if (rivalIntel && isComputer) {
+    if (rivalIntel.avgCommunityOverbid > 8 || rivalIntel.isLeaderNeed) {
+      denialBonusPct = Math.min(3, Math.round((rivalIntel.avgCommunityOverbid || 0) * 0.2));
+    }
+  }
+
+  const marginPct = !isComputer ? 0 : Math.min(25, baseMarginPct + denialBonusPct);
+  const maxRationalBid = Math.round(marketValue * (1 + (marginPct / 100)));
+  const recommendedBid = maxRationalBid;
+
+  reasoning.push(`💰 [Banda: ${band}] Puja recomendada: ${recommendedBid.toLocaleString()} € (${(100 + marginPct).toFixed(1)}% VM | Sobreprecio: +${marginPct}%).`);
+
+  // Affordability & Safety Reserve check
+  const safetyReserveMin = strategy.purchase?.safetyReserveMin ?? 1000000;
   const minRequiredCash = recommendedBid + safetyReserveMin;
   const canAfford = balance >= minRequiredCash;
 
   if (!canAfford) {
-    reasoning.push(`⛔ Fondos insuficientes: Requiere ${minRequiredCash.toLocaleString()} € (incl. reserva), caja: ${balance.toLocaleString()} €.`);
+    reasoning.push(`⛔ Fondos insuficientes: Requiere ${minRequiredCash.toLocaleString()} € (incl. reserva de seguridad de ${safetyReserveMin.toLocaleString()} €), caja actual: ${balance.toLocaleString()} €.`);
   }
 
   let action = 'PASS';
@@ -550,10 +827,10 @@ export function calculateMaxRationalBid(candidate, purchaseScore, balance, rival
     reasoning.push('⛔ Vendedor no verificado como Computer. No se permite puja autónoma ni recomendada.');
   } else if (!canAfford) {
     action = 'PASS';
-  } else if (purchaseScore.score < 25) {
+  } else if (purchaseScore.score < 25 && marginalValue <= 0) {
     action = 'PASS';
-    reasoning.push(`⛔ Puntuación estratégica insuficiente (${purchaseScore.score} < 25).`);
-  } else if (recommendedBid >= autoBidLimit || recommendedBid >= (balance * criticalPctBalance)) {
+    reasoning.push(`⛔ Puntuación estratégica insuficiente (${purchaseScore.score} < 25) y sin mejora en el XI.`);
+  } else if (marginPct > 25 || recommendedBid >= autoBidLimit || recommendedBid >= (balance * criticalPctBalance)) {
     action = 'REQUIRE_CONFIRMATION';
     reasoning.push(`⚠️ Operación crítica (${recommendedBid.toLocaleString()} € >= límite ${autoBidLimit.toLocaleString()} € o 40% caja). Requiere confirmación.`);
   } else if (strategy.liquidity?.fullAutonomousMode === false) {
@@ -567,6 +844,7 @@ export function calculateMaxRationalBid(candidate, purchaseScore, balance, rival
     maxRationalBid,
     recommendedBid,
     marginPct,
+    band,
     action,
     canAfford,
     reasoning
