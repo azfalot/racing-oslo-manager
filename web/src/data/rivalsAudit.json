@@ -6211,21 +6211,22 @@
     "crest": "/media/crests/suances_nin.svg",
     "pos": 9,
     "points": 129,
-    "squadValue": 48150000,
-    "playerCount": 14,
-    "financialHealth": "Apalancado / Saldo Negativo (-2.35M €)",
-    "debtAlert": "Saldo en descubierto (-2.35M €). Consume el 19.5% del límite de crédito permitido (12.04M €). Exige ventas antes de puntuar.",
-    "projectedScore": 36,
+    "squadValue": 45980000,
+    "playerCount": 12,
+    "financialHealth": "Apalancado / Saldo Negativo (-0.20M €)",
+    "debtAlert": "Saldo en descubierto (-0.20M €). Consume el 1.7% del límite de crédito permitido (11.49M €). Exige ventas antes de puntuar.",
+    "projectedScore": 32,
     "formation": "3-5-2",
-    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 36 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 32 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones.",
       "Línea defensiva con bajo valor de mercado o margen de mejora en solidez.",
-      "Tensión de tesorería: Saldo negativo de -2.35M € que obliga a vender piezas."
+      "Tensión de tesorería: Saldo negativo de -0.20M € que obliga a vender piezas."
     ],
     "tacticalAlerts": [
       {
@@ -6258,20 +6259,20 @@
       }
     ],
     "speculation": {
-      "score": 84,
+      "score": 87,
       "badge": "🦈 Tiburón Kamikaze / Deuda",
       "badgeColor": "#ef4444",
       "overbidRate": "+14.6%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 56293893,
-      "totalReceived": 32658600,
+      "totalReceived": 34807100,
       "purchasesCount": 13,
-      "salesCount": 14,
-      "estimatedCash": -2345293,
+      "salesCount": 16,
+      "estimatedCash": -196793,
       "prizesEarned": 1290000,
-      "maxCreditLimit": 12037500,
-      "netWealth": 45804707,
-      "analysis": "Operativa histórica de 13 compras (56.3M €) y 14 ventas (32.7M €). Dinero total rotado: 89.0M € con sobrepuja media de +14.6%."
+      "maxCreditLimit": 11495000,
+      "netWealth": 45783207,
+      "analysis": "Operativa histórica de 13 compras (56.3M €) y 16 ventas (34.8M €). Dinero total rotado: 91.1M € con sobrepuja media de +14.6%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -6283,10 +6284,10 @@
         "tag": "🎯 11.67 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
-        "player": "Carlos Maciá",
-        "price": 922222,
-        "impact": "Fichado por 0.92M €, hoy cotiza en 1.41M € (+487.778 € / +52.9% de plusvalía).",
-        "tag": "📈 +52.9% Plusvalía"
+        "player": "Roy Revivo",
+        "price": 499000,
+        "impact": "Fichado por 0.50M €, hoy cotiza en 0.80M € (+301.000 € / +60.3% de plusvalía).",
+        "tag": "📈 +60.3% Plusvalía"
       },
       "worstMove": {
         "player": "Mbappé",
@@ -6642,6 +6643,34 @@
           "seller": "Suances nin",
           "buyer": "Computer",
           "date": "2026-09-10T04:34:51+02:00"
+        },
+        {
+          "playerName": "Musuayi",
+          "price": 783600,
+          "marketValue": 783600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Suances nin",
+          "buyer": "Computer",
+          "date": "2026-09-14T04:35:00+02:00"
+        },
+        {
+          "playerName": "Carlos Maciá",
+          "price": 1364900,
+          "marketValue": 1364900,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Suances nin",
+          "buyer": "Computer",
+          "date": "2026-09-14T04:35:00+02:00"
         }
       ]
     },
@@ -6749,23 +6778,6 @@
         "image": "/media/players/3689.png"
       },
       {
-        "id": 3953,
-        "name": "Carlos Maciá",
-        "position": "midfielder",
-        "price": 1410000,
-        "points": 0,
-        "expectedPoints": 2.6,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3953.png"
-      },
-      {
         "id": 2924,
         "name": "Víctor García",
         "position": "midfielder",
@@ -6800,6 +6812,23 @@
         "image": "/media/players/4118.png"
       },
       {
+        "id": 3728,
+        "name": "Peio Canales",
+        "position": "midfielder",
+        "price": 2440000,
+        "points": 0,
+        "expectedPoints": 0.7,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3728.png"
+      },
+      {
         "id": 3469,
         "name": "Mbappé",
         "position": "striker",
@@ -6817,12 +6846,12 @@
         "image": "/media/players/3469.png"
       },
       {
-        "id": 4102,
-        "name": "Musuayi",
+        "id": 3574,
+        "name": "Etta Eyong",
         "position": "striker",
-        "price": 760000,
+        "price": 2450000,
         "points": 0,
-        "expectedPoints": 1.2,
+        "expectedPoints": 0.7,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -6831,7 +6860,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/4102.png"
+        "image": "/media/players/3574.png"
       }
     ],
     "bench": [
@@ -6850,38 +6879,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3017.png"
-      },
-      {
-        "id": 3728,
-        "name": "Peio Canales",
-        "position": "midfielder",
-        "price": 2440000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3728.png"
-      },
-      {
-        "id": 3574,
-        "name": "Etta Eyong",
-        "position": "striker",
-        "price": 2450000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3574.png"
       }
     ],
     "isMe": false
