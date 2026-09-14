@@ -500,6 +500,20 @@ async function fetchRealData() {
     console.warn('[SYNC-WEB] Info generación warRoom:', wrErr.message);
   }
 
+  // Generación del Radar Diario de Especulación & Trading (speculationRadar.json)
+  try {
+    const { scanSpeculationOpportunities } = await import('./speculationRadar.js');
+    const speculationResult = scanSpeculationOpportunities(
+      rawMarket?.players || [],
+      squad,
+      dashboard.money || 280288
+    );
+    fs.writeFileSync(path.resolve('web/src/data/speculationRadar.json'), JSON.stringify(speculationResult, null, 2));
+    console.log(`[SYNC-WEB] ✅ speculationRadar.json exportado (${speculationResult.totalOpportunitiesCount} oportunidades detectadas).`);
+  } catch (specErr) {
+    console.warn('[SYNC-WEB] Info generación speculationRadar:', specErr.message);
+  }
+
   // Generación de estado del sistema y observabilidad (systemStatus.json)
   try {
     const configPath = path.resolve('config.json');

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Radar, ArrowRightLeft, Search, UserMinus, UserPlus, Computer, Eye, Flame, X } from 'lucide-react'
 import marketData from '../data/market.json'
 import newsData from '../data/news.json'
+import speculationRadar from '../data/speculationRadar.json'
 import PlayerProfileModal from '../components/PlayerProfileModal'
 import { getCategoryBadgeStyle, formatNewsDate } from './Noticias'
 
@@ -131,6 +132,86 @@ export default function Mercado() {
                 </div>
               )
             })}
+          </div>
+        </div>
+      )}
+
+      {/* RADAR DIARIO DE ESPECULACIÓN & TRADING (GENERADOR DE TESORERÍA) */}
+      {speculationRadar?.opportunities?.length > 0 && (
+        <div className="bg-charcoal/80 border border-purple-500/40 p-4 sm:p-5 rounded-sm space-y-3 shadow-xl relative overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-purple-500/20 pb-3">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse" />
+              <h3 className="text-sm font-display font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                📈 RADAR DIARIO DE ESPECULACIÓN & TRADING (GENERADOR DE TESORERÍA)
+              </h3>
+            </div>
+            <div className="flex items-center gap-3 text-xs font-mono">
+              <span className="text-purple-300 font-bold bg-purple-950/60 px-2 py-0.5 rounded border border-purple-500/30">
+                {speculationRadar.freeSlots} Huecos libres en plantilla
+              </span>
+              <span className="text-forest-light font-bold">
+                Plusvalía potencial: +{(speculationRadar.totalProjectedGainsEUR / 1000000).toFixed(1)}M €
+              </span>
+            </div>
+          </div>
+
+          {/* Grid de Activos de Especulación */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+            {speculationRadar.opportunities.map(opp => (
+              <div
+                key={opp.playerId}
+                className="bg-black/80 border border-purple-500/30 hover:border-purple-400 p-3.5 rounded-sm space-y-2.5 transition-all shadow-md group"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <span className="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded border block mb-1 truncate text-purple-300 bg-purple-950/50 border-purple-500/40">
+                      {opp.tierLabel.split('/')[0]}
+                    </span>
+                    <h4 className="text-sm font-bold text-white group-hover:text-purple-300 transition-colors">
+                      {opp.name}
+                    </h4>
+                    <span className="text-[10px] text-cream/50 font-mono">{opp.club} • {opp.position}</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-xs font-bold font-mono text-amber-300 block">
+                      {opp.price.toLocaleString('es-ES')} €
+                    </span>
+                    <span className="text-[10px] font-bold text-forest-light font-mono">
+                      +{opp.estimatedRoiPct}% ROI
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-2 bg-black/60 border border-white/5 rounded-sm space-y-1 text-[11px] font-mono">
+                  <div className="flex justify-between text-cream/70">
+                    <span>Estado:</span>
+                    <span className="text-white font-bold">{opp.returnWindow}</span>
+                  </div>
+                  <div className="flex justify-between text-cream/70">
+                    <span>Subida diaria est:</span>
+                    <span className="text-forest-light font-bold">+{opp.dailyGrowthEstEUR.toLocaleString('es-ES')} €/día</span>
+                  </div>
+                  <div className="flex justify-between text-cream/70">
+                    <span>Riesgo caída:</span>
+                    <span className="text-sky-300 font-bold">{opp.downsideRisk.split(' ')[0]}</span>
+                  </div>
+                </div>
+
+                <div className="text-[10px] text-purple-200/90 font-mono bg-purple-950/30 p-1.5 rounded border border-purple-500/20 text-center">
+                  {opp.actionLabel}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Recomendaciones de Mateo Oslomany */}
+          <div className="pt-2 border-t border-purple-500/20 text-[11px] font-mono text-cream/70 space-y-1">
+            {speculationRadar.strategyRecommendations.map((rec, i) => (
+              <p key={i} className="flex items-center gap-1.5">
+                <span>{rec}</span>
+              </p>
+            ))}
           </div>
         </div>
       )}
