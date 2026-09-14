@@ -1129,6 +1129,56 @@ async function handleTelegramMessage(message) {
     }
   }
 
+  // ── /trading · /especulacion ───────────────────────────────────────────
+  else if (text.startsWith('/trading') || text.startsWith('/especulacion')) {
+    await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Consultando libro de trading y radar de especulación...</i>');
+    const client = new ComunioClient();
+    try {
+      await client.login();
+      const squad = await client.getSquad();
+      const dashboard = await client.getDashboardData();
+      const market = await client.getMarket();
+      const balance = dashboard?.money || 0;
+
+      const { loadSpeculationLedger } = await import('./dailySpeculator.js');
+      const { scanSpeculationOpportunities } = await import('./speculationRadar.js');
+
+      const ledger = loadSpeculationLedger();
+      const { opportunities, freeSlots, totalProjectedGainsEUR } = scanSpeculationOpportunities(market?.players || [], squad, balance);
+
+      let rep = `💰 <b>[Mateo Oslomany] · Libro Mayor de Trading & Especulación</b>\n\n`;
+      rep += `📊 <b>RESUMEN FINANCIERO:</b>\n`;
+      rep += ` • Saldo Actual: <b>${balance.toLocaleString()} €</b>\n`;
+      rep += ` • Plusvalías Netas Cerradas: <b>+${ledger.totalProfitEUR.toLocaleString()} €</b> (${ledger.successfulTradesCount} operaciones con éxito)\n`;
+      rep += ` • Capacidad Disponible: <b>${freeSlots} hueco(s) libres</b> en plantilla\n\n`;
+
+      rep += `📦 <b>POSICIONES ACTIVAS EN TRADING (${ledger.activeTradingPlayers.length}):</b>\n`;
+      if (ledger.activeTradingPlayers.length > 0) {
+        for (const p of ledger.activeTradingPlayers) {
+          rep += ` • <b>${escapeHtml(p.name)}</b> — Comprado por: ${p.buyPrice.toLocaleString()} € | ${p.listedOnMarket ? '🏷️ En venta (esperando oferta Computer)' : '⏳ Pendiente de listar'}\n`;
+        }
+      } else {
+        rep += ` <i>No hay activos especulativos abiertos en cartera ahora mismo.</i>\n`;
+      }
+
+      rep += `\n🎯 <b>OPORTUNIDADES DE MERCADO HOY (${opportunities.length}):</b>\n`;
+      if (opportunities.length > 0) {
+        for (const opp of opportunities.slice(0, 4)) {
+          rep += ` • <b>${escapeHtml(opp.name)}</b> (${opp.price.toLocaleString()} €) ➔ Plusvalía: +${opp.projectedUpsideEUR.toLocaleString()} € (+${opp.estimatedRoiPct}%)\n   <i>${opp.tierLabel}</i>\n`;
+        }
+        rep += `\n💡 <i>Plusvalía potencial total en mercado: +${(totalProjectedGainsEUR / 1000000).toFixed(2)}M €</i>`;
+      } else {
+        rep += ` <i>No hay chollos en precio suelo ni cracks en saldo hoy en el mercado de Computer.</i>`;
+      }
+
+      await sendTelegramMessage(rep);
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error consultando libro de trading: <code>${escapeHtml(e.message)}</code>`);
+    } finally {
+      await client.close();
+    }
+  }
+
   // ── /sync ───────────────────────────────────────────────────────────────
   else if (text.startsWith('/sync')) {
     await sendTelegramMessage('💼 🚀 <i>[Mateo Oslomany]: Sincronizando web y desplegando a Cloudflare Pages...</i>');
@@ -1860,6 +1910,53 @@ async function runMarketCheck() {
 
     // Auditar cambios de plantilla y nuevos fichajes incorporados
     await auditAndSyncSquadEvents(client, squad, balance);
+
+    // 4. MÓDULO AUTÓNOMO DE ESPECULACIÓN Y TRADING DIARIO
+    try {
+      const {
+        executeDailySpeculationBids,
+        autoListSpeculationPlayers,
+        executeSpeculationOfferAcceptances
+      } = await import('./dailySpeculator.js');
+
+      // A. Revisar ofertas de venta recibidas para activos en trading (Solo acepta con plusvalía > 0)
+      const offersUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers?current`;
+      const offersRes = await axios.get(offersUrl, { headers: client.getHeaders() });
+      const saleOffers = (offersRes.data?.items || []).filter(item => item.type === 'SALE' && item.state === 'PENDING');
+
+      if (saleOffers.length > 0) {
+        const offerResult = await executeSpeculationOfferAcceptances(client, saleOffers);
+        for (const trade of offerResult.acceptedTrades) {
+          const profitMsg = `💰 🤖 <b>[Trading Autónomo] · Plusvalía Consolidada</b>\n\n` +
+            `👤 <b>${escapeHtml(trade.name)}</b> vendido con éxito.\n` +
+            `💵 <b>Precio de Venta:</b> ${trade.sellPrice.toLocaleString()} € (Comprado por ${trade.buyPrice.toLocaleString()} €)\n` +
+            `📈 <b>Beneficio Neto:</b> <b>+${trade.profitEUR.toLocaleString()} €</b> (+${trade.roiPct}% ROI)\n\n` +
+            `💼 <i>Capital recuperado y acumulado en tesorería para reinvertir en la próxima jornada.</i>`;
+          await sendTelegramMessage(profitMsg);
+        }
+      }
+
+      // B. Auto-listar jugadores especulativos en plantilla en el mercado para recibir ofertas de Computer
+      const listed = await autoListSpeculationPlayers(client, squad);
+      if (listed.length > 0) {
+        console.log(`[DAEMON-SPECULATION] ${listed.length} jugadores especulativos puestos en venta en el mercado.`);
+      }
+
+      // C. Escanear y lanzar pujas especulativas a Computer con reserva de saldo protegida (colchón 1M€)
+      if (!botPaused) {
+        const specBids = await executeDailySpeculationBids(client, squad, balance);
+        for (const b of specBids.executedBids) {
+          const bMsg = `🪙 🤖 <b>[Trading Autónomo] · Compra Especulativa Emitida</b>\n\n` +
+            `👤 <b>${escapeHtml(b.name)}</b> (Precio Suelo / Oportunidad)\n` +
+            `💰 <b>Puja a Computer:</b> ${b.price.toLocaleString()} € (0% sobreprecio)\n` +
+            `📈 <b>Plusvalía Proyectada:</b> +${(b.projectedUpsideEUR || 0).toLocaleString()} €\n\n` +
+            `<i>Se pondrá a la venta automáticamente mañana para liquidar con beneficio a Computer.</i>`;
+          await sendTelegramMessage(bMsg);
+        }
+      }
+    } catch (specErr) {
+      console.warn('[DAEMON-SPECULATION ERROR]', specErr.message);
+    }
 
   } catch (err) {
     console.error('[DAEMON-MARKET] Error en el monitor de mercado:', err.message);

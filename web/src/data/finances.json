@@ -3,8 +3,8 @@
     "name": "Racing de Oslo",
     "coach": "Mateo Oslomany",
     "balance": 280288,
-    "committedBids": 0,
-    "effectiveBalance": 280288,
+    "committedBids": 2100000,
+    "effectiveBalance": -1819712,
     "teamValue": 50090000,
     "netWorth": 50370288,
     "squadSize": 11,
@@ -37,16 +37,16 @@
   "projections": {
     "nextMatchday": {
       "matchday": "Jornada 6",
-      "expectedPoints": 52,
-      "expectedPrize": 520000,
-      "projectedCashAfter": 800288
+      "expectedPoints": 50,
+      "expectedPrize": 500000,
+      "projectedCashAfter": -1319712
     },
     "monthlyOutlook": {
       "jornadas": 4,
-      "projectedPoints": 208,
-      "projectedPrize": 2080000,
+      "projectedPoints": 199,
+      "projectedPrize": 1988000,
       "estimatedSales": 980000,
-      "totalProjectedLiquidity": 3340288
+      "totalProjectedLiquidity": 1148288
     },
     "financialPolicy": {
       "reserveRequirement": "Saldo Positivo Obligatorio (Corte Jornada)",
@@ -105,18 +105,6 @@
     },
     {
       "pos": 5,
-      "teamName": "Amigos de NIN",
-      "owner": "Amigos de NIN",
-      "squadValue": 44370000,
-      "points": 166,
-      "totalPrize": 1660000,
-      "estimatedCash": 1331100,
-      "totalWealth": 45701100,
-      "power": "Patrimonio Regular",
-      "isMe": false
-    },
-    {
-      "pos": 6,
       "teamName": "M4 TEAM",
       "owner": "M4 TEAM",
       "squadValue": 53790000,
@@ -125,6 +113,18 @@
       "estimatedCash": 1613700,
       "totalWealth": 55403700,
       "power": "Patrimonio Medio",
+      "isMe": false
+    },
+    {
+      "pos": 6,
+      "teamName": "Amigos de NIN",
+      "owner": "Amigos de NIN",
+      "squadValue": 44370000,
+      "points": 166,
+      "totalPrize": 1660000,
+      "estimatedCash": 1331100,
+      "totalWealth": 45701100,
+      "power": "Patrimonio Regular",
       "isMe": false
     },
     {
@@ -143,28 +143,16 @@
       "pos": 8,
       "teamName": "Ana",
       "owner": "Ana",
-      "squadValue": 48300000,
+      "squadValue": 37810000,
       "points": 138,
       "totalPrize": 1380000,
-      "estimatedCash": 1449000,
-      "totalWealth": 49749000,
-      "power": "Patrimonio Medio",
+      "estimatedCash": 1134300,
+      "totalWealth": 38944300,
+      "power": "Patrimonio Regular",
       "isMe": false
     },
     {
       "pos": 9,
-      "teamName": "Hache FC",
-      "owner": "Hache FC",
-      "squadValue": 46030000,
-      "points": 140,
-      "totalPrize": 1400000,
-      "estimatedCash": 1380900,
-      "totalWealth": 47410900,
-      "power": "Patrimonio Medio",
-      "isMe": false
-    },
-    {
-      "pos": 10,
       "teamName": "Suances nin",
       "owner": "Suances nin",
       "squadValue": 48150000,
@@ -172,6 +160,18 @@
       "totalPrize": 1290000,
       "estimatedCash": 1444500,
       "totalWealth": 49594500,
+      "power": "Patrimonio Medio",
+      "isMe": false
+    },
+    {
+      "pos": 10,
+      "teamName": "Hache FC",
+      "owner": "Hache FC",
+      "squadValue": 46030000,
+      "points": 140,
+      "totalPrize": 1400000,
+      "estimatedCash": 1380900,
+      "totalWealth": 47410900,
       "power": "Patrimonio Medio",
       "isMe": false
     }

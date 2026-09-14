@@ -510,8 +510,13 @@ async function fetchRealData() {
     );
     fs.writeFileSync(path.resolve('web/src/data/speculationRadar.json'), JSON.stringify(speculationResult, null, 2));
     console.log(`[SYNC-WEB] ✅ speculationRadar.json exportado (${speculationResult.totalOpportunitiesCount} oportunidades detectadas).`);
+
+    const { loadSpeculationLedger } = await import('./dailySpeculator.js');
+    const ledgerData = loadSpeculationLedger();
+    fs.writeFileSync(path.resolve('web/src/data/speculationLedger.json'), JSON.stringify(ledgerData, null, 2));
+    console.log(`[SYNC-WEB] ✅ speculationLedger.json exportado (${ledgerData.activeTradingPlayers.length} activos abiertos, +${ledgerData.totalProfitEUR.toLocaleString()} € ganados).`);
   } catch (specErr) {
-    console.warn('[SYNC-WEB] Info generación speculationRadar:', specErr.message);
+    console.warn('[SYNC-WEB] Info generación speculationRadar/Ledger:', specErr.message);
   }
 
   // Generación de estado del sistema y observabilidad (systemStatus.json)
