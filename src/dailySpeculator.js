@@ -5,7 +5,7 @@ import { isVerifiedComputerOwner } from './ownership.js';
 import { ComunioEngine } from './engine.js';
 
 export const DEFAULT_LEDGER_PATH = 'data/speculationLedger.json';
-export const DEFAULT_SAFETY_RESERVE_MIN_EUR = 1000000;
+export const DEFAULT_SAFETY_RESERVE_MIN_EUR = 50000;
 export const MAX_SQUAD_CAPACITY = 15;
 
 /**
@@ -70,6 +70,7 @@ export async function executeDailySpeculationBids(client, squad = { players: [] 
   const safetyReserveMin = options.safetyReserveMin !== undefined ? options.safetyReserveMin : DEFAULT_SAFETY_RESERVE_MIN_EUR;
   const maxSquadSize = options.maxSquadSize !== undefined ? options.maxSquadSize : MAX_SQUAD_CAPACITY;
   const dryRun = options.dryRun || false;
+  const ledger = loadSpeculationLedger(ledgerPath);
 
   const currentPlayers = squad.players || [];
   const currentSquadIds = new Set(currentPlayers.map(p => parseInt(p.playerId || p.id || 0)));
@@ -84,11 +85,12 @@ export async function executeDailySpeculationBids(client, squad = { players: [] 
   }
 
   const pendingIds = new Set(pendingBids.map(b => parseInt(b.playerId || b.id || 0)));
-  const pendingBidsCost = pendingBids.reduce((sum, b) => sum + (b.price || 0), 0);
 
   const occupiedSlots = currentPlayers.length + pendingBids.length;
   let availableSlots = Math.max(0, maxSquadSize - occupiedSlots);
-  let availableBiddingCap = Math.max(0, currentBalance - pendingBidsCost - safetyReserveMin);
+
+  // Liquidez disponible respetando el colchón de seguridad
+  let availableBiddingCap = Math.max(0, currentBalance - safetyReserveMin);
 
   console.log('[DAILY-SPECULATOR] Capacidad: ' + occupiedSlots + '/' + maxSquadSize + ' (' + availableSlots + ' libres) | Saldo: ' + currentBalance.toLocaleString() + ' EUR | Cap Especulacion: ' + availableBiddingCap.toLocaleString() + ' EUR');
 
@@ -139,6 +141,19 @@ export async function executeDailySpeculationBids(client, squad = { players: [] 
     if (success) {
       availableSlots--;
       availableBiddingCap -= price;
+
+      // Registrar activo en el ledger para seguimiento contable
+      if (!ledger.activeTradingPlayers.some(p => p.playerId === pid)) {
+        ledger.activeTradingPlayers.push({
+          playerId: pid,
+          name: opp.name,
+          buyPrice: price,
+          buyDate: new Date().toISOString(),
+          tier: opp.tier || 'FLOOR_PRICE_BARGAIN',
+          listedOnMarket: false
+        });
+      }
+
       executedBids.push({
         playerId: pid,
         name: opp.name,
@@ -148,8 +163,12 @@ export async function executeDailySpeculationBids(client, squad = { players: [] 
         timestamp: new Date().toISOString()
       });
 
-      console.log('[DAILY-SPECULATOR] Puja especulativa enviada: ' + opp.name + ' (' + price.toLocaleString() + ' EUR)');
+      console.log('[DAILY-SPECULATOR] 🛒 Puja especulativa enviada: ' + opp.name + ' (' + price.toLocaleString() + ' EUR)');
     }
+  }
+
+  if (executedBids.length > 0) {
+    saveSpeculationLedger(ledger, ledgerPath);
   }
 
   return {
