@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-13T21:50:37.474Z",
+  "timestamp": "2026-09-14T07:10:40.024Z",
   "currentMatchday": 5,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -12,35 +12,27 @@
     "balance": 280288,
     "committedBids": 0,
     "effectiveBalance": 280288,
-    "squadValue": 52900000,
-    "totalPatrimony": 53180288
+    "squadValue": 50090000,
+    "totalPatrimony": 50370288
   },
   "lineup": {
     "formation": "4-3-3",
-    "expectedPoints": 50.2,
+    "expectedPoints": 51.300000000000004,
     "starterCount": 11,
     "starterRisks": [
       {
         "playerId": 3597,
         "name": "Íñigo Arguibide",
         "type": "defender",
-        "price": 1250000,
+        "price": 1100000,
         "available": true,
         "expectedPoints": 1.3
-      },
-      {
-        "playerId": 3553,
-        "name": "Johnny Cardoso",
-        "type": "midfielder",
-        "price": 1440000,
-        "available": true,
-        "expectedPoints": 1.8
       },
       {
         "playerId": 2785,
         "name": "Pol Lozano",
         "type": "midfielder",
-        "price": 250000,
+        "price": 220000,
         "available": true,
         "expectedPoints": 0.2
       }
@@ -51,7 +43,7 @@
       "playerId": 2785,
       "name": "Pol Lozano",
       "position": "midfielder",
-      "price": 250000,
+      "price": 220000,
       "expectedPoints": 0.2,
       "vorp": -2,
       "vorpPerMatchday": -0.06,
@@ -63,19 +55,19 @@
       "playerId": 3553,
       "name": "Johnny Cardoso",
       "position": "midfielder",
-      "price": 1440000,
-      "expectedPoints": 1.8,
+      "price": 1580000,
+      "expectedPoints": 2.9,
       "vorp": 18,
       "vorpPerMatchday": 0.53,
       "replacementPpm": 2.55,
-      "upgradeGap": 3.7,
-      "urgencyScore": 12.2
+      "upgradeGap": 2.6,
+      "urgencyScore": 11.4
     },
     {
       "playerId": 3597,
       "name": "Íñigo Arguibide",
       "position": "defender",
-      "price": 1250000,
+      "price": 1100000,
       "expectedPoints": 1.3,
       "vorp": 33,
       "vorpPerMatchday": 0.97,
@@ -94,186 +86,34 @@
   },
   "marketTargets": [
     {
-      "playerId": 3689,
-      "name": "Marc Bernal",
-      "type": "midfielder",
-      "price": 3850000,
-      "bidAmount": 4273500,
-      "maxRationalBid": 4273500,
-      "marginPct": 11,
-      "band": "CLEAR_UPGRADE",
-      "expectedPoints": 4,
-      "ppm": 4.78,
-      "efficiency": 42.2,
-      "upgradePoints": 4.1,
-      "marginalValue": 4.1,
-      "vorp": 58,
-      "vorpPerMatchday": 1.71,
-      "cpmp": 939024,
-      "cpmpSeason": 27698,
-      "replacedPlayer": {
-        "playerId": 2785,
-        "name": "Pol Lozano",
-        "type": "midfielder",
-        "price": 250000,
-        "available": true,
-        "expectedPoints": 0.2
-      },
-      "replacedPlayerName": "Pol Lozano",
-      "replacedPlayerExpectedPoints": 0.2,
-      "strategicScore": 80.2,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 4.1
-        },
-        "absoluteQuality": {
-          "raw": 79.7,
-          "weight": 0.2,
-          "ppm": 4.78
-        },
-        "positionNeed": {
-          "raw": 85,
-          "weight": 0.15,
-          "detail": "Solo 3 disponible(s) para 4 requeridos. Urgencia alta."
-        },
-        "marketOpportunity": {
-          "raw": 100,
-          "weight": 0.1,
-          "efficiency": 42.2
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": false,
-      "reasoning": [
-        "✅ Entra en el XI titular (+4.1 pts al Once Ideal sustituyendo a Pol Lozano).",
-        "🔴 Posición con necesidad ALTA: Solo 3 disponible(s) para 4 requeridos. Urgencia alta.",
-        "📊 ⭐ Titular Fijo (PPM: 4.78 | Fiabilidad: 95% minutos | Eficiencia: 42.2 pts/M€)",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 4.273.500 € (111.0% VM | Sobreprecio: +11%).",
-        "⛔ Fondos insuficientes: Requiere 5.273.500 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 280.288 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Pol Lozano). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 4.273.500 € (111.0% VM | Sobreprecio: +11%)."
-    },
-    {
-      "playerId": 3457,
-      "name": "Arda Güler",
-      "type": "midfielder",
-      "price": 11010000,
-      "bidAmount": 13542300,
-      "maxRationalBid": 13542300,
-      "marginPct": 23,
-      "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 8,
-      "ppm": 6.56,
-      "efficiency": 20.3,
-      "upgradePoints": 8,
-      "marginalValue": 8,
-      "vorp": 123,
-      "vorpPerMatchday": 3.62,
-      "cpmp": 1376250,
-      "cpmpSeason": 40478,
-      "replacedPlayer": {
-        "playerId": 2785,
-        "name": "Pol Lozano",
-        "type": "midfielder",
-        "price": 250000,
-        "available": true,
-        "expectedPoints": 0.2
-      },
-      "replacedPlayerName": "Pol Lozano",
-      "replacedPlayerExpectedPoints": 0.2,
-      "strategicScore": 79.3,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 8
-        },
-        "absoluteQuality": {
-          "raw": 100,
-          "weight": 0.2,
-          "ppm": 6.56
-        },
-        "positionNeed": {
-          "raw": 85,
-          "weight": 0.15,
-          "detail": "Solo 3 disponible(s) para 4 requeridos. Urgencia alta."
-        },
-        "marketOpportunity": {
-          "raw": 50.8,
-          "weight": 0.1,
-          "efficiency": 20.3
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "SALTO_CUALITATIVO",
-      "impactTag": "🚀 SALTO CUALITATIVO (+8 pts XI)",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": false,
-      "reasoning": [
-        "✅ Entra en el XI titular (+8 pts al Once Ideal sustituyendo a Pol Lozano).",
-        "🔴 Posición con necesidad ALTA: Solo 3 disponible(s) para 4 requeridos. Urgencia alta.",
-        "📊 ⭐ Titular Fijo (PPM: 6.56 | Fiabilidad: 95% minutos | Eficiencia: 20.3 pts/M€)",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 13.542.300 € (123.0% VM | Sobreprecio: +23%).",
-        "⛔ Fondos insuficientes: Requiere 14.542.300 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 280.288 €."
-      ],
-      "reason": "🚀 SALTO CUALITATIVO (+8 pts XI): Mejora real del XI: +8 pts (sustituye a Pol Lozano). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 13.542.300 € (123.0% VM | Sobreprecio: +23%)."
-    },
-    {
       "playerId": 3276,
       "name": "Tchouaméni",
       "type": "midfielder",
-      "price": 5500000,
-      "bidAmount": 6435000,
-      "maxRationalBid": 6435000,
+      "price": 4870000,
+      "bidAmount": 5697900,
+      "maxRationalBid": 5697900,
       "marginPct": 17,
       "band": "ELITE_LEAGUE_WINNER",
       "expectedPoints": 6,
       "ppm": 4.62,
-      "efficiency": 28.6,
+      "efficiency": 32.3,
       "upgradePoints": 5.7,
       "marginalValue": 5.7,
       "vorp": 105,
       "vorpPerMatchday": 3.09,
-      "cpmp": 964912,
-      "cpmpSeason": 28351,
+      "cpmp": 854386,
+      "cpmpSeason": 25103,
       "replacedPlayer": {
         "playerId": 2785,
         "name": "Pol Lozano",
         "type": "midfielder",
-        "price": 250000,
+        "price": 220000,
         "available": true,
         "expectedPoints": 0.2
       },
       "replacedPlayerName": "Pol Lozano",
       "replacedPlayerExpectedPoints": 0.2,
-      "strategicScore": 76.8,
+      "strategicScore": 77.7,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
@@ -291,9 +131,9 @@
           "detail": "Solo 3 disponible(s) para 4 requeridos. Urgencia alta."
         },
         "marketOpportunity": {
-          "raw": 71.5,
+          "raw": 80.7,
           "weight": 0.1,
-          "efficiency": 28.6
+          "efficiency": 32.3
         },
         "rivalPressure": {
           "raw": 20,
@@ -314,138 +154,62 @@
       "reasoning": [
         "✅ Entra en el XI titular (+5.7 pts al Once Ideal sustituyendo a Pol Lozano).",
         "🔴 Posición con necesidad ALTA: Solo 3 disponible(s) para 4 requeridos. Urgencia alta.",
-        "📊 ⭐ Titular Fijo (PPM: 4.62 | Fiabilidad: 95% minutos | Eficiencia: 28.6 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 4.62 | Fiabilidad: 95% minutos | Eficiencia: 32.3 pts/M€)",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 6.435.000 € (117.0% VM | Sobreprecio: +17%).",
-        "⛔ Fondos insuficientes: Requiere 7.435.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 280.288 €."
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.697.900 € (117.0% VM | Sobreprecio: +17%).",
+        "⛔ Fondos insuficientes: Requiere 6.697.900 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 280.288 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Pol Lozano). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 6.435.000 € (117.0% VM | Sobreprecio: +17%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Pol Lozano). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.697.900 € (117.0% VM | Sobreprecio: +17%)."
     },
     {
-      "playerId": 1676,
-      "name": "José Giménez",
-      "type": "defender",
-      "price": 2960000,
-      "bidAmount": 3048800,
-      "maxRationalBid": 3048800,
-      "marginPct": 3,
-      "band": "DEPTH",
-      "expectedPoints": 3,
-      "ppm": 3.63,
-      "efficiency": 41.7,
-      "upgradePoints": 1.9,
-      "marginalValue": 1.9,
-      "vorp": 33,
-      "vorpPerMatchday": 0.97,
-      "cpmp": 1557895,
-      "cpmpSeason": 45538,
+      "playerId": 4083,
+      "name": "Álex Calatrava",
+      "type": "midfielder",
+      "price": 5130000,
+      "bidAmount": 5899500,
+      "maxRationalBid": 5899500,
+      "marginPct": 15,
+      "band": "CLEAR_UPGRADE",
+      "expectedPoints": 5,
+      "ppm": 4.67,
+      "efficiency": 31,
+      "upgradePoints": 4.9,
+      "marginalValue": 4.9,
+      "vorp": 58,
+      "vorpPerMatchday": 1.71,
+      "cpmp": 1046939,
+      "cpmpSeason": 30719,
       "replacedPlayer": {
-        "playerId": 3597,
-        "name": "Íñigo Arguibide",
-        "type": "defender",
-        "price": 1250000,
+        "playerId": 2785,
+        "name": "Pol Lozano",
+        "type": "midfielder",
+        "price": 220000,
         "available": true,
-        "expectedPoints": 1.3
+        "expectedPoints": 0.2
       },
-      "replacedPlayerName": "Íñigo Arguibide",
-      "replacedPlayerExpectedPoints": 1.3,
-      "strategicScore": 56.4,
+      "replacedPlayerName": "Pol Lozano",
+      "replacedPlayerExpectedPoints": 0.2,
+      "strategicScore": 76.3,
       "strategicComponents": {
         "squadUpgrade": {
-          "raw": 63.3,
+          "raw": 100,
           "weight": 0.4,
-          "marginalValue": 1.9
+          "marginalValue": 4.9
         },
         "absoluteQuality": {
-          "raw": 60.5,
+          "raw": 77.8,
           "weight": 0.2,
-          "ppm": 3.63
+          "ppm": 4.67
         },
         "positionNeed": {
-          "raw": 50,
+          "raw": 85,
           "weight": 0.15,
-          "detail": "4 disponibles = exactamente los requeridos. Sin suplentes."
+          "detail": "Solo 3 disponible(s) para 4 requeridos. Urgencia alta."
         },
         "marketOpportunity": {
-          "raw": 100,
+          "raw": 77.5,
           "weight": 0.1,
-          "efficiency": 41.7
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": false,
-      "reasoning": [
-        "✅ Entra en el XI titular (+1.9 pts al Once Ideal sustituyendo a Íñigo Arguibide).",
-        "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 3.63 | Fiabilidad: 95% minutos | Eficiencia: 41.7 pts/M€)",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: DEPTH] Puja recomendada: 3.048.800 € (103.0% VM | Sobreprecio: +3%).",
-        "⛔ Fondos insuficientes: Requiere 4.048.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 280.288 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +2 pts (sustituye a Íñigo Arguibide). 💰 [Banda: DEPTH] Puja recomendada: 3.048.800 € (103.0% VM | Sobreprecio: +3%)."
-    },
-    {
-      "playerId": 4089,
-      "name": "Bright Ede",
-      "type": "defender",
-      "price": 1710000,
-      "bidAmount": 1761300,
-      "maxRationalBid": 1761300,
-      "marginPct": 3,
-      "band": "DEPTH",
-      "expectedPoints": 3,
-      "ppm": 3.57,
-      "efficiency": 71,
-      "upgradePoints": 1.8,
-      "marginalValue": 1.8,
-      "vorp": 33,
-      "vorpPerMatchday": 0.97,
-      "cpmp": 950000,
-      "cpmpSeason": 28033,
-      "replacedPlayer": {
-        "playerId": 3597,
-        "name": "Íñigo Arguibide",
-        "type": "defender",
-        "price": 1250000,
-        "available": true,
-        "expectedPoints": 1.3
-      },
-      "replacedPlayerName": "Íñigo Arguibide",
-      "replacedPlayerExpectedPoints": 1.3,
-      "strategicScore": 53.6,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 60,
-          "weight": 0.4,
-          "marginalValue": 1.8
-        },
-        "absoluteQuality": {
-          "raw": 59.5,
-          "weight": 0.2,
-          "ppm": 3.57
-        },
-        "positionNeed": {
-          "raw": 50,
-          "weight": 0.15,
-          "detail": "4 disponibles = exactamente los requeridos. Sin suplentes."
-        },
-        "marketOpportunity": {
-          "raw": 100,
-          "weight": 0.1,
-          "efficiency": 71
+          "efficiency": 31
         },
         "rivalPressure": {
           "raw": 20,
@@ -464,14 +228,242 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+1.8 pts al Once Ideal sustituyendo a Íñigo Arguibide).",
-        "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 🔄 Rotación Habitual (PPM: 3.57 | Fiabilidad: 75% minutos | Eficiencia: 71 pts/M€)",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 75%)",
-        "💰 [Banda: DEPTH] Puja recomendada: 1.761.300 € (103.0% VM | Sobreprecio: +3%).",
-        "⛔ Fondos insuficientes: Requiere 2.761.300 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 280.288 €."
+        "✅ Entra en el XI titular (+4.9 pts al Once Ideal sustituyendo a Pol Lozano).",
+        "🔴 Posición con necesidad ALTA: Solo 3 disponible(s) para 4 requeridos. Urgencia alta.",
+        "📊 ⭐ Titular Fijo (PPM: 4.67 | Fiabilidad: 95% minutos | Eficiencia: 31 pts/M€)",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 5.899.500 € (115.0% VM | Sobreprecio: +15%).",
+        "⛔ Fondos insuficientes: Requiere 6.899.500 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 280.288 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +2 pts (sustituye a Íñigo Arguibide). 💰 [Banda: DEPTH] Puja recomendada: 1.761.300 € (103.0% VM | Sobreprecio: +3%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Pol Lozano). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 5.899.500 € (115.0% VM | Sobreprecio: +15%)."
+    },
+    {
+      "playerId": 3160,
+      "name": "Gavi",
+      "type": "midfielder",
+      "price": 1910000,
+      "bidAmount": 2043700,
+      "maxRationalBid": 2043700,
+      "marginPct": 7,
+      "band": "CLEAR_UPGRADE",
+      "expectedPoints": 3,
+      "ppm": 3.57,
+      "efficiency": 63.5,
+      "upgradePoints": 2.9,
+      "marginalValue": 2.9,
+      "vorp": 18,
+      "vorpPerMatchday": 0.53,
+      "cpmp": 658621,
+      "cpmpSeason": 19293,
+      "replacedPlayer": {
+        "playerId": 2785,
+        "name": "Pol Lozano",
+        "type": "midfielder",
+        "price": 220000,
+        "available": true,
+        "expectedPoints": 0.2
+      },
+      "replacedPlayerName": "Pol Lozano",
+      "replacedPlayerExpectedPoints": 0.2,
+      "strategicScore": 74.8,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 96.7,
+          "weight": 0.4,
+          "marginalValue": 2.9
+        },
+        "absoluteQuality": {
+          "raw": 59.5,
+          "weight": 0.2,
+          "ppm": 3.57
+        },
+        "positionNeed": {
+          "raw": 85,
+          "weight": 0.15,
+          "detail": "Solo 3 disponible(s) para 4 requeridos. Urgencia alta."
+        },
+        "marketOpportunity": {
+          "raw": 100,
+          "weight": 0.1,
+          "efficiency": 63.5
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 10,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": false,
+      "reasoning": [
+        "✅ Entra en el XI titular (+2.9 pts al Once Ideal sustituyendo a Pol Lozano).",
+        "🔴 Posición con necesidad ALTA: Solo 3 disponible(s) para 4 requeridos. Urgencia alta.",
+        "📊 ⭐ Titular Fijo (PPM: 3.57 | Fiabilidad: 95% minutos | Eficiencia: 63.5 pts/M€)",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.043.700 € (107.0% VM | Sobreprecio: +7%).",
+        "⛔ Fondos insuficientes: Requiere 3.043.700 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 280.288 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Pol Lozano). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.043.700 € (107.0% VM | Sobreprecio: +7%)."
+    },
+    {
+      "playerId": 4098,
+      "name": "Adeyemi",
+      "type": "striker",
+      "price": 13810000,
+      "bidAmount": 14638600,
+      "maxRationalBid": 14638600,
+      "marginPct": 6,
+      "band": "CLEAR_UPGRADE",
+      "expectedPoints": 7,
+      "ppm": 5.93,
+      "efficiency": 14.6,
+      "upgradePoints": 2.7,
+      "marginalValue": 2.7,
+      "vorp": 99,
+      "vorpPerMatchday": 2.91,
+      "cpmp": 5114815,
+      "cpmpSeason": 150109,
+      "replacedPlayer": {
+        "playerId": 2550,
+        "name": "Hugo Duro",
+        "type": "striker",
+        "price": 2500000,
+        "available": true,
+        "expectedPoints": 4
+      },
+      "replacedPlayerName": "Hugo Duro",
+      "replacedPlayerExpectedPoints": 4,
+      "strategicScore": 64.2,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 90,
+          "weight": 0.4,
+          "marginalValue": 2.7
+        },
+        "absoluteQuality": {
+          "raw": 98.8,
+          "weight": 0.2,
+          "ppm": 5.93
+        },
+        "positionNeed": {
+          "raw": 30,
+          "weight": 0.15,
+          "detail": "3 disponibles. Fondo de armario ajustado."
+        },
+        "marketOpportunity": {
+          "raw": 36.5,
+          "weight": 0.1,
+          "efficiency": 14.6
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 35,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": false,
+      "reasoning": [
+        "✅ Entra en el XI titular (+2.7 pts al Once Ideal sustituyendo a Hugo Duro).",
+        "🟡 Posición con necesidad MODERADA: 3 disponibles. Fondo de armario ajustado.",
+        "📊 ⭐ Titular Fijo (PPM: 5.93 | Fiabilidad: 95% minutos | Eficiencia: 14.6 pts/M€)",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 14.638.600 € (106.0% VM | Sobreprecio: +6%).",
+        "⛔ Fondos insuficientes: Requiere 15.638.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 280.288 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Hugo Duro). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 14.638.600 € (106.0% VM | Sobreprecio: +6%)."
+    },
+    {
+      "playerId": 1876,
+      "name": "Denis Suárez",
+      "type": "midfielder",
+      "price": 1400000,
+      "bidAmount": 1442000,
+      "maxRationalBid": 1442000,
+      "marginPct": 3,
+      "band": "DEPTH",
+      "expectedPoints": 2,
+      "ppm": 3.73,
+      "efficiency": 90.5,
+      "upgradePoints": 2,
+      "marginalValue": 2,
+      "vorp": 30,
+      "vorpPerMatchday": 0.88,
+      "cpmp": 700000,
+      "cpmpSeason": 20588,
+      "replacedPlayer": {
+        "playerId": 2785,
+        "name": "Pol Lozano",
+        "type": "midfielder",
+        "price": 220000,
+        "available": true,
+        "expectedPoints": 0.2
+      },
+      "replacedPlayerName": "Pol Lozano",
+      "replacedPlayerExpectedPoints": 0.2,
+      "strategicScore": 63.4,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 66.7,
+          "weight": 0.4,
+          "marginalValue": 2
+        },
+        "absoluteQuality": {
+          "raw": 62.2,
+          "weight": 0.2,
+          "ppm": 3.73
+        },
+        "positionNeed": {
+          "raw": 85,
+          "weight": 0.15,
+          "detail": "Solo 3 disponible(s) para 4 requeridos. Urgencia alta."
+        },
+        "marketOpportunity": {
+          "raw": 100,
+          "weight": 0.1,
+          "efficiency": 90.5
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 10,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": false,
+      "reasoning": [
+        "✅ Entra en el XI titular (+2 pts al Once Ideal sustituyendo a Pol Lozano).",
+        "🔴 Posición con necesidad ALTA: Solo 3 disponible(s) para 4 requeridos. Urgencia alta.",
+        "📊 ⭐ Titular Fijo (PPM: 3.73 | Fiabilidad: 95% minutos | Eficiencia: 90.5 pts/M€)",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
+        "💰 [Banda: DEPTH] Puja recomendada: 1.442.000 € (103.0% VM | Sobreprecio: +3%).",
+        "⛔ Fondos insuficientes: Requiere 2.442.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 280.288 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +2 pts (sustituye a Pol Lozano). 💰 [Banda: DEPTH] Puja recomendada: 1.442.000 € (103.0% VM | Sobreprecio: +3%)."
     }
   ],
   "liquiditySuggestions": [],
@@ -487,11 +479,11 @@
     "remainingMatchdays": 33,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 50.2,
+      "currentXiExpectedPoints": 51.3,
       "restOfSeasonAggregateExpectedPpm": 36.8,
       "pWin": 0,
-      "pTop2": 0.933,
-      "pTop3": 0.991,
+      "pTop2": 0.929,
+      "pTop3": 0.989,
       "expectedFinalPoints": 1404,
       "range": "1346 - 1468 pts",
       "wilsonCI95": {
@@ -500,8 +492,8 @@
       }
     },
     "probChampion": 0,
-    "probTop2": 93.3,
-    "probTop3": 99.1,
+    "probTop2": 92.9,
+    "probTop3": 98.9,
     "racingExpectedFinalPoints": 1404,
     "racingRange": "1346 - 1468 pts",
     "racingWilsonCI95": {
@@ -536,8 +528,8 @@
         "expectedFinalPoints": 1404,
         "range": "1346 - 1468 pts",
         "probChampion": 0,
-        "probTop2": 93.3,
-        "probTop3": 99.1,
+        "probTop2": 92.9,
+        "probTop3": 98.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -549,11 +541,11 @@
         "currentPoints": 170,
         "meanPpm": 34,
         "stdDev": 8,
-        "expectedFinalPoints": 1290,
-        "range": "1230 - 1349 pts",
+        "expectedFinalPoints": 1294,
+        "range": "1237 - 1354 pts",
         "probChampion": 0,
-        "probTop2": 3.8,
-        "probTop3": 49.1,
+        "probTop2": 3.9,
+        "probTop3": 52.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -569,7 +561,7 @@
         "range": "1206 - 1328 pts",
         "probChampion": 0,
         "probTop2": 2.2,
-        "probTop3": 28.6,
+        "probTop3": 27.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -581,11 +573,11 @@
         "currentPoints": 166,
         "meanPpm": 33.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1264,
-        "range": "1208 - 1325 pts",
+        "expectedFinalPoints": 1260,
+        "range": "1199 - 1320 pts",
         "probChampion": 0,
-        "probTop2": 0.7,
-        "probTop3": 23.2,
+        "probTop2": 1,
+        "probTop3": 20.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -698,8 +690,8 @@
         "expectedFinalPoints": 1404,
         "range": "1346 - 1468 pts",
         "probChampion": 0,
-        "probTop2": 93.3,
-        "probTop3": 99.1,
+        "probTop2": 92.9,
+        "probTop3": 98.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -711,11 +703,11 @@
         "currentPoints": 170,
         "meanPpm": 34,
         "stdDev": 8,
-        "expectedFinalPoints": 1290,
-        "range": "1230 - 1349 pts",
+        "expectedFinalPoints": 1294,
+        "range": "1237 - 1354 pts",
         "probChampion": 0,
-        "probTop2": 3.8,
-        "probTop3": 49.1,
+        "probTop2": 3.9,
+        "probTop3": 52.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -731,7 +723,7 @@
         "range": "1206 - 1328 pts",
         "probChampion": 0,
         "probTop2": 2.2,
-        "probTop3": 28.6,
+        "probTop3": 27.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -743,11 +735,11 @@
         "currentPoints": 166,
         "meanPpm": 33.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1264,
-        "range": "1208 - 1325 pts",
+        "expectedFinalPoints": 1260,
+        "range": "1199 - 1320 pts",
         "probChampion": 0,
-        "probTop2": 0.7,
-        "probTop3": 23.2,
+        "probTop2": 1,
+        "probTop3": 20.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -835,5 +827,5 @@
       }
     ]
   },
-  "priorityMovement": "Pujar 4.273.500 € por Marc Bernal (midfielder) para sustituir a Pol Lozano (Expected XI Delta: +4.1 pts, CPMP: Óptimo)."
+  "priorityMovement": "Pujar 5.697.900 € por Tchouaméni (midfielder) para sustituir a Pol Lozano (Expected XI Delta: +5.7 pts, CPMP: Óptimo)."
 }
