@@ -24,6 +24,7 @@ import { MinuteTracker } from './minuteTracker.js';
 import { DisciplineMonitor } from './disciplineMonitor.js';
 import { LineupScraper } from './lineupScraper.js';
 import { isVerifiedComputerOwner } from './ownership.js';
+import { evaluateClubMomentum } from './clubMomentum.js';
 
 export class ComunioEngine {
 
@@ -212,7 +213,10 @@ export class ComunioEngine {
     // 6. Ponderación por Probabilidad de Titularidad en Prensa (LineupScraper)
     const lineupProbMod = LineupScraper.getLineupProbabilityMultiplier(player);
 
-    matchExpected = matchExpected * matchMod * minuteMod * lineupProbMod;
+    // 7. Modificador de Momentum y Estado Anímico del Club Real (ClubMomentum)
+    const clubMomentum = evaluateClubMomentum(player);
+
+    matchExpected = matchExpected * matchMod * minuteMod * lineupProbMod * clubMomentum.momentumMultiplier;
 
     return parseFloat(matchExpected.toFixed(1));
   }

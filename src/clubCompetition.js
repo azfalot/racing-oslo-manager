@@ -71,7 +71,11 @@ export const LALIGA_CLUB_DEPTH_CHARTS = {
 
 function normalizeClubName(club) {
   if (!club) return '';
-  const c = club.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  if (typeof club === 'object') {
+    club = club.name || club.teamName || club.team || '';
+  }
+  const c = String(club).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+  if (c.includes('espanyol') || c.includes('espanol')) return 'espanyol';
   if (c.includes('barca') || c.includes('barcelona')) return 'barcelona';
   if (c.includes('madrid') && !c.includes('atlet')) return 'real madrid';
   if (c.includes('atlet') || c.includes('atm')) return 'atletico';
@@ -82,6 +86,15 @@ function normalizeClubName(club) {
   if (c.includes('villarreal')) return 'villarreal';
   if (c.includes('betis')) return 'betis';
   if (c.includes('getafe')) return 'getafe';
+  if (c.includes('alaves')) return 'alaves';
+  if (c.includes('sevilla')) return 'sevilla';
+  if (c.includes('valencia')) return 'valencia';
+  if (c.includes('girona')) return 'girona';
+  if (c.includes('mallorca')) return 'mallorca';
+  if (c.includes('rayo')) return 'rayo vallecano';
+  if (c.includes('leganes')) return 'leganes';
+  if (c.includes('las palmas') || c.includes('palmas')) return 'las palmas';
+  if (c.includes('valladolid')) return 'valladolid';
   return c;
 }
 

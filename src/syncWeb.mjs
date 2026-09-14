@@ -117,14 +117,16 @@ async function fetchRealData() {
         p.lastSeasonAvg = parseFloat((p.projectedPoints / 34).toFixed(1));
         p.matchExpected = engine.getExpectedPoints(p);
 
-        // Inteligencia de minutos, tarjetas y probabilidad de titularidad
+        // Inteligencia de minutos, tarjetas, probabilidad de titularidad y momentum de club
         const { MinuteTracker } = await import('./minuteTracker.js');
         const { DisciplineMonitor } = await import('./disciplineMonitor.js');
         const { LineupScraper } = await import('./lineupScraper.js');
+        const { evaluateClubMomentum } = await import('./clubMomentum.js');
 
         p.estimatedMinutes = MinuteTracker.getEstimatedMinutesPerGame(p);
         p.disciplinary = DisciplineMonitor.getDisciplinaryStatus(p);
         p.lineupProbability = LineupScraper.getLineupStatusTag(p);
+        p.clubMomentum = evaluateClubMomentum(p);
       }
     } catch (e) {}
   }

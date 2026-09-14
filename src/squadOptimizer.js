@@ -8,6 +8,7 @@
 
 import fs from 'fs';
 import { evaluateClubCompetition } from './clubCompetition.js';
+import { evaluateClubMomentum } from './clubMomentum.js';
 import { isVerifiedComputerOwner } from './ownership.js';
 import { calculateVORP, identifyPositionalWeaknesses, calculateDepthFragility } from './vorpEngine.js';
 
@@ -320,7 +321,11 @@ export function getExpectedPerformance(player, strategyConfig = null) {
   if (competition.competitionLevel === 'BAJA') competitionMultiplier = 1.05;
   else if (competition.competitionLevel === 'ALTA') competitionMultiplier = 0.90;
 
-  effectivePPM *= competitionMultiplier;
+  // 6.1. Real Club Momentum Modifier (Estado de ánimo, crisis y dinámica de su club)
+  const momentum = evaluateClubMomentum(player);
+  const momentumMultiplier = momentum.momentumMultiplier || 1.0;
+
+  effectivePPM *= (competitionMultiplier * momentumMultiplier);
   const expectedRemainingPoints = effectivePPM * matchdaysRemaining;
 
   // 7. Economic efficiency: expected remaining points per million
@@ -355,7 +360,8 @@ export function getExpectedPerformance(player, strategyConfig = null) {
     starterStatus,
     starterTag,
     starterProbability: parseFloat(starterProbability.toFixed(2)),
-    competition
+    competition,
+    momentum
   };
 }
 
@@ -490,9 +496,24 @@ export function calculateStrategicPurchaseScore(engine, candidate, squad, balanc
 
   // Build reasoning
   const reasoning = [];
-  if (entersXI) {
-    const replacedMsg = replacedPlayerName ? ` sustituyendo a ${replacedPlayerName}` : '';
+  let replacedPpm = 0;
+  let strictlyBeatsReplaced = false;
+
+  if (entersXI && replacedPlayer) {
+    const replacedPerf = getExpectedPerformance(replacedPlayer, strategy);
+    replacedPpm = replacedPerf.ppm;
+    strictlyBeatsReplaced = perf.ppm > replacedPpm && marginalValue > 0;
+
+    const replacedMsg = replacedPlayerName ? ` sustituyendo a ${replacedPlayerName} (${replacedPpm} PPM)` : '';
     reasoning.push(`✅ Entra en el XI titular (+${marginalValue} pts al Once Ideal${replacedMsg}).`);
+
+    if (strictlyBeatsReplaced) {
+      reasoning.push(`🚀 Supera el promedio con momentum del titular actual (${perf.ppm} PPM > ${replacedPpm} PPM).`);
+    } else {
+      reasoning.push(`⚠️ Alerta: El promedio con momentum (${perf.ppm} PPM) no supera holgadamente a ${replacedPlayerName} (${replacedPpm} PPM).`);
+    }
+  } else if (entersXI) {
+    reasoning.push(`✅ Entra en el XI titular (+${marginalValue} pts al Once Ideal).`);
   } else if (marginalValue > 0) {
     reasoning.push(`📈 Mejora el fondo de armario (+${marginalValue} pts de profundidad).`);
   } else {
@@ -506,6 +527,9 @@ export function calculateStrategicPurchaseScore(engine, candidate, squad, balanc
   }
 
   reasoning.push(`📊 ${perf.starterTag} (PPM: ${perf.ppm} | Fiabilidad: ${Math.round(perf.starterProbability * 100)}% minutos | Eficiencia: ${perf.efficiency} pts/M€)`);
+  if (perf.momentum && perf.momentum.reasoning) {
+    reasoning.push(`🔥 Dinámica de club: ${perf.momentum.reasoning}`);
+  }
   if (perf.competition && perf.competition.reasoning) {
     reasoning.push(`⚔️ Competencia en club: ${perf.competition.reasoning}`);
   }
@@ -530,7 +554,9 @@ export function calculateStrategicPurchaseScore(engine, candidate, squad, balanc
     marginalValue,
     replacedPlayer,
     replacedPlayerName,
-    replacedPlayerExpectedPoints
+    replacedPlayerExpectedPoints,
+    replacedPlayerPpm: replacedPpm,
+    strictlyBeatsReplaced
   };
 }
 
