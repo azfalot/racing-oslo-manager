@@ -2,10 +2,25 @@
 import path from 'path';
 import { scanSpeculationOpportunities } from './speculationRadar.js';
 import { isVerifiedComputerOwner } from './ownership.js';
+import { ComunioEngine } from './engine.js';
 
 export const DEFAULT_LEDGER_PATH = 'data/speculationLedger.json';
 export const DEFAULT_SAFETY_RESERVE_MIN_EUR = 1000000;
 export const MAX_SQUAD_CAPACITY = 15;
+
+/**
+ * Obtiene el conjunto de IDs del 11 titular óptimo para protegerlos contra auto-ventas.
+ */
+export function getStarting11Ids(squad, engine = null) {
+  if (!squad || !squad.players || squad.players.length === 0) return new Set();
+  try {
+    const eng = engine || new ComunioEngine();
+    const optimal = eng.optimizeLineup(squad);
+    return new Set((optimal.starting11 || []).map(p => parseInt(p.playerId || p.id || 0)));
+  } catch (e) {
+    return new Set();
+  }
+}
 
 export function loadSpeculationLedger(ledgerPath = DEFAULT_LEDGER_PATH) {
   try {
@@ -146,16 +161,24 @@ export async function executeDailySpeculationBids(client, squad = { players: [] 
 
 export async function autoListSpeculationPlayers(client, squad = { players: [] }, options = {}) {
   const ledgerPath = options.ledgerPath || DEFAULT_LEDGER_PATH;
+  const protectStarters = options.protectStarters !== false;
   const ledger = loadSpeculationLedger(ledgerPath);
   const currentPlayers = squad.players || [];
   const activeTradingMap = new Map(ledger.activeTradingPlayers.map(p => [p.playerId, p]));
+  const starterIds = protectStarters ? getStarting11Ids(squad, options.engine) : new Set();
   const listedPlayers = [];
 
   for (const player of currentPlayers) {
     const pid = player.playerId || player.id;
     const tradingRecord = activeTradingMap.get(pid);
 
+    // 🛡️ BLINDAJE DEL 11 TITULAR: Solo se auto-listan jugadores de trading que no sean titulares indispensables
     if (tradingRecord && !tradingRecord.listedOnMarket) {
+      if (protectStarters && starterIds.has(pid)) {
+        console.log('[DAILY-SPECULATOR] 🛡️ Activo ' + player.name + ' es titular del XI óptimo. Protegido de auto-listado.');
+        continue;
+      }
+
       const askPrice = player.price || tradingRecord.buyPrice || 160000;
       let success = false;
 
@@ -191,8 +214,10 @@ export async function autoListSpeculationPlayers(client, squad = { players: [] }
 export function evaluateSpeculationOffers(saleOffers = [], options = {}) {
   const ledgerPath = options.ledgerPath || DEFAULT_LEDGER_PATH;
   const minSpreadRatio = options.minSpreadRatio !== undefined ? options.minSpreadRatio : 1.00;
+  const protectStarters = options.protectStarters !== false;
   const ledger = loadSpeculationLedger(ledgerPath);
   const activeTradingMap = new Map(ledger.activeTradingPlayers.map(p => [p.playerId, p]));
+  const starterIds = (protectStarters && options.squad) ? getStarting11Ids(options.squad, options.engine) : new Set();
 
   const toAccept = [];
   const toHoldOrReject = [];
@@ -205,6 +230,20 @@ export function evaluateSpeculationOffers(saleOffers = [], options = {}) {
 
     const tradingRecord = activeTradingMap.get(pid);
     if (!tradingRecord) continue;
+
+    // 🛡️ BLINDAJE DEL 11 TITULAR: Si el activo está rindiendo como titular indiscutible en el Once Óptimo, retener
+    if (protectStarters && starterIds.has(pid)) {
+      toHoldOrReject.push({
+        offerId: offer.id || offer.offerId,
+        playerId: pid,
+        name: playerName,
+        buyPrice: tradingRecord.buyPrice,
+        offerPrice,
+        decision: 'HOLD',
+        reason: '🛡️ Titular Indispensable: Forma parte del 11 Titular óptimo actual. Protegido de venta automática.'
+      });
+      continue;
+    }
 
     const buyPrice = tradingRecord.buyPrice || 0;
     const profitEUR = offerPrice - buyPrice;

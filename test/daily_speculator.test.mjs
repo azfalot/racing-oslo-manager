@@ -192,3 +192,48 @@ test('Sync Ledger with New Signings', () => {
 
   if (fs.existsSync(testPath)) fs.unlinkSync(testPath);
 });
+
+test('Starting XI Immunity - Starters and Non-Trading Core Players are 100% Protected', async () => {
+  const testPath = 'data/test_starters_ledger.json';
+  if (fs.existsSync(testPath)) fs.unlinkSync(testPath);
+
+  // 1. Gerard Moreno (core starter, not in ledger) must NEVER be auto-listed or auto-sold
+  const squad = {
+    players: [
+      { playerId: 1, name: 'Gerard Moreno', price: 3900000, type: 'striker', totalPoints: 20 },
+      { playerId: 2, name: 'Fede Valverde', price: 10500000, type: 'midfielder', totalPoints: 35 },
+      { playerId: 99, name: 'Banquillo Especulacion', price: 180000, type: 'defender', totalPoints: 0 }
+    ]
+  };
+
+  const ledger = {
+    activeTradingPlayers: [
+      { playerId: 99, name: 'Banquillo Especulacion', buyPrice: 170000, listedOnMarket: false }
+    ],
+    closedTrades: [],
+    totalProfitEUR: 0,
+    successfulTradesCount: 0
+  };
+  saveSpeculationLedger(ledger, testPath);
+
+  // Auto-list: Only player 99 (bench speculation) is listed. Starters 1 and 2 are 100% untouched.
+  const listed = await autoListSpeculationPlayers(null, squad, { ledgerPath: testPath, dryRun: true });
+  assert.equal(listed.length, 1);
+  assert.equal(listed[0].playerId, 99);
+  assert.ok(!listed.some(p => p.playerId === 1 || p.playerId === 2));
+
+  // Offers: Computer sends offer for Gerard Moreno (10M€) and for player 99 (210k€)
+  const incomingOffers = [
+    { offerId: 1001, playerId: 1, price: 10000000, tradable: { id: 1, name: 'Gerard Moreno' } },
+    { offerId: 1002, playerId: 99, price: 210000, tradable: { id: 99, name: 'Banquillo Especulacion' } }
+  ];
+
+  const { toAccept, toHoldOrReject } = evaluateSpeculationOffers(incomingOffers, { ledgerPath: testPath, squad });
+  // Gerard Moreno is NOT in trading ledger -> completely ignored by autonomous speculator (stays for manual review only)
+  assert.equal(toAccept.length, 1);
+  assert.equal(toAccept[0].playerId, 99);
+  assert.equal(toAccept[0].name, 'Banquillo Especulacion');
+  assert.ok(!toAccept.some(o => o.playerId === 1));
+
+  if (fs.existsSync(testPath)) fs.unlinkSync(testPath);
+});
