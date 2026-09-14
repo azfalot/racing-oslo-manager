@@ -163,8 +163,8 @@ export default function Plantilla() {
                 onClick={() => setSelectedPlayer(p)}
                 className="bg-black border border-forest/40 rounded-sm overflow-hidden flex flex-col justify-between group hover:border-forest-light transition-all cursor-pointer shadow-lg hover:scale-[1.02] relative"
               >
-                {/* Badge de Titular / Suplente */}
-                <div className="absolute top-2 left-2 z-20 flex gap-1">
+                {/* Badge de Titular / Suplente + Balón Parado / TOTW */}
+                <div className="absolute top-2 left-2 z-20 flex flex-wrap gap-1">
                   {p.isStarter ? (
                     <span className="bg-amber-500/90 text-black font-bold text-[8px] px-1.5 py-0.5 rounded-sm shadow-md">
                       XI TITULAR
@@ -172,6 +172,11 @@ export default function Plantilla() {
                   ) : (
                     <span className="bg-black/80 text-cream/70 font-mono text-[8px] px-1.5 py-0.5 rounded-sm border border-forest/30">
                       SUPLENTE
+                    </span>
+                  )}
+                  {(p.setPiece?.bonusPpm > 0 || p.name === 'Gerard Moreno' || p.name === 'Hugo Duro' || p.name === 'Federico Valverde') && (
+                    <span className="bg-forest-dark/90 text-amber-300 font-bold text-[8px] px-1 py-0.5 rounded-sm border border-amber-400/40 shadow-sm" title="Especialista a balón parado / penaltis">
+                      🎯 BALÓN PARADO
                     </span>
                   )}
                 </div>

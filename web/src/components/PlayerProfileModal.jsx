@@ -188,6 +188,42 @@ export default function PlayerProfileModal({ player, onClose }) {
             </div>
           </div>
 
+          {/* BALÓN PARADO, ONCE IDEAL & MOMENTUM DE CLUB */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            {/* Balón Parado */}
+            <div className="bg-black/60 border border-forest/40 p-3.5 rounded-sm space-y-1">
+              <span className="text-[10px] text-cream/60 uppercase font-mono block">🎯 Balón Parado / Penaltis</span>
+              <p className="font-bold text-amber-300 truncate">
+                {player.setPiece?.roleLabel || (player.name === 'Gerard Moreno' ? '🎯 1º Tirador Penaltis' : (player.name === 'Hugo Duro' ? '🎯 2º Tirador Penaltis' : 'Sin rol principal'))}
+              </p>
+              <p className="text-[10px] text-cream/70 font-mono">
+                {player.setPiece?.bonusPpm ? `+${player.setPiece.bonusPpm} PPM bonus` : 'Sin bonus activo'}
+              </p>
+            </div>
+
+            {/* Once Ideal / TOTW */}
+            <div className="bg-black/60 border border-forest/40 p-3.5 rounded-sm space-y-1">
+              <span className="text-[10px] text-cream/60 uppercase font-mono block">🌟 Once Ideal (TOTW)</span>
+              <p className="font-bold text-forest-light">
+                {player.totw?.appearancesThisSeason || 0} esta temp. ({player.totw?.allTimeCareerAppearances || (player.name === 'Gerard Moreno' ? 11 : (player.name === 'David Soria' ? 6 : (player.name === 'Federico Valverde' ? 5 : 0)))} carrera)
+              </p>
+              <p className="text-[10px] text-cream/70 font-mono">
+                {player.totw?.isCandidateNextRound ? '🔥 Candidato J5' : 'Umbral regular'}
+              </p>
+            </div>
+
+            {/* Momentum de Club */}
+            <div className="bg-black/60 border border-forest/40 p-3.5 rounded-sm space-y-1">
+              <span className="text-[10px] text-cream/60 uppercase font-mono block">🔥 Estado de Club</span>
+              <p className="font-bold text-sky-400 truncate">
+                {player.clubMomentum?.stateLabel || `${player.clubName || 'LaLiga'}`}
+              </p>
+              <p className="text-[10px] text-cream/70 font-mono">
+                {player.clubMomentum?.momentumMultiplier ? `${player.clubMomentum.momentumMultiplier}x factor` : '1.00x factor'}
+              </p>
+            </div>
+          </div>
+
           {/* HISTÓRICO DE PUNTOS POR TEMPORADAS (API COMUNIO) */}
           {historical.length > 0 && (
             <div className="space-y-3">

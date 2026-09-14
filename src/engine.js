@@ -25,6 +25,7 @@ import { DisciplineMonitor } from './disciplineMonitor.js';
 import { LineupScraper } from './lineupScraper.js';
 import { isVerifiedComputerOwner } from './ownership.js';
 import { evaluateClubMomentum } from './clubMomentum.js';
+import { evaluateSetPieceSpecialist } from './setPieces.js';
 
 export class ComunioEngine {
 
@@ -216,7 +217,10 @@ export class ComunioEngine {
     // 7. Modificador de Momentum y Estado Anímico del Club Real (ClubMomentum)
     const clubMomentum = evaluateClubMomentum(player);
 
-    matchExpected = matchExpected * matchMod * minuteMod * lineupProbMod * clubMomentum.momentumMultiplier;
+    // 8. Bonificación por Especialista a Balón Parado / Penaltis (SetPieces)
+    const setPiece = evaluateSetPieceSpecialist(player);
+
+    matchExpected = (matchExpected * matchMod * minuteMod * lineupProbMod * clubMomentum.momentumMultiplier) + setPiece.bonusPpm;
 
     return parseFloat(matchExpected.toFixed(1));
   }

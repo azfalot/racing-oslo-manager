@@ -9,6 +9,8 @@
 import fs from 'fs';
 import { evaluateClubCompetition } from './clubCompetition.js';
 import { evaluateClubMomentum } from './clubMomentum.js';
+import { evaluateSetPieceSpecialist } from './setPieces.js';
+import { evaluatePlayerTotwStats } from './totwTracker.js';
 import { isVerifiedComputerOwner } from './ownership.js';
 import { calculateVORP, identifyPositionalWeaknesses, calculateDepthFragility } from './vorpEngine.js';
 
@@ -325,7 +327,11 @@ export function getExpectedPerformance(player, strategyConfig = null) {
   const momentum = evaluateClubMomentum(player);
   const momentumMultiplier = momentum.momentumMultiplier || 1.0;
 
-  effectivePPM *= (competitionMultiplier * momentumMultiplier);
+  // 6.2. Set-Piece & Penalty Specialist Modifier (Lanzador de penaltis, faltas o córners)
+  const setPiece = evaluateSetPieceSpecialist(player);
+  const totw = evaluatePlayerTotwStats(player);
+
+  effectivePPM = (effectivePPM * competitionMultiplier * momentumMultiplier) + setPiece.bonusPpm;
   const expectedRemainingPoints = effectivePPM * matchdaysRemaining;
 
   // 7. Economic efficiency: expected remaining points per million
@@ -361,7 +367,9 @@ export function getExpectedPerformance(player, strategyConfig = null) {
     starterTag,
     starterProbability: parseFloat(starterProbability.toFixed(2)),
     competition,
-    momentum
+    momentum,
+    setPiece,
+    totw
   };
 }
 
@@ -529,6 +537,12 @@ export function calculateStrategicPurchaseScore(engine, candidate, squad, balanc
   reasoning.push(`📊 ${perf.starterTag} (PPM: ${perf.ppm} | Fiabilidad: ${Math.round(perf.starterProbability * 100)}% minutos | Eficiencia: ${perf.efficiency} pts/M€)`);
   if (perf.momentum && perf.momentum.reasoning) {
     reasoning.push(`🔥 Dinámica de club: ${perf.momentum.reasoning}`);
+  }
+  if (perf.setPiece && perf.setPiece.bonusPpm > 0) {
+    reasoning.push(`🎯 Balón parado: ${perf.setPiece.roleLabel} (+${perf.setPiece.bonusPpm} PPM bonus).`);
+  }
+  if (perf.totw && perf.totw.appearancesThisSeason > 0) {
+    reasoning.push(`🌟 Once Ideal: ${perf.totw.appearancesThisSeason} presencia(s) en TOTW esta temporada.`);
   }
   if (perf.competition && perf.competition.reasoning) {
     reasoning.push(`⚔️ Competencia en club: ${perf.competition.reasoning}`);

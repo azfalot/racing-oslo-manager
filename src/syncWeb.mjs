@@ -117,20 +117,31 @@ async function fetchRealData() {
         p.lastSeasonAvg = parseFloat((p.projectedPoints / 34).toFixed(1));
         p.matchExpected = engine.getExpectedPoints(p);
 
-        // Inteligencia de minutos, tarjetas, probabilidad de titularidad y momentum de club
+        // Inteligencia de minutos, tarjetas, probabilidad de titularidad, momentum, balón parado y TOTW
         const { MinuteTracker } = await import('./minuteTracker.js');
         const { DisciplineMonitor } = await import('./disciplineMonitor.js');
         const { LineupScraper } = await import('./lineupScraper.js');
         const { evaluateClubMomentum } = await import('./clubMomentum.js');
+        const { evaluateSetPieceSpecialist } = await import('./setPieces.js');
+        const { evaluatePlayerTotwStats, getSquadTotwSummary } = await import('./totwTracker.js');
 
         p.estimatedMinutes = MinuteTracker.getEstimatedMinutesPerGame(p);
         p.disciplinary = DisciplineMonitor.getDisciplinaryStatus(p);
         p.lineupProbability = LineupScraper.getLineupStatusTag(p);
         p.clubMomentum = evaluateClubMomentum(p);
+        p.setPiece = evaluateSetPieceSpecialist(p);
+        p.totw = evaluatePlayerTotwStats(p);
       }
     } catch (e) {}
   }
   fs.writeFileSync('./web/src/data/squad.json', JSON.stringify(squadJson, null, 2));
+
+  // Exportar histórico y candidatos de Once Ideal / Team of the Week
+  try {
+    const { getSquadTotwSummary } = await import('./totwTracker.js');
+    const totwSummary = getSquadTotwSummary(squadJson);
+    fs.writeFileSync('./web/src/data/totwHistory.json', JSON.stringify(totwSummary, null, 2));
+  } catch (totwErr) {}
     
   // Dashboard / Standings & Rivals
   const dashboard = await client.getDashboardData();

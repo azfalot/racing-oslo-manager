@@ -1,0 +1,40 @@
+{
+  "updatedAt": "2026-09-14T20:40:00.000Z",
+  "overview": {
+    "totalPageViews": 1420,
+    "uniqueVisitors": 385,
+    "avgSessionDuration": "3m 42s",
+    "bounceRate": "18.4%",
+    "activeSessionsNow": 3
+  },
+  "deviceBreakdown": {
+    "mobile": 68.5,
+    "desktop": 28.2,
+    "tablet": 3.3
+  },
+  "topPages": [
+    { "path": "/", "name": "Inicio / Portada", "views": 520, "percentage": 36.6 },
+    { "path": "/alineacion", "name": "Once Titular & Táctica", "views": 340, "percentage": 23.9 },
+    { "path": "/mercado", "name": "Radar de Mercado", "views": 215, "percentage": 15.1 },
+    { "path": "/rivales", "name": "Auditoría Rivales 360º", "views": 165, "percentage": 11.6 },
+    { "path": "/plantilla", "name": "Plantilla & Fichas", "views": 110, "percentage": 7.7 },
+    { "path": "/finanzas", "name": "Tesorería & Finanzas", "views": 70, "percentage": 4.9 }
+  ],
+  "trafficByDay": [
+    { "day": "Lun", "date": "08 Sep", "views": 180, "visitors": 52 },
+    { "day": "Mar", "date": "09 Sep", "views": 195, "visitors": 58 },
+    { "day": "Mié", "date": "10 Sep", "views": 210, "visitors": 64 },
+    { "day": "Jue", "date": "11 Sep", "views": 175, "visitors": 49 },
+    { "day": "Vie", "date": "12 Sep (Previa J5)", "views": 290, "visitors": 88 },
+    { "day": "Sáb", "date": "13 Sep (Jornada)", "views": 230, "visitors": 74 },
+    { "day": "Dom", "date": "14 Sep (Cierre)", "views": 140, "visitors": 42 }
+  ],
+  "cloudflareObservability": {
+    "status": "ACTIVE",
+    "workerId": "racing-oslo",
+    "region": "WEUR (Western Europe / Madrid)",
+    "tlsVersion": "TLSv1.3",
+    "edgeHitRatio": "99.4%",
+    "avgResponseTimeMs": 24
+  }
+}
