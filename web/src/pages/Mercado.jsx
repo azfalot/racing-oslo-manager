@@ -175,9 +175,9 @@ export default function Mercado() {
       </div>
 
       {/* MERCADO PRINCIPAL */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
         {/* Jugadores Libres */}
-        <div className="lg:col-span-2 space-y-8 flex flex-col">
+        <div className="lg:col-span-2 space-y-8">
           <div className="flex items-center justify-between border-b border-forest/30 pb-4">
             <div className="flex items-center gap-3">
               <Computer className="text-forest-light" />
@@ -190,7 +190,7 @@ export default function Mercado() {
             )}
           </div>
           
-          <div className="bg-black border border-forest/30 rounded-sm overflow-hidden shadow-xl flex-1">
+          <div className="bg-black border border-forest/30 rounded-sm overflow-hidden shadow-xl">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-forest-dark/40 text-xs uppercase tracking-widest text-forest-light border-b border-forest/30 font-mono">
@@ -210,7 +210,7 @@ export default function Mercado() {
         </div>
 
         {/* Columna Derecha: Nuestros Jugadores & Rivales */}
-        <div className="space-y-8 flex flex-col h-full min-h-0">
+        <div className="space-y-8">
           {/* Nuestros en Venta */}
           <div>
             <div className="flex items-center justify-between border-b border-forest/30 pb-4 mb-4">
@@ -243,7 +243,7 @@ export default function Mercado() {
           </div>
 
           {/* En Venta por Rivales */}
-          <div className="flex-1 flex flex-col min-h-0">
+          <div>
             <div className="flex items-center justify-between border-b border-forest/30 pb-4 mb-4">
               <div className="flex items-center gap-3">
                 <UserPlus className="text-forest-light" />
@@ -256,7 +256,7 @@ export default function Mercado() {
             {otherPlayers.length === 0 ? (
               <p className="text-sm text-cream/50 italic bg-black/40 p-4 border border-forest/20 rounded-sm">No hay jugadores puestos en venta por rivales actualmente.</p>
             ) : (
-              <div className="space-y-2 flex-1 min-h-0 overflow-y-auto pr-1.5">
+              <div className="space-y-2 max-h-[460px] overflow-y-auto pr-1.5">
                 {otherPlayers.map(p => (
                   <div key={p.id} onClick={() => setSelectedPlayer(p)} className="bg-black border border-forest/30 p-3 rounded-sm flex justify-between items-center cursor-pointer hover:border-forest-light transition-all">
                     <div className="flex items-center gap-3">
