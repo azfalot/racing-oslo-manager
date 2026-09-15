@@ -733,12 +733,12 @@ export class ComunioClient {
     try {
       const url = `https://api.comunio.es/communities/${this.communityId}/users/${this.userId}/exchangemarket/addplayer`;
       const response = await axios.post(url, {
-        tradables: [{ id: parseInt(playerId), price: parseInt(price) }]
+        items: [{ tradableId: parseInt(playerId), price: parseInt(price) }]
       }, {
         headers: this.getHeaders()
       });
 
-      if (response.status === 200 && response.data?.status === 'OK') {
+      if (response.status === 200 && (response.data?.status === 'OK' || response.data?.purchasePrices)) {
         console.log(`[CLIENT] Jugador ID ${playerId} puesto a la venta con éxito (API).`);
         return true;
       }
