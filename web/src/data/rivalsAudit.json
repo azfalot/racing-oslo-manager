@@ -6,22 +6,22 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 306,
-    "squadValue": 64910000,
-    "playerCount": 19,
-    "financialHealth": "Apalancado / Saldo Negativo (-0.90M €)",
-    "debtAlert": "Saldo en descubierto (-0.90M €). Consume el 5.5% del límite de crédito permitido (16.23M €). Exige ventas antes de puntuar.",
+    "squadValue": 63860000,
+    "playerCount": 16,
+    "financialHealth": "Solvente Ajustado (+164k € en Caja)",
+    "debtAlert": "Saldo positivo (+164k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
     "projectedScore": 57,
     "formation": "3-5-2",
     "tacticDescription": "Estructura 3-5-2 orientada a maximizar 57 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 306 puntos acumulados (102.0 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (64.91M €).",
+      "Patrimonio de plantilla consolidado en Primera (63.86M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -0.90M € que obliga a vender piezas."
+      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
     ],
     "tacticalAlerts": [
       {
@@ -41,33 +41,33 @@
         "reason": "Refuerzo de ataque (0.23M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
       },
       {
-        "name": "Beñat Prados",
-        "pos": "Centrocampista",
-        "price": 250000,
-        "reason": "Centrocampista con llegada (0.25M €) para asociarse con Bellingham y dominar la posesión."
-      },
-      {
         "name": "Adrián Rodríguez",
         "pos": "Portero",
         "price": 160000,
         "reason": "Oportunidad de mercado (0.16M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+      },
+      {
+        "name": "Beñat Prados",
+        "pos": "Centrocampista",
+        "price": 250000,
+        "reason": "Pieza competitiva en el mercado (0.25M €) adaptable al esquema 3-5-2."
       }
     ],
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+7.3%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 162333835,
-      "totalReceived": 138375400,
+      "totalReceived": 139437600,
       "purchasesCount": 44,
-      "salesCount": 40,
-      "estimatedCash": -898435,
+      "salesCount": 43,
+      "estimatedCash": 163765,
       "prizesEarned": 3060000,
-      "maxCreditLimit": 16227500,
-      "netWealth": 64011565,
-      "analysis": "Operativa histórica de 44 compras (162.3M €) y 40 ventas (138.4M €). Dinero total rotado: 300.7M € con sobrepuja media de +7.3%."
+      "maxCreditLimit": 15965000,
+      "netWealth": 64023765,
+      "analysis": "Operativa histórica de 44 compras (162.3M €) y 43 ventas (139.4M €). Dinero total rotado: 301.8M € con sobrepuja media de +7.3%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -1172,6 +1172,48 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-09-14T04:35:00+02:00"
+        },
+        {
+          "playerName": "Lobete",
+          "price": 166400,
+          "marketValue": 166400,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-09-15T04:37:15+02:00"
+        },
+        {
+          "playerName": "Oluwaseyi",
+          "price": 727800,
+          "marketValue": 727800,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-09-15T04:37:15+02:00"
+        },
+        {
+          "playerName": "Álvaro Ferllo",
+          "price": 168000,
+          "marketValue": 168000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-09-15T04:37:15+02:00"
         }
       ]
     },
@@ -1366,22 +1408,6 @@
     ],
     "bench": [
       {
-        "id": 2331,
-        "name": "Álvaro Ferllo",
-        "position": "keeper",
-        "price": 160000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2331.png"
-      },
-      {
         "id": 3665,
         "name": "Álex Padilla ",
         "position": "keeper",
@@ -1460,38 +1486,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2395.png"
-      },
-      {
-        "id": 3924,
-        "name": "Oluwaseyi",
-        "position": "striker",
-        "price": 730000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3924.png"
-      },
-      {
-        "id": 3145,
-        "name": "Lobete",
-        "position": "striker",
-        "price": 160000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3145.png"
       }
     ],
     "isMe": false
@@ -3595,22 +3589,20 @@
     "crest": "/media/crests/m4_team.svg",
     "pos": 5,
     "points": 207,
-    "squadValue": 57570000,
-    "playerCount": 13,
-    "financialHealth": "Apalancado / Saldo Negativo (-5.44M €)",
-    "debtAlert": "Saldo en descubierto (-5.44M €). Consume el 37.8% del límite de crédito permitido (14.39M €). Exige ventas antes de puntuar.",
-    "projectedScore": 54,
-    "formation": "3-5-2",
-    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 54 puntos según plantilla disponible.",
+    "squadValue": 50160000,
+    "playerCount": 11,
+    "financialHealth": "Saneado / Alta Liquidez (+1.78M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+1.78M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 45,
+    "formation": "4-4-2",
+    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 45 puntos según plantilla disponible.",
     "strengths": [
-      "Patrimonio de plantilla consolidado en Primera (57.57M €).",
       "Seguridad contrastada bajo palos en portería.",
-      "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
-      "Poderío goleador diferencial en ataque."
+      "Medular con futbolistas de jerarquía técnica y capacidad de puntuación."
     ],
     "weaknesses": [
-      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez.",
-      "Tensión de tesorería: Saldo negativo de -5.44M € que obliga a vender piezas."
+      "Plantilla corta (11 jugadores) con escaso fondo de armario ante rotaciones.",
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -3624,6 +3616,12 @@
     ],
     "recommendations": [
       {
+        "name": "Raúl de Tomás",
+        "pos": "Delantero",
+        "price": 230000,
+        "reason": "Refuerzo de ataque (0.23M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+      },
+      {
         "name": "Boyomo",
         "pos": "Defensa",
         "price": 1450000,
@@ -3633,30 +3631,24 @@
         "name": "Adrián Rodríguez",
         "pos": "Portero",
         "price": 160000,
-        "reason": "Alternativa para la portería (0.16M €) para asegurar titularidad y rotación fiable."
-      },
-      {
-        "name": "Raúl de Tomás",
-        "pos": "Delantero",
-        "price": 230000,
-        "reason": "Oportunidad de mercado (0.23M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "reason": "Oportunidad de mercado (0.16M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       }
     ],
     "speculation": {
-      "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "score": 76,
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+15.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 66544879,
-      "totalReceived": 39031000,
+      "totalReceived": 46253100,
       "purchasesCount": 15,
-      "salesCount": 17,
-      "estimatedCash": -5443879,
+      "salesCount": 19,
+      "estimatedCash": 1778221,
       "prizesEarned": 2070000,
-      "maxCreditLimit": 14392500,
-      "netWealth": 52126121,
-      "analysis": "Operativa histórica de 15 compras (66.5M €) y 17 ventas (39.0M €). Dinero total rotado: 105.6M € con sobrepuja media de +15.2%."
+      "maxCreditLimit": 12540000,
+      "netWealth": 51938221,
+      "analysis": "Operativa histórica de 15 compras (66.5M €) y 19 ventas (46.3M €). Dinero total rotado: 112.8M € con sobrepuja media de +15.2%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -4087,6 +4079,34 @@
           "seller": "M4 TEAM",
           "buyer": "Computer",
           "date": "2026-09-10T04:34:51+02:00"
+        },
+        {
+          "playerName": "Fer Niño",
+          "price": 4964200,
+          "marketValue": 4964200,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "M4 TEAM",
+          "buyer": "Computer",
+          "date": "2026-09-15T04:37:15+02:00"
+        },
+        {
+          "playerName": "Dani Lorenzo",
+          "price": 2257900,
+          "marketValue": 2257900,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "M4 TEAM",
+          "buyer": "Computer",
+          "date": "2026-09-15T04:37:15+02:00"
         }
       ]
     },
@@ -4160,6 +4180,23 @@
         "image": "/media/players/2918.png"
       },
       {
+        "id": 2491,
+        "name": "Gorosabel",
+        "position": "defender",
+        "price": 400000,
+        "points": 0,
+        "expectedPoints": 0.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/2491.png"
+      },
+      {
         "id": 2969,
         "name": "Pedri",
         "position": "midfielder",
@@ -4228,40 +4265,6 @@
         "image": "/media/players/3276.png"
       },
       {
-        "id": 4075,
-        "name": "Dani Lorenzo",
-        "position": "midfielder",
-        "price": 2190000,
-        "points": 0,
-        "expectedPoints": 4.1,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4075.png"
-      },
-      {
-        "id": 2895,
-        "name": "Fer Niño",
-        "position": "striker",
-        "price": 5220000,
-        "points": 0,
-        "expectedPoints": 6.4,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2895.png"
-      },
-      {
         "id": 3150,
         "name": "Danjuma",
         "position": "striker",
@@ -4277,24 +4280,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3150.png"
-      }
-    ],
-    "bench": [
-      {
-        "id": 2491,
-        "name": "Gorosabel",
-        "position": "defender",
-        "price": 400000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2491.png"
       },
       {
         "id": 4162,
@@ -4302,6 +4287,7 @@
         "position": "striker",
         "price": 1250000,
         "points": 0,
+        "expectedPoints": 1.7,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -4313,6 +4299,7 @@
         "image": "/media/players/4162.png"
       }
     ],
+    "bench": [],
     "isMe": false
   },
   {
