@@ -213,9 +213,14 @@ export default function Mercado() {
         <div className="space-y-8">
           {/* Nuestros en Venta */}
           <div>
-            <div className="flex items-center gap-3 border-b border-forest/30 pb-4 mb-4">
-              <UserMinus className="text-amber-400" />
-              <h3 className="text-xl font-display font-bold">Nuestros Transferibles</h3>
+            <div className="flex items-center justify-between border-b border-forest/30 pb-4 mb-4">
+              <div className="flex items-center gap-3">
+                <UserMinus className="text-amber-400" />
+                <h3 className="text-xl font-display font-bold">Nuestros Transferibles</h3>
+              </div>
+              <span className="text-xs font-mono font-bold text-amber-400 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-500/30">
+                {ourPlayers.length}
+              </span>
             </div>
             {ourPlayers.length === 0 ? (
               <p className="text-sm text-cream/50 italic bg-black/40 p-4 border border-forest/20 rounded-sm">No hay jugadores puestos en venta por el club actualmente.</p>
@@ -239,27 +244,36 @@ export default function Mercado() {
 
           {/* En Venta por Rivales */}
           <div>
-            <div className="flex items-center gap-3 border-b border-forest/30 pb-4 mb-4">
-              <UserPlus className="text-forest-light" />
-              <h3 className="text-xl font-display font-bold">En Venta por Rivales</h3>
+            <div className="flex items-center justify-between border-b border-forest/30 pb-4 mb-4">
+              <div className="flex items-center gap-3">
+                <UserPlus className="text-forest-light" />
+                <h3 className="text-xl font-display font-bold">En Venta por Rivales</h3>
+              </div>
+              <span className="text-xs font-mono font-bold text-forest-light bg-forest-dark/40 px-2 py-0.5 rounded border border-forest/30">
+                {otherPlayers.length}
+              </span>
             </div>
-            <div className="space-y-2">
-              {otherPlayers.map(p => (
-                <div key={p.id} onClick={() => setSelectedPlayer(p)} className="bg-black border border-forest/30 p-3 rounded-sm flex justify-between items-center cursor-pointer hover:border-forest-light transition-all">
-                  <div className="flex items-center gap-3">
-                    <img src={p.image} alt={p.name} className="w-8 h-8 rounded-full object-cover" />
-                    <div>
-                      <p className="font-bold text-xs text-white">{p.name}</p>
-                      <p className="text-[10px] text-cream/50 font-mono">{p.owner}</p>
+            {otherPlayers.length === 0 ? (
+              <p className="text-sm text-cream/50 italic bg-black/40 p-4 border border-forest/20 rounded-sm">No hay jugadores puestos en venta por rivales actualmente.</p>
+            ) : (
+              <div className="space-y-2 max-h-[520px] xl:max-h-[620px] overflow-y-auto pr-1.5">
+                {otherPlayers.map(p => (
+                  <div key={p.id} onClick={() => setSelectedPlayer(p)} className="bg-black border border-forest/30 p-3 rounded-sm flex justify-between items-center cursor-pointer hover:border-forest-light transition-all">
+                    <div className="flex items-center gap-3">
+                      <img src={p.image} alt={p.name} className="w-8 h-8 rounded-full object-cover" />
+                      <div>
+                        <p className="font-bold text-xs text-white">{p.name}</p>
+                        <p className="text-[10px] text-cream/50 font-mono">{p.owner}</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xs font-bold text-amber-300 font-mono">{formatPrice(p.price)}</p>
+                      <p className="text-[10px] text-forest-light font-mono">~{p.projectedPoints || 120} pts esperados</p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-xs font-bold text-amber-300 font-mono">{formatPrice(p.price)}</p>
-                    <p className="text-[10px] text-forest-light font-mono">~{p.projectedPoints || 120} pts esperados</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
