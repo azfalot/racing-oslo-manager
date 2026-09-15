@@ -1503,13 +1503,13 @@
     "crest": "/media/crest.jpg",
     "pos": 2,
     "points": 225,
-    "squadValue": 53030000,
-    "playerCount": 13,
+    "squadValue": 50620000,
+    "playerCount": 12,
     "financialHealth": "Solvente Ajustado (+543k € en Caja)",
     "debtAlert": "Saldo positivo (+543k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
-    "projectedScore": 63,
-    "formation": "4-3-3",
-    "tacticDescription": "Estructura 4-3-3 orientada a maximizar 63 puntos según plantilla disponible.",
+    "projectedScore": 58,
+    "formation": "4-4-2",
+    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 58 puntos según plantilla disponible.",
     "strengths": [
       "2º en la clasificación general con 225 puntos acumulados (75.0 pts/jornada).",
       "Seguridad contrastada bajo palos en portería.",
@@ -1517,7 +1517,7 @@
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -1537,33 +1537,33 @@
         "reason": "Refuerzo de ataque (0.23M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
       },
       {
-        "name": "Beñat Prados",
-        "pos": "Centrocampista",
-        "price": 250000,
-        "reason": "Centrocampista con llegada (0.25M €) para asociarse con Fede Valverde y dominar la posesión."
-      },
-      {
         "name": "Adrián Rodríguez",
         "pos": "Portero",
         "price": 160000,
         "reason": "Oportunidad de mercado (0.16M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+      },
+      {
+        "name": "Beñat Prados",
+        "pos": "Centrocampista",
+        "price": 250000,
+        "reason": "Pieza competitiva en el mercado (0.25M €) adaptable al esquema 4-4-2."
       }
     ],
     "speculation": {
-      "score": 91,
+      "score": 95,
       "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+15.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 73147012,
-      "totalReceived": 49287300,
+      "totalReceived": 51769600,
       "purchasesCount": 23,
-      "salesCount": 25,
+      "salesCount": 26,
       "estimatedCash": 543389,
       "prizesEarned": 2250000,
-      "maxCreditLimit": 13257500,
-      "netWealth": 53573389,
-      "analysis": "Operativa histórica de 23 compras (73.1M €) y 25 ventas (49.3M €). Dinero total rotado: 122.4M € con sobrepuja media de +15.2%."
+      "maxCreditLimit": 12655000,
+      "netWealth": 51163389,
+      "analysis": "Operativa histórica de 23 compras (73.1M €) y 26 ventas (51.8M €). Dinero total rotado: 124.9M € con sobrepuja media de +15.2%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -2192,6 +2192,20 @@
           "seller": "Racing de Oslo",
           "buyer": "Computer",
           "date": "2026-09-11T04:36:36+02:00"
+        },
+        {
+          "playerName": "Hugo Duro",
+          "price": 2482300,
+          "marketValue": 2482300,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Racing de Oslo",
+          "buyer": "Computer",
+          "date": "2026-09-15T04:37:15+02:00"
         }
       ]
     },
@@ -2333,6 +2347,23 @@
         "image": "/media/players/3553.png"
       },
       {
+        "id": 2785,
+        "name": "Pol Lozano",
+        "position": "midfielder",
+        "price": 240000,
+        "points": 0,
+        "expectedPoints": 0.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/2785.png"
+      },
+      {
         "id": 1927,
         "name": "Gerard Moreno",
         "position": "striker",
@@ -2365,23 +2396,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2304.png"
-      },
-      {
-        "id": 2550,
-        "name": "Hugo Duro",
-        "position": "striker",
-        "price": 2410000,
-        "points": 0,
-        "expectedPoints": 5.1,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2550.png"
       }
     ],
     "bench": [
@@ -2400,22 +2414,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/4163.png"
-      },
-      {
-        "id": 2785,
-        "name": "Pol Lozano",
-        "position": "midfielder",
-        "price": 240000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2785.png"
       }
     ],
     "isMe": true
