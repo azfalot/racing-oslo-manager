@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-15T16:30:42.695Z",
-  "currentMatchday": 5,
+  "timestamp": "2026-09-15T20:40:53.094Z",
+  "currentMatchday": 6,
   "confidenceLevel": "MEDIUM",
   "standings": {
     "racingPoints": 188,
@@ -17,7 +17,7 @@
   },
   "lineup": {
     "formation": "4-4-2",
-    "expectedPoints": 51.50000000000001,
+    "expectedPoints": 49.50000000000001,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -45,11 +45,11 @@
       "position": "midfielder",
       "price": 240000,
       "expectedPoints": 0.2,
-      "vorp": -10,
-      "vorpPerMatchday": -0.29,
-      "replacementPpm": 2.8,
+      "vorp": -11,
+      "vorpPerMatchday": -0.32,
+      "replacementPpm": 2.81,
       "upgradeGap": 5.3,
-      "urgencyScore": 21.7
+      "urgencyScore": 22
     },
     {
       "playerId": 3553,
@@ -57,23 +57,23 @@
       "position": "midfielder",
       "price": 1560000,
       "expectedPoints": 3,
-      "vorp": 10,
-      "vorpPerMatchday": 0.29,
-      "replacementPpm": 2.8,
+      "vorp": 9,
+      "vorpPerMatchday": 0.26,
+      "replacementPpm": 2.81,
       "upgradeGap": 2.5,
-      "urgencyScore": 13.8
+      "urgencyScore": 14
     },
     {
       "playerId": 1876,
       "name": "Denis Suárez",
       "position": "midfielder",
       "price": 1610000,
-      "expectedPoints": 4.2,
-      "vorp": 22,
-      "vorpPerMatchday": 0.65,
-      "replacementPpm": 2.8,
-      "upgradeGap": 1.3,
-      "urgencyScore": 9.3
+      "expectedPoints": 3.7,
+      "vorp": 21,
+      "vorpPerMatchday": 0.62,
+      "replacementPpm": 2.81,
+      "upgradeGap": 1.8,
+      "urgencyScore": 10
     }
   ],
   "depthAnalysis": {
@@ -90,19 +90,19 @@
       "name": "Sergio Camello",
       "type": "striker",
       "price": 9190000,
-      "bidAmount": 11487500,
-      "maxRationalBid": 11487500,
-      "marginPct": 25,
+      "bidAmount": 11395600,
+      "maxRationalBid": 11395600,
+      "marginPct": 24,
       "band": "ELITE_LEAGUE_WINNER",
       "expectedPoints": 9,
-      "ppm": 7.35,
-      "efficiency": 27.2,
-      "upgradePoints": 8.9,
-      "marginalValue": 8.9,
+      "ppm": 7.07,
+      "efficiency": 26.1,
+      "upgradePoints": 8.4,
+      "marginalValue": 8.4,
       "vorp": 100,
       "vorpPerMatchday": 2.94,
-      "cpmp": 1032584,
-      "cpmpSeason": 30330,
+      "cpmp": 1094048,
+      "cpmpSeason": 32133,
       "replacedPlayer": {
         "playerId": 2785,
         "name": "Pol Lozano",
@@ -113,17 +113,17 @@
       },
       "replacedPlayerName": "Pol Lozano",
       "replacedPlayerExpectedPoints": 0.2,
-      "strategicScore": 75.8,
+      "strategicScore": 75.5,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 8.9
+          "marginalValue": 8.4
         },
         "absoluteQuality": {
           "raw": 100,
           "weight": 0.2,
-          "ppm": 7.35
+          "ppm": 7.07
         },
         "positionNeed": {
           "raw": 50,
@@ -131,9 +131,9 @@
           "detail": "2 disponibles = exactamente los requeridos. Sin suplentes."
         },
         "marketOpportunity": {
-          "raw": 68,
+          "raw": 65.3,
           "weight": 0.1,
-          "efficiency": 27.2
+          "efficiency": 26.1
         },
         "rivalPressure": {
           "raw": 20,
@@ -152,94 +152,16 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+8.9 pts al Once Ideal sustituyendo a Pol Lozano (1.89 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (7.35 PPM > 1.89 PPM).",
+        "✅ Entra en el XI titular (+8.4 pts al Once Ideal sustituyendo a Pol Lozano (1.89 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (7.07 PPM > 1.89 PPM).",
         "🟡 Posición con necesidad MODERADA: 2 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 7.35 | Fiabilidad: 95% minutos | Eficiencia: 27.2 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 7.07 | Fiabilidad: 95% minutos | Eficiencia: 26.1 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 11.487.500 € (125.0% VM | Sobreprecio: +25%).",
-        "⛔ Fondos insuficientes: Requiere 12.487.500 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 872.588 €."
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 11.395.600 € (124.0% VM | Sobreprecio: +24%).",
+        "⛔ Fondos insuficientes: Requiere 12.395.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 872.588 €."
       ],
-      "reason": "🚀 SALTO CUALITATIVO (+8 pts XI): Mejora real del XI: +9 pts (sustituye a Pol Lozano). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 11.487.500 € (125.0% VM | Sobreprecio: +25%)."
-    },
-    {
-      "playerId": 4083,
-      "name": "Álex Calatrava",
-      "type": "midfielder",
-      "price": 5150000,
-      "bidAmount": 5922500,
-      "maxRationalBid": 5922500,
-      "marginPct": 15,
-      "band": "CLEAR_UPGRADE",
-      "expectedPoints": 5,
-      "ppm": 4.67,
-      "efficiency": 30.8,
-      "upgradePoints": 4.9,
-      "marginalValue": 4.9,
-      "vorp": 50,
-      "vorpPerMatchday": 1.47,
-      "cpmp": 1051020,
-      "cpmpSeason": 30838,
-      "replacedPlayer": {
-        "playerId": 2785,
-        "name": "Pol Lozano",
-        "type": "midfielder",
-        "price": 240000,
-        "available": true,
-        "expectedPoints": 0.2
-      },
-      "replacedPlayerName": "Pol Lozano",
-      "replacedPlayerExpectedPoints": 0.2,
-      "strategicScore": 71,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 4.9
-        },
-        "absoluteQuality": {
-          "raw": 77.8,
-          "weight": 0.2,
-          "ppm": 4.67
-        },
-        "positionNeed": {
-          "raw": 50,
-          "weight": 0.15,
-          "detail": "4 disponibles = exactamente los requeridos. Sin suplentes."
-        },
-        "marketOpportunity": {
-          "raw": 77,
-          "weight": 0.1,
-          "efficiency": 30.8
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 35,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": false,
-      "reasoning": [
-        "✅ Entra en el XI titular (+4.9 pts al Once Ideal sustituyendo a Pol Lozano (1.89 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.67 PPM > 1.89 PPM).",
-        "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 4.67 | Fiabilidad: 95% minutos | Eficiencia: 30.8 pts/M€)",
-        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 5.922.500 € (115.0% VM | Sobreprecio: +15%).",
-        "⛔ Fondos insuficientes: Requiere 6.922.500 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 872.588 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Pol Lozano). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 5.922.500 € (115.0% VM | Sobreprecio: +15%)."
+      "reason": "🚀 SALTO CUALITATIVO (+8 pts XI): Mejora real del XI: +8 pts (sustituye a Pol Lozano). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 11.395.600 € (124.0% VM | Sobreprecio: +24%)."
     },
     {
       "playerId": 4098,
@@ -320,6 +242,84 @@
       "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +7 pts (sustituye a Pol Lozano). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 17.350.200 € (119.0% VM | Sobreprecio: +19%)."
     },
     {
+      "playerId": 4083,
+      "name": "Álex Calatrava",
+      "type": "midfielder",
+      "price": 5150000,
+      "bidAmount": 5871000,
+      "maxRationalBid": 5871000,
+      "marginPct": 14,
+      "band": "CLEAR_UPGRADE",
+      "expectedPoints": 5,
+      "ppm": 4.54,
+      "efficiency": 29.9,
+      "upgradePoints": 4.7,
+      "marginalValue": 4.7,
+      "vorp": 49,
+      "vorpPerMatchday": 1.44,
+      "cpmp": 1095745,
+      "cpmpSeason": 32188,
+      "replacedPlayer": {
+        "playerId": 2785,
+        "name": "Pol Lozano",
+        "type": "midfielder",
+        "price": 240000,
+        "available": true,
+        "expectedPoints": 0.2
+      },
+      "replacedPlayerName": "Pol Lozano",
+      "replacedPlayerExpectedPoints": 0.2,
+      "strategicScore": 70.4,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 100,
+          "weight": 0.4,
+          "marginalValue": 4.7
+        },
+        "absoluteQuality": {
+          "raw": 75.7,
+          "weight": 0.2,
+          "ppm": 4.54
+        },
+        "positionNeed": {
+          "raw": 50,
+          "weight": 0.15,
+          "detail": "4 disponibles = exactamente los requeridos. Sin suplentes."
+        },
+        "marketOpportunity": {
+          "raw": 74.8,
+          "weight": 0.1,
+          "efficiency": 29.9
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 35,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": false,
+      "reasoning": [
+        "✅ Entra en el XI titular (+4.7 pts al Once Ideal sustituyendo a Pol Lozano (1.89 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (4.54 PPM > 1.89 PPM).",
+        "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
+        "📊 ⭐ Titular Fijo (PPM: 4.54 | Fiabilidad: 90% minutos | Eficiencia: 29.9 pts/M€)",
+        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 75%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 5.871.000 € (114.0% VM | Sobreprecio: +14%).",
+        "⛔ Fondos insuficientes: Requiere 6.871.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 872.588 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Pol Lozano). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 5.871.000 € (114.0% VM | Sobreprecio: +14%)."
+    },
+    {
       "playerId": 3160,
       "name": "Gavi",
       "type": "midfielder",
@@ -333,8 +333,8 @@
       "efficiency": 64.2,
       "upgradePoints": 2.9,
       "marginalValue": 2.9,
-      "vorp": 10,
-      "vorpPerMatchday": 0.29,
+      "vorp": 9,
+      "vorpPerMatchday": 0.26,
       "cpmp": 651724,
       "cpmpSeason": 19091,
       "replacedPlayer": {
@@ -494,41 +494,41 @@
     "scenarioType": "ACTUAL_BASELINE",
     "totalSimulations": 1000,
     "iterations": 1000,
-    "remainingMatchdays": 33,
+    "remainingMatchdays": 32,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 51.5,
-      "restOfSeasonAggregateExpectedPpm": 45,
+      "currentXiExpectedPoints": 49.5,
+      "restOfSeasonAggregateExpectedPpm": 37.5,
       "pWin": 0,
-      "pTop2": 0.734,
-      "pTop3": 0.927,
-      "expectedFinalPoints": 1709,
-      "range": "1646 - 1769 pts",
+      "pTop2": 0.692,
+      "pTop3": 0.914,
+      "expectedFinalPoints": 1425,
+      "range": "1368 - 1485 pts",
       "wilsonCI95": {
         "lowerPct": 0,
         "upperPct": 0.4
       }
     },
     "probChampion": 0,
-    "probTop2": 73.4,
-    "probTop3": 92.7,
-    "racingExpectedFinalPoints": 1709,
-    "racingRange": "1646 - 1769 pts",
+    "probTop2": 69.2,
+    "probTop3": 91.4,
+    "racingExpectedFinalPoints": 1425,
+    "racingRange": "1368 - 1485 pts",
     "racingWilsonCI95": {
       "lowerPct": 0,
       "upperPct": 0.4
     },
     "leaderName": "Fermín Gadura F.C.",
-    "leaderExpectedPoints": 2288,
+    "leaderExpectedPoints": 1938,
     "standings": [
       {
         "id": 21163674,
         "name": "Fermín Gadura F.C.",
         "currentPoints": 306,
-        "meanPpm": 60,
+        "meanPpm": 51,
         "stdDev": 8,
-        "expectedFinalPoints": 2288,
-        "range": "2229 - 2349 pts",
+        "expectedFinalPoints": 1938,
+        "range": "1880 - 1996 pts",
         "probChampion": 100,
         "probTop2": 100,
         "probTop3": 100,
@@ -541,13 +541,13 @@
         "id": 21163822,
         "name": "Racing de Oslo",
         "currentPoints": 225,
-        "meanPpm": 45,
+        "meanPpm": 37.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1709,
-        "range": "1646 - 1769 pts",
+        "expectedFinalPoints": 1425,
+        "range": "1368 - 1485 pts",
         "probChampion": 0,
-        "probTop2": 73.4,
-        "probTop3": 92.7,
+        "probTop2": 69.2,
+        "probTop3": 91.4,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -557,13 +557,13 @@
         "id": 21163653,
         "name": "Pachangueros F.C.",
         "currentPoints": 217,
-        "meanPpm": 43.4,
+        "meanPpm": 36.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1652,
-        "range": "1593 - 1713 pts",
+        "expectedFinalPoints": 1374,
+        "range": "1314 - 1432 pts",
         "probChampion": 0,
-        "probTop2": 14.9,
-        "probTop3": 61.1,
+        "probTop2": 17.4,
+        "probTop3": 57.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -573,13 +573,13 @@
         "id": 21163563,
         "name": "Puente Avios FC",
         "currentPoints": 215,
-        "meanPpm": 43,
+        "meanPpm": 35.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1635,
-        "range": "1578 - 1699 pts",
+        "expectedFinalPoints": 1362,
+        "range": "1303 - 1420 pts",
         "probChampion": 0,
-        "probTop2": 11.1,
-        "probTop3": 40,
+        "probTop2": 11.7,
+        "probTop3": 41,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -589,13 +589,13 @@
         "id": 21163650,
         "name": "Amigos de NIN",
         "currentPoints": 205,
-        "meanPpm": 41,
+        "meanPpm": 34.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1556,
-        "range": "1496 - 1615 pts",
+        "expectedFinalPoints": 1300,
+        "range": "1242 - 1358 pts",
         "probChampion": 0,
-        "probTop2": 0.4,
-        "probTop3": 3.6,
+        "probTop2": 1.2,
+        "probTop3": 6.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -605,13 +605,13 @@
         "id": 21163646,
         "name": "M4 TEAM",
         "currentPoints": 207,
-        "meanPpm": 40.6,
+        "meanPpm": 33.8,
         "stdDev": 8.1,
-        "expectedFinalPoints": 1549,
-        "range": "1491 - 1609 pts",
+        "expectedFinalPoints": 1288,
+        "range": "1233 - 1344 pts",
         "probChampion": 0,
-        "probTop2": 0.2,
-        "probTop3": 2.6,
+        "probTop2": 0.5,
+        "probTop3": 3.6,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -621,10 +621,10 @@
         "id": 21163612,
         "name": "Melano Plabloroza",
         "currentPoints": 187,
-        "meanPpm": 37.4,
+        "meanPpm": 31.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1421,
-        "range": "1362 - 1478 pts",
+        "expectedFinalPoints": 1186,
+        "range": "1125 - 1246 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -637,10 +637,10 @@
         "id": 21163583,
         "name": "Ana",
         "currentPoints": 186,
-        "meanPpm": 37.2,
+        "meanPpm": 31,
         "stdDev": 8,
-        "expectedFinalPoints": 1413,
-        "range": "1356 - 1472 pts",
+        "expectedFinalPoints": 1179,
+        "range": "1123 - 1239 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -653,10 +653,10 @@
         "id": 21163606,
         "name": "Suances nin",
         "currentPoints": 177,
-        "meanPpm": 35.4,
+        "meanPpm": 29.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1346,
-        "range": "1291 - 1403 pts",
+        "expectedFinalPoints": 1122,
+        "range": "1064 - 1178 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -669,10 +669,10 @@
         "id": 21163825,
         "name": "Hache FC",
         "currentPoints": 175,
-        "meanPpm": 35,
+        "meanPpm": 29.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1328,
-        "range": "1269 - 1389 pts",
+        "expectedFinalPoints": 1110,
+        "range": "1055 - 1171 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -687,10 +687,10 @@
         "id": 21163674,
         "name": "Fermín Gadura F.C.",
         "currentPoints": 306,
-        "meanPpm": 60,
+        "meanPpm": 51,
         "stdDev": 8,
-        "expectedFinalPoints": 2288,
-        "range": "2229 - 2349 pts",
+        "expectedFinalPoints": 1938,
+        "range": "1880 - 1996 pts",
         "probChampion": 100,
         "probTop2": 100,
         "probTop3": 100,
@@ -703,13 +703,13 @@
         "id": 21163822,
         "name": "Racing de Oslo",
         "currentPoints": 225,
-        "meanPpm": 45,
+        "meanPpm": 37.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1709,
-        "range": "1646 - 1769 pts",
+        "expectedFinalPoints": 1425,
+        "range": "1368 - 1485 pts",
         "probChampion": 0,
-        "probTop2": 73.4,
-        "probTop3": 92.7,
+        "probTop2": 69.2,
+        "probTop3": 91.4,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -719,13 +719,13 @@
         "id": 21163653,
         "name": "Pachangueros F.C.",
         "currentPoints": 217,
-        "meanPpm": 43.4,
+        "meanPpm": 36.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1652,
-        "range": "1593 - 1713 pts",
+        "expectedFinalPoints": 1374,
+        "range": "1314 - 1432 pts",
         "probChampion": 0,
-        "probTop2": 14.9,
-        "probTop3": 61.1,
+        "probTop2": 17.4,
+        "probTop3": 57.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -735,13 +735,13 @@
         "id": 21163563,
         "name": "Puente Avios FC",
         "currentPoints": 215,
-        "meanPpm": 43,
+        "meanPpm": 35.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1635,
-        "range": "1578 - 1699 pts",
+        "expectedFinalPoints": 1362,
+        "range": "1303 - 1420 pts",
         "probChampion": 0,
-        "probTop2": 11.1,
-        "probTop3": 40,
+        "probTop2": 11.7,
+        "probTop3": 41,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -751,13 +751,13 @@
         "id": 21163650,
         "name": "Amigos de NIN",
         "currentPoints": 205,
-        "meanPpm": 41,
+        "meanPpm": 34.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1556,
-        "range": "1496 - 1615 pts",
+        "expectedFinalPoints": 1300,
+        "range": "1242 - 1358 pts",
         "probChampion": 0,
-        "probTop2": 0.4,
-        "probTop3": 3.6,
+        "probTop2": 1.2,
+        "probTop3": 6.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -767,13 +767,13 @@
         "id": 21163646,
         "name": "M4 TEAM",
         "currentPoints": 207,
-        "meanPpm": 40.6,
+        "meanPpm": 33.8,
         "stdDev": 8.1,
-        "expectedFinalPoints": 1549,
-        "range": "1491 - 1609 pts",
+        "expectedFinalPoints": 1288,
+        "range": "1233 - 1344 pts",
         "probChampion": 0,
-        "probTop2": 0.2,
-        "probTop3": 2.6,
+        "probTop2": 0.5,
+        "probTop3": 3.6,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -783,10 +783,10 @@
         "id": 21163612,
         "name": "Melano Plabloroza",
         "currentPoints": 187,
-        "meanPpm": 37.4,
+        "meanPpm": 31.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1421,
-        "range": "1362 - 1478 pts",
+        "expectedFinalPoints": 1186,
+        "range": "1125 - 1246 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -799,10 +799,10 @@
         "id": 21163583,
         "name": "Ana",
         "currentPoints": 186,
-        "meanPpm": 37.2,
+        "meanPpm": 31,
         "stdDev": 8,
-        "expectedFinalPoints": 1413,
-        "range": "1356 - 1472 pts",
+        "expectedFinalPoints": 1179,
+        "range": "1123 - 1239 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -815,10 +815,10 @@
         "id": 21163606,
         "name": "Suances nin",
         "currentPoints": 177,
-        "meanPpm": 35.4,
+        "meanPpm": 29.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1346,
-        "range": "1291 - 1403 pts",
+        "expectedFinalPoints": 1122,
+        "range": "1064 - 1178 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -831,10 +831,10 @@
         "id": 21163825,
         "name": "Hache FC",
         "currentPoints": 175,
-        "meanPpm": 35,
+        "meanPpm": 29.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1328,
-        "range": "1269 - 1389 pts",
+        "expectedFinalPoints": 1110,
+        "range": "1055 - 1171 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -845,5 +845,5 @@
       }
     ]
   },
-  "priorityMovement": "Pujar 11.487.500 € por Sergio Camello (striker) para sustituir a Pol Lozano (Expected XI Delta: +8.9 pts, CPMP: Óptimo)."
+  "priorityMovement": "Pujar 11.395.600 € por Sergio Camello (striker) para sustituir a Pol Lozano (Expected XI Delta: +8.4 pts, CPMP: Óptimo)."
 }
