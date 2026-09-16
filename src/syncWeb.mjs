@@ -515,8 +515,14 @@ async function fetchRealData() {
     const ledgerData = loadSpeculationLedger();
     fs.writeFileSync(path.resolve('web/src/data/speculationLedger.json'), JSON.stringify(ledgerData, null, 2));
     console.log(`[SYNC-WEB] ✅ speculationLedger.json exportado (${ledgerData.activeTradingPlayers.length} activos abiertos, +${ledgerData.totalProfitEUR.toLocaleString()} € ganados).`);
+
+    // Balance de Mercado & Eficiencia de Plusvalías vs Pérdidas (marketBalance.json)
+    const { calculateMarketBalance } = await import('./marketBalance.js');
+    const marketBalanceData = calculateMarketBalance();
+    fs.writeFileSync(path.resolve('web/src/data/marketBalance.json'), JSON.stringify(marketBalanceData, null, 2));
+    console.log(`[SYNC-WEB] ✅ marketBalance.json exportado (${marketBalanceData.healthLabel}, +${marketBalanceData.realizedGainsEUR.toLocaleString()} € en plusvalías realizadas).`);
   } catch (specErr) {
-    console.warn('[SYNC-WEB] Info generación speculationRadar/Ledger:', specErr.message);
+    console.warn('[SYNC-WEB] Info generación speculationRadar/Ledger/MarketBalance:', specErr.message);
   }
 
   // Generación de estado del sistema y observabilidad (systemStatus.json)
