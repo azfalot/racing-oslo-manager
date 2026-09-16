@@ -2,60 +2,55 @@ import fs from 'fs';
 import path from 'path';
 
 /**
- * Calcula el balance histórico y en tiempo real de plusvalías y pérdidas
- * de todas las operaciones realizadas por Racing de Oslo.
+ * Normalizador estándar de nombres de clubes de la comunidad.
  */
-export function calculateMarketBalance(options = {}) {
-  const txPath = options.historicalTransactionsPath || 'web/src/data/historicalTransactions.json';
-  const squadPath = options.squadPath || 'web/src/data/squad.json';
-  const speculationLedgerPath = options.speculationLedgerPath || 'data/speculationLedger.json';
+export function normalizeClubName(n) {
+  if (!n) return n;
+  const low = n.toLowerCase();
+  if (low.includes('fermin') || low.includes('fermín')) return 'Fermín Gadura F.C.';
+  if (low.includes('suances')) return 'Suances nin';
+  if (low.includes('puente')) return 'Puente Avios FC';
+  if (low.includes('melano')) return 'Melano Plabloroza';
+  if (low.includes('hache')) return 'Hache FC';
+  if (low.includes('m4')) return 'M4 TEAM';
+  if (low.includes('amigos') || low.includes('nin')) return 'Amigos de NIN';
+  if (low.includes('pachang') || low.includes('javilyon')) return 'Pachangueros F.C.';
+  if (low.includes('ana')) return 'Ana';
+  if (low.includes('racing') || low.includes('oslo') || low.includes('azfalot')) return 'Racing de Oslo';
+  return n;
+}
 
-  let transactions = [];
-  try {
-    if (fs.existsSync(txPath)) {
-      transactions = JSON.parse(fs.readFileSync(txPath, 'utf8'));
-    }
-  } catch (e) {
-    console.warn('[MARKET-BALANCE] Error leyendo transacciones:', e.message);
-  }
+/**
+ * Calcula el balance de mercado y plusvalías para cualquier club de la comunidad.
+ */
+export function calculateClubMarketBalance({ clubName, managerLogin, squad = [], transactions = [], playerPriceMap = {} }) {
+  const normTarget = normalizeClubName(clubName || managerLogin);
 
-  let squad = [];
-  try {
-    if (fs.existsSync(squadPath)) {
-      const data = JSON.parse(fs.readFileSync(squadPath, 'utf8'));
-      squad = Array.isArray(data) ? data : (data.players || []);
-    }
-  } catch (e) {
-    console.warn('[MARKET-BALANCE] Error leyendo plantilla:', e.message);
-  }
+  // Filtrar transacciones del club objetivo
+  const clubTxs = transactions.filter(t => {
+    const buyerNorm = normalizeClubName(t.buyer);
+    const sellerNorm = normalizeClubName(t.seller);
+    return (
+      buyerNorm === normTarget ||
+      sellerNorm === normTarget ||
+      (managerLogin && (t.buyer === managerLogin || t.seller === managerLogin))
+    );
+  });
 
-  let speculationLedger = { closedTrades: [], totalProfitEUR: 0 };
-  try {
-    if (fs.existsSync(speculationLedgerPath)) {
-      speculationLedger = JSON.parse(fs.readFileSync(speculationLedgerPath, 'utf8'));
-    }
-  } catch (e) {
-    console.warn('[MARKET-BALANCE] Error leyendo ledger:', e.message);
-  }
-
-  // Filtrar transacciones del club (Racing de Oslo / azfalot)
-  const myTxs = transactions.filter(t => 
-    (t.buyer && (t.buyer.toLowerCase().includes('oslo') || t.buyer === 'azfalot')) || 
-    (t.seller && (t.seller.toLowerCase().includes('oslo') || t.seller === 'azfalot'))
-  );
-
-  // Agrupar por jugador
   const playerTrades = {};
-  for (const t of myTxs) {
+  for (const t of clubTxs) {
     const name = t.playerName;
     if (!name) continue;
     if (!playerTrades[name]) {
       playerTrades[name] = { name, purchases: [], sales: [] };
     }
-    if (t.buyer && (t.buyer.toLowerCase().includes('oslo') || t.buyer === 'azfalot')) {
+    const buyerNorm = normalizeClubName(t.buyer);
+    const sellerNorm = normalizeClubName(t.seller);
+
+    if (buyerNorm === normTarget || (managerLogin && t.buyer === managerLogin)) {
       playerTrades[name].purchases.push(t);
     }
-    if (t.seller && (t.seller.toLowerCase().includes('oslo') || t.seller === 'azfalot')) {
+    if (sellerNorm === normTarget || (managerLogin && t.seller === managerLogin)) {
       playerTrades[name].sales.push(t);
     }
   }
@@ -89,7 +84,7 @@ export function calculateMarketBalance(options = {}) {
     }
   }
 
-  closedOperations.sort((a, b) => (b.diff - a.diff));
+  closedOperations.sort((a, b) => b.diff - a.diff);
 
   // Plusvalías / Minusvalías Latentes de la Plantilla Actual
   const latentTrades = [];
@@ -100,7 +95,7 @@ export function calculateMarketBalance(options = {}) {
     const pHistory = playerTrades[player.name];
     if (pHistory && pHistory.purchases.length > 0) {
       const buyPrice = pHistory.purchases.reduce((sum, b) => sum + (b.price || 0), 0);
-      const currentVM = player.price || 0;
+      const currentVM = player.price || player.quotedprice || playerPriceMap[player.name?.toLowerCase()] || buyPrice;
       const latentDiff = currentVM - buyPrice;
       const latentRoiPct = buyPrice > 0 ? (latentDiff / buyPrice) * 100 : 0;
 
@@ -112,7 +107,7 @@ export function calculateMarketBalance(options = {}) {
 
       latentTrades.push({
         playerName: player.name,
-        position: player.position,
+        position: player.position || player.type,
         buyPrice,
         currentVM,
         latentDiff,
@@ -129,46 +124,100 @@ export function calculateMarketBalance(options = {}) {
   const totalClosedCount = closedOperations.length;
   const successRatePct = totalClosedCount > 0 ? Math.round((profitableCount / totalClosedCount) * 100) : 0;
 
-  // Clasificación del Estado del Balance
-  let healthLabel = 'SANEAMIENTO ESTRATÉGICO';
-  let healthBadgeColor = 'amber';
-  let healthSummary = 'El balance histórico refleja el coste de saneamiento inicial de deuda (ventas defensivas como Hugo Duro y Galarreta para salir de números rojos), mientras que el nuevo régimen de especulación opera con un 100% de plusvalías netas.';
+  // Clasificación dinámica de la salud del balance
+  let healthLabel = 'INVERSIÓN CONTINUA';
+  let healthBadgeColor = 'blue';
+  let healthSummary = 'El club mantiene sus piezas clave adquiridas en cartera sin un volumen representativo de ventas cerradas.';
 
-  if (realizedGains > realizedLosses) {
-    healthLabel = 'SUPERÁVIT DE MERCADO';
+  if (totalClosedCount === 0) {
+    healthLabel = 'SIN TRADES CERRADOS';
+    healthBadgeColor = 'gray';
+    healthSummary = 'Sin operaciones completas de compra y venta cerradas en el histórico.';
+  } else if (realizedGains >= realizedLosses && realizedGains > 0) {
+    healthLabel = 'SUPERÁVIT DE TRADING';
     healthBadgeColor = 'emerald';
-    healthSummary = 'Las plusvalías totales superan a las pérdidas de mercado. La gestión financiera del club es netamente positiva y autofinanciable.';
+    healthSummary = `Genera un superávit neto de +${netRealized.toLocaleString()} € en operaciones de mercado con una efectividad del ${successRatePct}%.`;
   } else if (totalLatentGains > 1000000) {
     healthLabel = 'TRANSICIÓN RENTABLE';
     healthBadgeColor = 'purple';
-    healthSummary = 'Minusvalías asumidas en el pasado para pagar deudas, compensadas por una plantilla actual con más de 1.0M € en plusvalías latentes (Mariano, Cardoso, De la Fuente).';
+    healthSummary = `Las minusvalías de ventas cerradas (-${realizedLosses.toLocaleString()} €) quedan compensadas por la revalorización latente de su plantilla (+${totalLatentGains.toLocaleString()} €).`;
+  } else if (realizedLosses > realizedGains) {
+    healthLabel = 'AJUSTES & DEUDA';
+    healthBadgeColor = 'amber';
+    healthSummary = `Ha asumido minusvalías netas en el mercado (-${(realizedLosses - realizedGains).toLocaleString()} €), principalmente por liquidaciones o desinversiones a precio de saldo.`;
   }
 
-  const result = {
+  return {
+    clubName: normTarget,
     realizedGainsEUR: realizedGains,
     realizedLossesEUR: realizedLosses,
     netRealizedBalanceEUR: netRealized,
     profitableTradesCount: profitableCount,
     totalClosedTradesCount: totalClosedCount,
     historicalSuccessRatePct: successRatePct,
-    
-    // Especulación Automatizada
-    speculationGainsEUR: speculationLedger.totalProfitEUR || 5900,
-    speculationTradesCount: speculationLedger.successfulTradesCount || 1,
-    
-    // Plantilla Actual (Latente)
     totalLatentGainsEUR: totalLatentGains,
     totalLatentLossesEUR: totalLatentLosses,
     netLatentBalanceEUR: totalLatentGains - totalLatentLosses,
-    
     healthLabel,
     healthBadgeColor,
     healthSummary,
-    
     closedOperations,
     latentTrades,
     lastUpdated: new Date().toISOString()
   };
+}
 
-  return result;
+/**
+ * Calcula el balance histórico y en tiempo real de plusvalías y pérdidas
+ * de todas las operaciones realizadas por Racing de Oslo.
+ */
+export function calculateMarketBalance(options = {}) {
+  const txPath = options.historicalTransactionsPath || 'web/src/data/historicalTransactions.json';
+  const squadPath = options.squadPath || 'web/src/data/squad.json';
+  const speculationLedgerPath = options.speculationLedgerPath || 'data/speculationLedger.json';
+
+  let transactions = [];
+  try {
+    if (fs.existsSync(txPath)) {
+      transactions = JSON.parse(fs.readFileSync(txPath, 'utf8'));
+    }
+  } catch (e) {
+    console.warn('[MARKET-BALANCE] Error leyendo transacciones:', e.message);
+  }
+
+  let squad = [];
+  try {
+    if (fs.existsSync(squadPath)) {
+      const data = JSON.parse(fs.readFileSync(squadPath, 'utf8'));
+      squad = Array.isArray(data) ? data : (data.players || []);
+    }
+  } catch (e) {
+    console.warn('[MARKET-BALANCE] Error leyendo plantilla:', e.message);
+  }
+
+  let speculationLedger = { closedTrades: [], totalProfitEUR: 0, successfulTradesCount: 0 };
+  try {
+    if (fs.existsSync(speculationLedgerPath)) {
+      speculationLedger = JSON.parse(fs.readFileSync(speculationLedgerPath, 'utf8'));
+    }
+  } catch (e) {
+    console.warn('[MARKET-BALANCE] Error leyendo ledger:', e.message);
+  }
+
+  const baseResult = calculateClubMarketBalance({
+    clubName: 'Racing de Oslo',
+    managerLogin: 'azfalot',
+    squad,
+    transactions
+  });
+
+  // Enriquecer con datos del ledger de especulación autónoma de Racing de Oslo
+  const finalResult = {
+    ...baseResult,
+    speculationGainsEUR: speculationLedger.totalProfitEUR || 5900,
+    speculationTradesCount: speculationLedger.successfulTradesCount || 1,
+    healthSummary: 'El balance histórico refleja el coste de saneamiento inicial de deuda (ventas defensivas como Hugo Duro y Galarreta para salir de números rojos), mientras que el nuevo régimen de especulación opera con un 100% de plusvalías netas.'
+  };
+
+  return finalResult;
 }

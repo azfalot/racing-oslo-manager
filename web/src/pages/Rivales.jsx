@@ -17,7 +17,11 @@ import {
   ChevronUp,
   History,
   ArrowDownLeft,
-  ArrowUpRight
+  ArrowUpRight,
+  Scale,
+  X,
+  Percent,
+  Wallet
 } from 'lucide-react';
 
 const CLUB_CRESTS = {
@@ -38,6 +42,7 @@ const CLUB_CRESTS = {
 export default function Rivales() {
   const [selectedId, setSelectedId] = useState(rivalsData[0]?.id || 21163674);
   const [showTransfers, setShowTransfers] = useState(false);
+  const [showBalanceModal, setShowBalanceModal] = useState(false);
   const club = rivalsData.find(c => c.id === selectedId) || rivalsData[0];
   const osloClub = rivalsData.find(c => c.isMe) || rivalsData[1];
 
@@ -103,7 +108,14 @@ export default function Rivales() {
                     <span className="text-[11px] sm:text-xs font-bold truncate">{c.teamName}</span>
                     <span className="text-[9px] sm:text-[10px] font-mono text-amber-300">#{c.pos}</span>
                   </div>
-                  <div className="text-[9px] sm:text-[10px] text-cream-dark/70 truncate">{c.points} pts</div>
+                  <div className="flex items-center justify-between text-[9px] sm:text-[10px] text-cream-dark/70 truncate">
+                    <span>{c.points} pts</span>
+                    {c.marketBalance && c.marketBalance.realizedGainsEUR > 0 && (
+                      <span className="text-emerald-400 font-mono font-bold text-[8px] sm:text-[9px]">
+                        +{(c.marketBalance.realizedGainsEUR >= 1000000 ? (c.marketBalance.realizedGainsEUR / 1000000).toFixed(1) + 'M' : (c.marketBalance.realizedGainsEUR / 1000).toFixed(0) + 'k')} €
+                      </span>
+                    )}
+                  </div>
                 </div>
               </button>
             );
@@ -209,6 +221,89 @@ export default function Rivales() {
             </ul>
           </div>
         </div>
+
+        {/* BALANCE FINANCIERO: PLUSVALÍAS VS PÉRDIDAS DEL CLUB */}
+        {club.marketBalance && (
+          <div className="bg-black/75 border border-forest/40 p-3.5 sm:p-5 rounded-sm shadow-xl space-y-3 sm:space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2.5 border-b border-forest/20">
+              <div className="flex items-center gap-2">
+                <Scale size={16} className="text-amber-300" />
+                <h3 className="text-xs sm:text-base font-display font-bold text-white uppercase tracking-wider">
+                  Balance de Mercado: Plusvalías vs Pérdidas
+                </h3>
+              </div>
+              <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:py-1 rounded-full border text-[10px] sm:text-xs font-bold font-mono ${
+                  club.marketBalance.healthBadgeColor === 'emerald' 
+                    ? 'border-emerald-500/40 text-emerald-400 bg-emerald-500/10'
+                    : club.marketBalance.healthBadgeColor === 'purple'
+                    ? 'border-purple-500/40 text-purple-300 bg-purple-500/10'
+                    : club.marketBalance.healthBadgeColor === 'amber'
+                    ? 'border-amber-500/40 text-amber-300 bg-amber-500/10'
+                    : 'border-blue-500/40 text-blue-300 bg-blue-500/10'
+                }`}>
+                  <span>{club.marketBalance.healthLabel}</span>
+                </span>
+                <button
+                  onClick={() => setShowBalanceModal(true)}
+                  className="px-2.5 py-1 rounded-sm bg-forest-dark hover:bg-forest border border-forest-light/40 text-amber-300 hover:text-white text-[10px] sm:text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+                  title="Abrir auditoría completa y desglose de plusvalías"
+                >
+                  <Info size={13} className="text-amber-300" />
+                  <span>Auditoría & Desglose</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Métricas clave de balance */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+              <div className="bg-black/50 border border-emerald-500/20 p-2 sm:p-2.5 rounded-sm text-center">
+                <span className="text-[9px] sm:text-[10px] text-cream-dark uppercase block truncate">Plusvalías Ganadas</span>
+                <span className="text-xs sm:text-base font-bold font-mono text-emerald-400">
+                  +{club.marketBalance.realizedGainsEUR.toLocaleString('es-ES')} €
+                </span>
+                <span className="text-[8px] sm:text-[9px] text-cream-dark/60 block">({club.marketBalance.profitableTradesCount} ventas con beneficio)</span>
+              </div>
+              <div className="bg-black/50 border border-red-500/20 p-2 sm:p-2.5 rounded-sm text-center">
+                <span className="text-[9px] sm:text-[10px] text-cream-dark uppercase block truncate">Pérdidas Asumidas</span>
+                <span className="text-xs sm:text-base font-bold font-mono text-red-400">
+                  -{club.marketBalance.realizedLossesEUR.toLocaleString('es-ES')} €
+                </span>
+                <span className="text-[8px] sm:text-[9px] text-cream-dark/60 block">({club.marketBalance.totalClosedTradesCount - club.marketBalance.profitableTradesCount} ventas con pérdida)</span>
+              </div>
+              <div className="bg-black/50 border border-forest/20 p-2 sm:p-2.5 rounded-sm text-center">
+                <span className="text-[9px] sm:text-[10px] text-cream-dark uppercase block truncate">Balance Neto Cerrado</span>
+                <span className={`text-xs sm:text-base font-bold font-mono ${
+                  club.marketBalance.netRealizedBalanceEUR >= 0 ? 'text-emerald-400' : 'text-amber-300'
+                }`}>
+                  {club.marketBalance.netRealizedBalanceEUR >= 0 ? '+' : ''}{club.marketBalance.netRealizedBalanceEUR.toLocaleString('es-ES')} €
+                </span>
+                <span className="text-[8px] sm:text-[9px] text-cream-dark/60 block">{club.marketBalance.historicalSuccessRatePct}% acierto trading</span>
+              </div>
+              <div className="bg-black/50 border border-purple-500/20 p-2 sm:p-2.5 rounded-sm text-center">
+                <span className="text-[9px] sm:text-[10px] text-cream-dark uppercase block truncate">Patrimonio Latente (11)</span>
+                <span className="text-xs sm:text-base font-bold font-mono text-purple-300">
+                  +{club.marketBalance.totalLatentGainsEUR.toLocaleString('es-ES')} €
+                </span>
+                <span className="text-[8px] sm:text-[9px] text-cream-dark/60 block">Plusvalía en plantilla</span>
+              </div>
+            </div>
+
+            {/* Diagnóstico Textual */}
+            <div className="bg-forest-dark/20 border border-forest/20 p-2.5 sm:p-3 rounded-sm text-[11px] sm:text-xs text-cream-dark leading-relaxed flex items-start justify-between gap-3">
+              <div className="flex items-start gap-2">
+                <Info size={14} className="text-amber-300 mt-0.5 flex-shrink-0" />
+                <span>{club.marketBalance.healthSummary}</span>
+              </div>
+              <button
+                onClick={() => setShowBalanceModal(true)}
+                className="text-[10px] sm:text-xs font-mono font-bold text-amber-300 hover:text-white underline shrink-0 self-center cursor-pointer"
+              >
+                Ver historial ({club.marketBalance.totalClosedTradesCount}) &rarr;
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* RADAR ESPECULATIVO & SOBREPUJAS */}
         {club.speculation && (
@@ -742,6 +837,286 @@ export default function Rivales() {
         </div>
       </div>
 
+      {/* MODAL DE AUDITORÍA FINANCIERA & BALANCE DE PLUSVALÍAS */}
+      {showBalanceModal && (
+        <ClubMarketBalanceModal
+          club={club}
+          onClose={() => setShowBalanceModal(false)}
+        />
+      )}
+
+    </div>
+  );
+}
+
+function ClubMarketBalanceModal({ club, onClose }) {
+  const [activeTab, setActiveTab] = useState('closed'); // 'closed' or 'latent'
+  const [searchTerm, setSearchTerm] = useState('');
+  const mb = club.marketBalance;
+
+  if (!mb) return null;
+
+  const filteredClosed = (mb.closedOperations || []).filter(op => 
+    op.playerName.toLowerCase().includes(searchTerm.toLowerCase().trim())
+  );
+
+  const filteredLatent = (mb.latentTrades || []).filter(tr => 
+    tr.playerName.toLowerCase().includes(searchTerm.toLowerCase().trim())
+  );
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-fade-in" onClick={onClose}>
+      <div 
+        className="relative w-full max-w-4xl max-h-[90vh] flex flex-col bg-gradient-to-b from-[#0e1712] via-[#09100c] to-black border border-forest/50 rounded-sm shadow-2xl overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* MODAL HEADER */}
+        <div className="flex items-center justify-between p-4 sm:p-5 border-b border-forest/30 bg-black/60 shrink-0">
+          <div className="flex items-center gap-3">
+            <img 
+              src={CLUB_CRESTS[club.teamName] || club.crest || '/media/crest.jpg'} 
+              alt={club.teamName} 
+              onError={(e) => { e.currentTarget.src = '/media/crest.jpg'; }}
+              className="w-10 h-10 rounded-full border border-forest-light object-cover bg-black/60" 
+            />
+            <div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <h3 className="text-base sm:text-xl font-display font-bold text-white">
+                  Auditoría Financiera: {club.teamName}
+                </h3>
+                <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-sm border ${
+                  mb.healthBadgeColor === 'emerald'
+                    ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+                    : mb.healthBadgeColor === 'purple'
+                    ? 'bg-purple-500/20 text-purple-300 border-purple-500/40'
+                    : mb.healthBadgeColor === 'amber'
+                    ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                    : 'bg-blue-500/20 text-blue-300 border-blue-500/40'
+                }`}>
+                  {mb.healthLabel}
+                </span>
+              </div>
+              <p className="text-[11px] text-cream-dark font-mono">
+                Mánager: <span className="text-white font-bold">{club.manager}</span> · Balance de Plusvalías vs Pérdidas en Mercado
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="p-1.5 rounded-full bg-forest-dark/80 hover:bg-forest text-cream-dark hover:text-white border border-forest/40 transition-colors cursor-pointer"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        {/* MODAL BODY */}
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-5 scrollbar-thin scrollbar-thumb-forest scrollbar-track-black/40 flex-1">
+          {/* 4 SUMMARY CARDS */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+            <div className="bg-black/60 border border-emerald-500/30 p-3 rounded-sm space-y-1">
+              <span className="text-[10px] uppercase font-bold text-cream/70 block">Plusvalías Ganadas</span>
+              <p className="text-base sm:text-xl font-mono font-bold text-emerald-400">
+                +{mb.realizedGainsEUR.toLocaleString('es-ES')} €
+              </p>
+              <span className="text-[9px] text-cream/50 block font-mono">
+                {mb.profitableTradesCount} operaciones con beneficio
+              </span>
+            </div>
+
+            <div className="bg-black/60 border border-red-500/30 p-3 rounded-sm space-y-1">
+              <span className="text-[10px] uppercase font-bold text-cream/70 block">Pérdidas Asumidas</span>
+              <p className="text-base sm:text-xl font-mono font-bold text-red-400">
+                -{mb.realizedLossesEUR.toLocaleString('es-ES')} €
+              </p>
+              <span className="text-[9px] text-cream/50 block font-mono">
+                {mb.totalClosedTradesCount - mb.profitableTradesCount} ventas con pérdida
+              </span>
+            </div>
+
+            <div className="bg-black/60 border border-forest/40 p-3 rounded-sm space-y-1">
+              <span className="text-[10px] uppercase font-bold text-cream/70 block">Tasa de Acierto</span>
+              <p className="text-base sm:text-xl font-mono font-bold text-amber-300">
+                {mb.historicalSuccessRatePct}%
+              </p>
+              <span className="text-[9px] text-cream/50 block font-mono">
+                {mb.profitableTradesCount} de {mb.totalClosedTradesCount} trades
+              </span>
+            </div>
+
+            <div className="bg-black/60 border border-purple-500/30 p-3 rounded-sm space-y-1">
+              <span className="text-[10px] uppercase font-bold text-cream/70 block">Patrimonio Latente</span>
+              <p className="text-base sm:text-xl font-mono font-bold text-purple-300">
+                +{mb.totalLatentGainsEUR.toLocaleString('es-ES')} €
+              </p>
+              <span className="text-[9px] text-cream/50 block font-mono">
+                Revalorización plantilla actual
+              </span>
+            </div>
+          </div>
+
+          {/* DIAGNÓSTICO EXPLICATIVO */}
+          <div className="bg-forest-dark/30 border border-forest/30 p-3.5 rounded-sm space-y-1.5">
+            <div className="flex items-center gap-2 text-amber-300 text-xs font-bold uppercase tracking-wider">
+              <Info size={14} />
+              <span>Diagnóstico de Eficiencia de Mercado</span>
+            </div>
+            <p className="text-xs text-cream-dark leading-relaxed">
+              {mb.healthSummary}
+            </p>
+          </div>
+
+          {/* TABS & SEARCH */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-forest/20">
+            <div className="flex items-center gap-2 bg-black/60 p-1 rounded-sm border border-forest/30 self-start">
+              <button
+                onClick={() => setActiveTab('closed')}
+                className={`px-3 py-1 rounded-sm text-xs font-bold transition-all cursor-pointer ${
+                  activeTab === 'closed'
+                    ? 'bg-forest border border-forest-light text-white'
+                    : 'text-cream-dark hover:text-white'
+                }`}
+              >
+                Trades Cerrados ({mb.closedOperations.length})
+              </button>
+              <button
+                onClick={() => setActiveTab('latent')}
+                className={`px-3 py-1 rounded-sm text-xs font-bold transition-all cursor-pointer ${
+                  activeTab === 'latent'
+                    ? 'bg-purple-900/60 border border-purple-400 text-purple-200'
+                    : 'text-cream-dark hover:text-white'
+                }`}
+              >
+                Plusvalía Latente en Plantilla ({mb.latentTrades.length})
+              </button>
+            </div>
+
+            <input
+              type="text"
+              placeholder="Buscar jugador..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="bg-black/80 border border-forest/40 px-3 py-1 text-xs text-white rounded-sm focus:outline-none focus:border-forest-light placeholder-cream-dark/40 font-mono w-full sm:w-48"
+            />
+          </div>
+
+          {/* TAB 1: OPERACIONES CERRADAS */}
+          {activeTab === 'closed' && (
+            <div className="space-y-2">
+              {filteredClosed.length === 0 ? (
+                <div className="p-8 text-center bg-black/40 border border-forest/20 rounded-sm">
+                  <p className="text-xs text-cream-dark italic">
+                    {searchTerm ? 'No se encontraron operaciones con ese nombre.' : 'No hay operaciones cerradas de compra y posterior venta para este club.'}
+                  </p>
+                </div>
+              ) : (
+                <div className="border border-forest/30 rounded-sm overflow-hidden bg-black/40">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs">
+                      <thead className="bg-forest-dark/60 text-cream/70 font-mono text-[10px] uppercase border-b border-forest/30">
+                        <tr>
+                          <th className="p-2.5">Futbolista</th>
+                          <th className="p-2.5 text-right">Compra</th>
+                          <th className="p-2.5 text-right">Venta</th>
+                          <th className="p-2.5 text-right">Plusvalía / Pérdida</th>
+                          <th className="p-2.5 text-right">ROI %</th>
+                          <th className="p-2.5 text-right">Fecha Venta</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-forest/10 font-mono text-xs">
+                        {filteredClosed.map((op, i) => (
+                          <tr key={i} className="hover:bg-forest-dark/20 transition-colors">
+                            <td className="p-2.5 font-bold text-white font-sans">{op.playerName}</td>
+                            <td className="p-2.5 text-right text-cream-dark">{op.buyPrice.toLocaleString('es-ES')} €</td>
+                            <td className="p-2.5 text-right text-cream-dark">{op.sellPrice.toLocaleString('es-ES')} €</td>
+                            <td className={`p-2.5 text-right font-bold ${op.isProfit ? 'text-emerald-400' : 'text-red-400'}`}>
+                              {op.diff >= 0 ? `+${op.diff.toLocaleString('es-ES')} €` : `-${Math.abs(op.diff).toLocaleString('es-ES')} €`}
+                            </td>
+                            <td className="p-2.5 text-right">
+                              <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
+                                op.roiPct >= 0 
+                                  ? 'bg-emerald-500/20 text-emerald-300' 
+                                  : 'bg-red-500/20 text-red-300'
+                              }`}>
+                                {op.roiPct >= 0 ? `+${op.roiPct}%` : `${op.roiPct}%`}
+                              </span>
+                            </td>
+                            <td className="p-2.5 text-right text-[10px] text-cream-dark/60">
+                              {op.sellDate ? new Date(op.sellDate).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' }) : '—'}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB 2: PLUSVALÍA LATENTE EN PLANTILLA */}
+          {activeTab === 'latent' && (
+            <div className="space-y-2">
+              {filteredLatent.length === 0 ? (
+                <div className="p-8 text-center bg-black/40 border border-forest/20 rounded-sm">
+                  <p className="text-xs text-cream-dark italic">
+                    {searchTerm ? 'No se encontraron jugadores con ese nombre.' : 'No hay registros de compras en el histórico para la plantilla actual.'}
+                  </p>
+                </div>
+              ) : (
+                <div className="border border-forest/30 rounded-sm overflow-hidden bg-black/40">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs">
+                      <thead className="bg-purple-950/40 text-purple-200 font-mono text-[10px] uppercase border-b border-purple-500/30">
+                        <tr>
+                          <th className="p-2.5">Futbolista</th>
+                          <th className="p-2.5">Posición</th>
+                          <th className="p-2.5 text-right">Coste Compra</th>
+                          <th className="p-2.5 text-right">Valor Actual (VM)</th>
+                          <th className="p-2.5 text-right">Margen Latente</th>
+                          <th className="p-2.5 text-right">Rentabilidad %</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-forest/10 font-mono text-xs">
+                        {filteredLatent.map((tr, i) => (
+                          <tr key={i} className="hover:bg-purple-950/20 transition-colors">
+                            <td className="p-2.5 font-bold text-white font-sans">{tr.playerName}</td>
+                            <td className="p-2.5 text-[10px] text-cream-dark uppercase">{tr.position}</td>
+                            <td className="p-2.5 text-right text-cream-dark">{tr.buyPrice.toLocaleString('es-ES')} €</td>
+                            <td className="p-2.5 text-right text-amber-300 font-bold">{tr.currentVM.toLocaleString('es-ES')} €</td>
+                            <td className={`p-2.5 text-right font-bold ${tr.isProfit ? 'text-emerald-400' : 'text-red-400'}`}>
+                              {tr.latentDiff >= 0 ? `+${tr.latentDiff.toLocaleString('es-ES')} €` : `-${Math.abs(tr.latentDiff).toLocaleString('es-ES')} €`}
+                            </td>
+                            <td className="p-2.5 text-right">
+                              <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
+                                tr.latentRoiPct >= 0 
+                                  ? 'bg-emerald-500/20 text-emerald-300' 
+                                  : 'bg-red-500/20 text-red-300'
+                              }`}>
+                                {tr.latentRoiPct >= 0 ? `+${tr.latentRoiPct}%` : `${tr.latentRoiPct}%`}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* MODAL FOOTER */}
+        <div className="p-3 sm:p-4 bg-black/80 border-t border-forest/30 flex items-center justify-between text-xs font-mono text-cream-dark">
+          <span>{club.teamName} · Análisis 360º de Comunio</span>
+          <button
+            onClick={onClose}
+            className="px-4 py-1.5 rounded-sm bg-forest hover:bg-forest-light text-white font-bold text-xs transition-colors cursor-pointer"
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

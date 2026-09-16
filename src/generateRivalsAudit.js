@@ -1,6 +1,7 @@
 import { ComunioClient } from './comunioClient.js';
 import { ComunioEngine } from './engine.js';
 import { ensurePlayerPhoto } from './imageGen.js';
+import { calculateClubMarketBalance } from './marketBalance.js';
 import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
@@ -670,6 +671,15 @@ export async function generateRivalsAuditData() {
         });
       }
 
+      // Cálculo de Balance de Mercado & Plusvalías vs Pérdidas para cada club
+      const clubMarketBalance = calculateClubMarketBalance({
+        clubName: teamName,
+        managerLogin: m.login,
+        squad,
+        transactions: accumulatedTransactions,
+        playerPriceMap
+      });
+
       auditClubs.push({
         id: m.id,
         teamName,
@@ -688,6 +698,7 @@ export async function generateRivalsAuditData() {
         weaknesses,
         tacticalAlerts,
         recommendations,
+        marketBalance: clubMarketBalance,
         // Speculation & Overbid Metrics
         speculation: {
           score: specScore,
