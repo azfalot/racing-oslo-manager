@@ -1,18 +1,17 @@
 {
+  "clubName": "Racing de Oslo",
   "realizedGainsEUR": 111100,
   "realizedLossesEUR": 7572811,
   "netRealizedBalanceEUR": -7461711,
   "profitableTradesCount": 4,
   "totalClosedTradesCount": 14,
   "historicalSuccessRatePct": 29,
-  "speculationGainsEUR": 5900,
-  "speculationTradesCount": 1,
   "totalLatentGainsEUR": 1055000,
   "totalLatentLossesEUR": 8570001,
   "netLatentBalanceEUR": -7515001,
-  "healthLabel": "TRANSICIÓN RENTABLE",
-  "healthBadgeColor": "purple",
-  "healthSummary": "Minusvalías asumidas en el pasado para pagar deudas, compensadas por una plantilla actual con más de 1.0M € en plusvalías latentes (Mariano, Cardoso, De la Fuente).",
+  "healthLabel": "AJUSTES & DEUDA",
+  "healthBadgeColor": "amber",
+  "healthSummary": "El balance histórico refleja el coste de saneamiento inicial de deuda (ventas defensivas como Hugo Duro y Galarreta para salir de números rojos), mientras que el nuevo régimen de especulación opera con un 100% de plusvalías netas.",
   "closedOperations": [
     {
       "playerName": "Álvaro Carreras",
@@ -242,5 +241,7 @@
       "isProfit": false
     }
   ],
-  "lastUpdated": "2026-09-16T10:52:33.936Z"
+  "lastUpdated": "2026-09-16T16:01:42.586Z",
+  "speculationGainsEUR": 5900,
+  "speculationTradesCount": 1
 }

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-16T10:52:33.917Z",
+  "timestamp": "2026-09-16T16:01:42.503Z",
   "currentMatchday": 6,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -23,18 +23,306 @@
       {
         "playerId": 3597,
         "name": "Íñigo Arguibide",
-        "type": "defender",
         "price": 1110000,
+        "totalPoints": 14,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "type": "defender",
+        "historical": {
+          "points": [
+            {
+              "season": "23/24",
+              "points": "2",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "25/26",
+              "points": "13",
+              "eventId": 998265
+            }
+          ]
+        },
+        "average": {
+          "grade": "6,5",
+          "points": "2,8",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "6,5",
+            "points": "2,8"
+          }
+        },
+        "club": {
+          "id": 12,
+          "name": "Osasuna",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/12"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/12/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 6,
+            "homeClub": {
+              "id": 2,
+              "name": "Atlético",
+              "abbreviation": "atm",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/2"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/2/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/12"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/12/logo"
+                }
+              }
+            },
+            "kickoff": "2026-09-16T19:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 7,
+            "homeClub": {
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/12"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/12/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "kickoff": "2026-09-19T14:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 8,
+            "homeClub": {
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/4"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/4/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/12"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/12/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-11T18:30:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
         "available": true,
-        "expectedPoints": 1.3
+        "expectedPoints": 1.3,
+        "id": 3597,
+        "position": "defender",
+        "points": 0
       },
       {
         "playerId": 2587,
         "name": "Raúl de Tomás",
-        "type": "striker",
         "price": 230000,
+        "totalPoints": 0,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "type": "striker",
+        "historical": {
+          "points": [
+            {
+              "season": "18/19",
+              "points": "214",
+              "eventId": 899953
+            },
+            {
+              "season": "19/20",
+              "points": "80",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "21/22",
+              "points": "219",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "83",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "87",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "6",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "-",
+              "eventId": false
+            }
+          ]
+        },
+        "average": {
+          "grade": "0",
+          "points": "0",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "",
+            "points": ""
+          }
+        },
+        "club": {
+          "id": 70,
+          "name": "Rayo Vallecano",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/70"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/70/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 7,
+            "homeClub": {
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/12"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/12/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "kickoff": "2026-09-19T14:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 8,
+            "homeClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/1"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/1/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-10T14:00:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
         "available": true,
-        "expectedPoints": 0.3
+        "expectedPoints": 0.3,
+        "id": 2587,
+        "position": "striker",
+        "points": 0
       }
     ]
   },
@@ -106,10 +394,151 @@
       "replacedPlayer": {
         "playerId": 2587,
         "name": "Raúl de Tomás",
-        "type": "striker",
         "price": 230000,
+        "totalPoints": 0,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "type": "striker",
+        "historical": {
+          "points": [
+            {
+              "season": "18/19",
+              "points": "214",
+              "eventId": 899953
+            },
+            {
+              "season": "19/20",
+              "points": "80",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "21/22",
+              "points": "219",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "83",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "87",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "6",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "-",
+              "eventId": false
+            }
+          ]
+        },
+        "average": {
+          "grade": "0",
+          "points": "0",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "",
+            "points": ""
+          }
+        },
+        "club": {
+          "id": 70,
+          "name": "Rayo Vallecano",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/70"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/70/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 7,
+            "homeClub": {
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/12"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/12/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "kickoff": "2026-09-19T14:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 8,
+            "homeClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/1"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/1/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-10T14:00:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
         "available": true,
-        "expectedPoints": 0.3
+        "expectedPoints": 0.3,
+        "id": 2587,
+        "position": "striker",
+        "points": 0
       },
       "replacedPlayerName": "Raúl de Tomás",
       "replacedPlayerExpectedPoints": 0.3,
@@ -152,8 +581,8 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+3.6 pts al Once Ideal sustituyendo a Raúl de Tomás (1.89 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.42 PPM > 1.89 PPM).",
+        "✅ Entra en el XI titular (+3.6 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (4.42 PPM > 2.05 PPM).",
         "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
         "📊 ⭐ Titular Fijo (PPM: 4.42 | Fiabilidad: 95% minutos | Eficiencia: 36.5 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
@@ -185,10 +614,151 @@
       "replacedPlayer": {
         "playerId": 2587,
         "name": "Raúl de Tomás",
-        "type": "striker",
         "price": 230000,
+        "totalPoints": 0,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "type": "striker",
+        "historical": {
+          "points": [
+            {
+              "season": "18/19",
+              "points": "214",
+              "eventId": 899953
+            },
+            {
+              "season": "19/20",
+              "points": "80",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "21/22",
+              "points": "219",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "83",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "87",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "6",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "-",
+              "eventId": false
+            }
+          ]
+        },
+        "average": {
+          "grade": "0",
+          "points": "0",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "",
+            "points": ""
+          }
+        },
+        "club": {
+          "id": 70,
+          "name": "Rayo Vallecano",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/70"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/70/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 7,
+            "homeClub": {
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/12"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/12/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "kickoff": "2026-09-19T14:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 8,
+            "homeClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/1"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/1/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-10T14:00:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
         "available": true,
-        "expectedPoints": 0.3
+        "expectedPoints": 0.3,
+        "id": 2587,
+        "position": "striker",
+        "points": 0
       },
       "replacedPlayerName": "Raúl de Tomás",
       "replacedPlayerExpectedPoints": 0.3,
@@ -231,8 +801,8 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+4.7 pts al Once Ideal sustituyendo a Raúl de Tomás (1.89 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.62 PPM > 1.89 PPM).",
+        "✅ Entra en el XI titular (+4.7 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (4.62 PPM > 2.05 PPM).",
         "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
         "📊 ⭐ Titular Fijo (PPM: 4.62 | Fiabilidad: 95% minutos | Eficiencia: 32.2 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
@@ -263,10 +833,151 @@
       "replacedPlayer": {
         "playerId": 2587,
         "name": "Raúl de Tomás",
-        "type": "striker",
         "price": 230000,
+        "totalPoints": 0,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "type": "striker",
+        "historical": {
+          "points": [
+            {
+              "season": "18/19",
+              "points": "214",
+              "eventId": 899953
+            },
+            {
+              "season": "19/20",
+              "points": "80",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "21/22",
+              "points": "219",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "83",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "87",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "6",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "-",
+              "eventId": false
+            }
+          ]
+        },
+        "average": {
+          "grade": "0",
+          "points": "0",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "",
+            "points": ""
+          }
+        },
+        "club": {
+          "id": 70,
+          "name": "Rayo Vallecano",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/70"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/70/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 7,
+            "homeClub": {
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/12"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/12/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "kickoff": "2026-09-19T14:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 8,
+            "homeClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/1"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/1/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-10T14:00:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
         "available": true,
-        "expectedPoints": 0.3
+        "expectedPoints": 0.3,
+        "id": 2587,
+        "position": "striker",
+        "points": 0
       },
       "replacedPlayerName": "Raúl de Tomás",
       "replacedPlayerExpectedPoints": 0.3,
@@ -309,8 +1020,8 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+6.9 pts al Once Ideal sustituyendo a Raúl de Tomás (1.89 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (6.25 PPM > 1.89 PPM).",
+        "✅ Entra en el XI titular (+6.9 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (6.25 PPM > 2.05 PPM).",
         "🟡 Posición con necesidad MODERADA: 3 disponibles. Fondo de armario ajustado.",
         "📊 ⭐ Titular Fijo (PPM: 6.25 | Fiabilidad: 95% minutos | Eficiencia: 25.1 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
@@ -341,10 +1052,151 @@
       "replacedPlayer": {
         "playerId": 2587,
         "name": "Raúl de Tomás",
-        "type": "striker",
         "price": 230000,
+        "totalPoints": 0,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "type": "striker",
+        "historical": {
+          "points": [
+            {
+              "season": "18/19",
+              "points": "214",
+              "eventId": 899953
+            },
+            {
+              "season": "19/20",
+              "points": "80",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "21/22",
+              "points": "219",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "83",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "87",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "6",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "-",
+              "eventId": false
+            }
+          ]
+        },
+        "average": {
+          "grade": "0",
+          "points": "0",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "",
+            "points": ""
+          }
+        },
+        "club": {
+          "id": 70,
+          "name": "Rayo Vallecano",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/70"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/70/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 7,
+            "homeClub": {
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/12"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/12/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "kickoff": "2026-09-19T14:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 8,
+            "homeClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/1"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/1/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-10T14:00:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
         "available": true,
-        "expectedPoints": 0.3
+        "expectedPoints": 0.3,
+        "id": 2587,
+        "position": "striker",
+        "points": 0
       },
       "replacedPlayerName": "Raúl de Tomás",
       "replacedPlayerExpectedPoints": 0.3,
@@ -387,8 +1239,8 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+5.7 pts al Once Ideal sustituyendo a Raúl de Tomás (1.89 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (5.15 PPM > 1.89 PPM).",
+        "✅ Entra en el XI titular (+5.7 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (5.15 PPM > 2.05 PPM).",
         "🟡 Posición con necesidad MODERADA: 3 disponibles. Fondo de armario ajustado.",
         "📊 ⭐ Titular Fijo (PPM: 5.15 | Fiabilidad: 95% minutos | Eficiencia: 11.9 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
@@ -419,10 +1271,151 @@
       "replacedPlayer": {
         "playerId": 2587,
         "name": "Raúl de Tomás",
-        "type": "striker",
         "price": 230000,
+        "totalPoints": 0,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "type": "striker",
+        "historical": {
+          "points": [
+            {
+              "season": "18/19",
+              "points": "214",
+              "eventId": 899953
+            },
+            {
+              "season": "19/20",
+              "points": "80",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "21/22",
+              "points": "219",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "83",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "87",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "6",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "-",
+              "eventId": false
+            }
+          ]
+        },
+        "average": {
+          "grade": "0",
+          "points": "0",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "",
+            "points": ""
+          }
+        },
+        "club": {
+          "id": 70,
+          "name": "Rayo Vallecano",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/70"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/70/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 7,
+            "homeClub": {
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/12"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/12/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "kickoff": "2026-09-19T14:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 8,
+            "homeClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/1"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/1/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-10T14:00:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
         "available": true,
-        "expectedPoints": 0.3
+        "expectedPoints": 0.3,
+        "id": 2587,
+        "position": "striker",
+        "points": 0
       },
       "replacedPlayerName": "Raúl de Tomás",
       "replacedPlayerExpectedPoints": 0.3,
@@ -465,8 +1458,8 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+0.5 pts al Once Ideal sustituyendo a Raúl de Tomás (1.89 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (3.26 PPM > 1.89 PPM).",
+        "✅ Entra en el XI titular (+0.5 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (3.26 PPM > 2.05 PPM).",
         "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
         "📊 ⭐ Titular Fijo (PPM: 3.26 | Fiabilidad: 95% minutos | Eficiencia: 268.5 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
