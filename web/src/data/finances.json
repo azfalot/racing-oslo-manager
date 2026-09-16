@@ -37,16 +37,16 @@
   "projections": {
     "nextMatchday": {
       "matchday": "Jornada 7",
-      "expectedPoints": 46,
-      "expectedPrize": 460000,
-      "projectedCashAfter": -391512
+      "expectedPoints": 44,
+      "expectedPrize": 440000,
+      "projectedCashAfter": -411512
     },
     "monthlyOutlook": {
       "jornadas": 4,
-      "projectedPoints": 184,
-      "projectedPrize": 1836000,
+      "projectedPoints": 177,
+      "projectedPrize": 1768000,
       "estimatedSales": 980000,
-      "totalProjectedLiquidity": 1964488
+      "totalProjectedLiquidity": 1896488
     },
     "financialPolicy": {
       "reserveRequirement": "Saldo Positivo Obligatorio (Corte Jornada)",
@@ -69,18 +69,6 @@
     },
     {
       "pos": 2,
-      "teamName": "Racing de Oslo",
-      "owner": "Mateo Oslomany (TÚ)",
-      "squadValue": 51950000,
-      "points": 225,
-      "totalPrize": 2250000,
-      "estimatedCash": 648488,
-      "totalWealth": 52598488,
-      "power": "Solvente (0 € Deuda)",
-      "isMe": true
-    },
-    {
-      "pos": 3,
       "teamName": "Pachangueros F.C.",
       "owner": "Pachangueros F.C.",
       "squadValue": 52910000,
@@ -92,7 +80,7 @@
       "isMe": false
     },
     {
-      "pos": 4,
+      "pos": 3,
       "teamName": "Puente Avios FC",
       "owner": "Puente Avios FC",
       "squadValue": 52720000,
@@ -102,6 +90,18 @@
       "totalWealth": 54301600,
       "power": "Patrimonio Medio",
       "isMe": false
+    },
+    {
+      "pos": 4,
+      "teamName": "Racing de Oslo",
+      "owner": "Mateo Oslomany (TÚ)",
+      "squadValue": 51950000,
+      "points": 225,
+      "totalPrize": 2250000,
+      "estimatedCash": 648488,
+      "totalWealth": 52598488,
+      "power": "Solvente (0 € Deuda)",
+      "isMe": true
     },
     {
       "pos": 5,

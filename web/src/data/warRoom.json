@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-16T16:01:42.503Z",
+  "timestamp": "2026-09-16T21:51:09.269Z",
   "currentMatchday": 6,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -17,7 +17,7 @@
   },
   "lineup": {
     "formation": "4-3-3",
-    "expectedPoints": 45.9,
+    "expectedPoints": 44.2,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -48,8 +48,8 @@
           ]
         },
         "average": {
-          "grade": "6,5",
-          "points": "2,8",
+          "grade": "6,3",
+          "points": "2,17",
           "lastXMatchdays": {
             "matchesAmount": 5,
             "grade": "6,5",
@@ -70,37 +70,6 @@
           }
         },
         "nextMatches": [
-          {
-            "matchdayNr": 6,
-            "homeClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/2"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 12,
-              "name": "Osasuna",
-              "abbreviation": "osa",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/12"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/12/logo"
-                }
-              }
-            },
-            "kickoff": "2026-09-16T19:00:00+02:00",
-            "odds": null
-          },
           {
             "matchdayNr": 7,
             "homeClub": {
@@ -170,7 +139,7 @@
           "red": 0
         },
         "available": true,
-        "expectedPoints": 1.3,
+        "expectedPoints": 1.6,
         "id": 3597,
         "position": "defender",
         "points": 0
@@ -344,12 +313,12 @@
       "name": "Johnny Cardoso",
       "position": "midfielder",
       "price": 1540000,
-      "expectedPoints": 3,
-      "vorp": 9,
-      "vorpPerMatchday": 0.26,
-      "replacementPpm": 2.81,
-      "upgradeGap": 2.5,
-      "urgencyScore": 14
+      "expectedPoints": 2.8,
+      "vorp": 1,
+      "vorpPerMatchday": 0.03,
+      "replacementPpm": 3.05,
+      "upgradeGap": 2.7,
+      "urgencyScore": 16.6
     },
     {
       "playerId": 1876,
@@ -357,11 +326,11 @@
       "position": "midfielder",
       "price": 1610000,
       "expectedPoints": 3.7,
-      "vorp": 21,
-      "vorpPerMatchday": 0.62,
-      "replacementPpm": 2.81,
+      "vorp": 13,
+      "vorpPerMatchday": 0.38,
+      "replacementPpm": 3.05,
       "upgradeGap": 1.8,
-      "urgencyScore": 10
+      "urgencyScore": 12.4
     }
   ],
   "depthAnalysis": {
@@ -387,8 +356,8 @@
       "efficiency": 36.5,
       "upgradePoints": 3.6,
       "marginalValue": 3.6,
-      "vorp": 77,
-      "vorpPerMatchday": 2.26,
+      "vorp": 80,
+      "vorpPerMatchday": 2.35,
       "cpmp": 1111111,
       "cpmpSeason": 32787,
       "replacedPlayer": {
@@ -607,8 +576,8 @@
       "efficiency": 32.2,
       "upgradePoints": 4.7,
       "marginalValue": 4.7,
-      "vorp": 73,
-      "vorpPerMatchday": 2.15,
+      "vorp": 76,
+      "vorpPerMatchday": 2.24,
       "cpmp": 1008511,
       "cpmpSeason": 29625,
       "replacedPlayer": {
@@ -1264,8 +1233,8 @@
       "efficiency": 268.5,
       "upgradePoints": 0.5,
       "marginalValue": 0.5,
-      "vorp": 6,
-      "vorpPerMatchday": 0.18,
+      "vorp": 9,
+      "vorpPerMatchday": 0.26,
       "cpmp": 800000,
       "cpmpSeason": 23529,
       "replacedPlayer": {
@@ -1496,23 +1465,23 @@
     "remainingMatchdays": 32,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 45.9,
+      "currentXiExpectedPoints": 44.2,
       "restOfSeasonAggregateExpectedPpm": 37.5,
       "pWin": 0,
-      "pTop2": 0.692,
-      "pTop3": 0.914,
-      "expectedFinalPoints": 1425,
-      "range": "1368 - 1485 pts",
+      "pTop2": 0.707,
+      "pTop3": 0.913,
+      "expectedFinalPoints": 1426,
+      "range": "1369 - 1484 pts",
       "wilsonCI95": {
         "lowerPct": 0,
         "upperPct": 0.4
       }
     },
     "probChampion": 0,
-    "probTop2": 69.2,
-    "probTop3": 91.4,
-    "racingExpectedFinalPoints": 1425,
-    "racingRange": "1368 - 1485 pts",
+    "probTop2": 70.7,
+    "probTop3": 91.3,
+    "racingExpectedFinalPoints": 1426,
+    "racingRange": "1369 - 1484 pts",
     "racingWilsonCI95": {
       "lowerPct": 0,
       "upperPct": 0.4
@@ -1542,11 +1511,11 @@
         "currentPoints": 225,
         "meanPpm": 37.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1425,
-        "range": "1368 - 1485 pts",
+        "expectedFinalPoints": 1426,
+        "range": "1369 - 1484 pts",
         "probChampion": 0,
-        "probTop2": 69.2,
-        "probTop3": 91.4,
+        "probTop2": 70.7,
+        "probTop3": 91.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1558,11 +1527,11 @@
         "currentPoints": 217,
         "meanPpm": 36.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1374,
-        "range": "1314 - 1432 pts",
+        "expectedFinalPoints": 1375,
+        "range": "1318 - 1435 pts",
         "probChampion": 0,
-        "probTop2": 17.4,
-        "probTop3": 57.1,
+        "probTop2": 17.7,
+        "probTop3": 57.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1574,11 +1543,11 @@
         "currentPoints": 215,
         "meanPpm": 35.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1362,
-        "range": "1303 - 1420 pts",
+        "expectedFinalPoints": 1360,
+        "range": "1298 - 1417 pts",
         "probChampion": 0,
-        "probTop2": 11.7,
-        "probTop3": 41,
+        "probTop2": 10.1,
+        "probTop3": 40.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1594,7 +1563,7 @@
         "range": "1242 - 1358 pts",
         "probChampion": 0,
         "probTop2": 1.2,
-        "probTop3": 6.9,
+        "probTop3": 8.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1609,8 +1578,8 @@
         "expectedFinalPoints": 1288,
         "range": "1233 - 1344 pts",
         "probChampion": 0,
-        "probTop2": 0.5,
-        "probTop3": 3.6,
+        "probTop2": 0.3,
+        "probTop3": 3.2,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1704,11 +1673,11 @@
         "currentPoints": 225,
         "meanPpm": 37.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1425,
-        "range": "1368 - 1485 pts",
+        "expectedFinalPoints": 1426,
+        "range": "1369 - 1484 pts",
         "probChampion": 0,
-        "probTop2": 69.2,
-        "probTop3": 91.4,
+        "probTop2": 70.7,
+        "probTop3": 91.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1720,11 +1689,11 @@
         "currentPoints": 217,
         "meanPpm": 36.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1374,
-        "range": "1314 - 1432 pts",
+        "expectedFinalPoints": 1375,
+        "range": "1318 - 1435 pts",
         "probChampion": 0,
-        "probTop2": 17.4,
-        "probTop3": 57.1,
+        "probTop2": 17.7,
+        "probTop3": 57.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1736,11 +1705,11 @@
         "currentPoints": 215,
         "meanPpm": 35.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1362,
-        "range": "1303 - 1420 pts",
+        "expectedFinalPoints": 1360,
+        "range": "1298 - 1417 pts",
         "probChampion": 0,
-        "probTop2": 11.7,
-        "probTop3": 41,
+        "probTop2": 10.1,
+        "probTop3": 40.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1756,7 +1725,7 @@
         "range": "1242 - 1358 pts",
         "probChampion": 0,
         "probTop2": 1.2,
-        "probTop3": 6.9,
+        "probTop3": 8.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1771,8 +1740,8 @@
         "expectedFinalPoints": 1288,
         "range": "1233 - 1344 pts",
         "probChampion": 0,
-        "probTop2": 0.5,
-        "probTop3": 3.6,
+        "probTop2": 0.3,
+        "probTop3": 3.2,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
