@@ -342,8 +342,30 @@ export class ComunioEngine {
     return {
       formation: bestFormation,
       score: bestScore,
-      starting11: bestStarting11.map(p => ({ playerId: p.playerId, name: p.name, type: p.type, price: p.price, available: p.available, expectedPoints: p.expectedPoints })),
-      bench: bestBench.map(p => ({ playerId: p.playerId, name: p.name, type: p.type, price: p.price, available: p.available, expectedPoints: p.expectedPoints }))
+      starting11: bestStarting11.map(p => ({
+        ...p,
+        playerId: p.playerId || p.id,
+        id: p.playerId || p.id,
+        name: p.name,
+        type: p.type || p.position,
+        position: p.type || p.position,
+        price: p.price || 0,
+        points: parseInt(p.points || 0, 10),
+        available: p.available !== false,
+        expectedPoints: p.expectedPoints || 3.5
+      })),
+      bench: bestBench.map(p => ({
+        ...p,
+        playerId: p.playerId || p.id,
+        id: p.playerId || p.id,
+        name: p.name,
+        type: p.type || p.position,
+        position: p.type || p.position,
+        price: p.price || 0,
+        points: parseInt(p.points || 0, 10),
+        available: p.available !== false,
+        expectedPoints: p.expectedPoints || 3.5
+      }))
     };
   }
 

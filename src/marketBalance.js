@@ -124,20 +124,32 @@ export function calculateClubMarketBalance({ clubName, managerLogin, squad = [],
   const totalClosedCount = closedOperations.length;
   const successRatePct = totalClosedCount > 0 ? Math.round((profitableCount / totalClosedCount) * 100) : 0;
 
+  const netLatent = totalLatentGains - totalLatentLosses;
+
   // Clasificación dinámica de la salud del balance
-  let healthLabel = 'INVERSIÓN CONTINUA';
+  let healthLabel = 'INVERSIÓN PATRIMONIAL';
   let healthBadgeColor = 'blue';
   let healthSummary = 'El club mantiene sus piezas clave adquiridas en cartera sin un volumen representativo de ventas cerradas.';
 
   if (totalClosedCount === 0) {
-    healthLabel = 'SIN TRADES CERRADOS';
-    healthBadgeColor = 'gray';
-    healthSummary = 'Sin operaciones completas de compra y venta cerradas en el histórico.';
+    if (netLatent < -2000000) {
+      healthLabel = 'DEPRECIACIÓN EN CARTERA';
+      healthBadgeColor = 'red';
+      healthSummary = `Mantiene los ${latentTrades.length} fichajes realizados en plantilla con una minusvalía latente acumulada de -${totalLatentLosses.toLocaleString()} € debido a sobrepujas iniciales y posterior depreciación de mercado.`;
+    } else if (netLatent > 2000000) {
+      healthLabel = 'REVALORIZACIÓN EN CARTERA';
+      healthBadgeColor = 'emerald';
+      healthSummary = `Mantiene los ${latentTrades.length} fichajes en plantilla con una plusvalía latente acumulada de +${totalLatentGains.toLocaleString()} €.`;
+    } else {
+      healthLabel = 'SIN TRADES CERRADOS';
+      healthBadgeColor = 'blue';
+      healthSummary = `Mantiene su bloque de fichajes en cartera (${latentTrades.length} jugadores adquiridos) sin ventas cerradas en el histórico.`;
+    }
   } else if (realizedGains >= realizedLosses && realizedGains > 0) {
     healthLabel = 'SUPERÁVIT DE TRADING';
     healthBadgeColor = 'emerald';
     healthSummary = `Genera un superávit neto de +${netRealized.toLocaleString()} € en operaciones de mercado con una efectividad del ${successRatePct}%.`;
-  } else if (totalLatentGains > 1000000) {
+  } else if (totalLatentGains > realizedLosses) {
     healthLabel = 'TRANSICIÓN RENTABLE';
     healthBadgeColor = 'purple';
     healthSummary = `Las minusvalías de ventas cerradas (-${realizedLosses.toLocaleString()} €) quedan compensadas por la revalorización latente de su plantilla (+${totalLatentGains.toLocaleString()} €).`;

@@ -39,15 +39,14 @@ export async function generateRivalsAuditData() {
   let transferNews = [];
   try {
     let start = 0;
-    let keepGoing = true;
-    while (keepGoing && start <= 600) {
-      const newsUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/news?start=${start}&limit=50`;
+    while (true) {
+      const newsUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/news?start=${start}&limit=20`;
       const newsRes = await axios.get(newsUrl, { headers });
       const entries = newsRes.data?.newsList?.entries || [];
       if (entries.length === 0) break;
       transferNews.push(...entries);
-      if (entries.length < 10) break;
       start += entries.length;
+      if (start > 5000) break;
     }
     console.log(`[RIVALS-AUDIT] Total de noticias históricas recuperadas: ${transferNews.length}`);
   } catch (err) {
@@ -423,14 +422,21 @@ export async function generateRivalsAuditData() {
           bestBuy = {
             player: topGain.playerName,
             price: topGain.price,
-            impact: `Fichado por ${(topGain.price / 1000000).toFixed(2)}M €, hoy cotiza en ${(topGain.currentVM / 1000000).toFixed(2)}M € (+${topGain.gain.toLocaleString()} € / +${topGain.gainPct}% de plusvalía).`,
+            impact: `Fichado por ${(topGain.price / 1000000).toFixed(2)}M €, hoy cotiza en ${(topGain.currentVM / 1000000).toFixed(2)}M € (+${topGain.gain.toLocaleString('es-ES')} € / +${topGain.gainPct}% de plusvalía).`,
             tag: `📈 +${topGain.gainPct}% Plusvalía`
+          };
+        } else if (topGain && topGain.gain < -30000) {
+          bestBuy = {
+            player: topGain.playerName,
+            price: topGain.price,
+            impact: `Todas sus compras acumulan ajuste por depreciación de mercado. La menor caída es ${topGain.playerName} (${topGain.gain.toLocaleString('es-ES')} € / ${topGain.gainPct}%).`,
+            tag: `📉 ${topGain.gainPct}% Depreciación`
           };
         } else {
           bestBuy = {
             player: topGain?.playerName || 'Estabilidad',
             price: topGain?.price || 0,
-            impact: 'Operaciones ajustadas a cotización oficial sin minusvalías registradas.',
+            impact: 'Operaciones ajustadas a cotización oficial sin variaciones patrimoniales significativas.',
             tag: '💎 A Valor'
           };
         }
@@ -726,11 +732,11 @@ export async function generateRivalsAuditData() {
           name: p.name,
           position: p.type || p.position,
           price: p.price || 0,
-          points: p.points || 0,
+          points: parseInt(p.points !== undefined && p.points !== null ? p.points : lookupPoints(p.name), 10),
           expectedPoints: p.expectedPoints || 3.5,
           status: p.status || 'ACTIVE',
           statusInfo: p.statusInfo || '',
-          isAvailable: p.isAvailable !== false,
+          isAvailable: p.available !== false && p.isAvailable !== false,
           isDoubt: Boolean(p.isDoubt),
           isBanned: Boolean(p.isBanned),
           isInjured: Boolean(p.isInjured),
@@ -743,10 +749,10 @@ export async function generateRivalsAuditData() {
           name: p.name,
           position: p.type || p.position,
           price: p.price || 0,
-          points: p.points || 0,
+          points: parseInt(p.points !== undefined && p.points !== null ? p.points : lookupPoints(p.name), 10),
           status: p.status || 'ACTIVE',
           statusInfo: p.statusInfo || '',
-          isAvailable: p.isAvailable !== false,
+          isAvailable: p.available !== false && p.isAvailable !== false,
           isDoubt: Boolean(p.isDoubt),
           isBanned: Boolean(p.isBanned),
           isInjured: Boolean(p.isInjured),
