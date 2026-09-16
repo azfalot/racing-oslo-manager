@@ -1,22 +1,14 @@
 {
   "activeTradingPlayers": [
     {
-      "playerId": 4163,
-      "name": "Esquivel",
-      "buyPrice": 160000,
-      "buyDate": "2026-09-14T21:55:26.946Z",
-      "tier": "FLOOR_PRICE_BARGAIN",
-      "listedOnMarket": true,
-      "listedPrice": 160000,
-      "listedDate": "2026-09-15T08:32:45.240Z"
-    },
-    {
       "playerId": 3796,
       "name": "Adrián Rodríguez",
       "buyPrice": 160000,
       "buyDate": "2026-09-15T08:42:01.181Z",
       "tier": "FLOOR_PRICE_BARGAIN",
-      "listedOnMarket": false
+      "listedOnMarket": true,
+      "listedPrice": 160000,
+      "listedDate": "2026-09-16T07:07:18.328Z"
     },
     {
       "playerId": 2587,
@@ -33,10 +25,28 @@
       "buyDate": "2026-09-15T08:42:01.385Z",
       "tier": "FLOOR_PRICE_BARGAIN",
       "listedOnMarket": false
+    },
+    {
+      "playerId": 3487,
+      "name": "Sergi Canós",
+      "buyPrice": 160000,
+      "buyDate": "2026-09-16T07:07:19.017Z",
+      "tier": "FLOOR_PRICE_BARGAIN",
+      "listedOnMarket": false
     }
   ],
-  "closedTrades": [],
-  "totalProfitEUR": 0,
-  "successfulTradesCount": 0,
-  "lastUpdated": "2026-09-15T08:42:01.385Z"
+  "closedTrades": [
+    {
+      "playerId": 4163,
+      "name": "Esquivel",
+      "buyPrice": 160000,
+      "sellPrice": 165900,
+      "profitEUR": 5900,
+      "roiPct": 3.7,
+      "sellDate": "2026-09-16T07:07:18.192Z"
+    }
+  ],
+  "totalProfitEUR": 5900,
+  "successfulTradesCount": 1,
+  "lastUpdated": "2026-09-16T07:07:19.018Z"
 }
