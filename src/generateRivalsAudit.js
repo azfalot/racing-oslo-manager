@@ -500,7 +500,8 @@ export async function generateRivalsAuditData() {
       // Recomendaciones de Mercado Inteligentes y Dinámicas por Capacidad Económica y Necesidad Táctica
       const recommendations = [];
       const posMap = { keeper: 'Portero', defender: 'Defensa', midfielder: 'Centrocampista', striker: 'Delantero' };
-      const compMarket = (marketPlayers || []).filter(mp => (mp.owner?.name === 'Computer' || !mp.owner) && mp.price > 0);
+      // Filtrar activos de rendimiento deportivo genuinos (excluyendo parches de especulación pura de 160k sin puntos)
+      const compMarket = (marketPlayers || []).filter(mp => (mp.owner?.name === 'Computer' || !mp.owner) && (mp.price >= 300000 || (mp.points || 0) > 0));
 
       // Evaluar necesidades posicionales reales del club
       const posCounts = {
@@ -534,7 +535,7 @@ export async function generateRivalsAuditData() {
           // Clase media (precio <= 3.5M)
           candidate = sortedMarket.find(mp => (mp.position === neededPos || mp.type === neededPos) && mp.price <= 3500000 && !recommendations.some(r => r.name === mp.name));
         } else {
-          // Presupuesto ajustado o déficit (precio <= 1.5M)
+          // Presupuesto ajustado o déficit (precio entre 300k y 1.5M con rendimiento)
           candidate = sortedMarket.find(mp => (mp.position === neededPos || mp.type === neededPos) && mp.price <= 1500000 && !recommendations.some(r => r.name === mp.name));
         }
 
