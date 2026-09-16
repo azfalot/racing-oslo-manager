@@ -51,7 +51,10 @@ test('Execute Daily Speculation Bids - Safety Reserve and Capacity Constraints',
     { playerId: 2, name: 'Valverde', price: 10500000 }
   ] };
 
-  // Caso 1: Saldo de 1.200.000 €, safetyReserveMin de 1.000.000 € -> 200.000 ₫ disponible
+  const testPath = 'data/test_bids_ledger.json';
+  if (fs.existsSync(testPath)) fs.unlinkSync(testPath);
+
+  // Caso 1: Saldo de 1.200.000 €, safetyReserveMin de 1.000.000 € -> 200.000 € disponible
   // Solo debe pujar por Parche Barato (170k) e ignorar Gavi (1.91M) y Chollo Extra (250k) por exceder cap
   const res = await executeDailySpeculationBids(
     null,
@@ -61,6 +64,7 @@ test('Execute Daily Speculation Bids - Safety Reserve and Capacity Constraints',
       marketPlayers: mockMarket,
       safetyReserveMin: 1000000,
       maxSquadSize: 15,
+      ledgerPath: testPath,
       dryRun: true
     }
   );
@@ -80,10 +84,13 @@ test('Execute Daily Speculation Bids - Safety Reserve and Capacity Constraints',
       marketPlayers: mockMarket,
       safetyReserveMin: 1000000,
       maxSquadSize: 15,
+      ledgerPath: testPath,
       dryRun: true
     }
   );
   assert.equal(fullRes.executedBids.length, 0);
+
+  if (fs.existsSync(testPath)) fs.unlinkSync(testPath);
 });
 
 test('Auto-List Speculation Players on Market', async () => {
