@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-17T09:37:46.079Z",
+  "timestamp": "2026-09-17T09:40:54.751Z",
   "currentMatchday": 6,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -1479,36 +1479,36 @@
     "racing": {
       "currentXiExpectedPoints": 43,
       "restOfSeasonAggregateExpectedPpm": 37.5,
-      "pWin": 1,
-      "pTop2": 1,
-      "pTop3": 1,
-      "expectedFinalPoints": 1425,
-      "range": "1369 - 1482 pts",
+      "pWin": 0,
+      "pTop2": 0.685,
+      "pTop3": 0.917,
+      "expectedFinalPoints": 1424,
+      "range": "1362 - 1481 pts",
       "wilsonCI95": {
-        "lowerPct": 99.6,
-        "upperPct": 100
+        "lowerPct": 0,
+        "upperPct": 0.4
       }
     },
-    "probChampion": 100,
-    "probTop2": 100,
-    "probTop3": 100,
-    "racingExpectedFinalPoints": 1425,
-    "racingRange": "1369 - 1482 pts",
+    "probChampion": 0,
+    "probTop2": 68.5,
+    "probTop3": 91.7,
+    "racingExpectedFinalPoints": 1424,
+    "racingRange": "1362 - 1481 pts",
     "racingWilsonCI95": {
-      "lowerPct": 99.6,
-      "upperPct": 100
+      "lowerPct": 0,
+      "upperPct": 0.4
     },
-    "leaderName": "Racing de Oslo",
-    "leaderExpectedPoints": 1425,
+    "leaderName": "Fermín Gadura F.C.",
+    "leaderExpectedPoints": 1938,
     "standings": [
       {
-        "id": 21163822,
-        "name": "Racing de Oslo",
-        "currentPoints": 225,
-        "meanPpm": 37.5,
+        "id": 21163674,
+        "name": "Fermín Gadura F.C.",
+        "currentPoints": 306,
+        "meanPpm": 51,
         "stdDev": 8,
-        "expectedFinalPoints": 1425,
-        "range": "1369 - 1482 pts",
+        "expectedFinalPoints": 1938,
+        "range": "1880 - 1996 pts",
         "probChampion": 100,
         "probTop2": 100,
         "probTop3": 100,
@@ -1516,23 +1516,311 @@
           "lowerPct": 99.6,
           "upperPct": 100
         }
-      }
-    ],
-    "table": [
+      },
       {
         "id": 21163822,
         "name": "Racing de Oslo",
         "currentPoints": 225,
         "meanPpm": 37.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1425,
-        "range": "1369 - 1482 pts",
+        "expectedFinalPoints": 1424,
+        "range": "1362 - 1481 pts",
+        "probChampion": 0,
+        "probTop2": 68.5,
+        "probTop3": 91.7,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163653,
+        "name": "Pachangueros F.C.",
+        "currentPoints": 217,
+        "meanPpm": 36.2,
+        "stdDev": 8,
+        "expectedFinalPoints": 1375,
+        "range": "1318 - 1435 pts",
+        "probChampion": 0,
+        "probTop2": 18.4,
+        "probTop3": 57.4,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163563,
+        "name": "Puente Avios FC",
+        "currentPoints": 215,
+        "meanPpm": 35.8,
+        "stdDev": 8,
+        "expectedFinalPoints": 1362,
+        "range": "1303 - 1420 pts",
+        "probChampion": 0,
+        "probTop2": 11.5,
+        "probTop3": 40.3,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163650,
+        "name": "Amigos de NIN",
+        "currentPoints": 205,
+        "meanPpm": 34.2,
+        "stdDev": 8,
+        "expectedFinalPoints": 1300,
+        "range": "1242 - 1358 pts",
+        "probChampion": 0,
+        "probTop2": 1,
+        "probTop3": 7,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163646,
+        "name": "M4 TEAM",
+        "currentPoints": 207,
+        "meanPpm": 33.8,
+        "stdDev": 8.1,
+        "expectedFinalPoints": 1288,
+        "range": "1233 - 1344 pts",
+        "probChampion": 0,
+        "probTop2": 0.6,
+        "probTop3": 3.5,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163612,
+        "name": "Melano Plabloroza",
+        "currentPoints": 187,
+        "meanPpm": 31.2,
+        "stdDev": 8,
+        "expectedFinalPoints": 1186,
+        "range": "1125 - 1246 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0.1,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163583,
+        "name": "Ana",
+        "currentPoints": 186,
+        "meanPpm": 31,
+        "stdDev": 8,
+        "expectedFinalPoints": 1179,
+        "range": "1123 - 1239 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163606,
+        "name": "Suances nin",
+        "currentPoints": 177,
+        "meanPpm": 29.5,
+        "stdDev": 8,
+        "expectedFinalPoints": 1122,
+        "range": "1064 - 1178 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163825,
+        "name": "Hache FC",
+        "currentPoints": 175,
+        "meanPpm": 29.2,
+        "stdDev": 8,
+        "expectedFinalPoints": 1110,
+        "range": "1055 - 1171 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      }
+    ],
+    "table": [
+      {
+        "id": 21163674,
+        "name": "Fermín Gadura F.C.",
+        "currentPoints": 306,
+        "meanPpm": 51,
+        "stdDev": 8,
+        "expectedFinalPoints": 1938,
+        "range": "1880 - 1996 pts",
         "probChampion": 100,
         "probTop2": 100,
         "probTop3": 100,
         "wilsonCI95": {
           "lowerPct": 99.6,
           "upperPct": 100
+        }
+      },
+      {
+        "id": 21163822,
+        "name": "Racing de Oslo",
+        "currentPoints": 225,
+        "meanPpm": 37.5,
+        "stdDev": 8,
+        "expectedFinalPoints": 1424,
+        "range": "1362 - 1481 pts",
+        "probChampion": 0,
+        "probTop2": 68.5,
+        "probTop3": 91.7,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163653,
+        "name": "Pachangueros F.C.",
+        "currentPoints": 217,
+        "meanPpm": 36.2,
+        "stdDev": 8,
+        "expectedFinalPoints": 1375,
+        "range": "1318 - 1435 pts",
+        "probChampion": 0,
+        "probTop2": 18.4,
+        "probTop3": 57.4,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163563,
+        "name": "Puente Avios FC",
+        "currentPoints": 215,
+        "meanPpm": 35.8,
+        "stdDev": 8,
+        "expectedFinalPoints": 1362,
+        "range": "1303 - 1420 pts",
+        "probChampion": 0,
+        "probTop2": 11.5,
+        "probTop3": 40.3,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163650,
+        "name": "Amigos de NIN",
+        "currentPoints": 205,
+        "meanPpm": 34.2,
+        "stdDev": 8,
+        "expectedFinalPoints": 1300,
+        "range": "1242 - 1358 pts",
+        "probChampion": 0,
+        "probTop2": 1,
+        "probTop3": 7,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163646,
+        "name": "M4 TEAM",
+        "currentPoints": 207,
+        "meanPpm": 33.8,
+        "stdDev": 8.1,
+        "expectedFinalPoints": 1288,
+        "range": "1233 - 1344 pts",
+        "probChampion": 0,
+        "probTop2": 0.6,
+        "probTop3": 3.5,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163612,
+        "name": "Melano Plabloroza",
+        "currentPoints": 187,
+        "meanPpm": 31.2,
+        "stdDev": 8,
+        "expectedFinalPoints": 1186,
+        "range": "1125 - 1246 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0.1,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163583,
+        "name": "Ana",
+        "currentPoints": 186,
+        "meanPpm": 31,
+        "stdDev": 8,
+        "expectedFinalPoints": 1179,
+        "range": "1123 - 1239 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163606,
+        "name": "Suances nin",
+        "currentPoints": 177,
+        "meanPpm": 29.5,
+        "stdDev": 8,
+        "expectedFinalPoints": 1122,
+        "range": "1064 - 1178 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163825,
+        "name": "Hache FC",
+        "currentPoints": 175,
+        "meanPpm": 29.2,
+        "stdDev": 8,
+        "expectedFinalPoints": 1110,
+        "range": "1055 - 1171 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
         }
       }
     ]

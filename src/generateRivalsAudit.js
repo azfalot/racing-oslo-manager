@@ -179,12 +179,42 @@ export async function generateRivalsAuditData() {
     }
   }
 
+  const outPath = path.resolve('web/src/data/rivalsAudit.json');
+  let existingAuditClubs = [];
+  try {
+    if (fs.existsSync(outPath)) {
+      existingAuditClubs = JSON.parse(fs.readFileSync(outPath, 'utf8'));
+    }
+  } catch (e) {}
+  const existingAuditMap = new Map(existingAuditClubs.map(c => [c.id, c]));
+
   const auditClubs = [];
 
   for (const m of members) {
     try {
-      const squadRes = await axios.get(`https://api.comunio.es/users/${m.id}/squad`, { headers });
-      const rawPlayers = squadRes.data.items || [];
+      let rawPlayers = [];
+      try {
+        const squadRes = await axios.get(`https://api.comunio.es/users/${m.id}/squad`, { headers });
+        rawPlayers = squadRes.data.items || [];
+      } catch (squadErr) {
+        console.warn(`[RIVALS-AUDIT] Aviso: No se pudo descargar plantilla en vivo de ${m.login} (${squadErr.message}), usando histórico de plantilla en caché.`);
+        const cachedClub = existingAuditMap.get(m.id);
+        if (cachedClub) {
+          rawPlayers = [...(cachedClub.starters || []), ...(cachedClub.bench || [])].map(p => ({
+            id: p.id || p.playerId,
+            name: p.name,
+            position: p.position || p.type,
+            quotedprice: p.price,
+            points: p.points,
+            status: p.status,
+            statusInfo: p.statusInfo
+          }));
+        }
+      }
+
+      // Pequeña pausa para no saturar la API en picos de tráfico
+      await new Promise(r => setTimeout(r, 200));
+
       const teamName = m.firstName ? (m.firstName + ' ' + (m.lastName || '')).trim() : m.login;
       const std = standings.find(s => s.id === m.id) || {};
       const pos = standings.findIndex(s => s.id === m.id) + 1;
@@ -768,7 +798,6 @@ export async function generateRivalsAuditData() {
   }
 
   auditClubs.sort((a, b) => a.pos - b.pos);
-  const outPath = path.resolve('web/src/data/rivalsAudit.json');
   fs.writeFileSync(outPath, JSON.stringify(auditClubs, null, 2));
   console.log(`[RIVALS-AUDIT] ✅ rivalsAudit.json generado con éxito con métricas de especulación.`);
   await client.close();
