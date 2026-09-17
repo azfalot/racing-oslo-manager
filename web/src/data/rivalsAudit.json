@@ -467,7 +467,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-17T21:52:10.452Z"
+      "lastUpdated": "2026-09-17T23:10:43.034Z"
     },
     "speculation": {
       "score": 98,
@@ -2278,7 +2278,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-17T21:52:13.265Z"
+      "lastUpdated": "2026-09-17T23:10:45.898Z"
     },
     "speculation": {
       "score": 98,
@@ -3402,7 +3402,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-17T21:52:11.138Z"
+      "lastUpdated": "2026-09-17T23:10:43.798Z"
     },
     "speculation": {
       "score": 29,
@@ -3721,8 +3721,8 @@
         "price": 1960000,
         "points": 12,
         "expectedPoints": 4.1,
-        "status": "ACTIVE",
-        "statusInfo": "",
+        "status": "WEAKENED",
+        "statusInfo": "Contusión en tobillo",
         "isAvailable": true,
         "isDoubt": false,
         "isBanned": false,
@@ -4067,7 +4067,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-17T21:52:11.854Z"
+      "lastUpdated": "2026-09-17T23:10:44.495Z"
     },
     "speculation": {
       "score": 98,
@@ -4924,7 +4924,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-17T21:52:11.495Z"
+      "lastUpdated": "2026-09-17T23:10:44.124Z"
     },
     "speculation": {
       "score": 65,
@@ -5704,7 +5704,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-17T21:52:12.211Z"
+      "lastUpdated": "2026-09-17T23:10:44.855Z"
     },
     "speculation": {
       "score": 78,
@@ -6624,7 +6624,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-17T21:52:10.780Z"
+      "lastUpdated": "2026-09-17T23:10:43.440Z"
     },
     "speculation": {
       "score": 98,
@@ -7454,23 +7454,32 @@
     "crest": "/media/crests/suances_nin.svg",
     "pos": 8,
     "points": 177,
-    "squadValue": 46930000,
-    "playerCount": 13,
-    "financialHealth": "Apalancado / Saldo Negativo (-1.58M €)",
-    "debtAlert": "Saldo en descubierto (-1.58M €). Consume el 13.5% del límite de crédito permitido (11.73M €). Exige ventas antes de puntuar.",
-    "projectedScore": 38,
+    "squadValue": 42890000,
+    "playerCount": 12,
+    "financialHealth": "Saneado / Alta Liquidez (+2.52M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+2.52M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 32,
     "formation": "3-5-2",
-    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 38 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 32 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez.",
-      "Tensión de tesorería: Saldo negativo de -1.58M € que obliga a vender piezas."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones.",
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
+      {
+        "type": "danger",
+        "badge": "🚑 Lesión",
+        "player": "Aimar Oroz",
+        "position": "midfielder",
+        "title": "Baja Médica Confirmada",
+        "description": "Aimar Oroz sufre una lesión (Lesión muscular en bíceps femoral. Baja hasta octubre) que le impedirá disputar la jornada.",
+        "action": "Dar entrada a un jugador sano del banquillo."
+      },
       {
         "type": "danger",
         "badge": "🚑 Lesión",
@@ -7489,32 +7498,32 @@
         "reason": "Zaguero de jerarquía (0.32M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
       },
       {
-        "name": "Letacek",
-        "pos": "Portero",
-        "price": 580000,
-        "reason": "Alternativa para la portería (0.58M €) para asegurar titularidad y rotación fiable."
-      },
-      {
         "name": "Diatta",
         "pos": "Centrocampista",
+        "price": 320000,
+        "reason": "Centrocampista con llegada (0.32M €) para asociarse con Mbappé y dominar la posesión."
+      },
+      {
+        "name": "Marc Santos",
+        "pos": "Defensa",
         "price": 320000,
         "reason": "Oportunidad de mercado (0.32M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       }
     ],
     "marketBalance": {
       "clubName": "Suances nin",
-      "realizedGainsEUR": 796467,
+      "realizedGainsEUR": 893068,
       "realizedLossesEUR": 588455,
-      "netRealizedBalanceEUR": 208012,
-      "profitableTradesCount": 2,
-      "totalClosedTradesCount": 4,
-      "historicalSuccessRatePct": 50,
-      "totalLatentGainsEUR": 571004,
+      "netRealizedBalanceEUR": 304613,
+      "profitableTradesCount": 3,
+      "totalClosedTradesCount": 5,
+      "historicalSuccessRatePct": 60,
+      "totalLatentGainsEUR": 531003,
       "totalLatentLossesEUR": 15199342,
-      "netLatentBalanceEUR": -14628338,
+      "netLatentBalanceEUR": -14668339,
       "healthLabel": "SUPERÁVIT DE TRADING",
       "healthBadgeColor": "emerald",
-      "healthSummary": "Genera un superávit neto de +208.012 € en operaciones de mercado con una efectividad del 50%.",
+      "healthSummary": "Genera un superávit neto de +304.613 € en operaciones de mercado con una efectividad del 60%.",
       "closedOperations": [
         {
           "playerName": "Carlos Maciá",
@@ -7533,6 +7542,15 @@
           "roiPct": 167.6,
           "isProfit": true,
           "sellDate": "2026-09-06T04:34:11+02:00"
+        },
+        {
+          "playerName": "Marc Bernal",
+          "buyPrice": 3999999,
+          "sellPrice": 4096600,
+          "diff": 96601,
+          "roiPct": 2.4,
+          "isProfit": true,
+          "sellDate": "2026-09-17T04:34:52+02:00"
         },
         {
           "playerName": "Rodrygo",
@@ -7570,15 +7588,6 @@
           "currentVM": 620000,
           "latentDiff": 150001,
           "latentRoiPct": 31.9,
-          "isProfit": true
-        },
-        {
-          "playerName": "Marc Bernal",
-          "position": "midfielder",
-          "buyPrice": 3999999,
-          "currentVM": 4040000,
-          "latentDiff": 40001,
-          "latentRoiPct": 1,
           "isProfit": true
         },
         {
@@ -7645,23 +7654,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-17T21:52:12.921Z"
+      "lastUpdated": "2026-09-17T23:10:45.554Z"
     },
     "speculation": {
-      "score": 88,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
-      "badgeColor": "#ef4444",
+      "score": 73,
+      "badge": "🎰 Especulador de Mercado",
+      "badgeColor": "#f59e0b",
       "overbidRate": "+14.1%",
-      "riskLevel": "Alto Riesgo (Apalancado)",
+      "riskLevel": "Riesgo Moderado-Alto",
       "totalSpent": 58157226,
-      "totalReceived": 34807100,
+      "totalReceived": 38903700,
       "purchasesCount": 14,
-      "salesCount": 16,
-      "estimatedCash": -1580126,
+      "salesCount": 17,
+      "estimatedCash": 2516474,
       "prizesEarned": 1770000,
-      "maxCreditLimit": 11732500,
-      "netWealth": 45349874,
-      "analysis": "Operativa histórica de 14 compras (58.2M €) y 16 ventas (34.8M €). Dinero total rotado: 93.0M € con sobrepuja media de +14.1%."
+      "maxCreditLimit": 10722500,
+      "netWealth": 45406474,
+      "analysis": "Operativa histórica de 14 compras (58.2M €) y 17 ventas (38.9M €). Dinero total rotado: 97.1M € con sobrepuja media de +14.1%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -8074,6 +8083,20 @@
           "seller": "Suances nin",
           "buyer": "Computer",
           "date": "2026-09-14T04:35:00+02:00"
+        },
+        {
+          "playerName": "Marc Bernal",
+          "price": 4096600,
+          "marketValue": 4096600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Suances nin",
+          "buyer": "Computer",
+          "date": "2026-09-17T04:34:52+02:00"
         }
       ]
     },
@@ -8147,23 +8170,6 @@
         "image": "/media/players/4158.png"
       },
       {
-        "id": 3689,
-        "name": "Marc Bernal",
-        "position": "midfielder",
-        "price": 4040000,
-        "points": 28,
-        "expectedPoints": 6.4,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3689.png"
-      },
-      {
         "id": 3465,
         "name": "Dotor",
         "position": "midfielder",
@@ -8232,6 +8238,23 @@
         "image": "/media/players/2924.png"
       },
       {
+        "id": 2953,
+        "name": "Aimar Oroz",
+        "position": "midfielder",
+        "price": 1620000,
+        "points": 12,
+        "expectedPoints": 0.7,
+        "status": "INJURED",
+        "statusInfo": "Lesión muscular en bíceps femoral. Baja hasta octubre",
+        "isAvailable": false,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": true,
+        "isCardRisk": false,
+        "riskBadge": "🚑 Lesión",
+        "image": "/media/players/2953.png"
+      },
+      {
         "id": 3469,
         "name": "Mbappé",
         "position": "striker",
@@ -8282,22 +8305,6 @@
         "isCardRisk": false,
         "riskBadge": "🚑 Lesión",
         "image": "/media/players/3017.png"
-      },
-      {
-        "id": 2953,
-        "name": "Aimar Oroz",
-        "position": "midfielder",
-        "price": 1620000,
-        "points": 12,
-        "status": "INJURED",
-        "statusInfo": "Lesión muscular en bíceps femoral. Baja hasta octubre",
-        "isAvailable": false,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": true,
-        "isCardRisk": false,
-        "riskBadge": "🚑 Lesión",
-        "image": "/media/players/2953.png"
       }
     ],
     "isMe": false
@@ -8444,7 +8451,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-17T21:52:12.567Z"
+      "lastUpdated": "2026-09-17T23:10:45.195Z"
     },
     "speculation": {
       "score": 57,
@@ -9067,7 +9074,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-17T21:52:13.620Z"
+      "lastUpdated": "2026-09-17T23:10:46.242Z"
     },
     "speculation": {
       "score": 50,
