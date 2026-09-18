@@ -130,7 +130,9 @@ export function scanSpeculationOpportunities(marketPlayers = [], squad = null, c
     }
 
     // 2. Chequeo de FLOOR_PRICE_BARGAIN (Chollos en precio suelo < 300.000 €)
-    if (price <= 300000 && price > 0) {
+    // Filtro estricto: NUNCA fichar futbolistas con lesión activa, incluso a 160k
+    const isInjured = p.status === 'INJURED' || Boolean(p.isInjured) || (p.statusInfo && p.statusInfo.toLowerCase().includes('lesion'));
+    if (price <= 300000 && price > 0 && !isInjured) {
       const estimatedGainEUR = Math.round(price * 0.35 + 80000);
       opportunities.push({
         playerId: p.playerId || p.id,
