@@ -467,7 +467,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T07:20:12.855Z"
+      "lastUpdated": "2026-09-18T10:02:06.556Z"
     },
     "speculation": {
       "score": 98,
@@ -2278,7 +2278,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T07:20:15.565Z"
+      "lastUpdated": "2026-09-18T10:02:09.228Z"
     },
     "speculation": {
       "score": 98,
@@ -3417,7 +3417,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T07:20:13.580Z"
+      "lastUpdated": "2026-09-18T10:02:07.224Z"
     },
     "speculation": {
       "score": 34,
@@ -3767,8 +3767,8 @@
         "price": 2030000,
         "points": 17,
         "expectedPoints": 4.1,
-        "status": "WEAKENED",
-        "statusInfo": "Contusión en tobillo",
+        "status": "ACTIVE",
+        "statusInfo": "",
         "isAvailable": true,
         "isDoubt": false,
         "isBanned": false,
@@ -4121,7 +4121,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T07:20:14.231Z"
+      "lastUpdated": "2026-09-18T10:02:07.878Z"
     },
     "speculation": {
       "score": 84,
@@ -4815,19 +4815,19 @@
     "crest": "/media/crests/amigos_de_nin.svg",
     "pos": 5,
     "points": 261,
-    "squadValue": 44270000,
-    "playerCount": 13,
-    "financialHealth": "Solvente Ajustado (+939k € en Caja)",
-    "debtAlert": "Saldo positivo (+939k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
-    "projectedScore": 59,
+    "squadValue": 38920000,
+    "playerCount": 12,
+    "financialHealth": "Saneado / Alta Liquidez (+6.11M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+6.11M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 53,
     "formation": "4-4-2",
-    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 59 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 53 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación."
     ],
     "weaknesses": [
-      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -4841,38 +4841,38 @@
     ],
     "recommendations": [
       {
-        "name": "Diatta",
-        "pos": "Centrocampista",
-        "price": 320000,
-        "reason": "Oportunidad de mercado (0.32M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
-      },
-      {
         "name": "Rodrygo",
         "pos": "Delantero",
         "price": 800000,
-        "reason": "Pieza competitiva en el mercado (0.80M €) adaptable al esquema 4-4-2."
+        "reason": "Refuerzo de ataque (0.80M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
       },
       {
-        "name": "Oluwaseyi",
-        "pos": "Delantero",
-        "price": 950000,
-        "reason": "Pieza competitiva en el mercado (0.95M €) adaptable al esquema 4-4-2."
+        "name": "Beñat Turrientes",
+        "pos": "Centrocampista",
+        "price": 2090000,
+        "reason": "Oportunidad de mercado (2.09M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+      },
+      {
+        "name": "Diatta",
+        "pos": "Centrocampista",
+        "price": 320000,
+        "reason": "Pieza competitiva en el mercado (0.32M €) adaptable al esquema 4-4-2."
       }
     ],
     "marketBalance": {
       "clubName": "Amigos de NIN",
       "realizedGainsEUR": 0,
-      "realizedLossesEUR": 240400,
-      "netRealizedBalanceEUR": -240400,
+      "realizedLossesEUR": 1072400,
+      "netRealizedBalanceEUR": -1072400,
       "profitableTradesCount": 0,
-      "totalClosedTradesCount": 1,
+      "totalClosedTradesCount": 2,
       "historicalSuccessRatePct": 0,
       "totalLatentGainsEUR": 35000,
-      "totalLatentLossesEUR": 12229105,
-      "netLatentBalanceEUR": -12194105,
+      "totalLatentLossesEUR": 11579005,
+      "netLatentBalanceEUR": -11544005,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-240.400 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-1.072.400 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Pathé Ciss",
@@ -4882,6 +4882,15 @@
           "roiPct": -8.1,
           "isProfit": false,
           "sellDate": "2026-08-30T04:35:39+02:00"
+        },
+        {
+          "playerName": "Oskarsson",
+          "buyPrice": 6000100,
+          "sellPrice": 5168100,
+          "diff": -832000,
+          "roiPct": -13.9,
+          "isProfit": false,
+          "sellDate": "2026-09-18T04:36:56+02:00"
         }
       ],
       "latentTrades": [
@@ -4901,15 +4910,6 @@
           "currentVM": 580000,
           "latentDiff": -119000,
           "latentRoiPct": -17,
-          "isProfit": false
-        },
-        {
-          "playerName": "Oskarsson",
-          "position": "striker",
-          "buyPrice": 6000100,
-          "currentVM": 5350000,
-          "latentDiff": -650100,
-          "latentRoiPct": -10.8,
           "isProfit": false
         },
         {
@@ -4976,23 +4976,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T07:20:13.922Z"
+      "lastUpdated": "2026-09-18T10:02:07.535Z"
     },
     "speculation": {
-      "score": 64,
+      "score": 65,
       "badge": "🎰 Especulador de Mercado",
       "badgeColor": "#f59e0b",
       "overbidRate": "+14.8%",
       "riskLevel": "Riesgo Moderado-Alto",
       "totalSpent": 47368105,
-      "totalReceived": 25697210,
+      "totalReceived": 30865310,
       "purchasesCount": 11,
-      "salesCount": 13,
-      "estimatedCash": 939105,
+      "salesCount": 14,
+      "estimatedCash": 6107205,
       "prizesEarned": 2610000,
-      "maxCreditLimit": 11067500,
-      "netWealth": 45209105,
-      "analysis": "Operativa histórica de 11 compras (47.4M €) y 13 ventas (25.7M €). Dinero total rotado: 73.1M € con sobrepuja media de +14.8%."
+      "maxCreditLimit": 9730000,
+      "netWealth": 45027205,
+      "analysis": "Operativa histórica de 11 compras (47.4M €) y 14 ventas (30.9M €). Dinero total rotado: 78.2M € con sobrepuja media de +14.8%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -5004,10 +5004,10 @@
         "tag": "🎯 8.41 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
-        "player": "Amatucci",
-        "price": 4125000,
-        "impact": "Fichado por 4.13M €, hoy cotiza en 4.16M € (+35.000 € / +0.8% de plusvalía).",
-        "tag": "📈 +0.8% Plusvalía"
+        "player": "Oskarsson",
+        "price": 6000100,
+        "impact": "Fichado por 6.00M €, hoy cotiza en 6.04M € (+39.900 € / +0.7% de plusvalía).",
+        "tag": "📈 +0.7% Plusvalía"
       },
       "worstMove": {
         "player": "Marcos Llorente",
@@ -5313,6 +5313,20 @@
           "seller": "Amigos de NIN",
           "buyer": "Computer",
           "date": "2026-09-05T04:35:19+02:00"
+        },
+        {
+          "playerName": "Oskarsson",
+          "price": 5168100,
+          "marketValue": 5168100,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Amigos de NIN",
+          "buyer": "Computer",
+          "date": "2026-09-18T04:36:56+02:00"
         }
       ]
     },
@@ -5471,23 +5485,6 @@
         "image": "/media/players/1969.png"
       },
       {
-        "id": 3714,
-        "name": "Oskarsson",
-        "position": "striker",
-        "price": 5350000,
-        "points": 22,
-        "expectedPoints": 6.4,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3714.png"
-      },
-      {
         "id": 3563,
         "name": "Isaac Romero",
         "position": "striker",
@@ -5503,6 +5500,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3563.png"
+      },
+      {
+        "id": 4043,
+        "name": "Juan Carlos Arana",
+        "position": "striker",
+        "price": 300000,
+        "points": 5,
+        "expectedPoints": 0.4,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/4043.png"
       }
     ],
     "bench": [
@@ -5521,22 +5535,6 @@
         "isCardRisk": false,
         "riskBadge": "🚑 Lesión",
         "image": "/media/players/3400.png"
-      },
-      {
-        "id": 4043,
-        "name": "Juan Carlos Arana",
-        "position": "striker",
-        "price": 300000,
-        "points": 5,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4043.png"
       }
     ],
     "isMe": false
@@ -5552,9 +5550,9 @@
     "playerCount": 13,
     "financialHealth": "Solvente Ajustado (+476k € en Caja)",
     "debtAlert": "Saldo positivo (+476k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
-    "projectedScore": 44,
+    "projectedScore": 48,
     "formation": "4-4-2",
-    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 44 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 48 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación."
@@ -5564,13 +5562,12 @@
     ],
     "tacticalAlerts": [
       {
-        "type": "danger",
-        "badge": "🚑 Lesión",
-        "player": "Danjuma",
-        "position": "striker",
-        "title": "Baja Médica Confirmada",
-        "description": "Danjuma sufre una lesión (Molestias musculares) que le impedirá disputar la jornada.",
-        "action": "Dar entrada a un jugador sano del banquillo."
+        "type": "success",
+        "badge": "✅ Once Saneado",
+        "player": "Alineación Óptima",
+        "title": "Sin Bajas ni Riesgos Críticos",
+        "description": "Todos los futbolistas del 11 titular están activos, disponibles y en plenitud para la jornada.",
+        "action": "Mantener la estructura táctica establecida."
       }
     ],
     "recommendations": [
@@ -5764,7 +5761,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T07:20:14.540Z"
+      "lastUpdated": "2026-09-18T10:02:08.237Z"
     },
     "speculation": {
       "score": 82,
@@ -6425,6 +6422,23 @@
         "image": "/media/players/3276.png"
       },
       {
+        "id": 3150,
+        "name": "Danjuma",
+        "position": "striker",
+        "price": 2860000,
+        "points": 26,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3150.png"
+      },
+      {
         "id": 4162,
         "name": "Ratkov",
         "position": "striker",
@@ -6440,23 +6454,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/4162.png"
-      },
-      {
-        "id": 3150,
-        "name": "Danjuma",
-        "position": "striker",
-        "price": 2860000,
-        "points": 26,
-        "expectedPoints": 0.7,
-        "status": "WEAKENED",
-        "statusInfo": "Molestias musculares",
-        "isAvailable": false,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": true,
-        "isCardRisk": false,
-        "riskBadge": "🚑 Lesión",
-        "image": "/media/players/3150.png"
       }
     ],
     "bench": [
@@ -6745,7 +6742,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T07:20:13.196Z"
+      "lastUpdated": "2026-09-18T10:02:06.885Z"
     },
     "speculation": {
       "score": 98,
@@ -7775,7 +7772,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T07:20:15.238Z"
+      "lastUpdated": "2026-09-18T10:02:08.914Z"
     },
     "speculation": {
       "score": 70,
@@ -8572,7 +8569,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T07:20:14.893Z"
+      "lastUpdated": "2026-09-18T10:02:08.594Z"
     },
     "speculation": {
       "score": 59,
@@ -9195,7 +9192,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T07:20:15.919Z"
+      "lastUpdated": "2026-09-18T10:02:09.580Z"
     },
     "speculation": {
       "score": 50,
