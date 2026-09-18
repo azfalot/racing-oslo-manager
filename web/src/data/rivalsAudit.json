@@ -6,67 +6,68 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 340,
-    "squadValue": 71280000,
-    "playerCount": 17,
-    "financialHealth": "Apalancado / Saldo Negativo (-10.01M €)",
-    "debtAlert": "Saldo en descubierto (-10.01M €). Consume el 56.2% del límite de crédito permitido (17.82M €). Exige ventas antes de puntuar.",
-    "projectedScore": 63,
-    "formation": "3-5-2",
-    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 63 puntos según plantilla disponible.",
+    "squadValue": 60950000,
+    "playerCount": 14,
+    "financialHealth": "Solvente Ajustado (+373k € en Caja)",
+    "debtAlert": "Saldo positivo (+373k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
+    "projectedScore": 53,
+    "formation": "3-4-3",
+    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 53 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 340 puntos acumulados (113.3 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (71.28M €).",
+      "Patrimonio de plantilla consolidado en Primera (60.95M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -10.01M € que obliga a vender piezas."
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
-        "type": "success",
-        "badge": "✅ Once Saneado",
-        "player": "Alineación Óptima",
-        "title": "Sin Bajas ni Riesgos Críticos",
-        "description": "Todos los futbolistas del 11 titular están activos, disponibles y en plenitud para la jornada.",
-        "action": "Mantener la estructura táctica establecida."
+        "type": "suboptimal",
+        "badge": "⚠️ Banquillo Desperdiciado",
+        "player": "Kike Barja",
+        "position": "midfielder",
+        "title": "Rendimiento en Reserva",
+        "description": "Tiene a Kike Barja (19 pts) en el banquillo mientras alinea a Selton Sánchez (0 pts).",
+        "action": "Valorar permuta táctica dando entrada a Kike Barja de inicio."
       }
     ],
     "recommendations": [
       {
-        "name": "Rodrygo",
-        "pos": "Delantero",
-        "price": 800000,
-        "reason": "Refuerzo de ataque (0.80M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+        "name": "Sebastián Cáceres",
+        "pos": "Defensa",
+        "price": 1350000,
+        "reason": "Zaguero de jerarquía (1.35M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
       },
       {
         "name": "Diatta",
         "pos": "Centrocampista",
         "price": 320000,
-        "reason": "Centrocampista con llegada (0.32M €) para asociarse con Bellingham y dominar la posesión."
+        "reason": "Oportunidad de mercado (0.32M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       },
       {
-        "name": "Oluwaseyi",
+        "name": "Rodrygo",
         "pos": "Delantero",
-        "price": 950000,
-        "reason": "Oportunidad de mercado (0.95M € · 0 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "price": 800000,
+        "reason": "Pieza competitiva en el mercado (0.80M €) adaptable al esquema 3-4-3."
       }
     ],
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
-      "realizedGainsEUR": 8928715,
+      "realizedGainsEUR": 9448903,
       "realizedLossesEUR": 13411317,
-      "netRealizedBalanceEUR": -4482602,
-      "profitableTradesCount": 9,
-      "totalClosedTradesCount": 29,
-      "historicalSuccessRatePct": 31,
-      "totalLatentGainsEUR": 2497941,
+      "netRealizedBalanceEUR": -3962414,
+      "profitableTradesCount": 11,
+      "totalClosedTradesCount": 31,
+      "historicalSuccessRatePct": 35,
+      "totalLatentGainsEUR": 2027953,
       "totalLatentLossesEUR": 8600283,
-      "netLatentBalanceEUR": -6102342,
+      "netLatentBalanceEUR": -6572330,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-4.482.602 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-3.962.414 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Raphinha",
@@ -94,6 +95,15 @@
           "roiPct": 67.8,
           "isProfit": true,
           "sellDate": "2026-09-14T04:35:00+02:00"
+        },
+        {
+          "playerName": "José Giménez",
+          "buyPrice": 3465002,
+          "sellPrice": 3914300,
+          "diff": 449298,
+          "roiPct": 13,
+          "isProfit": true,
+          "sellDate": "2026-09-18T04:36:56+02:00"
         },
         {
           "playerName": "Letacek",
@@ -130,6 +140,15 @@
           "roiPct": 32.9,
           "isProfit": true,
           "sellDate": "2026-08-28T00:14:45+02:00"
+        },
+        {
+          "playerName": "Olasagasti",
+          "buyPrice": 3685010,
+          "sellPrice": 3755900,
+          "diff": 70890,
+          "roiPct": 1.9,
+          "isProfit": true,
+          "sellDate": "2026-09-18T04:36:56+02:00"
         },
         {
           "playerName": "Alex Marchal",
@@ -350,15 +369,6 @@
           "isProfit": true
         },
         {
-          "playerName": "José Giménez",
-          "position": "defender",
-          "buyPrice": 3465002,
-          "currentVM": 3830000,
-          "latentDiff": 364998,
-          "latentRoiPct": 10.5,
-          "isProfit": true
-        },
-        {
           "playerName": "Otorbi",
           "position": "striker",
           "buyPrice": 1075001,
@@ -374,15 +384,6 @@
           "currentVM": 290000,
           "latentDiff": 124980,
           "latentRoiPct": 75.7,
-          "isProfit": true
-        },
-        {
-          "playerName": "Olasagasti",
-          "position": "midfielder",
-          "buyPrice": 3685010,
-          "currentVM": 3790000,
-          "latentDiff": 104990,
-          "latentRoiPct": 2.8,
           "isProfit": true
         },
         {
@@ -467,23 +468,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T12:43:27.385Z"
+      "lastUpdated": "2026-09-18T16:02:11.441Z"
     },
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+7.1%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 187900856,
-      "totalReceived": 154490500,
+      "totalReceived": 164873400,
       "purchasesCount": 46,
-      "salesCount": 44,
-      "estimatedCash": -10010356,
+      "salesCount": 47,
+      "estimatedCash": 372544,
       "prizesEarned": 3400000,
-      "maxCreditLimit": 17820000,
-      "netWealth": 61269644,
-      "analysis": "Operativa histórica de 46 compras (187.9M €) y 44 ventas (154.5M €). Dinero total rotado: 342.4M € con sobrepuja media de +7.1%."
+      "maxCreditLimit": 15237500,
+      "netWealth": 61322544,
+      "analysis": "Operativa histórica de 46 compras (187.9M €) y 47 ventas (164.9M €). Dinero total rotado: 352.8M € con sobrepuja media de +7.1%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -1672,6 +1673,48 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-09-16T00:07:53+02:00"
+        },
+        {
+          "playerName": "José Giménez",
+          "price": 3914300,
+          "marketValue": 3914300,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-09-18T04:36:56+02:00"
+        },
+        {
+          "playerName": "Pablo Ibáñez",
+          "price": 2712700,
+          "marketValue": 2712700,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-09-18T04:36:56+02:00"
+        },
+        {
+          "playerName": "Olasagasti",
+          "price": 3755900,
+          "marketValue": 3755900,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-09-18T04:36:56+02:00"
         }
       ]
     },
@@ -1692,23 +1735,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2444.png"
-      },
-      {
-        "id": 1676,
-        "name": "José Giménez",
-        "position": "defender",
-        "price": 3830000,
-        "points": 20,
-        "expectedPoints": 5.2,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/1676.png"
       },
       {
         "id": 1019,
@@ -1745,6 +1771,23 @@
         "image": "/media/players/3619.png"
       },
       {
+        "id": 3698,
+        "name": "Pau Navarro",
+        "position": "defender",
+        "price": 790000,
+        "points": 11,
+        "expectedPoints": 2,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3698.png"
+      },
+      {
         "id": 3444,
         "name": "Bellingham",
         "position": "midfielder",
@@ -1760,23 +1803,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3444.png"
-      },
-      {
-        "id": 3380,
-        "name": "Olasagasti",
-        "position": "midfielder",
-        "price": 3790000,
-        "points": 31,
-        "expectedPoints": 5.2,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3380.png"
       },
       {
         "id": 3851,
@@ -1813,12 +1839,12 @@
         "image": "/media/players/2591.png"
       },
       {
-        "id": 3311,
-        "name": "Pablo Ibáñez",
+        "id": 3949,
+        "name": "Selton Sánchez",
         "position": "midfielder",
-        "price": 2710000,
-        "points": 32,
-        "expectedPoints": 4.1,
+        "price": 290000,
+        "points": 0,
+        "expectedPoints": 0.3,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -1827,7 +1853,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/3311.png"
+        "image": "/media/players/3949.png"
       },
       {
         "id": 4098,
@@ -1862,6 +1888,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2764.png"
+      },
+      {
+        "id": 3557,
+        "name": "Otorbi",
+        "position": "striker",
+        "price": 1200000,
+        "points": 18,
+        "expectedPoints": 2.6,
+        "status": "ACTIVE",
+        "statusInfo": "Filial",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3557.png"
       }
     ],
     "bench": [
@@ -1882,22 +1925,6 @@
         "image": "/media/players/3665.png"
       },
       {
-        "id": 3698,
-        "name": "Pau Navarro",
-        "position": "defender",
-        "price": 790000,
-        "points": 11,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3698.png"
-      },
-      {
         "id": 3512,
         "name": "Unai Egiluz",
         "position": "defender",
@@ -1914,22 +1941,6 @@
         "image": "/media/players/3512.png"
       },
       {
-        "id": 3949,
-        "name": "Selton Sánchez",
-        "position": "midfielder",
-        "price": 290000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3949.png"
-      },
-      {
         "id": 2395,
         "name": "Kike Barja",
         "position": "midfielder",
@@ -1944,22 +1955,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2395.png"
-      },
-      {
-        "id": 3557,
-        "name": "Otorbi",
-        "position": "striker",
-        "price": 1200000,
-        "points": 18,
-        "status": "ACTIVE",
-        "statusInfo": "Filial",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3557.png"
       }
     ],
     "isMe": false
@@ -2278,7 +2273,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T12:43:30.137Z"
+      "lastUpdated": "2026-09-18T16:02:14.087Z"
     },
     "speculation": {
       "score": 98,
@@ -3417,7 +3412,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T12:43:28.068Z"
+      "lastUpdated": "2026-09-18T16:02:12.085Z"
     },
     "speculation": {
       "score": 34,
@@ -4121,7 +4116,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T12:43:28.757Z"
+      "lastUpdated": "2026-09-18T16:02:12.742Z"
     },
     "speculation": {
       "score": 84,
@@ -4976,7 +4971,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T12:43:28.425Z"
+      "lastUpdated": "2026-09-18T16:02:12.412Z"
     },
     "speculation": {
       "score": 65,
@@ -5761,7 +5756,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T12:43:29.098Z"
+      "lastUpdated": "2026-09-18T16:02:13.121Z"
     },
     "speculation": {
       "score": 82,
@@ -6742,7 +6737,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T12:43:27.742Z"
+      "lastUpdated": "2026-09-18T16:02:11.768Z"
     },
     "speculation": {
       "score": 98,
@@ -7772,7 +7767,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T12:43:29.812Z"
+      "lastUpdated": "2026-09-18T16:02:13.771Z"
     },
     "speculation": {
       "score": 70,
@@ -8569,7 +8564,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T12:43:29.424Z"
+      "lastUpdated": "2026-09-18T16:02:13.455Z"
     },
     "speculation": {
       "score": 59,
@@ -9192,7 +9187,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-18T12:43:30.477Z"
+      "lastUpdated": "2026-09-18T16:02:14.443Z"
     },
     "speculation": {
       "score": 50,
