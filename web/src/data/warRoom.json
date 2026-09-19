@@ -1,19 +1,19 @@
 {
-  "timestamp": "2026-09-18T21:52:17.503Z",
+  "timestamp": "2026-09-19T07:14:10.677Z",
   "currentMatchday": 7,
   "confidenceLevel": "MEDIUM",
   "standings": {
     "racingPoints": 188,
     "leaderPoints": 245,
-    "leaderName": "Pachangueros F.C.",
+    "leaderName": "Fermín Gadura F.C.",
     "gap": 57
   },
   "finances": {
-    "balance": 1126688,
+    "balance": 696688,
     "committedBids": 0,
-    "effectiveBalance": 1126688,
-    "squadValue": 50310000,
-    "totalPatrimony": 51436688
+    "effectiveBalance": 696688,
+    "squadValue": 46580000,
+    "totalPatrimony": 47276688
   },
   "lineup": {
     "formation": "4-3-3",
@@ -23,7 +23,7 @@
       {
         "playerId": 3597,
         "name": "Íñigo Arguibide",
-        "price": 1170000,
+        "price": 1120000,
         "totalPoints": 13,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -178,7 +178,7 @@
       {
         "playerId": 2587,
         "name": "Raúl de Tomás",
-        "price": 230000,
+        "price": 220000,
         "totalPoints": 0,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -362,7 +362,7 @@
       "playerId": 2587,
       "name": "Raúl de Tomás",
       "position": "striker",
-      "price": 230000,
+      "price": 220000,
       "expectedPoints": 0.3,
       "vorp": -43,
       "vorpPerMatchday": -1.26,
@@ -386,7 +386,7 @@
       "playerId": 1876,
       "name": "Denis Suárez",
       "position": "midfielder",
-      "price": 1450000,
+      "price": 1300000,
       "expectedPoints": 2.5,
       "vorp": 13,
       "vorpPerMatchday": 0.38,
@@ -396,286 +396,36 @@
     }
   ],
   "depthAnalysis": {
-    "squadSize": 13,
+    "squadSize": 15,
     "targetSize": 13,
     "isFragile": false,
     "missingDepthCount": 0,
     "depthPenaltyPerMatchday": 0,
-    "recommendation": "✅ Profundidad adecuada (13 jugadores). Cobertura activa ante rotaciones y bajas."
+    "recommendation": "✅ Profundidad adecuada (15 jugadores). Cobertura activa ante rotaciones y bajas."
   },
   "marketTargets": [
     {
-      "playerId": 4008,
-      "name": "Xavi Espart",
-      "type": "defender",
-      "price": 7020000,
-      "bidAmount": 8353800,
-      "maxRationalBid": 8353800,
-      "marginPct": 19,
-      "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 7,
-      "ppm": 5.99,
-      "efficiency": 28.1,
-      "upgradePoints": 6.5,
-      "marginalValue": 6.5,
-      "vorp": 116,
-      "vorpPerMatchday": 3.41,
-      "cpmp": 1080000,
-      "cpmpSeason": 31765,
-      "replacedPlayer": {
-        "playerId": 2587,
-        "name": "Raúl de Tomás",
-        "price": 230000,
-        "totalPoints": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "type": "striker",
-        "historical": {
-          "points": [
-            {
-              "season": "18/19",
-              "points": "214",
-              "eventId": 899953
-            },
-            {
-              "season": "19/20",
-              "points": "80",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "21/22",
-              "points": "219",
-              "eventId": 951313
-            },
-            {
-              "season": "22/23",
-              "points": "83",
-              "eventId": 961836
-            },
-            {
-              "season": "23/24",
-              "points": "87",
-              "eventId": 975270
-            },
-            {
-              "season": "24/25",
-              "points": "6",
-              "eventId": 988474
-            },
-            {
-              "season": "25/26",
-              "points": "-",
-              "eventId": false
-            }
-          ]
-        },
-        "average": {
-          "grade": "0",
-          "points": "0",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "",
-            "points": ""
-          }
-        },
-        "club": {
-          "id": 70,
-          "name": "Rayo Vallecano",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/70"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/70/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 7,
-            "homeClub": {
-              "id": 12,
-              "name": "Osasuna",
-              "abbreviation": "osa",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/12"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/12/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 70,
-              "name": "Rayo Vallecano",
-              "abbreviation": "ray",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/70"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/70/logo"
-                }
-              }
-            },
-            "kickoff": "2026-09-19T14:00:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 70,
-              "name": "Rayo Vallecano",
-              "abbreviation": "ray",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/70"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/70/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 1,
-              "name": "Athletic",
-              "abbreviation": "ath",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/1"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/1/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-10T14:00:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 9,
-            "homeClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/8"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 70,
-              "name": "Rayo Vallecano",
-              "abbreviation": "ray",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/70"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/70/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-19T21:00:00+02:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 0,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 0.3,
-        "id": 2587,
-        "position": "striker",
-        "points": 0
-      },
-      "replacedPlayerName": "Raúl de Tomás",
-      "replacedPlayerExpectedPoints": 0.3,
-      "strategicScore": 76,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 6.5
-        },
-        "absoluteQuality": {
-          "raw": 99.8,
-          "weight": 0.2,
-          "ppm": 5.99
-        },
-        "positionNeed": {
-          "raw": 50,
-          "weight": 0.15,
-          "detail": "4 disponibles = exactamente los requeridos. Sin suplentes."
-        },
-        "marketOpportunity": {
-          "raw": 70.3,
-          "weight": 0.1,
-          "efficiency": 28.1
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": false,
-      "reasoning": [
-        "✅ Entra en el XI titular (+6.5 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (5.99 PPM > 2.05 PPM).",
-        "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 5.99 | Fiabilidad: 95% minutos | Eficiencia: 28.1 pts/M€)",
-        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 8.353.800 € (119.0% VM | Sobreprecio: +19%).",
-        "⛔ Fondos insuficientes: Requiere 9.353.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.126.688 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +7 pts (sustituye a Raúl de Tomás). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 8.353.800 € (119.0% VM | Sobreprecio: +19%)."
-    },
-    {
-      "playerId": 1083,
-      "name": "Koke",
+      "playerId": 2859,
+      "name": "Rodrigo Riquelme",
       "type": "midfielder",
-      "price": 4470000,
-      "bidAmount": 5229900,
-      "maxRationalBid": 5229900,
-      "marginPct": 17,
+      "price": 5260000,
+      "bidAmount": 6101600,
+      "maxRationalBid": 6101600,
+      "marginPct": 16,
       "band": "ELITE_LEAGUE_WINNER",
       "expectedPoints": 6,
-      "ppm": 4.76,
-      "efficiency": 35.1,
-      "upgradePoints": 5.7,
-      "marginalValue": 5.7,
-      "vorp": 79,
-      "vorpPerMatchday": 2.32,
-      "cpmp": 784211,
-      "cpmpSeason": 23041,
+      "ppm": 4.97,
+      "efficiency": 31.2,
+      "upgradePoints": 5.3,
+      "marginalValue": 5.3,
+      "vorp": 41,
+      "vorpPerMatchday": 1.21,
+      "cpmp": 992453,
+      "cpmpSeason": 29222,
       "replacedPlayer": {
         "playerId": 2587,
         "name": "Raúl de Tomás",
-        "price": 230000,
+        "price": 220000,
         "totalPoints": 0,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -854,17 +604,17 @@
       },
       "replacedPlayerName": "Raúl de Tomás",
       "replacedPlayerExpectedPoints": 0.3,
-      "strategicScore": 73.6,
+      "strategicScore": 73.4,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 5.7
+          "marginalValue": 5.3
         },
         "absoluteQuality": {
-          "raw": 79.3,
+          "raw": 82.8,
           "weight": 0.2,
-          "ppm": 4.76
+          "ppm": 4.97
         },
         "positionNeed": {
           "raw": 50,
@@ -872,9 +622,9 @@
           "detail": "4 disponibles = exactamente los requeridos. Sin suplentes."
         },
         "marketOpportunity": {
-          "raw": 87.8,
+          "raw": 78,
           "weight": 0.1,
-          "efficiency": 35.1
+          "efficiency": 31.2
         },
         "rivalPressure": {
           "raw": 20,
@@ -891,41 +641,41 @@
       "ownerName": "Computer",
       "ownerId": 1,
       "isComputer": true,
-      "requiresSaleFirst": false,
+      "requiresSaleFirst": true,
       "reasoning": [
-        "✅ Entra en el XI titular (+5.7 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.76 PPM > 2.05 PPM).",
+        "✅ Entra en el XI titular (+5.3 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (4.97 PPM > 2.05 PPM).",
         "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 4.76 | Fiabilidad: 95% minutos | Eficiencia: 35.1 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 4.97 | Fiabilidad: 95% minutos | Eficiencia: 31.2 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.229.900 € (117.0% VM | Sobreprecio: +17%).",
-        "⛔ Fondos insuficientes: Requiere 6.229.900 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.126.688 €."
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 6.101.600 € (116.0% VM | Sobreprecio: +16%).",
+        "⛔ Fondos insuficientes: Requiere 7.101.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 696.688 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Raúl de Tomás). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.229.900 € (117.0% VM | Sobreprecio: +17%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Raúl de Tomás). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 6.101.600 € (116.0% VM | Sobreprecio: +16%)."
     },
     {
       "playerId": 3174,
       "name": "Beñat Turrientes",
       "type": "midfielder",
-      "price": 2090000,
-      "bidAmount": 2236300,
-      "maxRationalBid": 2236300,
+      "price": 1940000,
+      "bidAmount": 2075800,
+      "maxRationalBid": 2075800,
       "marginPct": 7,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 3,
       "ppm": 3.77,
-      "efficiency": 59.5,
+      "efficiency": 64.1,
       "upgradePoints": 3.1,
       "marginalValue": 3.1,
       "vorp": 1,
       "vorpPerMatchday": 0.03,
-      "cpmp": 674194,
-      "cpmpSeason": 19905,
+      "cpmp": 625806,
+      "cpmpSeason": 18476,
       "replacedPlayer": {
         "playerId": 2587,
         "name": "Raúl de Tomás",
-        "price": 230000,
+        "price": 220000,
         "totalPoints": 0,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -1124,7 +874,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 59.5
+          "efficiency": 64.1
         },
         "rivalPressure": {
           "raw": 20,
@@ -1141,41 +891,41 @@
       "ownerName": "Computer",
       "ownerId": 1,
       "isComputer": true,
-      "requiresSaleFirst": false,
+      "requiresSaleFirst": true,
       "reasoning": [
         "✅ Entra en el XI titular (+3.1 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
         "🚀 Supera el promedio con momentum del titular actual (3.77 PPM > 2.05 PPM).",
         "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 🔄 Rotación Habitual (PPM: 3.77 | Fiabilidad: 75% minutos | Eficiencia: 59.5 pts/M€)",
+        "📊 🔄 Rotación Habitual (PPM: 3.77 | Fiabilidad: 75% minutos | Eficiencia: 64.1 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 75%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.236.300 € (107.0% VM | Sobreprecio: +7%).",
-        "⛔ Fondos insuficientes: Requiere 3.236.300 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.126.688 €."
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.075.800 € (107.0% VM | Sobreprecio: +7%).",
+        "⛔ Fondos insuficientes: Requiere 3.075.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 696.688 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Raúl de Tomás). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.236.300 € (107.0% VM | Sobreprecio: +7%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Raúl de Tomás). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.075.800 € (107.0% VM | Sobreprecio: +7%)."
     },
     {
       "playerId": 4151,
       "name": "Harvey Elliot",
       "type": "midfielder",
-      "price": 3280000,
-      "bidAmount": 3509600,
-      "maxRationalBid": 3509600,
+      "price": 3080000,
+      "bidAmount": 3295600,
+      "maxRationalBid": 3295600,
       "marginPct": 7,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 3,
       "ppm": 4.09,
-      "efficiency": 41.2,
+      "efficiency": 43.9,
       "upgradePoints": 3.1,
       "marginalValue": 3.1,
       "vorp": 41,
       "vorpPerMatchday": 1.21,
-      "cpmp": 1058065,
-      "cpmpSeason": 31238,
+      "cpmp": 993548,
+      "cpmpSeason": 29333,
       "replacedPlayer": {
         "playerId": 2587,
         "name": "Raúl de Tomás",
-        "price": 230000,
+        "price": 220000,
         "totalPoints": 0,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -1374,7 +1124,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 41.2
+          "efficiency": 43.9
         },
         "rivalPressure": {
           "raw": 20,
@@ -1391,41 +1141,291 @@
       "ownerName": "Computer",
       "ownerId": 1,
       "isComputer": true,
-      "requiresSaleFirst": false,
+      "requiresSaleFirst": true,
       "reasoning": [
         "✅ Entra en el XI titular (+3.1 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
         "🚀 Supera el promedio con momentum del titular actual (4.09 PPM > 2.05 PPM).",
         "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 4.09 | Fiabilidad: 90% minutos | Eficiencia: 41.2 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 4.09 | Fiabilidad: 90% minutos | Eficiencia: 43.9 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 90%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.509.600 € (107.0% VM | Sobreprecio: +7%).",
-        "⛔ Fondos insuficientes: Requiere 4.509.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.126.688 €."
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.295.600 € (107.0% VM | Sobreprecio: +7%).",
+        "⛔ Fondos insuficientes: Requiere 4.295.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 696.688 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Raúl de Tomás). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.509.600 € (107.0% VM | Sobreprecio: +7%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Raúl de Tomás). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.295.600 € (107.0% VM | Sobreprecio: +7%)."
+    },
+    {
+      "playerId": 1249,
+      "name": "Isco",
+      "type": "midfielder",
+      "price": 8780000,
+      "bidAmount": 10097000,
+      "maxRationalBid": 10097000,
+      "marginPct": 15,
+      "band": "CLEAR_UPGRADE",
+      "expectedPoints": 5,
+      "ppm": 5.06,
+      "efficiency": 19,
+      "upgradePoints": 4.9,
+      "marginalValue": 4.9,
+      "vorp": 81,
+      "vorpPerMatchday": 2.38,
+      "cpmp": 1791837,
+      "cpmpSeason": 52575,
+      "replacedPlayer": {
+        "playerId": 2587,
+        "name": "Raúl de Tomás",
+        "price": 220000,
+        "totalPoints": 0,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "type": "striker",
+        "historical": {
+          "points": [
+            {
+              "season": "18/19",
+              "points": "214",
+              "eventId": 899953
+            },
+            {
+              "season": "19/20",
+              "points": "80",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "21/22",
+              "points": "219",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "83",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "87",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "6",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "-",
+              "eventId": false
+            }
+          ]
+        },
+        "average": {
+          "grade": "0",
+          "points": "0",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "",
+            "points": ""
+          }
+        },
+        "club": {
+          "id": 70,
+          "name": "Rayo Vallecano",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/70"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/70/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 7,
+            "homeClub": {
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/12"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/12/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "kickoff": "2026-09-19T14:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 8,
+            "homeClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/1"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/1/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-10T14:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 9,
+            "homeClub": {
+              "id": 8,
+              "name": "Getafe",
+              "abbreviation": "get",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/8"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/8/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 70,
+              "name": "Rayo Vallecano",
+              "abbreviation": "ray",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/70"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/70/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-19T21:00:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 0.3,
+        "id": 2587,
+        "position": "striker",
+        "points": 0
+      },
+      "replacedPlayerName": "Raúl de Tomás",
+      "replacedPlayerExpectedPoints": 0.3,
+      "strategicScore": 70.6,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 100,
+          "weight": 0.4,
+          "marginalValue": 4.9
+        },
+        "absoluteQuality": {
+          "raw": 84.3,
+          "weight": 0.2,
+          "ppm": 5.06
+        },
+        "positionNeed": {
+          "raw": 50,
+          "weight": 0.15,
+          "detail": "4 disponibles = exactamente los requeridos. Sin suplentes."
+        },
+        "marketOpportunity": {
+          "raw": 47.5,
+          "weight": 0.1,
+          "efficiency": 19
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 10,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": true,
+      "reasoning": [
+        "✅ Entra en el XI titular (+4.9 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (5.06 PPM > 2.05 PPM).",
+        "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
+        "📊 ⭐ Titular Fijo (PPM: 5.06 | Fiabilidad: 95% minutos | Eficiencia: 19 pts/M€)",
+        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 10.097.000 € (115.0% VM | Sobreprecio: +15%).",
+        "⛔ Fondos insuficientes: Requiere 11.097.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 696.688 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Raúl de Tomás). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 10.097.000 € (115.0% VM | Sobreprecio: +15%)."
     },
     {
       "playerId": 2571,
       "name": " Juan Cruz",
       "type": "midfielder",
-      "price": 1630000,
-      "bidAmount": 1776700,
-      "maxRationalBid": 1776700,
+      "price": 1620000,
+      "bidAmount": 1765800,
+      "maxRationalBid": 1765800,
       "marginPct": 9,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 4,
       "ppm": 3.49,
-      "efficiency": 70.6,
+      "efficiency": 71,
       "upgradePoints": 3.6,
       "marginalValue": 3.6,
       "vorp": 55,
       "vorpPerMatchday": 1.62,
-      "cpmp": 452778,
-      "cpmpSeason": 13361,
+      "cpmp": 450000,
+      "cpmpSeason": 13279,
       "replacedPlayer": {
         "playerId": 2587,
         "name": "Raúl de Tomás",
-        "price": 230000,
+        "price": 220000,
         "totalPoints": 0,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -1624,7 +1624,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 70.6
+          "efficiency": 71
         },
         "rivalPressure": {
           "raw": 20,
@@ -1641,26 +1641,38 @@
       "ownerName": "Computer",
       "ownerId": 1,
       "isComputer": true,
-      "requiresSaleFirst": false,
+      "requiresSaleFirst": true,
       "reasoning": [
         "✅ Entra en el XI titular (+3.6 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
         "🚀 Supera el promedio con momentum del titular actual (3.49 PPM > 2.05 PPM).",
         "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 3.49 | Fiabilidad: 95% minutos | Eficiencia: 70.6 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 3.49 | Fiabilidad: 95% minutos | Eficiencia: 71 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.776.700 € (109.0% VM | Sobreprecio: +9%).",
-        "⛔ Fondos insuficientes: Requiere 2.776.700 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.126.688 €."
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.765.800 € (109.0% VM | Sobreprecio: +9%).",
+        "⛔ Fondos insuficientes: Requiere 2.765.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 696.688 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Raúl de Tomás). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.776.700 € (109.0% VM | Sobreprecio: +9%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Raúl de Tomás). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.765.800 € (109.0% VM | Sobreprecio: +9%)."
     }
   ],
   "liquiditySuggestions": [
     {
       "playerId": 2587,
       "name": "Raúl de Tomás",
-      "price": 230000,
-      "reason": "Parche secundario sin minutos. Vender libera 230.000 € para acometer fichajes titulares."
+      "price": 220000,
+      "reason": "Parche secundario sin minutos. Vender libera 220.000 € para acometer fichajes titulares."
+    },
+    {
+      "playerId": 3449,
+      "name": "Abdel Abqar",
+      "price": 250000,
+      "reason": "Sin minutos o en recuperación (Lesión muscular). Vender libera 250.000 € de tesorería."
+    },
+    {
+      "playerId": 3795,
+      "name": "Fortuño",
+      "price": 160000,
+      "reason": "Parche secundario sin minutos. Vender libera 160.000 € para acometer fichajes titulares."
     },
     {
       "playerId": 3796,
@@ -2029,5 +2041,5 @@
       }
     ]
   },
-  "priorityMovement": "Pujar 8.353.800 € por Xavi Espart (defender) para sustituir a Raúl de Tomás (Expected XI Delta: +6.5 pts, CPMP: Óptimo)."
+  "priorityMovement": "Pujar 6.101.600 € por Rodrigo Riquelme (midfielder) para sustituir a Raúl de Tomás (Expected XI Delta: +5.3 pts, CPMP: Óptimo)."
 }
