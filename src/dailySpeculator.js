@@ -184,13 +184,14 @@ export async function autoListSpeculationPlayers(client, squad = { players: [] }
   const currentPlayers = squad.players || [];
   const activeTradingMap = new Map(ledger.activeTradingPlayers.map(p => [p.playerId, p]));
   const listedPlayers = [];
-
   for (const player of currentPlayers) {
     const pid = player.playerId || player.id;
     const tradingRecord = activeTradingMap.get(pid);
+    if (!tradingRecord) continue;
 
-    // 📈 JUGADORES DE ESPECULACIÓN: Se listan inmediatamente en el mercado desde el minuto 1 para captar ofertas de Computer
-    if (tradingRecord && !tradingRecord.listedOnMarket) {
+    // 📈 JUGADORES DE ESPECULACIÓN O TRANSFERIBLES: Si no están activos en el mercado de Comunio, listarlos de inmediato
+    const isActuallyOnMarket = player.onMarket === true || (player.onMarket === undefined && Boolean(tradingRecord.listedOnMarket));
+    if (!isActuallyOnMarket) {
       const askPrice = player.price || tradingRecord.buyPrice || 160000;
       let success = false;
 
