@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-19T16:01:30.533Z",
+  "timestamp": "2026-09-19T21:52:09.171Z",
   "currentMatchday": 7,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -17,7 +17,7 @@
   },
   "lineup": {
     "formation": "4-3-3",
-    "expectedPoints": 43.5,
+    "expectedPoints": 42.5,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -142,6 +142,175 @@
         "expectedPoints": 1.3,
         "id": 3597,
         "position": "defender",
+        "points": 0
+      },
+      {
+        "playerId": 1876,
+        "name": "Denis Suárez",
+        "price": 1300000,
+        "totalPoints": 29,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "type": "midfielder",
+        "historical": {
+          "points": [
+            {
+              "season": "14/15",
+              "points": "120",
+              "eventId": 471732
+            },
+            {
+              "season": "15/16",
+              "points": "190",
+              "eventId": 687859
+            },
+            {
+              "season": "16/17",
+              "points": "82",
+              "eventId": 788917
+            },
+            {
+              "season": "17/18",
+              "points": "88",
+              "eventId": 869072
+            },
+            {
+              "season": "18/19",
+              "points": "8",
+              "eventId": 899953
+            },
+            {
+              "season": "19/20",
+              "points": "109",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "171",
+              "eventId": 939519
+            },
+            {
+              "season": "21/22",
+              "points": "196",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "44",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "13",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "86",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "113",
+              "eventId": 998265
+            }
+          ]
+        },
+        "average": {
+          "grade": "6,9",
+          "points": "4,83",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "7,0",
+            "points": "5"
+          }
+        },
+        "club": {
+          "id": 89,
+          "name": "Alavés",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/89"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/89/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 8,
+            "homeClub": {
+              "id": 89,
+              "name": "Alavés",
+              "abbreviation": "ala",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/89"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/89/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 2,
+              "name": "Atlético",
+              "abbreviation": "atm",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/2"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/2/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-10T16:15:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 9,
+            "homeClub": {
+              "id": 5,
+              "name": "Celta",
+              "abbreviation": "cel",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/5"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/5/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 89,
+              "name": "Alavés",
+              "abbreviation": "ala",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/89"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/89/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-18T16:15:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 1,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 2.2,
+        "id": 1876,
+        "position": "midfielder",
         "points": 0
       },
       {
@@ -325,12 +494,12 @@
       "name": "Denis Suárez",
       "position": "midfielder",
       "price": 1300000,
-      "expectedPoints": 2.5,
+      "expectedPoints": 2.2,
       "vorp": 13,
       "vorpPerMatchday": 0.38,
       "replacementPpm": 3.05,
-      "upgradeGap": 3,
-      "urgencyScore": 13.2
+      "upgradeGap": 3.3,
+      "urgencyScore": 13.4
     }
   ],
   "depthAnalysis": {
@@ -1224,19 +1393,19 @@
       "name": "Gordon",
       "type": "striker",
       "price": 13870000,
-      "bidAmount": 17198800,
-      "maxRationalBid": 17198800,
-      "marginPct": 24,
+      "bidAmount": 17060100,
+      "maxRationalBid": 17060100,
+      "marginPct": 23,
       "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 7,
-      "ppm": 6.24,
-      "efficiency": 14.8,
-      "upgradePoints": 8.4,
-      "marginalValue": 8.4,
+      "expectedPoints": 6,
+      "ppm": 6.1,
+      "efficiency": 14.5,
+      "upgradePoints": 8.1,
+      "marginalValue": 8.1,
       "vorp": 100,
       "vorpPerMatchday": 2.94,
-      "cpmp": 1651190,
-      "cpmpSeason": 48497,
+      "cpmp": 1712346,
+      "cpmpSeason": 50436,
       "replacedPlayer": {
         "playerId": 2587,
         "name": "Raúl de Tomás",
@@ -1388,17 +1557,17 @@
       },
       "replacedPlayerName": "Raúl de Tomás",
       "replacedPlayerExpectedPoints": 0.3,
-      "strategicScore": 68.5,
+      "strategicScore": 68.4,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 8.4
+          "marginalValue": 8.1
         },
         "absoluteQuality": {
           "raw": 100,
           "weight": 0.2,
-          "ppm": 6.24
+          "ppm": 6.1
         },
         "positionNeed": {
           "raw": 30,
@@ -1406,9 +1575,9 @@
           "detail": "3 disponibles. Fondo de armario ajustado."
         },
         "marketOpportunity": {
-          "raw": 37,
+          "raw": 36.3,
           "weight": 0.1,
-          "efficiency": 14.8
+          "efficiency": 14.5
         },
         "rivalPressure": {
           "raw": 20,
@@ -1427,16 +1596,16 @@
       "isComputer": true,
       "requiresSaleFirst": true,
       "reasoning": [
-        "✅ Entra en el XI titular (+8.4 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (6.24 PPM > 2.05 PPM).",
+        "✅ Entra en el XI titular (+8.1 pts al Once Ideal sustituyendo a Raúl de Tomás (2.05 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (6.1 PPM > 2.05 PPM).",
         "🟡 Posición con necesidad MODERADA: 3 disponibles. Fondo de armario ajustado.",
-        "📊 ⭐ Titular Fijo (PPM: 6.24 | Fiabilidad: 95% minutos | Eficiencia: 14.8 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 6.1 | Fiabilidad: 95% minutos | Eficiencia: 14.5 pts/M€)",
         "🔥 Dinámica de club: 🔥 Euforia / Líder Arrollador (1.1x): 5V 0E 0D - Ataque demoledor y máxima confianza colectiva",
         "⚔️ Competencia en club: Compite en [object Object] con Robert Lewandowski, Lamine Yamal, Raphinha... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 17.198.800 € (124.0% VM | Sobreprecio: +24%).",
-        "⛔ Fondos insuficientes: Requiere 18.198.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 696.688 €."
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 17.060.100 € (123.0% VM | Sobreprecio: +23%).",
+        "⛔ Fondos insuficientes: Requiere 18.060.100 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 696.688 €."
       ],
-      "reason": "🚀 SALTO CUALITATIVO (+8 pts XI): Mejora real del XI: +8 pts (sustituye a Raúl de Tomás). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 17.198.800 € (124.0% VM | Sobreprecio: +24%)."
+      "reason": "🚀 SALTO CUALITATIVO (+8 pts XI): Mejora real del XI: +8 pts (sustituye a Raúl de Tomás). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 17.060.100 € (123.0% VM | Sobreprecio: +23%)."
     }
   ],
   "liquiditySuggestions": [
@@ -1477,11 +1646,11 @@
     "remainingMatchdays": 31,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 43.5,
+      "currentXiExpectedPoints": 42.5,
       "restOfSeasonAggregateExpectedPpm": 38.9,
       "pWin": 0,
-      "pTop2": 0.491,
-      "pTop3": 0.769,
+      "pTop2": 0.497,
+      "pTop3": 0.791,
       "expectedFinalPoints": 1478,
       "range": "1422 - 1537 pts",
       "wilsonCI95": {
@@ -1490,8 +1659,8 @@
       }
     },
     "probChampion": 0,
-    "probTop2": 49.1,
-    "probTop3": 76.9,
+    "probTop2": 49.7,
+    "probTop3": 79.1,
     "racingExpectedFinalPoints": 1478,
     "racingRange": "1422 - 1537 pts",
     "racingWilsonCI95": {
@@ -1526,8 +1695,8 @@
         "expectedFinalPoints": 1478,
         "range": "1422 - 1537 pts",
         "probChampion": 0,
-        "probTop2": 49.1,
-        "probTop3": 76.9,
+        "probTop2": 49.7,
+        "probTop3": 79.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1542,8 +1711,8 @@
         "expectedFinalPoints": 1458,
         "range": "1401 - 1517 pts",
         "probChampion": 0,
-        "probTop2": 29.2,
-        "probTop3": 61,
+        "probTop2": 29.9,
+        "probTop3": 62.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1555,11 +1724,11 @@
         "currentPoints": 264,
         "meanPpm": 37.7,
         "stdDev": 8,
-        "expectedFinalPoints": 1436,
-        "range": "1378 - 1495 pts",
+        "expectedFinalPoints": 1433,
+        "range": "1377 - 1488 pts",
         "probChampion": 0,
-        "probTop2": 14.1,
-        "probTop3": 39.6,
+        "probTop2": 12.8,
+        "probTop3": 35.4,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1591,7 +1760,7 @@
         "range": "1247 - 1364 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0,
+        "probTop3": 0.4,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1603,11 +1772,11 @@
         "currentPoints": 238,
         "meanPpm": 34,
         "stdDev": 8,
-        "expectedFinalPoints": 1293,
-        "range": "1237 - 1347 pts",
+        "expectedFinalPoints": 1295,
+        "range": "1238 - 1354 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0.1,
+        "probTop3": 0,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1688,8 +1857,8 @@
         "expectedFinalPoints": 1478,
         "range": "1422 - 1537 pts",
         "probChampion": 0,
-        "probTop2": 49.1,
-        "probTop3": 76.9,
+        "probTop2": 49.7,
+        "probTop3": 79.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1704,8 +1873,8 @@
         "expectedFinalPoints": 1458,
         "range": "1401 - 1517 pts",
         "probChampion": 0,
-        "probTop2": 29.2,
-        "probTop3": 61,
+        "probTop2": 29.9,
+        "probTop3": 62.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1717,11 +1886,11 @@
         "currentPoints": 264,
         "meanPpm": 37.7,
         "stdDev": 8,
-        "expectedFinalPoints": 1436,
-        "range": "1378 - 1495 pts",
+        "expectedFinalPoints": 1433,
+        "range": "1377 - 1488 pts",
         "probChampion": 0,
-        "probTop2": 14.1,
-        "probTop3": 39.6,
+        "probTop2": 12.8,
+        "probTop3": 35.4,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1753,7 +1922,7 @@
         "range": "1247 - 1364 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0,
+        "probTop3": 0.4,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1765,11 +1934,11 @@
         "currentPoints": 238,
         "meanPpm": 34,
         "stdDev": 8,
-        "expectedFinalPoints": 1293,
-        "range": "1237 - 1347 pts",
+        "expectedFinalPoints": 1295,
+        "range": "1238 - 1354 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0.1,
+        "probTop3": 0,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
