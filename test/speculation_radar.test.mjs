@@ -61,3 +61,28 @@ test('3. Speculation Radar: Denies non-Computer owned players for automated spec
   const result = scanSpeculationOpportunities(market);
   assert.equal(result.opportunities.length, 0, 'Must ignore non-Computer players for automated speculation');
 });
+
+test('4. Speculation Radar: 100% BLOCKS injured, doubtful or medically compromised players', () => {
+  const market = [
+    { ...createMockMarketPlayer(3449, 'Abdel Abqar', 'defender', 250000, 'Computer'), status: 'INJURED', statusInfo: 'Lesión muscular' },
+    { ...createMockMarketPlayer(3487, 'Sergi Canós', 'midfielder', 160000, 'Computer'), status: 'ACTIVE', statusInfo: 'Baja médica por rotura' },
+    { ...createMockMarketPlayer(3999, 'Jugador Duda', 'defender', 160000, 'Computer'), status: 'DOUBT', statusInfo: 'Molestias en el tobillo' },
+    { ...createMockMarketPlayer(4000, 'Jugador Sano', 'defender', 160000, 'Computer'), status: 'ACTIVE', statusInfo: '' }
+  ];
+
+  const result = scanSpeculationOpportunities(market, { players: [] }, 500000);
+  assert.equal(result.opportunities.length, 1, 'Only healthy players must pass speculation filter');
+  assert.equal(result.opportunities[0].name, 'Jugador Sano');
+});
+
+test('5. Speculation Radar: BLOCKS devaluing players with negative market trend (trend < 0)', () => {
+  const market = [
+    { ...createMockMarketPlayer(4001, 'Jugador Cayendo', 'defender', 200000, 'Computer'), trend: -1, status: 'ACTIVE' },
+    { ...createMockMarketPlayer(4002, 'Jugador Estable', 'defender', 200000, 'Computer'), trend: 0, status: 'ACTIVE' }
+  ];
+
+  const result = scanSpeculationOpportunities(market, { players: [] }, 500000);
+  assert.equal(result.opportunities.length, 1, 'Devaluing player with trend < 0 must be rejected');
+  assert.equal(result.opportunities[0].name, 'Jugador Estable');
+});
+

@@ -69,6 +69,33 @@ function normalizeName(name) {
   return String(name || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
 }
 
+export const MEDICAL_DISQUALIFYING_KEYWORDS = [
+  'lesion', 'lesión', 'baja', 'duda', 'molestias', 'rotura', 'esguince',
+  'quirofano', 'quirófano', 'cirugia', 'cirugía', 'ligamento', 'cruzado',
+  'menisco', 'recuperacion', 'recuperación', 'sancion', 'sanción', 'banned',
+  'red_banned', 'yellow_banned', 'tarjetas', 'expulsion', 'expulsión'
+];
+
+export function isPlayerFitForSpeculation(player) {
+  if (!player) return false;
+  const status = String(player.status || '').toUpperCase();
+  if (status === 'INJURED' || status === 'DOUBT' || status === 'BANNED' || status === 'RED_BANNED' || status === 'YELLOW_BANNED') {
+    return false;
+  }
+  if (player.isInjured || player.isDoubt || player.isBanned || player.available === false || player.isAvailable === false) {
+    return false;
+  }
+  const statusInfo = String(player.statusInfo || player.status_info || '').toLowerCase();
+  for (const kw of MEDICAL_DISQUALIFYING_KEYWORDS) {
+    if (statusInfo.includes(kw)) return false;
+  }
+  // Salvaguarda de mercado: descartar futbolistas en tendencia descendente de valor
+  if (player.trend !== undefined && player.trend < 0) {
+    return false;
+  }
+  return true;
+}
+
 /**
  * Evalúa las oportunidades de especulación en el mercado de fichajes.
  * @param {Array} marketPlayers Lista de jugadores en el mercado
@@ -130,9 +157,8 @@ export function scanSpeculationOpportunities(marketPlayers = [], squad = null, c
     }
 
     // 2. Chequeo de FLOOR_PRICE_BARGAIN (Chollos en precio suelo < 300.000 €)
-    // Filtro estricto: NUNCA fichar futbolistas con lesión activa, incluso a 160k
-    const isInjured = p.status === 'INJURED' || Boolean(p.isInjured) || (p.statusInfo && p.statusInfo.toLowerCase().includes('lesion'));
-    if (price <= 300000 && price > 0 && !isInjured) {
+    // Filtro estricto: NUNCA fichar futbolistas con lesión activa o tendencia negativa
+    if (price <= 300000 && price > 0 && isPlayerFitForSpeculation(p)) {
       const estimatedGainEUR = Math.round(price * 0.35 + 80000);
       opportunities.push({
         playerId: p.playerId || p.id,
@@ -163,7 +189,7 @@ export function scanSpeculationOpportunities(marketPlayers = [], squad = null, c
     const avgPts = parseFloat(p.average?.points ? String(p.average.points).replace(',', '.') : 0);
     const momentum = evaluateClubMomentum(p);
 
-    if (price <= 2000000 && (points >= 10 || avgPts >= 4.5 || momentum.state === 'SURGING')) {
+    if (price <= 2000000 && isPlayerFitForSpeculation(p) && (points >= 10 || avgPts >= 4.5 || momentum.state === 'SURGING')) {
       const estimatedGainEUR = Math.round(price * 0.40);
       opportunities.push({
         playerId: p.playerId || p.id,

@@ -273,8 +273,14 @@ export class ComunioClient {
             name: playerObj.name,
             price: playerObj.quotedPrice || playerObj.price || 0,
             type: playerObj.position,
+            position: playerObj.position,
             totalPoints: playerObj.points === '-' ? 0 : parseInt(playerObj.points) || 0,
-            status: playerObj.status,
+            points: playerObj.points === '-' ? 0 : parseInt(playerObj.points) || 0,
+            status: playerObj.status || details?.status || 'ACTIVE',
+            statusInfo: playerObj.statusInfo || details?.statusInfo || '',
+            trend: playerObj.trend !== undefined ? playerObj.trend : 0,
+            club: playerObj.club || details?.club || {},
+            clubName: playerObj.club?.name || details?.club?.name || '',
             owner: {
               id: ownerObj?.id || 1,
               name: ownerObj?.name || 'Computer'

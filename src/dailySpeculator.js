@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { scanSpeculationOpportunities } from './speculationRadar.js';
+import { scanSpeculationOpportunities, isPlayerFitForSpeculation } from './speculationRadar.js';
 import { isVerifiedComputerOwner } from './ownership.js';
 import { ComunioEngine } from './engine.js';
 
@@ -128,6 +128,13 @@ export async function executeDailySpeculationBids(client, squad = { players: [] 
 
     if (price > availableBiddingCap) {
       skippedOpportunities.push({ name: opp.name, reason: 'EXCEEDS_AVAILABLE_SPECULATION_CAP', price, availableBiddingCap });
+      continue;
+    }
+
+    // 🛡️ BARRERA DE SEGURIDAD PRE-PUJA: Comprobación médica y de tendencia antes de emitir la puja
+    if (!isPlayerFitForSpeculation(opp)) {
+      skippedOpportunities.push({ name: opp.name, reason: 'FAILED_HEALTH_OR_TREND_VALIDATION' });
+      console.warn('[DAILY-SPECULATOR] ⛔ Puja cancelada por alerta médica/tendencia: ' + opp.name + ' (' + (opp.status || '') + ' - ' + (opp.statusInfo || '') + ')');
       continue;
     }
 
