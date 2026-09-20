@@ -1,11 +1,11 @@
 {
   "clubName": "Racing de Oslo",
-  "realizedGainsEUR": 119300,
+  "realizedGainsEUR": 124800,
   "realizedLossesEUR": 7572811,
-  "netRealizedBalanceEUR": -7453511,
-  "profitableTradesCount": 6,
-  "totalClosedTradesCount": 16,
-  "historicalSuccessRatePct": 38,
+  "netRealizedBalanceEUR": -7448011,
+  "profitableTradesCount": 8,
+  "totalClosedTradesCount": 18,
+  "historicalSuccessRatePct": 44,
   "totalLatentGainsEUR": 450000,
   "totalLatentLossesEUR": 11255001,
   "netLatentBalanceEUR": -10805001,
@@ -59,6 +59,15 @@
       "sellDate": "2026-09-16T04:36:17+02:00"
     },
     {
+      "playerName": "Raúl de Tomás",
+      "buyPrice": 230000,
+      "sellPrice": 233900,
+      "diff": 3900,
+      "roiPct": 1.7,
+      "isProfit": true,
+      "sellDate": "2026-09-20T04:36:05+02:00"
+    },
+    {
       "playerName": "Sergi Canós",
       "buyPrice": 160000,
       "sellPrice": 161900,
@@ -66,6 +75,15 @@
       "roiPct": 1.2,
       "isProfit": true,
       "sellDate": "2026-09-18T04:36:56+02:00"
+    },
+    {
+      "playerName": "Fortuño",
+      "buyPrice": 160000,
+      "sellPrice": 161600,
+      "diff": 1600,
+      "roiPct": 1,
+      "isProfit": true,
+      "sellDate": "2026-09-20T04:36:05+02:00"
     },
     {
       "playerName": "Szczęsny",
@@ -169,24 +187,6 @@
       "isProfit": true
     },
     {
-      "playerName": "Raúl de Tomás",
-      "position": "striker",
-      "buyPrice": 230000,
-      "currentVM": 230000,
-      "latentDiff": 0,
-      "latentRoiPct": 0,
-      "isProfit": true
-    },
-    {
-      "playerName": "Fortuño",
-      "position": "keeper",
-      "buyPrice": 160000,
-      "currentVM": 160000,
-      "latentDiff": 0,
-      "latentRoiPct": 0,
-      "isProfit": true
-    },
-    {
       "playerName": "Adrián Rodríguez",
       "position": "keeper",
       "buyPrice": 160000,
@@ -277,7 +277,7 @@
       "isProfit": false
     }
   ],
-  "lastUpdated": "2026-09-20T11:27:45.032Z",
-  "speculationGainsEUR": 14100,
-  "speculationTradesCount": 3
+  "lastUpdated": "2026-09-20T11:33:03.206Z",
+  "speculationGainsEUR": 19600,
+  "speculationTradesCount": 5
 }
