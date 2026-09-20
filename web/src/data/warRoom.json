@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-20T11:33:03.185Z",
+  "timestamp": "2026-09-20T16:00:51.403Z",
   "currentMatchday": 7,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -9,15 +9,15 @@
     "gap": 57
   },
   "finances": {
-    "balance": 696688,
+    "balance": 1092188,
     "committedBids": 0,
-    "effectiveBalance": 696688,
+    "effectiveBalance": 1092188,
     "squadValue": 47890000,
-    "totalPatrimony": 48586688
+    "totalPatrimony": 48982188
   },
   "lineup": {
-    "formation": "5-3-2",
-    "expectedPoints": 42.5,
+    "formation": "4-4-2",
+    "expectedPoints": 40.6,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -141,161 +141,6 @@
         "available": true,
         "expectedPoints": 1.3,
         "id": 3597,
-        "position": "defender",
-        "points": 0
-      },
-      {
-        "playerId": 3449,
-        "name": "Abdel Abqar",
-        "price": 260000,
-        "totalPoints": 2,
-        "status": null,
-        "statusInfo": null,
-        "type": "defender",
-        "historical": {
-          "points": [
-            {
-              "season": "23/24",
-              "points": "99",
-              "eventId": 975270
-            },
-            {
-              "season": "24/25",
-              "points": "118",
-              "eventId": 988474
-            },
-            {
-              "season": "25/26",
-              "points": "84",
-              "eventId": 998265
-            }
-          ]
-        },
-        "average": {
-          "grade": "6,2",
-          "points": "1",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "0,0",
-            "points": "0"
-          }
-        },
-        "club": {
-          "id": 8,
-          "name": "Getafe",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/8"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/8/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 7,
-            "homeClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/8"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/65"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
-                }
-              }
-            },
-            "kickoff": "2026-09-20T14:00:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/8"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-10T18:30:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 9,
-            "homeClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/8"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 70,
-              "name": "Rayo Vallecano",
-              "abbreviation": "ray",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/70"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/70/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-19T21:00:00+02:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 0,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 0.3,
-        "id": 3449,
         "position": "defender",
         "points": 0
       },
@@ -467,33 +312,177 @@
         "id": 1876,
         "position": "midfielder",
         "points": 0
+      },
+      {
+        "playerId": 2785,
+        "name": "Pol Lozano",
+        "price": 190000,
+        "totalPoints": 10,
+        "status": null,
+        "statusInfo": null,
+        "type": "midfielder",
+        "historical": {
+          "points": [
+            {
+              "season": "19/20",
+              "points": "8",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "21/22",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "22/23",
+              "points": "8",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "24/25",
+              "points": "113",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "129",
+              "eventId": 998265
+            }
+          ]
+        },
+        "average": {
+          "grade": "6,6",
+          "points": "3,33",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "2,6",
+            "points": "1,2"
+          }
+        },
+        "club": {
+          "id": 7,
+          "name": "Espanyol",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/7"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/7/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 8,
+            "homeClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 7,
+              "name": "Espanyol",
+              "abbreviation": "esp",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/7"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/7/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-09T21:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 9,
+            "homeClub": {
+              "id": 7,
+              "name": "Espanyol",
+              "abbreviation": "esp",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/7"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/7/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 2,
+              "name": "Atlético",
+              "abbreviation": "atm",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/2"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/2/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-17T14:00:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 1,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 0.2,
+        "id": 2785,
+        "position": "midfielder",
+        "points": 0
       }
     ]
   },
   "weaknesses": [
     {
-      "playerId": 3449,
-      "name": "Abdel Abqar",
-      "position": "defender",
-      "price": 260000,
-      "expectedPoints": 0.3,
-      "vorp": -5,
-      "vorpPerMatchday": -0.15,
-      "replacementPpm": 1.88,
-      "upgradeGap": 5.2,
-      "urgencyScore": 20.1
+      "playerId": 2785,
+      "name": "Pol Lozano",
+      "position": "midfielder",
+      "price": 190000,
+      "expectedPoints": 0.2,
+      "vorp": -17,
+      "vorpPerMatchday": -0.5,
+      "replacementPpm": 3,
+      "upgradeGap": 5.3,
+      "urgencyScore": 23.8
     },
     {
       "playerId": 3553,
       "name": "Johnny Cardoso",
       "position": "midfielder",
       "price": 1540000,
-      "expectedPoints": 2.8,
-      "vorp": 1,
-      "vorpPerMatchday": 0.03,
-      "replacementPpm": 3.05,
-      "upgradeGap": 2.7,
-      "urgencyScore": 16.6
+      "expectedPoints": 2.7,
+      "vorp": 3,
+      "vorpPerMatchday": 0.09,
+      "replacementPpm": 3,
+      "upgradeGap": 2.8,
+      "urgencyScore": 16.1
     },
     {
       "playerId": 1876,
@@ -501,11 +490,11 @@
       "position": "midfielder",
       "price": 1360000,
       "expectedPoints": 2.2,
-      "vorp": 13,
-      "vorpPerMatchday": 0.38,
-      "replacementPpm": 3.05,
+      "vorp": 15,
+      "vorpPerMatchday": 0.44,
+      "replacementPpm": 3,
       "upgradeGap": 3.3,
-      "urgencyScore": 13.4
+      "urgencyScore": 12.8
     }
   ],
   "depthAnalysis": {
@@ -529,78 +518,85 @@
       "expectedPoints": 5,
       "ppm": 4.05,
       "efficiency": 42.8,
-      "upgradePoints": 4.4,
-      "marginalValue": 4.4,
+      "upgradePoints": 4.5,
+      "marginalValue": 4.5,
       "vorp": 60,
       "vorpPerMatchday": 1.76,
-      "cpmp": 709091,
-      "cpmpSeason": 20800,
+      "cpmp": 693333,
+      "cpmpSeason": 20392,
       "replacedPlayer": {
-        "playerId": 3449,
-        "name": "Abdel Abqar",
-        "price": 260000,
-        "totalPoints": 2,
+        "playerId": 2785,
+        "name": "Pol Lozano",
+        "price": 190000,
+        "totalPoints": 10,
         "status": null,
         "statusInfo": null,
-        "type": "defender",
+        "type": "midfielder",
         "historical": {
           "points": [
             {
+              "season": "19/20",
+              "points": "8",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "21/22",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "22/23",
+              "points": "8",
+              "eventId": 961836
+            },
+            {
               "season": "23/24",
-              "points": "99",
-              "eventId": 975270
+              "points": "-",
+              "eventId": false
             },
             {
               "season": "24/25",
-              "points": "118",
+              "points": "113",
               "eventId": 988474
             },
             {
               "season": "25/26",
-              "points": "84",
+              "points": "129",
               "eventId": 998265
             }
           ]
         },
         "average": {
-          "grade": "6,2",
-          "points": "1",
+          "grade": "6,6",
+          "points": "3,33",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "0,0",
-            "points": "0"
+            "grade": "2,6",
+            "points": "1,2"
           }
         },
         "club": {
-          "id": 8,
-          "name": "Getafe",
+          "id": 7,
+          "name": "Espanyol",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/8"
+              "href": "https://api.comunio.es/clubs/7"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/8/logo"
+              "href": "https://api.comunio.es/clubs/7/logo"
             }
           }
         },
         "nextMatches": [
           {
-            "matchdayNr": 7,
+            "matchdayNr": 8,
             "homeClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/8"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
-                }
-              }
-            },
-            "guestClub": {
               "id": 65,
               "name": "Málaga",
               "abbreviation": "mga",
@@ -613,91 +609,73 @@
                 }
               }
             },
-            "kickoff": "2026-09-20T14:00:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
             "guestClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
+              "id": 7,
+              "name": "Espanyol",
+              "abbreviation": "esp",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/8"
+                  "href": "https://api.comunio.es/clubs/7"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
+                  "href": "https://api.comunio.es/clubs/7/logo"
                 }
               }
             },
-            "kickoff": "2026-10-10T18:30:00+02:00",
+            "kickoff": "2026-10-09T21:00:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
+              "id": 7,
+              "name": "Espanyol",
+              "abbreviation": "esp",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/8"
+                  "href": "https://api.comunio.es/clubs/7"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
+                  "href": "https://api.comunio.es/clubs/7/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 70,
-              "name": "Rayo Vallecano",
-              "abbreviation": "ray",
+              "id": 2,
+              "name": "Atlético",
+              "abbreviation": "atm",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/70"
+                  "href": "https://api.comunio.es/clubs/2"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/70/logo"
+                  "href": "https://api.comunio.es/clubs/2/logo"
                 }
               }
             },
-            "kickoff": "2026-10-19T21:00:00+02:00",
+            "kickoff": "2026-10-17T14:00:00+02:00",
             "odds": null
           }
         ],
         "cards": {
-          "yellow": 0,
+          "yellow": 1,
           "yellowRed": 0,
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.3,
-        "id": 3449,
-        "position": "defender",
+        "expectedPoints": 0.2,
+        "id": 2785,
+        "position": "midfielder",
         "points": 0
       },
-      "replacedPlayerName": "Abdel Abqar",
-      "replacedPlayerExpectedPoints": 0.3,
+      "replacedPlayerName": "Pol Lozano",
+      "replacedPlayerExpectedPoints": 0.2,
       "strategicScore": 72.5,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 4.4
+          "marginalValue": 4.5
         },
         "absoluteQuality": {
           "raw": 67.5,
@@ -731,16 +709,16 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+4.4 pts al Once Ideal sustituyendo a Abdel Abqar (1.27 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.05 PPM > 1.27 PPM).",
+        "✅ Entra en el XI titular (+4.5 pts al Once Ideal sustituyendo a Pol Lozano (2.47 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (4.05 PPM > 2.47 PPM).",
         "🟡 Posición con necesidad MODERADA: 2 disponibles = exactamente los requeridos. Sin suplentes.",
         "📊 ⭐ Titular Fijo (PPM: 4.05 | Fiabilidad: 95% minutos | Eficiencia: 42.8 pts/M€)",
         "🔥 Dinámica de club: ⚖️ Competitivo / Desgaste Europa League (1.02x): 3V 1E 1D - Fuerte pero con calendario apretado en Europa",
         "⚔️ Competencia en club: Compite en [object Object] con Nico Williams, Iñaki Williams, Álvaro Djaló... (Nivel: BAJA, Confianza XI: 95%)",
         "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.525.600 € (113.0% VM | Sobreprecio: +13%).",
-        "⛔ Fondos insuficientes: Requiere 4.525.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 696.688 €."
+        "⛔ Fondos insuficientes: Requiere 4.525.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.092.188 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Abdel Abqar). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.525.600 € (113.0% VM | Sobreprecio: +13%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Pol Lozano). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.525.600 € (113.0% VM | Sobreprecio: +13%)."
     },
     {
       "playerId": 3311,
@@ -754,78 +732,85 @@
       "expectedPoints": 6,
       "ppm": 4.06,
       "efficiency": 47.2,
-      "upgradePoints": 5.2,
-      "marginalValue": 5.2,
-      "vorp": 22,
-      "vorpPerMatchday": 0.65,
-      "cpmp": 546154,
-      "cpmpSeason": 16045,
+      "upgradePoints": 5.3,
+      "marginalValue": 5.3,
+      "vorp": 24,
+      "vorpPerMatchday": 0.71,
+      "cpmp": 535849,
+      "cpmpSeason": 15778,
       "replacedPlayer": {
-        "playerId": 3449,
-        "name": "Abdel Abqar",
-        "price": 260000,
-        "totalPoints": 2,
+        "playerId": 2785,
+        "name": "Pol Lozano",
+        "price": 190000,
+        "totalPoints": 10,
         "status": null,
         "statusInfo": null,
-        "type": "defender",
+        "type": "midfielder",
         "historical": {
           "points": [
             {
+              "season": "19/20",
+              "points": "8",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "21/22",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "22/23",
+              "points": "8",
+              "eventId": 961836
+            },
+            {
               "season": "23/24",
-              "points": "99",
-              "eventId": 975270
+              "points": "-",
+              "eventId": false
             },
             {
               "season": "24/25",
-              "points": "118",
+              "points": "113",
               "eventId": 988474
             },
             {
               "season": "25/26",
-              "points": "84",
+              "points": "129",
               "eventId": 998265
             }
           ]
         },
         "average": {
-          "grade": "6,2",
-          "points": "1",
+          "grade": "6,6",
+          "points": "3,33",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "0,0",
-            "points": "0"
+            "grade": "2,6",
+            "points": "1,2"
           }
         },
         "club": {
-          "id": 8,
-          "name": "Getafe",
+          "id": 7,
+          "name": "Espanyol",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/8"
+              "href": "https://api.comunio.es/clubs/7"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/8/logo"
+              "href": "https://api.comunio.es/clubs/7/logo"
             }
           }
         },
         "nextMatches": [
           {
-            "matchdayNr": 7,
+            "matchdayNr": 8,
             "homeClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/8"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
-                }
-              }
-            },
-            "guestClub": {
               "id": 65,
               "name": "Málaga",
               "abbreviation": "mga",
@@ -838,91 +823,73 @@
                 }
               }
             },
-            "kickoff": "2026-09-20T14:00:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
             "guestClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
+              "id": 7,
+              "name": "Espanyol",
+              "abbreviation": "esp",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/8"
+                  "href": "https://api.comunio.es/clubs/7"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
+                  "href": "https://api.comunio.es/clubs/7/logo"
                 }
               }
             },
-            "kickoff": "2026-10-10T18:30:00+02:00",
+            "kickoff": "2026-10-09T21:00:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
+              "id": 7,
+              "name": "Espanyol",
+              "abbreviation": "esp",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/8"
+                  "href": "https://api.comunio.es/clubs/7"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
+                  "href": "https://api.comunio.es/clubs/7/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 70,
-              "name": "Rayo Vallecano",
-              "abbreviation": "ray",
+              "id": 2,
+              "name": "Atlético",
+              "abbreviation": "atm",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/70"
+                  "href": "https://api.comunio.es/clubs/2"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/70/logo"
+                  "href": "https://api.comunio.es/clubs/2/logo"
                 }
               }
             },
-            "kickoff": "2026-10-19T21:00:00+02:00",
+            "kickoff": "2026-10-17T14:00:00+02:00",
             "odds": null
           }
         ],
         "cards": {
-          "yellow": 0,
+          "yellow": 1,
           "yellowRed": 0,
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.3,
-        "id": 3449,
-        "position": "defender",
+        "expectedPoints": 0.2,
+        "id": 2785,
+        "position": "midfielder",
         "points": 0
       },
-      "replacedPlayerName": "Abdel Abqar",
-      "replacedPlayerExpectedPoints": 0.3,
+      "replacedPlayerName": "Pol Lozano",
+      "replacedPlayerExpectedPoints": 0.2,
       "strategicScore": 72.5,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 5.2
+          "marginalValue": 5.3
         },
         "absoluteQuality": {
           "raw": 67.7,
@@ -956,16 +923,16 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+5.2 pts al Once Ideal sustituyendo a Abdel Abqar (1.27 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.06 PPM > 1.27 PPM).",
+        "✅ Entra en el XI titular (+5.3 pts al Once Ideal sustituyendo a Pol Lozano (2.47 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (4.06 PPM > 2.47 PPM).",
         "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
         "📊 ⭐ Titular Fijo (PPM: 4.06 | Fiabilidad: 95% minutos | Eficiencia: 47.2 pts/M€)",
         "🔥 Dinámica de club: 🚀 Estado de Gracia / Racha Histórica (1.06x): 3V 1E 1D - Alta efectividad colectiva y moral por las nubes",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
         "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 3.294.400 € (116.0% VM | Sobreprecio: +16%).",
-        "⛔ Fondos insuficientes: Requiere 4.294.400 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 696.688 €."
+        "⛔ Fondos insuficientes: Requiere 4.294.400 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.092.188 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Abdel Abqar). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 3.294.400 € (116.0% VM | Sobreprecio: +16%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Pol Lozano). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 3.294.400 € (116.0% VM | Sobreprecio: +16%)."
     },
     {
       "playerId": 3993,
@@ -979,78 +946,85 @@
       "expectedPoints": 2,
       "ppm": 2.68,
       "efficiency": 89.2,
-      "upgradePoints": 1.9,
-      "marginalValue": 1.9,
+      "upgradePoints": 2,
+      "marginalValue": 2,
       "vorp": 6,
       "vorpPerMatchday": 0.18,
-      "cpmp": 521053,
-      "cpmpSeason": 15231,
+      "cpmp": 495000,
+      "cpmpSeason": 14559,
       "replacedPlayer": {
-        "playerId": 3449,
-        "name": "Abdel Abqar",
-        "price": 260000,
-        "totalPoints": 2,
+        "playerId": 2785,
+        "name": "Pol Lozano",
+        "price": 190000,
+        "totalPoints": 10,
         "status": null,
         "statusInfo": null,
-        "type": "defender",
+        "type": "midfielder",
         "historical": {
           "points": [
             {
+              "season": "19/20",
+              "points": "8",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "21/22",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "22/23",
+              "points": "8",
+              "eventId": 961836
+            },
+            {
               "season": "23/24",
-              "points": "99",
-              "eventId": 975270
+              "points": "-",
+              "eventId": false
             },
             {
               "season": "24/25",
-              "points": "118",
+              "points": "113",
               "eventId": 988474
             },
             {
               "season": "25/26",
-              "points": "84",
+              "points": "129",
               "eventId": 998265
             }
           ]
         },
         "average": {
-          "grade": "6,2",
-          "points": "1",
+          "grade": "6,6",
+          "points": "3,33",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "0,0",
-            "points": "0"
+            "grade": "2,6",
+            "points": "1,2"
           }
         },
         "club": {
-          "id": 8,
-          "name": "Getafe",
+          "id": 7,
+          "name": "Espanyol",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/8"
+              "href": "https://api.comunio.es/clubs/7"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/8/logo"
+              "href": "https://api.comunio.es/clubs/7/logo"
             }
           }
         },
         "nextMatches": [
           {
-            "matchdayNr": 7,
+            "matchdayNr": 8,
             "homeClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/8"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
-                }
-              }
-            },
-            "guestClub": {
               "id": 65,
               "name": "Málaga",
               "abbreviation": "mga",
@@ -1063,91 +1037,73 @@
                 }
               }
             },
-            "kickoff": "2026-09-20T14:00:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
             "guestClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
+              "id": 7,
+              "name": "Espanyol",
+              "abbreviation": "esp",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/8"
+                  "href": "https://api.comunio.es/clubs/7"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
+                  "href": "https://api.comunio.es/clubs/7/logo"
                 }
               }
             },
-            "kickoff": "2026-10-10T18:30:00+02:00",
+            "kickoff": "2026-10-09T21:00:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
+              "id": 7,
+              "name": "Espanyol",
+              "abbreviation": "esp",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/8"
+                  "href": "https://api.comunio.es/clubs/7"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
+                  "href": "https://api.comunio.es/clubs/7/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 70,
-              "name": "Rayo Vallecano",
-              "abbreviation": "ray",
+              "id": 2,
+              "name": "Atlético",
+              "abbreviation": "atm",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/70"
+                  "href": "https://api.comunio.es/clubs/2"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/70/logo"
+                  "href": "https://api.comunio.es/clubs/2/logo"
                 }
               }
             },
-            "kickoff": "2026-10-19T21:00:00+02:00",
+            "kickoff": "2026-10-17T14:00:00+02:00",
             "odds": null
           }
         ],
         "cards": {
-          "yellow": 0,
+          "yellow": 1,
           "yellowRed": 0,
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.3,
-        "id": 3449,
-        "position": "defender",
+        "expectedPoints": 0.2,
+        "id": 2785,
+        "position": "midfielder",
         "points": 0
       },
-      "replacedPlayerName": "Abdel Abqar",
-      "replacedPlayerExpectedPoints": 0.3,
-      "strategicScore": 50.3,
+      "replacedPlayerName": "Pol Lozano",
+      "replacedPlayerExpectedPoints": 0.2,
+      "strategicScore": 51.6,
       "strategicComponents": {
         "squadUpgrade": {
-          "raw": 63.3,
+          "raw": 66.7,
           "weight": 0.4,
-          "marginalValue": 1.9
+          "marginalValue": 2
         },
         "absoluteQuality": {
           "raw": 44.7,
@@ -1181,16 +1137,16 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+1.9 pts al Once Ideal sustituyendo a Abdel Abqar (1.27 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (2.68 PPM > 1.27 PPM).",
+        "✅ Entra en el XI titular (+2 pts al Once Ideal sustituyendo a Pol Lozano (2.47 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (2.68 PPM > 2.47 PPM).",
         "🟡 Posición con necesidad MODERADA: 5 disponibles. Fondo de armario ajustado.",
         "📊 🔄 Rotación Habitual (PPM: 2.68 | Fiabilidad: 90% minutos | Eficiencia: 89.2 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 90%)",
         "💰 [Banda: DEPTH] Puja recomendada: 1.019.700 € (103.0% VM | Sobreprecio: +3%).",
-        "⛔ Fondos insuficientes: Requiere 2.019.700 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 696.688 €."
+        "⛔ Fondos insuficientes: Requiere 2.019.700 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.092.188 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +2 pts (sustituye a Abdel Abqar). 💰 [Banda: DEPTH] Puja recomendada: 1.019.700 € (103.0% VM | Sobreprecio: +3%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +2 pts (sustituye a Pol Lozano). 💰 [Banda: DEPTH] Puja recomendada: 1.019.700 € (103.0% VM | Sobreprecio: +3%)."
     },
     {
       "playerId": 4076,
@@ -1202,80 +1158,87 @@
       "marginPct": 2,
       "band": "DEPTH",
       "expectedPoints": 2,
-      "ppm": 2.5,
-      "efficiency": 133,
-      "upgradePoints": 1.4,
-      "marginalValue": 1.4,
-      "vorp": -34,
-      "vorpPerMatchday": -1,
-      "cpmp": 442857,
-      "cpmpSeason": 12917,
+      "ppm": 2.61,
+      "efficiency": 139.2,
+      "upgradePoints": 1.6,
+      "marginalValue": 1.6,
+      "vorp": -32,
+      "vorpPerMatchday": -0.94,
+      "cpmp": 387500,
+      "cpmpSeason": 11481,
       "replacedPlayer": {
-        "playerId": 3449,
-        "name": "Abdel Abqar",
-        "price": 260000,
-        "totalPoints": 2,
+        "playerId": 2785,
+        "name": "Pol Lozano",
+        "price": 190000,
+        "totalPoints": 10,
         "status": null,
         "statusInfo": null,
-        "type": "defender",
+        "type": "midfielder",
         "historical": {
           "points": [
             {
+              "season": "19/20",
+              "points": "8",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "21/22",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "22/23",
+              "points": "8",
+              "eventId": 961836
+            },
+            {
               "season": "23/24",
-              "points": "99",
-              "eventId": 975270
+              "points": "-",
+              "eventId": false
             },
             {
               "season": "24/25",
-              "points": "118",
+              "points": "113",
               "eventId": 988474
             },
             {
               "season": "25/26",
-              "points": "84",
+              "points": "129",
               "eventId": 998265
             }
           ]
         },
         "average": {
-          "grade": "6,2",
-          "points": "1",
+          "grade": "6,6",
+          "points": "3,33",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "0,0",
-            "points": "0"
+            "grade": "2,6",
+            "points": "1,2"
           }
         },
         "club": {
-          "id": 8,
-          "name": "Getafe",
+          "id": 7,
+          "name": "Espanyol",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/8"
+              "href": "https://api.comunio.es/clubs/7"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/8/logo"
+              "href": "https://api.comunio.es/clubs/7/logo"
             }
           }
         },
         "nextMatches": [
           {
-            "matchdayNr": 7,
+            "matchdayNr": 8,
             "homeClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/8"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
-                }
-              }
-            },
-            "guestClub": {
               "id": 65,
               "name": "Málaga",
               "abbreviation": "mga",
@@ -1288,96 +1251,78 @@
                 }
               }
             },
-            "kickoff": "2026-09-20T14:00:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
             "guestClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
+              "id": 7,
+              "name": "Espanyol",
+              "abbreviation": "esp",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/8"
+                  "href": "https://api.comunio.es/clubs/7"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
+                  "href": "https://api.comunio.es/clubs/7/logo"
                 }
               }
             },
-            "kickoff": "2026-10-10T18:30:00+02:00",
+            "kickoff": "2026-10-09T21:00:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
+              "id": 7,
+              "name": "Espanyol",
+              "abbreviation": "esp",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/8"
+                  "href": "https://api.comunio.es/clubs/7"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
+                  "href": "https://api.comunio.es/clubs/7/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 70,
-              "name": "Rayo Vallecano",
-              "abbreviation": "ray",
+              "id": 2,
+              "name": "Atlético",
+              "abbreviation": "atm",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/70"
+                  "href": "https://api.comunio.es/clubs/2"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/70/logo"
+                  "href": "https://api.comunio.es/clubs/2/logo"
                 }
               }
             },
-            "kickoff": "2026-10-19T21:00:00+02:00",
+            "kickoff": "2026-10-17T14:00:00+02:00",
             "odds": null
           }
         ],
         "cards": {
-          "yellow": 0,
+          "yellow": 1,
           "yellowRed": 0,
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.3,
-        "id": 3449,
-        "position": "defender",
+        "expectedPoints": 0.2,
+        "id": 2785,
+        "position": "midfielder",
         "points": 0
       },
-      "replacedPlayerName": "Abdel Abqar",
-      "replacedPlayerExpectedPoints": 0.3,
-      "strategicScore": 44.8,
+      "replacedPlayerName": "Pol Lozano",
+      "replacedPlayerExpectedPoints": 0.2,
+      "strategicScore": 47.8,
       "strategicComponents": {
         "squadUpgrade": {
-          "raw": 46.7,
+          "raw": 53.3,
           "weight": 0.4,
-          "marginalValue": 1.4
+          "marginalValue": 1.6
         },
         "absoluteQuality": {
-          "raw": 41.7,
+          "raw": 43.5,
           "weight": 0.2,
-          "ppm": 2.5
+          "ppm": 2.61
         },
         "positionNeed": {
           "raw": 50,
@@ -1387,7 +1332,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 133
+          "efficiency": 139.2
         },
         "rivalPressure": {
           "raw": 20,
@@ -1406,16 +1351,16 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+1.4 pts al Once Ideal sustituyendo a Abdel Abqar (1.27 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (2.5 PPM > 1.27 PPM).",
+        "✅ Entra en el XI titular (+1.6 pts al Once Ideal sustituyendo a Pol Lozano (2.47 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (2.61 PPM > 2.47 PPM).",
         "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 🔄 Rotación Habitual (PPM: 2.5 | Fiabilidad: 90% minutos | Eficiencia: 133 pts/M€)",
+        "📊 🔄 Rotación Habitual (PPM: 2.61 | Fiabilidad: 90% minutos | Eficiencia: 139.2 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 90%)",
         "💰 [Banda: DEPTH] Puja recomendada: 632.400 € (102.0% VM | Sobreprecio: +2%).",
-        "⛔ Fondos insuficientes: Requiere 1.632.400 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 696.688 €."
+        "⛔ Fondos insuficientes: Requiere 1.632.400 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.092.188 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +1 pts (sustituye a Abdel Abqar). 💰 [Banda: DEPTH] Puja recomendada: 632.400 € (102.0% VM | Sobreprecio: +2%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +2 pts (sustituye a Pol Lozano). 💰 [Banda: DEPTH] Puja recomendada: 632.400 € (102.0% VM | Sobreprecio: +2%)."
     },
     {
       "playerId": 3649,
@@ -1429,78 +1374,85 @@
       "expectedPoints": 1,
       "ppm": 1.93,
       "efficiency": 219.4,
-      "upgradePoints": 0.2,
-      "marginalValue": 0.2,
+      "upgradePoints": 0.3,
+      "marginalValue": 0.3,
       "vorp": 18,
       "vorpPerMatchday": 0.53,
-      "cpmp": 1450000,
-      "cpmpSeason": 41429,
+      "cpmp": 966667,
+      "cpmpSeason": 29000,
       "replacedPlayer": {
-        "playerId": 3449,
-        "name": "Abdel Abqar",
-        "price": 260000,
-        "totalPoints": 2,
+        "playerId": 2785,
+        "name": "Pol Lozano",
+        "price": 190000,
+        "totalPoints": 10,
         "status": null,
         "statusInfo": null,
-        "type": "defender",
+        "type": "midfielder",
         "historical": {
           "points": [
             {
+              "season": "19/20",
+              "points": "8",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "21/22",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "22/23",
+              "points": "8",
+              "eventId": 961836
+            },
+            {
               "season": "23/24",
-              "points": "99",
-              "eventId": 975270
+              "points": "-",
+              "eventId": false
             },
             {
               "season": "24/25",
-              "points": "118",
+              "points": "113",
               "eventId": 988474
             },
             {
               "season": "25/26",
-              "points": "84",
+              "points": "129",
               "eventId": 998265
             }
           ]
         },
         "average": {
-          "grade": "6,2",
-          "points": "1",
+          "grade": "6,6",
+          "points": "3,33",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "0,0",
-            "points": "0"
+            "grade": "2,6",
+            "points": "1,2"
           }
         },
         "club": {
-          "id": 8,
-          "name": "Getafe",
+          "id": 7,
+          "name": "Espanyol",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/8"
+              "href": "https://api.comunio.es/clubs/7"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/8/logo"
+              "href": "https://api.comunio.es/clubs/7/logo"
             }
           }
         },
         "nextMatches": [
           {
-            "matchdayNr": 7,
+            "matchdayNr": 8,
             "homeClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/8"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
-                }
-              }
-            },
-            "guestClub": {
               "id": 65,
               "name": "Málaga",
               "abbreviation": "mga",
@@ -1513,91 +1465,73 @@
                 }
               }
             },
-            "kickoff": "2026-09-20T14:00:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
             "guestClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
+              "id": 7,
+              "name": "Espanyol",
+              "abbreviation": "esp",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/8"
+                  "href": "https://api.comunio.es/clubs/7"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
+                  "href": "https://api.comunio.es/clubs/7/logo"
                 }
               }
             },
-            "kickoff": "2026-10-10T18:30:00+02:00",
+            "kickoff": "2026-10-09T21:00:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
+              "id": 7,
+              "name": "Espanyol",
+              "abbreviation": "esp",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/8"
+                  "href": "https://api.comunio.es/clubs/7"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
+                  "href": "https://api.comunio.es/clubs/7/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 70,
-              "name": "Rayo Vallecano",
-              "abbreviation": "ray",
+              "id": 2,
+              "name": "Atlético",
+              "abbreviation": "atm",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/70"
+                  "href": "https://api.comunio.es/clubs/2"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/70/logo"
+                  "href": "https://api.comunio.es/clubs/2/logo"
                 }
               }
             },
-            "kickoff": "2026-10-19T21:00:00+02:00",
+            "kickoff": "2026-10-17T14:00:00+02:00",
             "odds": null
           }
         ],
         "cards": {
-          "yellow": 0,
+          "yellow": 1,
           "yellowRed": 0,
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.3,
-        "id": 3449,
-        "position": "defender",
+        "expectedPoints": 0.2,
+        "id": 2785,
+        "position": "midfielder",
         "points": 0
       },
-      "replacedPlayerName": "Abdel Abqar",
-      "replacedPlayerExpectedPoints": 0.3,
-      "strategicScore": 25.1,
+      "replacedPlayerName": "Pol Lozano",
+      "replacedPlayerExpectedPoints": 0.2,
+      "strategicScore": 26.4,
       "strategicComponents": {
         "squadUpgrade": {
-          "raw": 6.7,
+          "raw": 10,
           "weight": 0.4,
-          "marginalValue": 0.2
+          "marginalValue": 0.3
         },
         "absoluteQuality": {
           "raw": 32.2,
@@ -1631,17 +1565,17 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+0.2 pts al Once Ideal sustituyendo a Abdel Abqar (1.27 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (1.93 PPM > 1.27 PPM).",
+        "✅ Entra en el XI titular (+0.3 pts al Once Ideal sustituyendo a Pol Lozano (2.47 PPM)).",
+        "⚠️ Alerta: El promedio con momentum (1.93 PPM) no supera holgadamente a Pol Lozano (2.47 PPM).",
         "🟡 Posición con necesidad MODERADA: 5 disponibles. Fondo de armario ajustado.",
         "📊 ⭐ Titular Fijo (PPM: 1.93 | Fiabilidad: 95% minutos | Eficiencia: 219.4 pts/M€)",
         "🔥 Dinámica de club: 🏟️ Fuerte en El Sadar / Regular (1.02x): 3V 1E 1D - Fiable en casa y regularidad táctica",
         "⚔️ Competencia en club: Compite en [object Object] con Alejandro Catena, Flavien Boyomo, Enzo Boyomo... (Nivel: BAJA, Confianza XI: 95%)",
-        "⛔ Mejora insuficiente (0.2 < 3 pts) y posición cubierta.",
+        "⛔ Mejora insuficiente (0.3 < 3 pts) y posición cubierta.",
         "💰 [Banda: DEPTH] Puja recomendada: 290.000 € (100.0% VM | Sobreprecio: +0%).",
-        "⛔ Fondos insuficientes: Requiere 1.290.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 696.688 €."
+        "⛔ Fondos insuficientes: Requiere 1.290.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.092.188 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +0 pts (sustituye a Abdel Abqar). 💰 [Banda: DEPTH] Puja recomendada: 290.000 € (100.0% VM | Sobreprecio: +0%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +0 pts (sustituye a Pol Lozano). 💰 [Banda: DEPTH] Puja recomendada: 290.000 € (100.0% VM | Sobreprecio: +0%)."
     }
   ],
   "liquiditySuggestions": [
@@ -1664,23 +1598,23 @@
     "remainingMatchdays": 31,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 42.5,
+      "currentXiExpectedPoints": 40.6,
       "restOfSeasonAggregateExpectedPpm": 38.9,
       "pWin": 0,
-      "pTop2": 0.497,
-      "pTop3": 0.791,
-      "expectedFinalPoints": 1478,
-      "range": "1422 - 1537 pts",
+      "pTop2": 0.543,
+      "pTop3": 0.801,
+      "expectedFinalPoints": 1481,
+      "range": "1425 - 1539 pts",
       "wilsonCI95": {
         "lowerPct": 0,
         "upperPct": 0.4
       }
     },
     "probChampion": 0,
-    "probTop2": 49.7,
-    "probTop3": 79.1,
-    "racingExpectedFinalPoints": 1478,
-    "racingRange": "1422 - 1537 pts",
+    "probTop2": 54.3,
+    "probTop3": 80.1,
+    "racingExpectedFinalPoints": 1481,
+    "racingRange": "1425 - 1539 pts",
     "racingWilsonCI95": {
       "lowerPct": 0,
       "upperPct": 0.4
@@ -1710,11 +1644,11 @@
         "currentPoints": 272,
         "meanPpm": 38.9,
         "stdDev": 8,
-        "expectedFinalPoints": 1478,
-        "range": "1422 - 1537 pts",
+        "expectedFinalPoints": 1481,
+        "range": "1425 - 1539 pts",
         "probChampion": 0,
-        "probTop2": 49.7,
-        "probTop3": 79.1,
+        "probTop2": 54.3,
+        "probTop3": 80.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1729,8 +1663,8 @@
         "expectedFinalPoints": 1458,
         "range": "1401 - 1517 pts",
         "probChampion": 0,
-        "probTop2": 29.9,
-        "probTop3": 62.7,
+        "probTop2": 27.8,
+        "probTop3": 61.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1745,8 +1679,8 @@
         "expectedFinalPoints": 1433,
         "range": "1377 - 1488 pts",
         "probChampion": 0,
-        "probTop2": 12.8,
-        "probTop3": 35.4,
+        "probTop2": 11.2,
+        "probTop3": 34.4,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1758,11 +1692,11 @@
         "currentPoints": 261,
         "meanPpm": 37.3,
         "stdDev": 8,
-        "expectedFinalPoints": 1416,
-        "range": "1359 - 1473 pts",
+        "expectedFinalPoints": 1417,
+        "range": "1361 - 1476 pts",
         "probChampion": 0,
-        "probTop2": 7.6,
-        "probTop3": 22.4,
+        "probTop2": 6.7,
+        "probTop3": 24.2,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1774,11 +1708,11 @@
         "currentPoints": 240,
         "meanPpm": 34.3,
         "stdDev": 8,
-        "expectedFinalPoints": 1304,
-        "range": "1247 - 1364 pts",
+        "expectedFinalPoints": 1300,
+        "range": "1245 - 1357 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0.4,
+        "probTop3": 0,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1790,8 +1724,8 @@
         "currentPoints": 238,
         "meanPpm": 34,
         "stdDev": 8,
-        "expectedFinalPoints": 1295,
-        "range": "1238 - 1354 pts",
+        "expectedFinalPoints": 1291,
+        "range": "1235 - 1349 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1806,8 +1740,8 @@
         "currentPoints": 230,
         "meanPpm": 32.9,
         "stdDev": 8,
-        "expectedFinalPoints": 1247,
-        "range": "1192 - 1304 pts",
+        "expectedFinalPoints": 1250,
+        "range": "1195 - 1312 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1872,11 +1806,11 @@
         "currentPoints": 272,
         "meanPpm": 38.9,
         "stdDev": 8,
-        "expectedFinalPoints": 1478,
-        "range": "1422 - 1537 pts",
+        "expectedFinalPoints": 1481,
+        "range": "1425 - 1539 pts",
         "probChampion": 0,
-        "probTop2": 49.7,
-        "probTop3": 79.1,
+        "probTop2": 54.3,
+        "probTop3": 80.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1891,8 +1825,8 @@
         "expectedFinalPoints": 1458,
         "range": "1401 - 1517 pts",
         "probChampion": 0,
-        "probTop2": 29.9,
-        "probTop3": 62.7,
+        "probTop2": 27.8,
+        "probTop3": 61.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1907,8 +1841,8 @@
         "expectedFinalPoints": 1433,
         "range": "1377 - 1488 pts",
         "probChampion": 0,
-        "probTop2": 12.8,
-        "probTop3": 35.4,
+        "probTop2": 11.2,
+        "probTop3": 34.4,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1920,11 +1854,11 @@
         "currentPoints": 261,
         "meanPpm": 37.3,
         "stdDev": 8,
-        "expectedFinalPoints": 1416,
-        "range": "1359 - 1473 pts",
+        "expectedFinalPoints": 1417,
+        "range": "1361 - 1476 pts",
         "probChampion": 0,
-        "probTop2": 7.6,
-        "probTop3": 22.4,
+        "probTop2": 6.7,
+        "probTop3": 24.2,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1936,11 +1870,11 @@
         "currentPoints": 240,
         "meanPpm": 34.3,
         "stdDev": 8,
-        "expectedFinalPoints": 1304,
-        "range": "1247 - 1364 pts",
+        "expectedFinalPoints": 1300,
+        "range": "1245 - 1357 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0.4,
+        "probTop3": 0,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1952,8 +1886,8 @@
         "currentPoints": 238,
         "meanPpm": 34,
         "stdDev": 8,
-        "expectedFinalPoints": 1295,
-        "range": "1238 - 1354 pts",
+        "expectedFinalPoints": 1291,
+        "range": "1235 - 1349 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1968,8 +1902,8 @@
         "currentPoints": 230,
         "meanPpm": 32.9,
         "stdDev": 8,
-        "expectedFinalPoints": 1247,
-        "range": "1192 - 1304 pts",
+        "expectedFinalPoints": 1250,
+        "range": "1195 - 1312 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2012,5 +1946,5 @@
       }
     ]
   },
-  "priorityMovement": "Pujar 3.525.600 € por Guruzeta (striker) para sustituir a Abdel Abqar (Expected XI Delta: +4.4 pts, CPMP: Óptimo)."
+  "priorityMovement": "Pujar 3.525.600 € por Guruzeta (striker) para sustituir a Pol Lozano (Expected XI Delta: +4.5 pts, CPMP: Óptimo)."
 }

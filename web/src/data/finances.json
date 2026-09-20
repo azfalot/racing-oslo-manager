@@ -2,11 +2,11 @@
   "club": {
     "name": "Racing de Oslo",
     "coach": "Mateo Oslomany",
-    "balance": 696688,
-    "committedBids": 0,
-    "effectiveBalance": 696688,
+    "balance": 1092188,
+    "committedBids": 3000000,
+    "effectiveBalance": -1907812,
     "teamValue": 47890000,
-    "netWorth": 48586688,
+    "netWorth": 48982188,
     "squadSize": 13,
     "debt": 0,
     "isHealthy": true,
@@ -37,16 +37,16 @@
   "projections": {
     "nextMatchday": {
       "matchday": "Jornada 8",
-      "expectedPoints": 43,
-      "expectedPrize": 430000,
-      "projectedCashAfter": 1126688
+      "expectedPoints": 41,
+      "expectedPrize": 410000,
+      "projectedCashAfter": -1497812
     },
     "monthlyOutlook": {
       "jornadas": 4,
-      "projectedPoints": 170,
-      "projectedPrize": 1700000,
+      "projectedPoints": 162,
+      "projectedPrize": 1624000,
       "estimatedSales": 980000,
-      "totalProjectedLiquidity": 3376688
+      "totalProjectedLiquidity": 696188
     },
     "financialPolicy": {
       "reserveRequirement": "Saldo Positivo Obligatorio (Corte Jornada)",
@@ -71,16 +71,28 @@
       "pos": 2,
       "teamName": "Pachangueros F.C.",
       "owner": "Pachangueros F.C.",
-      "squadValue": 66320000,
+      "squadValue": 61370000,
       "points": 269,
       "totalPrize": 2690000,
-      "estimatedCash": 1989600,
-      "totalWealth": 68309600,
+      "estimatedCash": 1841100,
+      "totalWealth": 63211100,
       "power": "Patrimonio Alto",
       "isMe": false
     },
     {
       "pos": 3,
+      "teamName": "Ana",
+      "owner": "Ana",
+      "squadValue": 48280000,
+      "points": 238,
+      "totalPrize": 2380000,
+      "estimatedCash": 1448400,
+      "totalWealth": 49728400,
+      "power": "Patrimonio Medio",
+      "isMe": false
+    },
+    {
+      "pos": 4,
       "teamName": "Amigos de NIN",
       "owner": "Amigos de NIN",
       "squadValue": 40250000,
@@ -92,28 +104,16 @@
       "isMe": false
     },
     {
-      "pos": 4,
+      "pos": 5,
       "teamName": "Racing de Oslo",
       "owner": "Mateo Oslomany (TÚ)",
       "squadValue": 47890000,
       "points": 272,
       "totalPrize": 2720000,
-      "estimatedCash": 696688,
-      "totalWealth": 48586688,
+      "estimatedCash": 1092188,
+      "totalWealth": 48982188,
       "power": "Solvente (0 € Deuda)",
       "isMe": true
-    },
-    {
-      "pos": 5,
-      "teamName": "Ana",
-      "owner": "Ana",
-      "squadValue": 48280000,
-      "points": 238,
-      "totalPrize": 2380000,
-      "estimatedCash": 1448400,
-      "totalWealth": 49728400,
-      "power": "Patrimonio Medio",
-      "isMe": false
     },
     {
       "pos": 6,
@@ -129,18 +129,6 @@
     },
     {
       "pos": 7,
-      "teamName": "Suances nin",
-      "owner": "Suances nin",
-      "squadValue": 51080000,
-      "points": 230,
-      "totalPrize": 2300000,
-      "estimatedCash": 1532400,
-      "totalWealth": 52612400,
-      "power": "Patrimonio Medio",
-      "isMe": false
-    },
-    {
-      "pos": 8,
       "teamName": "M4 TEAM",
       "owner": "M4 TEAM",
       "squadValue": 53670000,
@@ -148,6 +136,18 @@
       "totalPrize": 2400000,
       "estimatedCash": 1610100,
       "totalWealth": 55280100,
+      "power": "Patrimonio Medio",
+      "isMe": false
+    },
+    {
+      "pos": 8,
+      "teamName": "Suances nin",
+      "owner": "Suances nin",
+      "squadValue": 51080000,
+      "points": 230,
+      "totalPrize": 2300000,
+      "estimatedCash": 1532400,
+      "totalWealth": 52612400,
       "power": "Patrimonio Medio",
       "isMe": false
     },

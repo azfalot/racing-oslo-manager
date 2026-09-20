@@ -1,13 +1,13 @@
 {
-  "lastSyncTimestamp": "2026-09-20T11:33:03.215Z",
-  "lastSyncFormatted": "20/9/26, 13:33:03",
+  "lastSyncTimestamp": "2026-09-20T16:00:51.417Z",
+  "lastSyncFormatted": "20/9/26, 18:00:51",
   "bot": {
     "name": "comunio-bot",
     "version": "1.2.0",
     "status": "ONLINE",
     "mode": "autonomo",
     "environment": "production",
-    "pid": 12248,
+    "pid": 4112,
     "uptime": "0h 0m",
     "pm2Process": "comunio-bot (id 0, fork)",
     "schedule": {
@@ -43,7 +43,7 @@
     "distStatus": "Sincronizado con origin/main",
     "dataFiles": {
       "squad": "13 jugadores en plantilla",
-      "news": "167 noticias históricas sincronizadas",
+      "news": "169 noticias históricas sincronizadas",
       "rivals": "10 clubes auditados con sugerencias dinámicas",
       "market": "Mercado escaneado",
       "warRoom": "War Room cuantitativo activo con Monte Carlo (1.000 iteraciones)",
@@ -55,9 +55,9 @@
     "manager": "azfalot",
     "standingsPosition": 2,
     "points": 188,
-    "squadValue": 48280000,
+    "squadValue": 47890000,
     "balanceStatus": "Positivo / Saneado (+280.288 €)",
-    "activeFormation": "5-3-2",
+    "activeFormation": "4-4-2",
     "starterCount": 11,
     "topScorer": "Mariano Díaz (46 pts)"
   },
@@ -78,7 +78,7 @@
       "id": "lineup_engine",
       "name": "Motor Táctico ComunioEngine",
       "status": "OK",
-      "detail": "Once óptimo 5-3-2 calculado y guardado para Jornada 5"
+      "detail": "Once óptimo 4-4-2 calculado y guardado para Jornada 5"
     },
     {
       "id": "rivals_360",
@@ -90,7 +90,7 @@
       "id": "news_crawler",
       "name": "Crawler de Noticias & Tablón",
       "status": "OK",
-      "detail": "167 noticias históricas sincronizadas y deduplicadas"
+      "detail": "169 noticias históricas sincronizadas y deduplicadas"
     },
     {
       "id": "bench_trends",
@@ -124,7 +124,7 @@
     {
       "name": "Radar y deduplicación de noticias",
       "status": "OK",
-      "detail": "167 noticias históricas"
+      "detail": "169 noticias históricas"
     },
     {
       "name": "Auditoría de banquillo y tendencias",
