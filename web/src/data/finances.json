@@ -37,16 +37,16 @@
   "projections": {
     "nextMatchday": {
       "matchday": "Jornada 8",
-      "expectedPoints": 41,
-      "expectedPrize": 410000,
-      "projectedCashAfter": -1497812
+      "expectedPoints": 44,
+      "expectedPrize": 440000,
+      "projectedCashAfter": -1467812
     },
     "monthlyOutlook": {
       "jornadas": 4,
-      "projectedPoints": 162,
-      "projectedPrize": 1624000,
+      "projectedPoints": 175,
+      "projectedPrize": 1752000,
       "estimatedSales": 980000,
-      "totalProjectedLiquidity": 696188
+      "totalProjectedLiquidity": 824188
     },
     "financialPolicy": {
       "reserveRequirement": "Saldo Positivo Obligatorio (Corte Jornada)",
@@ -93,30 +93,6 @@
     },
     {
       "pos": 4,
-      "teamName": "Amigos de NIN",
-      "owner": "Amigos de NIN",
-      "squadValue": 40250000,
-      "points": 261,
-      "totalPrize": 2610000,
-      "estimatedCash": 1207500,
-      "totalWealth": 41457500,
-      "power": "Patrimonio Regular",
-      "isMe": false
-    },
-    {
-      "pos": 5,
-      "teamName": "Racing de Oslo",
-      "owner": "Mateo Oslomany (TÚ)",
-      "squadValue": 47890000,
-      "points": 272,
-      "totalPrize": 2720000,
-      "estimatedCash": 1092188,
-      "totalWealth": 48982188,
-      "power": "Solvente (0 € Deuda)",
-      "isMe": true
-    },
-    {
-      "pos": 6,
       "teamName": "Puente Avios FC",
       "owner": "Puente Avios FC",
       "squadValue": 57090000,
@@ -128,14 +104,38 @@
       "isMe": false
     },
     {
+      "pos": 5,
+      "teamName": "Amigos de NIN",
+      "owner": "Amigos de NIN",
+      "squadValue": 40250000,
+      "points": 261,
+      "totalPrize": 2610000,
+      "estimatedCash": 1207500,
+      "totalWealth": 41457500,
+      "power": "Patrimonio Regular",
+      "isMe": false
+    },
+    {
+      "pos": 6,
+      "teamName": "Racing de Oslo",
+      "owner": "Mateo Oslomany (TÚ)",
+      "squadValue": 47890000,
+      "points": 272,
+      "totalPrize": 2720000,
+      "estimatedCash": 1092188,
+      "totalWealth": 48982188,
+      "power": "Solvente (0 € Deuda)",
+      "isMe": true
+    },
+    {
       "pos": 7,
       "teamName": "M4 TEAM",
       "owner": "M4 TEAM",
-      "squadValue": 53670000,
+      "squadValue": 45800000,
       "points": 240,
       "totalPrize": 2400000,
-      "estimatedCash": 1610100,
-      "totalWealth": 55280100,
+      "estimatedCash": 1374000,
+      "totalWealth": 47174000,
       "power": "Patrimonio Medio",
       "isMe": false
     },
@@ -143,11 +143,11 @@
       "pos": 8,
       "teamName": "Suances nin",
       "owner": "Suances nin",
-      "squadValue": 51080000,
+      "squadValue": 50470000,
       "points": 230,
       "totalPrize": 2300000,
-      "estimatedCash": 1532400,
-      "totalWealth": 52612400,
+      "estimatedCash": 1514100,
+      "totalWealth": 51984100,
       "power": "Patrimonio Medio",
       "isMe": false
     },
