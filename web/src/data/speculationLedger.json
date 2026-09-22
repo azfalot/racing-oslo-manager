@@ -1,16 +1,6 @@
 {
   "activeTradingPlayers": [
     {
-      "playerId": 3796,
-      "name": "Adrián Rodríguez",
-      "buyPrice": 160000,
-      "buyDate": "2026-09-15T08:42:01.181Z",
-      "tier": "FLOOR_PRICE_BARGAIN",
-      "listedOnMarket": true,
-      "listedPrice": 160000,
-      "listedDate": "2026-09-16T07:07:18.328Z"
-    },
-    {
       "playerId": 3440,
       "name": "Beñat Prados",
       "buyPrice": 250000,
@@ -27,16 +17,6 @@
       "listedOnMarket": true,
       "listedPrice": 250000,
       "listedDate": "2026-09-19T07:13:05.587Z"
-    },
-    {
-      "playerId": 3879,
-      "name": "Iturbe",
-      "buyPrice": 160000,
-      "buyDate": "2026-09-20T16:00:11.347Z",
-      "tier": "FLOOR_PRICE_BARGAIN",
-      "listedOnMarket": true,
-      "listedPrice": 160000,
-      "listedDate": "2026-09-21T07:05:13.391Z"
     }
   ],
   "closedTrades": [
@@ -84,9 +64,27 @@
       "profitEUR": 3900,
       "roiPct": 1.7,
       "sellDate": "2026-09-20T11:32:05.005Z"
+    },
+    {
+      "playerId": 3879,
+      "name": "Iturbe",
+      "buyPrice": 160000,
+      "sellPrice": 166100,
+      "profitEUR": 6100,
+      "roiPct": 3.8,
+      "sellDate": "2026-09-22T07:24:24.870Z"
+    },
+    {
+      "playerId": 3796,
+      "name": "Adrián Rodríguez",
+      "buyPrice": 160000,
+      "sellPrice": 165100,
+      "profitEUR": 5100,
+      "roiPct": 3.2,
+      "sellDate": "2026-09-22T07:24:24.974Z"
     }
   ],
-  "totalProfitEUR": 19600,
-  "successfulTradesCount": 5,
-  "lastUpdated": "2026-09-21T07:05:13.391Z"
+  "totalProfitEUR": 30800,
+  "successfulTradesCount": 7,
+  "lastUpdated": "2026-09-22T07:24:24.975Z"
 }

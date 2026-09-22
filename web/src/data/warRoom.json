@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-21T21:51:41.953Z",
+  "timestamp": "2026-09-22T07:25:40.317Z",
   "currentMatchday": 7,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -9,21 +9,21 @@
     "gap": 57
   },
   "finances": {
-    "balance": 1212188,
+    "balance": 402188,
     "committedBids": 0,
-    "effectiveBalance": 1212188,
-    "squadValue": 48690000,
-    "totalPatrimony": 49902188
+    "effectiveBalance": 402188,
+    "squadValue": 49450000,
+    "totalPatrimony": 49852188
   },
   "lineup": {
     "formation": "4-4-2",
-    "expectedPoints": 43.800000000000004,
+    "expectedPoints": 45,
     "starterCount": 11,
     "starterRisks": [
       {
         "playerId": 3597,
         "name": "Íñigo Arguibide",
-        "price": 1060000,
+        "price": 1050000,
         "totalPoints": 15,
         "status": null,
         "statusInfo": null,
@@ -147,7 +147,7 @@
       {
         "playerId": 1876,
         "name": "Denis Suárez",
-        "price": 1350000,
+        "price": 1180000,
         "totalPoints": 29,
         "status": null,
         "statusInfo": null,
@@ -314,71 +314,46 @@
         "points": 0
       },
       {
-        "playerId": 2785,
-        "name": "Pol Lozano",
-        "price": 210000,
-        "totalPoints": 10,
+        "playerId": 3822,
+        "name": "Dani Requena",
+        "price": 640000,
+        "totalPoints": 9,
         "status": null,
         "statusInfo": null,
         "type": "midfielder",
         "historical": {
           "points": [
             {
-              "season": "19/20",
-              "points": "8",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "21/22",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "22/23",
-              "points": "8",
-              "eventId": 961836
-            },
-            {
-              "season": "23/24",
-              "points": "-",
-              "eventId": false
-            },
-            {
               "season": "24/25",
-              "points": "113",
+              "points": "2",
               "eventId": 988474
             },
             {
               "season": "25/26",
-              "points": "129",
-              "eventId": 998265
+              "points": "-",
+              "eventId": false
             }
           ]
         },
         "average": {
-          "grade": "6,6",
-          "points": "3,33",
+          "grade": "6,5",
+          "points": "3",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "1,3",
-            "points": "0,6"
+            "grade": "3,9",
+            "points": "1,8"
           }
         },
         "club": {
-          "id": 7,
-          "name": "Espanyol",
+          "id": 10,
+          "name": "Levante",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/7"
+              "href": "https://api.comunio.es/clubs/10"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/7/logo"
+              "href": "https://api.comunio.es/clubs/10/logo"
             }
           }
         },
@@ -386,74 +361,105 @@
           {
             "matchdayNr": 8,
             "homeClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
+              "id": 10,
+              "name": "Levante",
+              "abbreviation": "lev",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/65"
+                  "href": "https://api.comunio.es/clubs/10"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
+                  "href": "https://api.comunio.es/clubs/10/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 17,
+              "name": "Sevilla",
+              "abbreviation": "sev",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/17"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/17/logo"
                 }
               }
             },
-            "kickoff": "2026-10-09T21:00:00+02:00",
+            "kickoff": "2026-10-12T21:00:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 6,
+              "name": "Deportivo",
+              "abbreviation": "dep",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/6"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/6/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
+              "id": 10,
+              "name": "Levante",
+              "abbreviation": "lev",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/2"
+                  "href": "https://api.comunio.es/clubs/10"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
+                  "href": "https://api.comunio.es/clubs/10/logo"
                 }
               }
             },
-            "kickoff": "2026-10-17T14:00:00+02:00",
+            "kickoff": "2026-10-16T21:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 6,
+            "homeClub": {
+              "id": 10,
+              "name": "Levante",
+              "abbreviation": "lev",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/10"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/10/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/1"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/1/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-21T20:00:00+02:00",
             "odds": null
           }
         ],
         "cards": {
-          "yellow": 1,
+          "yellow": 0,
           "yellowRed": 0,
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.2,
-        "id": 2785,
+        "expectedPoints": 1.4,
+        "id": 3822,
         "position": "midfielder",
         "points": 0
       }
@@ -461,16 +467,16 @@
   },
   "weaknesses": [
     {
-      "playerId": 2785,
-      "name": "Pol Lozano",
+      "playerId": 3822,
+      "name": "Dani Requena",
       "position": "midfielder",
-      "price": 210000,
-      "expectedPoints": 0.2,
-      "vorp": -16,
-      "vorpPerMatchday": -0.47,
+      "price": 640000,
+      "expectedPoints": 1.4,
+      "vorp": -31,
+      "vorpPerMatchday": -0.91,
       "replacementPpm": 2.97,
-      "upgradeGap": 5.3,
-      "urgencyScore": 23.5
+      "upgradeGap": 4.1,
+      "urgencyScore": 27.2
     },
     {
       "playerId": 3553,
@@ -488,7 +494,7 @@
       "playerId": 1876,
       "name": "Denis Suárez",
       "position": "midfielder",
-      "price": 1350000,
+      "price": 1180000,
       "expectedPoints": 2.2,
       "vorp": 16,
       "vorpPerMatchday": 0.47,
@@ -510,86 +516,66 @@
       "playerId": 2539,
       "name": "Lucas Boyé",
       "type": "striker",
-      "price": 7630000,
-      "bidAmount": 9461200,
-      "maxRationalBid": 9461200,
-      "marginPct": 24,
+      "price": 7350000,
+      "bidAmount": 8893500,
+      "maxRationalBid": 8893500,
+      "marginPct": 21,
       "band": "ELITE_LEAGUE_WINNER",
       "expectedPoints": 9,
       "ppm": 6.33,
-      "efficiency": 27.4,
-      "upgradePoints": 8.7,
-      "marginalValue": 8.7,
+      "efficiency": 28.4,
+      "upgradePoints": 7.6,
+      "marginalValue": 7.6,
       "vorp": 100,
       "vorpPerMatchday": 2.94,
-      "cpmp": 877011,
-      "cpmpSeason": 25777,
+      "cpmp": 967105,
+      "cpmpSeason": 28488,
       "replacedPlayer": {
-        "playerId": 2785,
-        "name": "Pol Lozano",
-        "price": 210000,
-        "totalPoints": 10,
+        "playerId": 3597,
+        "name": "Íñigo Arguibide",
+        "price": 1050000,
+        "totalPoints": 15,
         "status": null,
         "statusInfo": null,
-        "type": "midfielder",
+        "type": "defender",
         "historical": {
           "points": [
             {
-              "season": "19/20",
-              "points": "8",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "21/22",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "22/23",
-              "points": "8",
-              "eventId": 961836
-            },
-            {
               "season": "23/24",
-              "points": "-",
-              "eventId": false
+              "points": "2",
+              "eventId": 975270
             },
             {
               "season": "24/25",
-              "points": "113",
-              "eventId": 988474
+              "points": "-",
+              "eventId": false
             },
             {
               "season": "25/26",
-              "points": "129",
+              "points": "13",
               "eventId": 998265
             }
           ]
         },
         "average": {
-          "grade": "6,6",
-          "points": "3,33",
+          "grade": "6,3",
+          "points": "2,14",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "1,3",
-            "points": "0,6"
+            "grade": "6,3",
+            "points": "1,8"
           }
         },
         "club": {
-          "id": 7,
-          "name": "Espanyol",
+          "id": 12,
+          "name": "Osasuna",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/7"
+              "href": "https://api.comunio.es/clubs/12"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/7/logo"
+              "href": "https://api.comunio.es/clubs/12/logo"
             }
           }
         },
@@ -597,85 +583,85 @@
           {
             "matchdayNr": 8,
             "homeClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/65"
+                  "href": "https://api.comunio.es/clubs/4"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
+                  "href": "https://api.comunio.es/clubs/4/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/12"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/12/logo"
                 }
               }
             },
-            "kickoff": "2026-10-09T21:00:00+02:00",
+            "kickoff": "2026-10-11T18:30:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/12"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/12/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
+              "id": 14,
+              "name": "Racing",
+              "abbreviation": "rac",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/2"
+                  "href": "https://api.comunio.es/clubs/14"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
+                  "href": "https://api.comunio.es/clubs/14/logo"
                 }
               }
             },
-            "kickoff": "2026-10-17T14:00:00+02:00",
+            "kickoff": "2026-10-18T14:00:00+02:00",
             "odds": null
           }
         ],
         "cards": {
-          "yellow": 1,
+          "yellow": 0,
           "yellowRed": 0,
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.2,
-        "id": 2785,
-        "position": "midfielder",
+        "expectedPoints": 1.3,
+        "id": 3597,
+        "position": "defender",
         "points": 0
       },
-      "replacedPlayerName": "Pol Lozano",
-      "replacedPlayerExpectedPoints": 0.2,
-      "strategicScore": 75.8,
+      "replacedPlayerName": "Íñigo Arguibide",
+      "replacedPlayerExpectedPoints": 1.3,
+      "strategicScore": 73.1,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 8.7
+          "marginalValue": 7.6
         },
         "absoluteQuality": {
           "raw": 100,
@@ -683,14 +669,208 @@
           "ppm": 6.33
         },
         "positionNeed": {
-          "raw": 50,
+          "raw": 30,
           "weight": 0.15,
-          "detail": "2 disponibles = exactamente los requeridos. Sin suplentes."
+          "detail": "3 disponibles. Fondo de armario ajustado."
         },
         "marketOpportunity": {
-          "raw": 68.5,
+          "raw": 71,
           "weight": 0.1,
-          "efficiency": 27.4
+          "efficiency": 28.4
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 10,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": false,
+      "reasoning": [
+        "✅ Entra en el XI titular (+7.6 pts al Once Ideal sustituyendo a Íñigo Arguibide (2.7 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (6.33 PPM > 2.7 PPM).",
+        "🟡 Posición con necesidad MODERADA: 3 disponibles. Fondo de armario ajustado.",
+        "📊 ⭐ Titular Fijo (PPM: 6.33 | Fiabilidad: 95% minutos | Eficiencia: 28.4 pts/M€)",
+        "🔥 Dinámica de club: 🚀 Estado de Gracia / Racha Histórica (1.06x): 3V 1E 1D - Alta efectividad colectiva y moral por las nubes",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 8.893.500 € (121.0% VM | Sobreprecio: +21%).",
+        "⛔ Fondos insuficientes: Requiere 9.893.500 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 402.188 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +8 pts (sustituye a Íñigo Arguibide). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 8.893.500 € (121.0% VM | Sobreprecio: +21%)."
+    },
+    {
+      "playerId": 3506,
+      "name": "Fermín López",
+      "type": "midfielder",
+      "price": 16200000,
+      "bidAmount": 20250000,
+      "maxRationalBid": 20250000,
+      "marginPct": 25,
+      "band": "ELITE_LEAGUE_WINNER",
+      "expectedPoints": 9,
+      "ppm": 8.47,
+      "efficiency": 17.2,
+      "upgradePoints": 10.1,
+      "marginalValue": 10.1,
+      "vorp": 124,
+      "vorpPerMatchday": 3.65,
+      "cpmp": 1603960,
+      "cpmpSeason": 47230,
+      "replacedPlayer": {
+        "playerId": 3597,
+        "name": "Íñigo Arguibide",
+        "price": 1050000,
+        "totalPoints": 15,
+        "status": null,
+        "statusInfo": null,
+        "type": "defender",
+        "historical": {
+          "points": [
+            {
+              "season": "23/24",
+              "points": "2",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "25/26",
+              "points": "13",
+              "eventId": 998265
+            }
+          ]
+        },
+        "average": {
+          "grade": "6,3",
+          "points": "2,14",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "6,3",
+            "points": "1,8"
+          }
+        },
+        "club": {
+          "id": 12,
+          "name": "Osasuna",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/12"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/12/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 8,
+            "homeClub": {
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/4"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/4/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/12"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/12/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-11T18:30:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 9,
+            "homeClub": {
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/12"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/12/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 14,
+              "name": "Racing",
+              "abbreviation": "rac",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/14"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/14/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-18T14:00:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 1.3,
+        "id": 3597,
+        "position": "defender",
+        "points": 0
+      },
+      "replacedPlayerName": "Íñigo Arguibide",
+      "replacedPlayerExpectedPoints": 1.3,
+      "strategicScore": 70.3,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 100,
+          "weight": 0.4,
+          "marginalValue": 10.1
+        },
+        "absoluteQuality": {
+          "raw": 100,
+          "weight": 0.2,
+          "ppm": 8.47
+        },
+        "positionNeed": {
+          "raw": 30,
+          "weight": 0.15,
+          "detail": "5 disponibles. Fondo de armario ajustado."
+        },
+        "marketOpportunity": {
+          "raw": 43,
+          "weight": 0.1,
+          "efficiency": 17.2
         },
         "rivalPressure": {
           "raw": 20,
@@ -709,315 +889,81 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+8.7 pts al Once Ideal sustituyendo a Pol Lozano (2.47 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (6.33 PPM > 2.47 PPM).",
-        "🟡 Posición con necesidad MODERADA: 2 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 6.33 | Fiabilidad: 95% minutos | Eficiencia: 27.4 pts/M€)",
-        "🔥 Dinámica de club: 🚀 Estado de Gracia / Racha Histórica (1.06x): 3V 1E 1D - Alta efectividad colectiva y moral por las nubes",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 9.461.200 € (124.0% VM | Sobreprecio: +24%).",
-        "⛔ Fondos insuficientes: Requiere 10.461.200 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.212.188 €."
+        "✅ Entra en el XI titular (+10.1 pts al Once Ideal sustituyendo a Íñigo Arguibide (2.7 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (8.47 PPM > 2.7 PPM).",
+        "🟡 Posición con necesidad MODERADA: 5 disponibles. Fondo de armario ajustado.",
+        "📊 ⭐ Titular Fijo (PPM: 8.47 | Fiabilidad: 95% minutos | Eficiencia: 17.2 pts/M€)",
+        "🔥 Dinámica de club: 🔥 Euforia / Líder Arrollador (1.1x): 5V 0E 0D - Ataque demoledor y máxima confianza colectiva",
+        "⚔️ Competencia en club: Compite en [object Object] con Pedri, Gavi, Frenkie de Jong... (Nivel: BAJA, Confianza XI: 95%)",
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 20.250.000 € (125.0% VM | Sobreprecio: +25%).",
+        "⛔ Fondos insuficientes: Requiere 21.250.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 402.188 €."
       ],
-      "reason": "🚀 SALTO CUALITATIVO (+8 pts XI): Mejora real del XI: +9 pts (sustituye a Pol Lozano). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 9.461.200 € (124.0% VM | Sobreprecio: +24%)."
+      "reason": "🚀 SALTO CUALITATIVO (+8 pts XI): Mejora real del XI: +10 pts (sustituye a Íñigo Arguibide). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 20.250.000 € (125.0% VM | Sobreprecio: +25%)."
     },
     {
-      "playerId": 3136,
-      "name": "Pathé Ciss",
-      "type": "midfielder",
-      "price": 2510000,
-      "bidAmount": 2886500,
-      "maxRationalBid": 2886500,
-      "marginPct": 15,
-      "band": "CLEAR_UPGRADE",
-      "expectedPoints": 5,
-      "ppm": 3.68,
-      "efficiency": 48.4,
-      "upgradePoints": 4.9,
-      "marginalValue": 4.9,
-      "vorp": 37,
-      "vorpPerMatchday": 1.09,
-      "cpmp": 512245,
-      "cpmpSeason": 15030,
-      "replacedPlayer": {
-        "playerId": 2785,
-        "name": "Pol Lozano",
-        "price": 210000,
-        "totalPoints": 10,
-        "status": null,
-        "statusInfo": null,
-        "type": "midfielder",
-        "historical": {
-          "points": [
-            {
-              "season": "19/20",
-              "points": "8",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "21/22",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "22/23",
-              "points": "8",
-              "eventId": 961836
-            },
-            {
-              "season": "23/24",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "24/25",
-              "points": "113",
-              "eventId": 988474
-            },
-            {
-              "season": "25/26",
-              "points": "129",
-              "eventId": 998265
-            }
-          ]
-        },
-        "average": {
-          "grade": "6,6",
-          "points": "3,33",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "1,3",
-            "points": "0,6"
-          }
-        },
-        "club": {
-          "id": 7,
-          "name": "Espanyol",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/7"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/7/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/65"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-09T21:00:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 9,
-            "homeClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/2"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-17T14:00:00+02:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 1,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 0.2,
-        "id": 2785,
-        "position": "midfielder",
-        "points": 0
-      },
-      "replacedPlayerName": "Pol Lozano",
-      "replacedPlayerExpectedPoints": 0.2,
-      "strategicScore": 71.3,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 4.9
-        },
-        "absoluteQuality": {
-          "raw": 61.3,
-          "weight": 0.2,
-          "ppm": 3.68
-        },
-        "positionNeed": {
-          "raw": 50,
-          "weight": 0.15,
-          "detail": "4 disponibles = exactamente los requeridos. Sin suplentes."
-        },
-        "marketOpportunity": {
-          "raw": 100,
-          "weight": 0.1,
-          "efficiency": 48.4
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": false,
-      "reasoning": [
-        "✅ Entra en el XI titular (+4.9 pts al Once Ideal sustituyendo a Pol Lozano (2.47 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (3.68 PPM > 2.47 PPM).",
-        "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 3.68 | Fiabilidad: 95% minutos | Eficiencia: 48.4 pts/M€)",
-        "🔥 Dinámica de club: ⚖️ Ritmo Estable (0.98x): 2V 1E 2D - Rendimiento alternante",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.886.500 € (115.0% VM | Sobreprecio: +15%).",
-        "⛔ Fondos insuficientes: Requiere 3.886.500 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.212.188 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Pol Lozano). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.886.500 € (115.0% VM | Sobreprecio: +15%)."
-    },
-    {
-      "playerId": 1613,
-      "name": "Laporte",
-      "type": "defender",
-      "price": 4790000,
-      "bidAmount": 5748000,
-      "maxRationalBid": 5748000,
-      "marginPct": 20,
+      "playerId": 3986,
+      "name": "Lookman",
+      "type": "striker",
+      "price": 10010000,
+      "bidAmount": 11811800,
+      "maxRationalBid": 11811800,
+      "marginPct": 18,
       "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 7,
-      "ppm": 4.8,
-      "efficiency": 33.1,
-      "upgradePoints": 6.8,
-      "marginalValue": 6.8,
-      "vorp": 81,
-      "vorpPerMatchday": 2.38,
-      "cpmp": 704412,
-      "cpmpSeason": 20736,
+      "expectedPoints": 6,
+      "ppm": 5.31,
+      "efficiency": 17.5,
+      "upgradePoints": 6.3,
+      "marginalValue": 6.3,
+      "vorp": 100,
+      "vorpPerMatchday": 2.94,
+      "cpmp": 1588889,
+      "cpmpSeason": 46776,
       "replacedPlayer": {
-        "playerId": 2785,
-        "name": "Pol Lozano",
-        "price": 210000,
-        "totalPoints": 10,
+        "playerId": 3597,
+        "name": "Íñigo Arguibide",
+        "price": 1050000,
+        "totalPoints": 15,
         "status": null,
         "statusInfo": null,
-        "type": "midfielder",
+        "type": "defender",
         "historical": {
           "points": [
             {
-              "season": "19/20",
-              "points": "8",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "21/22",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "22/23",
-              "points": "8",
-              "eventId": 961836
-            },
-            {
               "season": "23/24",
-              "points": "-",
-              "eventId": false
+              "points": "2",
+              "eventId": 975270
             },
             {
               "season": "24/25",
-              "points": "113",
-              "eventId": 988474
+              "points": "-",
+              "eventId": false
             },
             {
               "season": "25/26",
-              "points": "129",
+              "points": "13",
               "eventId": 998265
             }
           ]
         },
         "average": {
-          "grade": "6,6",
-          "points": "3,33",
+          "grade": "6,3",
+          "points": "2,14",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "1,3",
-            "points": "0,6"
+            "grade": "6,3",
+            "points": "1,8"
           }
         },
         "club": {
-          "id": 7,
-          "name": "Espanyol",
+          "id": 12,
+          "name": "Osasuna",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/7"
+              "href": "https://api.comunio.es/clubs/12"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/7/logo"
+              "href": "https://api.comunio.es/clubs/12/logo"
             }
           }
         },
@@ -1025,100 +971,100 @@
           {
             "matchdayNr": 8,
             "homeClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/65"
+                  "href": "https://api.comunio.es/clubs/4"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
+                  "href": "https://api.comunio.es/clubs/4/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/12"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/12/logo"
                 }
               }
             },
-            "kickoff": "2026-10-09T21:00:00+02:00",
+            "kickoff": "2026-10-11T18:30:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/12"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/12/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
+              "id": 14,
+              "name": "Racing",
+              "abbreviation": "rac",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/2"
+                  "href": "https://api.comunio.es/clubs/14"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
+                  "href": "https://api.comunio.es/clubs/14/logo"
                 }
               }
             },
-            "kickoff": "2026-10-17T14:00:00+02:00",
+            "kickoff": "2026-10-18T14:00:00+02:00",
             "odds": null
           }
         ],
         "cards": {
-          "yellow": 1,
+          "yellow": 0,
           "yellowRed": 0,
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.2,
-        "id": 2785,
-        "position": "midfielder",
+        "expectedPoints": 1.3,
+        "id": 3597,
+        "position": "defender",
         "points": 0
       },
-      "replacedPlayerName": "Pol Lozano",
-      "replacedPlayerExpectedPoints": 0.2,
-      "strategicScore": 70.3,
+      "replacedPlayerName": "Íñigo Arguibide",
+      "replacedPlayerExpectedPoints": 1.3,
+      "strategicScore": 68.1,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 6.8
+          "marginalValue": 6.3
         },
         "absoluteQuality": {
-          "raw": 80,
+          "raw": 88.5,
           "weight": 0.2,
-          "ppm": 4.8
+          "ppm": 5.31
         },
         "positionNeed": {
           "raw": 30,
           "weight": 0.15,
-          "detail": "5 disponibles. Fondo de armario ajustado."
+          "detail": "3 disponibles. Fondo de armario ajustado."
         },
         "marketOpportunity": {
-          "raw": 82.8,
+          "raw": 43.8,
           "weight": 0.1,
-          "efficiency": 33.1
+          "efficiency": 17.5
         },
         "rivalPressure": {
           "raw": 20,
@@ -1137,101 +1083,81 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+6.8 pts al Once Ideal sustituyendo a Pol Lozano (2.47 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.8 PPM > 2.47 PPM).",
-        "🟡 Posición con necesidad MODERADA: 5 disponibles. Fondo de armario ajustado.",
-        "📊 ⭐ Titular Fijo (PPM: 4.8 | Fiabilidad: 95% minutos | Eficiencia: 33.1 pts/M€)",
-        "🔥 Dinámica de club: ⚖️ Competitivo / Desgaste Europa League (1.02x): 3V 1E 1D - Fuerte pero con calendario apretado en Europa",
-        "⚔️ Competencia en club: Compite en [object Object] con Daniel Vivian, Aitor Paredes, Yeray Álvarez... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.748.000 € (120.0% VM | Sobreprecio: +20%).",
-        "⛔ Fondos insuficientes: Requiere 6.748.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.212.188 €."
+        "✅ Entra en el XI titular (+6.3 pts al Once Ideal sustituyendo a Íñigo Arguibide (2.7 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (5.31 PPM > 2.7 PPM).",
+        "🟡 Posición con necesidad MODERADA: 3 disponibles. Fondo de armario ajustado.",
+        "📊 ⭐ Titular Fijo (PPM: 5.31 | Fiabilidad: 90% minutos | Eficiencia: 17.5 pts/M€)",
+        "🔥 Dinámica de club: 🛡️ En Racha Positiva / Invictos (1.06x): 3V 2E 0D - Solidez defensiva y plantilla profunda",
+        "⚔️ Competencia en club: Compite en [object Object] con Antoine Griezmann, Julián Álvarez, Alexander Sorloth... (Nivel: MEDIA, Confianza XI: 75%)",
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 11.811.800 € (118.0% VM | Sobreprecio: +18%).",
+        "⛔ Fondos insuficientes: Requiere 12.811.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 402.188 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +7 pts (sustituye a Pol Lozano). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.748.000 € (120.0% VM | Sobreprecio: +20%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Íñigo Arguibide). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 11.811.800 € (118.0% VM | Sobreprecio: +18%)."
     },
     {
-      "playerId": 3278,
-      "name": "Swedberg",
-      "type": "midfielder",
-      "price": 1450000,
-      "bidAmount": 1537000,
-      "maxRationalBid": 1537000,
-      "marginPct": 6,
-      "band": "CLEAR_UPGRADE",
-      "expectedPoints": 3,
-      "ppm": 3.66,
-      "efficiency": 83.3,
-      "upgradePoints": 2.8,
-      "marginalValue": 2.8,
-      "vorp": 18,
-      "vorpPerMatchday": 0.53,
-      "cpmp": 517857,
-      "cpmpSeason": 15263,
+      "playerId": 2161,
+      "name": "Oyarzabal",
+      "type": "striker",
+      "price": 13070000,
+      "bidAmount": 15422600,
+      "maxRationalBid": 15422600,
+      "marginPct": 18,
+      "band": "ELITE_LEAGUE_WINNER",
+      "expectedPoints": 7,
+      "ppm": 5.08,
+      "efficiency": 12.8,
+      "upgradePoints": 6.1,
+      "marginalValue": 6.1,
+      "vorp": 134,
+      "vorpPerMatchday": 3.94,
+      "cpmp": 2142623,
+      "cpmpSeason": 63140,
       "replacedPlayer": {
-        "playerId": 2785,
-        "name": "Pol Lozano",
-        "price": 210000,
-        "totalPoints": 10,
+        "playerId": 3597,
+        "name": "Íñigo Arguibide",
+        "price": 1050000,
+        "totalPoints": 15,
         "status": null,
         "statusInfo": null,
-        "type": "midfielder",
+        "type": "defender",
         "historical": {
           "points": [
             {
-              "season": "19/20",
-              "points": "8",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "21/22",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "22/23",
-              "points": "8",
-              "eventId": 961836
-            },
-            {
               "season": "23/24",
-              "points": "-",
-              "eventId": false
+              "points": "2",
+              "eventId": 975270
             },
             {
               "season": "24/25",
-              "points": "113",
-              "eventId": 988474
+              "points": "-",
+              "eventId": false
             },
             {
               "season": "25/26",
-              "points": "129",
+              "points": "13",
               "eventId": 998265
             }
           ]
         },
         "average": {
-          "grade": "6,6",
-          "points": "3,33",
+          "grade": "6,3",
+          "points": "2,14",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "1,3",
-            "points": "0,6"
+            "grade": "6,3",
+            "points": "1,8"
           }
         },
         "club": {
-          "id": 7,
-          "name": "Espanyol",
+          "id": 12,
+          "name": "Osasuna",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/7"
+              "href": "https://api.comunio.es/clubs/12"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/7/logo"
+              "href": "https://api.comunio.es/clubs/12/logo"
             }
           }
         },
@@ -1239,100 +1165,100 @@
           {
             "matchdayNr": 8,
             "homeClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/65"
+                  "href": "https://api.comunio.es/clubs/4"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
+                  "href": "https://api.comunio.es/clubs/4/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/12"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/12/logo"
                 }
               }
             },
-            "kickoff": "2026-10-09T21:00:00+02:00",
+            "kickoff": "2026-10-11T18:30:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/12"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/12/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
+              "id": 14,
+              "name": "Racing",
+              "abbreviation": "rac",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/2"
+                  "href": "https://api.comunio.es/clubs/14"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
+                  "href": "https://api.comunio.es/clubs/14/logo"
                 }
               }
             },
-            "kickoff": "2026-10-17T14:00:00+02:00",
+            "kickoff": "2026-10-18T14:00:00+02:00",
             "odds": null
           }
         ],
         "cards": {
-          "yellow": 1,
+          "yellow": 0,
           "yellowRed": 0,
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.2,
-        "id": 2785,
-        "position": "midfielder",
+        "expectedPoints": 1.3,
+        "id": 3597,
+        "position": "defender",
         "points": 0
       },
-      "replacedPlayerName": "Pol Lozano",
-      "replacedPlayerExpectedPoints": 0.2,
-      "strategicScore": 68.5,
+      "replacedPlayerName": "Íñigo Arguibide",
+      "replacedPlayerExpectedPoints": 1.3,
+      "strategicScore": 66.1,
       "strategicComponents": {
         "squadUpgrade": {
-          "raw": 93.3,
+          "raw": 100,
           "weight": 0.4,
-          "marginalValue": 2.8
+          "marginalValue": 6.1
         },
         "absoluteQuality": {
-          "raw": 61,
+          "raw": 84.7,
           "weight": 0.2,
-          "ppm": 3.66
+          "ppm": 5.08
         },
         "positionNeed": {
-          "raw": 50,
+          "raw": 30,
           "weight": 0.15,
-          "detail": "4 disponibles = exactamente los requeridos. Sin suplentes."
+          "detail": "3 disponibles. Fondo de armario ajustado."
         },
         "marketOpportunity": {
-          "raw": 100,
+          "raw": 32,
           "weight": 0.1,
-          "efficiency": 83.3
+          "efficiency": 12.8
         },
         "rivalPressure": {
           "raw": 20,
@@ -1351,101 +1277,82 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+2.8 pts al Once Ideal sustituyendo a Pol Lozano (2.47 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (3.66 PPM > 2.47 PPM).",
-        "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 3.66 | Fiabilidad: 95% minutos | Eficiencia: 83.3 pts/M€)",
-        "🔥 Dinámica de club: ⚽ Alta Producción Ofensiva (1.05x): 3V 0E 2D - Fútbol vistoso con gran generación de ocasiones",
-        "⚔️ Competencia en club: Compite en [object Object] con Fran Beltrán, Hugo Sotelo, Damián Rodríguez... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.537.000 € (106.0% VM | Sobreprecio: +6%).",
-        "⛔ Fondos insuficientes: Requiere 2.537.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.212.188 €."
+        "✅ Entra en el XI titular (+6.1 pts al Once Ideal sustituyendo a Íñigo Arguibide (2.7 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (5.08 PPM > 2.7 PPM).",
+        "🟡 Posición con necesidad MODERADA: 3 disponibles. Fondo de armario ajustado.",
+        "📊 ⭐ Titular Fijo (PPM: 5.08 | Fiabilidad: 95% minutos | Eficiencia: 12.8 pts/M€)",
+        "🔥 Dinámica de club: 📉 Dudas Iniciales / Bajas Sensibles (0.9x): 1V 1E 3D - Falta de pegada y lesiones en puestos clave",
+        "🎯 Balón parado: 🎯 1º Tirador Penaltis (+0.45 PPM bonus).",
+        "⚔️ Competencia en club: Compite en [object Object] con Takefusa Kubo, Orri Óskarsson, Sheraldo Becker... (Nivel: BAJA, Confianza XI: 95%)",
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 15.422.600 € (118.0% VM | Sobreprecio: +18%).",
+        "⛔ Fondos insuficientes: Requiere 16.422.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 402.188 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Pol Lozano). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.537.000 € (106.0% VM | Sobreprecio: +6%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Íñigo Arguibide). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 15.422.600 € (118.0% VM | Sobreprecio: +18%)."
     },
     {
       "playerId": 4062,
       "name": "Bernardo Silva",
       "type": "midfielder",
-      "price": 8860000,
-      "bidAmount": 10543400,
-      "maxRationalBid": 10543400,
-      "marginPct": 19,
+      "price": 9300000,
+      "bidAmount": 10788000,
+      "maxRationalBid": 10788000,
+      "marginPct": 16,
       "band": "ELITE_LEAGUE_WINNER",
       "expectedPoints": 5,
       "ppm": 4.66,
-      "efficiency": 17.3,
-      "upgradePoints": 6.5,
-      "marginalValue": 6.5,
+      "efficiency": 16.5,
+      "upgradePoints": 5.4,
+      "marginalValue": 5.4,
       "vorp": 84,
       "vorpPerMatchday": 2.47,
-      "cpmp": 1363077,
-      "cpmpSeason": 40090,
+      "cpmp": 1722222,
+      "cpmpSeason": 50543,
       "replacedPlayer": {
-        "playerId": 2785,
-        "name": "Pol Lozano",
-        "price": 210000,
-        "totalPoints": 10,
+        "playerId": 3597,
+        "name": "Íñigo Arguibide",
+        "price": 1050000,
+        "totalPoints": 15,
         "status": null,
         "statusInfo": null,
-        "type": "midfielder",
+        "type": "defender",
         "historical": {
           "points": [
             {
-              "season": "19/20",
-              "points": "8",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "21/22",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "22/23",
-              "points": "8",
-              "eventId": 961836
-            },
-            {
               "season": "23/24",
-              "points": "-",
-              "eventId": false
+              "points": "2",
+              "eventId": 975270
             },
             {
               "season": "24/25",
-              "points": "113",
-              "eventId": 988474
+              "points": "-",
+              "eventId": false
             },
             {
               "season": "25/26",
-              "points": "129",
+              "points": "13",
               "eventId": 998265
             }
           ]
         },
         "average": {
-          "grade": "6,6",
-          "points": "3,33",
+          "grade": "6,3",
+          "points": "2,14",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "1,3",
-            "points": "0,6"
+            "grade": "6,3",
+            "points": "1,8"
           }
         },
         "club": {
-          "id": 7,
-          "name": "Espanyol",
+          "id": 12,
+          "name": "Osasuna",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/7"
+              "href": "https://api.comunio.es/clubs/12"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/7/logo"
+              "href": "https://api.comunio.es/clubs/12/logo"
             }
           }
         },
@@ -1453,85 +1360,85 @@
           {
             "matchdayNr": 8,
             "homeClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/65"
+                  "href": "https://api.comunio.es/clubs/4"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
+                  "href": "https://api.comunio.es/clubs/4/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/12"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/12/logo"
                 }
               }
             },
-            "kickoff": "2026-10-09T21:00:00+02:00",
+            "kickoff": "2026-10-11T18:30:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 12,
+              "name": "Osasuna",
+              "abbreviation": "osa",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/12"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/12/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
+              "id": 14,
+              "name": "Racing",
+              "abbreviation": "rac",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/2"
+                  "href": "https://api.comunio.es/clubs/14"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
+                  "href": "https://api.comunio.es/clubs/14/logo"
                 }
               }
             },
-            "kickoff": "2026-10-17T14:00:00+02:00",
+            "kickoff": "2026-10-18T14:00:00+02:00",
             "odds": null
           }
         ],
         "cards": {
-          "yellow": 1,
+          "yellow": 0,
           "yellowRed": 0,
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.2,
-        "id": 2785,
-        "position": "midfielder",
+        "expectedPoints": 1.3,
+        "id": 3597,
+        "position": "defender",
         "points": 0
       },
-      "replacedPlayerName": "Pol Lozano",
-      "replacedPlayerExpectedPoints": 0.2,
-      "strategicScore": 67.6,
+      "replacedPlayerName": "Íñigo Arguibide",
+      "replacedPlayerExpectedPoints": 1.3,
+      "strategicScore": 64.4,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 6.5
+          "marginalValue": 5.4
         },
         "absoluteQuality": {
           "raw": 77.7,
@@ -1539,14 +1446,14 @@
           "ppm": 4.66
         },
         "positionNeed": {
-          "raw": 50,
+          "raw": 30,
           "weight": 0.15,
-          "detail": "4 disponibles = exactamente los requeridos. Sin suplentes."
+          "detail": "5 disponibles. Fondo de armario ajustado."
         },
         "marketOpportunity": {
-          "raw": 43.3,
+          "raw": 41.3,
           "weight": 0.1,
-          "efficiency": 17.3
+          "efficiency": 16.5
         },
         "rivalPressure": {
           "raw": 20,
@@ -1565,30 +1472,24 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+6.5 pts al Once Ideal sustituyendo a Pol Lozano (2.47 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.66 PPM > 2.47 PPM).",
-        "🟡 Posición con necesidad MODERADA: 4 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 4.66 | Fiabilidad: 90% minutos | Eficiencia: 17.3 pts/M€)",
+        "✅ Entra en el XI titular (+5.4 pts al Once Ideal sustituyendo a Íñigo Arguibide (2.7 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (4.66 PPM > 2.7 PPM).",
+        "🟡 Posición con necesidad MODERADA: 5 disponibles. Fondo de armario ajustado.",
+        "📊 ⭐ Titular Fijo (PPM: 4.66 | Fiabilidad: 90% minutos | Eficiencia: 16.5 pts/M€)",
         "🔥 Dinámica de club: ⚖️ Alto Nivel con Rotaciones Champions (0.95x): 3V 2E 0D - Exigencia máxima y rotaciones frecuentes por Champions League",
         "⚔️ Competencia en club: Compite en [object Object] con Jude Bellingham, Federico Valverde, Eduardo Camavinga... (Nivel: MEDIA, Confianza XI: 75%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 10.543.400 € (119.0% VM | Sobreprecio: +19%).",
-        "⛔ Fondos insuficientes: Requiere 11.543.400 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.212.188 €."
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 10.788.000 € (116.0% VM | Sobreprecio: +16%).",
+        "⛔ Fondos insuficientes: Requiere 11.788.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 402.188 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +7 pts (sustituye a Pol Lozano). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 10.543.400 € (119.0% VM | Sobreprecio: +19%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Íñigo Arguibide). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 10.788.000 € (116.0% VM | Sobreprecio: +16%)."
     }
   ],
   "liquiditySuggestions": [
     {
-      "playerId": 3796,
-      "name": "Adrián Rodríguez",
-      "price": 160000,
-      "reason": "Parche secundario sin minutos. Vender libera 160.000 € para acometer fichajes titulares."
-    },
-    {
-      "playerId": 3879,
-      "name": "Iturbe",
-      "price": 160000,
-      "reason": "Parche secundario sin minutos. Vender libera 160.000 € para acometer fichajes titulares."
+      "playerId": 4114,
+      "name": "Ibra Sow",
+      "price": 180000,
+      "reason": "Parche secundario sin minutos. Vender libera 180.000 € para acometer fichajes titulares."
     }
   ],
   "simulation": {
@@ -1603,7 +1504,7 @@
     "remainingMatchdays": 31,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 43.8,
+      "currentXiExpectedPoints": 45,
       "restOfSeasonAggregateExpectedPpm": 42.9,
       "pWin": 0,
       "pTop2": 0.042,
@@ -1951,5 +1852,5 @@
       }
     ]
   },
-  "priorityMovement": "Pujar 9.461.200 € por Lucas Boyé (striker) para sustituir a Pol Lozano (Expected XI Delta: +8.7 pts, CPMP: Óptimo)."
+  "priorityMovement": "Pujar 8.893.500 € por Lucas Boyé (striker) para sustituir a Íñigo Arguibide (Expected XI Delta: +7.6 pts, CPMP: Óptimo)."
 }
