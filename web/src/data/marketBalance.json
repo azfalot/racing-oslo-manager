@@ -1,14 +1,14 @@
 {
   "clubName": "Racing de Oslo",
-  "realizedGainsEUR": 136000,
-  "realizedLossesEUR": 7572811,
-  "netRealizedBalanceEUR": -7436811,
-  "profitableTradesCount": 10,
-  "totalClosedTradesCount": 20,
+  "realizedGainsEUR": 157000,
+  "realizedLossesEUR": 7599411,
+  "netRealizedBalanceEUR": -7442411,
+  "profitableTradesCount": 11,
+  "totalClosedTradesCount": 22,
   "historicalSuccessRatePct": 50,
   "totalLatentGainsEUR": 785000,
-  "totalLatentLossesEUR": 10700001,
-  "netLatentBalanceEUR": -9915001,
+  "totalLatentLossesEUR": 10650001,
+  "netLatentBalanceEUR": -9865001,
   "healthLabel": "AJUSTES & DEUDA",
   "healthBadgeColor": "amber",
   "healthSummary": "El balance histórico refleja el coste de saneamiento inicial de deuda (ventas defensivas como Hugo Duro y Galarreta para salir de números rojos), mientras que el nuevo régimen de especulación opera con un 100% de plusvalías netas.",
@@ -30,6 +30,15 @@
       "roiPct": 2.7,
       "isProfit": true,
       "sellDate": "2026-08-23T04:33:31+02:00"
+    },
+    {
+      "playerName": "Íñigo Arguibide",
+      "buyPrice": 1070000,
+      "sellPrice": 1091000,
+      "diff": 21000,
+      "roiPct": 2,
+      "isProfit": true,
+      "sellDate": "2026-09-22T04:36:28+02:00"
     },
     {
       "playerName": "Marc Santos",
@@ -111,6 +120,15 @@
       "roiPct": -12.8,
       "isProfit": false,
       "sellDate": "2026-08-31T04:34:20+02:00"
+    },
+    {
+      "playerName": "Abdel Abqar",
+      "buyPrice": 270000,
+      "sellPrice": 243400,
+      "diff": -26600,
+      "roiPct": -9.9,
+      "isProfit": false,
+      "sellDate": "2026-09-22T04:36:28+02:00"
     },
     {
       "playerName": "Fabio Cardoso",
@@ -241,24 +259,6 @@
       "isProfit": true
     },
     {
-      "playerName": "Íñigo Arguibide",
-      "position": "defender",
-      "buyPrice": 1070000,
-      "currentVM": 1050000,
-      "latentDiff": -20000,
-      "latentRoiPct": -1.9,
-      "isProfit": false
-    },
-    {
-      "playerName": "Abdel Abqar",
-      "position": "defender",
-      "buyPrice": 270000,
-      "currentVM": 240000,
-      "latentDiff": -30000,
-      "latentRoiPct": -11.1,
-      "isProfit": false
-    },
-    {
       "playerName": "Pol Lozano",
       "position": "midfielder",
       "buyPrice": 340000,
@@ -304,7 +304,7 @@
       "isProfit": false
     }
   ],
-  "lastUpdated": "2026-09-22T07:25:40.380Z",
-  "speculationGainsEUR": 30800,
-  "speculationTradesCount": 7
+  "lastUpdated": "2026-09-22T10:01:45.901Z",
+  "speculationGainsEUR": 34200,
+  "speculationTradesCount": 8
 }

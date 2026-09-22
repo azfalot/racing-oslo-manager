@@ -520,7 +520,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-22T07:25:34.290Z"
+      "lastUpdated": "2026-09-22T10:01:39.774Z"
     },
     "speculation": {
       "score": 98,
@@ -2340,7 +2340,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-22T07:25:34.938Z"
+      "lastUpdated": "2026-09-22T10:01:40.461Z"
     },
     "speculation": {
       "score": 39,
@@ -3134,7 +3134,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-22T07:25:34.629Z"
+      "lastUpdated": "2026-09-22T10:01:40.116Z"
     },
     "speculation": {
       "score": 98,
@@ -4220,7 +4220,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-22T07:25:35.606Z"
+      "lastUpdated": "2026-09-22T10:01:41.178Z"
     },
     "speculation": {
       "score": 83,
@@ -5075,7 +5075,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-22T07:25:35.249Z"
+      "lastUpdated": "2026-09-22T10:01:40.818Z"
     },
     "speculation": {
       "score": 64,
@@ -5645,20 +5645,21 @@
     "crest": "/media/crest.jpg",
     "pos": 6,
     "points": 300,
-    "squadValue": 49450000,
-    "playerCount": 14,
+    "squadValue": 48160000,
+    "playerCount": 12,
     "financialHealth": "Solvente Ajustado (+543k € en Caja)",
     "debtAlert": "Saldo positivo (+543k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
-    "projectedScore": 58,
-    "formation": "4-4-2",
-    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 58 puntos según plantilla disponible.",
+    "projectedScore": 55,
+    "formation": "3-4-3",
+    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 55 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones.",
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -5687,23 +5688,23 @@
         "name": "Fermín López",
         "pos": "Centrocampista",
         "price": 16200000,
-        "reason": "Pieza competitiva en el mercado (16.20M €) adaptable al esquema 4-4-2."
+        "reason": "Pieza competitiva en el mercado (16.20M €) adaptable al esquema 3-4-3."
       }
     ],
     "marketBalance": {
       "clubName": "Racing de Oslo",
-      "realizedGainsEUR": 136000,
-      "realizedLossesEUR": 7572811,
-      "netRealizedBalanceEUR": -7436811,
-      "profitableTradesCount": 10,
-      "totalClosedTradesCount": 20,
+      "realizedGainsEUR": 157000,
+      "realizedLossesEUR": 7599411,
+      "netRealizedBalanceEUR": -7442411,
+      "profitableTradesCount": 11,
+      "totalClosedTradesCount": 22,
       "historicalSuccessRatePct": 50,
       "totalLatentGainsEUR": 785000,
-      "totalLatentLossesEUR": 10700001,
-      "netLatentBalanceEUR": -9915001,
+      "totalLatentLossesEUR": 10650001,
+      "netLatentBalanceEUR": -9865001,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-7.436.811 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-7.442.411 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Álvaro Carreras",
@@ -5722,6 +5723,15 @@
           "roiPct": 2.7,
           "isProfit": true,
           "sellDate": "2026-08-23T04:33:31+02:00"
+        },
+        {
+          "playerName": "Íñigo Arguibide",
+          "buyPrice": 1070000,
+          "sellPrice": 1091000,
+          "diff": 21000,
+          "roiPct": 2,
+          "isProfit": true,
+          "sellDate": "2026-09-22T04:36:28+02:00"
         },
         {
           "playerName": "Marc Santos",
@@ -5803,6 +5813,15 @@
           "roiPct": -12.8,
           "isProfit": false,
           "sellDate": "2026-08-31T04:34:20+02:00"
+        },
+        {
+          "playerName": "Abdel Abqar",
+          "buyPrice": 270000,
+          "sellPrice": 243400,
+          "diff": -26600,
+          "roiPct": -9.9,
+          "isProfit": false,
+          "sellDate": "2026-09-22T04:36:28+02:00"
         },
         {
           "playerName": "Fabio Cardoso",
@@ -5933,24 +5952,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Íñigo Arguibide",
-          "position": "defender",
-          "buyPrice": 1070000,
-          "currentVM": 1050000,
-          "latentDiff": -20000,
-          "latentRoiPct": -1.9,
-          "isProfit": false
-        },
-        {
-          "playerName": "Abdel Abqar",
-          "position": "defender",
-          "buyPrice": 270000,
-          "currentVM": 240000,
-          "latentDiff": -30000,
-          "latentRoiPct": -11.1,
-          "isProfit": false
-        },
-        {
           "playerName": "Pol Lozano",
           "position": "midfielder",
           "buyPrice": 340000,
@@ -5996,7 +5997,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-22T07:25:36.912Z"
+      "lastUpdated": "2026-09-22T10:01:42.544Z"
     },
     "speculation": {
       "score": 98,
@@ -6005,23 +6006,23 @@
       "overbidRate": "+14.7%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 75257012,
-      "totalReceived": 52990400,
+      "totalReceived": 54324800,
       "purchasesCount": 32,
-      "salesCount": 33,
+      "salesCount": 35,
       "estimatedCash": 543389,
       "prizesEarned": 3000000,
-      "maxCreditLimit": 12362500,
-      "netWealth": 49993389,
-      "analysis": "Operativa histórica de 32 compras (75.3M €) y 33 ventas (53.0M €). Dinero total rotado: 128.2M € con sobrepuja media de +14.7%."
+      "maxCreditLimit": 12040000,
+      "netWealth": 48703389,
+      "analysis": "Operativa histórica de 32 compras (75.3M €) y 35 ventas (54.3M €). Dinero total rotado: 129.6M € con sobrepuja media de +14.7%."
     },
     "keyDeals": {
       "smartBuy": {
-        "player": "Íñigo Arguibide",
-        "price": 1070000,
-        "points": 15,
-        "roi": 14.02,
-        "impact": "Pilar clave (Titular en el 11): Costó 1.07M € y suma 15 pts con el club (14.02 pts/M€ invertido).",
-        "tag": "🎯 14.02 pts/M€ (Titular ROI)"
+        "player": "David Soria",
+        "price": 4820000,
+        "points": 56,
+        "roi": 11.62,
+        "impact": "Pilar clave (Titular en el 11): Costó 4.82M € y suma 56 pts con el club (11.62 pts/M€ invertido).",
+        "tag": "🎯 11.62 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
         "player": "Johnny Cardoso",
@@ -6879,6 +6880,34 @@
           "seller": "Racing de Oslo",
           "buyer": "Computer",
           "date": "2026-09-22T04:36:28+02:00"
+        },
+        {
+          "playerName": "Íñigo Arguibide",
+          "price": 1091000,
+          "marketValue": 1091000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Racing de Oslo",
+          "buyer": "Computer",
+          "date": "2026-09-22T04:36:28+02:00"
+        },
+        {
+          "playerName": "Abdel Abqar",
+          "price": 243400,
+          "marketValue": 243400,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Racing de Oslo",
+          "buyer": "Computer",
+          "date": "2026-09-22T04:36:28+02:00"
         }
       ]
     },
@@ -6950,23 +6979,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3817.png"
-      },
-      {
-        "id": 3597,
-        "name": "Íñigo Arguibide",
-        "position": "defender",
-        "price": 1050000,
-        "points": 15,
-        "expectedPoints": 2.6,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3597.png"
       },
       {
         "id": 2415,
@@ -7069,15 +7081,14 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2304.png"
-      }
-    ],
-    "bench": [
+      },
       {
-        "id": 3449,
-        "name": "Abdel Abqar",
-        "position": "defender",
-        "price": 240000,
-        "points": 2,
+        "id": 4114,
+        "name": "Ibra Sow",
+        "position": "striker",
+        "price": 180000,
+        "points": 0,
+        "expectedPoints": 0.1,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -7086,8 +7097,10 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/3449.png"
-      },
+        "image": "/media/players/4114.png"
+      }
+    ],
+    "bench": [
       {
         "id": 2785,
         "name": "Pol Lozano",
@@ -7103,22 +7116,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2785.png"
-      },
-      {
-        "id": 4114,
-        "name": "Ibra Sow",
-        "position": "striker",
-        "price": 180000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4114.png"
       }
     ],
     "isMe": true
@@ -7382,7 +7379,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-22T07:25:35.918Z"
+      "lastUpdated": "2026-09-22T10:01:41.517Z"
     },
     "speculation": {
       "score": 85,
@@ -8444,7 +8441,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-22T07:25:36.571Z"
+      "lastUpdated": "2026-09-22T10:01:42.202Z"
     },
     "speculation": {
       "score": 89,
@@ -9347,7 +9344,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-22T07:25:36.243Z"
+      "lastUpdated": "2026-09-22T10:01:41.843Z"
     },
     "speculation": {
       "score": 63,
@@ -10048,7 +10045,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-09-22T07:25:37.221Z"
+      "lastUpdated": "2026-09-22T10:01:42.871Z"
     },
     "speculation": {
       "score": 70,

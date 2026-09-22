@@ -1,13 +1,13 @@
 {
-  "lastSyncTimestamp": "2026-09-22T07:25:40.386Z",
-  "lastSyncFormatted": "22/9/26, 9:25:40",
+  "lastSyncTimestamp": "2026-09-22T10:01:45.907Z",
+  "lastSyncFormatted": "22/9/26, 12:01:45",
   "bot": {
     "name": "comunio-bot",
     "version": "1.2.0",
     "status": "ONLINE",
     "mode": "autonomo",
     "environment": "production",
-    "pid": 23324,
+    "pid": 4904,
     "uptime": "0h 1m",
     "pm2Process": "comunio-bot (id 0, fork)",
     "schedule": {
@@ -42,7 +42,7 @@
     "buildStatus": "OPTIMIZED (Vite 8 + React 19)",
     "distStatus": "Sincronizado con origin/main",
     "dataFiles": {
-      "squad": "14 jugadores en plantilla",
+      "squad": "12 jugadores en plantilla",
       "news": "169 noticias históricas sincronizadas",
       "rivals": "10 clubes auditados con sugerencias dinámicas",
       "market": "Mercado escaneado",
@@ -55,9 +55,9 @@
     "manager": "azfalot",
     "standingsPosition": 2,
     "points": 188,
-    "squadValue": 49780000,
+    "squadValue": 49450000,
     "balanceStatus": "Positivo / Saneado (+280.288 €)",
-    "activeFormation": "4-4-2",
+    "activeFormation": "3-5-2",
     "starterCount": 11,
     "topScorer": "Mariano Díaz (46 pts)"
   },
@@ -78,7 +78,7 @@
       "id": "lineup_engine",
       "name": "Motor Táctico ComunioEngine",
       "status": "OK",
-      "detail": "Once óptimo 4-4-2 calculado y guardado para Jornada 5"
+      "detail": "Once óptimo 3-5-2 calculado y guardado para Jornada 5"
     },
     {
       "id": "rivals_360",
@@ -114,7 +114,7 @@
     {
       "name": "Extracción y enriquecimiento de plantilla",
       "status": "OK",
-      "detail": "14 jugadores activos"
+      "detail": "12 jugadores activos"
     },
     {
       "name": "Auditoría 360º de Rivales",
