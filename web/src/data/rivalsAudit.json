@@ -6,22 +6,22 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 405,
-    "squadValue": 66220000,
-    "playerCount": 20,
-    "financialHealth": "Apalancado / Saldo Negativo (-2.82M €)",
-    "debtAlert": "Saldo en descubierto (-2.82M €). Consume el 17.0% del límite de crédito permitido (16.55M €). Exige ventas antes de puntuar.",
-    "projectedScore": 59,
+    "squadValue": 63370000,
+    "playerCount": 17,
+    "financialHealth": "Solvente Ajustado (+124k € en Caja)",
+    "debtAlert": "Saldo positivo (+124k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
+    "projectedScore": 58,
     "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 59 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 58 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 405 puntos acumulados (135.0 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (66.22M €).",
+      "Patrimonio de plantilla consolidado en Primera (63.37M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -2.82M € que obliga a vender piezas."
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -56,17 +56,17 @@
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
       "realizedGainsEUR": 15612030,
-      "realizedLossesEUR": 18360002,
-      "netRealizedBalanceEUR": -2747972,
+      "realizedLossesEUR": 19268320,
+      "netRealizedBalanceEUR": -3656290,
       "profitableTradesCount": 18,
-      "totalClosedTradesCount": 47,
-      "historicalSuccessRatePct": 38,
+      "totalClosedTradesCount": 50,
+      "historicalSuccessRatePct": 36,
       "totalLatentGainsEUR": 3407947,
-      "totalLatentLossesEUR": 13698309,
-      "netLatentBalanceEUR": -10290362,
+      "totalLatentLossesEUR": 12695191,
+      "netLatentBalanceEUR": -9287244,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-2.747.972 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-3.656.290 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Raphinha",
@@ -229,6 +229,24 @@
           "roiPct": 4.3,
           "isProfit": true,
           "sellDate": "2026-09-15T04:37:15+02:00"
+        },
+        {
+          "playerName": "Rego",
+          "buyPrice": 160006,
+          "sellPrice": 157900,
+          "diff": -2106,
+          "roiPct": -1.3,
+          "isProfit": false,
+          "sellDate": "2026-10-09T04:29:01+02:00"
+        },
+        {
+          "playerName": "Odriozola",
+          "buyPrice": 173012,
+          "sellPrice": 168600,
+          "diff": -4412,
+          "roiPct": -2.6,
+          "isProfit": false,
+          "sellDate": "2026-10-09T04:29:01+02:00"
         },
         {
           "playerName": "Lobete",
@@ -456,6 +474,15 @@
           "sellDate": "2026-09-12T04:33:38+02:00"
         },
         {
+          "playerName": "Leandro Cabrera",
+          "buyPrice": 3520100,
+          "sellPrice": 2618300,
+          "diff": -901800,
+          "roiPct": -25.6,
+          "isProfit": false,
+          "sellDate": "2026-10-09T04:29:01+02:00"
+        },
+        {
           "playerName": "Hjulmand",
           "buyPrice": 7820020,
           "sellPrice": 6793800,
@@ -539,24 +566,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Rego",
-          "position": "midfielder",
-          "buyPrice": 160006,
-          "currentVM": 160000,
-          "latentDiff": -6,
-          "latentRoiPct": 0,
-          "isProfit": false
-        },
-        {
-          "playerName": "Odriozola",
-          "position": "defender",
-          "buyPrice": 173012,
-          "currentVM": 170000,
-          "latentDiff": -3012,
-          "latentRoiPct": -1.7,
-          "isProfit": false
-        },
-        {
           "playerName": "Sivera",
           "position": "keeper",
           "buyPrice": 3450010,
@@ -599,15 +608,6 @@
           "currentVM": 1210000,
           "latentDiff": -205001,
           "latentRoiPct": -14.5,
-          "isProfit": false
-        },
-        {
-          "playerName": "Leandro Cabrera",
-          "position": "defender",
-          "buyPrice": 3520100,
-          "currentVM": 2520000,
-          "latentDiff": -1000100,
-          "latentRoiPct": -28.4,
           "isProfit": false
         },
         {
@@ -665,23 +665,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-09T10:01:34.311Z"
+      "lastUpdated": "2026-10-09T16:01:24.679Z"
     },
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+7.0%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 259459235,
-      "totalReceived": 232588200,
+      "totalReceived": 235533000,
       "purchasesCount": 69,
-      "salesCount": 64,
-      "estimatedCash": -2821035,
+      "salesCount": 67,
+      "estimatedCash": 123765,
       "prizesEarned": 4050000,
-      "maxCreditLimit": 16555000,
-      "netWealth": 63398965,
-      "analysis": "Operativa histórica de 69 compras (259.5M €) y 64 ventas (232.6M €). Dinero total rotado: 492.0M € con sobrepuja media de +7.0%."
+      "maxCreditLimit": 15842500,
+      "netWealth": 63493765,
+      "analysis": "Operativa histórica de 69 compras (259.5M €) y 67 ventas (235.5M €). Dinero total rotado: 495.0M € con sobrepuja media de +7.0%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -2472,6 +2472,48 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-09-25T02:11:23+02:00"
+        },
+        {
+          "playerName": "Leandro Cabrera",
+          "price": 2618300,
+          "marketValue": 2618300,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-09T04:29:01+02:00"
+        },
+        {
+          "playerName": "Rego",
+          "price": 157900,
+          "marketValue": 157900,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-09T04:29:01+02:00"
+        },
+        {
+          "playerName": "Odriozola",
+          "price": 168600,
+          "marketValue": 168600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-09T04:29:01+02:00"
         }
       ]
     },
@@ -2492,23 +2534,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2444.png"
-      },
-      {
-        "id": 1019,
-        "name": "Leandro Cabrera",
-        "position": "defender",
-        "price": 2520000,
-        "points": 16,
-        "expectedPoints": 4.1,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/1019.png"
       },
       {
         "id": 3498,
@@ -2543,6 +2568,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3619.png"
+      },
+      {
+        "id": 4155,
+        "name": "Belocian",
+        "position": "defender",
+        "price": 1210000,
+        "points": 9,
+        "expectedPoints": 2.6,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/4155.png"
       },
       {
         "id": 3444,
@@ -2682,22 +2724,6 @@
         "image": "/media/players/3665.png"
       },
       {
-        "id": 4155,
-        "name": "Belocian",
-        "position": "defender",
-        "price": 1210000,
-        "points": 9,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4155.png"
-      },
-      {
         "id": 1168,
         "name": "Kiko Femenía",
         "position": "defender",
@@ -2712,22 +2738,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/1168.png"
-      },
-      {
-        "id": 2350,
-        "name": "Odriozola",
-        "position": "defender",
-        "price": 170000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2350.png"
       },
       {
         "id": 2395,
@@ -2776,22 +2786,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3440.png"
-      },
-      {
-        "id": 3914,
-        "name": "Rego",
-        "position": "midfielder",
-        "price": 160000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3914.png"
       },
       {
         "id": 4017,
@@ -2964,7 +2958,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-09T10:01:35.133Z"
+      "lastUpdated": "2026-10-09T16:01:25.351Z"
     },
     "speculation": {
       "score": 41,
@@ -3776,7 +3770,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-09T10:01:34.754Z"
+      "lastUpdated": "2026-10-09T16:01:25.005Z"
     },
     "speculation": {
       "score": 98,
@@ -4929,7 +4923,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-09T10:01:35.841Z"
+      "lastUpdated": "2026-10-09T16:01:26.024Z"
     },
     "speculation": {
       "score": 93,
@@ -5817,7 +5811,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-09T10:01:35.503Z"
+      "lastUpdated": "2026-10-09T16:01:25.682Z"
     },
     "speculation": {
       "score": 72,
@@ -6795,7 +6789,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-09T10:01:37.335Z"
+      "lastUpdated": "2026-10-09T16:01:27.445Z"
     },
     "speculation": {
       "score": 98,
@@ -8376,7 +8370,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-09T10:01:36.209Z"
+      "lastUpdated": "2026-10-09T16:01:26.386Z"
     },
     "speculation": {
       "score": 98,
@@ -9706,7 +9700,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-09T10:01:36.981Z"
+      "lastUpdated": "2026-10-09T16:01:27.066Z"
     },
     "speculation": {
       "score": 80,
@@ -10663,7 +10657,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-09T10:01:36.597Z"
+      "lastUpdated": "2026-10-09T16:01:26.708Z"
     },
     "speculation": {
       "score": 63,
@@ -11364,7 +11358,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-09T10:01:37.720Z"
+      "lastUpdated": "2026-10-09T16:01:27.773Z"
     },
     "speculation": {
       "score": 73,
