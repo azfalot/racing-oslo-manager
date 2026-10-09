@@ -1,17 +1,18 @@
 {
-  "lastSyncTimestamp": "2026-09-22T10:01:45.907Z",
-  "lastSyncFormatted": "22/9/26, 12:01:45",
+  "lastSyncTimestamp": "2026-10-09T10:01:40.218Z",
+  "lastSyncFormatted": "9/10/26, 12:01:40",
   "bot": {
     "name": "comunio-bot",
     "version": "1.2.0",
     "status": "ONLINE",
     "mode": "autonomo",
     "environment": "production",
-    "pid": 4904,
+    "pid": 42904,
     "uptime": "0h 1m",
     "pm2Process": "comunio-bot (id 0, fork)",
     "schedule": {
       "slots": [
+        "05:05",
         "12:00",
         "18:00",
         "23:50"
@@ -42,8 +43,8 @@
     "buildStatus": "OPTIMIZED (Vite 8 + React 19)",
     "distStatus": "Sincronizado con origin/main",
     "dataFiles": {
-      "squad": "12 jugadores en plantilla",
-      "news": "169 noticias históricas sincronizadas",
+      "squad": "15 jugadores en plantilla",
+      "news": "170 noticias históricas sincronizadas",
       "rivals": "10 clubes auditados con sugerencias dinámicas",
       "market": "Mercado escaneado",
       "warRoom": "War Room cuantitativo activo con Monte Carlo (1.000 iteraciones)",
@@ -55,7 +56,7 @@
     "manager": "azfalot",
     "standingsPosition": 2,
     "points": 188,
-    "squadValue": 49450000,
+    "squadValue": 44730000,
     "balanceStatus": "Positivo / Saneado (+280.288 €)",
     "activeFormation": "3-5-2",
     "starterCount": 11,
@@ -90,7 +91,7 @@
       "id": "news_crawler",
       "name": "Crawler de Noticias & Tablón",
       "status": "OK",
-      "detail": "169 noticias históricas sincronizadas y deduplicadas"
+      "detail": "170 noticias históricas sincronizadas y deduplicadas"
     },
     {
       "id": "bench_trends",
@@ -114,7 +115,7 @@
     {
       "name": "Extracción y enriquecimiento de plantilla",
       "status": "OK",
-      "detail": "12 jugadores activos"
+      "detail": "15 jugadores activos"
     },
     {
       "name": "Auditoría 360º de Rivales",
@@ -124,7 +125,7 @@
     {
       "name": "Radar y deduplicación de noticias",
       "status": "OK",
-      "detail": "169 noticias históricas"
+      "detail": "170 noticias históricas"
     },
     {
       "name": "Auditoría de banquillo y tendencias",
