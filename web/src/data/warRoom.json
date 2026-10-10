@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-10T10:01:34.229Z",
+  "timestamp": "2026-10-10T16:01:41.514Z",
   "currentMatchday": 8,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -17,7 +17,7 @@
   },
   "lineup": {
     "formation": "3-5-2",
-    "expectedPoints": 45.1,
+    "expectedPoints": 44.900000000000006,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -259,7 +259,7 @@
         },
         "average": {
           "grade": "6,9",
-          "points": "4,83",
+          "points": "4,86",
           "lastXMatchdays": {
             "matchesAmount": 5,
             "grade": "5,5",
@@ -556,12 +556,12 @@
       "name": "Johnny Cardoso",
       "position": "midfielder",
       "price": 2210000,
-      "expectedPoints": 3.5,
+      "expectedPoints": 3.6,
       "vorp": 0,
       "vorpPerMatchday": 0,
       "replacementPpm": 3.1,
-      "upgradeGap": 2,
-      "urgencyScore": 16.4
+      "upgradeGap": 1.9,
+      "urgencyScore": 16.3
     }
   ],
   "depthAnalysis": {
@@ -1632,23 +1632,23 @@
     "remainingMatchdays": 30,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 45.1,
+      "currentXiExpectedPoints": 44.9,
       "restOfSeasonAggregateExpectedPpm": 37.5,
       "pWin": 0,
-      "pTop2": 0.062,
-      "pTop3": 0.178,
-      "expectedFinalPoints": 1425,
-      "range": "1365 - 1485 pts",
+      "pTop2": 0.04,
+      "pTop3": 0.149,
+      "expectedFinalPoints": 1424,
+      "range": "1371 - 1479 pts",
       "wilsonCI95": {
         "lowerPct": 0,
         "upperPct": 0.4
       }
     },
     "probChampion": 0,
-    "probTop2": 6.2,
-    "probTop3": 17.8,
-    "racingExpectedFinalPoints": 1425,
-    "racingRange": "1365 - 1485 pts",
+    "probTop2": 4,
+    "probTop3": 14.9,
+    "racingExpectedFinalPoints": 1424,
+    "racingRange": "1371 - 1479 pts",
     "racingWilsonCI95": {
       "lowerPct": 0,
       "upperPct": 0.4
@@ -1681,8 +1681,8 @@
         "expectedFinalPoints": 1497,
         "range": "1444 - 1554 pts",
         "probChampion": 0,
-        "probTop2": 52.6,
-        "probTop3": 76.9,
+        "probTop2": 53.8,
+        "probTop3": 77.5,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1695,10 +1695,10 @@
         "meanPpm": 38.5,
         "stdDev": 8,
         "expectedFinalPoints": 1463,
-        "range": "1403 - 1519 pts",
+        "range": "1406 - 1518 pts",
         "probChampion": 0,
-        "probTop2": 19.3,
-        "probTop3": 47.9,
+        "probTop2": 19.6,
+        "probTop3": 45.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1711,26 +1711,10 @@
         "meanPpm": 38.4,
         "stdDev": 8,
         "expectedFinalPoints": 1459,
-        "range": "1403 - 1514 pts",
+        "range": "1399 - 1515 pts",
         "probChampion": 0,
-        "probTop2": 18,
-        "probTop3": 42,
-        "wilsonCI95": {
-          "lowerPct": 0,
-          "upperPct": 0.4
-        }
-      },
-      {
-        "id": 21163822,
-        "name": "Racing de Oslo",
-        "currentPoints": 300,
-        "meanPpm": 37.5,
-        "stdDev": 8,
-        "expectedFinalPoints": 1425,
-        "range": "1365 - 1485 pts",
-        "probChampion": 0,
-        "probTop2": 6.2,
-        "probTop3": 17.8,
+        "probTop2": 16.5,
+        "probTop3": 43.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1742,11 +1726,27 @@
         "currentPoints": 300,
         "meanPpm": 37.5,
         "stdDev": 8,
+        "expectedFinalPoints": 1425,
+        "range": "1365 - 1485 pts",
+        "probChampion": 0,
+        "probTop2": 6.1,
+        "probTop3": 17.8,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163822,
+        "name": "Racing de Oslo",
+        "currentPoints": 300,
+        "meanPpm": 37.5,
+        "stdDev": 8,
         "expectedFinalPoints": 1424,
         "range": "1371 - 1479 pts",
         "probChampion": 0,
-        "probTop2": 3.9,
-        "probTop3": 15.1,
+        "probTop2": 4,
+        "probTop3": 14.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1762,7 +1762,7 @@
         "range": "1289 - 1400 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0.3,
+        "probTop3": 0.2,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1843,8 +1843,8 @@
         "expectedFinalPoints": 1497,
         "range": "1444 - 1554 pts",
         "probChampion": 0,
-        "probTop2": 52.6,
-        "probTop3": 76.9,
+        "probTop2": 53.8,
+        "probTop3": 77.5,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1857,10 +1857,10 @@
         "meanPpm": 38.5,
         "stdDev": 8,
         "expectedFinalPoints": 1463,
-        "range": "1403 - 1519 pts",
+        "range": "1406 - 1518 pts",
         "probChampion": 0,
-        "probTop2": 19.3,
-        "probTop3": 47.9,
+        "probTop2": 19.6,
+        "probTop3": 45.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1873,26 +1873,10 @@
         "meanPpm": 38.4,
         "stdDev": 8,
         "expectedFinalPoints": 1459,
-        "range": "1403 - 1514 pts",
+        "range": "1399 - 1515 pts",
         "probChampion": 0,
-        "probTop2": 18,
-        "probTop3": 42,
-        "wilsonCI95": {
-          "lowerPct": 0,
-          "upperPct": 0.4
-        }
-      },
-      {
-        "id": 21163822,
-        "name": "Racing de Oslo",
-        "currentPoints": 300,
-        "meanPpm": 37.5,
-        "stdDev": 8,
-        "expectedFinalPoints": 1425,
-        "range": "1365 - 1485 pts",
-        "probChampion": 0,
-        "probTop2": 6.2,
-        "probTop3": 17.8,
+        "probTop2": 16.5,
+        "probTop3": 43.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1904,11 +1888,27 @@
         "currentPoints": 300,
         "meanPpm": 37.5,
         "stdDev": 8,
+        "expectedFinalPoints": 1425,
+        "range": "1365 - 1485 pts",
+        "probChampion": 0,
+        "probTop2": 6.1,
+        "probTop3": 17.8,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163822,
+        "name": "Racing de Oslo",
+        "currentPoints": 300,
+        "meanPpm": 37.5,
+        "stdDev": 8,
         "expectedFinalPoints": 1424,
         "range": "1371 - 1479 pts",
         "probChampion": 0,
-        "probTop2": 3.9,
-        "probTop3": 15.1,
+        "probTop2": 4,
+        "probTop3": 14.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1924,7 +1924,7 @@
         "range": "1289 - 1400 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0.3,
+        "probTop3": 0.2,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
