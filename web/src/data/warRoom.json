@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-10T16:01:41.514Z",
+  "timestamp": "2026-10-10T21:51:40.138Z",
   "currentMatchday": 8,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -17,7 +17,7 @@
   },
   "lineup": {
     "formation": "3-5-2",
-    "expectedPoints": 44.900000000000006,
+    "expectedPoints": 50.4,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -59,7 +59,7 @@
         },
         "average": {
           "grade": "6,8",
-          "points": "4",
+          "points": "4,33",
           "lastXMatchdays": {
             "matchesAmount": 5,
             "grade": "1,4",
@@ -80,37 +80,6 @@
           }
         },
         "nextMatches": [
-          {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/8"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-10T18:30:00+02:00",
-            "odds": null
-          },
           {
             "matchdayNr": 9,
             "homeClub": {
@@ -172,157 +141,19 @@
             },
             "kickoff": "2026-10-25T21:00:00+02:00",
             "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 0,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 2.4,
-        "id": 3160,
-        "position": "midfielder",
-        "points": 0
-      },
-      {
-        "playerId": 1876,
-        "name": "Denis Suárez",
-        "price": 1360000,
-        "totalPoints": 29,
-        "status": null,
-        "statusInfo": null,
-        "type": "midfielder",
-        "historical": {
-          "points": [
-            {
-              "season": "14/15",
-              "points": "120",
-              "eventId": 471732
-            },
-            {
-              "season": "15/16",
-              "points": "190",
-              "eventId": 687859
-            },
-            {
-              "season": "16/17",
-              "points": "82",
-              "eventId": 788917
-            },
-            {
-              "season": "17/18",
-              "points": "88",
-              "eventId": 869072
-            },
-            {
-              "season": "18/19",
-              "points": "8",
-              "eventId": 899953
-            },
-            {
-              "season": "19/20",
-              "points": "109",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "171",
-              "eventId": 939519
-            },
-            {
-              "season": "21/22",
-              "points": "196",
-              "eventId": 951313
-            },
-            {
-              "season": "22/23",
-              "points": "44",
-              "eventId": 961836
-            },
-            {
-              "season": "23/24",
-              "points": "13",
-              "eventId": 975270
-            },
-            {
-              "season": "24/25",
-              "points": "86",
-              "eventId": 988474
-            },
-            {
-              "season": "25/26",
-              "points": "113",
-              "eventId": 998265
-            }
-          ]
-        },
-        "average": {
-          "grade": "6,9",
-          "points": "4,86",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "5,5",
-            "points": "3,8"
-          }
-        },
-        "club": {
-          "id": 89,
-          "name": "Alavés",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/89"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/89/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/2"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-10T16:15:00+02:00",
-            "odds": null
           },
           {
-            "matchdayNr": 9,
+            "matchdayNr": 11,
             "homeClub": {
-              "id": 5,
-              "name": "Celta",
-              "abbreviation": "cel",
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/5"
+                  "href": "https://api.comunio.es/clubs/3"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/5/logo"
+                  "href": "https://api.comunio.es/clubs/3/logo"
                 }
               }
             },
@@ -339,177 +170,7 @@
                 }
               }
             },
-            "kickoff": "2026-10-18T16:15:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 10,
-            "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/65"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-23T21:00:00+02:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 1,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 2.2,
-        "id": 1876,
-        "position": "midfielder",
-        "points": 0
-      },
-      {
-        "playerId": 4096,
-        "name": "Mikel Rodríguez",
-        "price": 970000,
-        "totalPoints": 22,
-        "status": null,
-        "statusInfo": null,
-        "type": "midfielder",
-        "historical": {
-          "points": []
-        },
-        "average": {
-          "grade": "7,2",
-          "points": "7,33",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "1,4",
-            "points": "0,8"
-          }
-        },
-        "club": {
-          "id": 89,
-          "name": "Alavés",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/89"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/89/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/2"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-10T16:15:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 9,
-            "homeClub": {
-              "id": 5,
-              "name": "Celta",
-              "abbreviation": "cel",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/5"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/5/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-18T16:15:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 10,
-            "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/65"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-23T21:00:00+02:00",
+            "kickoff": "2026-10-31T21:00:00+02:00",
             "odds": null
           }
         ],
@@ -520,7 +181,7 @@
         },
         "available": true,
         "expectedPoints": 1.9,
-        "id": 4096,
+        "id": 3160,
         "position": "midfielder",
         "points": 0
       }
@@ -532,36 +193,36 @@
       "name": "Mikel Rodríguez",
       "position": "midfielder",
       "price": 970000,
-      "expectedPoints": 1.9,
-      "vorp": -35,
-      "vorpPerMatchday": -1.03,
-      "replacementPpm": 3.1,
-      "upgradeGap": 3.6,
-      "urgencyScore": 28
+      "expectedPoints": 2.5,
+      "vorp": -41,
+      "vorpPerMatchday": -1.21,
+      "replacementPpm": 3.26,
+      "upgradeGap": 3,
+      "urgencyScore": 29.4
     },
     {
       "playerId": 3160,
       "name": "Gavi",
       "position": "midfielder",
       "price": 1430000,
-      "expectedPoints": 2.4,
-      "vorp": 0,
-      "vorpPerMatchday": 0,
-      "replacementPpm": 3.1,
-      "upgradeGap": 3.1,
-      "urgencyScore": 17.2
+      "expectedPoints": 1.9,
+      "vorp": -6,
+      "vorpPerMatchday": -0.18,
+      "replacementPpm": 3.26,
+      "upgradeGap": 3.6,
+      "urgencyScore": 19.3
     },
     {
       "playerId": 3553,
       "name": "Johnny Cardoso",
       "position": "midfielder",
       "price": 2210000,
-      "expectedPoints": 3.6,
-      "vorp": 0,
-      "vorpPerMatchday": 0,
-      "replacementPpm": 3.1,
-      "upgradeGap": 1.9,
-      "urgencyScore": 16.3
+      "expectedPoints": 3.7,
+      "vorp": -6,
+      "vorpPerMatchday": -0.18,
+      "replacementPpm": 3.26,
+      "upgradeGap": 1.8,
+      "urgencyScore": 18.1
     }
   ],
   "depthAnalysis": {
@@ -578,33 +239,59 @@
       "name": "Gerard Martín",
       "type": "defender",
       "price": 4970000,
-      "bidAmount": 5914300,
-      "maxRationalBid": 5914300,
-      "marginPct": 19,
+      "bidAmount": 5964000,
+      "maxRationalBid": 5964000,
+      "marginPct": 20,
       "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 6,
-      "ppm": 5.61,
-      "efficiency": 33.9,
-      "upgradePoints": 6.5,
-      "marginalValue": 6.5,
-      "vorp": 63,
-      "vorpPerMatchday": 1.85,
-      "cpmp": 764615,
-      "cpmpSeason": 22489,
+      "expectedPoints": 7,
+      "ppm": 5.74,
+      "efficiency": 34.6,
+      "upgradePoints": 6.8,
+      "marginalValue": 6.8,
+      "vorp": 65,
+      "vorpPerMatchday": 1.91,
+      "cpmp": 730882,
+      "cpmpSeason": 21515,
       "replacedPlayer": {
-        "playerId": 4096,
-        "name": "Mikel Rodríguez",
-        "price": 970000,
-        "totalPoints": 22,
+        "playerId": 3160,
+        "name": "Gavi",
+        "price": 1430000,
+        "totalPoints": 8,
         "status": null,
         "statusInfo": null,
         "type": "midfielder",
         "historical": {
-          "points": []
+          "points": [
+            {
+              "season": "21/22",
+              "points": "143",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "159",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "69",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "119",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "47",
+              "eventId": 998265
+            }
+          ]
         },
         "average": {
-          "grade": "7,2",
-          "points": "7,33",
+          "grade": "6,8",
+          "points": "4,33",
           "lastXMatchdays": {
             "matchesAmount": 5,
             "grade": "1,4",
@@ -612,84 +299,97 @@
           }
         },
         "club": {
-          "id": 89,
-          "name": "Alavés",
+          "id": 3,
+          "name": "Barcelona",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/89"
+              "href": "https://api.comunio.es/clubs/3"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/89/logo"
+              "href": "https://api.comunio.es/clubs/3/logo"
             }
           }
         },
         "nextMatches": [
           {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/2"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-10T16:15:00+02:00",
-            "odds": null
-          },
-          {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 5,
-              "name": "Celta",
-              "abbreviation": "cel",
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/5"
+                  "href": "https://api.comunio.es/clubs/4"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/5/logo"
+                  "href": "https://api.comunio.es/clubs/4/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/89"
+                  "href": "https://api.comunio.es/clubs/3"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
+                  "href": "https://api.comunio.es/clubs/3/logo"
                 }
               }
             },
-            "kickoff": "2026-10-18T16:15:00+02:00",
+            "kickoff": "2026-10-17T18:30:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 10,
             "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 15,
+              "name": "Real Madrid",
+              "abbreviation": "rma",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/15"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/15/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-25T21:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 11,
+            "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
               "id": 89,
               "name": "Alavés",
               "abbreviation": "ala",
@@ -702,20 +402,7 @@
                 }
               }
             },
-            "guestClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/65"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-23T21:00:00+02:00",
+            "kickoff": "2026-10-31T21:00:00+02:00",
             "odds": null
           }
         ],
@@ -726,23 +413,23 @@
         },
         "available": true,
         "expectedPoints": 1.9,
-        "id": 4096,
+        "id": 3160,
         "position": "midfielder",
         "points": 0
       },
-      "replacedPlayerName": "Mikel Rodríguez",
+      "replacedPlayerName": "Gavi",
       "replacedPlayerExpectedPoints": 1.9,
-      "strategicScore": 81.4,
+      "strategicScore": 82,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 6.5
+          "marginalValue": 6.8
         },
         "absoluteQuality": {
-          "raw": 93.5,
+          "raw": 95.7,
           "weight": 0.2,
-          "ppm": 5.61
+          "ppm": 5.74
         },
         "positionNeed": {
           "raw": 85,
@@ -750,9 +437,9 @@
           "detail": "Solo 3 disponible(s) para 4 requeridos. Urgencia alta."
         },
         "marketOpportunity": {
-          "raw": 84.7,
+          "raw": 86.5,
           "weight": 0.1,
-          "efficiency": 33.9
+          "efficiency": 34.6
         },
         "rivalPressure": {
           "raw": 20,
@@ -771,16 +458,16 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+6.5 pts al Once Ideal sustituyendo a Mikel Rodríguez (4.04 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (5.61 PPM > 4.04 PPM).",
+        "✅ Entra en el XI titular (+6.8 pts al Once Ideal sustituyendo a Gavi (4.02 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (5.74 PPM > 4.02 PPM).",
         "🔴 Posición con necesidad ALTA: Solo 3 disponible(s) para 4 requeridos. Urgencia alta.",
-        "📊 ⭐ Titular Fijo (PPM: 5.61 | Fiabilidad: 95% minutos | Eficiencia: 33.9 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 5.74 | Fiabilidad: 95% minutos | Eficiencia: 34.6 pts/M€)",
         "🔥 Dinámica de club: 🔥 Euforia / Líder Arrollador (1.1x): 5V 0E 0D - Ataque demoledor y máxima confianza colectiva",
         "⚔️ Competencia en club: Compite en [object Object] con Pau Cubarsí, Jules Koundé, Andreas Christensen... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.914.300 € (119.0% VM | Sobreprecio: +19%).",
-        "⛔ Fondos insuficientes: Requiere 6.914.300 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.964.000 € (120.0% VM | Sobreprecio: +20%).",
+        "⛔ Fondos insuficientes: Requiere 6.964.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +7 pts (sustituye a Mikel Rodríguez). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.914.300 € (119.0% VM | Sobreprecio: +19%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +7 pts (sustituye a Gavi). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.964.000 € (120.0% VM | Sobreprecio: +20%)."
     },
     {
       "playerId": 1952,
@@ -796,24 +483,50 @@
       "efficiency": 24.1,
       "upgradePoints": 6.2,
       "marginalValue": 6.2,
-      "vorp": 94,
-      "vorpPerMatchday": 2.76,
+      "vorp": 96,
+      "vorpPerMatchday": 2.82,
       "cpmp": 1183871,
       "cpmpSeason": 34787,
       "replacedPlayer": {
-        "playerId": 4096,
-        "name": "Mikel Rodríguez",
-        "price": 970000,
-        "totalPoints": 22,
+        "playerId": 3160,
+        "name": "Gavi",
+        "price": 1430000,
+        "totalPoints": 8,
         "status": null,
         "statusInfo": null,
         "type": "midfielder",
         "historical": {
-          "points": []
+          "points": [
+            {
+              "season": "21/22",
+              "points": "143",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "159",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "69",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "119",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "47",
+              "eventId": 998265
+            }
+          ]
         },
         "average": {
-          "grade": "7,2",
-          "points": "7,33",
+          "grade": "6,8",
+          "points": "4,33",
           "lastXMatchdays": {
             "matchesAmount": 5,
             "grade": "1,4",
@@ -821,84 +534,97 @@
           }
         },
         "club": {
-          "id": 89,
-          "name": "Alavés",
+          "id": 3,
+          "name": "Barcelona",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/89"
+              "href": "https://api.comunio.es/clubs/3"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/89/logo"
+              "href": "https://api.comunio.es/clubs/3/logo"
             }
           }
         },
         "nextMatches": [
           {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/2"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-10T16:15:00+02:00",
-            "odds": null
-          },
-          {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 5,
-              "name": "Celta",
-              "abbreviation": "cel",
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/5"
+                  "href": "https://api.comunio.es/clubs/4"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/5/logo"
+                  "href": "https://api.comunio.es/clubs/4/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/89"
+                  "href": "https://api.comunio.es/clubs/3"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
+                  "href": "https://api.comunio.es/clubs/3/logo"
                 }
               }
             },
-            "kickoff": "2026-10-18T16:15:00+02:00",
+            "kickoff": "2026-10-17T18:30:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 10,
             "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 15,
+              "name": "Real Madrid",
+              "abbreviation": "rma",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/15"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/15/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-25T21:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 11,
+            "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
               "id": 89,
               "name": "Alavés",
               "abbreviation": "ala",
@@ -911,20 +637,7 @@
                 }
               }
             },
-            "guestClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/65"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-23T21:00:00+02:00",
+            "kickoff": "2026-10-31T21:00:00+02:00",
             "odds": null
           }
         ],
@@ -935,11 +648,11 @@
         },
         "available": true,
         "expectedPoints": 1.9,
-        "id": 4096,
+        "id": 3160,
         "position": "midfielder",
         "points": 0
       },
-      "replacedPlayerName": "Mikel Rodríguez",
+      "replacedPlayerName": "Gavi",
       "replacedPlayerExpectedPoints": 1.9,
       "strategicScore": 79.9,
       "strategicComponents": {
@@ -980,8 +693,8 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+6.2 pts al Once Ideal sustituyendo a Mikel Rodríguez (4.04 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (5.9 PPM > 4.04 PPM).",
+        "✅ Entra en el XI titular (+6.2 pts al Once Ideal sustituyendo a Gavi (4.02 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (5.9 PPM > 4.02 PPM).",
         "🔴 Posición con necesidad ALTA: Solo 3 disponible(s) para 4 requeridos. Urgencia alta.",
         "📊 ⭐ Titular Fijo (PPM: 5.9 | Fiabilidad: 95% minutos | Eficiencia: 24.1 pts/M€)",
         "🔥 Dinámica de club: 🔥 Euforia / Líder Arrollador (1.1x): 5V 0E 0D - Ataque demoledor y máxima confianza colectiva",
@@ -989,7 +702,7 @@
         "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 8.661.200 € (118.0% VM | Sobreprecio: +18%).",
         "⛔ Fondos insuficientes: Requiere 9.661.200 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Mikel Rodríguez). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 8.661.200 € (118.0% VM | Sobreprecio: +18%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Gavi). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 8.661.200 € (118.0% VM | Sobreprecio: +18%)."
     },
     {
       "playerId": 2539,
@@ -1010,19 +723,45 @@
       "cpmp": 1095161,
       "cpmpSeason": 32180,
       "replacedPlayer": {
-        "playerId": 4096,
-        "name": "Mikel Rodríguez",
-        "price": 970000,
-        "totalPoints": 22,
+        "playerId": 3160,
+        "name": "Gavi",
+        "price": 1430000,
+        "totalPoints": 8,
         "status": null,
         "statusInfo": null,
         "type": "midfielder",
         "historical": {
-          "points": []
+          "points": [
+            {
+              "season": "21/22",
+              "points": "143",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "159",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "69",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "119",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "47",
+              "eventId": 998265
+            }
+          ]
         },
         "average": {
-          "grade": "7,2",
-          "points": "7,33",
+          "grade": "6,8",
+          "points": "4,33",
           "lastXMatchdays": {
             "matchesAmount": 5,
             "grade": "1,4",
@@ -1030,84 +769,97 @@
           }
         },
         "club": {
-          "id": 89,
-          "name": "Alavés",
+          "id": 3,
+          "name": "Barcelona",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/89"
+              "href": "https://api.comunio.es/clubs/3"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/89/logo"
+              "href": "https://api.comunio.es/clubs/3/logo"
             }
           }
         },
         "nextMatches": [
           {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/2"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-10T16:15:00+02:00",
-            "odds": null
-          },
-          {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 5,
-              "name": "Celta",
-              "abbreviation": "cel",
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/5"
+                  "href": "https://api.comunio.es/clubs/4"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/5/logo"
+                  "href": "https://api.comunio.es/clubs/4/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/89"
+                  "href": "https://api.comunio.es/clubs/3"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
+                  "href": "https://api.comunio.es/clubs/3/logo"
                 }
               }
             },
-            "kickoff": "2026-10-18T16:15:00+02:00",
+            "kickoff": "2026-10-17T18:30:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 10,
             "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 15,
+              "name": "Real Madrid",
+              "abbreviation": "rma",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/15"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/15/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-25T21:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 11,
+            "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
               "id": 89,
               "name": "Alavés",
               "abbreviation": "ala",
@@ -1120,20 +872,7 @@
                 }
               }
             },
-            "guestClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/65"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-23T21:00:00+02:00",
+            "kickoff": "2026-10-31T21:00:00+02:00",
             "odds": null
           }
         ],
@@ -1144,11 +883,11 @@
         },
         "available": true,
         "expectedPoints": 1.9,
-        "id": 4096,
+        "id": 3160,
         "position": "midfielder",
         "points": 0
       },
-      "replacedPlayerName": "Mikel Rodríguez",
+      "replacedPlayerName": "Gavi",
       "replacedPlayerExpectedPoints": 1.9,
       "strategicScore": 73.4,
       "strategicComponents": {
@@ -1189,8 +928,8 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+6.2 pts al Once Ideal sustituyendo a Mikel Rodríguez (4.04 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (5.5 PPM > 4.04 PPM).",
+        "✅ Entra en el XI titular (+6.2 pts al Once Ideal sustituyendo a Gavi (4.02 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (5.5 PPM > 4.02 PPM).",
         "🟡 Posición con necesidad MODERADA: 2 disponibles = exactamente los requeridos. Sin suplentes.",
         "📊 ⭐ Titular Fijo (PPM: 5.5 | Fiabilidad: 95% minutos | Eficiencia: 24.3 pts/M€)",
         "🔥 Dinámica de club: 🚀 Estado de Gracia / Racha Histórica (1.06x): 3V 1E 1D - Alta efectividad colectiva y moral por las nubes",
@@ -1198,7 +937,7 @@
         "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 8.012.200 € (118.0% VM | Sobreprecio: +18%).",
         "⛔ Fondos insuficientes: Requiere 9.012.200 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Mikel Rodríguez). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 8.012.200 € (118.0% VM | Sobreprecio: +18%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Gavi). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 8.012.200 € (118.0% VM | Sobreprecio: +18%)."
     },
     {
       "playerId": 3188,
@@ -1219,19 +958,45 @@
       "cpmp": 941509,
       "cpmpSeason": 27722,
       "replacedPlayer": {
-        "playerId": 4096,
-        "name": "Mikel Rodríguez",
-        "price": 970000,
-        "totalPoints": 22,
+        "playerId": 3160,
+        "name": "Gavi",
+        "price": 1430000,
+        "totalPoints": 8,
         "status": null,
         "statusInfo": null,
         "type": "midfielder",
         "historical": {
-          "points": []
+          "points": [
+            {
+              "season": "21/22",
+              "points": "143",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "159",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "69",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "119",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "47",
+              "eventId": 998265
+            }
+          ]
         },
         "average": {
-          "grade": "7,2",
-          "points": "7,33",
+          "grade": "6,8",
+          "points": "4,33",
           "lastXMatchdays": {
             "matchesAmount": 5,
             "grade": "1,4",
@@ -1239,84 +1004,97 @@
           }
         },
         "club": {
-          "id": 89,
-          "name": "Alavés",
+          "id": 3,
+          "name": "Barcelona",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/89"
+              "href": "https://api.comunio.es/clubs/3"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/89/logo"
+              "href": "https://api.comunio.es/clubs/3/logo"
             }
           }
         },
         "nextMatches": [
           {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/2"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-10T16:15:00+02:00",
-            "odds": null
-          },
-          {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 5,
-              "name": "Celta",
-              "abbreviation": "cel",
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/5"
+                  "href": "https://api.comunio.es/clubs/4"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/5/logo"
+                  "href": "https://api.comunio.es/clubs/4/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/89"
+                  "href": "https://api.comunio.es/clubs/3"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
+                  "href": "https://api.comunio.es/clubs/3/logo"
                 }
               }
             },
-            "kickoff": "2026-10-18T16:15:00+02:00",
+            "kickoff": "2026-10-17T18:30:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 10,
             "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 15,
+              "name": "Real Madrid",
+              "abbreviation": "rma",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/15"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/15/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-25T21:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 11,
+            "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
               "id": 89,
               "name": "Alavés",
               "abbreviation": "ala",
@@ -1329,20 +1107,7 @@
                 }
               }
             },
-            "guestClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/65"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-23T21:00:00+02:00",
+            "kickoff": "2026-10-31T21:00:00+02:00",
             "odds": null
           }
         ],
@@ -1353,11 +1118,11 @@
         },
         "available": true,
         "expectedPoints": 1.9,
-        "id": 4096,
+        "id": 3160,
         "position": "midfielder",
         "points": 0
       },
-      "replacedPlayerName": "Mikel Rodríguez",
+      "replacedPlayerName": "Gavi",
       "replacedPlayerExpectedPoints": 1.9,
       "strategicScore": 72.6,
       "strategicComponents": {
@@ -1398,8 +1163,8 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+5.3 pts al Once Ideal sustituyendo a Mikel Rodríguez (4.04 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.88 PPM > 4.04 PPM).",
+        "✅ Entra en el XI titular (+5.3 pts al Once Ideal sustituyendo a Gavi (4.02 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (4.88 PPM > 4.02 PPM).",
         "🟡 Posición con necesidad MODERADA: 2 disponibles = exactamente los requeridos. Sin suplentes.",
         "📊 ⭐ Titular Fijo (PPM: 4.88 | Fiabilidad: 95% minutos | Eficiencia: 29.4 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
@@ -1407,40 +1172,66 @@
         "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.788.400 € (116.0% VM | Sobreprecio: +16%).",
         "⛔ Fondos insuficientes: Requiere 6.788.400 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Mikel Rodríguez). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.788.400 € (116.0% VM | Sobreprecio: +16%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Gavi). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.788.400 € (116.0% VM | Sobreprecio: +16%)."
     },
     {
-      "playerId": 4156,
-      "name": "Iván Azón",
-      "type": "striker",
-      "price": 2870000,
-      "bidAmount": 3042200,
-      "maxRationalBid": 3042200,
-      "marginPct": 6,
-      "band": "CLEAR_UPGRADE",
-      "expectedPoints": 5,
-      "ppm": 3.6,
-      "efficiency": 37.7,
-      "upgradePoints": 2.7,
-      "marginalValue": 2.7,
-      "vorp": 20,
-      "vorpPerMatchday": 0.59,
-      "cpmp": 1062963,
-      "cpmpSeason": 31196,
+      "playerId": 3477,
+      "name": "Starfelt",
+      "type": "defender",
+      "price": 1420000,
+      "bidAmount": 1462600,
+      "maxRationalBid": 1462600,
+      "marginPct": 3,
+      "band": "DEPTH",
+      "expectedPoints": 4,
+      "ppm": 4.58,
+      "efficiency": 96.7,
+      "upgradePoints": 1.7,
+      "marginalValue": 1.7,
+      "vorp": 16,
+      "vorpPerMatchday": 0.47,
+      "cpmp": 835294,
+      "cpmpSeason": 24483,
       "replacedPlayer": {
-        "playerId": 4096,
-        "name": "Mikel Rodríguez",
-        "price": 970000,
-        "totalPoints": 22,
+        "playerId": 3160,
+        "name": "Gavi",
+        "price": 1430000,
+        "totalPoints": 8,
         "status": null,
         "statusInfo": null,
         "type": "midfielder",
         "historical": {
-          "points": []
+          "points": [
+            {
+              "season": "21/22",
+              "points": "143",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "159",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "69",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "119",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "47",
+              "eventId": 998265
+            }
+          ]
         },
         "average": {
-          "grade": "7,2",
-          "points": "7,33",
+          "grade": "6,8",
+          "points": "4,33",
           "lastXMatchdays": {
             "matchesAmount": 5,
             "grade": "1,4",
@@ -1448,84 +1239,97 @@
           }
         },
         "club": {
-          "id": 89,
-          "name": "Alavés",
+          "id": 3,
+          "name": "Barcelona",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/89"
+              "href": "https://api.comunio.es/clubs/3"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/89/logo"
+              "href": "https://api.comunio.es/clubs/3/logo"
             }
           }
         },
         "nextMatches": [
           {
-            "matchdayNr": 8,
-            "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 2,
-              "name": "Atlético",
-              "abbreviation": "atm",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/2"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/2/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-10T16:15:00+02:00",
-            "odds": null
-          },
-          {
             "matchdayNr": 9,
             "homeClub": {
-              "id": 5,
-              "name": "Celta",
-              "abbreviation": "cel",
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/5"
+                  "href": "https://api.comunio.es/clubs/4"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/5/logo"
+                  "href": "https://api.comunio.es/clubs/4/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/89"
+                  "href": "https://api.comunio.es/clubs/3"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
+                  "href": "https://api.comunio.es/clubs/3/logo"
                 }
               }
             },
-            "kickoff": "2026-10-18T16:15:00+02:00",
+            "kickoff": "2026-10-17T18:30:00+02:00",
             "odds": null
           },
           {
             "matchdayNr": 10,
             "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 15,
+              "name": "Real Madrid",
+              "abbreviation": "rma",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/15"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/15/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-25T21:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 11,
+            "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
               "id": 89,
               "name": "Alavés",
               "abbreviation": "ala",
@@ -1538,20 +1342,7 @@
                 }
               }
             },
-            "guestClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/65"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-23T21:00:00+02:00",
+            "kickoff": "2026-10-31T21:00:00+02:00",
             "odds": null
           }
         ],
@@ -1562,40 +1353,40 @@
         },
         "available": true,
         "expectedPoints": 1.9,
-        "id": 4096,
+        "id": 3160,
         "position": "midfielder",
         "points": 0
       },
-      "replacedPlayerName": "Mikel Rodríguez",
+      "replacedPlayerName": "Gavi",
       "replacedPlayerExpectedPoints": 1.9,
-      "strategicScore": 65.2,
+      "strategicScore": 62.2,
       "strategicComponents": {
         "squadUpgrade": {
-          "raw": 90,
+          "raw": 56.7,
           "weight": 0.4,
-          "marginalValue": 2.7
+          "marginalValue": 1.7
         },
         "absoluteQuality": {
-          "raw": 60,
+          "raw": 76.3,
           "weight": 0.2,
-          "ppm": 3.6
+          "ppm": 4.58
         },
         "positionNeed": {
-          "raw": 50,
+          "raw": 85,
           "weight": 0.15,
-          "detail": "2 disponibles = exactamente los requeridos. Sin suplentes."
+          "detail": "Solo 3 disponible(s) para 4 requeridos. Urgencia alta."
         },
         "marketOpportunity": {
-          "raw": 94.3,
+          "raw": 100,
           "weight": 0.1,
-          "efficiency": 37.7
+          "efficiency": 96.7
         },
         "rivalPressure": {
           "raw": 20,
           "weight": 0.1
         },
         "riskAdjustment": {
-          "raw": 35,
+          "raw": 10,
           "weight": -0.05
         }
       },
@@ -1607,16 +1398,16 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+2.7 pts al Once Ideal sustituyendo a Mikel Rodríguez (4.04 PPM)).",
-        "⚠️ Alerta: El promedio con momentum (3.6 PPM) no supera holgadamente a Mikel Rodríguez (4.04 PPM).",
-        "🟡 Posición con necesidad MODERADA: 2 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 3.6 | Fiabilidad: 95% minutos | Eficiencia: 37.7 pts/M€)",
-        "🔥 Dinámica de club: 📉 Sequía Ofensiva / Plantilla Corta (0.88x): 0V 3E 2D - Sin victorias y escasa producción de goles",
-        "⚔️ Competencia en club: Compite en [object Object] con Borja Mayoral, Bertug Yildirim, Peter Federico... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.042.200 € (106.0% VM | Sobreprecio: +6%).",
-        "⛔ Fondos insuficientes: Requiere 4.042.200 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
+        "✅ Entra en el XI titular (+1.7 pts al Once Ideal sustituyendo a Gavi (4.02 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (4.58 PPM > 4.02 PPM).",
+        "🔴 Posición con necesidad ALTA: Solo 3 disponible(s) para 4 requeridos. Urgencia alta.",
+        "📊 ⭐ Titular Fijo (PPM: 4.58 | Fiabilidad: 95% minutos | Eficiencia: 96.7 pts/M€)",
+        "🔥 Dinámica de club: ⚽ Alta Producción Ofensiva (1.05x): 3V 0E 2D - Fútbol vistoso con gran generación de ocasiones",
+        "⚔️ Competencia en club: Compite en [object Object] con Marcos Alonso, Jailson, Javi Rodríguez... (Nivel: BAJA, Confianza XI: 95%)",
+        "💰 [Banda: DEPTH] Puja recomendada: 1.462.600 € (103.0% VM | Sobreprecio: +3%).",
+        "⛔ Fondos insuficientes: Requiere 2.462.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Mikel Rodríguez). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.042.200 € (106.0% VM | Sobreprecio: +6%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +2 pts (sustituye a Gavi). 💰 [Banda: DEPTH] Puja recomendada: 1.462.600 € (103.0% VM | Sobreprecio: +3%)."
     }
   ],
   "liquiditySuggestions": [],
@@ -1632,23 +1423,23 @@
     "remainingMatchdays": 30,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 44.9,
+      "currentXiExpectedPoints": 50.4,
       "restOfSeasonAggregateExpectedPpm": 37.5,
       "pWin": 0,
-      "pTop2": 0.04,
-      "pTop3": 0.149,
-      "expectedFinalPoints": 1424,
-      "range": "1371 - 1479 pts",
+      "pTop2": 0.047,
+      "pTop3": 0.147,
+      "expectedFinalPoints": 1425,
+      "range": "1365 - 1481 pts",
       "wilsonCI95": {
         "lowerPct": 0,
         "upperPct": 0.4
       }
     },
     "probChampion": 0,
-    "probTop2": 4,
-    "probTop3": 14.9,
-    "racingExpectedFinalPoints": 1424,
-    "racingRange": "1371 - 1479 pts",
+    "probTop2": 4.7,
+    "probTop3": 14.7,
+    "racingExpectedFinalPoints": 1425,
+    "racingRange": "1365 - 1481 pts",
     "racingWilsonCI95": {
       "lowerPct": 0,
       "upperPct": 0.4
@@ -1678,11 +1469,11 @@
         "currentPoints": 315,
         "meanPpm": 39.4,
         "stdDev": 8,
-        "expectedFinalPoints": 1497,
-        "range": "1444 - 1554 pts",
+        "expectedFinalPoints": 1496,
+        "range": "1442 - 1552 pts",
         "probChampion": 0,
-        "probTop2": 53.8,
-        "probTop3": 77.5,
+        "probTop2": 52.8,
+        "probTop3": 77.4,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1695,10 +1486,10 @@
         "meanPpm": 38.5,
         "stdDev": 8,
         "expectedFinalPoints": 1463,
-        "range": "1406 - 1518 pts",
+        "range": "1411 - 1520 pts",
         "probChampion": 0,
-        "probTop2": 19.6,
-        "probTop3": 45.8,
+        "probTop2": 19.3,
+        "probTop3": 45.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1711,10 +1502,26 @@
         "meanPpm": 38.4,
         "stdDev": 8,
         "expectedFinalPoints": 1459,
-        "range": "1399 - 1515 pts",
+        "range": "1403 - 1514 pts",
         "probChampion": 0,
-        "probTop2": 16.5,
-        "probTop3": 43.8,
+        "probTop2": 18.2,
+        "probTop3": 43.5,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163822,
+        "name": "Racing de Oslo",
+        "currentPoints": 300,
+        "meanPpm": 37.5,
+        "stdDev": 8,
+        "expectedFinalPoints": 1425,
+        "range": "1365 - 1481 pts",
+        "probChampion": 0,
+        "probTop2": 4.7,
+        "probTop3": 14.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1729,24 +1536,8 @@
         "expectedFinalPoints": 1425,
         "range": "1365 - 1485 pts",
         "probChampion": 0,
-        "probTop2": 6.1,
-        "probTop3": 17.8,
-        "wilsonCI95": {
-          "lowerPct": 0,
-          "upperPct": 0.4
-        }
-      },
-      {
-        "id": 21163822,
-        "name": "Racing de Oslo",
-        "currentPoints": 300,
-        "meanPpm": 37.5,
-        "stdDev": 8,
-        "expectedFinalPoints": 1424,
-        "range": "1371 - 1479 pts",
-        "probChampion": 0,
-        "probTop2": 4,
-        "probTop3": 14.9,
+        "probTop2": 4.8,
+        "probTop3": 17.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1759,10 +1550,10 @@
         "meanPpm": 35.4,
         "stdDev": 8,
         "expectedFinalPoints": 1346,
-        "range": "1289 - 1400 pts",
+        "range": "1288 - 1405 pts",
         "probChampion": 0,
-        "probTop2": 0,
-        "probTop3": 0.2,
+        "probTop2": 0.2,
+        "probTop3": 0.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1775,7 +1566,7 @@
         "meanPpm": 34.3,
         "stdDev": 8,
         "expectedFinalPoints": 1304,
-        "range": "1247 - 1363 pts",
+        "range": "1248 - 1359 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1840,11 +1631,11 @@
         "currentPoints": 315,
         "meanPpm": 39.4,
         "stdDev": 8,
-        "expectedFinalPoints": 1497,
-        "range": "1444 - 1554 pts",
+        "expectedFinalPoints": 1496,
+        "range": "1442 - 1552 pts",
         "probChampion": 0,
-        "probTop2": 53.8,
-        "probTop3": 77.5,
+        "probTop2": 52.8,
+        "probTop3": 77.4,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1857,10 +1648,10 @@
         "meanPpm": 38.5,
         "stdDev": 8,
         "expectedFinalPoints": 1463,
-        "range": "1406 - 1518 pts",
+        "range": "1411 - 1520 pts",
         "probChampion": 0,
-        "probTop2": 19.6,
-        "probTop3": 45.8,
+        "probTop2": 19.3,
+        "probTop3": 45.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1873,10 +1664,26 @@
         "meanPpm": 38.4,
         "stdDev": 8,
         "expectedFinalPoints": 1459,
-        "range": "1399 - 1515 pts",
+        "range": "1403 - 1514 pts",
         "probChampion": 0,
-        "probTop2": 16.5,
-        "probTop3": 43.8,
+        "probTop2": 18.2,
+        "probTop3": 43.5,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163822,
+        "name": "Racing de Oslo",
+        "currentPoints": 300,
+        "meanPpm": 37.5,
+        "stdDev": 8,
+        "expectedFinalPoints": 1425,
+        "range": "1365 - 1481 pts",
+        "probChampion": 0,
+        "probTop2": 4.7,
+        "probTop3": 14.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1891,24 +1698,8 @@
         "expectedFinalPoints": 1425,
         "range": "1365 - 1485 pts",
         "probChampion": 0,
-        "probTop2": 6.1,
-        "probTop3": 17.8,
-        "wilsonCI95": {
-          "lowerPct": 0,
-          "upperPct": 0.4
-        }
-      },
-      {
-        "id": 21163822,
-        "name": "Racing de Oslo",
-        "currentPoints": 300,
-        "meanPpm": 37.5,
-        "stdDev": 8,
-        "expectedFinalPoints": 1424,
-        "range": "1371 - 1479 pts",
-        "probChampion": 0,
-        "probTop2": 4,
-        "probTop3": 14.9,
+        "probTop2": 4.8,
+        "probTop3": 17.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1921,10 +1712,10 @@
         "meanPpm": 35.4,
         "stdDev": 8,
         "expectedFinalPoints": 1346,
-        "range": "1289 - 1400 pts",
+        "range": "1288 - 1405 pts",
         "probChampion": 0,
-        "probTop2": 0,
-        "probTop3": 0.2,
+        "probTop2": 0.2,
+        "probTop3": 0.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1937,7 +1728,7 @@
         "meanPpm": 34.3,
         "stdDev": 8,
         "expectedFinalPoints": 1304,
-        "range": "1247 - 1363 pts",
+        "range": "1248 - 1359 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1980,5 +1771,5 @@
       }
     ]
   },
-  "priorityMovement": "Pujar 5.914.300 € por Gerard Martín (defender) para sustituir a Mikel Rodríguez (Expected XI Delta: +6.5 pts, CPMP: Óptimo)."
+  "priorityMovement": "Pujar 5.964.000 € por Gerard Martín (defender) para sustituir a Gavi (Expected XI Delta: +6.8 pts, CPMP: Óptimo)."
 }
