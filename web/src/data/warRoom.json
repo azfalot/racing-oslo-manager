@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-11T16:01:50.841Z",
+  "timestamp": "2026-10-11T21:52:08.860Z",
   "currentMatchday": 8,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -944,19 +944,19 @@
       "name": "Iván Martín",
       "type": "midfielder",
       "price": 3040000,
-      "bidAmount": 3344000,
-      "maxRationalBid": 3344000,
-      "marginPct": 10,
+      "bidAmount": 3404800,
+      "maxRationalBid": 3404800,
+      "marginPct": 12,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 6,
-      "ppm": 4.62,
-      "efficiency": 45.6,
-      "upgradePoints": 3.7,
-      "marginalValue": 3.7,
+      "ppm": 4.97,
+      "efficiency": 49,
+      "upgradePoints": 4.2,
+      "marginalValue": 4.2,
       "vorp": 44,
       "vorpPerMatchday": 1.29,
-      "cpmp": 821622,
-      "cpmpSeason": 24127,
+      "cpmp": 723810,
+      "cpmpSeason": 21259,
       "replacedPlayer": {
         "playerId": 3160,
         "name": "Gavi",
@@ -1124,17 +1124,17 @@
       },
       "replacedPlayerName": "Gavi",
       "replacedPlayerExpectedPoints": 1.8,
-      "strategicScore": 67.7,
+      "strategicScore": 68.8,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 3.7
+          "marginalValue": 4.2
         },
         "absoluteQuality": {
-          "raw": 77,
+          "raw": 82.8,
           "weight": 0.2,
-          "ppm": 4.62
+          "ppm": 4.97
         },
         "positionNeed": {
           "raw": 5,
@@ -1144,7 +1144,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 45.6
+          "efficiency": 49
         },
         "rivalPressure": {
           "raw": 20,
@@ -1163,15 +1163,15 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+3.7 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.62 PPM > 3.93 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 4.62 | Fiabilidad: 95% minutos | Eficiencia: 45.6 pts/M€)",
+        "✅ Entra en el XI titular (+4.2 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (4.97 PPM > 3.93 PPM).",
+        "📊 ⭐ Titular Fijo (PPM: 4.97 | Fiabilidad: 95% minutos | Eficiencia: 49 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.344.000 € (110.0% VM | Sobreprecio: +10%).",
-        "⛔ Fondos insuficientes: Requiere 4.344.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.404.800 € (112.0% VM | Sobreprecio: +12%).",
+        "⛔ Fondos insuficientes: Requiere 4.404.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Gavi). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.344.000 € (110.0% VM | Sobreprecio: +10%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Gavi). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.404.800 € (112.0% VM | Sobreprecio: +12%)."
     },
     {
       "playerId": 3812,
@@ -1425,20 +1425,20 @@
       "currentXiExpectedPoints": 50.3,
       "restOfSeasonAggregateExpectedPpm": 37.5,
       "pWin": 0,
-      "pTop2": 0.067,
-      "pTop3": 0.179,
-      "expectedFinalPoints": 1425,
-      "range": "1365 - 1485 pts",
+      "pTop2": 0.03,
+      "pTop3": 0.155,
+      "expectedFinalPoints": 1424,
+      "range": "1371 - 1479 pts",
       "wilsonCI95": {
         "lowerPct": 0,
         "upperPct": 0.4
       }
     },
     "probChampion": 0,
-    "probTop2": 6.7,
-    "probTop3": 17.9,
-    "racingExpectedFinalPoints": 1425,
-    "racingRange": "1365 - 1485 pts",
+    "probTop2": 3,
+    "probTop3": 15.5,
+    "racingExpectedFinalPoints": 1424,
+    "racingRange": "1371 - 1479 pts",
     "racingWilsonCI95": {
       "lowerPct": 0,
       "upperPct": 0.4
@@ -1469,10 +1469,10 @@
         "meanPpm": 39.4,
         "stdDev": 8,
         "expectedFinalPoints": 1497,
-        "range": "1441 - 1552 pts",
+        "range": "1437 - 1553 pts",
         "probChampion": 0,
-        "probTop2": 55,
-        "probTop3": 79,
+        "probTop2": 52.7,
+        "probTop3": 76.6,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1485,10 +1485,10 @@
         "meanPpm": 38.5,
         "stdDev": 8,
         "expectedFinalPoints": 1463,
-        "range": "1403 - 1519 pts",
+        "range": "1406 - 1518 pts",
         "probChampion": 0,
-        "probTop2": 18.9,
-        "probTop3": 46.3,
+        "probTop2": 22,
+        "probTop3": 46.2,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1503,24 +1503,8 @@
         "expectedFinalPoints": 1459,
         "range": "1406 - 1516 pts",
         "probChampion": 0,
-        "probTop2": 15.7,
-        "probTop3": 41.2,
-        "wilsonCI95": {
-          "lowerPct": 0,
-          "upperPct": 0.4
-        }
-      },
-      {
-        "id": 21163822,
-        "name": "Racing de Oslo",
-        "currentPoints": 300,
-        "meanPpm": 37.5,
-        "stdDev": 8,
-        "expectedFinalPoints": 1425,
-        "range": "1365 - 1485 pts",
-        "probChampion": 0,
-        "probTop2": 6.7,
-        "probTop3": 17.9,
+        "probTop2": 16.4,
+        "probTop3": 41.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1532,11 +1516,27 @@
         "currentPoints": 300,
         "meanPpm": 37.5,
         "stdDev": 8,
+        "expectedFinalPoints": 1425,
+        "range": "1365 - 1485 pts",
+        "probChampion": 0,
+        "probTop2": 5.8,
+        "probTop3": 19.1,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163822,
+        "name": "Racing de Oslo",
+        "currentPoints": 300,
+        "meanPpm": 37.5,
+        "stdDev": 8,
         "expectedFinalPoints": 1424,
         "range": "1371 - 1479 pts",
         "probChampion": 0,
-        "probTop2": 3.7,
-        "probTop3": 14.6,
+        "probTop2": 3,
+        "probTop3": 15.5,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1551,8 +1551,8 @@
         "expectedFinalPoints": 1346,
         "range": "1288 - 1405 pts",
         "probChampion": 0,
-        "probTop2": 0,
-        "probTop3": 1,
+        "probTop2": 0.1,
+        "probTop3": 0.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1568,7 +1568,7 @@
         "range": "1248 - 1359 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0,
+        "probTop3": 0.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1631,10 +1631,10 @@
         "meanPpm": 39.4,
         "stdDev": 8,
         "expectedFinalPoints": 1497,
-        "range": "1441 - 1552 pts",
+        "range": "1437 - 1553 pts",
         "probChampion": 0,
-        "probTop2": 55,
-        "probTop3": 79,
+        "probTop2": 52.7,
+        "probTop3": 76.6,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1647,10 +1647,10 @@
         "meanPpm": 38.5,
         "stdDev": 8,
         "expectedFinalPoints": 1463,
-        "range": "1403 - 1519 pts",
+        "range": "1406 - 1518 pts",
         "probChampion": 0,
-        "probTop2": 18.9,
-        "probTop3": 46.3,
+        "probTop2": 22,
+        "probTop3": 46.2,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1665,24 +1665,8 @@
         "expectedFinalPoints": 1459,
         "range": "1406 - 1516 pts",
         "probChampion": 0,
-        "probTop2": 15.7,
-        "probTop3": 41.2,
-        "wilsonCI95": {
-          "lowerPct": 0,
-          "upperPct": 0.4
-        }
-      },
-      {
-        "id": 21163822,
-        "name": "Racing de Oslo",
-        "currentPoints": 300,
-        "meanPpm": 37.5,
-        "stdDev": 8,
-        "expectedFinalPoints": 1425,
-        "range": "1365 - 1485 pts",
-        "probChampion": 0,
-        "probTop2": 6.7,
-        "probTop3": 17.9,
+        "probTop2": 16.4,
+        "probTop3": 41.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1694,11 +1678,27 @@
         "currentPoints": 300,
         "meanPpm": 37.5,
         "stdDev": 8,
+        "expectedFinalPoints": 1425,
+        "range": "1365 - 1485 pts",
+        "probChampion": 0,
+        "probTop2": 5.8,
+        "probTop3": 19.1,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163822,
+        "name": "Racing de Oslo",
+        "currentPoints": 300,
+        "meanPpm": 37.5,
+        "stdDev": 8,
         "expectedFinalPoints": 1424,
         "range": "1371 - 1479 pts",
         "probChampion": 0,
-        "probTop2": 3.7,
-        "probTop3": 14.6,
+        "probTop2": 3,
+        "probTop3": 15.5,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1713,8 +1713,8 @@
         "expectedFinalPoints": 1346,
         "range": "1288 - 1405 pts",
         "probChampion": 0,
-        "probTop2": 0,
-        "probTop3": 1,
+        "probTop2": 0.1,
+        "probTop3": 0.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1730,7 +1730,7 @@
         "range": "1248 - 1359 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0,
+        "probTop3": 0.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
