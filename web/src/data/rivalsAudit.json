@@ -693,7 +693,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T10:01:04.424Z"
+      "lastUpdated": "2026-10-12T16:01:06.851Z"
     },
     "speculation": {
       "score": 98,
@@ -3132,7 +3132,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T10:01:05.908Z"
+      "lastUpdated": "2026-10-12T16:01:08.315Z"
     },
     "speculation": {
       "score": 89,
@@ -3847,22 +3847,21 @@
     "crest": "/media/crests/pachangueros.svg",
     "pos": 3,
     "points": 315,
-    "squadValue": 60880000,
-    "playerCount": 13,
-    "financialHealth": "Apalancado / Saldo Negativo (-4.93M €)",
-    "debtAlert": "Saldo en descubierto (-4.93M €). Consume el 32.4% del límite de crédito permitido (15.22M €). Exige ventas antes de puntuar.",
-    "projectedScore": 66,
-    "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 66 puntos según plantilla disponible.",
+    "squadValue": 54820000,
+    "playerCount": 12,
+    "financialHealth": "Saneado / Alta Liquidez (+1.02M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+1.02M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 64,
+    "formation": "4-4-2",
+    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 64 puntos según plantilla disponible.",
     "strengths": [
       "3º en la clasificación general con 315 puntos acumulados (105.0 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (60.88M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -4.93M € que obliga a vender piezas."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -3885,13 +3884,13 @@
         "name": "Aubameyang",
         "pos": "Delantero",
         "price": 13150000,
-        "reason": "Pieza competitiva en el mercado (13.15M €) adaptable al esquema 3-4-3."
+        "reason": "Pieza competitiva en el mercado (13.15M €) adaptable al esquema 4-4-2."
       },
       {
         "name": "Buchanan",
         "pos": "Centrocampista",
         "price": 1920000,
-        "reason": "Pieza competitiva en el mercado (1.92M €) adaptable al esquema 3-4-3."
+        "reason": "Pieza competitiva en el mercado (1.92M €) adaptable al esquema 4-4-2."
       }
     ],
     "marketBalance": {
@@ -4002,32 +4001,32 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T10:01:05.170Z"
+      "lastUpdated": "2026-10-12T16:01:07.606Z"
     },
     "speculation": {
-      "score": 55,
-      "badge": "🎰 Especulador de Mercado",
-      "badgeColor": "#f59e0b",
+      "score": 40,
+      "badge": "📈 Inversor Táctico / Eficiente",
+      "badgeColor": "#3b82f6",
       "overbidRate": "+2.0%",
-      "riskLevel": "Riesgo Moderado-Alto",
+      "riskLevel": "Riesgo Moderado",
       "totalSpent": 49581000,
-      "totalReceived": 21505100,
+      "totalReceived": 27450000,
       "purchasesCount": 10,
-      "salesCount": 12,
-      "estimatedCash": -4925900,
+      "salesCount": 13,
+      "estimatedCash": 1019000,
       "prizesEarned": 3150000,
-      "maxCreditLimit": 15220000,
-      "netWealth": 55954100,
-      "analysis": "Operativa histórica de 10 compras (49.6M €) y 12 ventas (21.5M €). Dinero total rotado: 71.1M € con sobrepuja media de +2.0%."
+      "maxCreditLimit": 13705000,
+      "netWealth": 55839000,
+      "analysis": "Operativa histórica de 10 compras (49.6M €) y 13 ventas (27.4M €). Dinero total rotado: 77.0M € con sobrepuja media de +2.0%."
     },
     "keyDeals": {
       "smartBuy": {
-        "player": "Sergio Carreira",
-        "price": 3995000,
-        "points": 42,
-        "roi": 10.51,
-        "impact": "Pilar clave (Titular en el 11): Costó 4.00M € y suma 42 pts con el club (10.51 pts/M€ invertido).",
-        "tag": "🎯 10.51 pts/M€ (Titular ROI)"
+        "player": "Andrés Castrín",
+        "price": 1730000,
+        "points": 31,
+        "roi": 17.92,
+        "impact": "Pilar clave (Titular en el 11): Costó 1.73M € y suma 31 pts con el club (17.92 pts/M€ invertido).",
+        "tag": "🎯 17.92 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
         "player": "Álex Baena",
@@ -4329,6 +4328,20 @@
           "seller": "Pachangueros F.C.",
           "buyer": "Computer",
           "date": "2026-09-20T04:36:05+02:00"
+        },
+        {
+          "playerName": "Enes Ünal",
+          "price": 5944900,
+          "marketValue": 5944900,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Pachangueros F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-12T04:30:28+02:00"
         }
       ]
     },
@@ -4402,6 +4415,23 @@
         "image": "/media/players/3029.png"
       },
       {
+        "id": 3910,
+        "name": "Andrés Castrín",
+        "position": "defender",
+        "price": 1720000,
+        "points": 31,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3910.png"
+      },
+      {
         "id": 2943,
         "name": "Álex Baena",
         "position": "midfielder",
@@ -4470,23 +4500,6 @@
         "image": "/media/players/2859.png"
       },
       {
-        "id": 2403,
-        "name": "Enes Ünal",
-        "position": "striker",
-        "price": 6060000,
-        "points": 25,
-        "expectedPoints": 6.4,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2403.png"
-      },
-      {
         "id": 3188,
         "name": "Iván Romero",
         "position": "striker",
@@ -4522,22 +4535,6 @@
       }
     ],
     "bench": [
-      {
-        "id": 3910,
-        "name": "Andrés Castrín",
-        "position": "defender",
-        "price": 1720000,
-        "points": 31,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3910.png"
-      },
       {
         "id": 1602,
         "name": "Rubén García",
@@ -4843,7 +4840,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T10:01:04.814Z"
+      "lastUpdated": "2026-10-12T16:01:07.226Z"
     },
     "speculation": {
       "score": 98,
@@ -6178,7 +6175,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T10:01:07.405Z"
+      "lastUpdated": "2026-10-12T16:01:09.732Z"
     },
     "speculation": {
       "score": 98,
@@ -7590,7 +7587,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T10:01:05.531Z"
+      "lastUpdated": "2026-10-12T16:01:07.968Z"
     },
     "speculation": {
       "score": 73,
@@ -8435,7 +8432,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T10:01:07.026Z"
+      "lastUpdated": "2026-10-12T16:01:09.369Z"
     },
     "speculation": {
       "score": 98,
@@ -9610,7 +9607,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T10:01:06.284Z"
+      "lastUpdated": "2026-10-12T16:01:08.695Z"
     },
     "speculation": {
       "score": 98,
@@ -10891,7 +10888,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T10:01:06.677Z"
+      "lastUpdated": "2026-10-12T16:01:09.008Z"
     },
     "speculation": {
       "score": 65,
@@ -11592,7 +11589,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T10:01:07.780Z"
+      "lastUpdated": "2026-10-12T16:01:10.071Z"
     },
     "speculation": {
       "score": 73,
