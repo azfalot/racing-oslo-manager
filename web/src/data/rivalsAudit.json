@@ -693,7 +693,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T03:08:45.803Z"
+      "lastUpdated": "2026-10-12T10:01:04.424Z"
     },
     "speculation": {
       "score": 98,
@@ -2923,13 +2923,13 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 2,
     "points": 307,
-    "squadValue": 48190000,
-    "playerCount": 12,
-    "financialHealth": "Solvente Ajustado (+22k € en Caja)",
-    "debtAlert": "Saldo positivo (+22k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
-    "projectedScore": 56,
-    "formation": "4-3-3",
-    "tacticDescription": "Estructura 4-3-3 orientada a maximizar 56 puntos según plantilla disponible.",
+    "squadValue": 47100000,
+    "playerCount": 11,
+    "financialHealth": "Saneado / Alta Liquidez (+1.11M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+1.11M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 54,
+    "formation": "3-4-3",
+    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 54 puntos según plantilla disponible.",
     "strengths": [
       "2º en la clasificación general con 307 puntos acumulados (102.3 pts/jornada).",
       "Seguridad contrastada bajo palos en portería.",
@@ -2937,7 +2937,8 @@
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
+      "Plantilla corta (11 jugadores) con escaso fondo de armario ante rotaciones.",
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -2951,6 +2952,12 @@
     ],
     "recommendations": [
       {
+        "name": "Gayà",
+        "pos": "Defensa",
+        "price": 1330000,
+        "reason": "Zaguero de jerarquía (1.33M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
+      },
+      {
         "name": "Ugrinic",
         "pos": "Centrocampista",
         "price": 700000,
@@ -2960,30 +2967,33 @@
         "name": "Aubameyang",
         "pos": "Delantero",
         "price": 13150000,
-        "reason": "Pieza competitiva en el mercado (13.15M €) adaptable al esquema 4-3-3."
-      },
-      {
-        "name": "Buchanan",
-        "pos": "Centrocampista",
-        "price": 1920000,
-        "reason": "Pieza competitiva en el mercado (1.92M €) adaptable al esquema 4-3-3."
+        "reason": "Pieza competitiva en el mercado (13.15M €) adaptable al esquema 3-4-3."
       }
     ],
     "marketBalance": {
       "clubName": "Puente Avios FC",
-      "realizedGainsEUR": 139400,
+      "realizedGainsEUR": 818499,
       "realizedLossesEUR": 906000,
-      "netRealizedBalanceEUR": -766600,
-      "profitableTradesCount": 3,
-      "totalClosedTradesCount": 7,
-      "historicalSuccessRatePct": 43,
-      "totalLatentGainsEUR": 4367099,
+      "netRealizedBalanceEUR": -87501,
+      "profitableTradesCount": 4,
+      "totalClosedTradesCount": 8,
+      "historicalSuccessRatePct": 50,
+      "totalLatentGainsEUR": 3688000,
       "totalLatentLossesEUR": 22979399,
-      "netLatentBalanceEUR": -18612300,
+      "netLatentBalanceEUR": -19291399,
       "healthLabel": "TRANSICIÓN RENTABLE",
       "healthBadgeColor": "purple",
-      "healthSummary": "Las minusvalías de ventas cerradas (-906.000 €) quedan compensadas por la revalorización latente de su plantilla (+4.367.099 €).",
+      "healthSummary": "Las minusvalías de ventas cerradas (-906.000 €) quedan compensadas por la revalorización latente de su plantilla (+3.688.000 €).",
       "closedOperations": [
+        {
+          "playerName": "Valentín Gómez",
+          "buyPrice": 410901,
+          "sellPrice": 1090000,
+          "diff": 679099,
+          "roiPct": 165.3,
+          "isProfit": true,
+          "sellDate": "2026-10-12T04:30:28+02:00"
+        },
         {
           "playerName": "Benavídez Protesoni",
           "buyPrice": 180000,
@@ -3059,15 +3069,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Valentín Gómez",
-          "position": "defender",
-          "buyPrice": 410901,
-          "currentVM": 1090000,
-          "latentDiff": 679099,
-          "latentRoiPct": 165.3,
-          "isProfit": true
-        },
-        {
           "playerName": "Roberto Fernández",
           "position": "striker",
           "buyPrice": 12050000,
@@ -3131,23 +3132,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T03:08:47.225Z"
+      "lastUpdated": "2026-10-12T10:01:05.908Z"
     },
     "speculation": {
-      "score": 92,
+      "score": 89,
       "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+22.8%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 67829300,
-      "totalReceived": 44781300,
+      "totalReceived": 45871300,
       "purchasesCount": 16,
-      "salesCount": 19,
-      "estimatedCash": 22000,
+      "salesCount": 20,
+      "estimatedCash": 1112000,
       "prizesEarned": 3070000,
-      "maxCreditLimit": 12047500,
+      "maxCreditLimit": 11775000,
       "netWealth": 48212000,
-      "analysis": "Operativa histórica de 16 compras (67.8M €) y 19 ventas (44.8M €). Dinero total rotado: 112.6M € con sobrepuja media de +22.8%."
+      "analysis": "Operativa histórica de 16 compras (67.8M €) y 20 ventas (45.9M €). Dinero total rotado: 113.7M € con sobrepuja media de +22.8%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -3630,6 +3631,20 @@
           "seller": "Puente Avios FC",
           "buyer": "Computer",
           "date": "2026-09-28T04:29:26+02:00"
+        },
+        {
+          "playerName": "Valentín Gómez",
+          "price": 1090000,
+          "marketValue": 1090000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-10-12T04:30:28+02:00"
         }
       ]
     },
@@ -3703,23 +3718,6 @@
         "image": "/media/players/3875.png"
       },
       {
-        "id": 3886,
-        "name": "Valentín Gómez",
-        "position": "defender",
-        "price": 1090000,
-        "points": 23,
-        "expectedPoints": 2.6,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3886.png"
-      },
-      {
         "id": 3010,
         "name": "Íñigo Vicente",
         "position": "midfielder",
@@ -3769,6 +3767,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2370.png"
+      },
+      {
+        "id": 3078,
+        "name": "Urko González",
+        "position": "midfielder",
+        "price": 560000,
+        "points": 21,
+        "expectedPoints": 0.7,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3078.png"
       },
       {
         "id": 3773,
@@ -3822,24 +3837,7 @@
         "image": "/media/players/4080.png"
       }
     ],
-    "bench": [
-      {
-        "id": 3078,
-        "name": "Urko González",
-        "position": "midfielder",
-        "price": 560000,
-        "points": 21,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3078.png"
-      }
-    ],
+    "bench": [],
     "isMe": false
   },
   {
@@ -4004,7 +4002,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T03:08:46.475Z"
+      "lastUpdated": "2026-10-12T10:01:05.170Z"
     },
     "speculation": {
       "score": 55,
@@ -4845,7 +4843,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T03:08:46.134Z"
+      "lastUpdated": "2026-10-12T10:01:04.814Z"
     },
     "speculation": {
       "score": 98,
@@ -6180,7 +6178,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T03:08:48.671Z"
+      "lastUpdated": "2026-10-12T10:01:07.405Z"
     },
     "speculation": {
       "score": 98,
@@ -7592,7 +7590,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T03:08:46.835Z"
+      "lastUpdated": "2026-10-12T10:01:05.531Z"
     },
     "speculation": {
       "score": 73,
@@ -8437,7 +8435,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T03:08:48.323Z"
+      "lastUpdated": "2026-10-12T10:01:07.026Z"
     },
     "speculation": {
       "score": 98,
@@ -9269,21 +9267,21 @@
     "crest": "/media/crests/m4_team.svg",
     "pos": 8,
     "points": 283,
-    "squadValue": 47510000,
-    "playerCount": 14,
-    "financialHealth": "Apalancado / Saldo Negativo (-1.39M €)",
-    "debtAlert": "Saldo en descubierto (-1.39M €). Consume el 11.7% del límite de crédito permitido (11.88M €). Exige ventas antes de puntuar.",
-    "projectedScore": 46,
-    "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 46 puntos según plantilla disponible.",
+    "squadValue": 45140000,
+    "playerCount": 12,
+    "financialHealth": "Saneado / Alta Liquidez (+1.03M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+1.03M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 42,
+    "formation": "4-3-3",
+    "tacticDescription": "Estructura 4-3-3 orientada a maximizar 42 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez.",
-      "Tensión de tesorería: Saldo negativo de -1.39M € que obliga a vender piezas."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones.",
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -9303,32 +9301,32 @@
         "reason": "Zaguero de jerarquía (1.33M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
       },
       {
+        "name": "Buchanan",
+        "pos": "Centrocampista",
+        "price": 1920000,
+        "reason": "Centrocampista con llegada (1.92M €) para asociarse con Vinícius Júnior y dominar la posesión."
+      },
+      {
         "name": "Ugrinic",
         "pos": "Centrocampista",
         "price": 700000,
         "reason": "Oportunidad de mercado (0.70M € · 22 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
-      },
-      {
-        "name": "Aubameyang",
-        "pos": "Delantero",
-        "price": 13150000,
-        "reason": "Pieza competitiva en el mercado (13.15M €) adaptable al esquema 3-4-3."
       }
     ],
     "marketBalance": {
       "clubName": "M4 TEAM",
-      "realizedGainsEUR": 2967810,
-      "realizedLossesEUR": 8356889,
-      "netRealizedBalanceEUR": -5389079,
-      "profitableTradesCount": 7,
-      "totalClosedTradesCount": 18,
-      "historicalSuccessRatePct": 39,
-      "totalLatentGainsEUR": 1122100,
-      "totalLatentLossesEUR": 14253994,
-      "netLatentBalanceEUR": -13131894,
+      "realizedGainsEUR": 3098810,
+      "realizedLossesEUR": 8416289,
+      "netRealizedBalanceEUR": -5317479,
+      "profitableTradesCount": 8,
+      "totalClosedTradesCount": 20,
+      "historicalSuccessRatePct": 40,
+      "totalLatentGainsEUR": 991100,
+      "totalLatentLossesEUR": 14144994,
+      "netLatentBalanceEUR": -13153894,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-5.389.079 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-5.317.479 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Dani Ceballos",
@@ -9376,6 +9374,15 @@
           "sellDate": "2026-09-20T04:36:05+02:00"
         },
         {
+          "playerName": "Lomónaco",
+          "buyPrice": 469000,
+          "sellPrice": 600000,
+          "diff": 131000,
+          "roiPct": 27.9,
+          "isProfit": true,
+          "sellDate": "2026-10-12T04:30:28+02:00"
+        },
+        {
           "playerName": "Jon Pacheco",
           "buyPrice": 179000,
           "sellPrice": 287800,
@@ -9410,6 +9417,15 @@
           "roiPct": -4,
           "isProfit": false,
           "sellDate": "2026-09-19T04:34:24+02:00"
+        },
+        {
+          "playerName": "Gudelj",
+          "buyPrice": 1879000,
+          "sellPrice": 1819600,
+          "diff": -59400,
+          "roiPct": -3.2,
+          "isProfit": false,
+          "sellDate": "2026-10-12T04:30:28+02:00"
         },
         {
           "playerName": "Ángel Ortiz",
@@ -9513,15 +9529,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Lomónaco",
-          "position": "defender",
-          "buyPrice": 469000,
-          "currentVM": 600000,
-          "latentDiff": 131000,
-          "latentRoiPct": 27.9,
-          "isProfit": true
-        },
-        {
           "playerName": "Eriksson",
           "position": "keeper",
           "buyPrice": 160005,
@@ -9546,15 +9553,6 @@
           "currentVM": 2760000,
           "latentDiff": -100000,
           "latentRoiPct": -3.5,
-          "isProfit": false
-        },
-        {
-          "playerName": "Gudelj",
-          "position": "midfielder",
-          "buyPrice": 1879000,
-          "currentVM": 1770000,
-          "latentDiff": -109000,
-          "latentRoiPct": -5.8,
           "isProfit": false
         },
         {
@@ -9612,23 +9610,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T03:08:47.582Z"
+      "lastUpdated": "2026-10-12T10:01:06.284Z"
     },
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+16.0%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 121771773,
-      "totalReceived": 97552000,
+      "totalReceived": 99971600,
       "purchasesCount": 31,
-      "salesCount": 32,
-      "estimatedCash": -1389773,
+      "salesCount": 34,
+      "estimatedCash": 1029827,
       "prizesEarned": 2830000,
-      "maxCreditLimit": 11877500,
-      "netWealth": 46120227,
-      "analysis": "Operativa histórica de 31 compras (121.8M €) y 32 ventas (97.6M €). Dinero total rotado: 219.3M € con sobrepuja media de +16.0%."
+      "maxCreditLimit": 11285000,
+      "netWealth": 46169827,
+      "analysis": "Operativa histórica de 31 compras (121.8M €) y 34 ventas (100.0M €). Dinero total rotado: 221.7M € con sobrepuja media de +16.0%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -10493,6 +10491,34 @@
           "seller": "M4 TEAM",
           "buyer": "Computer",
           "date": "2026-10-11T04:30:14+02:00"
+        },
+        {
+          "playerName": "Lomónaco",
+          "price": 600000,
+          "marketValue": 600000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "M4 TEAM",
+          "buyer": "Computer",
+          "date": "2026-10-12T04:30:28+02:00"
+        },
+        {
+          "playerName": "Gudelj",
+          "price": 1819600,
+          "marketValue": 1819600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "M4 TEAM",
+          "buyer": "Computer",
+          "date": "2026-10-12T04:30:28+02:00"
         }
       ]
     },
@@ -10549,12 +10575,12 @@
         "image": "/media/players/3649.png"
       },
       {
-        "id": 4166,
-        "name": "Lomónaco",
+        "id": 2491,
+        "name": "Gorosabel",
         "position": "defender",
-        "price": 600000,
+        "price": 210000,
         "points": 0,
-        "expectedPoints": 0.4,
+        "expectedPoints": 0.1,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -10563,7 +10589,24 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/4166.png"
+        "image": "/media/players/2491.png"
+      },
+      {
+        "id": 2791,
+        "name": "Ferland Mendy",
+        "position": "defender",
+        "price": 160000,
+        "points": 0,
+        "expectedPoints": 0.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/2791.png"
       },
       {
         "id": 2969,
@@ -10615,23 +10658,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2596.png"
-      },
-      {
-        "id": 2838,
-        "name": "Gudelj",
-        "position": "midfielder",
-        "price": 1770000,
-        "points": 15,
-        "expectedPoints": 4.1,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2838.png"
       },
       {
         "id": 2565,
@@ -10701,38 +10727,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/4029.png"
-      },
-      {
-        "id": 2491,
-        "name": "Gorosabel",
-        "position": "defender",
-        "price": 210000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2491.png"
-      },
-      {
-        "id": 2791,
-        "name": "Ferland Mendy",
-        "position": "defender",
-        "price": 160000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2791.png"
       }
     ],
     "isMe": false
@@ -10897,7 +10891,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T03:08:47.943Z"
+      "lastUpdated": "2026-10-12T10:01:06.677Z"
     },
     "speculation": {
       "score": 65,
@@ -11598,7 +11592,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-12T03:08:49.016Z"
+      "lastUpdated": "2026-10-12T10:01:07.780Z"
     },
     "speculation": {
       "score": 73,
