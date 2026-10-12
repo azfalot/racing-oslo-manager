@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-11T21:52:08.860Z",
+  "timestamp": "2026-10-12T03:06:00.629Z",
   "currentMatchday": 8,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -12,8 +12,8 @@
     "balance": -279312,
     "committedBids": 0,
     "effectiveBalance": -279312,
-    "squadValue": 42870000,
-    "totalPatrimony": 42590688
+    "squadValue": 43370000,
+    "totalPatrimony": 43090688
   },
   "lineup": {
     "formation": "3-5-2",
@@ -192,7 +192,7 @@
       "playerId": 4096,
       "name": "Mikel Rodríguez",
       "position": "midfielder",
-      "price": 990000,
+      "price": 980000,
       "expectedPoints": 2.5,
       "vorp": -35,
       "vorpPerMatchday": -1.03,
@@ -216,7 +216,7 @@
       "playerId": 3553,
       "name": "Johnny Cardoso",
       "position": "midfielder",
-      "price": 2260000,
+      "price": 2280000,
       "expectedPoints": 3.7,
       "vorp": 0,
       "vorpPerMatchday": 0,
@@ -235,258 +235,23 @@
   },
   "marketTargets": [
     {
-      "playerId": 2539,
-      "name": "Lucas Boyé",
-      "type": "striker",
-      "price": 6450000,
-      "bidAmount": 7611000,
-      "maxRationalBid": 7611000,
-      "marginPct": 18,
-      "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 8,
-      "ppm": 5.5,
-      "efficiency": 25.6,
-      "upgradePoints": 6.3,
-      "marginalValue": 6.3,
-      "vorp": 60,
-      "vorpPerMatchday": 1.76,
-      "cpmp": 1023810,
-      "cpmpSeason": 30140,
-      "replacedPlayer": {
-        "playerId": 3160,
-        "name": "Gavi",
-        "price": 1460000,
-        "totalPoints": 8,
-        "status": null,
-        "statusInfo": null,
-        "type": "midfielder",
-        "historical": {
-          "points": [
-            {
-              "season": "21/22",
-              "points": "143",
-              "eventId": 951313
-            },
-            {
-              "season": "22/23",
-              "points": "159",
-              "eventId": 961836
-            },
-            {
-              "season": "23/24",
-              "points": "69",
-              "eventId": 975270
-            },
-            {
-              "season": "24/25",
-              "points": "119",
-              "eventId": 988474
-            },
-            {
-              "season": "25/26",
-              "points": "47",
-              "eventId": 998265
-            }
-          ]
-        },
-        "average": {
-          "grade": "6,8",
-          "points": "4",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "1,4",
-            "points": "0,8"
-          }
-        },
-        "club": {
-          "id": 3,
-          "name": "Barcelona",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/3"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/3/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 9,
-            "homeClub": {
-              "id": 4,
-              "name": "Betis",
-              "abbreviation": "bet",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/4"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/4/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-17T18:30:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 10,
-            "homeClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 15,
-              "name": "Real Madrid",
-              "abbreviation": "rma",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/15"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/15/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-25T21:00:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 11,
-            "homeClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-31T21:00:00+02:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 0,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 1.8,
-        "id": 3160,
-        "position": "midfielder",
-        "points": 0
-      },
-      "replacedPlayerName": "Gavi",
-      "replacedPlayerExpectedPoints": 1.8,
-      "strategicScore": 73.7,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 6.3
-        },
-        "absoluteQuality": {
-          "raw": 91.7,
-          "weight": 0.2,
-          "ppm": 5.5
-        },
-        "positionNeed": {
-          "raw": 50,
-          "weight": 0.15,
-          "detail": "2 disponibles = exactamente los requeridos. Sin suplentes."
-        },
-        "marketOpportunity": {
-          "raw": 64,
-          "weight": 0.1,
-          "efficiency": 25.6
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": false,
-      "reasoning": [
-        "✅ Entra en el XI titular (+6.3 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (5.5 PPM > 3.93 PPM).",
-        "🟡 Posición con necesidad MODERADA: 2 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 5.5 | Fiabilidad: 95% minutos | Eficiencia: 25.6 pts/M€)",
-        "🔥 Dinámica de club: 🚀 Estado de Gracia / Racha Histórica (1.06x): 3V 1E 1D - Alta efectividad colectiva y moral por las nubes",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 7.611.000 € (118.0% VM | Sobreprecio: +18%).",
-        "⛔ Fondos insuficientes: Requiere 8.611.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Gavi). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 7.611.000 € (118.0% VM | Sobreprecio: +18%)."
-    },
-    {
       "playerId": 3231,
       "name": "Aubameyang",
       "type": "striker",
-      "price": 11440000,
-      "bidAmount": 13956800,
-      "maxRationalBid": 13956800,
+      "price": 13150000,
+      "bidAmount": 16043000,
+      "maxRationalBid": 16043000,
       "marginPct": 22,
       "band": "ELITE_LEAGUE_WINNER",
       "expectedPoints": 10,
       "ppm": 6.72,
-      "efficiency": 17.6,
+      "efficiency": 15.3,
       "upgradePoints": 7.9,
       "marginalValue": 7.9,
       "vorp": 100,
       "vorpPerMatchday": 2.94,
-      "cpmp": 1448101,
-      "cpmpSeason": 42528,
+      "cpmp": 1664557,
+      "cpmpSeason": 48885,
       "replacedPlayer": {
         "playerId": 3160,
         "name": "Gavi",
@@ -654,7 +419,7 @@
       },
       "replacedPlayerName": "Gavi",
       "replacedPlayerExpectedPoints": 1.8,
-      "strategicScore": 73.4,
+      "strategicScore": 72.8,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
@@ -672,9 +437,9 @@
           "detail": "2 disponibles = exactamente los requeridos. Sin suplentes."
         },
         "marketOpportunity": {
-          "raw": 44,
+          "raw": 38.3,
           "weight": 0.1,
-          "efficiency": 17.6
+          "efficiency": 15.3
         },
         "rivalPressure": {
           "raw": 20,
@@ -696,267 +461,32 @@
         "✅ Entra en el XI titular (+7.9 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
         "🚀 Supera el promedio con momentum del titular actual (6.72 PPM > 3.93 PPM).",
         "🟡 Posición con necesidad MODERADA: 2 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 6.72 | Fiabilidad: 95% minutos | Eficiencia: 17.6 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 6.72 | Fiabilidad: 95% minutos | Eficiencia: 15.3 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 13.956.800 € (122.0% VM | Sobreprecio: +22%).",
-        "⛔ Fondos insuficientes: Requiere 14.956.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 16.043.000 € (122.0% VM | Sobreprecio: +22%).",
+        "⛔ Fondos insuficientes: Requiere 17.043.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +8 pts (sustituye a Gavi). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 13.956.800 € (122.0% VM | Sobreprecio: +22%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +8 pts (sustituye a Gavi). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 16.043.000 € (122.0% VM | Sobreprecio: +22%)."
     },
     {
-      "playerId": 3188,
-      "name": "Iván Romero",
-      "type": "striker",
-      "price": 4980000,
-      "bidAmount": 5776800,
-      "maxRationalBid": 5776800,
-      "marginPct": 16,
-      "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 7,
-      "ppm": 4.88,
-      "efficiency": 29.4,
-      "upgradePoints": 5.4,
-      "marginalValue": 5.4,
-      "vorp": 64,
-      "vorpPerMatchday": 1.88,
-      "cpmp": 922222,
-      "cpmpSeason": 27065,
-      "replacedPlayer": {
-        "playerId": 3160,
-        "name": "Gavi",
-        "price": 1460000,
-        "totalPoints": 8,
-        "status": null,
-        "statusInfo": null,
-        "type": "midfielder",
-        "historical": {
-          "points": [
-            {
-              "season": "21/22",
-              "points": "143",
-              "eventId": 951313
-            },
-            {
-              "season": "22/23",
-              "points": "159",
-              "eventId": 961836
-            },
-            {
-              "season": "23/24",
-              "points": "69",
-              "eventId": 975270
-            },
-            {
-              "season": "24/25",
-              "points": "119",
-              "eventId": 988474
-            },
-            {
-              "season": "25/26",
-              "points": "47",
-              "eventId": 998265
-            }
-          ]
-        },
-        "average": {
-          "grade": "6,8",
-          "points": "4",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "1,4",
-            "points": "0,8"
-          }
-        },
-        "club": {
-          "id": 3,
-          "name": "Barcelona",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/3"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/3/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 9,
-            "homeClub": {
-              "id": 4,
-              "name": "Betis",
-              "abbreviation": "bet",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/4"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/4/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-17T18:30:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 10,
-            "homeClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 15,
-              "name": "Real Madrid",
-              "abbreviation": "rma",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/15"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/15/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-25T21:00:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 11,
-            "homeClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-31T21:00:00+02:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 0,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 1.8,
-        "id": 3160,
-        "position": "midfielder",
-        "points": 0
-      },
-      "replacedPlayerName": "Gavi",
-      "replacedPlayerExpectedPoints": 1.8,
-      "strategicScore": 72.6,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 5.4
-        },
-        "absoluteQuality": {
-          "raw": 81.3,
-          "weight": 0.2,
-          "ppm": 4.88
-        },
-        "positionNeed": {
-          "raw": 50,
-          "weight": 0.15,
-          "detail": "2 disponibles = exactamente los requeridos. Sin suplentes."
-        },
-        "marketOpportunity": {
-          "raw": 73.5,
-          "weight": 0.1,
-          "efficiency": 29.4
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": false,
-      "reasoning": [
-        "✅ Entra en el XI titular (+5.4 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.88 PPM > 3.93 PPM).",
-        "🟡 Posición con necesidad MODERADA: 2 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 4.88 | Fiabilidad: 95% minutos | Eficiencia: 29.4 pts/M€)",
-        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.776.800 € (116.0% VM | Sobreprecio: +16%).",
-        "⛔ Fondos insuficientes: Requiere 6.776.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Gavi). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.776.800 € (116.0% VM | Sobreprecio: +16%)."
-    },
-    {
-      "playerId": 3125,
-      "name": "Iván Martín",
+      "playerId": 3783,
+      "name": "Buchanan",
       "type": "midfielder",
-      "price": 3040000,
-      "bidAmount": 3404800,
-      "maxRationalBid": 3404800,
-      "marginPct": 12,
-      "band": "CLEAR_UPGRADE",
-      "expectedPoints": 6,
-      "ppm": 4.97,
-      "efficiency": 49,
-      "upgradePoints": 4.2,
-      "marginalValue": 4.2,
-      "vorp": 44,
-      "vorpPerMatchday": 1.29,
-      "cpmp": 723810,
-      "cpmpSeason": 21259,
+      "price": 1920000,
+      "bidAmount": 1977600,
+      "maxRationalBid": 1977600,
+      "marginPct": 3,
+      "band": "DEPTH",
+      "expectedPoints": 4,
+      "ppm": 2.93,
+      "efficiency": 45.7,
+      "upgradePoints": 2.3,
+      "marginalValue": 2.3,
+      "vorp": 34,
+      "vorpPerMatchday": 1,
+      "cpmp": 834783,
+      "cpmpSeason": 24615,
       "replacedPlayer": {
         "playerId": 3160,
         "name": "Gavi",
@@ -1124,17 +654,17 @@
       },
       "replacedPlayerName": "Gavi",
       "replacedPlayerExpectedPoints": 1.8,
-      "strategicScore": 68.8,
+      "strategicScore": 52.7,
       "strategicComponents": {
         "squadUpgrade": {
-          "raw": 100,
+          "raw": 76.7,
           "weight": 0.4,
-          "marginalValue": 4.2
+          "marginalValue": 2.3
         },
         "absoluteQuality": {
-          "raw": 82.8,
+          "raw": 48.8,
           "weight": 0.2,
-          "ppm": 4.97
+          "ppm": 2.93
         },
         "positionNeed": {
           "raw": 5,
@@ -1144,7 +674,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 49
+          "efficiency": 45.7
         },
         "rivalPressure": {
           "raw": 20,
@@ -1163,34 +693,34 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+4.2 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.97 PPM > 3.93 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 4.97 | Fiabilidad: 95% minutos | Eficiencia: 49 pts/M€)",
-        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.404.800 € (112.0% VM | Sobreprecio: +12%).",
-        "⛔ Fondos insuficientes: Requiere 4.404.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
+        "✅ Entra en el XI titular (+2.3 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
+        "⚠️ Alerta: El promedio con momentum (2.93 PPM) no supera holgadamente a Gavi (3.93 PPM).",
+        "📊 ⭐ Titular Fijo (PPM: 2.93 | Fiabilidad: 95% minutos | Eficiencia: 45.7 pts/M€)",
+        "🔥 Dinámica de club: ⚠️ Crisis Deportiva (0 Victorias) / Bloqueo Total (0.82x): 0V 2E 3D - 0 victorias en la temporada, depresión competitiva y bajas",
+        "⚔️ Competencia en club: Compite en [object Object] con Dani Parejo, Santi Comesaña, Pape Gueye... (Nivel: BAJA, Confianza XI: 95%)",
+        "💰 [Banda: DEPTH] Puja recomendada: 1.977.600 € (103.0% VM | Sobreprecio: +3%).",
+        "⛔ Fondos insuficientes: Requiere 2.977.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Gavi). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.404.800 € (112.0% VM | Sobreprecio: +12%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +2 pts (sustituye a Gavi). 💰 [Banda: DEPTH] Puja recomendada: 1.977.600 € (103.0% VM | Sobreprecio: +3%)."
     },
     {
-      "playerId": 3812,
-      "name": "Youssef Enríquez",
+      "playerId": 1844,
+      "name": "Gayà",
       "type": "defender",
-      "price": 1380000,
-      "bidAmount": 1407600,
-      "maxRationalBid": 1407600,
-      "marginPct": 2,
+      "price": 1330000,
+      "bidAmount": 1343300,
+      "maxRationalBid": 1343300,
+      "marginPct": 1,
       "band": "DEPTH",
-      "expectedPoints": 3,
-      "ppm": 3.97,
-      "efficiency": 86.4,
-      "upgradePoints": 1.3,
-      "marginalValue": 1.3,
-      "vorp": 16,
-      "vorpPerMatchday": 0.47,
-      "cpmp": 1061538,
-      "cpmpSeason": 31364,
+      "expectedPoints": 2,
+      "ppm": 2.71,
+      "efficiency": 61.2,
+      "upgradePoints": 0.4,
+      "marginalValue": 0.4,
+      "vorp": 33,
+      "vorpPerMatchday": 0.97,
+      "cpmp": 3325000,
+      "cpmpSeason": 95000,
       "replacedPlayer": {
         "playerId": 3160,
         "name": "Gavi",
@@ -1358,17 +888,17 @@
       },
       "replacedPlayerName": "Gavi",
       "replacedPlayerExpectedPoints": 1.8,
-      "strategicScore": 54.8,
+      "strategicScore": 38.6,
       "strategicComponents": {
         "squadUpgrade": {
-          "raw": 43.3,
+          "raw": 13.3,
           "weight": 0.4,
-          "marginalValue": 1.3
+          "marginalValue": 0.4
         },
         "absoluteQuality": {
-          "raw": 66.2,
+          "raw": 45.2,
           "weight": 0.2,
-          "ppm": 3.97
+          "ppm": 2.71
         },
         "positionNeed": {
           "raw": 85,
@@ -1378,7 +908,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 86.4
+          "efficiency": 61.2
         },
         "rivalPressure": {
           "raw": 20,
@@ -1397,16 +927,486 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+1.3 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (3.97 PPM > 3.93 PPM).",
+        "✅ Entra en el XI titular (+0.4 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
+        "⚠️ Alerta: El promedio con momentum (2.71 PPM) no supera holgadamente a Gavi (3.93 PPM).",
         "🔴 Posición con necesidad ALTA: Solo 3 disponible(s) para 4 requeridos. Urgencia alta.",
-        "📊 🔄 Rotación Habitual (PPM: 3.97 | Fiabilidad: 75% minutos | Eficiencia: 86.4 pts/M€)",
-        "🔥 Dinámica de club: 🚀 Estado de Gracia / Racha Histórica (1.06x): 3V 1E 1D - Alta efectividad colectiva y moral por las nubes",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 75%)",
-        "💰 [Banda: DEPTH] Puja recomendada: 1.407.600 € (102.0% VM | Sobreprecio: +2%).",
-        "⛔ Fondos insuficientes: Requiere 2.407.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
+        "📊 ⭐ Titular Fijo (PPM: 2.71 | Fiabilidad: 95% minutos | Eficiencia: 61.2 pts/M€)",
+        "🔥 Dinámica de club: 🚨 Crisis Institucional y Deportiva (Colista) (0.8x): 0V 1E 4D - Colista, generación ofensiva mínima y pesimismo",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
+        "💰 [Banda: DEPTH] Puja recomendada: 1.343.300 € (101.0% VM | Sobreprecio: +1%).",
+        "⛔ Fondos insuficientes: Requiere 2.343.300 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +1 pts (sustituye a Gavi). 💰 [Banda: DEPTH] Puja recomendada: 1.407.600 € (102.0% VM | Sobreprecio: +2%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +0 pts (sustituye a Gavi). 💰 [Banda: DEPTH] Puja recomendada: 1.343.300 € (101.0% VM | Sobreprecio: +1%)."
+    },
+    {
+      "playerId": 4073,
+      "name": "Izan Merino",
+      "type": "midfielder",
+      "price": 1480000,
+      "bidAmount": 1494800,
+      "maxRationalBid": 1494800,
+      "marginPct": 1,
+      "band": "DEPTH",
+      "expectedPoints": 3,
+      "ppm": 3.42,
+      "efficiency": 69.4,
+      "upgradePoints": 0.9,
+      "marginalValue": 0.9,
+      "vorp": 0,
+      "vorpPerMatchday": 0,
+      "cpmp": 1644444,
+      "cpmpSeason": 47742,
+      "replacedPlayer": {
+        "playerId": 3160,
+        "name": "Gavi",
+        "price": 1460000,
+        "totalPoints": 8,
+        "status": null,
+        "statusInfo": null,
+        "type": "midfielder",
+        "historical": {
+          "points": [
+            {
+              "season": "21/22",
+              "points": "143",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "159",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "69",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "119",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "47",
+              "eventId": 998265
+            }
+          ]
+        },
+        "average": {
+          "grade": "6,8",
+          "points": "4",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "1,4",
+            "points": "0,8"
+          }
+        },
+        "club": {
+          "id": 3,
+          "name": "Barcelona",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/3"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/3/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 9,
+            "homeClub": {
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/4"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/4/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-17T18:30:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 10,
+            "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 15,
+              "name": "Real Madrid",
+              "abbreviation": "rma",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/15"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/15/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-25T21:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 11,
+            "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 89,
+              "name": "Alavés",
+              "abbreviation": "ala",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/89"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/89/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-31T21:00:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 1.8,
+        "id": 3160,
+        "position": "midfielder",
+        "points": 0
+      },
+      "replacedPlayerName": "Gavi",
+      "replacedPlayerExpectedPoints": 1.8,
+      "strategicScore": 34.4,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 30,
+          "weight": 0.4,
+          "marginalValue": 0.9
+        },
+        "absoluteQuality": {
+          "raw": 57,
+          "weight": 0.2,
+          "ppm": 3.42
+        },
+        "positionNeed": {
+          "raw": 5,
+          "weight": 0.15,
+          "detail": "6 disponibles. Posición bien cubierta."
+        },
+        "marketOpportunity": {
+          "raw": 100,
+          "weight": 0.1,
+          "efficiency": 69.4
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 35,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": false,
+      "reasoning": [
+        "✅ Entra en el XI titular (+0.9 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
+        "⚠️ Alerta: El promedio con momentum (3.42 PPM) no supera holgadamente a Gavi (3.93 PPM).",
+        "📊 🔄 Rotación Habitual (PPM: 3.42 | Fiabilidad: 90% minutos | Eficiencia: 69.4 pts/M€)",
+        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 90%)",
+        "⛔ Mejora insuficiente (0.9 < 3 pts) y posición cubierta.",
+        "💰 [Banda: DEPTH] Puja recomendada: 1.494.800 € (101.0% VM | Sobreprecio: +1%).",
+        "⛔ Fondos insuficientes: Requiere 2.494.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +1 pts (sustituye a Gavi). 💰 [Banda: DEPTH] Puja recomendada: 1.494.800 € (101.0% VM | Sobreprecio: +1%)."
+    },
+    {
+      "playerId": 3625,
+      "name": "Raúl Moro",
+      "type": "midfielder",
+      "price": 780000,
+      "bidAmount": 787800,
+      "maxRationalBid": 787800,
+      "marginPct": 1,
+      "band": "DEPTH",
+      "expectedPoints": 3,
+      "ppm": 2.95,
+      "efficiency": 113.3,
+      "upgradePoints": 0.8,
+      "marginalValue": 0.8,
+      "vorp": -19,
+      "vorpPerMatchday": -0.56,
+      "cpmp": 975000,
+      "cpmpSeason": 28889,
+      "replacedPlayer": {
+        "playerId": 3160,
+        "name": "Gavi",
+        "price": 1460000,
+        "totalPoints": 8,
+        "status": null,
+        "statusInfo": null,
+        "type": "midfielder",
+        "historical": {
+          "points": [
+            {
+              "season": "21/22",
+              "points": "143",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "159",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "69",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "119",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "47",
+              "eventId": 998265
+            }
+          ]
+        },
+        "average": {
+          "grade": "6,8",
+          "points": "4",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "1,4",
+            "points": "0,8"
+          }
+        },
+        "club": {
+          "id": 3,
+          "name": "Barcelona",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/3"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/3/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 9,
+            "homeClub": {
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/4"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/4/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-17T18:30:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 10,
+            "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 15,
+              "name": "Real Madrid",
+              "abbreviation": "rma",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/15"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/15/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-25T21:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 11,
+            "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 89,
+              "name": "Alavés",
+              "abbreviation": "ala",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/89"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/89/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-31T21:00:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 1.8,
+        "id": 3160,
+        "position": "midfielder",
+        "points": 0
+      },
+      "replacedPlayerName": "Gavi",
+      "replacedPlayerExpectedPoints": 1.8,
+      "strategicScore": 32.8,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 26.7,
+          "weight": 0.4,
+          "marginalValue": 0.8
+        },
+        "absoluteQuality": {
+          "raw": 49.2,
+          "weight": 0.2,
+          "ppm": 2.95
+        },
+        "positionNeed": {
+          "raw": 5,
+          "weight": 0.15,
+          "detail": "6 disponibles. Posición bien cubierta."
+        },
+        "marketOpportunity": {
+          "raw": 100,
+          "weight": 0.1,
+          "efficiency": 113.3
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 10,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": false,
+      "reasoning": [
+        "✅ Entra en el XI titular (+0.8 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
+        "⚠️ Alerta: El promedio con momentum (2.95 PPM) no supera holgadamente a Gavi (3.93 PPM).",
+        "📊 ⭐ Titular Fijo (PPM: 2.95 | Fiabilidad: 95% minutos | Eficiencia: 113.3 pts/M€)",
+        "🔥 Dinámica de club: 🏟️ Fuerte en El Sadar / Regular (1.02x): 3V 1E 1D - Fiable en casa y regularidad táctica",
+        "⚔️ Competencia en club: Compite en [object Object] con Lucas Torró, Jon Moncayola, Aimar Oroz... (Nivel: BAJA, Confianza XI: 95%)",
+        "⛔ Mejora insuficiente (0.8 < 3 pts) y posición cubierta.",
+        "💰 [Banda: DEPTH] Puja recomendada: 787.800 € (101.0% VM | Sobreprecio: +1%).",
+        "⛔ Fondos insuficientes: Requiere 1.787.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +1 pts (sustituye a Gavi). 💰 [Banda: DEPTH] Puja recomendada: 787.800 € (101.0% VM | Sobreprecio: +1%)."
     }
   ],
   "liquiditySuggestions": [],
@@ -1770,5 +1770,5 @@
       }
     ]
   },
-  "priorityMovement": "Pujar 7.611.000 € por Lucas Boyé (striker) para sustituir a Gavi (Expected XI Delta: +6.3 pts, CPMP: Óptimo)."
+  "priorityMovement": "Pujar 16.043.000 € por Aubameyang (striker) para sustituir a Gavi (Expected XI Delta: +7.9 pts, CPMP: Óptimo)."
 }
