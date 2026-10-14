@@ -6,23 +6,23 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 456,
-    "squadValue": 77290000,
-    "playerCount": 18,
-    "financialHealth": "Apalancado / Saldo Negativo (-13.79M €)",
-    "debtAlert": "Saldo en descubierto (-13.79M €). Consume el 71.4% del límite de crédito permitido (19.32M €). Exige ventas antes de puntuar.",
-    "projectedScore": 55,
+    "squadValue": 64240000,
+    "playerCount": 17,
+    "financialHealth": "Apalancado / Saldo Negativo (-0.82M €)",
+    "debtAlert": "Saldo en descubierto (-0.82M €). Consume el 5.1% del límite de crédito permitido (16.06M €). Exige ventas antes de puntuar.",
+    "projectedScore": 52,
     "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 55 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 52 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 456 puntos acumulados (152.0 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (77.29M €).",
+      "Patrimonio de plantilla consolidado en Primera (64.24M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
       "Línea defensiva con bajo valor de mercado o margen de mejora en solidez.",
-      "Tensión de tesorería: Saldo negativo de -13.79M € que obliga a vender piezas."
+      "Tensión de tesorería: Saldo negativo de -0.82M € que obliga a vender piezas."
     ],
     "tacticalAlerts": [
       {
@@ -42,15 +42,6 @@
         "title": "Rendimiento en Reserva",
         "description": "Tiene a Kike Barja (22 pts) en el banquillo mientras alinea a Aleix Febas (9 pts).",
         "action": "Valorar permuta táctica dando entrada a Kike Barja de inicio."
-      },
-      {
-        "type": "suboptimal",
-        "badge": "⚠️ Banquillo Desperdiciado",
-        "player": "Otorbi",
-        "position": "striker",
-        "title": "Rendimiento en Reserva",
-        "description": "Tiene a Otorbi (41 pts) en el banquillo mientras alinea a Ayoze Pérez (34 pts).",
-        "action": "Valorar permuta táctica dando entrada a Otorbi de inicio."
       }
     ],
     "recommendations": [
@@ -75,18 +66,18 @@
     ],
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
-      "realizedGainsEUR": 13928808,
+      "realizedGainsEUR": 15220496,
       "realizedLossesEUR": 40993573,
-      "netRealizedBalanceEUR": -27064765,
-      "profitableTradesCount": 19,
-      "totalClosedTradesCount": 55,
-      "historicalSuccessRatePct": 35,
-      "totalLatentGainsEUR": 2769964,
+      "netRealizedBalanceEUR": -25773077,
+      "profitableTradesCount": 20,
+      "totalClosedTradesCount": 56,
+      "historicalSuccessRatePct": 36,
+      "totalLatentGainsEUR": 1399976,
       "totalLatentLossesEUR": 38276221,
-      "netLatentBalanceEUR": -35506257,
+      "netLatentBalanceEUR": -36876245,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-27.064.765 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-25.773.077 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Lookman",
@@ -123,6 +114,15 @@
           "roiPct": 67.8,
           "isProfit": true,
           "sellDate": "2026-09-14T04:35:00+02:00"
+        },
+        {
+          "playerName": "Aubameyang",
+          "buyPrice": 11680012,
+          "sellPrice": 12971700,
+          "diff": 1291688,
+          "roiPct": 11.1,
+          "isProfit": true,
+          "sellDate": "2026-10-14T04:30:50+02:00"
         },
         {
           "playerName": "Adeyemi",
@@ -586,15 +586,6 @@
       ],
       "latentTrades": [
         {
-          "playerName": "Aubameyang",
-          "position": "striker",
-          "buyPrice": 11680012,
-          "currentVM": 13050000,
-          "latentDiff": 1369988,
-          "latentRoiPct": 11.7,
-          "isProfit": true
-        },
-        {
           "playerName": "Yoel Lago",
           "position": "defender",
           "buyPrice": 1150020,
@@ -739,7 +730,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T10:01:18.145Z"
+      "lastUpdated": "2026-10-14T16:01:22.330Z"
     },
     "speculation": {
       "score": 98,
@@ -748,14 +739,14 @@
       "overbidRate": "+6.4%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 302302293,
-      "totalReceived": 263947600,
+      "totalReceived": 276919300,
       "purchasesCount": 75,
-      "salesCount": 72,
-      "estimatedCash": -13794693,
+      "salesCount": 73,
+      "estimatedCash": -822993,
       "prizesEarned": 4560000,
-      "maxCreditLimit": 19322500,
-      "netWealth": 63495307,
-      "analysis": "Operativa histórica de 75 compras (302.3M €) y 72 ventas (263.9M €). Dinero total rotado: 566.2M € con sobrepuja media de +6.4%."
+      "maxCreditLimit": 16060000,
+      "netWealth": 63417007,
+      "analysis": "Operativa histórica de 75 compras (302.3M €) y 73 ventas (276.9M €). Dinero total rotado: 579.2M € con sobrepuja media de +6.4%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -2742,6 +2733,20 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-10-14T00:08:59+02:00"
+        },
+        {
+          "playerName": "Aubameyang",
+          "price": 12971700,
+          "marketValue": 12971700,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-14T04:30:50+02:00"
         }
       ]
     },
@@ -2900,23 +2905,6 @@
         "image": "/media/players/3298.png"
       },
       {
-        "id": 3231,
-        "name": "Aubameyang",
-        "position": "striker",
-        "price": 13050000,
-        "points": 70,
-        "expectedPoints": 7.7,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3231.png"
-      },
-      {
         "id": 3389,
         "name": "Ayoze Pérez",
         "position": "striker",
@@ -2932,6 +2920,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3389.png"
+      },
+      {
+        "id": 3557,
+        "name": "Otorbi",
+        "position": "striker",
+        "price": 2850000,
+        "points": 41,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3557.png"
       }
     ],
     "bench": [
@@ -3030,22 +3035,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3440.png"
-      },
-      {
-        "id": 3557,
-        "name": "Otorbi",
-        "position": "striker",
-        "price": 2850000,
-        "points": 41,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3557.png"
       }
     ],
     "isMe": false
@@ -3292,7 +3281,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T10:01:19.585Z"
+      "lastUpdated": "2026-10-14T16:01:23.733Z"
     },
     "speculation": {
       "score": 96,
@@ -4261,7 +4250,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T10:01:18.909Z"
+      "lastUpdated": "2026-10-14T16:01:23.023Z"
     },
     "speculation": {
       "score": 44,
@@ -5128,7 +5117,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T10:01:18.530Z"
+      "lastUpdated": "2026-10-14T16:01:22.691Z"
     },
     "speculation": {
       "score": 98,
@@ -6245,7 +6234,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T10:01:19.238Z"
+      "lastUpdated": "2026-10-14T16:01:23.354Z"
     },
     "speculation": {
       "score": 72,
@@ -7089,7 +7078,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T10:01:20.647Z"
+      "lastUpdated": "2026-10-14T16:01:24.908Z"
     },
     "speculation": {
       "score": 85,
@@ -8281,7 +8270,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T10:01:19.947Z"
+      "lastUpdated": "2026-10-14T16:01:24.128Z"
     },
     "speculation": {
       "score": 98,
@@ -9828,7 +9817,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T10:01:21.025Z"
+      "lastUpdated": "2026-10-14T16:01:25.240Z"
     },
     "speculation": {
       "score": 98,
@@ -11223,7 +11212,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T10:01:20.321Z"
+      "lastUpdated": "2026-10-14T16:01:24.525Z"
     },
     "speculation": {
       "score": 67,
@@ -11924,7 +11913,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T10:01:21.383Z"
+      "lastUpdated": "2026-10-14T16:01:25.602Z"
     },
     "speculation": {
       "score": 74,
