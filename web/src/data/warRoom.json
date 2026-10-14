@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-13T21:51:15.979Z",
+  "timestamp": "2026-10-14T03:06:17.804Z",
   "currentMatchday": 8,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -12,8 +12,8 @@
     "balance": -279312,
     "committedBids": 0,
     "effectiveBalance": -279312,
-    "squadValue": 42730000,
-    "totalPatrimony": 42450688
+    "squadValue": 42380000,
+    "totalPatrimony": 42100688
   },
   "lineup": {
     "formation": "3-5-2",
@@ -26,7 +26,7 @@
       "playerId": 4096,
       "name": "Mikel Rodríguez",
       "position": "midfielder",
-      "price": 980000,
+      "price": 950000,
       "expectedPoints": 2.5,
       "vorp": -35,
       "vorpPerMatchday": -1.03,
@@ -69,236 +69,27 @@
   },
   "marketTargets": [
     {
-      "playerId": 3690,
-      "name": "Gerard Martín",
-      "type": "defender",
-      "price": 5070000,
-      "bidAmount": 5982600,
-      "maxRationalBid": 5982600,
-      "marginPct": 18,
-      "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 7,
-      "ppm": 5.74,
-      "efficiency": 34,
-      "upgradePoints": 6.2,
-      "marginalValue": 6.2,
-      "vorp": 65,
-      "vorpPerMatchday": 1.91,
-      "cpmp": 817742,
-      "cpmpSeason": 24028,
-      "replacedPlayer": {
-        "playerId": 4096,
-        "name": "Mikel Rodríguez",
-        "price": 980000,
-        "totalPoints": 22,
-        "status": null,
-        "statusInfo": null,
-        "type": "midfielder",
-        "historical": {
-          "points": []
-        },
-        "average": {
-          "grade": "7,2",
-          "points": "7,33",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "0,0",
-            "points": "0"
-          }
-        },
-        "club": {
-          "id": 89,
-          "name": "Alavés",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/89"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/89/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 9,
-            "homeClub": {
-              "id": 5,
-              "name": "Celta",
-              "abbreviation": "cel",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/5"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/5/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-18T16:15:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 10,
-            "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/65"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-23T21:00:00+02:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 11,
-            "homeClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-31T21:00:00+02:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 0,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 2.5,
-        "id": 4096,
-        "position": "midfielder",
-        "points": 0
-      },
-      "replacedPlayerName": "Mikel Rodríguez",
-      "replacedPlayerExpectedPoints": 2.5,
-      "strategicScore": 81.9,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 6.2
-        },
-        "absoluteQuality": {
-          "raw": 95.7,
-          "weight": 0.2,
-          "ppm": 5.74
-        },
-        "positionNeed": {
-          "raw": 85,
-          "weight": 0.15,
-          "detail": "Solo 3 disponible(s) para 4 requeridos. Urgencia alta."
-        },
-        "marketOpportunity": {
-          "raw": 85,
-          "weight": 0.1,
-          "efficiency": 34
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": false,
-      "reasoning": [
-        "✅ Entra en el XI titular (+6.2 pts al Once Ideal sustituyendo a Mikel Rodríguez (4.04 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (5.74 PPM > 4.04 PPM).",
-        "🔴 Posición con necesidad ALTA: Solo 3 disponible(s) para 4 requeridos. Urgencia alta.",
-        "📊 ⭐ Titular Fijo (PPM: 5.74 | Fiabilidad: 95% minutos | Eficiencia: 34 pts/M€)",
-        "🔥 Dinámica de club: 🔥 Euforia / Líder Arrollador (1.1x): 5V 0E 0D - Ataque demoledor y máxima confianza colectiva",
-        "⚔️ Competencia en club: Compite en [object Object] con Pau Cubarsí, Jules Koundé, Andreas Christensen... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.982.600 € (118.0% VM | Sobreprecio: +18%).",
-        "⛔ Fondos insuficientes: Requiere 6.982.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Mikel Rodríguez). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.982.600 € (118.0% VM | Sobreprecio: +18%)."
-    },
-    {
       "playerId": 3979,
       "name": "Ángel Pérez",
       "type": "midfielder",
-      "price": 3490000,
-      "bidAmount": 3804100,
-      "maxRationalBid": 3804100,
+      "price": 3530000,
+      "bidAmount": 3847700,
+      "maxRationalBid": 3847700,
       "marginPct": 9,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 6,
       "ppm": 5.04,
-      "efficiency": 43.3,
+      "efficiency": 42.8,
       "upgradePoints": 3.5,
       "marginalValue": 3.5,
       "vorp": 40,
       "vorpPerMatchday": 1.18,
-      "cpmp": 997143,
-      "cpmpSeason": 29328,
+      "cpmp": 1008571,
+      "cpmpSeason": 29664,
       "replacedPlayer": {
         "playerId": 4096,
         "name": "Mikel Rodríguez",
-        "price": 980000,
+        "price": 950000,
         "totalPoints": 22,
         "status": null,
         "statusInfo": null,
@@ -456,7 +247,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 43.3
+          "efficiency": 42.8
         },
         "rivalPressure": {
           "raw": 20,
@@ -477,36 +268,36 @@
       "reasoning": [
         "✅ Entra en el XI titular (+3.5 pts al Once Ideal sustituyendo a Mikel Rodríguez (4.04 PPM)).",
         "🚀 Supera el promedio con momentum del titular actual (5.04 PPM > 4.04 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 5.04 | Fiabilidad: 95% minutos | Eficiencia: 43.3 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 5.04 | Fiabilidad: 95% minutos | Eficiencia: 42.8 pts/M€)",
         "🔥 Dinámica de club: 🚀 Estado de Gracia / Racha Histórica (1.06x): 3V 1E 1D - Alta efectividad colectiva y moral por las nubes",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.804.100 € (109.0% VM | Sobreprecio: +9%).",
-        "⛔ Fondos insuficientes: Requiere 4.804.100 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.847.700 € (109.0% VM | Sobreprecio: +9%).",
+        "⛔ Fondos insuficientes: Requiere 4.847.700 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Mikel Rodríguez). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.804.100 € (109.0% VM | Sobreprecio: +9%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Mikel Rodríguez). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.847.700 € (109.0% VM | Sobreprecio: +9%)."
     },
     {
-      "playerId": 2829,
-      "name": "Aleix Febas",
+      "playerId": 4154,
+      "name": "Félix Correia",
       "type": "midfielder",
-      "price": 2040000,
-      "bidAmount": 2203200,
-      "maxRationalBid": 2203200,
-      "marginPct": 8,
+      "price": 3210000,
+      "bidAmount": 3370500,
+      "maxRationalBid": 3370500,
+      "marginPct": 5,
       "band": "CLEAR_UPGRADE",
-      "expectedPoints": 6,
-      "ppm": 3.47,
-      "efficiency": 51.1,
-      "upgradePoints": 3.2,
-      "marginalValue": 3.2,
-      "vorp": 81,
-      "vorpPerMatchday": 2.38,
-      "cpmp": 637500,
-      "cpmpSeason": 18716,
+      "expectedPoints": 5,
+      "ppm": 4.3,
+      "efficiency": 40.2,
+      "upgradePoints": 2.6,
+      "marginalValue": 2.6,
+      "vorp": 40,
+      "vorpPerMatchday": 1.18,
+      "cpmp": 1234615,
+      "cpmpSeason": 36477,
       "replacedPlayer": {
         "playerId": 4096,
         "name": "Mikel Rodríguez",
-        "price": 980000,
+        "price": 950000,
         "totalPoints": 22,
         "status": null,
         "statusInfo": null,
@@ -644,17 +435,17 @@
       },
       "replacedPlayerName": "Mikel Rodríguez",
       "replacedPlayerExpectedPoints": 2.5,
-      "strategicScore": 63.8,
+      "strategicScore": 60,
       "strategicComponents": {
         "squadUpgrade": {
-          "raw": 100,
+          "raw": 86.7,
           "weight": 0.4,
-          "marginalValue": 3.2
+          "marginalValue": 2.6
         },
         "absoluteQuality": {
-          "raw": 57.8,
+          "raw": 71.7,
           "weight": 0.2,
-          "ppm": 3.47
+          "ppm": 4.3
         },
         "positionNeed": {
           "raw": 5,
@@ -664,14 +455,14 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 51.1
+          "efficiency": 40.2
         },
         "rivalPressure": {
           "raw": 20,
           "weight": 0.1
         },
         "riskAdjustment": {
-          "raw": 10,
+          "raw": 35,
           "weight": -0.05
         }
       },
@@ -683,38 +474,38 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+3.2 pts al Once Ideal sustituyendo a Mikel Rodríguez (4.04 PPM)).",
-        "⚠️ Alerta: El promedio con momentum (3.47 PPM) no supera holgadamente a Mikel Rodríguez (4.04 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 3.47 | Fiabilidad: 95% minutos | Eficiencia: 51.1 pts/M€)",
-        "🔥 Dinámica de club: ⚽ Alta Producción Ofensiva (1.05x): 3V 0E 2D - Fútbol vistoso con gran generación de ocasiones",
-        "⚔️ Competencia en club: Compite en [object Object] con Fran Beltrán, Hugo Sotelo, Damián Rodríguez... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.203.200 € (108.0% VM | Sobreprecio: +8%).",
-        "⛔ Fondos insuficientes: Requiere 3.203.200 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
+        "✅ Entra en el XI titular (+2.6 pts al Once Ideal sustituyendo a Mikel Rodríguez (4.04 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (4.3 PPM > 4.04 PPM).",
+        "📊 ⭐ Titular Fijo (PPM: 4.3 | Fiabilidad: 95% minutos | Eficiencia: 40.2 pts/M€)",
+        "🔥 Dinámica de club: 📉 Inestabilidad y Presión Social (0.88x): 1V 2E 2D - Dudas tácticas y tensión competitiva",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.370.500 € (105.0% VM | Sobreprecio: +5%).",
+        "⛔ Fondos insuficientes: Requiere 4.370.500 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Mikel Rodríguez). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.203.200 € (108.0% VM | Sobreprecio: +8%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Mikel Rodríguez). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.370.500 € (105.0% VM | Sobreprecio: +5%)."
     },
     {
       "playerId": 3164,
       "name": "Héctor Bellerín",
       "type": "defender",
-      "price": 2790000,
-      "bidAmount": 2873700,
-      "maxRationalBid": 2873700,
+      "price": 2580000,
+      "bidAmount": 2657400,
+      "maxRationalBid": 2657400,
       "marginPct": 3,
       "band": "DEPTH",
       "expectedPoints": 4,
       "ppm": 2.89,
-      "efficiency": 31.1,
+      "efficiency": 33.6,
       "upgradePoints": 1.7,
       "marginalValue": 1.7,
       "vorp": 16,
       "vorpPerMatchday": 0.47,
-      "cpmp": 1641176,
-      "cpmpSeason": 48103,
+      "cpmp": 1517647,
+      "cpmpSeason": 44483,
       "replacedPlayer": {
         "playerId": 4096,
         "name": "Mikel Rodríguez",
-        "price": 980000,
+        "price": 950000,
         "totalPoints": 22,
         "status": null,
         "statusInfo": null,
@@ -852,7 +643,7 @@
       },
       "replacedPlayerName": "Mikel Rodríguez",
       "replacedPlayerExpectedPoints": 2.5,
-      "strategicScore": 54.3,
+      "strategicScore": 55,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 56.7,
@@ -870,9 +661,9 @@
           "detail": "Solo 3 disponible(s) para 4 requeridos. Urgencia alta."
         },
         "marketOpportunity": {
-          "raw": 77.8,
+          "raw": 84,
           "weight": 0.1,
-          "efficiency": 31.1
+          "efficiency": 33.6
         },
         "rivalPressure": {
           "raw": 20,
@@ -894,36 +685,244 @@
         "✅ Entra en el XI titular (+1.7 pts al Once Ideal sustituyendo a Mikel Rodríguez (4.04 PPM)).",
         "⚠️ Alerta: El promedio con momentum (2.89 PPM) no supera holgadamente a Mikel Rodríguez (4.04 PPM).",
         "🔴 Posición con necesidad ALTA: Solo 3 disponible(s) para 4 requeridos. Urgencia alta.",
-        "📊 🔄 Rotación Habitual (PPM: 2.89 | Fiabilidad: 55% minutos | Eficiencia: 31.1 pts/M€)",
+        "📊 🔄 Rotación Habitual (PPM: 2.89 | Fiabilidad: 55% minutos | Eficiencia: 33.6 pts/M€)",
         "🔥 Dinámica de club: ⚖️ Regular / Carga Conference (0.98x): 2V 2E 1D - Ritmo irregular por desgaste europeo",
         "⚔️ Competencia en club: Compite en [object Object] con Diego Llorente, Natan, Marc Bartra... (Nivel: ALTA, Confianza XI: 55%)",
-        "💰 [Banda: DEPTH] Puja recomendada: 2.873.700 € (103.0% VM | Sobreprecio: +3%).",
-        "⛔ Fondos insuficientes: Requiere 3.873.700 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
+        "💰 [Banda: DEPTH] Puja recomendada: 2.657.400 € (103.0% VM | Sobreprecio: +3%).",
+        "⛔ Fondos insuficientes: Requiere 3.657.400 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +2 pts (sustituye a Mikel Rodríguez). 💰 [Banda: DEPTH] Puja recomendada: 2.873.700 € (103.0% VM | Sobreprecio: +3%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +2 pts (sustituye a Mikel Rodríguez). 💰 [Banda: DEPTH] Puja recomendada: 2.657.400 € (103.0% VM | Sobreprecio: +3%)."
     },
     {
-      "playerId": 1450,
-      "name": "Bigas",
+      "playerId": 3977,
+      "name": "Lucas Cepeda",
+      "type": "midfielder",
+      "price": 1680000,
+      "bidAmount": 1730400,
+      "maxRationalBid": 1730400,
+      "marginPct": 3,
+      "band": "DEPTH",
+      "expectedPoints": 5,
+      "ppm": 3.71,
+      "efficiency": 66.2,
+      "upgradePoints": 2.2,
+      "marginalValue": 2.2,
+      "vorp": 0,
+      "vorpPerMatchday": 0,
+      "cpmp": 763636,
+      "cpmpSeason": 22400,
+      "replacedPlayer": {
+        "playerId": 4096,
+        "name": "Mikel Rodríguez",
+        "price": 950000,
+        "totalPoints": 22,
+        "status": null,
+        "statusInfo": null,
+        "type": "midfielder",
+        "historical": {
+          "points": []
+        },
+        "average": {
+          "grade": "7,2",
+          "points": "7,33",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "0,0",
+            "points": "0"
+          }
+        },
+        "club": {
+          "id": 89,
+          "name": "Alavés",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/89"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/89/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 9,
+            "homeClub": {
+              "id": 5,
+              "name": "Celta",
+              "abbreviation": "cel",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/5"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/5/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 89,
+              "name": "Alavés",
+              "abbreviation": "ala",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/89"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/89/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-18T16:15:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 10,
+            "homeClub": {
+              "id": 89,
+              "name": "Alavés",
+              "abbreviation": "ala",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/89"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/89/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-23T21:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 11,
+            "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 89,
+              "name": "Alavés",
+              "abbreviation": "ala",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/89"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/89/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-31T21:00:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 2.5,
+        "id": 4096,
+        "position": "midfielder",
+        "points": 0
+      },
+      "replacedPlayerName": "Mikel Rodríguez",
+      "replacedPlayerExpectedPoints": 2.5,
+      "strategicScore": 54,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 73.3,
+          "weight": 0.4,
+          "marginalValue": 2.2
+        },
+        "absoluteQuality": {
+          "raw": 61.8,
+          "weight": 0.2,
+          "ppm": 3.71
+        },
+        "positionNeed": {
+          "raw": 5,
+          "weight": 0.15,
+          "detail": "6 disponibles. Posición bien cubierta."
+        },
+        "marketOpportunity": {
+          "raw": 100,
+          "weight": 0.1,
+          "efficiency": 66.2
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 10,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": false,
+      "reasoning": [
+        "✅ Entra en el XI titular (+2.2 pts al Once Ideal sustituyendo a Mikel Rodríguez (4.04 PPM)).",
+        "⚠️ Alerta: El promedio con momentum (3.71 PPM) no supera holgadamente a Mikel Rodríguez (4.04 PPM).",
+        "📊 🔄 Rotación Habitual (PPM: 3.71 | Fiabilidad: 75% minutos | Eficiencia: 66.2 pts/M€)",
+        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 75%)",
+        "💰 [Banda: DEPTH] Puja recomendada: 1.730.400 € (103.0% VM | Sobreprecio: +3%).",
+        "⛔ Fondos insuficientes: Requiere 2.730.400 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +2 pts (sustituye a Mikel Rodríguez). 💰 [Banda: DEPTH] Puja recomendada: 1.730.400 € (103.0% VM | Sobreprecio: +3%)."
+    },
+    {
+      "playerId": 3170,
+      "name": "Alejandro Balde",
       "type": "defender",
-      "price": 660000,
-      "bidAmount": 660000,
-      "maxRationalBid": 660000,
+      "price": 460000,
+      "bidAmount": 460000,
+      "maxRationalBid": 460000,
       "marginPct": 0,
       "band": "DEPTH",
-      "expectedPoints": 2,
-      "ppm": 2.28,
-      "efficiency": 103.6,
+      "expectedPoints": 1,
+      "ppm": 3,
+      "efficiency": 195.8,
       "upgradePoints": 0,
       "marginalValue": 0,
-      "vorp": 21,
-      "vorpPerMatchday": 0.62,
+      "vorp": -15,
+      "vorpPerMatchday": -0.44,
       "cpmp": null,
       "cpmpSeason": null,
       "replacedPlayer": null,
       "replacedPlayerName": null,
       "replacedPlayerExpectedPoints": 0,
-      "strategicScore": 31.8,
+      "strategicScore": 34.3,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 0,
@@ -931,9 +930,9 @@
           "marginalValue": 0
         },
         "absoluteQuality": {
-          "raw": 38,
+          "raw": 50,
           "weight": 0.2,
-          "ppm": 2.28
+          "ppm": 3
         },
         "positionNeed": {
           "raw": 85,
@@ -943,7 +942,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 103.6
+          "efficiency": 195.8
         },
         "rivalPressure": {
           "raw": 20,
@@ -964,13 +963,13 @@
       "reasoning": [
         "⚠️ No mejora el XI actual (mejora marginal: 0 pts).",
         "🔴 Posición con necesidad ALTA: Solo 3 disponible(s) para 4 requeridos. Urgencia alta.",
-        "📊 ⭐ Titular Fijo (PPM: 2.28 | Fiabilidad: 95% minutos | Eficiencia: 103.6 pts/M€)",
-        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: DEPTH] Puja recomendada: 660.000 € (100.0% VM | Sobreprecio: +0%).",
-        "⛔ Fondos insuficientes: Requiere 1.660.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
+        "📊 ⭐ Titular Fijo (PPM: 3 | Fiabilidad: 95% minutos | Eficiencia: 195.8 pts/M€)",
+        "🔥 Dinámica de club: 🔥 Euforia / Líder Arrollador (1.1x): 5V 0E 0D - Ataque demoledor y máxima confianza colectiva",
+        "⚔️ Competencia en club: Compite en [object Object] con Pau Cubarsí, Jules Koundé, Andreas Christensen... (Nivel: BAJA, Confianza XI: 95%)",
+        "💰 [Banda: DEPTH] Puja recomendada: 460.000 € (100.0% VM | Sobreprecio: +0%).",
+        "⛔ Fondos insuficientes: Requiere 1.460.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: -279.312 €."
       ],
-      "reason": "🛡️ FONDO DE ARMARIO / ROTACIÓN SÓLIDA: Mejora real del XI: +0 pts. 💰 [Banda: DEPTH] Puja recomendada: 660.000 € (100.0% VM | Sobreprecio: +0%)."
+      "reason": "🛡️ FONDO DE ARMARIO / ROTACIÓN SÓLIDA: Mejora real del XI: +0 pts. 💰 [Banda: DEPTH] Puja recomendada: 460.000 € (100.0% VM | Sobreprecio: +0%)."
     }
   ],
   "liquiditySuggestions": [],
@@ -1334,5 +1333,5 @@
       }
     ]
   },
-  "priorityMovement": "Pujar 5.982.600 € por Gerard Martín (defender) para sustituir a Mikel Rodríguez (Expected XI Delta: +6.2 pts, CPMP: Óptimo)."
+  "priorityMovement": "Pujar 3.847.700 € por Ángel Pérez (midfielder) para sustituir a Mikel Rodríguez (Expected XI Delta: +3.5 pts, CPMP: Óptimo)."
 }
