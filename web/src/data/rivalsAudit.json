@@ -739,7 +739,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T03:06:12.386Z"
+      "lastUpdated": "2026-10-14T10:01:18.145Z"
     },
     "speculation": {
       "score": 98,
@@ -3292,7 +3292,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T03:06:13.790Z"
+      "lastUpdated": "2026-10-14T10:01:19.585Z"
     },
     "speculation": {
       "score": 96,
@@ -4098,22 +4098,21 @@
     "crest": "/media/crests/pachangueros.svg",
     "pos": 3,
     "points": 369,
-    "squadValue": 60280000,
-    "playerCount": 13,
-    "financialHealth": "Apalancado / Saldo Negativo (-3.57M €)",
-    "debtAlert": "Saldo en descubierto (-3.57M €). Consume el 23.7% del límite de crédito permitido (15.07M €). Exige ventas antes de puntuar.",
-    "projectedScore": 66,
-    "formation": "4-4-2",
-    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 66 puntos según plantilla disponible.",
+    "squadValue": 54360000,
+    "playerCount": 12,
+    "financialHealth": "Saneado / Alta Liquidez (+2.47M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+2.47M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 64,
+    "formation": "5-4-1",
+    "tacticDescription": "Estructura 5-4-1 orientada a maximizar 64 puntos según plantilla disponible.",
     "strengths": [
       "3º en la clasificación general con 369 puntos acumulados (123.0 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (60.28M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -3.57M € que obliga a vender piezas."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -4136,30 +4135,39 @@
         "name": "Ángel Pérez",
         "pos": "Centrocampista",
         "price": 3530000,
-        "reason": "Pieza competitiva en el mercado (3.53M €) adaptable al esquema 4-4-2."
+        "reason": "Pieza competitiva en el mercado (3.53M €) adaptable al esquema 5-4-1."
       },
       {
         "name": "Abde Rebbach",
         "pos": "Centrocampista",
         "price": 730000,
-        "reason": "Pieza competitiva en el mercado (0.73M €) adaptable al esquema 4-4-2."
+        "reason": "Pieza competitiva en el mercado (0.73M €) adaptable al esquema 5-4-1."
       }
     ],
     "marketBalance": {
       "clubName": "Pachangueros F.C.",
-      "realizedGainsEUR": 0,
+      "realizedGainsEUR": 1034300,
       "realizedLossesEUR": 355500,
-      "netRealizedBalanceEUR": -355500,
-      "profitableTradesCount": 0,
-      "totalClosedTradesCount": 2,
-      "historicalSuccessRatePct": 0,
-      "totalLatentGainsEUR": 1640000,
+      "netRealizedBalanceEUR": 678800,
+      "profitableTradesCount": 1,
+      "totalClosedTradesCount": 3,
+      "historicalSuccessRatePct": 33,
+      "totalLatentGainsEUR": 730000,
       "totalLatentLossesEUR": 7217000,
-      "netLatentBalanceEUR": -5577000,
-      "healthLabel": "TRANSICIÓN RENTABLE",
-      "healthBadgeColor": "purple",
-      "healthSummary": "Las minusvalías de ventas cerradas (-355.500 €) quedan compensadas por la revalorización latente de su plantilla (+1.640.000 €).",
+      "netLatentBalanceEUR": -6487000,
+      "healthLabel": "SUPERÁVIT DE TRADING",
+      "healthBadgeColor": "emerald",
+      "healthSummary": "Genera un superávit neto de +678.800 € en operaciones de mercado con una efectividad del 33%.",
       "closedOperations": [
+        {
+          "playerName": "Iván Romero",
+          "buyPrice": 5010000,
+          "sellPrice": 6044300,
+          "diff": 1034300,
+          "roiPct": 20.6,
+          "isProfit": true,
+          "sellDate": "2026-10-14T04:30:50+02:00"
+        },
         {
           "playerName": "Álvaro Padilla",
           "buyPrice": 174000,
@@ -4180,15 +4188,6 @@
         }
       ],
       "latentTrades": [
-        {
-          "playerName": "Iván Romero",
-          "position": "striker",
-          "buyPrice": 5010000,
-          "currentVM": 5920000,
-          "latentDiff": 910000,
-          "latentRoiPct": 18.2,
-          "isProfit": true
-        },
         {
           "playerName": "Álex Baena",
           "position": "midfielder",
@@ -4262,38 +4261,38 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T03:06:13.048Z"
+      "lastUpdated": "2026-10-14T10:01:18.909Z"
     },
     "speculation": {
-      "score": 59,
-      "badge": "🎰 Especulador de Mercado",
-      "badgeColor": "#f59e0b",
+      "score": 44,
+      "badge": "📈 Inversor Táctico / Eficiente",
+      "badgeColor": "#3b82f6",
       "overbidRate": "+1.8%",
-      "riskLevel": "Riesgo Moderado-Alto",
+      "riskLevel": "Riesgo Moderado",
       "totalSpent": 54711000,
-      "totalReceived": 27450000,
+      "totalReceived": 33494300,
       "purchasesCount": 11,
-      "salesCount": 13,
-      "estimatedCash": -3571000,
+      "salesCount": 14,
+      "estimatedCash": 2473300,
       "prizesEarned": 3690000,
-      "maxCreditLimit": 15070000,
-      "netWealth": 56709000,
-      "analysis": "Operativa histórica de 11 compras (54.7M €) y 13 ventas (27.4M €). Dinero total rotado: 82.2M € con sobrepuja media de +1.8%."
+      "maxCreditLimit": 13590000,
+      "netWealth": 56833300,
+      "analysis": "Operativa histórica de 11 compras (54.7M €) y 14 ventas (33.5M €). Dinero total rotado: 88.2M € con sobrepuja media de +1.8%."
     },
     "keyDeals": {
       "smartBuy": {
-        "player": "Sergio Carreira",
-        "price": 3995000,
-        "points": 46,
-        "roi": 11.51,
-        "impact": "Pilar clave (Titular en el 11): Costó 4.00M € y suma 46 pts con el club (11.51 pts/M€ invertido).",
-        "tag": "🎯 11.51 pts/M€ (Titular ROI)"
+        "player": "Andrés Castrín",
+        "price": 1730000,
+        "points": 31,
+        "roi": 17.92,
+        "impact": "Pilar clave (Titular en el 11): Costó 1.73M € y suma 31 pts con el club (17.92 pts/M€ invertido).",
+        "tag": "🎯 17.92 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
-        "player": "Iván Romero",
-        "price": 5010000,
-        "impact": "Fichado por 5.01M €, hoy cotiza en 5.92M € (+910.000 € / +18.2% de plusvalía).",
-        "tag": "📈 +18.2% Plusvalía"
+        "player": "Álex Baena",
+        "price": 12620000,
+        "impact": "Fichado por 12.62M €, hoy cotiza en 13.31M € (+690.000 € / +5.5% de plusvalía).",
+        "tag": "📈 +5.5% Plusvalía"
       },
       "worstMove": {
         "player": "Canales",
@@ -4617,6 +4616,20 @@
           "seller": "Pachangueros F.C.",
           "buyer": "Computer",
           "date": "2026-10-12T04:30:28+02:00"
+        },
+        {
+          "playerName": "Iván Romero",
+          "price": 6044300,
+          "marketValue": 6044300,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Pachangueros F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-14T04:30:50+02:00"
         }
       ]
     },
@@ -4707,6 +4720,23 @@
         "image": "/media/players/3029.png"
       },
       {
+        "id": 3910,
+        "name": "Andrés Castrín",
+        "position": "defender",
+        "price": 1560000,
+        "points": 31,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3910.png"
+      },
+      {
         "id": 2943,
         "name": "Álex Baena",
         "position": "midfielder",
@@ -4775,23 +4805,6 @@
         "image": "/media/players/2859.png"
       },
       {
-        "id": 3188,
-        "name": "Iván Romero",
-        "position": "striker",
-        "price": 5920000,
-        "points": 49,
-        "expectedPoints": 6.4,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3188.png"
-      },
-      {
         "id": 3951,
         "name": "Miguel Sierra",
         "position": "striker",
@@ -4810,22 +4823,6 @@
       }
     ],
     "bench": [
-      {
-        "id": 3910,
-        "name": "Andrés Castrín",
-        "position": "defender",
-        "price": 1560000,
-        "points": 31,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3910.png"
-      },
       {
         "id": 1602,
         "name": "Rubén García",
@@ -5131,7 +5128,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T03:06:12.717Z"
+      "lastUpdated": "2026-10-14T10:01:18.530Z"
     },
     "speculation": {
       "score": 98,
@@ -6248,7 +6245,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T03:06:13.410Z"
+      "lastUpdated": "2026-10-14T10:01:19.238Z"
     },
     "speculation": {
       "score": 72,
@@ -7092,7 +7089,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T03:06:14.856Z"
+      "lastUpdated": "2026-10-14T10:01:20.647Z"
     },
     "speculation": {
       "score": 85,
@@ -8284,7 +8281,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T03:06:14.168Z"
+      "lastUpdated": "2026-10-14T10:01:19.947Z"
     },
     "speculation": {
       "score": 98,
@@ -9831,7 +9828,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T03:06:15.169Z"
+      "lastUpdated": "2026-10-14T10:01:21.025Z"
     },
     "speculation": {
       "score": 98,
@@ -11226,7 +11223,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T03:06:14.480Z"
+      "lastUpdated": "2026-10-14T10:01:20.321Z"
     },
     "speculation": {
       "score": 67,
@@ -11927,7 +11924,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-14T03:06:15.575Z"
+      "lastUpdated": "2026-10-14T10:01:21.383Z"
     },
     "speculation": {
       "score": 74,
