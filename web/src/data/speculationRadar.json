@@ -1,10 +1,10 @@
 {
   "opportunities": [
     {
-      "playerId": 4066,
-      "name": "Carlos López",
+      "playerId": 3796,
+      "name": "Adrián Rodríguez",
       "position": "keeper",
-      "club": "Málaga",
+      "club": "Alavés",
       "owner": {
         "id": 1,
         "name": "Computer"
@@ -25,10 +25,34 @@
       "priorityScore": 85
     },
     {
-      "playerId": 4163,
-      "name": "Esquivel",
+      "playerId": 3926,
+      "name": "Diangana",
+      "position": "midfielder",
+      "club": "Elche",
+      "owner": {
+        "id": 1,
+        "name": "Computer"
+      },
+      "price": 160000,
+      "tier": "FLOOR_PRICE_BARGAIN",
+      "tierLabel": "🪙 Precio Suelo / Riesgo Cero",
+      "badgeColor": "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+      "recoveryStatus": "ACTIVO_O_PARCHE",
+      "returnWindow": "Inmediato",
+      "estimatedRoiPct": 85,
+      "projectedUpsideEUR": 136000,
+      "dailyGrowthEstEUR": 15000,
+      "intrinsicValue": 296000,
+      "downsideRisk": "CERO (Precio mínimo garantizado por Comunio)",
+      "recommendation": "COMPRAR_FLIP_RAPIDO",
+      "actionLabel": "Pujar valor mínimo (160.000 €) • Riesgo 0€ • Beneficio rápido",
+      "priorityScore": 85
+    },
+    {
+      "playerId": 4066,
+      "name": "Carlos López",
       "position": "keeper",
-      "club": "Atlético",
+      "club": "Málaga",
       "owner": {
         "id": 1,
         "name": "Computer"
@@ -73,82 +97,10 @@
       "priorityScore": 85
     },
     {
-      "playerId": 4067,
-      "name": "Diego Murillo",
-      "position": "defender",
-      "club": "Málaga",
-      "owner": {
-        "id": 1,
-        "name": "Computer"
-      },
-      "price": 260000,
-      "tier": "FLOOR_PRICE_BARGAIN",
-      "tierLabel": "🪙 Precio Suelo / Riesgo Cero",
-      "badgeColor": "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
-      "recoveryStatus": "ACTIVO_O_PARCHE",
-      "returnWindow": "Inmediato",
-      "estimatedRoiPct": 66,
-      "projectedUpsideEUR": 171000,
-      "dailyGrowthEstEUR": 15000,
-      "intrinsicValue": 431000,
-      "downsideRisk": "CERO (Precio mínimo garantizado por Comunio)",
-      "recommendation": "COMPRAR_FLIP_RAPIDO",
-      "actionLabel": "Pujar valor mínimo (260.000 €) • Riesgo 0€ • Beneficio rápido",
-      "priorityScore": 85
-    },
-    {
-      "playerId": 2371,
-      "name": "Zubeldia",
-      "position": "defender",
-      "club": "Real Sociedad",
-      "owner": {
-        "id": 1,
-        "name": "Computer"
-      },
-      "price": 880000,
-      "tier": "RISING_MOMENTUM",
-      "tierLabel": "🚀 Activo en Racha / Subida Diaria",
-      "badgeColor": "bg-sky-500/20 text-sky-300 border-sky-500/40",
-      "recoveryStatus": "DISPONIBLE_EN_RACHA",
-      "returnWindow": "Titular / Minutos asegurados",
-      "estimatedRoiPct": 40,
-      "projectedUpsideEUR": 352000,
-      "dailyGrowthEstEUR": 35000,
-      "intrinsicValue": 1232000,
-      "downsideRisk": "BAJO",
-      "recommendation": "COMPRAR_Y_VENDER_EN_PICO",
-      "actionLabel": "Pujar VM (880.000 €) • Subida diaria estimada +35k€",
-      "priorityScore": 80
-    },
-    {
       "playerId": 2545,
       "name": "Junior Firpo",
       "position": "defender",
       "club": "Betis",
-      "owner": {
-        "id": 1,
-        "name": "Computer"
-      },
-      "price": 500000,
-      "tier": "RISING_MOMENTUM",
-      "tierLabel": "🚀 Activo en Racha / Subida Diaria",
-      "badgeColor": "bg-sky-500/20 text-sky-300 border-sky-500/40",
-      "recoveryStatus": "DISPONIBLE_EN_RACHA",
-      "returnWindow": "Titular / Minutos asegurados",
-      "estimatedRoiPct": 40,
-      "projectedUpsideEUR": 200000,
-      "dailyGrowthEstEUR": 35000,
-      "intrinsicValue": 700000,
-      "downsideRisk": "BAJO",
-      "recommendation": "COMPRAR_Y_VENDER_EN_PICO",
-      "actionLabel": "Pujar VM (500.000 €) • Subida diaria estimada +35k€",
-      "priorityScore": 80
-    },
-    {
-      "playerId": 3170,
-      "name": "Alejandro Balde",
-      "position": "defender",
-      "club": "Barcelona",
       "owner": {
         "id": 1,
         "name": "Computer"
@@ -169,61 +121,109 @@
       "priorityScore": 80
     },
     {
-      "playerId": 3451,
-      "name": "Abde Rebbach",
-      "position": "midfielder",
-      "club": "Alavés",
+      "playerId": 3170,
+      "name": "Alejandro Balde",
+      "position": "defender",
+      "club": "Barcelona",
       "owner": {
         "id": 1,
         "name": "Computer"
       },
-      "price": 730000,
+      "price": 510000,
       "tier": "RISING_MOMENTUM",
       "tierLabel": "🚀 Activo en Racha / Subida Diaria",
       "badgeColor": "bg-sky-500/20 text-sky-300 border-sky-500/40",
       "recoveryStatus": "DISPONIBLE_EN_RACHA",
       "returnWindow": "Titular / Minutos asegurados",
       "estimatedRoiPct": 40,
-      "projectedUpsideEUR": 292000,
+      "projectedUpsideEUR": 204000,
       "dailyGrowthEstEUR": 35000,
-      "intrinsicValue": 1022000,
+      "intrinsicValue": 714000,
       "downsideRisk": "BAJO",
       "recommendation": "COMPRAR_Y_VENDER_EN_PICO",
-      "actionLabel": "Pujar VM (730.000 €) • Subida diaria estimada +35k€",
+      "actionLabel": "Pujar VM (510.000 €) • Subida diaria estimada +35k€",
       "priorityScore": 80
     },
     {
-      "playerId": 3977,
-      "name": "Lucas Cepeda",
+      "playerId": 3655,
+      "name": "Peque",
       "position": "midfielder",
-      "club": "Elche",
+      "club": "Sevilla",
       "owner": {
         "id": 1,
         "name": "Computer"
       },
-      "price": 1680000,
+      "price": 340000,
       "tier": "RISING_MOMENTUM",
       "tierLabel": "🚀 Activo en Racha / Subida Diaria",
       "badgeColor": "bg-sky-500/20 text-sky-300 border-sky-500/40",
       "recoveryStatus": "DISPONIBLE_EN_RACHA",
       "returnWindow": "Titular / Minutos asegurados",
       "estimatedRoiPct": 40,
-      "projectedUpsideEUR": 672000,
+      "projectedUpsideEUR": 136000,
       "dailyGrowthEstEUR": 35000,
-      "intrinsicValue": 2352000,
+      "intrinsicValue": 476000,
       "downsideRisk": "BAJO",
       "recommendation": "COMPRAR_Y_VENDER_EN_PICO",
-      "actionLabel": "Pujar VM (1.680.000 €) • Subida diaria estimada +35k€",
+      "actionLabel": "Pujar VM (340.000 €) • Subida diaria estimada +35k€",
+      "priorityScore": 80
+    },
+    {
+      "playerId": 4105,
+      "name": "Sazonov",
+      "position": "defender",
+      "club": "Getafe",
+      "owner": {
+        "id": 1,
+        "name": "Computer"
+      },
+      "price": 570000,
+      "tier": "RISING_MOMENTUM",
+      "tierLabel": "🚀 Activo en Racha / Subida Diaria",
+      "badgeColor": "bg-sky-500/20 text-sky-300 border-sky-500/40",
+      "recoveryStatus": "DISPONIBLE_EN_RACHA",
+      "returnWindow": "Titular / Minutos asegurados",
+      "estimatedRoiPct": 40,
+      "projectedUpsideEUR": 228000,
+      "dailyGrowthEstEUR": 35000,
+      "intrinsicValue": 798000,
+      "downsideRisk": "BAJO",
+      "recommendation": "COMPRAR_Y_VENDER_EN_PICO",
+      "actionLabel": "Pujar VM (570.000 €) • Subida diaria estimada +35k€",
+      "priorityScore": 80
+    },
+    {
+      "playerId": 4117,
+      "name": "Rockson Yeboah",
+      "position": "defender",
+      "club": "Osasuna",
+      "owner": {
+        "id": 1,
+        "name": "Computer"
+      },
+      "price": 990000,
+      "tier": "RISING_MOMENTUM",
+      "tierLabel": "🚀 Activo en Racha / Subida Diaria",
+      "badgeColor": "bg-sky-500/20 text-sky-300 border-sky-500/40",
+      "recoveryStatus": "DISPONIBLE_EN_RACHA",
+      "returnWindow": "Titular / Minutos asegurados",
+      "estimatedRoiPct": 40,
+      "projectedUpsideEUR": 396000,
+      "dailyGrowthEstEUR": 35000,
+      "intrinsicValue": 1386000,
+      "downsideRisk": "BAJO",
+      "recommendation": "COMPRAR_Y_VENDER_EN_PICO",
+      "actionLabel": "Pujar VM (990.000 €) • Subida diaria estimada +35k€",
       "priorityScore": 80
     }
   ],
   "totalOpportunitiesCount": 9,
-  "totalProjectedGainsEUR": 2282500,
+  "totalProjectedGainsEUR": 1695500,
   "freeSlots": 3,
   "strategyRecommendations": [
     "🎯 Capacidad de plantilla disponible: 3 hueco(s) libre(s) para trading sin forzar ventas.",
     "💡 Regla de Oro del Trading Comunio: Pujar SIEMPRE el valor de mercado exacto a Computer (0% sobreprecio) para maximizar margen de ganancia.",
     "💰 Salida de Posición: En cuanto Computer haga oferta matinal con +3% a +5% de plusvalía o el jugador toque su techo, vender para recuperar liquidez y reinvertir."
   ],
-  "timestamp": "2026-10-14T21:51:29.596Z"
+  "timestamp": "2026-10-15T03:06:30.920Z"
 }
