@@ -6,51 +6,32 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 456,
-    "squadValue": 63680000,
-    "playerCount": 19,
-    "financialHealth": "Apalancado / Saldo Negativo (-3.57M €)",
-    "debtAlert": "Saldo en descubierto (-3.57M €). Consume el 22.5% del límite de crédito permitido (15.92M €). Exige ventas antes de puntuar.",
+    "squadValue": 60560000,
+    "playerCount": 17,
+    "financialHealth": "Apalancado / Saldo Negativo (-0.35M €)",
+    "debtAlert": "Saldo en descubierto (-0.35M €). Consume el 2.3% del límite de crédito permitido (15.14M €). Exige ventas antes de puntuar.",
     "projectedScore": 55,
     "formation": "3-4-3",
     "tacticDescription": "Estructura 3-4-3 orientada a maximizar 55 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 456 puntos acumulados (152.0 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (63.68M €).",
+      "Patrimonio de plantilla consolidado en Primera (60.56M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
       "Línea defensiva con bajo valor de mercado o margen de mejora en solidez.",
-      "Tensión de tesorería: Saldo negativo de -3.57M € que obliga a vender piezas."
+      "Tensión de tesorería: Saldo negativo de -0.35M € que obliga a vender piezas."
     ],
     "tacticalAlerts": [
       {
-        "type": "suboptimal",
-        "badge": "⚠️ Banquillo Desperdiciado",
-        "player": "Lucas Cepeda",
-        "position": "midfielder",
-        "title": "Rendimiento en Reserva",
-        "description": "Tiene a Lucas Cepeda (36 pts) en el banquillo mientras alinea a Comesaña (24 pts).",
-        "action": "Valorar permuta táctica dando entrada a Lucas Cepeda de inicio."
-      },
-      {
-        "type": "suboptimal",
-        "badge": "⚠️ Banquillo Desperdiciado",
-        "player": "Pedro Díaz",
-        "position": "midfielder",
-        "title": "Rendimiento en Reserva",
-        "description": "Tiene a Pedro Díaz (23 pts) en el banquillo mientras alinea a Aleix Febas (9 pts).",
-        "action": "Valorar permuta táctica dando entrada a Pedro Díaz de inicio."
-      },
-      {
-        "type": "suboptimal",
-        "badge": "⚠️ Banquillo Desperdiciado",
-        "player": "Kike Barja",
-        "position": "midfielder",
-        "title": "Rendimiento en Reserva",
-        "description": "Tiene a Kike Barja (22 pts) en el banquillo mientras alinea a Aleix Febas (9 pts).",
-        "action": "Valorar permuta táctica dando entrada a Kike Barja de inicio."
+        "type": "success",
+        "badge": "✅ Once Saneado",
+        "player": "Alineación Óptima",
+        "title": "Sin Bajas ni Riesgos Críticos",
+        "description": "Todos los futbolistas del 11 titular están activos, disponibles y en plenitud para la jornada.",
+        "action": "Mantener la estructura táctica establecida."
       }
     ],
     "recommendations": [
@@ -75,18 +56,18 @@
     ],
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
-      "realizedGainsEUR": 15220496,
-      "realizedLossesEUR": 40993573,
-      "netRealizedBalanceEUR": -25773077,
-      "profitableTradesCount": 20,
-      "totalClosedTradesCount": 56,
+      "realizedGainsEUR": 15434685,
+      "realizedLossesEUR": 41027375,
+      "netRealizedBalanceEUR": -25592690,
+      "profitableTradesCount": 21,
+      "totalClosedTradesCount": 58,
       "historicalSuccessRatePct": 36,
-      "totalLatentGainsEUR": 1532957,
-      "totalLatentLossesEUR": 41731204,
-      "netLatentBalanceEUR": -40198247,
+      "totalLatentGainsEUR": 1407968,
+      "totalLatentLossesEUR": 41683202,
+      "netLatentBalanceEUR": -40275234,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-25.773.077 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-25.592.690 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Lookman",
@@ -177,6 +158,15 @@
           "roiPct": 12.4,
           "isProfit": true,
           "sellDate": "2026-09-11T00:55:59+02:00"
+        },
+        {
+          "playerName": "Aleix Febas",
+          "buyPrice": 2105011,
+          "sellPrice": 2319200,
+          "diff": 214189,
+          "roiPct": 10.2,
+          "isProfit": true,
+          "sellDate": "2026-10-15T04:29:19+02:00"
         },
         {
           "playerName": "Iván Martín",
@@ -321,6 +311,15 @@
           "roiPct": -6.5,
           "isProfit": false,
           "sellDate": "2026-10-07T04:30:43+02:00"
+        },
+        {
+          "playerName": "Pedro Díaz",
+          "buyPrice": 938002,
+          "sellPrice": 904200,
+          "diff": -33802,
+          "roiPct": -3.6,
+          "isProfit": false,
+          "sellDate": "2026-10-15T04:29:19+02:00"
         },
         {
           "playerName": "Carlos Martín",
@@ -604,15 +603,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Aleix Febas",
-          "position": "midfielder",
-          "buyPrice": 2105011,
-          "currentVM": 2230000,
-          "latentDiff": 124989,
-          "latentRoiPct": 5.9,
-          "isProfit": true
-        },
-        {
           "playerName": "Pablo Marín",
           "position": "midfielder",
           "buyPrice": 162002,
@@ -646,15 +636,6 @@
           "currentVM": 1760000,
           "latentDiff": -41001,
           "latentRoiPct": -2.3,
-          "isProfit": false
-        },
-        {
-          "playerName": "Pedro Díaz",
-          "position": "midfielder",
-          "buyPrice": 938002,
-          "currentVM": 890000,
-          "latentDiff": -48002,
-          "latentRoiPct": -5.1,
           "isProfit": false
         },
         {
@@ -757,7 +738,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-15T16:01:33.679Z"
+      "lastUpdated": "2026-10-15T21:54:26.274Z"
     },
     "speculation": {
       "score": 98,
@@ -766,14 +747,14 @@
       "overbidRate": "+6.4%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 305054295,
-      "totalReceived": 276919300,
+      "totalReceived": 280142700,
       "purchasesCount": 77,
-      "salesCount": 73,
-      "estimatedCash": -3574995,
+      "salesCount": 75,
+      "estimatedCash": -351595,
       "prizesEarned": 4560000,
-      "maxCreditLimit": 15920000,
-      "netWealth": 60105005,
-      "analysis": "Operativa histórica de 77 compras (305.1M €) y 73 ventas (276.9M €). Dinero total rotado: 582.0M € con sobrepuja media de +6.4%."
+      "maxCreditLimit": 15140000,
+      "netWealth": 60208405,
+      "analysis": "Operativa histórica de 77 compras (305.1M €) y 75 ventas (280.1M €). Dinero total rotado: 585.2M € con sobrepuja media de +6.4%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -2802,6 +2783,34 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-10-14T04:30:50+02:00"
+        },
+        {
+          "playerName": "Aleix Febas",
+          "price": 2319200,
+          "marketValue": 2319200,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-15T04:29:19+02:00"
+        },
+        {
+          "playerName": "Pedro Díaz",
+          "price": 904200,
+          "marketValue": 904200,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-15T04:29:19+02:00"
         }
       ]
     },
@@ -2909,23 +2918,6 @@
         "image": "/media/players/2591.png"
       },
       {
-        "id": 2829,
-        "name": "Aleix Febas",
-        "position": "midfielder",
-        "price": 2230000,
-        "points": 9,
-        "expectedPoints": 4.1,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2829.png"
-      },
-      {
         "id": 3851,
         "name": "Javier Hernández",
         "position": "midfielder",
@@ -2941,6 +2933,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3851.png"
+      },
+      {
+        "id": 3977,
+        "name": "Lucas Cepeda",
+        "position": "midfielder",
+        "price": 1760000,
+        "points": 36,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3977.png"
       },
       {
         "id": 3298,
@@ -3026,38 +3035,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/1168.png"
-      },
-      {
-        "id": 3977,
-        "name": "Lucas Cepeda",
-        "position": "midfielder",
-        "price": 1760000,
-        "points": 36,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3977.png"
-      },
-      {
-        "id": 3675,
-        "name": "Pedro Díaz",
-        "position": "midfielder",
-        "price": 890000,
-        "points": 23,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3675.png"
       },
       {
         "id": 2785,
@@ -3368,7 +3345,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-15T16:01:35.074Z"
+      "lastUpdated": "2026-10-15T21:54:27.677Z"
     },
     "speculation": {
       "score": 96,
@@ -4337,7 +4314,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-15T16:01:34.396Z"
+      "lastUpdated": "2026-10-15T21:54:26.967Z"
     },
     "speculation": {
       "score": 44,
@@ -5204,7 +5181,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-15T16:01:34.019Z"
+      "lastUpdated": "2026-10-15T21:54:26.651Z"
     },
     "speculation": {
       "score": 98,
@@ -6321,7 +6298,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-15T16:01:34.742Z"
+      "lastUpdated": "2026-10-15T21:54:27.299Z"
     },
     "speculation": {
       "score": 74,
@@ -7165,7 +7142,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-15T16:01:36.161Z"
+      "lastUpdated": "2026-10-15T21:54:28.782Z"
     },
     "speculation": {
       "score": 88,
@@ -8365,7 +8342,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-15T16:01:35.453Z"
+      "lastUpdated": "2026-10-15T21:54:28.026Z"
     },
     "speculation": {
       "score": 98,
@@ -9940,7 +9917,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-15T16:01:36.477Z"
+      "lastUpdated": "2026-10-15T21:54:29.179Z"
     },
     "speculation": {
       "score": 98,
@@ -11335,7 +11312,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-15T16:01:35.830Z"
+      "lastUpdated": "2026-10-15T21:54:28.391Z"
     },
     "speculation": {
       "score": 66,
@@ -12036,7 +12013,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-15T16:01:36.838Z"
+      "lastUpdated": "2026-10-15T21:54:29.556Z"
     },
     "speculation": {
       "score": 74,
