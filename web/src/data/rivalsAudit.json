@@ -6,23 +6,22 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 456,
-    "squadValue": 60160000,
-    "playerCount": 17,
-    "financialHealth": "Apalancado / Saldo Negativo (-0.35M €)",
-    "debtAlert": "Saldo en descubierto (-0.35M €). Consume el 2.3% del límite de crédito permitido (15.04M €). Exige ventas antes de puntuar.",
+    "squadValue": 59720000,
+    "playerCount": 15,
+    "financialHealth": "Solvente Ajustado (+88k € en Caja)",
+    "debtAlert": "Saldo positivo (+88k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
     "projectedScore": 56,
     "formation": "3-4-3",
     "tacticDescription": "Estructura 3-4-3 orientada a maximizar 56 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 456 puntos acumulados (152.0 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (60.16M €).",
+      "Patrimonio de plantilla consolidado en Primera (59.72M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez.",
-      "Tensión de tesorería: Saldo negativo de -0.35M € que obliga a vender piezas."
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -57,17 +56,17 @@
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
       "realizedGainsEUR": 15434685,
-      "realizedLossesEUR": 41027375,
-      "netRealizedBalanceEUR": -25592690,
+      "realizedLossesEUR": 41192888,
+      "netRealizedBalanceEUR": -25758203,
       "profitableTradesCount": 21,
-      "totalClosedTradesCount": 58,
-      "historicalSuccessRatePct": 36,
+      "totalClosedTradesCount": 60,
+      "historicalSuccessRatePct": 35,
       "totalLatentGainsEUR": 1927968,
-      "totalLatentLossesEUR": 42593202,
-      "netLatentBalanceEUR": -40665234,
+      "totalLatentLossesEUR": 42428201,
+      "netLatentBalanceEUR": -40500233,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-25.592.690 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-25.758.203 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Lookman",
@@ -286,6 +285,15 @@
           "sellDate": "2026-09-15T04:37:15+02:00"
         },
         {
+          "playerName": "Álex Padilla",
+          "buyPrice": 160012,
+          "sellPrice": 153900,
+          "diff": -6112,
+          "roiPct": -3.8,
+          "isProfit": false,
+          "sellDate": "2026-10-16T04:30:53+02:00"
+        },
+        {
           "playerName": "Cestero",
           "buyPrice": 542003,
           "sellPrice": 527300,
@@ -374,6 +382,15 @@
           "roiPct": -22.7,
           "isProfit": false,
           "sellDate": "2026-10-06T00:19:40+02:00"
+        },
+        {
+          "playerName": "Pol Lozano",
+          "buyPrice": 445001,
+          "sellPrice": 285600,
+          "diff": -159401,
+          "roiPct": -35.8,
+          "isProfit": false,
+          "sellDate": "2026-10-16T04:30:53+02:00"
         },
         {
           "playerName": "Oluwaseyi",
@@ -657,15 +674,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Pol Lozano",
-          "position": "midfielder",
-          "buyPrice": 445001,
-          "currentVM": 280000,
-          "latentDiff": -165001,
-          "latentRoiPct": -37.1,
-          "isProfit": false
-        },
-        {
           "playerName": "Belocian",
           "position": "defender",
           "buyPrice": 1415001,
@@ -738,23 +746,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-16T03:06:36.550Z"
+      "lastUpdated": "2026-10-16T10:01:36.681Z"
     },
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+6.4%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 305054295,
-      "totalReceived": 280142700,
+      "totalReceived": 280582200,
       "purchasesCount": 77,
-      "salesCount": 75,
-      "estimatedCash": -351595,
+      "salesCount": 77,
+      "estimatedCash": 87905,
       "prizesEarned": 4560000,
-      "maxCreditLimit": 15040000,
-      "netWealth": 59808405,
-      "analysis": "Operativa histórica de 77 compras (305.1M €) y 75 ventas (280.1M €). Dinero total rotado: 585.2M € con sobrepuja media de +6.4%."
+      "maxCreditLimit": 14930000,
+      "netWealth": 59807905,
+      "analysis": "Operativa histórica de 77 compras (305.1M €) y 77 ventas (280.6M €). Dinero total rotado: 585.6M € con sobrepuja media de +6.4%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -2811,6 +2819,34 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-10-15T04:29:19+02:00"
+        },
+        {
+          "playerName": "Pol Lozano",
+          "price": 285600,
+          "marketValue": 285600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-16T04:30:53+02:00"
+        },
+        {
+          "playerName": "Álex Padilla",
+          "price": 153900,
+          "marketValue": 153900,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-16T04:30:53+02:00"
         }
       ]
     },
@@ -3005,22 +3041,6 @@
     ],
     "bench": [
       {
-        "id": 3665,
-        "name": "Álex Padilla ",
-        "position": "keeper",
-        "price": 160000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3665.png"
-      },
-      {
         "id": 1168,
         "name": "Kiko Femenía",
         "position": "defender",
@@ -3035,22 +3055,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/1168.png"
-      },
-      {
-        "id": 2785,
-        "name": "Pol Lozano",
-        "position": "midfielder",
-        "price": 280000,
-        "points": 13,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2785.png"
       },
       {
         "id": 2395,
@@ -3345,7 +3349,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-16T03:06:38.023Z"
+      "lastUpdated": "2026-10-16T10:01:38.135Z"
     },
     "speculation": {
       "score": 96,
@@ -4314,7 +4318,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-16T03:06:37.266Z"
+      "lastUpdated": "2026-10-16T10:01:37.411Z"
     },
     "speculation": {
       "score": 44,
@@ -5181,7 +5185,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-16T03:06:36.924Z"
+      "lastUpdated": "2026-10-16T10:01:37.065Z"
     },
     "speculation": {
       "score": 98,
@@ -6298,7 +6302,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-16T03:06:37.644Z"
+      "lastUpdated": "2026-10-16T10:01:37.758Z"
     },
     "speculation": {
       "score": 74,
@@ -7142,7 +7146,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-16T03:06:39.060Z"
+      "lastUpdated": "2026-10-16T10:01:39.206Z"
     },
     "speculation": {
       "score": 87,
@@ -8361,7 +8365,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-16T03:06:38.384Z"
+      "lastUpdated": "2026-10-16T10:01:38.450Z"
     },
     "speculation": {
       "score": 98,
@@ -9996,7 +10000,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-16T03:06:39.441Z"
+      "lastUpdated": "2026-10-16T10:01:39.537Z"
     },
     "speculation": {
       "score": 98,
@@ -11391,7 +11395,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-16T03:06:38.698Z"
+      "lastUpdated": "2026-10-16T10:01:38.828Z"
     },
     "speculation": {
       "score": 66,
@@ -12092,7 +12096,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-16T03:06:39.820Z"
+      "lastUpdated": "2026-10-16T10:01:39.925Z"
     },
     "speculation": {
       "score": 73,
