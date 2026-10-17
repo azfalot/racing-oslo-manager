@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-17T10:02:00.429Z",
+  "timestamp": "2026-10-17T16:01:04.783Z",
   "currentMatchday": 9,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -17,7 +17,7 @@
   },
   "lineup": {
     "formation": "3-5-2",
-    "expectedPoints": 52.199999999999996,
+    "expectedPoints": 51.99999999999999,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -479,14 +479,14 @@
       "marginPct": 17,
       "band": "ELITE_LEAGUE_WINNER",
       "expectedPoints": 8,
-      "ppm": 5.25,
-      "efficiency": 22.6,
-      "upgradePoints": 5.9,
-      "marginalValue": 5.9,
+      "ppm": 5.11,
+      "efficiency": 22,
+      "upgradePoints": 5.7,
+      "marginalValue": 5.7,
       "vorp": 60,
       "vorpPerMatchday": 1.76,
-      "cpmp": 1142373,
-      "cpmpSeason": 33532,
+      "cpmp": 1182456,
+      "cpmpSeason": 34742,
       "replacedPlayer": {
         "playerId": 3160,
         "name": "Gavi",
@@ -654,17 +654,17 @@
       },
       "replacedPlayerName": "Gavi",
       "replacedPlayerExpectedPoints": 1.8,
-      "strategicScore": 72.2,
+      "strategicScore": 71.5,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 5.9
+          "marginalValue": 5.7
         },
         "absoluteQuality": {
-          "raw": 87.5,
+          "raw": 85.2,
           "weight": 0.2,
-          "ppm": 5.25
+          "ppm": 5.11
         },
         "positionNeed": {
           "raw": 50,
@@ -672,9 +672,9 @@
           "detail": "2 disponibles = exactamente los requeridos. Sin suplentes."
         },
         "marketOpportunity": {
-          "raw": 56.5,
+          "raw": 55,
           "weight": 0.1,
-          "efficiency": 22.6
+          "efficiency": 22
         },
         "rivalPressure": {
           "raw": 20,
@@ -693,10 +693,10 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+5.9 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (5.25 PPM > 3.93 PPM).",
+        "✅ Entra en el XI titular (+5.7 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (5.11 PPM > 3.93 PPM).",
         "🟡 Posición con necesidad MODERADA: 2 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 5.25 | Fiabilidad: 95% minutos | Eficiencia: 22.6 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 5.11 | Fiabilidad: 95% minutos | Eficiencia: 22 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
         "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 7.885.800 € (117.0% VM | Sobreprecio: +17%).",
@@ -1094,7 +1094,7 @@
     "remainingMatchdays": 29,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 52.2,
+      "currentXiExpectedPoints": 52,
       "restOfSeasonAggregateExpectedPpm": 33.3,
       "pWin": 0,
       "pTop2": 0,
