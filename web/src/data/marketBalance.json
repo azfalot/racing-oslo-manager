@@ -6,9 +6,9 @@
   "profitableTradesCount": 14,
   "totalClosedTradesCount": 26,
   "historicalSuccessRatePct": 54,
-  "totalLatentGainsEUR": 1905000,
-  "totalLatentLossesEUR": 16715001,
-  "netLatentBalanceEUR": -14810001,
+  "totalLatentGainsEUR": 2115000,
+  "totalLatentLossesEUR": 17415001,
+  "netLatentBalanceEUR": -15300001,
   "healthLabel": "AJUSTES & DEUDA",
   "healthBadgeColor": "amber",
   "healthSummary": "El balance histórico refleja el coste de saneamiento inicial de deuda (ventas defensivas como Hugo Duro y Galarreta para salir de números rojos), mientras que el nuevo régimen de especulación opera con un 100% de plusvalías netas.",
@@ -259,30 +259,39 @@
       "isProfit": true
     },
     {
-      "playerName": "Gavi",
-      "position": "midfielder",
-      "buyPrice": 1275000,
-      "currentVM": 1490000,
-      "latentDiff": 215000,
-      "latentRoiPct": 16.9,
-      "isProfit": true
-    },
-    {
       "playerName": "Dani Requena",
       "position": "midfielder",
       "buyPrice": 640000,
-      "currentVM": 690000,
-      "latentDiff": 50000,
-      "latentRoiPct": 7.8,
+      "currentVM": 890000,
+      "latentDiff": 250000,
+      "latentRoiPct": 39.1,
+      "isProfit": true
+    },
+    {
+      "playerName": "Gavi",
+      "position": "midfielder",
+      "buyPrice": 1275000,
+      "currentVM": 1500000,
+      "latentDiff": 225000,
+      "latentRoiPct": 17.6,
       "isProfit": true
     },
     {
       "playerName": "Adrián de la Fuente",
       "position": "defender",
       "buyPrice": 3860000,
-      "currentVM": 3670000,
-      "latentDiff": -190000,
-      "latentRoiPct": -4.9,
+      "currentVM": 3750000,
+      "latentDiff": -110000,
+      "latentRoiPct": -2.8,
+      "isProfit": false
+    },
+    {
+      "playerName": "Denis Suárez",
+      "position": "midfielder",
+      "buyPrice": 2100000,
+      "currentVM": 1630000,
+      "latentDiff": -470000,
+      "latentRoiPct": -22.4,
       "isProfit": false
     },
     {
@@ -295,21 +304,12 @@
       "isProfit": false
     },
     {
-      "playerName": "Denis Suárez",
-      "position": "midfielder",
-      "buyPrice": 2100000,
-      "currentVM": 1400000,
-      "latentDiff": -700000,
-      "latentRoiPct": -33.3,
-      "isProfit": false
-    },
-    {
       "playerName": "David Soria",
       "position": "keeper",
       "buyPrice": 4820000,
-      "currentVM": 4100000,
-      "latentDiff": -720000,
-      "latentRoiPct": -14.9,
+      "currentVM": 4040000,
+      "latentDiff": -780000,
+      "latentRoiPct": -16.2,
       "isProfit": false
     },
     {
@@ -325,22 +325,22 @@
       "playerName": "Alexander-Arnold",
       "position": "defender",
       "buyPrice": 5000001,
-      "currentVM": 2130000,
-      "latentDiff": -2870001,
-      "latentRoiPct": -57.4,
+      "currentVM": 1820000,
+      "latentDiff": -3180001,
+      "latentRoiPct": -63.6,
       "isProfit": false
     },
     {
       "playerName": "Fede Valverde",
       "position": "midfielder",
       "buyPrice": 20510000,
-      "currentVM": 10590000,
-      "latentDiff": -9920000,
-      "latentRoiPct": -48.4,
+      "currentVM": 9950000,
+      "latentDiff": -10560000,
+      "latentRoiPct": -51.5,
       "isProfit": false
     }
   ],
-  "lastUpdated": "2026-10-16T21:51:56.199Z",
+  "lastUpdated": "2026-10-17T03:06:51.996Z",
   "speculationGainsEUR": 142100,
   "speculationTradesCount": 12
 }
