@@ -746,7 +746,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-17T03:11:37.519Z"
+      "lastUpdated": "2026-10-17T10:01:55.056Z"
     },
     "speculation": {
       "score": 98,
@@ -3114,10 +3114,10 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 2,
     "points": 378,
-    "squadValue": 47270000,
-    "playerCount": 14,
-    "financialHealth": "Solvente Ajustado (+1k € en Caja)",
-    "debtAlert": "Saldo positivo (+1k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
+    "squadValue": 46950000,
+    "playerCount": 12,
+    "financialHealth": "Solvente Ajustado (+328k € en Caja)",
+    "debtAlert": "Saldo positivo (+328k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
     "projectedScore": 57,
     "formation": "4-3-3",
     "tacticDescription": "Estructura 4-3-3 orientada a maximizar 57 puntos según plantilla disponible.",
@@ -3128,7 +3128,7 @@
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -3145,29 +3145,29 @@
         "name": "Javi Morcillo",
         "pos": "Centrocampista",
         "price": 870000,
-        "reason": "Centrocampista con llegada (0.87M €) para asociarse con Roberto Fernández y dominar la posesión."
+        "reason": "Oportunidad de mercado (0.87M € · 23 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       },
       {
-        "name": "Herrando",
+        "name": "Fer Niño",
+        "pos": "Delantero",
+        "price": 6740000,
+        "reason": "Pieza competitiva en el mercado (6.74M €) adaptable al esquema 4-3-3."
+      },
+      {
+        "name": "Cucurella",
         "pos": "Defensa",
-        "price": 340000,
-        "reason": "Zaguero de jerarquía (0.34M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
-      },
-      {
-        "name": "Paco Cortés",
-        "pos": "Centrocampista",
-        "price": 410000,
-        "reason": "Oportunidad de mercado (0.41M € · 12 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "price": 6900000,
+        "reason": "Pieza competitiva en el mercado (6.90M €) adaptable al esquema 4-3-3."
       }
     ],
     "marketBalance": {
       "clubName": "Puente Avios FC",
-      "realizedGainsEUR": 818499,
+      "realizedGainsEUR": 825199,
       "realizedLossesEUR": 906000,
-      "netRealizedBalanceEUR": -87501,
-      "profitableTradesCount": 4,
-      "totalClosedTradesCount": 8,
-      "historicalSuccessRatePct": 50,
+      "netRealizedBalanceEUR": -80801,
+      "profitableTradesCount": 6,
+      "totalClosedTradesCount": 10,
+      "historicalSuccessRatePct": 60,
       "totalLatentGainsEUR": 3068000,
       "totalLatentLossesEUR": 25140399,
       "netLatentBalanceEUR": -22072399,
@@ -3201,6 +3201,24 @@
           "roiPct": 1.7,
           "isProfit": true,
           "sellDate": "2026-09-04T01:17:33+02:00"
+        },
+        {
+          "playerName": "Álex Primo",
+          "buyPrice": 160000,
+          "sellPrice": 163500,
+          "diff": 3500,
+          "roiPct": 2.2,
+          "isProfit": true,
+          "sellDate": "2026-10-17T04:29:10+02:00"
+        },
+        {
+          "playerName": "Moussa Diarra",
+          "buyPrice": 160000,
+          "sellPrice": 163200,
+          "diff": 3200,
+          "roiPct": 2,
+          "isProfit": true,
+          "sellDate": "2026-10-17T04:29:10+02:00"
         },
         {
           "playerName": "El-Abdellaoui",
@@ -3268,24 +3286,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Álex Primo",
-          "position": "keeper",
-          "buyPrice": 160000,
-          "currentVM": 160000,
-          "latentDiff": 0,
-          "latentRoiPct": 0,
-          "isProfit": true
-        },
-        {
-          "playerName": "Moussa Diarra",
-          "position": "defender",
-          "buyPrice": 160000,
-          "currentVM": 160000,
-          "latentDiff": 0,
-          "latentRoiPct": 0,
-          "isProfit": true
-        },
-        {
           "playerName": "Gayà",
           "position": "defender",
           "buyPrice": 1501000,
@@ -3349,23 +3349,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-17T03:11:38.963Z"
+      "lastUpdated": "2026-10-17T10:01:56.435Z"
     },
     "speculation": {
-      "score": 96,
+      "score": 98,
       "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+22.4%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 69650300,
-      "totalReceived": 45871300,
+      "totalReceived": 46198000,
       "purchasesCount": 19,
-      "salesCount": 20,
-      "estimatedCash": 1000,
+      "salesCount": 22,
+      "estimatedCash": 327700,
       "prizesEarned": 3780000,
-      "maxCreditLimit": 11817500,
-      "netWealth": 47271000,
-      "analysis": "Operativa histórica de 19 compras (69.7M €) y 20 ventas (45.9M €). Dinero total rotado: 115.5M € con sobrepuja media de +22.4%."
+      "maxCreditLimit": 11737500,
+      "netWealth": 47277700,
+      "analysis": "Operativa histórica de 19 compras (69.7M €) y 22 ventas (46.2M €). Dinero total rotado: 115.8M € con sobrepuja media de +22.4%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -3904,6 +3904,34 @@
           "seller": "Puente Avios FC",
           "buyer": "Computer",
           "date": "2026-10-12T04:30:28+02:00"
+        },
+        {
+          "playerName": "Moussa Diarra",
+          "price": 163200,
+          "marketValue": 163200,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-10-17T04:29:10+02:00"
+        },
+        {
+          "playerName": "Álex Primo",
+          "price": 163500,
+          "marketValue": 163500,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-10-17T04:29:10+02:00"
         }
       ]
     },
@@ -4098,38 +4126,6 @@
     ],
     "bench": [
       {
-        "id": 3250,
-        "name": "Álex Primo",
-        "position": "keeper",
-        "price": 160000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3250.png"
-      },
-      {
-        "id": 4172,
-        "name": "Moussa Diarra",
-        "position": "defender",
-        "price": 160000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4172.png"
-      },
-      {
         "id": 3078,
         "name": "Urko González",
         "position": "midfielder",
@@ -4318,7 +4314,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-17T03:11:38.244Z"
+      "lastUpdated": "2026-10-17T10:01:55.754Z"
     },
     "speculation": {
       "score": 45,
@@ -5185,7 +5181,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-17T03:11:37.898Z"
+      "lastUpdated": "2026-10-17T10:01:55.424Z"
     },
     "speculation": {
       "score": 98,
@@ -6302,7 +6298,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-17T03:11:38.573Z"
+      "lastUpdated": "2026-10-17T10:01:56.101Z"
     },
     "speculation": {
       "score": 73,
@@ -7146,7 +7142,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-17T03:11:39.975Z"
+      "lastUpdated": "2026-10-17T10:01:57.568Z"
     },
     "speculation": {
       "score": 87,
@@ -8374,7 +8370,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-17T03:11:39.332Z"
+      "lastUpdated": "2026-10-17T10:01:56.820Z"
     },
     "speculation": {
       "score": 98,
@@ -10039,7 +10035,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-17T03:11:40.307Z"
+      "lastUpdated": "2026-10-17T10:01:57.941Z"
     },
     "speculation": {
       "score": 98,
@@ -11443,7 +11439,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-17T03:11:39.660Z"
+      "lastUpdated": "2026-10-17T10:01:57.174Z"
     },
     "speculation": {
       "score": 68,
@@ -12174,7 +12170,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-17T03:11:40.682Z"
+      "lastUpdated": "2026-10-17T10:01:58.286Z"
     },
     "speculation": {
       "score": 73,
