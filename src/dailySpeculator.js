@@ -190,16 +190,34 @@ export async function autoListSpeculationPlayers(client, squad = { players: [] }
   const ledger = loadSpeculationLedger(ledgerPath);
   const currentPlayers = squad.players || [];
   const activeTradingMap = new Map(ledger.activeTradingPlayers.map(p => [p.playerId, p]));
+  const currentBalance = options.currentBalance !== undefined ? options.currentBalance : 0;
+  const forceSanear = options.forceSanear || currentBalance < 0;
+  const protectedPlayerIds = new Set(options.protectedPlayerIds || []);
+
+  // 1. Obtener listados reales y vigentes directamente de la API de Comunio
+  let activeMarketIds = new Set();
+  if (client && typeof client.getUserMarketListings === 'function') {
+    const activeListings = await client.getUserMarketListings();
+    activeMarketIds = new Set(activeListings.map(l => l.playerId));
+  }
+
   const listedPlayers = [];
   for (const player of currentPlayers) {
     const pid = player.playerId || player.id;
-    const tradingRecord = activeTradingMap.get(pid);
-    if (!tradingRecord) continue;
+    
+    // Si el jugador es titular protegido, NUNCA ponerlo en venta
+    if (protectedPlayerIds.has(pid)) continue;
 
-    // 📈 JUGADORES DE ESPECULACIÓN O TRANSFERIBLES: Si no están activos en el mercado de Comunio, listarlos de inmediato
-    const isActuallyOnMarket = player.onMarket === true || (player.onMarket === undefined && Boolean(tradingRecord.listedOnMarket));
+    const tradingRecord = activeTradingMap.get(pid);
+    const isBenchPlayerInDebt = forceSanear && !protectedPlayerIds.has(pid);
+
+    // Listar si es activo de trading O si estamos en deuda y es suplente
+    if (!tradingRecord && !isBenchPlayerInDebt) continue;
+
+    // Verificar si REALMENTE está activo en el mercado de Comunio
+    const isActuallyOnMarket = activeMarketIds.has(pid);
     if (!isActuallyOnMarket) {
-      const askPrice = player.price || tradingRecord.buyPrice || 160000;
+      const askPrice = player.price || (tradingRecord && tradingRecord.buyPrice) || 160000;
       let success = false;
 
       if (options.dryRun) {
@@ -211,9 +229,23 @@ export async function autoListSpeculationPlayers(client, squad = { players: [] }
       }
 
       if (success) {
-        tradingRecord.listedOnMarket = true;
-        tradingRecord.listedPrice = askPrice;
-        tradingRecord.listedDate = new Date().toISOString();
+        if (tradingRecord) {
+          tradingRecord.listedOnMarket = true;
+          tradingRecord.listedPrice = askPrice;
+          tradingRecord.listedDate = new Date().toISOString();
+        } else {
+          // Registrar en trading si fue listado por saneamiento de deuda
+          ledger.activeTradingPlayers.push({
+            playerId: pid,
+            name: player.name,
+            buyPrice: player.price || 160000,
+            buyDate: new Date().toISOString(),
+            tier: 'EMERGENCY_DEBT_SANEAR',
+            listedOnMarket: true,
+            listedPrice: askPrice,
+            listedDate: new Date().toISOString()
+          });
+        }
         listedPlayers.push({
           playerId: pid,
           name: player.name,
@@ -221,6 +253,8 @@ export async function autoListSpeculationPlayers(client, squad = { players: [] }
         });
         console.log('[DAILY-SPECULATOR] 🏷️ Puesto en venta para ofertas de Computer: ' + player.name + ' (' + askPrice.toLocaleString() + ' EUR)');
       }
+    } else if (tradingRecord) {
+      tradingRecord.listedOnMarket = true;
     }
   }
 
@@ -234,6 +268,9 @@ export async function autoListSpeculationPlayers(client, squad = { players: [] }
 export function evaluateSpeculationOffers(saleOffers = [], options = {}) {
   const ledgerPath = options.ledgerPath || DEFAULT_LEDGER_PATH;
   const minSpreadRatio = options.minSpreadRatio !== undefined ? options.minSpreadRatio : 1.00;
+  const currentBalance = options.currentBalance !== undefined ? options.currentBalance : 0;
+  const forceSanear = options.forceSanear || currentBalance < 0;
+  const protectedPlayerIds = new Set(options.protectedPlayerIds || []);
   const ledger = loadSpeculationLedger(ledgerPath);
   const activeTradingMap = new Map(ledger.activeTradingPlayers.map(p => [p.playerId, p]));
 
@@ -246,13 +283,58 @@ export function evaluateSpeculationOffers(saleOffers = [], options = {}) {
     const offerPrice = offer.price || 0;
     const buyerName = (offer.user && offer.user.name) || (offer.tradingPartner && offer.tradingPartner.name) || 'Computer';
 
-    const tradingRecord = activeTradingMap.get(pid);
-    if (!tradingRecord) continue;
+    // REGLA 1: Once Titular es SAGRADO e INTOCABLE
+    if (protectedPlayerIds.has(pid)) {
+      toHoldOrReject.push({
+        offerId: offer.id || offer.offerId,
+        playerId: pid,
+        name: playerName,
+        offerPrice,
+        decision: 'HOLD',
+        reason: '🛡️ JUGADOR PROTEGIDO: Pertenece al Once Titular intocable.'
+      });
+      continue;
+    }
 
-    const buyPrice = tradingRecord.buyPrice || 0;
+    const tradingRecord = activeTradingMap.get(pid);
+    const buyPrice = (tradingRecord && tradingRecord.buyPrice) || offerPrice;
     const profitEUR = offerPrice - buyPrice;
     const roiPct = buyPrice > 0 ? ((profitEUR / buyPrice) * 100) : 0;
 
+    // REGLA 2: SANEAMIENTO OBLIGATORIO (PUNTUAR > PLUSVALÍA)
+    // Si el saldo es negativo, la prioridad absoluta es sanear la cuenta para no puntuar cero en la jornada.
+    if (forceSanear || currentBalance < 0) {
+      toAccept.push({
+        offerId: offer.id || offer.offerId,
+        playerId: pid,
+        name: playerName,
+        buyPrice,
+        offerPrice,
+        profitEUR,
+        roiPct: Math.round(roiPct * 10) / 10,
+        buyer: buyerName,
+        decision: 'ACCEPT',
+        reason: `🚨 SANEAMIENTO OBLIGATORIO: Saldo negativo (${currentBalance.toLocaleString()} €). Venta prioritaria inmediata para evitar 0 puntos en la jornada.`
+      });
+      continue;
+    }
+
+    // Si no está en activeTradingMap y no hay deuda, mantener
+    if (!tradingRecord) {
+      toHoldOrReject.push({
+        offerId: offer.id || offer.offerId,
+        playerId: pid,
+        name: playerName,
+        buyPrice,
+        offerPrice,
+        profitEUR,
+        decision: 'HOLD',
+        reason: 'Jugador de plantilla fuera del libro activo de trading.'
+      });
+      continue;
+    }
+
+    // REGLA 3: PLUSVALÍA NORMAL (Sin deuda pendiente)
     if (offerPrice > buyPrice && (buyPrice <= 0 || (offerPrice / buyPrice) >= minSpreadRatio)) {
       toAccept.push({
         offerId: offer.id || offer.offerId,

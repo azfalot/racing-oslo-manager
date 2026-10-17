@@ -37,16 +37,16 @@
   "projections": {
     "nextMatchday": {
       "matchday": "Jornada 10",
-      "expectedPoints": 52,
-      "expectedPrize": 520000,
-      "projectedCashAfter": 240688
+      "expectedPoints": 51,
+      "expectedPrize": 510000,
+      "projectedCashAfter": 230688
     },
     "monthlyOutlook": {
       "jornadas": 4,
-      "projectedPoints": 208,
-      "projectedPrize": 2080000,
+      "projectedPoints": 206,
+      "projectedPrize": 2056000,
       "estimatedSales": 980000,
-      "totalProjectedLiquidity": 2780688
+      "totalProjectedLiquidity": 2756688
     },
     "financialPolicy": {
       "reserveRequirement": "Saldo Positivo Obligatorio (Corte Jornada)",
@@ -141,18 +141,6 @@
     },
     {
       "pos": 8,
-      "teamName": "Racing de Oslo",
-      "owner": "Mateo Oslomany (TÚ)",
-      "squadValue": 41130000,
-      "points": 300,
-      "totalPrize": 3000000,
-      "estimatedCash": -279312,
-      "totalWealth": 40850688,
-      "power": "Solvente (0 € Deuda)",
-      "isMe": true
-    },
-    {
-      "pos": 9,
       "teamName": "Melano Plabloroza",
       "owner": "Melano Plabloroza",
       "squadValue": 37650000,
@@ -162,6 +150,18 @@
       "totalWealth": 38779500,
       "power": "Patrimonio Regular",
       "isMe": false
+    },
+    {
+      "pos": 9,
+      "teamName": "Racing de Oslo",
+      "owner": "Mateo Oslomany (TÚ)",
+      "squadValue": 41130000,
+      "points": 300,
+      "totalPrize": 3000000,
+      "estimatedCash": -279312,
+      "totalWealth": 40850688,
+      "power": "Solvente (0 € Deuda)",
+      "isMe": true
     },
     {
       "pos": 10,

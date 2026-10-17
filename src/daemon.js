@@ -217,6 +217,8 @@ async function handleTelegramMessage(message) {
       ` • /analisis — Auditoría táctica de carencias y mercado\n` +
       ` • /rivales — Clasificación y valor patrimonial de rivales\n\n` +
       `🎯 <b>Mercado & Finanzas:</b>\n` +
+      ` • /centinela — Auditoría de solvencia y reporte diario con mejoras (/informe)\n` +
+      ` • /sanear — Forzar liquidación de suplentes para eliminar deuda de inmediato\n` +
       ` • /pujas — Centro unificado de pujas activas y valoración racional\n` +
       ` • /finanzas — Balance, histórico de primas (10k€/pt) y tesorería\n` +
       ` • /ofertas — Ofertas de compra recibidas\n` +
@@ -227,27 +229,29 @@ async function handleTelegramMessage(message) {
     const helpMarkup = {
       inline_keyboard: [
         [
-          { text: '🎖️ War Room', callback_data: 'cmd:warroom' },
-          { text: '🎲 Simulación', callback_data: 'cmd:simulacion' },
+          { text: '🛡️ Centinela', callback_data: 'cmd:centinela' },
+          { text: '🩹 Sanear Deuda', callback_data: 'cmd:sanear' },
           { text: '📊 Reporte', callback_data: 'cmd:reporte' }
         ],
         [
-          { text: '👥 Plantilla', callback_data: 'cmd:plantilla' },
+          { text: '🎖️ War Room', callback_data: 'cmd:warroom' },
+          { text: '🎲 Simulación', callback_data: 'cmd:simulacion' },
+          { text: '👥 Plantilla', callback_data: 'cmd:plantilla' }
+        ],
+        [
           { text: '⚽ Alinear XI', callback_data: 'cmd:alinear' },
-          { text: '🕵️‍♂️ Análisis', callback_data: 'cmd:analisis' }
+          { text: '🕵️‍♂️ Análisis', callback_data: 'cmd:analisis' },
+          { text: '🎯 Scout', callback_data: 'cmd:scout' }
         ],
         [
-          { text: '🎯 Scout', callback_data: 'cmd:scout' },
           { text: '🏥 Salud', callback_data: 'cmd:salud' },
-          { text: '🛒 Pujas', callback_data: 'cmd:pujas' }
+          { text: '🛒 Pujas', callback_data: 'cmd:pujas' },
+          { text: '💰 Finanzas', callback_data: 'cmd:finanzas' }
         ],
         [
-          { text: '💰 Finanzas', callback_data: 'cmd:finanzas' },
           { text: '📩 Ofertas', callback_data: 'cmd:ofertas' },
-          { text: '🏆 Rivales', callback_data: 'cmd:rivales' }
-        ],
-        [
-          { text: '🌐 Abrir Sede Digital', url: 'https://racing-oslo.cotero91.workers.dev' }
+          { text: '🏆 Rivales', callback_data: 'cmd:rivales' },
+          { text: '🌐 Sede Digital', url: 'https://racing-oslo.cotero91.workers.dev' }
         ]
       ]
     };
@@ -1230,6 +1234,60 @@ async function handleTelegramMessage(message) {
 
 
 
+  // ── /centinela o /informe ────────────────────────────────────────────────
+  else if (cleanText.startsWith('/centinela') || cleanText.startsWith('/informe')) {
+    await sendTelegramMessage('🛡️ ⏳ <i>[Centinela]: Generando auditoría completa de solvencia y propuestas de mejora...</i>');
+    try {
+      const { generateDailyImprovementReport } = await import('./sentinelWatchdog.js');
+      const res = await generateDailyImprovementReport();
+      if (res.success) {
+        await sendTelegramMessage(res.reportHtml);
+      } else {
+        await sendTelegramMessage(`💼 ❌ Error generando informe del Centinela: <code>${res.error}</code>`);
+      }
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error: <code>${e.message}</code>`);
+    }
+  }
+
+  // ── /sanear ──────────────────────────────────────────────────────────────
+  else if (cleanText.startsWith('/sanear')) {
+    await sendTelegramMessage('🩹 ⏳ <i>[Centinela]: Forzando proceso de saneamiento preventivo y verificación de mercado...</i>');
+    try {
+      const { checkSolvencyAndAutoAlert } = await import('./sentinelWatchdog.js');
+      await checkSolvencyAndAutoAlert();
+
+      const client = new ComunioClient();
+      await client.login();
+      const db = await client.getDashboardData();
+      const userListings = await client.getUserMarketListings();
+      await client.close();
+
+      const balance = db?.money || 0;
+      let msg = `🩹 <b>[Centinela · Protocolo de Saneamiento]</b>\n\n` +
+        `💰 <b>Saldo en Caja:</b> <b>${balance.toLocaleString('es-ES')} €</b>\n` +
+        `📊 <b>Estado:</b> ${balance >= 0 ? '🟢 <b>SOLVENTE (APTO PARA PUNTUAR)</b>' : '🔴 <b>DÉFICIT PENDIENTE</b>'}\n\n`;
+
+      if (userListings.length > 0) {
+        msg += `🏷️ <b>Jugadores actualmente puestos en venta para ofertas de Computer:</b>\n`;
+        userListings.forEach(l => {
+          msg += ` • <b>${escapeHtml(l.name)}</b> — ${(l.price || 0).toLocaleString('es-ES')} €\n`;
+        });
+        const proj = userListings.reduce((sum, l) => sum + (l.price || 0), 0);
+        msg += `\n💵 <b>Ingreso proyectado en ofertas matutinas (05:00 AM):</b> +${proj.toLocaleString('es-ES')} €\n` +
+          `🏁 <b>Saldo proyectado tras liquidación:</b> <b>${(balance + proj >= 0 ? '+' : '')}${(balance + proj).toLocaleString('es-ES')} €</b>`;
+      } else if (balance < 0) {
+        msg += `⚠️ <i>No hay suplentes en venta actualmente. Se ha forzado su puesta en el mercado.</i>`;
+      } else {
+        msg += `✅ <i>Caja saneada sin necesidad de ventas forzosas.</i>`;
+      }
+
+      await sendTelegramMessage(msg);
+    } catch (e) {
+      await sendTelegramMessage(`💼 ❌ Error ejecutando saneamiento: <code>${e.message}</code>`);
+    }
+  }
+
   // ── /salud ───────────────────────────────────────────────────────────────
   else if (text.startsWith('/salud')) {
     await sendTelegramMessage('💼 🩺 <i>[Mateo Oslomany]: Analizando parte médico, estado físico y disciplina de la plantilla...</i>');
@@ -1919,27 +1977,47 @@ async function runMarketCheck() {
         executeSpeculationOfferAcceptances
       } = await import('./dailySpeculator.js');
 
-      // A. Revisar ofertas de venta recibidas para activos en trading (Solo acepta con plusvalía > 0)
+      // A. Revisar ofertas de venta recibidas para activos en trading y saneamiento prioritario
       const offersUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers?current`;
       const offersRes = await axios.get(offersUrl, { headers: client.getHeaders() });
       const saleOffers = (offersRes.data?.items || []).filter(item => item.type === 'SALE' && item.state === 'PENDING');
 
+      // Obtener titulares protegidos para blindar el Once
+      let protectedStarterIds = [];
+      try {
+        const currentLineup = await client.getCurrentLineup();
+        protectedStarterIds = (currentLineup?.players || []).map(p => p.playerId || p.id);
+      } catch (lineupErr) {
+        console.warn('[DAEMON-SPECULATION] No se pudo obtener lineup actual, usando fallback histórico:', lineupErr.message);
+      }
+
       if (saleOffers.length > 0) {
-        const offerResult = await executeSpeculationOfferAcceptances(client, saleOffers);
+        const offerResult = await executeSpeculationOfferAcceptances(client, saleOffers, {
+          currentBalance: balance,
+          protectedPlayerIds: protectedStarterIds,
+          squad
+        });
+
         for (const trade of offerResult.acceptedTrades) {
-          const profitMsg = `💰 🤖 <b>[Trading Autónomo] · Plusvalía Consolidada</b>\n\n` +
+          const isDebtClearance = balance < 0;
+          const icon = isDebtClearance ? '🚨 🩹' : '💰 🤖';
+          const title = isDebtClearance ? '[Saneamiento de Deuda Prioritario]' : '[Trading Autónomo] · Plusvalía Consolidada';
+          const profitMsg = `${icon} <b>${title}</b>\n\n` +
             `👤 <b>${escapeHtml(trade.name)}</b> vendido con éxito.\n` +
             `💵 <b>Precio de Venta:</b> ${trade.sellPrice.toLocaleString()} € (Comprado por ${trade.buyPrice.toLocaleString()} €)\n` +
-            `📈 <b>Beneficio Neto:</b> <b>+${trade.profitEUR.toLocaleString()} €</b> (+${trade.roiPct}% ROI)\n\n` +
-            `💼 <i>Capital recuperado y acumulado en tesorería para reinvertir en la próxima jornada.</i>`;
+            `📈 <b>Resultado:</b> <b>${trade.profitEUR >= 0 ? '+' : ''}${trade.profitEUR.toLocaleString()} €</b> (${trade.roiPct}% ROI)\n\n` +
+            `💼 <i>${isDebtClearance ? 'Venta prioritaria para salir de saldo negativo y asegurar puntos en la jornada.' : 'Capital recuperado y acumulado en tesorería para reinvertir en la próxima jornada.'}</i>`;
           await sendTelegramMessage(profitMsg);
         }
       }
 
-      // B. Auto-listar jugadores especulativos en plantilla en el mercado para recibir ofertas de Computer
-      const listed = await autoListSpeculationPlayers(client, squad);
+      // B. Auto-listar jugadores especulativos/suplentes en plantilla en el mercado para recibir ofertas de Computer
+      const listed = await autoListSpeculationPlayers(client, squad, {
+        currentBalance: balance,
+        protectedPlayerIds: protectedStarterIds
+      });
       if (listed.length > 0) {
-        console.log(`[DAEMON-SPECULATION] ${listed.length} jugadores especulativos puestos en venta en el mercado.`);
+        console.log(`[DAEMON-SPECULATION] ${listed.length} jugadores especulativos/suplentes puestos en venta en el mercado.`);
       }
 
       // C. Escanear y lanzar pujas especulativas a Computer con reserva de saldo protegida (colchón 1M€)
@@ -2253,11 +2331,41 @@ function startCronScheduler() {
       }
     } catch (err) {}
 
+    // 1.3 Auditoría horaria preventiva del Centinela (Solvencia y saneamiento continuo)
+    if (minutes === 0) {
+      try {
+        const { checkSolvencyAndAutoAlert } = await import('./sentinelWatchdog.js');
+        await checkSolvencyAndAutoAlert();
+      } catch (watchdogErr) {
+        console.warn('[DAEMON-WATCHDOG ERROR]', watchdogErr.message);
+      }
+    }
+
     if (isDailySlot || isMorningRandomSlot || isPreMatchdaySlot) {
       console.log(`[DAEMON-CRON] ⏰ Ventana de ejecución activada (${currentTimeStr} | Pre-Jornada: ${isPreMatchdaySlot ? 'SÍ' : 'NO'}). Ejecutando operativa...`);
 
       // 1. Ejecutar escáner y acciones de mercado / ofertas recibidas
       await runMarketCheck();
+
+      // 1.1 Verificación de solvencia tras mercado
+      try {
+        const { checkSolvencyAndAutoAlert } = await import('./sentinelWatchdog.js');
+        await checkSolvencyAndAutoAlert();
+      } catch (e) {}
+
+      // 1.2 Envío del Informe Diario y Propuestas de Mejora a las 08:30
+      if (currentTimeStr === '08:30') {
+        try {
+          const { generateDailyImprovementReport, sendSentinelTelegramMessage } = await import('./sentinelWatchdog.js');
+          const report = await generateDailyImprovementReport();
+          if (report.success) {
+            await sendSentinelTelegramMessage(report.reportHtml);
+            console.log('[DAEMON-CRON] 🛡️ Informe diario del Centinela enviado a Telegram.');
+          }
+        } catch (repErr) {
+          console.error('[DAEMON-CRON] Error enviando informe diario:', repErr.message);
+        }
+      }
 
       // 2. Escaneo de salud y bajas físicas
       await runSquadHealthCheck();

@@ -731,6 +731,32 @@ export class ComunioClient {
   }
 
   /**
+   * Obtiene los jugadores que el usuario tiene actualmente puestos en el mercado
+   */
+  async getUserMarketListings() {
+    if (!this.isLoggedIn) await this.login();
+    try {
+      const url = `https://api.comunio.es/communities/${this.communityId}/users/${this.userId}/exchangemarket`;
+      const response = await axios.get(url, { headers: this.getHeaders() });
+      if (response.status === 200 && response.data?.items) {
+        const uid = parseInt(this.userId);
+        return response.data.items
+          .filter(item => item._embedded?.owner?.id === uid)
+          .map(item => ({
+            playerId: item._embedded?.player?.id,
+            name: item._embedded?.player?.name,
+            price: item._embedded?.player?.quotedPrice || item._embedded?.player?.price,
+            date: item.date,
+            remaining: item.remaining
+          })).filter(x => Boolean(x.playerId));
+      }
+    } catch (err) {
+      console.warn('[CLIENT] Error al obtener listados de mercado del usuario:', err.message);
+    }
+    return [];
+  }
+
+  /**
    * Pone a un jugador a la venta en el mercado (Vía API directa de Comunio)
    */
   async listPlayerOnMarket(playerId, price) {
