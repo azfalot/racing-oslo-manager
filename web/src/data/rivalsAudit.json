@@ -746,7 +746,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-18T06:31:18.195Z"
+      "lastUpdated": "2026-10-18T10:01:20.709Z"
     },
     "speculation": {
       "score": 98,
@@ -3367,7 +3367,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-18T06:31:19.570Z"
+      "lastUpdated": "2026-10-18T10:01:22.153Z"
     },
     "speculation": {
       "score": 98,
@@ -4229,22 +4229,22 @@
     "crest": "/media/crests/pachangueros.svg",
     "pos": 3,
     "points": 369,
-    "squadValue": 60190000,
-    "playerCount": 13,
-    "financialHealth": "Apalancado / Saldo Negativo (-4.36M €)",
-    "debtAlert": "Saldo en descubierto (-4.36M €). Consume el 29.0% del límite de crédito permitido (15.05M €). Exige ventas antes de puntuar.",
-    "projectedScore": 65,
+    "squadValue": 55540000,
+    "playerCount": 11,
+    "financialHealth": "Solvente Ajustado (+196k € en Caja)",
+    "debtAlert": "Saldo positivo (+196k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
+    "projectedScore": 64,
     "formation": "4-4-2",
-    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 65 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 64 puntos según plantilla disponible.",
     "strengths": [
       "3º en la clasificación general con 369 puntos acumulados (123.0 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (60.19M €).",
+      "Patrimonio de plantilla consolidado en Primera (55.54M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -4.36M € que obliga a vender piezas."
+      "Plantilla corta (11 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -4279,17 +4279,17 @@
     "marketBalance": {
       "clubName": "Pachangueros F.C.",
       "realizedGainsEUR": 1034300,
-      "realizedLossesEUR": 355500,
-      "netRealizedBalanceEUR": 678800,
+      "realizedLossesEUR": 3183300,
+      "netRealizedBalanceEUR": -2149000,
       "profitableTradesCount": 1,
-      "totalClosedTradesCount": 3,
-      "historicalSuccessRatePct": 33,
+      "totalClosedTradesCount": 5,
+      "historicalSuccessRatePct": 20,
       "totalLatentGainsEUR": 1450000,
-      "totalLatentLossesEUR": 8377000,
-      "netLatentBalanceEUR": -6927000,
-      "healthLabel": "SUPERÁVIT DE TRADING",
-      "healthBadgeColor": "emerald",
-      "healthSummary": "Genera un superávit neto de +678.800 € en operaciones de mercado con una efectividad del 33%.",
+      "totalLatentLossesEUR": 5647000,
+      "netLatentBalanceEUR": -4197000,
+      "healthLabel": "AJUSTES & DEUDA",
+      "healthBadgeColor": "amber",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-2.149.000 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Iván Romero",
@@ -4317,6 +4317,24 @@
           "roiPct": -10.6,
           "isProfit": false,
           "sellDate": "2026-09-20T04:36:05+02:00"
+        },
+        {
+          "playerName": "Andrés Castrín",
+          "buyPrice": 1730000,
+          "sellPrice": 1341200,
+          "diff": -388800,
+          "roiPct": -22.5,
+          "isProfit": false,
+          "sellDate": "2026-10-18T04:30:42+02:00"
+        },
+        {
+          "playerName": "Rodrigo Riquelme",
+          "buyPrice": 5650000,
+          "sellPrice": 3211000,
+          "diff": -2439000,
+          "roiPct": -43.2,
+          "isProfit": false,
+          "sellDate": "2026-10-18T04:30:42+02:00"
         }
       ],
       "latentTrades": [
@@ -4348,15 +4366,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Andrés Castrín",
-          "position": "defender",
-          "buyPrice": 1730000,
-          "currentVM": 1400000,
-          "latentDiff": -330000,
-          "latentRoiPct": -19.1,
-          "isProfit": false
-        },
-        {
           "playerName": "Sergio Carreira",
           "position": "defender",
           "buyPrice": 3995000,
@@ -4384,15 +4393,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Rodrigo Riquelme",
-          "position": "midfielder",
-          "buyPrice": 5650000,
-          "currentVM": 3250000,
-          "latentDiff": -2400000,
-          "latentRoiPct": -42.5,
-          "isProfit": false
-        },
-        {
           "playerName": "Canales",
           "position": "midfielder",
           "buyPrice": 6000000,
@@ -4402,23 +4402,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-18T06:31:18.853Z"
+      "lastUpdated": "2026-10-18T10:01:21.432Z"
     },
     "speculation": {
-      "score": 64,
+      "score": 54,
       "badge": "🎰 Especulador de Mercado",
       "badgeColor": "#f59e0b",
       "overbidRate": "+1.7%",
       "riskLevel": "Riesgo Moderado-Alto",
       "totalSpent": 61541000,
-      "totalReceived": 33494300,
+      "totalReceived": 38046500,
       "purchasesCount": 12,
-      "salesCount": 14,
-      "estimatedCash": -4356700,
+      "salesCount": 16,
+      "estimatedCash": 195500,
       "prizesEarned": 3690000,
-      "maxCreditLimit": 15047500,
-      "netWealth": 55833300,
-      "analysis": "Operativa histórica de 12 compras (61.5M €) y 14 ventas (33.5M €). Dinero total rotado: 95.0M € con sobrepuja media de +1.7%."
+      "maxCreditLimit": 13885000,
+      "netWealth": 55735500,
+      "analysis": "Operativa histórica de 12 compras (61.5M €) y 16 ventas (38.0M €). Dinero total rotado: 99.6M € con sobrepuja media de +1.7%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -4785,6 +4785,34 @@
           "seller": "Pachangueros F.C.",
           "buyer": "Computer",
           "date": "2026-10-14T04:30:50+02:00"
+        },
+        {
+          "playerName": "Rodrigo Riquelme",
+          "price": 3211000,
+          "marketValue": 3211000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Pachangueros F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-18T04:30:42+02:00"
+        },
+        {
+          "playerName": "Andrés Castrín",
+          "price": 1341200,
+          "marketValue": 1341200,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Pachangueros F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-18T04:30:42+02:00"
         }
       ]
     },
@@ -4926,12 +4954,12 @@
         "image": "/media/players/947.png"
       },
       {
-        "id": 2859,
-        "name": "Rodrigo Riquelme",
+        "id": 1602,
+        "name": "Rubén García",
         "position": "midfielder",
-        "price": 3250000,
-        "points": 44,
-        "expectedPoints": 5.2,
+        "price": 1640000,
+        "points": 36,
+        "expectedPoints": 4.1,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -4940,7 +4968,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/2859.png"
+        "image": "/media/players/1602.png"
       },
       {
         "id": 2895,
@@ -4977,40 +5005,7 @@
         "image": "/media/players/3951.png"
       }
     ],
-    "bench": [
-      {
-        "id": 3910,
-        "name": "Andrés Castrín",
-        "position": "defender",
-        "price": 1400000,
-        "points": 31,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3910.png"
-      },
-      {
-        "id": 1602,
-        "name": "Rubén García",
-        "position": "midfielder",
-        "price": 1640000,
-        "points": 36,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/1602.png"
-      }
-    ],
+    "bench": [],
     "isMe": false
   },
   {
@@ -5299,7 +5294,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-18T06:31:18.538Z"
+      "lastUpdated": "2026-10-18T10:01:21.064Z"
     },
     "speculation": {
       "score": 98,
@@ -6416,7 +6411,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-18T06:31:19.208Z"
+      "lastUpdated": "2026-10-18T10:01:21.809Z"
     },
     "speculation": {
       "score": 73,
@@ -7260,7 +7255,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-18T06:31:20.580Z"
+      "lastUpdated": "2026-10-18T10:01:23.228Z"
     },
     "speculation": {
       "score": 87,
@@ -8488,7 +8483,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-18T06:31:19.949Z"
+      "lastUpdated": "2026-10-18T10:01:22.528Z"
     },
     "speculation": {
       "score": 98,
@@ -9926,7 +9921,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-18T06:31:20.262Z"
+      "lastUpdated": "2026-10-18T10:01:22.853Z"
     },
     "speculation": {
       "score": 68,
@@ -10910,7 +10905,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-18T06:31:20.940Z"
+      "lastUpdated": "2026-10-18T10:01:23.554Z"
     },
     "speculation": {
       "score": 98,
@@ -12284,7 +12279,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-18T06:31:21.263Z"
+      "lastUpdated": "2026-10-18T10:01:23.894Z"
     },
     "speculation": {
       "score": 73,
