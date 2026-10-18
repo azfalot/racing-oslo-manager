@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-18T10:01:26.278Z",
+  "timestamp": "2026-10-18T16:03:50.576Z",
   "currentMatchday": 9,
   "confidenceLevel": "MEDIUM",
   "standings": {
@@ -17,7 +17,7 @@
   },
   "lineup": {
     "formation": "3-5-2",
-    "expectedPoints": 51.3,
+    "expectedPoints": 51,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -194,11 +194,11 @@
       "position": "midfielder",
       "price": 870000,
       "expectedPoints": 2.5,
-      "vorp": -46,
-      "vorpPerMatchday": -1.35,
-      "replacementPpm": 3.4,
+      "vorp": -45,
+      "vorpPerMatchday": -1.32,
+      "replacementPpm": 3.37,
       "upgradeGap": 3,
-      "urgencyScore": 30.9
+      "urgencyScore": 30.6
     },
     {
       "playerId": 3160,
@@ -206,11 +206,11 @@
       "position": "midfielder",
       "price": 1500000,
       "expectedPoints": 1.6,
-      "vorp": -11,
-      "vorpPerMatchday": -0.32,
-      "replacementPpm": 3.4,
+      "vorp": -10,
+      "vorpPerMatchday": -0.29,
+      "replacementPpm": 3.37,
       "upgradeGap": 3.9,
-      "urgencyScore": 21
+      "urgencyScore": 20.7
     },
     {
       "playerId": 3553,
@@ -218,11 +218,11 @@
       "position": "midfielder",
       "price": 2940000,
       "expectedPoints": 3.7,
-      "vorp": -11,
-      "vorpPerMatchday": -0.32,
-      "replacementPpm": 3.4,
+      "vorp": -10,
+      "vorpPerMatchday": -0.29,
+      "replacementPpm": 3.37,
       "upgradeGap": 1.8,
-      "urgencyScore": 19.6
+      "urgencyScore": 19.3
     }
   ],
   "depthAnalysis": {
@@ -484,8 +484,8 @@
       "efficiency": 49.6,
       "upgradePoints": 4.9,
       "marginalValue": 4.9,
-      "vorp": 29,
-      "vorpPerMatchday": 0.85,
+      "vorp": 30,
+      "vorpPerMatchday": 0.88,
       "cpmp": 644898,
       "cpmpSeason": 18922,
       "replacedPlayer": {
@@ -715,14 +715,14 @@
       "marginPct": 13,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 6,
-      "ppm": 3.75,
-      "efficiency": 39.8,
-      "upgradePoints": 4.6,
-      "marginalValue": 4.6,
+      "ppm": 3.68,
+      "efficiency": 39.1,
+      "upgradePoints": 4.5,
+      "marginalValue": 4.5,
       "vorp": 108,
       "vorpPerMatchday": 3.18,
-      "cpmp": 593478,
-      "cpmpSeason": 17500,
+      "cpmp": 606667,
+      "cpmpSeason": 17843,
       "replacedPlayer": {
         "playerId": 3160,
         "name": "Gavi",
@@ -890,17 +890,17 @@
       },
       "replacedPlayerName": "Gavi",
       "replacedPlayerExpectedPoints": 1.6,
-      "strategicScore": 71.5,
+      "strategicScore": 71,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 4.6
+          "marginalValue": 4.5
         },
         "absoluteQuality": {
-          "raw": 62.5,
+          "raw": 61.3,
           "weight": 0.2,
-          "ppm": 3.75
+          "ppm": 3.68
         },
         "positionNeed": {
           "raw": 50,
@@ -908,9 +908,9 @@
           "detail": "2 disponibles = exactamente los requeridos. Sin suplentes."
         },
         "marketOpportunity": {
-          "raw": 99.5,
+          "raw": 97.8,
           "weight": 0.1,
-          "efficiency": 39.8
+          "efficiency": 39.1
         },
         "rivalPressure": {
           "raw": 20,
@@ -929,10 +929,10 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+4.6 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
-        "⚠️ Alerta: El promedio con momentum (3.75 PPM) no supera holgadamente a Gavi (3.93 PPM).",
+        "✅ Entra en el XI titular (+4.5 pts al Once Ideal sustituyendo a Gavi (3.93 PPM)).",
+        "⚠️ Alerta: El promedio con momentum (3.68 PPM) no supera holgadamente a Gavi (3.93 PPM).",
         "🟡 Posición con necesidad MODERADA: 2 disponibles = exactamente los requeridos. Sin suplentes.",
-        "📊 ⭐ Titular Fijo (PPM: 3.75 | Fiabilidad: 95% minutos | Eficiencia: 39.8 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 3.68 | Fiabilidad: 95% minutos | Eficiencia: 39.1 pts/M€)",
         "🔥 Dinámica de club: 🚀 Estado de Gracia / Racha Histórica (1.06x): 3V 1E 1D - Alta efectividad colectiva y moral por las nubes",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
         "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.084.900 € (113.0% VM | Sobreprecio: +13%).",
@@ -954,8 +954,8 @@
       "efficiency": 31.8,
       "upgradePoints": 6.5,
       "marginalValue": 6.5,
-      "vorp": 110,
-      "vorpPerMatchday": 3.24,
+      "vorp": 111,
+      "vorpPerMatchday": 3.26,
       "cpmp": 641538,
       "cpmpSeason": 18869,
       "replacedPlayer": {
@@ -1190,8 +1190,8 @@
       "efficiency": 41.2,
       "upgradePoints": 3.3,
       "marginalValue": 3.3,
-      "vorp": 35,
-      "vorpPerMatchday": 1.03,
+      "vorp": 36,
+      "vorpPerMatchday": 1.06,
       "cpmp": 745455,
       "cpmpSeason": 21964,
       "replacedPlayer": {
@@ -1426,7 +1426,7 @@
     "remainingMatchdays": 29,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 51.3,
+      "currentXiExpectedPoints": 51,
       "restOfSeasonAggregateExpectedPpm": 32.7,
       "pWin": 0,
       "pTop2": 0,
@@ -1473,10 +1473,10 @@
         "meanPpm": 42,
         "stdDev": 8,
         "expectedFinalPoints": 1596,
-        "range": "1539 - 1654 pts",
+        "range": "1541 - 1653 pts",
         "probChampion": 0,
-        "probTop2": 80.6,
-        "probTop3": 98.1,
+        "probTop2": 81.9,
+        "probTop3": 97.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1489,10 +1489,10 @@
         "meanPpm": 40.2,
         "stdDev": 8.1,
         "expectedFinalPoints": 1535,
-        "range": "1479 - 1593 pts",
+        "range": "1478 - 1594 pts",
         "probChampion": 0,
-        "probTop2": 16.2,
-        "probTop3": 74.6,
+        "probTop2": 15.6,
+        "probTop3": 76.5,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1507,8 +1507,8 @@
         "expectedFinalPoints": 1491,
         "range": "1436 - 1548 pts",
         "probChampion": 0,
-        "probTop2": 3,
-        "probTop3": 24.6,
+        "probTop2": 2.4,
+        "probTop3": 23.5,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1523,8 +1523,8 @@
         "expectedFinalPoints": 1430,
         "range": "1376 - 1484 pts",
         "probChampion": 0,
-        "probTop2": 0.2,
-        "probTop3": 2.7,
+        "probTop2": 0.1,
+        "probTop3": 2.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1536,8 +1536,8 @@
         "currentPoints": 312,
         "meanPpm": 34.7,
         "stdDev": 8,
-        "expectedFinalPoints": 1321,
-        "range": "1265 - 1378 pts",
+        "expectedFinalPoints": 1318,
+        "range": "1262 - 1371 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1552,8 +1552,8 @@
         "currentPoints": 309,
         "meanPpm": 34.3,
         "stdDev": 8,
-        "expectedFinalPoints": 1301,
-        "range": "1247 - 1360 pts",
+        "expectedFinalPoints": 1306,
+        "range": "1251 - 1363 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1568,8 +1568,8 @@
         "currentPoints": 297,
         "meanPpm": 33,
         "stdDev": 8,
-        "expectedFinalPoints": 1253,
-        "range": "1198 - 1306 pts",
+        "expectedFinalPoints": 1251,
+        "range": "1198 - 1309 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1635,10 +1635,10 @@
         "meanPpm": 42,
         "stdDev": 8,
         "expectedFinalPoints": 1596,
-        "range": "1539 - 1654 pts",
+        "range": "1541 - 1653 pts",
         "probChampion": 0,
-        "probTop2": 80.6,
-        "probTop3": 98.1,
+        "probTop2": 81.9,
+        "probTop3": 97.9,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1651,10 +1651,10 @@
         "meanPpm": 40.2,
         "stdDev": 8.1,
         "expectedFinalPoints": 1535,
-        "range": "1479 - 1593 pts",
+        "range": "1478 - 1594 pts",
         "probChampion": 0,
-        "probTop2": 16.2,
-        "probTop3": 74.6,
+        "probTop2": 15.6,
+        "probTop3": 76.5,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1669,8 +1669,8 @@
         "expectedFinalPoints": 1491,
         "range": "1436 - 1548 pts",
         "probChampion": 0,
-        "probTop2": 3,
-        "probTop3": 24.6,
+        "probTop2": 2.4,
+        "probTop3": 23.5,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1685,8 +1685,8 @@
         "expectedFinalPoints": 1430,
         "range": "1376 - 1484 pts",
         "probChampion": 0,
-        "probTop2": 0.2,
-        "probTop3": 2.7,
+        "probTop2": 0.1,
+        "probTop3": 2.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1698,8 +1698,8 @@
         "currentPoints": 312,
         "meanPpm": 34.7,
         "stdDev": 8,
-        "expectedFinalPoints": 1321,
-        "range": "1265 - 1378 pts",
+        "expectedFinalPoints": 1318,
+        "range": "1262 - 1371 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1714,8 +1714,8 @@
         "currentPoints": 309,
         "meanPpm": 34.3,
         "stdDev": 8,
-        "expectedFinalPoints": 1301,
-        "range": "1247 - 1360 pts",
+        "expectedFinalPoints": 1306,
+        "range": "1251 - 1363 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1730,8 +1730,8 @@
         "currentPoints": 297,
         "meanPpm": 33,
         "stdDev": 8,
-        "expectedFinalPoints": 1253,
-        "range": "1198 - 1306 pts",
+        "expectedFinalPoints": 1251,
+        "range": "1198 - 1309 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
