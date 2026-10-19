@@ -1,14 +1,14 @@
 {
-  "lastSyncTimestamp": "2026-10-18T21:52:21.470Z",
-  "lastSyncFormatted": "18/10/26, 23:52:21",
+  "lastSyncTimestamp": "2026-10-19T03:08:16.434Z",
+  "lastSyncFormatted": "19/10/26, 5:08:16",
   "bot": {
     "name": "comunio-bot",
     "version": "1.2.0",
     "status": "ONLINE",
     "mode": "autonomo",
     "environment": "production",
-    "pid": 67184,
-    "uptime": "0h 1m",
+    "pid": 82136,
+    "uptime": "0h 2m",
     "pm2Process": "comunio-bot (id 0, fork)",
     "schedule": {
       "slots": [
@@ -44,8 +44,8 @@
     "buildStatus": "OPTIMIZED (Vite 8 + React 19)",
     "distStatus": "Sincronizado con origin/main",
     "dataFiles": {
-      "squad": "11 jugadores en plantilla",
-      "news": "88 noticias históricas sincronizadas",
+      "squad": "15 jugadores en plantilla",
+      "news": "89 noticias históricas sincronizadas",
       "rivals": "10 clubes auditados con sugerencias dinámicas",
       "market": "Mercado escaneado",
       "warRoom": "War Room cuantitativo activo con Monte Carlo (1.000 iteraciones)",
@@ -57,7 +57,7 @@
     "manager": "azfalot",
     "standingsPosition": 2,
     "points": 188,
-    "squadValue": 41200000,
+    "squadValue": 39710000,
     "balanceStatus": "Positivo / Saneado (+280.288 €)",
     "activeFormation": "3-5-2",
     "starterCount": 11,
@@ -92,7 +92,7 @@
       "id": "news_crawler",
       "name": "Crawler de Noticias & Tablón",
       "status": "OK",
-      "detail": "88 noticias históricas sincronizadas y deduplicadas"
+      "detail": "89 noticias históricas sincronizadas y deduplicadas"
     },
     {
       "id": "bench_trends",
@@ -116,7 +116,7 @@
     {
       "name": "Extracción y enriquecimiento de plantilla",
       "status": "OK",
-      "detail": "11 jugadores activos"
+      "detail": "15 jugadores activos"
     },
     {
       "name": "Auditoría 360º de Rivales",
@@ -126,7 +126,7 @@
     {
       "name": "Radar y deduplicación de noticias",
       "status": "OK",
-      "detail": "88 noticias históricas"
+      "detail": "89 noticias históricas"
     },
     {
       "name": "Auditoría de banquillo y tendencias",
