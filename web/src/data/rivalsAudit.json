@@ -801,7 +801,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-21T03:10:26.239Z"
+      "lastUpdated": "2026-10-21T06:30:54.104Z"
     },
     "speculation": {
       "score": 98,
@@ -3347,10 +3347,10 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 2,
     "points": 423,
-    "squadValue": 49640000,
-    "playerCount": 14,
-    "financialHealth": "Apalancado / Saldo Negativo (-0.80M €)",
-    "debtAlert": "Saldo en descubierto (-0.80M €). Consume el 6.4% del límite de crédito permitido (12.41M €). Exige ventas antes de puntuar.",
+    "squadValue": 48580000,
+    "playerCount": 12,
+    "financialHealth": "Solvente Ajustado (+237k € en Caja)",
+    "debtAlert": "Saldo positivo (+237k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
     "projectedScore": 58,
     "formation": "4-4-2",
     "tacticDescription": "Estructura 4-4-2 orientada a maximizar 58 puntos según plantilla disponible.",
@@ -3361,7 +3361,7 @@
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -0.80M € que obliga a vender piezas."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -3395,18 +3395,18 @@
     ],
     "marketBalance": {
       "clubName": "Puente Avios FC",
-      "realizedGainsEUR": 825199,
-      "realizedLossesEUR": 11069760,
-      "netRealizedBalanceEUR": -10244561,
-      "profitableTradesCount": 6,
-      "totalClosedTradesCount": 11,
-      "historicalSuccessRatePct": 55,
-      "totalLatentGainsEUR": 3267000,
-      "totalLatentLossesEUR": 21449039,
-      "netLatentBalanceEUR": -18182039,
+      "realizedGainsEUR": 861099,
+      "realizedLossesEUR": 12112560,
+      "netRealizedBalanceEUR": -11251461,
+      "profitableTradesCount": 7,
+      "totalClosedTradesCount": 13,
+      "historicalSuccessRatePct": 54,
+      "totalLatentGainsEUR": 3237000,
+      "totalLatentLossesEUR": 20439039,
+      "netLatentBalanceEUR": -17202039,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-10.244.561 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-11.251.461 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Valentín Gómez",
@@ -3434,6 +3434,15 @@
           "roiPct": 1.7,
           "isProfit": true,
           "sellDate": "2026-09-04T01:17:33+02:00"
+        },
+        {
+          "playerName": "Herrando",
+          "buyPrice": 360000,
+          "sellPrice": 395900,
+          "diff": 35900,
+          "roiPct": 10,
+          "isProfit": true,
+          "sellDate": "2026-10-21T04:29:40+02:00"
         },
         {
           "playerName": "Álex Primo",
@@ -3490,6 +3499,15 @@
           "sellDate": "2026-09-04T01:17:33+02:00"
         },
         {
+          "playerName": "Guridi",
+          "buyPrice": 1680000,
+          "sellPrice": 637200,
+          "diff": -1042800,
+          "roiPct": -62.1,
+          "isProfit": false,
+          "sellDate": "2026-10-21T04:29:40+02:00"
+        },
+        {
           "playerName": "Pepelu",
           "buyPrice": 7350000,
           "sellPrice": 4508200,
@@ -3528,15 +3546,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Herrando",
-          "position": "defender",
-          "buyPrice": 360000,
-          "currentVM": 390000,
-          "latentDiff": 30000,
-          "latentRoiPct": 8.3,
-          "isProfit": true
-        },
-        {
           "playerName": "Gayà",
           "position": "defender",
           "buyPrice": 1501000,
@@ -3552,15 +3561,6 @@
           "currentVM": 810000,
           "latentDiff": -240000,
           "latentRoiPct": -22.9,
-          "isProfit": false
-        },
-        {
-          "playerName": "Guridi",
-          "position": "midfielder",
-          "buyPrice": 1680000,
-          "currentVM": 670000,
-          "latentDiff": -1010000,
-          "latentRoiPct": -60.1,
           "isProfit": false
         },
         {
@@ -3609,23 +3609,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-21T03:10:27.692Z"
+      "lastUpdated": "2026-10-21T06:30:55.595Z"
     },
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+21.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 73640300,
-      "totalReceived": 48614600,
+      "totalReceived": 49647700,
       "purchasesCount": 22,
-      "salesCount": 23,
-      "estimatedCash": -795700,
+      "salesCount": 25,
+      "estimatedCash": 237400,
       "prizesEarned": 4230000,
-      "maxCreditLimit": 12410000,
-      "netWealth": 48844300,
-      "analysis": "Operativa histórica de 22 compras (73.6M €) y 23 ventas (48.6M €). Dinero total rotado: 122.3M € con sobrepuja media de +21.2%."
+      "maxCreditLimit": 12145000,
+      "netWealth": 48817400,
+      "analysis": "Operativa histórica de 22 compras (73.6M €) y 25 ventas (49.6M €). Dinero total rotado: 123.3M € con sobrepuja media de +21.2%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -4248,6 +4248,34 @@
           "seller": "Puente Avios FC",
           "buyer": "Computer",
           "date": "2026-10-18T04:30:42+02:00"
+        },
+        {
+          "playerName": "Guridi",
+          "price": 637200,
+          "marketValue": 637200,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-10-21T04:29:40+02:00"
+        },
+        {
+          "playerName": "Herrando",
+          "price": 395900,
+          "marketValue": 395900,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-10-21T04:29:40+02:00"
         }
       ]
     },
@@ -4389,11 +4417,11 @@
         "image": "/media/players/3096.png"
       },
       {
-        "id": 2370,
-        "name": "Guridi",
+        "id": 4011,
+        "name": "Javi Morcillo",
         "position": "midfielder",
-        "price": 670000,
-        "points": 26,
+        "price": 810000,
+        "points": 27,
         "expectedPoints": 2,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -4403,7 +4431,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/2370.png"
+        "image": "/media/players/4011.png"
       },
       {
         "id": 3773,
@@ -4441,38 +4469,6 @@
       }
     ],
     "bench": [
-      {
-        "id": 3411,
-        "name": "Herrando",
-        "position": "defender",
-        "price": 390000,
-        "points": 12,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3411.png"
-      },
-      {
-        "id": 4011,
-        "name": "Javi Morcillo",
-        "position": "midfielder",
-        "price": 810000,
-        "points": 27,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4011.png"
-      },
       {
         "id": 3078,
         "name": "Urko González",
@@ -4680,7 +4676,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-21T03:10:26.927Z"
+      "lastUpdated": "2026-10-21T06:30:54.856Z"
     },
     "speculation": {
       "score": 57,
@@ -5600,7 +5596,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-21T03:10:26.596Z"
+      "lastUpdated": "2026-10-21T06:30:54.493Z"
     },
     "speculation": {
       "score": 98,
@@ -6717,7 +6713,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-21T03:10:27.286Z"
+      "lastUpdated": "2026-10-21T06:30:55.229Z"
     },
     "speculation": {
       "score": 74,
@@ -7561,7 +7557,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-21T03:10:28.681Z"
+      "lastUpdated": "2026-10-21T06:30:56.687Z"
     },
     "speculation": {
       "score": 88,
@@ -8799,7 +8795,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-21T03:10:28.039Z"
+      "lastUpdated": "2026-10-21T06:30:55.958Z"
     },
     "speculation": {
       "score": 98,
@@ -10293,7 +10289,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-21T03:10:28.350Z"
+      "lastUpdated": "2026-10-21T06:30:56.328Z"
     },
     "speculation": {
       "score": 67,
@@ -11348,7 +11344,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-21T03:10:29.042Z"
+      "lastUpdated": "2026-10-21T06:30:57.017Z"
     },
     "speculation": {
       "score": 98,
@@ -12954,7 +12950,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-21T03:10:29.390Z"
+      "lastUpdated": "2026-10-21T06:30:57.356Z"
     },
     "speculation": {
       "score": 73,
