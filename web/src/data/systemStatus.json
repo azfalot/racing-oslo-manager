@@ -1,13 +1,13 @@
 {
-  "lastSyncTimestamp": "2026-10-21T21:51:08.228Z",
-  "lastSyncFormatted": "21/10/26, 23:51:08",
+  "lastSyncTimestamp": "2026-10-22T03:06:02.689Z",
+  "lastSyncFormatted": "22/10/26, 5:06:02",
   "bot": {
     "name": "comunio-bot",
     "version": "1.2.0",
     "status": "ONLINE",
     "mode": "autonomo",
     "environment": "production",
-    "pid": 91520,
+    "pid": 79440,
     "uptime": "0h 0m",
     "pm2Process": "comunio-bot (id 0, fork)",
     "schedule": {
@@ -44,8 +44,8 @@
     "buildStatus": "OPTIMIZED (Vite 8 + React 19)",
     "distStatus": "Sincronizado con origin/main",
     "dataFiles": {
-      "squad": "15 jugadores en plantilla",
-      "news": "90 noticias históricas sincronizadas",
+      "squad": "11 jugadores en plantilla",
+      "news": "91 noticias históricas sincronizadas",
       "rivals": "10 clubes auditados con sugerencias dinámicas",
       "market": "Mercado escaneado",
       "warRoom": "War Room cuantitativo activo con Monte Carlo (1.000 iteraciones)",
@@ -57,7 +57,7 @@
     "manager": "azfalot",
     "standingsPosition": 2,
     "points": 188,
-    "squadValue": 40420000,
+    "squadValue": 40880000,
     "balanceStatus": "Positivo / Saneado (+280.288 €)",
     "activeFormation": "3-5-2",
     "starterCount": 11,
@@ -92,7 +92,7 @@
       "id": "news_crawler",
       "name": "Crawler de Noticias & Tablón",
       "status": "OK",
-      "detail": "90 noticias históricas sincronizadas y deduplicadas"
+      "detail": "91 noticias históricas sincronizadas y deduplicadas"
     },
     {
       "id": "bench_trends",
@@ -116,7 +116,7 @@
     {
       "name": "Extracción y enriquecimiento de plantilla",
       "status": "OK",
-      "detail": "15 jugadores activos"
+      "detail": "11 jugadores activos"
     },
     {
       "name": "Auditoría 360º de Rivales",
@@ -126,7 +126,7 @@
     {
       "name": "Radar y deduplicación de noticias",
       "status": "OK",
-      "detail": "90 noticias históricas"
+      "detail": "91 noticias históricas"
     },
     {
       "name": "Auditoría de banquillo y tendencias",

@@ -11,16 +11,6 @@
       "listedDate": "2026-10-21T03:06:03.466Z"
     },
     {
-      "playerId": 4077,
-      "name": "Aarón Ochoa",
-      "buyPrice": 160000,
-      "buyDate": "2026-10-20T03:05:52.344Z",
-      "tier": "FLOOR_PRICE_BARGAIN",
-      "listedOnMarket": true,
-      "listedPrice": 160000,
-      "listedDate": "2026-10-21T03:06:03.663Z"
-    },
-    {
       "playerId": 3997,
       "name": "Cestero",
       "buyPrice": 230000,
@@ -29,36 +19,6 @@
       "listedOnMarket": true,
       "listedPrice": 230000,
       "listedDate": "2026-10-21T03:06:03.578Z"
-    },
-    {
-      "playerId": 4141,
-      "name": "Brian Fariñas",
-      "buyPrice": 410000,
-      "buyDate": "2026-10-20T06:30:52.854Z",
-      "tier": "RISING_MOMENTUM",
-      "listedOnMarket": true,
-      "listedPrice": 410000,
-      "listedDate": "2026-10-21T03:06:03.756Z"
-    },
-    {
-      "playerId": 3817,
-      "name": "Alexander-Arnold",
-      "buyPrice": 2010000,
-      "buyDate": "2026-10-21T18:00:06.051Z",
-      "tier": "EMERGENCY_DEBT_SANEAR",
-      "listedOnMarket": true,
-      "listedPrice": 2010000,
-      "listedDate": "2026-10-21T18:00:06.052Z"
-    },
-    {
-      "playerId": 4096,
-      "name": "Mikel Rodríguez",
-      "buyPrice": 830000,
-      "buyDate": "2026-10-21T18:00:06.125Z",
-      "tier": "EMERGENCY_DEBT_SANEAR",
-      "listedOnMarket": true,
-      "listedPrice": 830000,
-      "listedDate": "2026-10-21T18:00:06.125Z"
     }
   ],
   "closedTrades": [
@@ -214,9 +174,45 @@
       "profitEUR": 7500,
       "roiPct": 3.4,
       "sellDate": "2026-10-20T03:00:49.941Z"
+    },
+    {
+      "playerId": 4141,
+      "name": "Brian Fariñas",
+      "buyPrice": 410000,
+      "sellPrice": 380600,
+      "profitEUR": -29400,
+      "roiPct": -7.2,
+      "sellDate": "2026-10-22T03:00:10.741Z"
+    },
+    {
+      "playerId": 4096,
+      "name": "Mikel Rodríguez",
+      "buyPrice": 830000,
+      "sellPrice": 806800,
+      "profitEUR": -23200,
+      "roiPct": -2.8,
+      "sellDate": "2026-10-22T03:00:10.926Z"
+    },
+    {
+      "playerId": 4077,
+      "name": "Aarón Ochoa",
+      "buyPrice": 160000,
+      "sellPrice": 168000,
+      "profitEUR": 8000,
+      "roiPct": 5,
+      "sellDate": "2026-10-22T03:00:11.054Z"
+    },
+    {
+      "playerId": 3817,
+      "name": "Alexander-Arnold",
+      "buyPrice": 2010000,
+      "sellPrice": 1791900,
+      "profitEUR": -218100,
+      "roiPct": -10.9,
+      "sellDate": "2026-10-22T03:00:11.189Z"
     }
   ],
-  "totalProfitEUR": 366600,
-  "successfulTradesCount": 17,
-  "lastUpdated": "2026-10-21T18:00:06.126Z"
+  "totalProfitEUR": 103900,
+  "successfulTradesCount": 21,
+  "lastUpdated": "2026-10-22T03:00:11.189Z"
 }

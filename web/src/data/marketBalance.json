@@ -1,14 +1,14 @@
 {
   "clubName": "Racing de Oslo",
-  "realizedGainsEUR": 459000,
-  "realizedLossesEUR": 7749011,
-  "netRealizedBalanceEUR": -7290011,
-  "profitableTradesCount": 17,
-  "totalClosedTradesCount": 31,
-  "historicalSuccessRatePct": 55,
-  "totalLatentGainsEUR": 2110000,
-  "totalLatentLossesEUR": 17890001,
-  "netLatentBalanceEUR": -15780001,
+  "realizedGainsEUR": 467000,
+  "realizedLossesEUR": 11689712,
+  "netRealizedBalanceEUR": -11222712,
+  "profitableTradesCount": 18,
+  "totalClosedTradesCount": 35,
+  "historicalSuccessRatePct": 51,
+  "totalLatentGainsEUR": 2515000,
+  "totalLatentLossesEUR": 13955000,
+  "netLatentBalanceEUR": -11440000,
   "healthLabel": "AJUSTES & DEUDA",
   "healthBadgeColor": "amber",
   "healthSummary": "El balance histórico refleja el coste de saneamiento inicial de deuda (ventas defensivas como Hugo Duro y Galarreta para salir de números rojos), mientras que el nuevo régimen de especulación opera con un 100% de plusvalías netas.",
@@ -57,6 +57,15 @@
       "roiPct": 2,
       "isProfit": true,
       "sellDate": "2026-09-22T04:36:28+02:00"
+    },
+    {
+      "playerName": "Aarón Ochoa",
+      "buyPrice": 160000,
+      "sellPrice": 168000,
+      "diff": 8000,
+      "roiPct": 5,
+      "isProfit": true,
+      "sellDate": "2026-10-22T04:29:33+02:00"
     },
     {
       "playerName": "Rodrigo Mendoza",
@@ -203,6 +212,15 @@
       "sellDate": "2026-09-22T04:36:28+02:00"
     },
     {
+      "playerName": "Brian Fariñas",
+      "buyPrice": 410000,
+      "sellPrice": 380600,
+      "diff": -29400,
+      "roiPct": -7.2,
+      "isProfit": false,
+      "sellDate": "2026-10-22T04:29:33+02:00"
+    },
+    {
       "playerName": "Fabio Cardoso",
       "buyPrice": 230000,
       "sellPrice": 196600,
@@ -266,6 +284,15 @@
       "sellDate": "2026-08-25T04:34:27+02:00"
     },
     {
+      "playerName": "Mikel Rodríguez",
+      "buyPrice": 1510000,
+      "sellPrice": 806800,
+      "diff": -703200,
+      "roiPct": -46.6,
+      "isProfit": false,
+      "sellDate": "2026-10-22T04:29:33+02:00"
+    },
+    {
       "playerName": "Olasagasti",
       "buyPrice": 4000000,
       "sellPrice": 2903600,
@@ -291,6 +318,15 @@
       "roiPct": -52.2,
       "isProfit": false,
       "sellDate": "2026-09-15T04:37:15+02:00"
+    },
+    {
+      "playerName": "Alexander-Arnold",
+      "buyPrice": 5000001,
+      "sellPrice": 1791900,
+      "diff": -3208101,
+      "roiPct": -64.2,
+      "isProfit": false,
+      "sellDate": "2026-10-22T04:29:33+02:00"
     }
   ],
   "latentTrades": [
@@ -298,18 +334,27 @@
       "playerName": "Johnny Cardoso",
       "position": "midfielder",
       "buyPrice": 1090000,
-      "currentVM": 3030000,
-      "latentDiff": 1940000,
-      "latentRoiPct": 178,
+      "currentVM": 2980000,
+      "latentDiff": 1890000,
+      "latentRoiPct": 173.4,
       "isProfit": true
     },
     {
       "playerName": "Adrián de la Fuente",
       "position": "defender",
       "buyPrice": 3860000,
-      "currentVM": 4030000,
-      "latentDiff": 170000,
-      "latentRoiPct": 4.4,
+      "currentVM": 4300000,
+      "latentDiff": 440000,
+      "latentRoiPct": 11.4,
+      "isProfit": true
+    },
+    {
+      "playerName": "Gavi",
+      "position": "midfielder",
+      "buyPrice": 1275000,
+      "currentVM": 1460000,
+      "latentDiff": 185000,
+      "latentRoiPct": 14.5,
       "isProfit": true
     },
     {
@@ -325,94 +370,49 @@
       "playerName": "Cestero",
       "position": "midfielder",
       "buyPrice": 230000,
-      "currentVM": 230000,
-      "latentDiff": 0,
-      "latentRoiPct": 0,
-      "isProfit": true
-    },
-    {
-      "playerName": "Aarón Ochoa",
-      "position": "midfielder",
-      "buyPrice": 160000,
-      "currentVM": 160000,
-      "latentDiff": 0,
-      "latentRoiPct": 0,
-      "isProfit": true
-    },
-    {
-      "playerName": "Brian Fariñas",
-      "position": "midfielder",
-      "buyPrice": 410000,
-      "currentVM": 410000,
-      "latentDiff": 0,
-      "latentRoiPct": 0,
-      "isProfit": true
-    },
-    {
-      "playerName": "Gavi",
-      "position": "midfielder",
-      "buyPrice": 1275000,
-      "currentVM": 1210000,
-      "latentDiff": -65000,
-      "latentRoiPct": -5.1,
-      "isProfit": false
-    },
-    {
-      "playerName": "Mikel Rodríguez",
-      "position": "midfielder",
-      "buyPrice": 1510000,
-      "currentVM": 830000,
-      "latentDiff": -680000,
-      "latentRoiPct": -45,
+      "currentVM": 220000,
+      "latentDiff": -10000,
+      "latentRoiPct": -4.3,
       "isProfit": false
     },
     {
       "playerName": "Denis Suárez",
       "position": "midfielder",
       "buyPrice": 2100000,
-      "currentVM": 1320000,
-      "latentDiff": -780000,
-      "latentRoiPct": -37.1,
+      "currentVM": 1390000,
+      "latentDiff": -710000,
+      "latentRoiPct": -33.8,
       "isProfit": false
     },
     {
       "playerName": "David Soria",
       "position": "keeper",
       "buyPrice": 4820000,
-      "currentVM": 3900000,
-      "latentDiff": -920000,
-      "latentRoiPct": -19.1,
+      "currentVM": 3940000,
+      "latentDiff": -880000,
+      "latentRoiPct": -18.3,
       "isProfit": false
     },
     {
       "playerName": "Mariano Díaz",
       "position": "striker",
       "buyPrice": 6315000,
-      "currentVM": 3790000,
-      "latentDiff": -2525000,
-      "latentRoiPct": -40,
-      "isProfit": false
-    },
-    {
-      "playerName": "Alexander-Arnold",
-      "position": "defender",
-      "buyPrice": 5000001,
-      "currentVM": 2010000,
-      "latentDiff": -2990001,
-      "latentRoiPct": -59.8,
+      "currentVM": 3910000,
+      "latentDiff": -2405000,
+      "latentRoiPct": -38.1,
       "isProfit": false
     },
     {
       "playerName": "Fede Valverde",
       "position": "midfielder",
       "buyPrice": 20510000,
-      "currentVM": 10580000,
-      "latentDiff": -9930000,
-      "latentRoiPct": -48.4,
+      "currentVM": 10560000,
+      "latentDiff": -9950000,
+      "latentRoiPct": -48.5,
       "isProfit": false
     }
   ],
-  "lastUpdated": "2026-10-21T21:51:08.222Z",
-  "speculationGainsEUR": 366600,
-  "speculationTradesCount": 17
+  "lastUpdated": "2026-10-22T03:06:02.683Z",
+  "speculationGainsEUR": 103900,
+  "speculationTradesCount": 21
 }
