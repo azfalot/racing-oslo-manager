@@ -6,22 +6,22 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 495,
-    "squadValue": 73830000,
-    "playerCount": 19,
-    "financialHealth": "Apalancado / Saldo Negativo (-15.88M €)",
-    "debtAlert": "Saldo en descubierto (-15.88M €). Consume el 86.0% del límite de crédito permitido (18.46M €). Exige ventas antes de puntuar.",
-    "projectedScore": 65,
+    "squadValue": 58020000,
+    "playerCount": 16,
+    "financialHealth": "Solvente Ajustado (+115k € en Caja)",
+    "debtAlert": "Saldo positivo (+115k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
+    "projectedScore": 61,
     "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 65 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 61 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 495 puntos acumulados (165.0 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (73.83M €).",
+      "Patrimonio de plantilla consolidado en Primera (58.02M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -15.88M € que obliga a vender piezas."
+      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
     ],
     "tacticalAlerts": [
       {
@@ -66,17 +66,17 @@
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
       "realizedGainsEUR": 17035665,
-      "realizedLossesEUR": 41539290,
-      "netRealizedBalanceEUR": -24503625,
+      "realizedLossesEUR": 50801141,
+      "netRealizedBalanceEUR": -33765476,
       "profitableTradesCount": 22,
-      "totalClosedTradesCount": 63,
-      "historicalSuccessRatePct": 35,
+      "totalClosedTradesCount": 66,
+      "historicalSuccessRatePct": 33,
       "totalLatentGainsEUR": 553983,
-      "totalLatentLossesEUR": 44559228,
-      "netLatentBalanceEUR": -44005245,
+      "totalLatentLossesEUR": 35110177,
+      "netLatentBalanceEUR": -34556194,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-24.503.625 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-33.765.476 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Lookman",
@@ -430,6 +430,15 @@
           "sellDate": "2026-09-15T04:37:15+02:00"
         },
         {
+          "playerName": "Kiko Femenía",
+          "buyPrice": 525011,
+          "sellPrice": 322100,
+          "diff": -202911,
+          "roiPct": -38.6,
+          "isProfit": false,
+          "sellDate": "2026-10-22T04:29:33+02:00"
+        },
+        {
           "playerName": "Unai Núñez",
           "buyPrice": 3268002,
           "sellPrice": 3063300,
@@ -455,6 +464,15 @@
           "roiPct": -16,
           "isProfit": false,
           "sellDate": "2026-10-20T00:19:51+02:00"
+        },
+        {
+          "playerName": "Kike Barja",
+          "buyPrice": 714010,
+          "sellPrice": 485000,
+          "diff": -229010,
+          "roiPct": -32.1,
+          "isProfit": false,
+          "sellDate": "2026-10-22T04:29:33+02:00"
         },
         {
           "playerName": "Iker Luque",
@@ -637,6 +655,15 @@
           "sellDate": "2026-09-16T00:07:53+02:00"
         },
         {
+          "playerName": "Bellingham",
+          "buyPrice": 24020030,
+          "sellPrice": 15190100,
+          "diff": -8829930,
+          "roiPct": -36.8,
+          "isProfit": false,
+          "sellDate": "2026-10-22T04:29:33+02:00"
+        },
+        {
           "playerName": "Raphinha",
           "buyPrice": 49119030,
           "sellPrice": 28427000,
@@ -729,24 +756,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Kiko Femenía",
-          "position": "defender",
-          "buyPrice": 525011,
-          "currentVM": 330000,
-          "latentDiff": -195011,
-          "latentRoiPct": -37.1,
-          "isProfit": false
-        },
-        {
-          "playerName": "Kike Barja",
-          "position": "midfielder",
-          "buyPrice": 714010,
-          "currentVM": 470000,
-          "latentDiff": -244010,
-          "latentRoiPct": -34.2,
-          "isProfit": false
-        },
-        {
           "playerName": "Víctor Chust",
           "position": "defender",
           "buyPrice": 1905012,
@@ -801,15 +810,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Bellingham",
-          "position": "midfielder",
-          "buyPrice": 24020030,
-          "currentVM": 15010000,
-          "latentDiff": -9010030,
-          "latentRoiPct": -37.5,
-          "isProfit": false
-        },
-        {
           "playerName": "Raphinha",
           "position": "striker",
           "buyPrice": 49119030,
@@ -819,23 +819,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-22T10:01:04.885Z"
+      "lastUpdated": "2026-10-22T16:01:08.221Z"
     },
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+6.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 327035329,
-      "totalReceived": 286202800,
+      "totalReceived": 302200000,
       "purchasesCount": 84,
-      "salesCount": 80,
-      "estimatedCash": -15882529,
+      "salesCount": 83,
+      "estimatedCash": 114671,
       "prizesEarned": 4950000,
-      "maxCreditLimit": 18457500,
-      "netWealth": 57947471,
-      "analysis": "Operativa histórica de 84 compras (327.0M €) y 80 ventas (286.2M €). Dinero total rotado: 613.2M € con sobrepuja media de +6.2%."
+      "maxCreditLimit": 14505000,
+      "netWealth": 58134671,
+      "analysis": "Operativa histórica de 84 compras (327.0M €) y 83 ventas (302.2M €). Dinero total rotado: 629.2M € con sobrepuja media de +6.2%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -3060,6 +3060,48 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-10-22T00:14:20+02:00"
+        },
+        {
+          "playerName": "Bellingham",
+          "price": 15190100,
+          "marketValue": 15190100,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-22T04:29:33+02:00"
+        },
+        {
+          "playerName": "Kike Barja",
+          "price": 485000,
+          "marketValue": 485000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-22T04:29:33+02:00"
+        },
+        {
+          "playerName": "Kiko Femenía",
+          "price": 322100,
+          "marketValue": 322100,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-22T04:29:33+02:00"
         }
       ]
     },
@@ -3133,23 +3175,6 @@
         "image": "/media/players/2760.png"
       },
       {
-        "id": 3444,
-        "name": "Bellingham",
-        "position": "midfielder",
-        "price": 15010000,
-        "points": 84,
-        "expectedPoints": 9,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3444.png"
-      },
-      {
         "id": 2155,
         "name": "Fornals",
         "position": "midfielder",
@@ -3199,6 +3224,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2591.png"
+      },
+      {
+        "id": 3851,
+        "name": "Javier Hernández",
+        "position": "midfielder",
+        "price": 2220000,
+        "points": 33,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3851.png"
       },
       {
         "id": 3298,
@@ -3286,38 +3328,6 @@
         "image": "/media/players/2371.png"
       },
       {
-        "id": 1168,
-        "name": "Kiko Femenía",
-        "position": "defender",
-        "price": 330000,
-        "points": 5,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/1168.png"
-      },
-      {
-        "id": 3851,
-        "name": "Javier Hernández",
-        "position": "midfielder",
-        "price": 2220000,
-        "points": 33,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3851.png"
-      },
-      {
         "id": 4004,
         "name": "Antañón",
         "position": "midfielder",
@@ -3332,22 +3342,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/4004.png"
-      },
-      {
-        "id": 2395,
-        "name": "Kike Barja",
-        "position": "midfielder",
-        "price": 470000,
-        "points": 22,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2395.png"
       },
       {
         "id": 3354,
@@ -3653,7 +3647,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-22T10:01:06.343Z"
+      "lastUpdated": "2026-10-22T16:01:09.664Z"
     },
     "speculation": {
       "score": 98,
@@ -4738,7 +4732,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-22T10:01:05.627Z"
+      "lastUpdated": "2026-10-22T16:01:08.930Z"
     },
     "speculation": {
       "score": 74,
@@ -5719,7 +5713,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-22T10:01:05.242Z"
+      "lastUpdated": "2026-10-22T16:01:08.572Z"
     },
     "speculation": {
       "score": 98,
@@ -6836,7 +6830,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-22T10:01:05.996Z"
+      "lastUpdated": "2026-10-22T16:01:09.303Z"
     },
     "speculation": {
       "score": 74,
@@ -7680,7 +7674,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-22T10:01:07.388Z"
+      "lastUpdated": "2026-10-22T16:01:10.808Z"
     },
     "speculation": {
       "score": 90,
@@ -8918,7 +8912,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-22T10:01:06.685Z"
+      "lastUpdated": "2026-10-22T16:01:10.058Z"
     },
     "speculation": {
       "score": 98,
@@ -10412,7 +10406,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-22T10:01:07.012Z"
+      "lastUpdated": "2026-10-22T16:01:10.452Z"
     },
     "speculation": {
       "score": 69,
@@ -11468,7 +11462,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-22T10:01:07.718Z"
+      "lastUpdated": "2026-10-22T16:01:11.140Z"
     },
     "speculation": {
       "score": 98,
@@ -13075,7 +13069,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-22T10:01:08.080Z"
+      "lastUpdated": "2026-10-22T16:01:11.499Z"
     },
     "speculation": {
       "score": 72,
