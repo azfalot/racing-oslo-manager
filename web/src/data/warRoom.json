@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-23T18:32:30.242Z",
-  "currentMatchday": 9,
-  "confidenceLevel": "MEDIUM",
+  "timestamp": "2026-10-23T21:51:26.353Z",
+  "currentMatchday": 10,
+  "confidenceLevel": "HIGH",
   "standings": {
     "racingPoints": 188,
     "leaderPoints": 245,
@@ -17,7 +17,7 @@
   },
   "lineup": {
     "formation": "4-4-2",
-    "expectedPoints": 40.1,
+    "expectedPoints": 38.2,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -356,6 +356,175 @@
         "points": 0
       },
       {
+        "playerId": 1876,
+        "name": "Denis Suárez",
+        "price": 1320000,
+        "totalPoints": 37,
+        "status": null,
+        "statusInfo": null,
+        "type": "midfielder",
+        "historical": {
+          "points": [
+            {
+              "season": "14/15",
+              "points": "120",
+              "eventId": 471732
+            },
+            {
+              "season": "15/16",
+              "points": "190",
+              "eventId": 687859
+            },
+            {
+              "season": "16/17",
+              "points": "82",
+              "eventId": 788917
+            },
+            {
+              "season": "17/18",
+              "points": "88",
+              "eventId": 869072
+            },
+            {
+              "season": "18/19",
+              "points": "8",
+              "eventId": 899953
+            },
+            {
+              "season": "19/20",
+              "points": "109",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "171",
+              "eventId": 939519
+            },
+            {
+              "season": "21/22",
+              "points": "196",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "44",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "13",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "86",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "113",
+              "eventId": 998265
+            }
+          ]
+        },
+        "average": {
+          "grade": "6,9",
+          "points": "4,67",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "5,5",
+            "points": "3,8"
+          }
+        },
+        "club": {
+          "id": 89,
+          "name": "Alavés",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/89"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/89/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 11,
+            "homeClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 89,
+              "name": "Alavés",
+              "abbreviation": "ala",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/89"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/89/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-31T21:00:00+02:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 12,
+            "homeClub": {
+              "id": 17,
+              "name": "Sevilla",
+              "abbreviation": "sev",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/17"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/17/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 89,
+              "name": "Alavés",
+              "abbreviation": "ala",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/89"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/89/logo"
+                }
+              }
+            },
+            "kickoff": "2026-11-06T21:00:00+02:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 1,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 2.2,
+        "id": 1876,
+        "position": "midfielder",
+        "points": 0
+      },
+      {
         "playerId": 3160,
         "name": "Gavi",
         "price": 1420000,
@@ -553,11 +722,11 @@
       "position": "midfielder",
       "price": 1420000,
       "expectedPoints": 1.6,
-      "vorp": 10,
-      "vorpPerMatchday": 0.29,
-      "replacementPpm": 2.8,
+      "vorp": 9,
+      "vorpPerMatchday": 0.26,
+      "replacementPpm": 2.81,
       "upgradeGap": 3.9,
-      "urgencyScore": 14.7
+      "urgencyScore": 15
     }
   ],
   "depthAnalysis": {
@@ -583,8 +752,8 @@
       "efficiency": 47,
       "upgradePoints": 5.9,
       "marginalValue": 5.9,
-      "vorp": 50,
-      "vorpPerMatchday": 1.47,
+      "vorp": 49,
+      "vorpPerMatchday": 1.44,
       "cpmp": 564407,
       "cpmpSeason": 16567,
       "replacedPlayer": {
@@ -1347,8 +1516,8 @@
       "efficiency": 59.6,
       "upgradePoints": 5.1,
       "marginalValue": 5.1,
-      "vorp": 91,
-      "vorpPerMatchday": 2.68,
+      "vorp": 90,
+      "vorpPerMatchday": 2.65,
       "cpmp": 331373,
       "cpmpSeason": 9769,
       "replacedPlayer": {
@@ -1879,16 +2048,16 @@
     "scenarioType": "ACTUAL_BASELINE",
     "totalSimulations": 1000,
     "iterations": 1000,
-    "remainingMatchdays": 29,
+    "remainingMatchdays": 28,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 40.1,
-      "restOfSeasonAggregateExpectedPpm": 33.3,
+      "currentXiExpectedPoints": 38.2,
+      "restOfSeasonAggregateExpectedPpm": 30,
       "pWin": 0,
       "pTop2": 0,
       "pTop3": 0,
-      "expectedFinalPoints": 1265,
-      "range": "1211 - 1319 pts",
+      "expectedFinalPoints": 1142,
+      "range": "1090 - 1197 pts",
       "wilsonCI95": {
         "lowerPct": 0,
         "upperPct": 0.4
@@ -1897,28 +2066,28 @@
     "probChampion": 0,
     "probTop2": 0,
     "probTop3": 0,
-    "racingExpectedFinalPoints": 1265,
-    "racingRange": "1211 - 1319 pts",
+    "racingExpectedFinalPoints": 1142,
+    "racingRange": "1090 - 1197 pts",
     "racingWilsonCI95": {
       "lowerPct": 0,
       "upperPct": 0.4
     },
     "leaderName": "Fermín Gadura F.C.",
-    "leaderExpectedPoints": 2089,
+    "leaderExpectedPoints": 1882,
     "standings": [
       {
         "id": 21163674,
         "name": "Fermín Gadura F.C.",
         "currentPoints": 495,
-        "meanPpm": 55,
+        "meanPpm": 49.5,
         "stdDev": 8,
-        "expectedFinalPoints": 2089,
-        "range": "2034 - 2143 pts",
-        "probChampion": 100,
+        "expectedFinalPoints": 1882,
+        "range": "1827 - 1936 pts",
+        "probChampion": 99.9,
         "probTop2": 100,
         "probTop3": 100,
         "wilsonCI95": {
-          "lowerPct": 99.6,
+          "lowerPct": 99.4,
           "upperPct": 100
         }
       },
@@ -1926,29 +2095,29 @@
         "id": 21163563,
         "name": "Puente Avios FC",
         "currentPoints": 439,
-        "meanPpm": 48.8,
+        "meanPpm": 43.9,
         "stdDev": 8,
-        "expectedFinalPoints": 1854,
-        "range": "1797 - 1912 pts",
-        "probChampion": 0,
-        "probTop2": 84.7,
-        "probTop3": 98.2,
+        "expectedFinalPoints": 1669,
+        "range": "1615 - 1725 pts",
+        "probChampion": 0.1,
+        "probTop2": 83.1,
+        "probTop3": 96.2,
         "wilsonCI95": {
           "lowerPct": 0,
-          "upperPct": 0.4
+          "upperPct": 0.6
         }
       },
       {
         "id": 21163653,
         "name": "Pachangueros F.C.",
         "currentPoints": 420,
-        "meanPpm": 46.7,
+        "meanPpm": 42,
         "stdDev": 8,
-        "expectedFinalPoints": 1774,
-        "range": "1719 - 1831 pts",
+        "expectedFinalPoints": 1595,
+        "range": "1539 - 1650 pts",
         "probChampion": 0,
-        "probTop2": 9.8,
-        "probTop3": 60.9,
+        "probTop2": 10.6,
+        "probTop3": 56.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1958,13 +2127,13 @@
         "id": 21163583,
         "name": "Ana",
         "currentPoints": 417,
-        "meanPpm": 46.3,
+        "meanPpm": 41.7,
         "stdDev": 8,
-        "expectedFinalPoints": 1760,
-        "range": "1706 - 1818 pts",
+        "expectedFinalPoints": 1585,
+        "range": "1533 - 1639 pts",
         "probChampion": 0,
-        "probTop2": 5.5,
-        "probTop3": 40.7,
+        "probTop2": 6.3,
+        "probTop3": 46.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1974,13 +2143,13 @@
         "id": 21163650,
         "name": "Amigos de NIN",
         "currentPoints": 383,
-        "meanPpm": 42.6,
+        "meanPpm": 38.3,
         "stdDev": 8,
-        "expectedFinalPoints": 1620,
-        "range": "1566 - 1674 pts",
+        "expectedFinalPoints": 1455,
+        "range": "1400 - 1510 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0.2,
+        "probTop3": 0.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1990,10 +2159,10 @@
         "id": 21163606,
         "name": "Suances nin",
         "currentPoints": 374,
-        "meanPpm": 41.6,
+        "meanPpm": 37.4,
         "stdDev": 8,
-        "expectedFinalPoints": 1583,
-        "range": "1527 - 1640 pts",
+        "expectedFinalPoints": 1418,
+        "range": "1364 - 1474 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2006,10 +2175,10 @@
         "id": 21163646,
         "name": "M4 TEAM",
         "currentPoints": 361,
-        "meanPpm": 40.1,
+        "meanPpm": 36.1,
         "stdDev": 8,
-        "expectedFinalPoints": 1521,
-        "range": "1468 - 1580 pts",
+        "expectedFinalPoints": 1373,
+        "range": "1320 - 1428 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2022,10 +2191,10 @@
         "id": 21163612,
         "name": "Melano Plabloroza",
         "currentPoints": 352,
-        "meanPpm": 39.1,
+        "meanPpm": 35.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1485,
-        "range": "1430 - 1539 pts",
+        "expectedFinalPoints": 1337,
+        "range": "1283 - 1393 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2038,10 +2207,10 @@
         "id": 21163822,
         "name": "Racing de Oslo",
         "currentPoints": 300,
-        "meanPpm": 33.3,
+        "meanPpm": 30,
         "stdDev": 8,
-        "expectedFinalPoints": 1265,
-        "range": "1211 - 1319 pts",
+        "expectedFinalPoints": 1142,
+        "range": "1090 - 1197 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2056,8 +2225,8 @@
         "currentPoints": 225,
         "meanPpm": 25,
         "stdDev": 8,
-        "expectedFinalPoints": 953,
-        "range": "897 - 1010 pts",
+        "expectedFinalPoints": 928,
+        "range": "877 - 981 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2072,15 +2241,15 @@
         "id": 21163674,
         "name": "Fermín Gadura F.C.",
         "currentPoints": 495,
-        "meanPpm": 55,
+        "meanPpm": 49.5,
         "stdDev": 8,
-        "expectedFinalPoints": 2089,
-        "range": "2034 - 2143 pts",
-        "probChampion": 100,
+        "expectedFinalPoints": 1882,
+        "range": "1827 - 1936 pts",
+        "probChampion": 99.9,
         "probTop2": 100,
         "probTop3": 100,
         "wilsonCI95": {
-          "lowerPct": 99.6,
+          "lowerPct": 99.4,
           "upperPct": 100
         }
       },
@@ -2088,29 +2257,29 @@
         "id": 21163563,
         "name": "Puente Avios FC",
         "currentPoints": 439,
-        "meanPpm": 48.8,
+        "meanPpm": 43.9,
         "stdDev": 8,
-        "expectedFinalPoints": 1854,
-        "range": "1797 - 1912 pts",
-        "probChampion": 0,
-        "probTop2": 84.7,
-        "probTop3": 98.2,
+        "expectedFinalPoints": 1669,
+        "range": "1615 - 1725 pts",
+        "probChampion": 0.1,
+        "probTop2": 83.1,
+        "probTop3": 96.2,
         "wilsonCI95": {
           "lowerPct": 0,
-          "upperPct": 0.4
+          "upperPct": 0.6
         }
       },
       {
         "id": 21163653,
         "name": "Pachangueros F.C.",
         "currentPoints": 420,
-        "meanPpm": 46.7,
+        "meanPpm": 42,
         "stdDev": 8,
-        "expectedFinalPoints": 1774,
-        "range": "1719 - 1831 pts",
+        "expectedFinalPoints": 1595,
+        "range": "1539 - 1650 pts",
         "probChampion": 0,
-        "probTop2": 9.8,
-        "probTop3": 60.9,
+        "probTop2": 10.6,
+        "probTop3": 56.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2120,13 +2289,13 @@
         "id": 21163583,
         "name": "Ana",
         "currentPoints": 417,
-        "meanPpm": 46.3,
+        "meanPpm": 41.7,
         "stdDev": 8,
-        "expectedFinalPoints": 1760,
-        "range": "1706 - 1818 pts",
+        "expectedFinalPoints": 1585,
+        "range": "1533 - 1639 pts",
         "probChampion": 0,
-        "probTop2": 5.5,
-        "probTop3": 40.7,
+        "probTop2": 6.3,
+        "probTop3": 46.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2136,13 +2305,13 @@
         "id": 21163650,
         "name": "Amigos de NIN",
         "currentPoints": 383,
-        "meanPpm": 42.6,
+        "meanPpm": 38.3,
         "stdDev": 8,
-        "expectedFinalPoints": 1620,
-        "range": "1566 - 1674 pts",
+        "expectedFinalPoints": 1455,
+        "range": "1400 - 1510 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0.2,
+        "probTop3": 0.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2152,10 +2321,10 @@
         "id": 21163606,
         "name": "Suances nin",
         "currentPoints": 374,
-        "meanPpm": 41.6,
+        "meanPpm": 37.4,
         "stdDev": 8,
-        "expectedFinalPoints": 1583,
-        "range": "1527 - 1640 pts",
+        "expectedFinalPoints": 1418,
+        "range": "1364 - 1474 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2168,10 +2337,10 @@
         "id": 21163646,
         "name": "M4 TEAM",
         "currentPoints": 361,
-        "meanPpm": 40.1,
+        "meanPpm": 36.1,
         "stdDev": 8,
-        "expectedFinalPoints": 1521,
-        "range": "1468 - 1580 pts",
+        "expectedFinalPoints": 1373,
+        "range": "1320 - 1428 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2184,10 +2353,10 @@
         "id": 21163612,
         "name": "Melano Plabloroza",
         "currentPoints": 352,
-        "meanPpm": 39.1,
+        "meanPpm": 35.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1485,
-        "range": "1430 - 1539 pts",
+        "expectedFinalPoints": 1337,
+        "range": "1283 - 1393 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2200,10 +2369,10 @@
         "id": 21163822,
         "name": "Racing de Oslo",
         "currentPoints": 300,
-        "meanPpm": 33.3,
+        "meanPpm": 30,
         "stdDev": 8,
-        "expectedFinalPoints": 1265,
-        "range": "1211 - 1319 pts",
+        "expectedFinalPoints": 1142,
+        "range": "1090 - 1197 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2218,8 +2387,8 @@
         "currentPoints": 225,
         "meanPpm": 25,
         "stdDev": 8,
-        "expectedFinalPoints": 953,
-        "range": "897 - 1010 pts",
+        "expectedFinalPoints": 928,
+        "range": "877 - 981 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
