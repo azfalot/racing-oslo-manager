@@ -1,14 +1,14 @@
 {
-  "lastSyncTimestamp": "2026-10-23T16:01:24.719Z",
-  "lastSyncFormatted": "23/10/26, 18:01:24",
+  "lastSyncTimestamp": "2026-10-23T18:32:30.276Z",
+  "lastSyncFormatted": "23/10/26, 20:32:30",
   "bot": {
     "name": "comunio-bot",
     "version": "1.2.0",
     "status": "ONLINE",
     "mode": "autonomo",
     "environment": "production",
-    "pid": 92336,
-    "uptime": "0h 0m",
+    "pid": 93044,
+    "uptime": "0h 2m",
     "pm2Process": "comunio-bot (id 0, fork)",
     "schedule": {
       "slots": [
@@ -45,7 +45,7 @@
     "distStatus": "Sincronizado con origin/main",
     "dataFiles": {
       "squad": "15 jugadores en plantilla",
-      "news": "91 noticias históricas sincronizadas",
+      "news": "90 noticias históricas sincronizadas",
       "rivals": "10 clubes auditados con sugerencias dinámicas",
       "market": "Mercado escaneado",
       "warRoom": "War Room cuantitativo activo con Monte Carlo (1.000 iteraciones)",
@@ -92,7 +92,7 @@
       "id": "news_crawler",
       "name": "Crawler de Noticias & Tablón",
       "status": "OK",
-      "detail": "91 noticias históricas sincronizadas y deduplicadas"
+      "detail": "90 noticias históricas sincronizadas y deduplicadas"
     },
     {
       "id": "bench_trends",
@@ -126,7 +126,7 @@
     {
       "name": "Radar y deduplicación de noticias",
       "status": "OK",
-      "detail": "91 noticias históricas"
+      "detail": "90 noticias históricas"
     },
     {
       "name": "Auditoría de banquillo y tendencias",
