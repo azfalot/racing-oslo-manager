@@ -819,7 +819,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-23T03:07:46.233Z"
+      "lastUpdated": "2026-10-23T06:31:14.334Z"
     },
     "speculation": {
       "score": 98,
@@ -3647,7 +3647,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-23T03:07:47.599Z"
+      "lastUpdated": "2026-10-23T06:31:15.708Z"
     },
     "speculation": {
       "score": 98,
@@ -4750,7 +4750,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-23T03:07:46.941Z"
+      "lastUpdated": "2026-10-23T06:31:14.975Z"
     },
     "speculation": {
       "score": 62,
@@ -5789,7 +5789,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-23T03:07:46.611Z"
+      "lastUpdated": "2026-10-23T06:31:14.645Z"
     },
     "speculation": {
       "score": 98,
@@ -6906,7 +6906,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-23T03:07:47.285Z"
+      "lastUpdated": "2026-10-23T06:31:15.343Z"
     },
     "speculation": {
       "score": 75,
@@ -7750,7 +7750,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-23T03:07:48.621Z"
+      "lastUpdated": "2026-10-23T06:31:16.813Z"
     },
     "speculation": {
       "score": 88,
@@ -8582,10 +8582,10 @@
     "crest": "/media/crests/m4_team.svg",
     "pos": 7,
     "points": 361,
-    "squadValue": 53320000,
-    "playerCount": 17,
-    "financialHealth": "Apalancado / Saldo Negativo (-1.50M €)",
-    "debtAlert": "Saldo en descubierto (-1.50M €). Consume el 11.3% del límite de crédito permitido (13.33M €). Exige ventas antes de puntuar.",
+    "squadValue": 51460000,
+    "playerCount": 16,
+    "financialHealth": "Solvente Ajustado (+339k € en Caja)",
+    "debtAlert": "Saldo positivo (+339k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
     "projectedScore": 52,
     "formation": "3-4-3",
     "tacticDescription": "Estructura 3-4-3 orientada a maximizar 52 puntos según plantilla disponible.",
@@ -8595,8 +8595,7 @@
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez.",
-      "Tensión de tesorería: Saldo negativo de -1.50M € que obliga a vender piezas."
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -8631,18 +8630,18 @@
     ],
     "marketBalance": {
       "clubName": "M4 TEAM",
-      "realizedGainsEUR": 4952110,
+      "realizedGainsEUR": 5433510,
       "realizedLossesEUR": 13131889,
-      "netRealizedBalanceEUR": -8179779,
-      "profitableTradesCount": 9,
-      "totalClosedTradesCount": 23,
-      "historicalSuccessRatePct": 39,
-      "totalLatentGainsEUR": 3380100,
+      "netRealizedBalanceEUR": -7698379,
+      "profitableTradesCount": 10,
+      "totalClosedTradesCount": 24,
+      "historicalSuccessRatePct": 42,
+      "totalLatentGainsEUR": 2880100,
       "totalLatentLossesEUR": 7103994,
-      "netLatentBalanceEUR": -3723894,
+      "netLatentBalanceEUR": -4223894,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-8.179.779 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-7.698.379 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Ugrinic",
@@ -8688,6 +8687,15 @@
           "roiPct": 8.5,
           "isProfit": true,
           "sellDate": "2026-09-26T04:29:42+02:00"
+        },
+        {
+          "playerName": "Raba",
+          "buyPrice": 1360000,
+          "sellPrice": 1841400,
+          "diff": 481400,
+          "roiPct": 35.4,
+          "isProfit": true,
+          "sellDate": "2026-10-23T04:31:00+02:00"
         },
         {
           "playerName": "Yeremay",
@@ -8872,15 +8880,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Raba",
-          "position": "striker",
-          "buyPrice": 1360000,
-          "currentVM": 1860000,
-          "latentDiff": 500000,
-          "latentRoiPct": 36.8,
-          "isProfit": true
-        },
-        {
           "playerName": "Rosier",
           "position": "defender",
           "buyPrice": 499000,
@@ -8998,23 +8997,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-23T03:07:47.929Z"
+      "lastUpdated": "2026-10-23T06:31:16.126Z"
     },
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+14.5%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 143319773,
-      "totalReceived": 118207300,
+      "totalReceived": 120048700,
       "purchasesCount": 39,
-      "salesCount": 37,
-      "estimatedCash": -1502473,
+      "salesCount": 38,
+      "estimatedCash": 338927,
       "prizesEarned": 3610000,
-      "maxCreditLimit": 13330000,
-      "netWealth": 51817527,
-      "analysis": "Operativa histórica de 39 compras (143.3M €) y 37 ventas (118.2M €). Dinero total rotado: 261.5M € con sobrepuja media de +14.5%."
+      "maxCreditLimit": 12865000,
+      "netWealth": 51798927,
+      "analysis": "Operativa histórica de 39 compras (143.3M €) y 38 ventas (120.0M €). Dinero total rotado: 263.4M € con sobrepuja media de +14.5%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -10061,6 +10060,20 @@
           "seller": "M4 TEAM",
           "buyer": "Computer",
           "date": "2026-10-19T04:29:32+02:00"
+        },
+        {
+          "playerName": "Raba",
+          "price": 1841400,
+          "marketValue": 1841400,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "M4 TEAM",
+          "buyer": "Computer",
+          "date": "2026-10-23T04:31:00+02:00"
         }
       ]
     },
@@ -10236,11 +10249,11 @@
         "image": "/media/players/3184.png"
       },
       {
-        "id": 2498,
-        "name": "Raba",
+        "id": 3109,
+        "name": "Andrés Martín",
         "position": "striker",
-        "price": 1860000,
-        "points": 17,
+        "price": 2650000,
+        "points": 20,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -10250,7 +10263,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/2498.png"
+        "image": "/media/players/3109.png"
       }
     ],
     "bench": [
@@ -10317,22 +10330,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3451.png"
-      },
-      {
-        "id": 3109,
-        "name": "Andrés Martín",
-        "position": "striker",
-        "price": 2650000,
-        "points": 20,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3109.png"
       },
       {
         "id": 3704,
@@ -10522,7 +10519,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-23T03:07:48.293Z"
+      "lastUpdated": "2026-10-23T06:31:16.498Z"
     },
     "speculation": {
       "score": 68,
@@ -11613,7 +11610,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-23T03:07:49.018Z"
+      "lastUpdated": "2026-10-23T06:31:17.211Z"
     },
     "speculation": {
       "score": 98,
@@ -13341,7 +13338,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-23T03:07:49.394Z"
+      "lastUpdated": "2026-10-23T06:31:17.588Z"
     },
     "speculation": {
       "score": 72,
