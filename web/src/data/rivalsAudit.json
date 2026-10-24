@@ -828,7 +828,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T06:31:27.888Z"
+      "lastUpdated": "2026-10-24T10:01:19.889Z"
     },
     "speculation": {
       "score": 98,
@@ -3695,7 +3695,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T06:31:29.347Z"
+      "lastUpdated": "2026-10-24T10:01:21.290Z"
     },
     "speculation": {
       "score": 98,
@@ -4901,7 +4901,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T06:31:28.274Z"
+      "lastUpdated": "2026-10-24T10:01:20.238Z"
     },
     "speculation": {
       "score": 98,
@@ -5877,20 +5877,20 @@
     "crest": "/media/crests/pachangueros.svg",
     "pos": 4,
     "points": 420,
-    "squadValue": 53320000,
-    "playerCount": 14,
-    "financialHealth": "Solvente Ajustado (+525k € en Caja)",
-    "debtAlert": "Saldo positivo (+525k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
-    "projectedScore": 63,
+    "squadValue": 50270000,
+    "playerCount": 11,
+    "financialHealth": "Saneado / Alta Liquidez (+3.52M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+3.52M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 59,
     "formation": "4-4-2",
-    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 63 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 59 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
+      "Plantilla corta (11 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -5904,10 +5904,10 @@
     ],
     "recommendations": [
       {
-        "name": "Zakaria",
+        "name": "Oskarsson",
         "pos": "Delantero",
-        "price": 680000,
-        "reason": "Refuerzo de ataque (0.68M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+        "price": 2760000,
+        "reason": "Refuerzo de ataque (2.76M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
       },
       {
         "name": "Iker Muñoz",
@@ -5924,18 +5924,18 @@
     ],
     "marketBalance": {
       "clubName": "Pachangueros F.C.",
-      "realizedGainsEUR": 1034300,
-      "realizedLossesEUR": 5847700,
-      "netRealizedBalanceEUR": -4813400,
-      "profitableTradesCount": 1,
-      "totalClosedTradesCount": 7,
-      "historicalSuccessRatePct": 14,
-      "totalLatentGainsEUR": 1624000,
-      "totalLatentLossesEUR": 5077000,
-      "netLatentBalanceEUR": -3453000,
+      "realizedGainsEUR": 1095300,
+      "realizedLossesEUR": 5922200,
+      "netRealizedBalanceEUR": -4826900,
+      "profitableTradesCount": 2,
+      "totalClosedTradesCount": 10,
+      "historicalSuccessRatePct": 20,
+      "totalLatentGainsEUR": 1570000,
+      "totalLatentLossesEUR": 5067000,
+      "netLatentBalanceEUR": -3497000,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-4.813.400 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-4.826.900 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Iván Romero",
@@ -5947,6 +5947,15 @@
           "sellDate": "2026-10-14T04:30:50+02:00"
         },
         {
+          "playerName": "Balliu",
+          "buyPrice": 721000,
+          "sellPrice": 782000,
+          "diff": 61000,
+          "roiPct": 8.5,
+          "isProfit": true,
+          "sellDate": "2026-10-24T04:29:03+02:00"
+        },
+        {
           "playerName": "Álvaro Padilla",
           "buyPrice": 174000,
           "sellPrice": 160300,
@@ -5954,6 +5963,24 @@
           "roiPct": -7.9,
           "isProfit": false,
           "sellDate": "2026-08-31T04:34:20+02:00"
+        },
+        {
+          "playerName": "Adriá Altimira",
+          "buyPrice": 410000,
+          "sellPrice": 384800,
+          "diff": -25200,
+          "roiPct": -6.1,
+          "isProfit": false,
+          "sellDate": "2026-10-24T04:29:03+02:00"
+        },
+        {
+          "playerName": "Bardeli",
+          "buyPrice": 1875000,
+          "sellPrice": 1825700,
+          "diff": -49300,
+          "roiPct": -2.6,
+          "isProfit": false,
+          "sellDate": "2026-10-24T04:29:03+02:00"
         },
         {
           "playerName": "Miguel Román",
@@ -6021,33 +6048,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Balliu",
-          "position": "defender",
-          "buyPrice": 721000,
-          "currentVM": 760000,
-          "latentDiff": 39000,
-          "latentRoiPct": 5.4,
-          "isProfit": true
-        },
-        {
-          "playerName": "Bardeli",
-          "position": "midfielder",
-          "buyPrice": 1875000,
-          "currentVM": 1890000,
-          "latentDiff": 15000,
-          "latentRoiPct": 0.8,
-          "isProfit": true
-        },
-        {
-          "playerName": "Adriá Altimira",
-          "position": "defender",
-          "buyPrice": 410000,
-          "currentVM": 400000,
-          "latentDiff": -10000,
-          "latentRoiPct": -2.4,
-          "isProfit": false
-        },
-        {
           "playerName": "Paco Cortés",
           "position": "midfielder",
           "buyPrice": 510000,
@@ -6093,7 +6093,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T06:31:28.600Z"
+      "lastUpdated": "2026-10-24T10:01:20.573Z"
     },
     "speculation": {
       "score": 63,
@@ -6102,14 +6102,14 @@
       "overbidRate": "+1.6%",
       "riskLevel": "Riesgo Moderado-Alto",
       "totalSpent": 68267000,
-      "totalReceived": 44592100,
+      "totalReceived": 47584600,
       "purchasesCount": 17,
-      "salesCount": 18,
-      "estimatedCash": 525100,
+      "salesCount": 21,
+      "estimatedCash": 3517600,
       "prizesEarned": 4200000,
-      "maxCreditLimit": 13330000,
-      "netWealth": 53845100,
-      "analysis": "Operativa histórica de 17 compras (68.3M €) y 18 ventas (44.6M €). Dinero total rotado: 112.9M € con sobrepuja media de +1.6%."
+      "maxCreditLimit": 12567500,
+      "netWealth": 53787600,
+      "analysis": "Operativa histórica de 17 compras (68.3M €) y 21 ventas (47.6M €). Dinero total rotado: 115.9M € con sobrepuja media de +1.6%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -6602,6 +6602,48 @@
           "seller": "Pachangueros F.C.",
           "buyer": "Computer",
           "date": "2026-10-22T04:29:33+02:00"
+        },
+        {
+          "playerName": "Bardeli",
+          "price": 1825700,
+          "marketValue": 1825700,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Pachangueros F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-24T04:29:03+02:00"
+        },
+        {
+          "playerName": "Balliu",
+          "price": 782000,
+          "marketValue": 782000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Pachangueros F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-24T04:29:03+02:00"
+        },
+        {
+          "playerName": "Adriá Altimira",
+          "price": 384800,
+          "marketValue": 384800,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Pachangueros F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-24T04:29:03+02:00"
         }
       ]
     },
@@ -6743,12 +6785,12 @@
         "image": "/media/players/1602.png"
       },
       {
-        "id": 4060,
-        "name": "Bardeli",
+        "id": 3907,
+        "name": "Paco Cortés",
         "position": "midfielder",
-        "price": 1890000,
-        "points": 31,
-        "expectedPoints": 4.1,
+        "price": 450000,
+        "points": 15,
+        "expectedPoints": 0.6,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -6757,7 +6799,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/4060.png"
+        "image": "/media/players/3907.png"
       },
       {
         "id": 2895,
@@ -6794,56 +6836,7 @@
         "image": "/media/players/3951.png"
       }
     ],
-    "bench": [
-      {
-        "id": 3130,
-        "name": "Balliu",
-        "position": "defender",
-        "price": 760000,
-        "points": 21,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3130.png"
-      },
-      {
-        "id": 3514,
-        "name": "Adriá Altimira",
-        "position": "defender",
-        "price": 400000,
-        "points": 22,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3514.png"
-      },
-      {
-        "id": 3907,
-        "name": "Paco Cortés",
-        "position": "midfielder",
-        "price": 450000,
-        "points": 15,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3907.png"
-      }
-    ],
+    "bench": [],
     "isMe": false
   },
   {
@@ -7024,7 +7017,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T06:31:28.973Z"
+      "lastUpdated": "2026-10-24T10:01:20.910Z"
     },
     "speculation": {
       "score": 76,
@@ -7902,7 +7895,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T06:31:30.428Z"
+      "lastUpdated": "2026-10-24T10:01:22.410Z"
     },
     "speculation": {
       "score": 98,
@@ -9209,7 +9202,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T06:31:29.707Z"
+      "lastUpdated": "2026-10-24T10:01:21.668Z"
     },
     "speculation": {
       "score": 98,
@@ -10731,7 +10724,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T06:31:30.083Z"
+      "lastUpdated": "2026-10-24T10:01:22.057Z"
     },
     "speculation": {
       "score": 68,
@@ -11822,7 +11815,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T06:31:30.760Z"
+      "lastUpdated": "2026-10-24T10:01:22.778Z"
     },
     "speculation": {
       "score": 98,
@@ -13548,7 +13541,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T06:31:31.122Z"
+      "lastUpdated": "2026-10-24T10:01:23.152Z"
     },
     "speculation": {
       "score": 71,
