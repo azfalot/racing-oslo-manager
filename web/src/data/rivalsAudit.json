@@ -6,22 +6,22 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 495,
-    "squadValue": 61470000,
-    "playerCount": 17,
-    "financialHealth": "Apalancado / Saldo Negativo (-3.83M €)",
-    "debtAlert": "Saldo en descubierto (-3.83M €). Consume el 24.9% del límite de crédito permitido (15.37M €). Exige ventas antes de puntuar.",
-    "projectedScore": 63,
-    "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 63 puntos según plantilla disponible.",
+    "squadValue": 57960000,
+    "playerCount": 16,
+    "financialHealth": "Apalancado / Saldo Negativo (-0.33M €)",
+    "debtAlert": "Saldo en descubierto (-0.33M €). Consume el 2.3% del límite de crédito permitido (14.49M €). Exige ventas antes de puntuar.",
+    "projectedScore": 62,
+    "formation": "3-5-2",
+    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 62 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 495 puntos acumulados (165.0 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (61.47M €).",
+      "Patrimonio de plantilla consolidado en Primera (57.96M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -3.83M € que obliga a vender piezas."
+      "Tensión de tesorería: Saldo negativo de -0.33M € que obliga a vender piezas."
     ],
     "tacticalAlerts": [
       {
@@ -45,6 +45,12 @@
     ],
     "recommendations": [
       {
+        "name": "Zakaria",
+        "pos": "Delantero",
+        "price": 680000,
+        "reason": "Refuerzo de ataque (0.68M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+      },
+      {
         "name": "Iker Muñoz",
         "pos": "Centrocampista",
         "price": 1000000,
@@ -54,29 +60,23 @@
         "name": "Rodrigo Riquelme",
         "pos": "Centrocampista",
         "price": 3120000,
-        "reason": "Pieza competitiva en el mercado (3.12M €) adaptable al esquema 3-4-3."
-      },
-      {
-        "name": "Nicolas Pépé",
-        "pos": "Delantero",
-        "price": 7110000,
-        "reason": "Pieza competitiva en el mercado (7.11M €) adaptable al esquema 3-4-3."
+        "reason": "Pieza competitiva en el mercado (3.12M €) adaptable al esquema 3-5-2."
       }
     ],
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
-      "realizedGainsEUR": 17035665,
-      "realizedLossesEUR": 50801141,
-      "netRealizedBalanceEUR": -33765476,
-      "profitableTradesCount": 22,
+      "realizedGainsEUR": 19079554,
+      "realizedLossesEUR": 49345530,
+      "netRealizedBalanceEUR": -30265976,
+      "profitableTradesCount": 23,
       "totalClosedTradesCount": 66,
-      "historicalSuccessRatePct": 33,
+      "historicalSuccessRatePct": 35,
       "totalLatentGainsEUR": 1383982,
-      "totalLatentLossesEUR": 36435178,
-      "netLatentBalanceEUR": -35051196,
+      "totalLatentLossesEUR": 36015167,
+      "netLatentBalanceEUR": -34631185,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-33.765.476 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-30.265.976 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Lookman",
@@ -95,6 +95,15 @@
           "roiPct": 16.9,
           "isProfit": true,
           "sellDate": "2026-09-01T04:36:39+02:00"
+        },
+        {
+          "playerName": "Otorbi",
+          "buyPrice": 3930011,
+          "sellPrice": 5973900,
+          "diff": 2043889,
+          "roiPct": 52,
+          "isProfit": true,
+          "sellDate": "2026-10-24T04:29:03+02:00"
         },
         {
           "playerName": "Sergio Camello",
@@ -628,15 +637,6 @@
           "sellDate": "2026-09-03T04:37:26+02:00"
         },
         {
-          "playerName": "Otorbi",
-          "buyPrice": 3930011,
-          "sellPrice": 2474400,
-          "diff": -1455611,
-          "roiPct": -37,
-          "isProfit": false,
-          "sellDate": "2026-10-03T00:46:52+02:00"
-        },
-        {
           "playerName": "Guruzeta",
           "buyPrice": 3701011,
           "sellPrice": 2181500,
@@ -765,15 +765,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Otorbi",
-          "position": "striker",
-          "buyPrice": 3930011,
-          "currentVM": 3510000,
-          "latentDiff": -420011,
-          "latentRoiPct": -10.7,
-          "isProfit": false
-        },
-        {
           "playerName": "Miguel Román",
           "position": "midfielder",
           "buyPrice": 3945002,
@@ -828,7 +819,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T16:01:27.648Z"
+      "lastUpdated": "2026-10-24T21:51:27.398Z"
     },
     "speculation": {
       "score": 98,
@@ -837,14 +828,14 @@
       "overbidRate": "+6.3%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 330980331,
-      "totalReceived": 302200000,
+      "totalReceived": 305699500,
       "purchasesCount": 85,
-      "salesCount": 83,
-      "estimatedCash": -3830331,
+      "salesCount": 84,
+      "estimatedCash": -330831,
       "prizesEarned": 4950000,
-      "maxCreditLimit": 15367500,
-      "netWealth": 57639669,
-      "analysis": "Operativa histórica de 85 compras (331.0M €) y 83 ventas (302.2M €). Dinero total rotado: 633.2M € con sobrepuja media de +6.3%."
+      "maxCreditLimit": 14490000,
+      "netWealth": 57629169,
+      "analysis": "Operativa histórica de 85 compras (331.0M €) y 84 ventas (305.7M €). Dinero total rotado: 636.7M € con sobrepuja media de +6.3%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -856,10 +847,10 @@
         "tag": "🎯 17.39 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
-        "player": "Otorbi",
-        "price": 1075001,
-        "impact": "Fichado por 1.08M €, hoy cotiza en 3.51M € (+2.434.999 € / +226.5% de plusvalía).",
-        "tag": "📈 +226.5% Plusvalía"
+        "player": "Sebastián Cáceres",
+        "price": 1462012,
+        "impact": "Fichado por 1.46M €, hoy cotiza en 3.60M € (+2.137.988 € / +146.2% de plusvalía).",
+        "tag": "📈 +146.2% Plusvalía"
       },
       "worstMove": {
         "player": "Gordon",
@@ -3125,6 +3116,20 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-10-22T04:29:33+02:00"
+        },
+        {
+          "playerName": "Otorbi",
+          "price": 3499500,
+          "marketValue": 3499500,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-24T04:29:03+02:00"
         }
       ]
     },
@@ -3266,6 +3271,23 @@
         "image": "/media/players/2591.png"
       },
       {
+        "id": 3851,
+        "name": "Javier Hernández",
+        "position": "midfielder",
+        "price": 2220000,
+        "points": 33,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3851.png"
+      },
+      {
         "id": 3298,
         "name": "Raphinha",
         "position": "striker",
@@ -3298,23 +3320,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3389.png"
-      },
-      {
-        "id": 3557,
-        "name": "Otorbi",
-        "position": "striker",
-        "price": 3510000,
-        "points": 45,
-        "expectedPoints": 5.2,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3557.png"
       }
     ],
     "bench": [
@@ -3349,22 +3354,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2371.png"
-      },
-      {
-        "id": 3851,
-        "name": "Javier Hernández",
-        "position": "midfielder",
-        "price": 2220000,
-        "points": 33,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3851.png"
       },
       {
         "id": 4004,
@@ -3695,7 +3684,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T16:01:28.964Z"
+      "lastUpdated": "2026-10-24T21:51:28.815Z"
     },
     "speculation": {
       "score": 98,
@@ -4828,7 +4817,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T16:01:28.293Z"
+      "lastUpdated": "2026-10-24T21:51:28.152Z"
     },
     "speculation": {
       "score": 63,
@@ -5581,21 +5570,20 @@
     "crest": "/media/crests/ana.svg",
     "pos": 4,
     "points": 417,
-    "squadValue": 58100000,
-    "playerCount": 15,
-    "financialHealth": "Apalancado / Saldo Negativo (-7.27M €)",
-    "debtAlert": "Saldo en descubierto (-7.27M €). Consume el 50.1% del límite de crédito permitido (14.53M €). Exige ventas antes de puntuar.",
-    "projectedScore": 62,
-    "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 62 puntos según plantilla disponible.",
+    "squadValue": 46140000,
+    "playerCount": 14,
+    "financialHealth": "Saneado / Alta Liquidez (+4.83M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+4.83M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 59,
+    "formation": "4-4-2",
+    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 59 puntos según plantilla disponible.",
     "strengths": [
-      "Patrimonio de plantilla consolidado en Primera (58.10M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -7.27M € que obliga a vender piezas."
+      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
     ],
     "tacticalAlerts": [
       {
@@ -5609,39 +5597,48 @@
     ],
     "recommendations": [
       {
-        "name": "Iker Muñoz",
-        "pos": "Centrocampista",
-        "price": 1000000,
-        "reason": "Oportunidad de mercado (1.00M € · 33 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
-      },
-      {
         "name": "Rodrigo Riquelme",
         "pos": "Centrocampista",
         "price": 3120000,
-        "reason": "Pieza competitiva en el mercado (3.12M €) adaptable al esquema 3-4-3."
+        "reason": "Oportunidad de mercado (3.12M € · 46 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       },
       {
         "name": "Nicolas Pépé",
         "pos": "Delantero",
         "price": 7110000,
-        "reason": "Pieza competitiva en el mercado (7.11M €) adaptable al esquema 3-4-3."
+        "reason": "Pieza competitiva en el mercado (7.11M €) adaptable al esquema 4-4-2."
+      },
+      {
+        "name": "Fofana",
+        "pos": "Centrocampista",
+        "price": 6350000,
+        "reason": "Pieza competitiva en el mercado (6.35M €) adaptable al esquema 4-4-2."
       }
     ],
     "marketBalance": {
       "clubName": "Ana",
-      "realizedGainsEUR": 2761890,
+      "realizedGainsEUR": 7415390,
       "realizedLossesEUR": 20675936,
-      "netRealizedBalanceEUR": -17914046,
-      "profitableTradesCount": 7,
-      "totalClosedTradesCount": 11,
-      "historicalSuccessRatePct": 64,
-      "totalLatentGainsEUR": 7670000,
+      "netRealizedBalanceEUR": -13260546,
+      "profitableTradesCount": 8,
+      "totalClosedTradesCount": 12,
+      "historicalSuccessRatePct": 67,
+      "totalLatentGainsEUR": 3160000,
       "totalLatentLossesEUR": 14785536,
-      "netLatentBalanceEUR": -7115536,
+      "netLatentBalanceEUR": -11625536,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-17.914.046 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-13.260.546 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
+        {
+          "playerName": "Jonathan David",
+          "buyPrice": 7450000,
+          "sellPrice": 12103500,
+          "diff": 4653500,
+          "roiPct": 62.5,
+          "isProfit": true,
+          "sellDate": "2026-10-24T04:29:03+02:00"
+        },
         {
           "playerName": "Arda Güler",
           "buyPrice": 12548709,
@@ -5743,15 +5740,6 @@
         }
       ],
       "latentTrades": [
-        {
-          "playerName": "Jonathan David",
-          "position": "striker",
-          "buyPrice": 7450000,
-          "currentVM": 11960000,
-          "latentDiff": 4510000,
-          "latentRoiPct": 60.5,
-          "isProfit": true
-        },
         {
           "playerName": "Aitor Paredes",
           "position": "defender",
@@ -5870,23 +5858,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T16:01:27.967Z"
+      "lastUpdated": "2026-10-24T21:51:27.763Z"
     },
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+10.5%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 120007746,
-      "totalReceived": 88565100,
+      "totalReceived": 100668600,
       "purchasesCount": 25,
-      "salesCount": 25,
-      "estimatedCash": -7272646,
+      "salesCount": 26,
+      "estimatedCash": 4830854,
       "prizesEarned": 4170000,
-      "maxCreditLimit": 14525000,
-      "netWealth": 50827354,
-      "analysis": "Operativa histórica de 25 compras (120.0M €) y 25 ventas (88.6M €). Dinero total rotado: 208.6M € con sobrepuja media de +10.5%."
+      "maxCreditLimit": 11535000,
+      "netWealth": 50970854,
+      "analysis": "Operativa histórica de 25 compras (120.0M €) y 26 ventas (100.7M €). Dinero total rotado: 220.7M € con sobrepuja media de +10.5%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -5898,10 +5886,10 @@
         "tag": "🎯 19.92 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
-        "player": "Jonathan David",
-        "price": 7450000,
-        "impact": "Fichado por 7.45M €, hoy cotiza en 11.96M € (+4.510.000 € / +60.5% de plusvalía).",
-        "tag": "📈 +60.5% Plusvalía"
+        "player": "Aitor Paredes",
+        "price": 2360000,
+        "impact": "Fichado por 2.36M €, hoy cotiza en 3.76M € (+1.400.000 € / +59.3% de plusvalía).",
+        "tag": "📈 +59.3% Plusvalía"
       },
       "worstMove": {
         "player": "Pau Cubarsí",
@@ -6579,6 +6567,20 @@
           "seller": "Ana",
           "buyer": "Computer",
           "date": "2026-09-25T04:30:00+02:00"
+        },
+        {
+          "playerName": "Jonathan David",
+          "price": 12103500,
+          "marketValue": 12103500,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Ana",
+          "buyer": "Computer",
+          "date": "2026-10-24T04:29:03+02:00"
         }
       ]
     },
@@ -6650,6 +6652,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3331.png"
+      },
+      {
+        "id": 4069,
+        "name": "Ángel Recio",
+        "position": "defender",
+        "price": 1700000,
+        "points": 36,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/4069.png"
       },
       {
         "id": 3048,
@@ -6737,23 +6756,6 @@
         "image": "/media/players/2764.png"
       },
       {
-        "id": 4157,
-        "name": "Jonathan David",
-        "position": "striker",
-        "price": 11960000,
-        "points": 43,
-        "expectedPoints": 7.7,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4157.png"
-      },
-      {
         "id": 3970,
         "name": "Satriano",
         "position": "striker",
@@ -6772,22 +6774,6 @@
       }
     ],
     "bench": [
-      {
-        "id": 4069,
-        "name": "Ángel Recio",
-        "position": "defender",
-        "price": 1700000,
-        "points": 36,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4069.png"
-      },
       {
         "id": 4074,
         "name": "Ramón Enríquez",
@@ -7017,7 +7003,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T16:01:28.603Z"
+      "lastUpdated": "2026-10-24T21:51:28.477Z"
     },
     "speculation": {
       "score": 76,
@@ -7895,7 +7881,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T16:01:29.970Z"
+      "lastUpdated": "2026-10-24T21:51:29.884Z"
     },
     "speculation": {
       "score": 98,
@@ -9202,7 +9188,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T16:01:29.293Z"
+      "lastUpdated": "2026-10-24T21:51:29.191Z"
     },
     "speculation": {
       "score": 98,
@@ -10724,7 +10710,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T16:01:29.606Z"
+      "lastUpdated": "2026-10-24T21:51:29.566Z"
     },
     "speculation": {
       "score": 68,
@@ -11815,7 +11801,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T16:01:30.348Z"
+      "lastUpdated": "2026-10-24T21:51:30.219Z"
     },
     "speculation": {
       "score": 98,
@@ -13541,7 +13527,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-24T16:01:30.703Z"
+      "lastUpdated": "2026-10-24T21:51:30.594Z"
     },
     "speculation": {
       "score": 71,
