@@ -1,14 +1,14 @@
 {
   "clubName": "Racing de Oslo",
-  "realizedGainsEUR": 475400,
-  "realizedLossesEUR": 11843812,
-  "netRealizedBalanceEUR": -11368412,
-  "profitableTradesCount": 18,
+  "realizedGainsEUR": 470300,
+  "realizedLossesEUR": 11998712,
+  "netRealizedBalanceEUR": -11528412,
+  "profitableTradesCount": 17,
   "totalClosedTradesCount": 36,
-  "historicalSuccessRatePct": 50,
-  "totalLatentGainsEUR": 2615000,
-  "totalLatentLossesEUR": 13925000,
-  "netLatentBalanceEUR": -11310000,
+  "historicalSuccessRatePct": 47,
+  "totalLatentGainsEUR": 2385000,
+  "totalLatentLossesEUR": 13895000,
+  "netLatentBalanceEUR": -11510000,
   "healthLabel": "AJUSTES & DEUDA",
   "healthBadgeColor": "amber",
   "healthSummary": "El balance histórico refleja el coste de saneamiento inicial de deuda (ventas defensivas como Hugo Duro y Galarreta para salir de números rojos), mientras que el nuevo régimen de especulación opera con un 100% de plusvalías netas.",
@@ -109,15 +109,6 @@
       "sellPrice": 166100,
       "diff": 6100,
       "roiPct": 3.8,
-      "isProfit": true,
-      "sellDate": "2026-09-22T04:36:28+02:00"
-    },
-    {
-      "playerName": "Adrián Rodríguez",
-      "buyPrice": 160000,
-      "sellPrice": 165100,
-      "diff": 5100,
-      "roiPct": 3.2,
       "isProfit": true,
       "sellDate": "2026-09-22T04:36:28+02:00"
     },
@@ -266,6 +257,15 @@
       "sellDate": "2026-09-16T04:36:17+02:00"
     },
     {
+      "playerName": "Adrián Rodríguez",
+      "buyPrice": 320000,
+      "sellPrice": 165100,
+      "diff": -154900,
+      "roiPct": -48.4,
+      "isProfit": false,
+      "sellDate": "2026-09-22T04:36:28+02:00"
+    },
+    {
       "playerName": "Eriksson",
       "buyPrice": 520000,
       "sellPrice": 295500,
@@ -343,18 +343,18 @@
       "playerName": "Johnny Cardoso",
       "position": "midfielder",
       "buyPrice": 1090000,
-      "currentVM": 2850000,
-      "latentDiff": 1760000,
-      "latentRoiPct": 161.5,
+      "currentVM": 2590000,
+      "latentDiff": 1500000,
+      "latentRoiPct": 137.6,
       "isProfit": true
     },
     {
       "playerName": "Adrián de la Fuente",
       "position": "defender",
       "buyPrice": 3860000,
-      "currentVM": 4300000,
-      "latentDiff": 440000,
-      "latentRoiPct": 11.4,
+      "currentVM": 4330000,
+      "latentDiff": 470000,
+      "latentRoiPct": 12.2,
       "isProfit": true
     },
     {
@@ -403,6 +403,15 @@
       "isProfit": false
     },
     {
+      "playerName": "Adrián Rodríguez",
+      "position": "keeper",
+      "buyPrice": 320000,
+      "currentVM": 170000,
+      "latentDiff": -150000,
+      "latentRoiPct": -46.9,
+      "isProfit": false
+    },
+    {
       "playerName": "Esquivel",
       "position": "keeper",
       "buyPrice": 320000,
@@ -415,27 +424,27 @@
       "playerName": "Denis Suárez",
       "position": "midfielder",
       "buyPrice": 2100000,
-      "currentVM": 1360000,
-      "latentDiff": -740000,
-      "latentRoiPct": -35.2,
+      "currentVM": 1280000,
+      "latentDiff": -820000,
+      "latentRoiPct": -39,
       "isProfit": false
     },
     {
       "playerName": "David Soria",
       "position": "keeper",
       "buyPrice": 4820000,
-      "currentVM": 3980000,
-      "latentDiff": -840000,
-      "latentRoiPct": -17.4,
+      "currentVM": 3850000,
+      "latentDiff": -970000,
+      "latentRoiPct": -20.1,
       "isProfit": false
     },
     {
       "playerName": "Mariano Díaz",
       "position": "striker",
       "buyPrice": 6315000,
-      "currentVM": 3780000,
-      "latentDiff": -2535000,
-      "latentRoiPct": -40.1,
+      "currentVM": 4170000,
+      "latentDiff": -2145000,
+      "latentRoiPct": -34,
       "isProfit": false
     },
     {
@@ -448,7 +457,7 @@
       "isProfit": false
     }
   ],
-  "lastUpdated": "2026-10-24T21:51:32.850Z",
+  "lastUpdated": "2026-10-25T04:06:34.849Z",
   "speculationGainsEUR": 118200,
   "speculationTradesCount": 22
 }
