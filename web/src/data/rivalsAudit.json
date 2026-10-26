@@ -837,7 +837,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T04:06:36.874Z"
+      "lastUpdated": "2026-10-26T07:31:37.105Z"
     },
     "speculation": {
       "score": 98,
@@ -3797,22 +3797,21 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 2,
     "points": 439,
-    "squadValue": 56010000,
-    "playerCount": 14,
-    "financialHealth": "Apalancado / Saldo Negativo (-6.29M €)",
-    "debtAlert": "Saldo en descubierto (-6.29M €). Consume el 44.9% del límite de crédito permitido (14.00M €). Exige ventas antes de puntuar.",
-    "projectedScore": 65,
+    "squadValue": 48990000,
+    "playerCount": 13,
+    "financialHealth": "Solvente Ajustado (+948k € en Caja)",
+    "debtAlert": "Saldo positivo (+948k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
+    "projectedScore": 60,
     "formation": "4-4-2",
-    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 65 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 60 puntos según plantilla disponible.",
     "strengths": [
       "2º en la clasificación general con 439 puntos acumulados (146.3 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (56.01M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -6.29M € que obliga a vender piezas."
+      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
     ],
     "tacticalAlerts": [
       {
@@ -3846,19 +3845,28 @@
     ],
     "marketBalance": {
       "clubName": "Puente Avios FC",
-      "realizedGainsEUR": 764099,
+      "realizedGainsEUR": 1595699,
       "realizedLossesEUR": 12296660,
-      "netRealizedBalanceEUR": -11532561,
-      "profitableTradesCount": 6,
-      "totalClosedTradesCount": 13,
-      "historicalSuccessRatePct": 46,
-      "totalLatentGainsEUR": 4074000,
+      "netRealizedBalanceEUR": -10700961,
+      "profitableTradesCount": 7,
+      "totalClosedTradesCount": 14,
+      "historicalSuccessRatePct": 50,
+      "totalLatentGainsEUR": 3460000,
       "totalLatentLossesEUR": 19963139,
-      "netLatentBalanceEUR": -15889139,
+      "netLatentBalanceEUR": -16503139,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-11.532.561 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-10.700.961 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
+        {
+          "playerName": "Yuri Berchiche",
+          "buyPrice": 6406000,
+          "sellPrice": 7237600,
+          "diff": 831600,
+          "roiPct": 13,
+          "isProfit": true,
+          "sellDate": "2026-10-26T04:29:14+01:00"
+        },
         {
           "playerName": "Valentín Gómez",
           "buyPrice": 410901,
@@ -3988,15 +3996,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Yuri Berchiche",
-          "position": "defender",
-          "buyPrice": 6406000,
-          "currentVM": 7020000,
-          "latentDiff": 614000,
-          "latentRoiPct": 9.6,
-          "isProfit": true
-        },
-        {
           "playerName": "Javi Morcillo",
           "position": "midfielder",
           "buyPrice": 1050000,
@@ -4078,23 +4077,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T04:06:38.325Z"
+      "lastUpdated": "2026-10-26T07:31:38.521Z"
     },
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+19.1%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 80327400,
-      "totalReceived": 49647700,
+      "totalReceived": 56885300,
       "purchasesCount": 24,
-      "salesCount": 25,
-      "estimatedCash": -6289700,
+      "salesCount": 26,
+      "estimatedCash": 947900,
       "prizesEarned": 4390000,
-      "maxCreditLimit": 14002500,
-      "netWealth": 49720300,
-      "analysis": "Operativa histórica de 24 compras (80.3M €) y 25 ventas (49.6M €). Dinero total rotado: 130.0M € con sobrepuja media de +19.1%."
+      "maxCreditLimit": 12247500,
+      "netWealth": 49937900,
+      "analysis": "Operativa histórica de 24 compras (80.3M €) y 26 ventas (56.9M €). Dinero total rotado: 137.2M € con sobrepuja media de +19.1%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -4773,6 +4772,20 @@
           "seller": "Puente Avios FC",
           "buyer": "Computer",
           "date": "2026-10-21T04:29:40+02:00"
+        },
+        {
+          "playerName": "Yuri Berchiche",
+          "price": 7237600,
+          "marketValue": 7237600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-10-26T04:29:14+01:00"
         }
       ]
     },
@@ -4793,23 +4806,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/1897.png"
-      },
-      {
-        "id": 1074,
-        "name": "Yuri Berchiche",
-        "position": "defender",
-        "price": 7020000,
-        "points": 26,
-        "expectedPoints": 7.7,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/1074.png"
       },
       {
         "id": 4125,
@@ -4861,6 +4857,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3875.png"
+      },
+      {
+        "id": 1844,
+        "name": "Gayà",
+        "position": "defender",
+        "price": 1450000,
+        "points": 25,
+        "expectedPoints": 2.6,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/1844.png"
       },
       {
         "id": 3010,
@@ -4966,22 +4979,6 @@
       }
     ],
     "bench": [
-      {
-        "id": 1844,
-        "name": "Gayà",
-        "position": "defender",
-        "price": 1450000,
-        "points": 25,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/1844.png"
-      },
       {
         "id": 3078,
         "name": "Urko González",
@@ -5313,7 +5310,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T04:06:37.246Z"
+      "lastUpdated": "2026-10-26T07:31:37.429Z"
     },
     "speculation": {
       "score": 98,
@@ -6512,7 +6509,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T04:06:37.606Z"
+      "lastUpdated": "2026-10-26T07:31:37.785Z"
     },
     "speculation": {
       "score": 63,
@@ -7576,7 +7573,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T04:06:39.383Z"
+      "lastUpdated": "2026-10-26T07:31:39.534Z"
     },
     "speculation": {
       "score": 83,
@@ -8691,7 +8688,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T04:06:37.962Z"
+      "lastUpdated": "2026-10-26T07:31:38.146Z"
     },
     "speculation": {
       "score": 79,
@@ -9751,7 +9748,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T04:06:38.702Z"
+      "lastUpdated": "2026-10-26T07:31:38.879Z"
     },
     "speculation": {
       "score": 98,
@@ -11331,7 +11328,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T04:06:39.048Z"
+      "lastUpdated": "2026-10-26T07:31:39.204Z"
     },
     "speculation": {
       "score": 68,
@@ -12413,7 +12410,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T04:06:39.713Z"
+      "lastUpdated": "2026-10-26T07:31:39.847Z"
     },
     "speculation": {
       "score": 98,
@@ -14155,7 +14152,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T04:06:40.056Z"
+      "lastUpdated": "2026-10-26T07:31:40.221Z"
     },
     "speculation": {
       "score": 71,
