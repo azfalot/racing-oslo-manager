@@ -837,7 +837,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T07:31:37.105Z"
+      "lastUpdated": "2026-10-26T11:01:41.837Z"
     },
     "speculation": {
       "score": 98,
@@ -4077,7 +4077,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T07:31:38.521Z"
+      "lastUpdated": "2026-10-26T11:01:43.228Z"
     },
     "speculation": {
       "score": 98,
@@ -5310,7 +5310,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T07:31:37.429Z"
+      "lastUpdated": "2026-10-26T11:01:42.194Z"
     },
     "speculation": {
       "score": 98,
@@ -6509,7 +6509,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T07:31:37.785Z"
+      "lastUpdated": "2026-10-26T11:01:42.553Z"
     },
     "speculation": {
       "score": 63,
@@ -7573,7 +7573,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T07:31:39.534Z"
+      "lastUpdated": "2026-10-26T11:01:44.252Z"
     },
     "speculation": {
       "score": 83,
@@ -8507,10 +8507,10 @@
     "crest": "/media/crests/amigos_de_nin.svg",
     "pos": 6,
     "points": 383,
-    "squadValue": 36230000,
-    "playerCount": 13,
-    "financialHealth": "Solvente Ajustado (+0k € en Caja)",
-    "debtAlert": "Saldo positivo (+0k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
+    "squadValue": 36070000,
+    "playerCount": 12,
+    "financialHealth": "Solvente Ajustado (+159k € en Caja)",
+    "debtAlert": "Saldo positivo (+159k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
     "projectedScore": 54,
     "formation": "3-4-3",
     "tacticDescription": "Estructura 3-4-3 orientada a maximizar 54 puntos según plantilla disponible.",
@@ -8520,7 +8520,7 @@
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -8556,17 +8556,17 @@
     "marketBalance": {
       "clubName": "Amigos de NIN",
       "realizedGainsEUR": 0,
-      "realizedLossesEUR": 1313300,
-      "netRealizedBalanceEUR": -1313300,
+      "realizedLossesEUR": 3104300,
+      "netRealizedBalanceEUR": -3104300,
       "profitableTradesCount": 0,
-      "totalClosedTradesCount": 3,
+      "totalClosedTradesCount": 4,
       "historicalSuccessRatePct": 0,
       "totalLatentGainsEUR": 0,
-      "totalLatentLossesEUR": 17640310,
-      "netLatentBalanceEUR": -17640310,
+      "totalLatentLossesEUR": 15850310,
+      "netLatentBalanceEUR": -15850310,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-1.313.300 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-3.104.300 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Pathé Ciss",
@@ -8594,6 +8594,15 @@
           "roiPct": -13.9,
           "isProfit": false,
           "sellDate": "2026-09-18T04:36:56+02:00"
+        },
+        {
+          "playerName": "Juan Carlos Arana",
+          "buyPrice": 1950000,
+          "sellPrice": 159000,
+          "diff": -1791000,
+          "roiPct": -91.8,
+          "isProfit": false,
+          "sellDate": "2026-10-26T04:29:14+01:00"
         }
       ],
       "latentTrades": [
@@ -8643,15 +8652,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Juan Carlos Arana",
-          "position": "striker",
-          "buyPrice": 1950000,
-          "currentVM": 160000,
-          "latentDiff": -1790000,
-          "latentRoiPct": -91.8,
-          "isProfit": false
-        },
-        {
           "playerName": "Sergio Gómez",
           "position": "defender",
           "buyPrice": 4885000,
@@ -8688,23 +8688,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T07:31:38.146Z"
+      "lastUpdated": "2026-10-26T11:01:42.899Z"
     },
     "speculation": {
-      "score": 79,
+      "score": 80,
       "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+15.3%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 55153410,
-      "totalReceived": 31323410,
+      "totalReceived": 31482410,
       "purchasesCount": 13,
-      "salesCount": 15,
-      "estimatedCash": 0,
+      "salesCount": 16,
+      "estimatedCash": 159000,
       "prizesEarned": 3830000,
-      "maxCreditLimit": 9057500,
-      "netWealth": 36230000,
-      "analysis": "Operativa histórica de 13 compras (55.2M €) y 15 ventas (31.3M €). Dinero total rotado: 86.5M € con sobrepuja media de +15.3%."
+      "maxCreditLimit": 9017500,
+      "netWealth": 36229000,
+      "analysis": "Operativa histórica de 13 compras (55.2M €) y 16 ventas (31.5M €). Dinero total rotado: 86.6M € con sobrepuja media de +15.3%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -9081,6 +9081,20 @@
           "seller": "Amigos de NIN",
           "buyer": "Computer",
           "date": "2026-10-24T04:29:03+02:00"
+        },
+        {
+          "playerName": "Juan Carlos Arana",
+          "price": 159000,
+          "marketValue": 159000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Amigos de NIN",
+          "buyer": "Computer",
+          "date": "2026-10-26T04:29:14+01:00"
         }
       ]
     },
@@ -9289,22 +9303,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3651.png"
-      },
-      {
-        "id": 4043,
-        "name": "Juan Carlos Arana",
-        "position": "striker",
-        "price": 160000,
-        "points": 5,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4043.png"
       }
     ],
     "isMe": false
@@ -9748,7 +9746,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T07:31:38.879Z"
+      "lastUpdated": "2026-10-26T11:01:43.549Z"
     },
     "speculation": {
       "score": 98,
@@ -11328,7 +11326,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T07:31:39.204Z"
+      "lastUpdated": "2026-10-26T11:01:43.893Z"
     },
     "speculation": {
       "score": 68,
@@ -12410,7 +12408,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T07:31:39.847Z"
+      "lastUpdated": "2026-10-26T11:01:44.583Z"
     },
     "speculation": {
       "score": 98,
@@ -14152,7 +14150,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-26T07:31:40.221Z"
+      "lastUpdated": "2026-10-26T11:01:44.928Z"
     },
     "speculation": {
       "score": 71,
