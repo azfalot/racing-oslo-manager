@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-26T17:01:57.195Z",
+  "timestamp": "2026-10-26T22:51:02.628Z",
   "currentMatchday": 10,
   "confidenceLevel": "HIGH",
   "standings": {
@@ -1188,19 +1188,19 @@
       "name": "Juan Iglesias",
       "type": "defender",
       "price": 2860000,
-      "bidAmount": 3203200,
-      "maxRationalBid": 3203200,
-      "marginPct": 12,
+      "bidAmount": 3231800,
+      "maxRationalBid": 3231800,
+      "marginPct": 13,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 5,
-      "ppm": 3.4,
-      "efficiency": 33.3,
-      "upgradePoints": 4.3,
-      "marginalValue": 4.3,
+      "ppm": 3.45,
+      "efficiency": 33.7,
+      "upgradePoints": 4.4,
+      "marginalValue": 4.4,
       "vorp": 43,
       "vorpPerMatchday": 1.26,
-      "cpmp": 665116,
-      "cpmpSeason": 19589,
+      "cpmp": 650000,
+      "cpmpSeason": 19067,
       "replacedPlayer": {
         "playerId": 2545,
         "name": "Junior Firpo",
@@ -1357,17 +1357,17 @@
       },
       "replacedPlayerName": "Junior Firpo",
       "replacedPlayerExpectedPoints": 0.6,
-      "strategicScore": 65.7,
+      "strategicScore": 65.9,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 4.3
+          "marginalValue": 4.4
         },
         "absoluteQuality": {
-          "raw": 56.7,
+          "raw": 57.5,
           "weight": 0.2,
-          "ppm": 3.4
+          "ppm": 3.45
         },
         "positionNeed": {
           "raw": 30,
@@ -1375,9 +1375,9 @@
           "detail": "5 disponibles. Fondo de armario ajustado."
         },
         "marketOpportunity": {
-          "raw": 83.2,
+          "raw": 84.3,
           "weight": 0.1,
-          "efficiency": 33.3
+          "efficiency": 33.7
         },
         "rivalPressure": {
           "raw": 20,
@@ -1396,16 +1396,16 @@
       "isComputer": true,
       "requiresSaleFirst": false,
       "reasoning": [
-        "✅ Entra en el XI titular (+4.3 pts al Once Ideal sustituyendo a Junior Firpo (2.93 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (3.4 PPM > 2.93 PPM).",
+        "✅ Entra en el XI titular (+4.4 pts al Once Ideal sustituyendo a Junior Firpo (2.93 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (3.45 PPM > 2.93 PPM).",
         "🟡 Posición con necesidad MODERADA: 5 disponibles. Fondo de armario ajustado.",
-        "📊 ⭐ Titular Fijo (PPM: 3.4 | Fiabilidad: 95% minutos | Eficiencia: 33.3 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 3.45 | Fiabilidad: 95% minutos | Eficiencia: 33.7 pts/M€)",
         "🔥 Dinámica de club: 📉 Inestabilidad y Presión Social (0.88x): 1V 2E 2D - Dudas tácticas y tensión competitiva",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.203.200 € (112.0% VM | Sobreprecio: +12%).",
-        "⛔ Fondos insuficientes: Requiere 4.203.200 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.206.188 €."
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.231.800 € (113.0% VM | Sobreprecio: +13%).",
+        "⛔ Fondos insuficientes: Requiere 4.231.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.206.188 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Junior Firpo). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.203.200 € (112.0% VM | Sobreprecio: +12%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Junior Firpo). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.231.800 € (113.0% VM | Sobreprecio: +13%)."
     },
     {
       "playerId": 3164,
@@ -1707,27 +1707,11 @@
         "expectedFinalPoints": 1669,
         "range": "1615 - 1725 pts",
         "probChampion": 0.1,
-        "probTop2": 83.1,
-        "probTop3": 96.3,
+        "probTop2": 88,
+        "probTop3": 98.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.6
-        }
-      },
-      {
-        "id": 21163653,
-        "name": "Pachangueros F.C.",
-        "currentPoints": 420,
-        "meanPpm": 42,
-        "stdDev": 8,
-        "expectedFinalPoints": 1595,
-        "range": "1539 - 1650 pts",
-        "probChampion": 0,
-        "probTop2": 10.6,
-        "probTop3": 56.9,
-        "wilsonCI95": {
-          "lowerPct": 0,
-          "upperPct": 0.4
         }
       },
       {
@@ -1736,11 +1720,27 @@
         "currentPoints": 417,
         "meanPpm": 41.7,
         "stdDev": 8,
-        "expectedFinalPoints": 1585,
-        "range": "1533 - 1639 pts",
+        "expectedFinalPoints": 1584,
+        "range": "1527 - 1639 pts",
         "probChampion": 0,
-        "probTop2": 6.3,
-        "probTop3": 46.8,
+        "probTop2": 7.7,
+        "probTop3": 55.6,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163653,
+        "name": "Pachangueros F.C.",
+        "currentPoints": 420,
+        "meanPpm": 41.2,
+        "stdDev": 8.1,
+        "expectedFinalPoints": 1574,
+        "range": "1521 - 1628 pts",
+        "probChampion": 0,
+        "probTop2": 4.3,
+        "probTop3": 46.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1756,7 +1756,7 @@
         "range": "1398 - 1508 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0,
+        "probTop3": 0.2,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1869,27 +1869,11 @@
         "expectedFinalPoints": 1669,
         "range": "1615 - 1725 pts",
         "probChampion": 0.1,
-        "probTop2": 83.1,
-        "probTop3": 96.3,
+        "probTop2": 88,
+        "probTop3": 98.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.6
-        }
-      },
-      {
-        "id": 21163653,
-        "name": "Pachangueros F.C.",
-        "currentPoints": 420,
-        "meanPpm": 42,
-        "stdDev": 8,
-        "expectedFinalPoints": 1595,
-        "range": "1539 - 1650 pts",
-        "probChampion": 0,
-        "probTop2": 10.6,
-        "probTop3": 56.9,
-        "wilsonCI95": {
-          "lowerPct": 0,
-          "upperPct": 0.4
         }
       },
       {
@@ -1898,11 +1882,27 @@
         "currentPoints": 417,
         "meanPpm": 41.7,
         "stdDev": 8,
-        "expectedFinalPoints": 1585,
-        "range": "1533 - 1639 pts",
+        "expectedFinalPoints": 1584,
+        "range": "1527 - 1639 pts",
         "probChampion": 0,
-        "probTop2": 6.3,
-        "probTop3": 46.8,
+        "probTop2": 7.7,
+        "probTop3": 55.6,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
+        "id": 21163653,
+        "name": "Pachangueros F.C.",
+        "currentPoints": 420,
+        "meanPpm": 41.2,
+        "stdDev": 8.1,
+        "expectedFinalPoints": 1574,
+        "range": "1521 - 1628 pts",
+        "probChampion": 0,
+        "probTop2": 4.3,
+        "probTop3": 46.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1918,7 +1918,7 @@
         "range": "1398 - 1508 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0,
+        "probTop3": 0.2,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
