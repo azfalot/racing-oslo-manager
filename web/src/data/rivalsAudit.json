@@ -6,16 +6,16 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 543,
-    "squadValue": 62840000,
-    "playerCount": 17,
-    "financialHealth": "Saneado / Alta Liquidez (+97.40M € en Caja)",
-    "debtAlert": "Excelente remanente de liquidez (+97.40M €) y solvencia plena para acudir a subastas sin deuda.",
-    "projectedScore": 65,
-    "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 65 puntos según plantilla disponible.",
+    "squadValue": 57510000,
+    "playerCount": 13,
+    "financialHealth": "Saneado / Alta Liquidez (+102.85M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+102.85M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 62,
+    "formation": "3-5-2",
+    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 62 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 543 puntos acumulados (181.0 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (62.84M €).",
+      "Patrimonio de plantilla consolidado en Primera (57.51M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
@@ -35,6 +35,12 @@
     ],
     "recommendations": [
       {
+        "name": "Zakaria",
+        "pos": "Delantero",
+        "price": 650000,
+        "reason": "Refuerzo de ataque (0.65M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+      },
+      {
         "name": "Lucas Cepeda",
         "pos": "Centrocampista",
         "price": 2150000,
@@ -44,29 +50,23 @@
         "name": "Canales",
         "pos": "Centrocampista",
         "price": 3250000,
-        "reason": "Pieza competitiva en el mercado (3.25M €) adaptable al esquema 3-4-3."
-      },
-      {
-        "name": "Adrià Pedrosa",
-        "pos": "Defensa",
-        "price": 1450000,
-        "reason": "Pieza competitiva en el mercado (1.45M €) adaptable al esquema 3-4-3."
+        "reason": "Pieza competitiva en el mercado (3.25M €) adaptable al esquema 3-5-2."
       }
     ],
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
-      "realizedGainsEUR": 78446832,
-      "realizedLossesEUR": 21426814,
-      "netRealizedBalanceEUR": 57020018,
-      "profitableTradesCount": 33,
-      "totalClosedTradesCount": 70,
+      "realizedGainsEUR": 79688028,
+      "realizedLossesEUR": 21493317,
+      "netRealizedBalanceEUR": 58194711,
+      "profitableTradesCount": 35,
+      "totalClosedTradesCount": 74,
       "historicalSuccessRatePct": 47,
-      "totalLatentGainsEUR": 1933971,
-      "totalLatentLossesEUR": 34137057,
-      "netLatentBalanceEUR": -32203086,
+      "totalLatentGainsEUR": 796975,
+      "totalLatentLossesEUR": 34055054,
+      "netLatentBalanceEUR": -33258079,
       "healthLabel": "SUPERÁVIT DE TRADING",
       "healthBadgeColor": "emerald",
-      "healthSummary": "Genera un superávit neto de +57.020.018 € en operaciones de mercado con una efectividad del 47%.",
+      "healthSummary": "Genera un superávit neto de +58.194.711 € en operaciones de mercado con una efectividad del 47%.",
       "closedOperations": [
         {
           "playerName": "Lookman",
@@ -240,6 +240,15 @@
           "sellDate": "2026-10-19T23:19:51+01:00"
         },
         {
+          "playerName": "Boyomo",
+          "buyPrice": 912003,
+          "sellPrice": 1715400,
+          "diff": 803397,
+          "roiPct": 88.1,
+          "isProfit": true,
+          "sellDate": "2026-10-27T04:30:56+01:00"
+        },
+        {
           "playerName": "Alex Marchal",
           "buyPrice": 722020,
           "sellPrice": 1515400,
@@ -265,6 +274,15 @@
           "roiPct": 13,
           "isProfit": true,
           "sellDate": "2026-09-18T04:36:56+02:00"
+        },
+        {
+          "playerName": "Oskarsson",
+          "buyPrice": 2791001,
+          "sellPrice": 3228800,
+          "diff": 437799,
+          "roiPct": 15.7,
+          "isProfit": true,
+          "sellDate": "2026-10-27T04:30:56+01:00"
         },
         {
           "playerName": "Letacek",
@@ -375,6 +393,15 @@
           "sellDate": "2026-10-09T04:29:01+02:00"
         },
         {
+          "playerName": "Beñat Prados",
+          "buyPrice": 191001,
+          "sellPrice": 187400,
+          "diff": -3601,
+          "roiPct": -1.9,
+          "isProfit": false,
+          "sellDate": "2026-10-27T04:30:56+01:00"
+        },
+        {
           "playerName": "Odriozola",
           "buyPrice": 173012,
           "sellPrice": 168600,
@@ -454,6 +481,15 @@
           "roiPct": -14.2,
           "isProfit": false,
           "sellDate": "2026-09-03T04:37:26+02:00"
+        },
+        {
+          "playerName": "Antañón",
+          "buyPrice": 381002,
+          "sellPrice": 318100,
+          "diff": -62902,
+          "roiPct": -16.5,
+          "isProfit": false,
+          "sellDate": "2026-10-27T04:30:56+01:00"
         },
         {
           "playerName": "Rodrygo",
@@ -701,30 +737,12 @@
       ],
       "latentTrades": [
         {
-          "playerName": "Boyomo",
-          "position": "defender",
-          "buyPrice": 912003,
-          "currentVM": 1640000,
-          "latentDiff": 727997,
-          "latentRoiPct": 79.8,
-          "isProfit": true
-        },
-        {
           "playerName": "Pau Cubarsí",
           "position": "defender",
           "buyPrice": 7410012,
           "currentVM": 7940000,
           "latentDiff": 529988,
           "latentRoiPct": 7.2,
-          "isProfit": true
-        },
-        {
-          "playerName": "Oskarsson",
-          "position": "striker",
-          "buyPrice": 2791001,
-          "currentVM": 3200000,
-          "latentDiff": 408999,
-          "latentRoiPct": 14.7,
           "isProfit": true
         },
         {
@@ -753,24 +771,6 @@
           "latentDiff": 7998,
           "latentRoiPct": 4.9,
           "isProfit": true
-        },
-        {
-          "playerName": "Beñat Prados",
-          "position": "midfielder",
-          "buyPrice": 191001,
-          "currentVM": 180000,
-          "latentDiff": -11001,
-          "latentRoiPct": -5.8,
-          "isProfit": false
-        },
-        {
-          "playerName": "Antañón",
-          "position": "midfielder",
-          "buyPrice": 381002,
-          "currentVM": 310000,
-          "latentDiff": -71002,
-          "latentRoiPct": -18.6,
-          "isProfit": false
         },
         {
           "playerName": "Federico Redondo",
@@ -845,7 +845,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-27T07:32:04.318Z"
+      "lastUpdated": "2026-10-27T11:00:58.595Z"
     },
     "speculation": {
       "score": 98,
@@ -854,14 +854,14 @@
       "overbidRate": "+6.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 345231339,
-      "totalReceived": 417199800,
+      "totalReceived": 422649500,
       "purchasesCount": 90,
-      "salesCount": 108,
-      "estimatedCash": 97398461,
+      "salesCount": 112,
+      "estimatedCash": 102848161,
       "prizesEarned": 5430000,
-      "maxCreditLimit": 15710000,
-      "netWealth": 160238461,
-      "analysis": "Operativa histórica de 90 compras (345.2M €) y 108 ventas (417.2M €). Dinero total rotado: 762.4M € con sobrepuja media de +6.2%."
+      "maxCreditLimit": 14377500,
+      "netWealth": 160358161,
+      "analysis": "Operativa histórica de 90 compras (345.2M €) y 112 ventas (422.6M €). Dinero total rotado: 767.9M € con sobrepuja media de +6.2%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -3562,6 +3562,62 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-10-27T01:10:03+01:00"
+        },
+        {
+          "playerName": "Oskarsson",
+          "price": 3228800,
+          "marketValue": 3228800,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-27T04:30:56+01:00"
+        },
+        {
+          "playerName": "Boyomo",
+          "price": 1715400,
+          "marketValue": 1715400,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-27T04:30:56+01:00"
+        },
+        {
+          "playerName": "Antañón",
+          "price": 318100,
+          "marketValue": 318100,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-27T04:30:56+01:00"
+        },
+        {
+          "playerName": "Beñat Prados",
+          "price": 187400,
+          "marketValue": 187400,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-10-27T04:30:56+01:00"
         }
       ]
     },
@@ -3703,6 +3759,23 @@
         "image": "/media/players/2591.png"
       },
       {
+        "id": 3902,
+        "name": "Federico Redondo",
+        "position": "midfielder",
+        "price": 650000,
+        "points": 25,
+        "expectedPoints": 2,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3902.png"
+      },
+      {
         "id": 3298,
         "name": "Raphinha",
         "position": "striker",
@@ -3735,42 +3808,9 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3389.png"
-      },
-      {
-        "id": 3714,
-        "name": "Oskarsson",
-        "position": "striker",
-        "price": 3200000,
-        "points": 37,
-        "expectedPoints": 5.2,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3714.png"
       }
     ],
     "bench": [
-      {
-        "id": 3628,
-        "name": "Boyomo",
-        "position": "defender",
-        "price": 1640000,
-        "points": 22,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3628.png"
-      },
       {
         "id": 3576,
         "name": "Hugo Rincón ",
@@ -3788,38 +3828,6 @@
         "image": "/media/players/3576.png"
       },
       {
-        "id": 3902,
-        "name": "Federico Redondo",
-        "position": "midfielder",
-        "price": 650000,
-        "points": 25,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3902.png"
-      },
-      {
-        "id": 4004,
-        "name": "Antañón",
-        "position": "midfielder",
-        "price": 310000,
-        "points": 3,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4004.png"
-      },
-      {
         "id": 3354,
         "name": "Pablo Marín",
         "position": "midfielder",
@@ -3834,22 +3842,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3354.png"
-      },
-      {
-        "id": 3440,
-        "name": "Beñat Prados",
-        "position": "midfielder",
-        "price": 180000,
-        "points": 3,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3440.png"
       }
     ],
     "isMe": false
@@ -4141,7 +4133,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-27T07:32:05.636Z"
+      "lastUpdated": "2026-10-27T11:00:59.954Z"
     },
     "speculation": {
       "score": 98,
@@ -5311,7 +5303,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-27T07:32:04.998Z"
+      "lastUpdated": "2026-10-27T11:00:59.279Z"
     },
     "speculation": {
       "score": 64,
@@ -6389,7 +6381,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-27T07:32:04.672Z"
+      "lastUpdated": "2026-10-27T11:00:58.936Z"
     },
     "speculation": {
       "score": 98,
@@ -7682,7 +7674,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-27T07:32:06.641Z"
+      "lastUpdated": "2026-10-27T11:01:01.056Z"
     },
     "speculation": {
       "score": 85,
@@ -8825,7 +8817,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-27T07:32:05.322Z"
+      "lastUpdated": "2026-10-27T11:00:59.625Z"
     },
     "speculation": {
       "score": 80,
@@ -8853,10 +8845,10 @@
         "tag": "🎯 15.51 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
-        "player": "Pathé Ciss",
-        "price": 2954000,
-        "impact": "Operaciones ajustadas a cotización oficial sin variaciones patrimoniales significativas.",
-        "tag": "💎 A Valor"
+        "player": "Oskarsson",
+        "price": 6000100,
+        "impact": "Fichado por 6.00M €, hoy cotiza en 6.04M € (+39.900 € / +0.7% de plusvalía).",
+        "tag": "📈 +0.7% Plusvalía"
       },
       "worstMove": {
         "player": "Marcos Llorente",
@@ -9883,7 +9875,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-27T07:32:05.955Z"
+      "lastUpdated": "2026-10-27T11:01:00.333Z"
     },
     "speculation": {
       "score": 98,
@@ -11463,7 +11455,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-27T07:32:06.294Z"
+      "lastUpdated": "2026-10-27T11:01:00.692Z"
     },
     "speculation": {
       "score": 69,
@@ -12563,7 +12555,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-27T07:32:07.015Z"
+      "lastUpdated": "2026-10-27T11:01:01.420Z"
     },
     "speculation": {
       "score": 98,
@@ -14365,7 +14357,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-10-27T07:32:07.376Z"
+      "lastUpdated": "2026-10-27T11:01:01.748Z"
     },
     "speculation": {
       "score": 71,
