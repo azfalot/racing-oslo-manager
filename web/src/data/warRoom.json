@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-30T19:31:39.797Z",
-  "currentMatchday": 10,
+  "timestamp": "2026-10-30T22:51:40.563Z",
+  "currentMatchday": 11,
   "confidenceLevel": "HIGH",
   "standings": {
     "racingPoints": 188,
@@ -17,7 +17,7 @@
   },
   "lineup": {
     "formation": "4-4-2",
-    "expectedPoints": 40.6,
+    "expectedPoints": 40.5,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -44,7 +44,7 @@
         },
         "average": {
           "grade": "6,8",
-          "points": "4,2",
+          "points": "4,17",
           "lastXMatchdays": {
             "matchesAmount": 5,
             "grade": "5,3",
@@ -65,37 +65,6 @@
           }
         },
         "nextMatches": [
-          {
-            "matchdayNr": 11,
-            "homeClub": {
-              "id": 19,
-              "name": "Villarreal",
-              "abbreviation": "vil",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/19"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/19/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-30T21:00:00+01:00",
-            "odds": null
-          },
           {
             "matchdayNr": 12,
             "homeClub": {
@@ -1024,260 +993,6 @@
       "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Junior Firpo). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.785.500 € (113.0% VM | Sobreprecio: +13%)."
     },
     {
-      "playerId": 3438,
-      "name": "Alberto Moleiro",
-      "type": "midfielder",
-      "price": 8800000,
-      "bidAmount": 10384000,
-      "maxRationalBid": 10384000,
-      "marginPct": 18,
-      "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 7,
-      "ppm": 4.8,
-      "efficiency": 15.3,
-      "upgradePoints": 6.3,
-      "marginalValue": 6.3,
-      "vorp": 92,
-      "vorpPerMatchday": 2.71,
-      "cpmp": 1396825,
-      "cpmpSeason": 41121,
-      "replacedPlayer": {
-        "playerId": 2545,
-        "name": "Junior Firpo",
-        "price": 390000,
-        "totalPoints": 12,
-        "status": null,
-        "statusInfo": null,
-        "type": "defender",
-        "historical": {
-          "points": [
-            {
-              "season": "17/18",
-              "points": "90",
-              "eventId": 869072
-            },
-            {
-              "season": "18/19",
-              "points": "127",
-              "eventId": 899953
-            },
-            {
-              "season": "19/20",
-              "points": "66",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "28",
-              "eventId": 939519
-            },
-            {
-              "season": "21/22",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "22/23",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "23/24",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "24/25",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "25/26",
-              "points": "37",
-              "eventId": 998265
-            }
-          ]
-        },
-        "average": {
-          "grade": "7,2",
-          "points": "6",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "1,5",
-            "points": "1,4"
-          }
-        },
-        "club": {
-          "id": 4,
-          "name": "Betis",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/4"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/4/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 11,
-            "homeClub": {
-              "id": 4,
-              "name": "Betis",
-              "abbreviation": "bet",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/4"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/4/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 65,
-              "name": "Málaga",
-              "abbreviation": "mga",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/65"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/65/logo"
-                }
-              }
-            },
-            "kickoff": "2026-10-31T18:30:00+01:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 12,
-            "homeClub": {
-              "id": 75,
-              "name": "Elche",
-              "abbreviation": "elc",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/75"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/75/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 4,
-              "name": "Betis",
-              "abbreviation": "bet",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/4"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/4/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-08T14:00:00+01:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 13,
-            "homeClub": {
-              "id": 17,
-              "name": "Sevilla",
-              "abbreviation": "sev",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/17"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/17/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 4,
-              "name": "Betis",
-              "abbreviation": "bet",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/4"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/4/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-21T18:30:00+01:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 1,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 0.6,
-        "id": 2545,
-        "position": "defender",
-        "points": 0
-      },
-      "replacedPlayerName": "Junior Firpo",
-      "replacedPlayerExpectedPoints": 0.6,
-      "strategicScore": 62.1,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 6.3
-        },
-        "absoluteQuality": {
-          "raw": 80,
-          "weight": 0.2,
-          "ppm": 4.8
-        },
-        "positionNeed": {
-          "raw": 5,
-          "weight": 0.15,
-          "detail": "6 disponibles. Posición bien cubierta."
-        },
-        "marketOpportunity": {
-          "raw": 38.3,
-          "weight": 0.1,
-          "efficiency": 15.3
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": false,
-      "reasoning": [
-        "✅ Entra en el XI titular (+6.3 pts al Once Ideal sustituyendo a Junior Firpo (2.93 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.8 PPM > 2.93 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 4.8 | Fiabilidad: 95% minutos | Eficiencia: 15.3 pts/M€)",
-        "🔥 Dinámica de club: ⚠️ Crisis Deportiva (0 Victorias) / Bloqueo Total (0.82x): 0V 2E 3D - 0 victorias en la temporada, depresión competitiva y bajas",
-        "⚔️ Competencia en club: Compite en [object Object] con Dani Parejo, Santi Comesaña, Pape Gueye... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 10.384.000 € (118.0% VM | Sobreprecio: +18%).",
-        "⛔ Fondos insuficientes: Requiere 11.384.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.221.088 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Junior Firpo). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 10.384.000 € (118.0% VM | Sobreprecio: +18%)."
-    },
-    {
       "playerId": 4109,
       "name": "Gerenabarrena",
       "type": "midfielder",
@@ -1530,6 +1245,260 @@
         "⛔ Fondos insuficientes: Requiere 4.616.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.221.088 €."
       ],
       "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Junior Firpo). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.616.000 € (113.0% VM | Sobreprecio: +13%)."
+    },
+    {
+      "playerId": 3438,
+      "name": "Alberto Moleiro",
+      "type": "midfielder",
+      "price": 8800000,
+      "bidAmount": 10384000,
+      "maxRationalBid": 10384000,
+      "marginPct": 18,
+      "band": "ELITE_LEAGUE_WINNER",
+      "expectedPoints": 7,
+      "ppm": 4.74,
+      "efficiency": 15.1,
+      "upgradePoints": 6.2,
+      "marginalValue": 6.2,
+      "vorp": 92,
+      "vorpPerMatchday": 2.71,
+      "cpmp": 1419355,
+      "cpmpSeason": 41706,
+      "replacedPlayer": {
+        "playerId": 2545,
+        "name": "Junior Firpo",
+        "price": 390000,
+        "totalPoints": 12,
+        "status": null,
+        "statusInfo": null,
+        "type": "defender",
+        "historical": {
+          "points": [
+            {
+              "season": "17/18",
+              "points": "90",
+              "eventId": 869072
+            },
+            {
+              "season": "18/19",
+              "points": "127",
+              "eventId": 899953
+            },
+            {
+              "season": "19/20",
+              "points": "66",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "28",
+              "eventId": 939519
+            },
+            {
+              "season": "21/22",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "22/23",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "23/24",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "24/25",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "25/26",
+              "points": "37",
+              "eventId": 998265
+            }
+          ]
+        },
+        "average": {
+          "grade": "7,2",
+          "points": "6",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "1,5",
+            "points": "1,4"
+          }
+        },
+        "club": {
+          "id": 4,
+          "name": "Betis",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/4"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/4/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 11,
+            "homeClub": {
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/4"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/4/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "kickoff": "2026-10-31T18:30:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 12,
+            "homeClub": {
+              "id": 75,
+              "name": "Elche",
+              "abbreviation": "elc",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/75"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/75/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/4"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/4/logo"
+                }
+              }
+            },
+            "kickoff": "2026-11-08T14:00:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 13,
+            "homeClub": {
+              "id": 17,
+              "name": "Sevilla",
+              "abbreviation": "sev",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/17"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/17/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/4"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/4/logo"
+                }
+              }
+            },
+            "kickoff": "2026-11-21T18:30:00+01:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 1,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 0.6,
+        "id": 2545,
+        "position": "defender",
+        "points": 0
+      },
+      "replacedPlayerName": "Junior Firpo",
+      "replacedPlayerExpectedPoints": 0.6,
+      "strategicScore": 61.8,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 100,
+          "weight": 0.4,
+          "marginalValue": 6.2
+        },
+        "absoluteQuality": {
+          "raw": 79,
+          "weight": 0.2,
+          "ppm": 4.74
+        },
+        "positionNeed": {
+          "raw": 5,
+          "weight": 0.15,
+          "detail": "6 disponibles. Posición bien cubierta."
+        },
+        "marketOpportunity": {
+          "raw": 37.8,
+          "weight": 0.1,
+          "efficiency": 15.1
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 10,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": false,
+      "reasoning": [
+        "✅ Entra en el XI titular (+6.2 pts al Once Ideal sustituyendo a Junior Firpo (2.93 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (4.74 PPM > 2.93 PPM).",
+        "📊 ⭐ Titular Fijo (PPM: 4.74 | Fiabilidad: 95% minutos | Eficiencia: 15.1 pts/M€)",
+        "🔥 Dinámica de club: ⚠️ Crisis Deportiva (0 Victorias) / Bloqueo Total (0.82x): 0V 2E 3D - 0 victorias en la temporada, depresión competitiva y bajas",
+        "⚔️ Competencia en club: Compite en [object Object] con Dani Parejo, Santi Comesaña, Pape Gueye... (Nivel: BAJA, Confianza XI: 95%)",
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 10.384.000 € (118.0% VM | Sobreprecio: +18%).",
+        "⛔ Fondos insuficientes: Requiere 11.384.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.221.088 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Junior Firpo). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 10.384.000 € (118.0% VM | Sobreprecio: +18%)."
     },
     {
       "playerId": 4087,
@@ -2065,16 +2034,16 @@
     "scenarioType": "ACTUAL_BASELINE",
     "totalSimulations": 1000,
     "iterations": 1000,
-    "remainingMatchdays": 28,
+    "remainingMatchdays": 27,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 40.6,
-      "restOfSeasonAggregateExpectedPpm": 32,
+      "currentXiExpectedPoints": 40.5,
+      "restOfSeasonAggregateExpectedPpm": 29.1,
       "pWin": 0,
       "pTop2": 0,
       "pTop3": 0,
-      "expectedFinalPoints": 1218,
-      "range": "1164 - 1273 pts",
+      "expectedFinalPoints": 1104,
+      "range": "1053 - 1155 pts",
       "wilsonCI95": {
         "lowerPct": 0,
         "upperPct": 0.4
@@ -2083,58 +2052,58 @@
     "probChampion": 0,
     "probTop2": 0,
     "probTop3": 0,
-    "racingExpectedFinalPoints": 1218,
-    "racingRange": "1164 - 1273 pts",
+    "racingExpectedFinalPoints": 1104,
+    "racingRange": "1053 - 1155 pts",
     "racingWilsonCI95": {
       "lowerPct": 0,
       "upperPct": 0.4
     },
     "leaderName": "Fermín Gadura F.C.",
-    "leaderExpectedPoints": 2065,
+    "leaderExpectedPoints": 1879,
     "standings": [
       {
         "id": 21163674,
         "name": "Fermín Gadura F.C.",
         "currentPoints": 543,
-        "meanPpm": 54.3,
+        "meanPpm": 49.4,
         "stdDev": 8,
-        "expectedFinalPoints": 2065,
-        "range": "2010 - 2118 pts",
-        "probChampion": 99.2,
+        "expectedFinalPoints": 1879,
+        "range": "1826 - 1934 pts",
+        "probChampion": 98.7,
         "probTop2": 100,
         "probTop3": 100,
         "wilsonCI95": {
-          "lowerPct": 98.4,
-          "upperPct": 99.6
+          "lowerPct": 97.8,
+          "upperPct": 99.2
         }
       },
       {
         "id": 21163563,
         "name": "Puente Avios FC",
         "currentPoints": 506,
-        "meanPpm": 50.6,
+        "meanPpm": 46,
         "stdDev": 8,
-        "expectedFinalPoints": 1924,
-        "range": "1870 - 1979 pts",
-        "probChampion": 0.8,
-        "probTop2": 99.8,
-        "probTop3": 100,
+        "expectedFinalPoints": 1747,
+        "range": "1695 - 1801 pts",
+        "probChampion": 1.3,
+        "probTop2": 98.7,
+        "probTop3": 99.8,
         "wilsonCI95": {
-          "lowerPct": 0.4,
-          "upperPct": 1.6
+          "lowerPct": 0.8,
+          "upperPct": 2.2
         }
       },
       {
         "id": 21163653,
         "name": "Pachangueros F.C.",
         "currentPoints": 461,
-        "meanPpm": 46.1,
+        "meanPpm": 41.9,
         "stdDev": 8,
-        "expectedFinalPoints": 1752,
-        "range": "1700 - 1805 pts",
+        "expectedFinalPoints": 1592,
+        "range": "1535 - 1645 pts",
         "probChampion": 0,
-        "probTop2": 0.1,
-        "probTop3": 44.6,
+        "probTop2": 0.4,
+        "probTop3": 41.5,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2144,13 +2113,13 @@
         "id": 21163583,
         "name": "Ana",
         "currentPoints": 460,
-        "meanPpm": 46,
+        "meanPpm": 41.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1747,
-        "range": "1691 - 1802 pts",
+        "expectedFinalPoints": 1591,
+        "range": "1538 - 1646 pts",
         "probChampion": 0,
-        "probTop2": 0,
-        "probTop3": 37.6,
+        "probTop2": 0.9,
+        "probTop3": 38.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2160,13 +2129,13 @@
         "id": 21163606,
         "name": "Suances nin",
         "currentPoints": 453,
-        "meanPpm": 45.3,
+        "meanPpm": 41.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1721,
-        "range": "1666 - 1776 pts",
+        "expectedFinalPoints": 1566,
+        "range": "1513 - 1621 pts",
         "probChampion": 0,
-        "probTop2": 0.1,
-        "probTop3": 17.8,
+        "probTop2": 0,
+        "probTop3": 19.6,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2176,13 +2145,13 @@
         "id": 21163650,
         "name": "Amigos de NIN",
         "currentPoints": 427,
-        "meanPpm": 42.7,
+        "meanPpm": 38.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1620,
-        "range": "1565 - 1675 pts",
+        "expectedFinalPoints": 1475,
+        "range": "1422 - 1529 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0,
+        "probTop3": 0.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2192,10 +2161,10 @@
         "id": 21163646,
         "name": "M4 TEAM",
         "currentPoints": 403,
-        "meanPpm": 40.3,
+        "meanPpm": 36.6,
         "stdDev": 8,
-        "expectedFinalPoints": 1533,
-        "range": "1480 - 1586 pts",
+        "expectedFinalPoints": 1392,
+        "range": "1335 - 1447 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2208,10 +2177,10 @@
         "id": 21163612,
         "name": "Melano Plabloroza",
         "currentPoints": 369,
-        "meanPpm": 36.9,
+        "meanPpm": 33.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1402,
-        "range": "1346 - 1457 pts",
+        "expectedFinalPoints": 1270,
+        "range": "1216 - 1322 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2224,10 +2193,10 @@
         "id": 21163822,
         "name": "Racing de Oslo",
         "currentPoints": 320,
-        "meanPpm": 32,
+        "meanPpm": 29.1,
         "stdDev": 8,
-        "expectedFinalPoints": 1218,
-        "range": "1164 - 1273 pts",
+        "expectedFinalPoints": 1104,
+        "range": "1053 - 1155 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2242,8 +2211,8 @@
         "currentPoints": 225,
         "meanPpm": 25,
         "stdDev": 8,
-        "expectedFinalPoints": 928,
-        "range": "877 - 981 pts",
+        "expectedFinalPoints": 902,
+        "range": "851 - 951 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2258,45 +2227,45 @@
         "id": 21163674,
         "name": "Fermín Gadura F.C.",
         "currentPoints": 543,
-        "meanPpm": 54.3,
+        "meanPpm": 49.4,
         "stdDev": 8,
-        "expectedFinalPoints": 2065,
-        "range": "2010 - 2118 pts",
-        "probChampion": 99.2,
+        "expectedFinalPoints": 1879,
+        "range": "1826 - 1934 pts",
+        "probChampion": 98.7,
         "probTop2": 100,
         "probTop3": 100,
         "wilsonCI95": {
-          "lowerPct": 98.4,
-          "upperPct": 99.6
+          "lowerPct": 97.8,
+          "upperPct": 99.2
         }
       },
       {
         "id": 21163563,
         "name": "Puente Avios FC",
         "currentPoints": 506,
-        "meanPpm": 50.6,
+        "meanPpm": 46,
         "stdDev": 8,
-        "expectedFinalPoints": 1924,
-        "range": "1870 - 1979 pts",
-        "probChampion": 0.8,
-        "probTop2": 99.8,
-        "probTop3": 100,
+        "expectedFinalPoints": 1747,
+        "range": "1695 - 1801 pts",
+        "probChampion": 1.3,
+        "probTop2": 98.7,
+        "probTop3": 99.8,
         "wilsonCI95": {
-          "lowerPct": 0.4,
-          "upperPct": 1.6
+          "lowerPct": 0.8,
+          "upperPct": 2.2
         }
       },
       {
         "id": 21163653,
         "name": "Pachangueros F.C.",
         "currentPoints": 461,
-        "meanPpm": 46.1,
+        "meanPpm": 41.9,
         "stdDev": 8,
-        "expectedFinalPoints": 1752,
-        "range": "1700 - 1805 pts",
+        "expectedFinalPoints": 1592,
+        "range": "1535 - 1645 pts",
         "probChampion": 0,
-        "probTop2": 0.1,
-        "probTop3": 44.6,
+        "probTop2": 0.4,
+        "probTop3": 41.5,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2306,13 +2275,13 @@
         "id": 21163583,
         "name": "Ana",
         "currentPoints": 460,
-        "meanPpm": 46,
+        "meanPpm": 41.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1747,
-        "range": "1691 - 1802 pts",
+        "expectedFinalPoints": 1591,
+        "range": "1538 - 1646 pts",
         "probChampion": 0,
-        "probTop2": 0,
-        "probTop3": 37.6,
+        "probTop2": 0.9,
+        "probTop3": 38.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2322,13 +2291,13 @@
         "id": 21163606,
         "name": "Suances nin",
         "currentPoints": 453,
-        "meanPpm": 45.3,
+        "meanPpm": 41.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1721,
-        "range": "1666 - 1776 pts",
+        "expectedFinalPoints": 1566,
+        "range": "1513 - 1621 pts",
         "probChampion": 0,
-        "probTop2": 0.1,
-        "probTop3": 17.8,
+        "probTop2": 0,
+        "probTop3": 19.6,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2338,13 +2307,13 @@
         "id": 21163650,
         "name": "Amigos de NIN",
         "currentPoints": 427,
-        "meanPpm": 42.7,
+        "meanPpm": 38.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1620,
-        "range": "1565 - 1675 pts",
+        "expectedFinalPoints": 1475,
+        "range": "1422 - 1529 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0,
+        "probTop3": 0.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2354,10 +2323,10 @@
         "id": 21163646,
         "name": "M4 TEAM",
         "currentPoints": 403,
-        "meanPpm": 40.3,
+        "meanPpm": 36.6,
         "stdDev": 8,
-        "expectedFinalPoints": 1533,
-        "range": "1480 - 1586 pts",
+        "expectedFinalPoints": 1392,
+        "range": "1335 - 1447 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2370,10 +2339,10 @@
         "id": 21163612,
         "name": "Melano Plabloroza",
         "currentPoints": 369,
-        "meanPpm": 36.9,
+        "meanPpm": 33.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1402,
-        "range": "1346 - 1457 pts",
+        "expectedFinalPoints": 1270,
+        "range": "1216 - 1322 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2386,10 +2355,10 @@
         "id": 21163822,
         "name": "Racing de Oslo",
         "currentPoints": 320,
-        "meanPpm": 32,
+        "meanPpm": 29.1,
         "stdDev": 8,
-        "expectedFinalPoints": 1218,
-        "range": "1164 - 1273 pts",
+        "expectedFinalPoints": 1104,
+        "range": "1053 - 1155 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2404,8 +2373,8 @@
         "currentPoints": 225,
         "meanPpm": 25,
         "stdDev": 8,
-        "expectedFinalPoints": 928,
-        "range": "877 - 981 pts",
+        "expectedFinalPoints": 902,
+        "range": "851 - 951 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
