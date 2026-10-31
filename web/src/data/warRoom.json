@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-31T11:01:47.014Z",
+  "timestamp": "2026-10-31T17:01:22.031Z",
   "currentMatchday": 11,
   "confidenceLevel": "HIGH",
   "standings": {
@@ -17,7 +17,7 @@
   },
   "lineup": {
     "formation": "4-4-2",
-    "expectedPoints": 40.5,
+    "expectedPoints": 41.900000000000006,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -698,11 +698,11 @@
       "position": "defender",
       "price": 390000,
       "expectedPoints": 0.6,
-      "vorp": -68,
-      "vorpPerMatchday": -2,
-      "replacementPpm": 3.12,
+      "vorp": -67,
+      "vorpPerMatchday": -1.97,
+      "replacementPpm": 3.1,
       "upgradeGap": 4.9,
-      "urgencyScore": 38.8
+      "urgencyScore": 38.5
     },
     {
       "playerId": 3698,
@@ -710,23 +710,23 @@
       "position": "defender",
       "price": 1100000,
       "expectedPoints": 1.8,
-      "vorp": -1,
-      "vorpPerMatchday": -0.03,
-      "replacementPpm": 3.12,
+      "vorp": 0,
+      "vorpPerMatchday": 0,
+      "replacementPpm": 3.1,
       "upgradeGap": 3.7,
-      "urgencyScore": 17.9
+      "urgencyScore": 17.6
     },
     {
       "playerId": 2251,
       "name": "Aïssa Mandi",
       "position": "defender",
       "price": 1910000,
-      "expectedPoints": 3.1,
-      "vorp": -1,
-      "vorpPerMatchday": -0.03,
-      "replacementPpm": 3.12,
-      "upgradeGap": 2.4,
-      "urgencyScore": 17
+      "expectedPoints": 4.1,
+      "vorp": 0,
+      "vorpPerMatchday": 0,
+      "replacementPpm": 3.1,
+      "upgradeGap": 1.4,
+      "urgencyScore": 16
     }
   ],
   "depthAnalysis": {
@@ -2037,7 +2037,7 @@
     "remainingMatchdays": 27,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 40.5,
+      "currentXiExpectedPoints": 41.9,
       "restOfSeasonAggregateExpectedPpm": 29.1,
       "pWin": 0,
       "pTop2": 0,
@@ -2086,7 +2086,7 @@
         "expectedFinalPoints": 1747,
         "range": "1695 - 1801 pts",
         "probChampion": 1.3,
-        "probTop2": 98.7,
+        "probTop2": 99,
         "probTop3": 99.8,
         "wilsonCI95": {
           "lowerPct": 0.8,
@@ -2102,8 +2102,8 @@
         "expectedFinalPoints": 1592,
         "range": "1535 - 1645 pts",
         "probChampion": 0,
-        "probTop2": 0.4,
-        "probTop3": 41.5,
+        "probTop2": 0.5,
+        "probTop3": 43.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2115,11 +2115,11 @@
         "currentPoints": 460,
         "meanPpm": 41.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1591,
-        "range": "1538 - 1646 pts",
+        "expectedFinalPoints": 1589,
+        "range": "1535 - 1646 pts",
         "probChampion": 0,
-        "probTop2": 0.9,
-        "probTop3": 38.8,
+        "probTop2": 0,
+        "probTop3": 38.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2131,11 +2131,11 @@
         "currentPoints": 453,
         "meanPpm": 41.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1566,
-        "range": "1513 - 1621 pts",
+        "expectedFinalPoints": 1568,
+        "range": "1514 - 1622 pts",
         "probChampion": 0,
-        "probTop2": 0,
-        "probTop3": 19.6,
+        "probTop2": 0.5,
+        "probTop3": 18.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2248,7 +2248,7 @@
         "expectedFinalPoints": 1747,
         "range": "1695 - 1801 pts",
         "probChampion": 1.3,
-        "probTop2": 98.7,
+        "probTop2": 99,
         "probTop3": 99.8,
         "wilsonCI95": {
           "lowerPct": 0.8,
@@ -2264,8 +2264,8 @@
         "expectedFinalPoints": 1592,
         "range": "1535 - 1645 pts",
         "probChampion": 0,
-        "probTop2": 0.4,
-        "probTop3": 41.5,
+        "probTop2": 0.5,
+        "probTop3": 43.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2277,11 +2277,11 @@
         "currentPoints": 460,
         "meanPpm": 41.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1591,
-        "range": "1538 - 1646 pts",
+        "expectedFinalPoints": 1589,
+        "range": "1535 - 1646 pts",
         "probChampion": 0,
-        "probTop2": 0.9,
-        "probTop3": 38.8,
+        "probTop2": 0,
+        "probTop3": 38.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2293,11 +2293,11 @@
         "currentPoints": 453,
         "meanPpm": 41.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1566,
-        "range": "1513 - 1621 pts",
+        "expectedFinalPoints": 1568,
+        "range": "1514 - 1622 pts",
         "probChampion": 0,
-        "probTop2": 0,
-        "probTop3": 19.6,
+        "probTop2": 0.5,
+        "probTop3": 18.1,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
