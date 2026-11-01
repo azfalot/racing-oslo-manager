@@ -872,7 +872,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-01T04:10:19.843Z"
+      "lastUpdated": "2026-11-01T07:31:21.092Z"
     },
     "speculation": {
       "score": 98,
@@ -4276,7 +4276,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-01T04:10:21.290Z"
+      "lastUpdated": "2026-11-01T07:31:22.430Z"
     },
     "speculation": {
       "score": 98,
@@ -5246,22 +5246,21 @@
     "crest": "/media/crests/pachangueros.svg",
     "pos": 3,
     "points": 461,
-    "squadValue": 55500000,
-    "playerCount": 12,
-    "financialHealth": "Solvente Ajustado (+15k € en Caja)",
-    "debtAlert": "Saldo positivo (+15k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
-    "projectedScore": 61,
-    "formation": "3-5-2",
-    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 61 puntos según plantilla disponible.",
+    "squadValue": 52240000,
+    "playerCount": 11,
+    "financialHealth": "Saneado / Alta Liquidez (+3.28M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+3.28M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 60,
+    "formation": "4-5-1",
+    "tacticDescription": "Estructura 4-5-1 orientada a maximizar 60 puntos según plantilla disponible.",
     "strengths": [
       "3º en la clasificación general con 461 puntos acumulados (153.7 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (55.50M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
+      "Plantilla corta (11 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -5284,13 +5283,13 @@
         "name": "Koke",
         "pos": "Centrocampista",
         "price": 3940000,
-        "reason": "Pieza competitiva en el mercado (3.94M €) adaptable al esquema 3-5-2."
+        "reason": "Pieza competitiva en el mercado (3.94M €) adaptable al esquema 4-5-1."
       },
       {
         "name": "Rodrigo Riquelme",
         "pos": "Centrocampista",
         "price": 2630000,
-        "reason": "Pieza competitiva en el mercado (2.63M €) adaptable al esquema 3-5-2."
+        "reason": "Pieza competitiva en el mercado (2.63M €) adaptable al esquema 4-5-1."
       }
     ],
     "marketBalance": {
@@ -5482,23 +5481,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-01T04:10:20.590Z"
+      "lastUpdated": "2026-11-01T07:31:21.793Z"
     },
     "speculation": {
-      "score": 68,
+      "score": 67,
       "badge": "🎰 Especulador de Mercado",
       "badgeColor": "#f59e0b",
       "overbidRate": "+1.5%",
       "riskLevel": "Riesgo Moderado-Alto",
       "totalSpent": 72612000,
-      "totalReceived": 48016800,
+      "totalReceived": 51280100,
       "purchasesCount": 19,
-      "salesCount": 22,
-      "estimatedCash": 14800,
+      "salesCount": 23,
+      "estimatedCash": 3278100,
       "prizesEarned": 4610000,
-      "maxCreditLimit": 13875000,
-      "netWealth": 55514800,
-      "analysis": "Operativa histórica de 19 compras (72.6M €) y 22 ventas (48.0M €). Dinero total rotado: 120.6M € con sobrepuja media de +1.5%."
+      "maxCreditLimit": 13060000,
+      "netWealth": 55518100,
+      "analysis": "Operativa histórica de 19 compras (72.6M €) y 23 ventas (51.3M €). Dinero total rotado: 123.9M € con sobrepuja media de +1.5%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -6075,6 +6074,20 @@
           "seller": "Pachangueros F.C.",
           "buyer": "Computer",
           "date": "2026-10-26T04:29:14+01:00"
+        },
+        {
+          "playerName": "Miguel Sierra",
+          "price": 3263300,
+          "marketValue": 3263300,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Pachangueros F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-01T04:30:47+01:00"
         }
       ]
     },
@@ -6146,6 +6159,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3029.png"
+      },
+      {
+        "id": 3116,
+        "name": "Fran García",
+        "position": "defender",
+        "price": 2910000,
+        "points": 35,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3116.png"
       },
       {
         "id": 2943,
@@ -6248,43 +6278,9 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2895.png"
-      },
-      {
-        "id": 3951,
-        "name": "Miguel Sierra",
-        "position": "striker",
-        "price": 3260000,
-        "points": 49,
-        "expectedPoints": 5.2,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3951.png"
       }
     ],
-    "bench": [
-      {
-        "id": 3116,
-        "name": "Fran García",
-        "position": "defender",
-        "price": 2910000,
-        "points": 35,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3116.png"
-      }
-    ],
+    "bench": [],
     "isMe": false
   },
   {
@@ -6591,7 +6587,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-01T04:10:20.232Z"
+      "lastUpdated": "2026-11-01T07:31:21.450Z"
     },
     "speculation": {
       "score": 98,
@@ -7866,7 +7862,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-01T04:10:22.318Z"
+      "lastUpdated": "2026-11-01T07:31:23.485Z"
     },
     "speculation": {
       "score": 85,
@@ -9007,7 +9003,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-01T04:10:20.931Z"
+      "lastUpdated": "2026-11-01T07:31:22.119Z"
     },
     "speculation": {
       "score": 80,
@@ -10095,7 +10091,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-01T04:10:21.649Z"
+      "lastUpdated": "2026-11-01T07:31:22.796Z"
     },
     "speculation": {
       "score": 98,
@@ -11765,7 +11761,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-01T04:10:21.975Z"
+      "lastUpdated": "2026-11-01T07:31:23.152Z"
     },
     "speculation": {
       "score": 68,
@@ -12883,7 +12879,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-01T04:10:22.697Z"
+      "lastUpdated": "2026-11-01T07:31:23.850Z"
     },
     "speculation": {
       "score": 98,
@@ -14739,7 +14735,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-01T04:10:23.023Z"
+      "lastUpdated": "2026-11-01T07:31:24.224Z"
     },
     "speculation": {
       "score": 71,
