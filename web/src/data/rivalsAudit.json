@@ -890,7 +890,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-03T04:06:40.039Z"
+      "lastUpdated": "2026-11-03T07:30:41.807Z"
     },
     "speculation": {
       "score": 98,
@@ -4392,7 +4392,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-03T04:06:41.342Z"
+      "lastUpdated": "2026-11-03T07:30:43.192Z"
     },
     "speculation": {
       "score": 98,
@@ -5392,10 +5392,10 @@
     "crest": "/media/crests/pachangueros.svg",
     "pos": 3,
     "points": 519,
-    "squadValue": 54130000,
-    "playerCount": 12,
-    "financialHealth": "Saneado / Alta Liquidez (+1.35M € en Caja)",
-    "debtAlert": "Excelente remanente de liquidez (+1.35M €) y solvencia plena para acudir a subastas sin deuda.",
+    "squadValue": 51930000,
+    "playerCount": 11,
+    "financialHealth": "Saneado / Alta Liquidez (+3.52M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+3.52M €) y solvencia plena para acudir a subastas sin deuda.",
     "projectedScore": 60,
     "formation": "4-5-1",
     "tacticDescription": "Estructura 4-5-1 orientada a maximizar 60 puntos según plantilla disponible.",
@@ -5406,7 +5406,7 @@
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
+      "Plantilla corta (11 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -5441,17 +5441,17 @@
     "marketBalance": {
       "clubName": "Pachangueros F.C.",
       "realizedGainsEUR": 1095300,
-      "realizedLossesEUR": 6000000,
-      "netRealizedBalanceEUR": -4904700,
+      "realizedLossesEUR": 6012800,
+      "netRealizedBalanceEUR": -4917500,
       "profitableTradesCount": 2,
-      "totalClosedTradesCount": 11,
-      "historicalSuccessRatePct": 18,
-      "totalLatentGainsEUR": 1135000,
+      "totalClosedTradesCount": 12,
+      "historicalSuccessRatePct": 17,
+      "totalLatentGainsEUR": 1117000,
       "totalLatentLossesEUR": 4267000,
-      "netLatentBalanceEUR": -3132000,
+      "netLatentBalanceEUR": -3150000,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-4.904.700 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-4.917.500 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Iván Romero",
@@ -5470,6 +5470,15 @@
           "roiPct": 8.5,
           "isProfit": true,
           "sellDate": "2026-10-24T04:29:03+02:00"
+        },
+        {
+          "playerName": "David Larrubia",
+          "buyPrice": 2182000,
+          "sellPrice": 2169200,
+          "diff": -12800,
+          "roiPct": -0.6,
+          "isProfit": false,
+          "sellDate": "2026-11-03T04:31:13+01:00"
         },
         {
           "playerName": "Álvaro Padilla",
@@ -5573,15 +5582,6 @@
           "isProfit": true
         },
         {
-          "playerName": "David Larrubia",
-          "position": "midfielder",
-          "buyPrice": 2182000,
-          "currentVM": 2200000,
-          "latentDiff": 18000,
-          "latentRoiPct": 0.8,
-          "isProfit": true
-        },
-        {
           "playerName": "Álex Baena",
           "position": "midfielder",
           "buyPrice": 12620000,
@@ -5636,23 +5636,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-03T04:06:40.717Z"
+      "lastUpdated": "2026-11-03T07:30:42.511Z"
     },
     "speculation": {
-      "score": 67,
+      "score": 70,
       "badge": "🎰 Especulador de Mercado",
       "badgeColor": "#f59e0b",
       "overbidRate": "+1.7%",
       "riskLevel": "Riesgo Moderado-Alto",
       "totalSpent": 75122000,
-      "totalReceived": 51280100,
+      "totalReceived": 53449300,
       "purchasesCount": 20,
-      "salesCount": 23,
-      "estimatedCash": 1348100,
+      "salesCount": 24,
+      "estimatedCash": 3517300,
       "prizesEarned": 5190000,
-      "maxCreditLimit": 13532500,
-      "netWealth": 55478100,
-      "analysis": "Operativa histórica de 20 compras (75.1M €) y 23 ventas (51.3M €). Dinero total rotado: 126.4M € con sobrepuja media de +1.7%."
+      "maxCreditLimit": 12982500,
+      "netWealth": 55447300,
+      "analysis": "Operativa histórica de 20 compras (75.1M €) y 24 ventas (53.4M €). Dinero total rotado: 128.6M € con sobrepuja media de +1.7%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -6257,6 +6257,20 @@
           "seller": "Pachangueros F.C.",
           "buyer": "Computer",
           "date": "2026-11-01T04:30:47+01:00"
+        },
+        {
+          "playerName": "David Larrubia",
+          "price": 2169200,
+          "marketValue": 2169200,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Pachangueros F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-03T04:31:13+01:00"
         }
       ]
     },
@@ -6449,24 +6463,7 @@
         "image": "/media/players/2895.png"
       }
     ],
-    "bench": [
-      {
-        "id": 4078,
-        "name": "David Larrubia",
-        "position": "midfielder",
-        "price": 2200000,
-        "points": 42,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4078.png"
-      }
-    ],
+    "bench": [],
     "isMe": false
   },
   {
@@ -6773,7 +6770,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-03T04:06:40.386Z"
+      "lastUpdated": "2026-11-03T07:30:42.178Z"
     },
     "speculation": {
       "score": 98,
@@ -8049,7 +8046,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-03T04:06:42.389Z"
+      "lastUpdated": "2026-11-03T07:30:44.244Z"
     },
     "speculation": {
       "score": 84,
@@ -9190,7 +9187,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-03T04:06:41.031Z"
+      "lastUpdated": "2026-11-03T07:30:42.881Z"
     },
     "speculation": {
       "score": 75,
@@ -10278,7 +10275,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-03T04:06:41.704Z"
+      "lastUpdated": "2026-11-03T07:30:43.538Z"
     },
     "speculation": {
       "score": 98,
@@ -11946,7 +11943,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-03T04:06:42.049Z"
+      "lastUpdated": "2026-11-03T07:30:43.863Z"
     },
     "speculation": {
       "score": 63,
@@ -13082,7 +13079,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-03T04:06:42.771Z"
+      "lastUpdated": "2026-11-03T07:30:44.617Z"
     },
     "speculation": {
       "score": 98,
@@ -14998,7 +14995,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-03T04:06:43.149Z"
+      "lastUpdated": "2026-11-03T07:30:44.972Z"
     },
     "speculation": {
       "score": 71,
