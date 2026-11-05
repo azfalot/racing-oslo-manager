@@ -945,7 +945,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T04:08:38.239Z"
+      "lastUpdated": "2026-11-05T07:30:39.423Z"
     },
     "speculation": {
       "score": 98,
@@ -4277,22 +4277,21 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 2,
     "points": 569,
-    "squadValue": 55660000,
-    "playerCount": 15,
-    "financialHealth": "Apalancado / Saldo Negativo (-0.10M €)",
-    "debtAlert": "Saldo en descubierto (-0.10M €). Consume el 0.7% del límite de crédito permitido (13.91M €). Exige ventas antes de puntuar.",
+    "squadValue": 54960000,
+    "playerCount": 13,
+    "financialHealth": "Solvente Ajustado (+633k € en Caja)",
+    "debtAlert": "Saldo positivo (+633k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
     "projectedScore": 65,
     "formation": "3-5-2",
     "tacticDescription": "Estructura 3-5-2 orientada a maximizar 65 puntos según plantilla disponible.",
     "strengths": [
       "2º en la clasificación general con 569 puntos acumulados (189.7 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (55.66M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -0.10M € que obliga a vender piezas."
+      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
     ],
     "tacticalAlerts": [
       {
@@ -4326,18 +4325,18 @@
     ],
     "marketBalance": {
       "clubName": "Puente Avios FC",
-      "realizedGainsEUR": 1636999,
+      "realizedGainsEUR": 1737897,
       "realizedLossesEUR": 12112560,
-      "netRealizedBalanceEUR": -10475561,
-      "profitableTradesCount": 8,
-      "totalClosedTradesCount": 14,
-      "historicalSuccessRatePct": 57,
-      "totalLatentGainsEUR": 5689000,
-      "totalLatentLossesEUR": 18849943,
-      "netLatentBalanceEUR": -13160943,
+      "netRealizedBalanceEUR": -10374663,
+      "profitableTradesCount": 10,
+      "totalClosedTradesCount": 16,
+      "historicalSuccessRatePct": 63,
+      "totalLatentGainsEUR": 5617000,
+      "totalLatentLossesEUR": 18849941,
+      "netLatentBalanceEUR": -13232941,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-10.475.561 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-10.374.663 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Yuri Berchiche",
@@ -4356,6 +4355,15 @@
           "roiPct": 165.3,
           "isProfit": true,
           "sellDate": "2026-10-12T04:30:28+02:00"
+        },
+        {
+          "playerName": "Mella",
+          "buyPrice": 468000,
+          "sellPrice": 561100,
+          "diff": 93100,
+          "roiPct": 19.9,
+          "isProfit": true,
+          "sellDate": "2026-11-05T04:29:31+01:00"
         },
         {
           "playerName": "Benavídez Protesoni",
@@ -4383,6 +4391,15 @@
           "roiPct": 10,
           "isProfit": true,
           "sellDate": "2026-10-21T04:29:40+02:00"
+        },
+        {
+          "playerName": "Iván Villar",
+          "buyPrice": 160002,
+          "sellPrice": 167800,
+          "diff": 7798,
+          "roiPct": 4.9,
+          "isProfit": true,
+          "sellDate": "2026-11-05T04:29:31+01:00"
         },
         {
           "playerName": "Álex Primo",
@@ -4495,15 +4512,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Mella",
-          "position": "midfielder",
-          "buyPrice": 468000,
-          "currentVM": 540000,
-          "latentDiff": 72000,
-          "latentRoiPct": 15.4,
-          "isProfit": true
-        },
-        {
           "playerName": "Gayà",
           "position": "defender",
           "buyPrice": 1501000,
@@ -4511,15 +4519,6 @@
           "latentDiff": 29000,
           "latentRoiPct": 1.9,
           "isProfit": true
-        },
-        {
-          "playerName": "Iván Villar",
-          "position": "keeper",
-          "buyPrice": 160002,
-          "currentVM": 160000,
-          "latentDiff": -2,
-          "latentRoiPct": 0,
-          "isProfit": false
         },
         {
           "playerName": "Marcão",
@@ -4585,23 +4584,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T04:08:39.574Z"
+      "lastUpdated": "2026-11-05T07:30:40.771Z"
     },
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+18.6%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 83316304,
-      "totalReceived": 57530000,
+      "totalReceived": 58258900,
       "purchasesCount": 28,
-      "salesCount": 28,
-      "estimatedCash": -96304,
+      "salesCount": 30,
+      "estimatedCash": 632596,
       "prizesEarned": 5690000,
-      "maxCreditLimit": 13915000,
-      "netWealth": 55563696,
-      "analysis": "Operativa histórica de 28 compras (83.3M €) y 28 ventas (57.5M €). Dinero total rotado: 140.8M € con sobrepuja media de +18.6%."
+      "maxCreditLimit": 13740000,
+      "netWealth": 55592596,
+      "analysis": "Operativa histórica de 28 compras (83.3M €) y 30 ventas (58.3M €). Dinero total rotado: 141.6M € con sobrepuja media de +18.6%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -5378,6 +5377,34 @@
           "seller": "Puente Avios FC",
           "buyer": "Computer",
           "date": "2026-10-30T04:31:06+01:00"
+        },
+        {
+          "playerName": "Iván Villar",
+          "price": 167800,
+          "marketValue": 167800,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-05T04:29:31+01:00"
+        },
+        {
+          "playerName": "Mella",
+          "price": 561100,
+          "marketValue": 561100,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-05T04:29:31+01:00"
         }
       ]
     },
@@ -5572,22 +5599,6 @@
     ],
     "bench": [
       {
-        "id": 2381,
-        "name": "Iván Villar",
-        "position": "keeper",
-        "price": 160000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2381.png"
-      },
-      {
         "id": 3345,
         "name": "Marcos Alonso",
         "position": "defender",
@@ -5618,22 +5629,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3294.png"
-      },
-      {
-        "id": 4051,
-        "name": "Mella",
-        "position": "midfielder",
-        "price": 540000,
-        "points": 14,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4051.png"
       }
     ],
     "isMe": false
@@ -5889,7 +5884,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T04:08:38.920Z"
+      "lastUpdated": "2026-11-05T07:30:40.102Z"
     },
     "speculation": {
       "score": 70,
@@ -7023,7 +7018,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T04:08:38.580Z"
+      "lastUpdated": "2026-11-05T07:30:39.741Z"
     },
     "speculation": {
       "score": 98,
@@ -8298,7 +8293,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T04:08:40.591Z"
+      "lastUpdated": "2026-11-05T07:30:41.789Z"
     },
     "speculation": {
       "score": 85,
@@ -9439,7 +9434,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T04:08:39.266Z"
+      "lastUpdated": "2026-11-05T07:30:40.440Z"
     },
     "speculation": {
       "score": 76,
@@ -10535,7 +10530,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T04:08:39.886Z"
+      "lastUpdated": "2026-11-05T07:30:41.118Z"
     },
     "speculation": {
       "score": 98,
@@ -12231,7 +12226,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T04:08:40.248Z"
+      "lastUpdated": "2026-11-05T07:30:41.444Z"
     },
     "speculation": {
       "score": 63,
@@ -13367,7 +13362,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T04:08:41.000Z"
+      "lastUpdated": "2026-11-05T07:30:42.102Z"
     },
     "speculation": {
       "score": 98,
@@ -15283,7 +15278,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T04:08:41.342Z"
+      "lastUpdated": "2026-11-05T07:30:42.414Z"
     },
     "speculation": {
       "score": 71,
