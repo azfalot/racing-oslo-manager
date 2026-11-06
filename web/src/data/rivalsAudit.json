@@ -6,16 +6,16 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 603,
-    "squadValue": 69950000,
-    "playerCount": 21,
-    "financialHealth": "Saneado / Alta Liquidez (+96.64M € en Caja)",
-    "debtAlert": "Excelente remanente de liquidez (+96.64M €) y solvencia plena para acudir a subastas sin deuda.",
-    "projectedScore": 62,
+    "squadValue": 66430000,
+    "playerCount": 19,
+    "financialHealth": "Saneado / Alta Liquidez (+100.33M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+100.33M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 60,
     "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 62 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 60 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 603 puntos acumulados (201.0 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (69.95M €).",
+      "Patrimonio de plantilla consolidado en Primera (66.43M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
@@ -25,67 +25,48 @@
     ],
     "tacticalAlerts": [
       {
-        "type": "suboptimal",
-        "badge": "⚠️ Banquillo Desperdiciado",
-        "player": "Hugo Rincón ",
-        "position": "defender",
-        "title": "Rendimiento en Reserva",
-        "description": "Tiene a Hugo Rincón  (32 pts) en el banquillo mientras alinea a Militão (4 pts).",
-        "action": "Valorar permuta táctica dando entrada a Hugo Rincón  de inicio."
-      },
-      {
-        "type": "suboptimal",
-        "badge": "⚠️ Banquillo Desperdiciado",
-        "player": "Boselli",
-        "position": "defender",
-        "title": "Rendimiento en Reserva",
-        "description": "Tiene a Boselli (27 pts) en el banquillo mientras alinea a Militão (4 pts).",
-        "action": "Valorar permuta táctica dando entrada a Boselli de inicio."
-      },
-      {
-        "type": "suboptimal",
-        "badge": "⚠️ Banquillo Desperdiciado",
-        "player": "Miguel Román",
-        "position": "midfielder",
-        "title": "Rendimiento en Reserva",
-        "description": "Tiene a Miguel Román (49 pts) en el banquillo mientras alinea a Comesaña (38 pts).",
-        "action": "Valorar permuta táctica dando entrada a Miguel Román de inicio."
+        "type": "success",
+        "badge": "✅ Once Saneado",
+        "player": "Alineación Óptima",
+        "title": "Sin Bajas ni Riesgos Críticos",
+        "description": "Todos los futbolistas del 11 titular están activos, disponibles y en plenitud para la jornada.",
+        "action": "Mantener la estructura táctica establecida."
       }
     ],
     "recommendations": [
       {
         "name": "Adeyemi",
         "pos": "Delantero",
-        "price": 10140000,
-        "reason": "Refuerzo de ataque (10.14M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+        "price": 9950000,
+        "reason": "Refuerzo de ataque (9.95M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
       },
       {
-        "name": "Iker Muñoz",
-        "pos": "Centrocampista",
-        "price": 920000,
-        "reason": "Centrocampista con llegada (0.92M €) para asociarse con Raphinha y dominar la posesión."
+        "name": "Carlos Puga",
+        "pos": "Defensa",
+        "price": 1620000,
+        "reason": "Zaguero de jerarquía (1.62M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
       },
       {
         "name": "Koundé",
         "pos": "Defensa",
-        "price": 2900000,
-        "reason": "Oportunidad de mercado (2.90M € · 35 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "price": 2480000,
+        "reason": "Oportunidad de mercado (2.48M € · 35 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       }
     ],
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
-      "realizedGainsEUR": 81388117,
-      "realizedLossesEUR": 25575728,
-      "netRealizedBalanceEUR": 55812389,
-      "profitableTradesCount": 35,
-      "totalClosedTradesCount": 76,
+      "realizedGainsEUR": 82488016,
+      "realizedLossesEUR": 26246330,
+      "netRealizedBalanceEUR": 56241686,
+      "profitableTradesCount": 36,
+      "totalClosedTradesCount": 78,
       "historicalSuccessRatePct": 46,
-      "totalLatentGainsEUR": 3405972,
-      "totalLatentLossesEUR": 38165290,
-      "netLatentBalanceEUR": -34759318,
+      "totalLatentGainsEUR": 2883971,
+      "totalLatentLossesEUR": 38150286,
+      "netLatentBalanceEUR": -35266315,
       "healthLabel": "SUPERÁVIT DE TRADING",
       "healthBadgeColor": "emerald",
-      "healthSummary": "Genera un superávit neto de +55.812.389 € en operaciones de mercado con una efectividad del 46%.",
+      "healthSummary": "Genera un superávit neto de +56.241.686 € en operaciones de mercado con una efectividad del 46%.",
       "closedOperations": [
         {
           "playerName": "Lookman",
@@ -239,6 +220,15 @@
           "roiPct": 55.8,
           "isProfit": true,
           "sellDate": "2026-08-24T23:08:24+01:00"
+        },
+        {
+          "playerName": "Federico Redondo",
+          "buyPrice": 762001,
+          "sellPrice": 1861900,
+          "diff": 1099899,
+          "roiPct": 144.3,
+          "isProfit": true,
+          "sellDate": "2026-11-05T04:29:31+01:00"
         },
         {
           "playerName": "Sebastián Cáceres",
@@ -682,6 +672,15 @@
           "sellDate": "2026-10-11T04:30:14+02:00"
         },
         {
+          "playerName": "Comesaña",
+          "buyPrice": 2501002,
+          "sellPrice": 1830400,
+          "diff": -670602,
+          "roiPct": -26.8,
+          "isProfit": false,
+          "sellDate": "2026-11-05T04:29:31+01:00"
+        },
+        {
           "playerName": "Batalla",
           "buyPrice": 3180001,
           "sellPrice": 2500500,
@@ -774,58 +773,49 @@
       ],
       "latentTrades": [
         {
-          "playerName": "Federico Redondo",
-          "position": "midfielder",
-          "buyPrice": 762001,
-          "currentVM": 1780000,
-          "latentDiff": 1017999,
-          "latentRoiPct": 133.6,
-          "isProfit": true
-        },
-        {
           "playerName": "Fornals",
           "position": "midfielder",
           "buyPrice": 4401001,
-          "currentVM": 5320000,
-          "latentDiff": 918999,
-          "latentRoiPct": 20.9,
+          "currentVM": 5480000,
+          "latentDiff": 1078999,
+          "latentRoiPct": 24.5,
           "isProfit": true
         },
         {
           "playerName": "Fofana",
           "position": "midfielder",
           "buyPrice": 6671002,
-          "currentVM": 7440000,
-          "latentDiff": 768998,
-          "latentRoiPct": 11.5,
+          "currentVM": 7490000,
+          "latentDiff": 818998,
+          "latentRoiPct": 12.3,
           "isProfit": true
         },
         {
           "playerName": "Víctor Chust",
           "position": "defender",
           "buyPrice": 1905012,
-          "currentVM": 2370000,
-          "latentDiff": 464988,
-          "latentRoiPct": 24.4,
+          "currentVM": 2560000,
+          "latentDiff": 654988,
+          "latentRoiPct": 34.4,
           "isProfit": true
         },
         {
           "playerName": "Alejandro Santiago",
           "position": "midfielder",
           "buyPrice": 345012,
-          "currentVM": 580000,
-          "latentDiff": 234988,
-          "latentRoiPct": 68.1,
+          "currentVM": 620000,
+          "latentDiff": 274988,
+          "latentRoiPct": 79.7,
           "isProfit": true
         },
         {
-          "playerName": "Christian Imga",
-          "position": "striker",
-          "buyPrice": 302001,
-          "currentVM": 300000,
-          "latentDiff": -2001,
-          "latentRoiPct": -0.7,
-          "isProfit": false
+          "playerName": "Boselli",
+          "position": "defender",
+          "buyPrice": 584002,
+          "currentVM": 640000,
+          "latentDiff": 55998,
+          "latentRoiPct": 9.6,
+          "isProfit": true
         },
         {
           "playerName": "Pablo Marín",
@@ -837,21 +827,12 @@
           "isProfit": false
         },
         {
-          "playerName": "Boselli",
-          "position": "defender",
-          "buyPrice": 584002,
-          "currentVM": 580000,
-          "latentDiff": -4002,
-          "latentRoiPct": -0.7,
-          "isProfit": false
-        },
-        {
-          "playerName": "Juan Iglesias",
-          "position": "defender",
-          "buyPrice": 3211003,
-          "currentVM": 3060000,
-          "latentDiff": -151003,
-          "latentRoiPct": -4.7,
+          "playerName": "Christian Imga",
+          "position": "striker",
+          "buyPrice": 302001,
+          "currentVM": 290000,
+          "latentDiff": -12001,
+          "latentRoiPct": -4,
           "isProfit": false
         },
         {
@@ -864,88 +845,88 @@
           "isProfit": false
         },
         {
+          "playerName": "Juan Iglesias",
+          "position": "defender",
+          "buyPrice": 3211003,
+          "currentVM": 2950000,
+          "latentDiff": -261003,
+          "latentRoiPct": -8.1,
+          "isProfit": false
+        },
+        {
           "playerName": "Sivera",
           "position": "keeper",
           "buyPrice": 3450010,
-          "currentVM": 3170000,
-          "latentDiff": -280010,
-          "latentRoiPct": -8.1,
+          "currentVM": 2870000,
+          "latentDiff": -580010,
+          "latentRoiPct": -16.8,
           "isProfit": false
         },
         {
           "playerName": "Iván Romero",
           "position": "striker",
           "buyPrice": 5705006,
-          "currentVM": 5000000,
-          "latentDiff": -705006,
-          "latentRoiPct": -12.4,
-          "isProfit": false
-        },
-        {
-          "playerName": "Comesaña",
-          "position": "midfielder",
-          "buyPrice": 2501002,
-          "currentVM": 1760000,
-          "latentDiff": -741002,
-          "latentRoiPct": -29.6,
+          "currentVM": 5110000,
+          "latentDiff": -595006,
+          "latentRoiPct": -10.4,
           "isProfit": false
         },
         {
           "playerName": "Koke",
           "position": "midfielder",
           "buyPrice": 4902001,
-          "currentVM": 3940000,
-          "latentDiff": -962001,
-          "latentRoiPct": -19.6,
+          "currentVM": 3870000,
+          "latentDiff": -1032001,
+          "latentRoiPct": -21.1,
           "isProfit": false
         },
         {
           "playerName": "Gorrotxategi",
           "position": "midfielder",
           "buyPrice": 2464223,
-          "currentVM": 1030000,
-          "latentDiff": -1434223,
-          "latentRoiPct": -58.2,
+          "currentVM": 1090000,
+          "latentDiff": -1374223,
+          "latentRoiPct": -55.8,
           "isProfit": false
         },
         {
           "playerName": "Miguel Román",
           "position": "midfielder",
           "buyPrice": 3945002,
-          "currentVM": 2510000,
-          "latentDiff": -1435002,
-          "latentRoiPct": -36.4,
+          "currentVM": 2150000,
+          "latentDiff": -1795002,
+          "latentRoiPct": -45.5,
           "isProfit": false
         },
         {
           "playerName": "Militão",
           "position": "defender",
           "buyPrice": 5828004,
-          "currentVM": 2830000,
-          "latentDiff": -2998004,
-          "latentRoiPct": -51.4,
+          "currentVM": 2840000,
+          "latentDiff": -2988004,
+          "latentRoiPct": -51.3,
           "isProfit": false
         },
         {
           "playerName": "Ayoze Pérez",
           "position": "striker",
           "buyPrice": 6491002,
-          "currentVM": 3380000,
-          "latentDiff": -3111002,
-          "latentRoiPct": -47.9,
+          "currentVM": 3440000,
+          "latentDiff": -3051002,
+          "latentRoiPct": -47,
           "isProfit": false
         },
         {
           "playerName": "Raphinha",
           "position": "striker",
           "buyPrice": 49119030,
-          "currentVM": 22940000,
-          "latentDiff": -26179030,
-          "latentRoiPct": -53.3,
+          "currentVM": 22820000,
+          "latentDiff": -26299030,
+          "latentRoiPct": -53.5,
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T17:00:49.506Z"
+      "lastUpdated": "2026-11-06T04:06:25.557Z"
     },
     "speculation": {
       "score": 98,
@@ -954,14 +935,14 @@
       "overbidRate": "+6.3%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 367133371,
-      "totalReceived": 437741200,
+      "totalReceived": 441433500,
       "purchasesCount": 101,
-      "salesCount": 115,
-      "estimatedCash": 96637829,
+      "salesCount": 117,
+      "estimatedCash": 100330129,
       "prizesEarned": 6030000,
-      "maxCreditLimit": 17487500,
-      "netWealth": 166587829,
-      "analysis": "Operativa histórica de 101 compras (367.1M €) y 115 ventas (437.7M €). Dinero total rotado: 804.9M € con sobrepuja media de +6.3%."
+      "maxCreditLimit": 16607500,
+      "netWealth": 166760129,
+      "analysis": "Operativa histórica de 101 compras (367.1M €) y 117 ventas (441.4M €). Dinero total rotado: 808.6M € con sobrepuja media de +6.3%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -3914,6 +3895,34 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-11-02T01:19:30+01:00"
+        },
+        {
+          "playerName": "Comesaña",
+          "price": 1830400,
+          "marketValue": 1830400,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-05T04:29:31+01:00"
+        },
+        {
+          "playerName": "Federico Redondo",
+          "price": 1861900,
+          "marketValue": 1861900,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-05T04:29:31+01:00"
         }
       ]
     },
@@ -3922,9 +3931,9 @@
         "id": 2444,
         "name": "Sivera",
         "position": "keeper",
-        "price": 3170000,
+        "price": 2870000,
         "points": 59,
-        "expectedPoints": 5.2,
+        "expectedPoints": 4.1,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -3939,9 +3948,9 @@
         "id": 3052,
         "name": "Juan Iglesias",
         "position": "defender",
-        "price": 3060000,
+        "price": 2950000,
         "points": 56,
-        "expectedPoints": 5.2,
+        "expectedPoints": 4.1,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -3956,7 +3965,7 @@
         "id": 3079,
         "name": "Víctor Chust",
         "position": "defender",
-        "price": 2370000,
+        "price": 2560000,
         "points": 52,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -3970,12 +3979,12 @@
         "image": "/media/players/3079.png"
       },
       {
-        "id": 2760,
-        "name": "Militão",
+        "id": 3576,
+        "name": "Hugo Rincón ",
         "position": "defender",
-        "price": 2830000,
-        "points": 4,
-        "expectedPoints": 3.1,
+        "price": 1730000,
+        "points": 32,
+        "expectedPoints": 4.1,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -3984,13 +3993,13 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/2760.png"
+        "image": "/media/players/3576.png"
       },
       {
         "id": 4165,
         "name": "Fofana",
         "position": "midfielder",
-        "price": 7440000,
+        "price": 7490000,
         "points": 51,
         "expectedPoints": 7.7,
         "status": "ACTIVE",
@@ -4007,7 +4016,7 @@
         "id": 2155,
         "name": "Fornals",
         "position": "midfielder",
-        "price": 5320000,
+        "price": 5480000,
         "points": 56,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -4024,7 +4033,7 @@
         "id": 1083,
         "name": "Koke",
         "position": "midfielder",
-        "price": 3940000,
+        "price": 3870000,
         "points": 52,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -4038,11 +4047,11 @@
         "image": "/media/players/1083.png"
       },
       {
-        "id": 2591,
-        "name": "Comesaña",
+        "id": 3927,
+        "name": "Miguel Román",
         "position": "midfielder",
-        "price": 1760000,
-        "points": 38,
+        "price": 2150000,
+        "points": 49,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -4052,13 +4061,13 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/2591.png"
+        "image": "/media/players/3927.png"
       },
       {
         "id": 3298,
         "name": "Raphinha",
         "position": "striker",
-        "price": 22940000,
+        "price": 22820000,
         "points": 144,
         "expectedPoints": 9,
         "status": "ACTIVE",
@@ -4075,7 +4084,7 @@
         "id": 3188,
         "name": "Iván Romero",
         "position": "striker",
-        "price": 5000000,
+        "price": 5110000,
         "points": 69,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -4092,7 +4101,7 @@
         "id": 3389,
         "name": "Ayoze Pérez",
         "position": "striker",
-        "price": 3380000,
+        "price": 3440000,
         "points": 45,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -4140,11 +4149,11 @@
         "image": "/media/players/3665.png"
       },
       {
-        "id": 3576,
-        "name": "Hugo Rincón ",
+        "id": 2760,
+        "name": "Militão",
         "position": "defender",
-        "price": 1480000,
-        "points": 32,
+        "price": 2840000,
+        "points": 4,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -4153,13 +4162,13 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/3576.png"
+        "image": "/media/players/2760.png"
       },
       {
         "id": 3969,
         "name": "Boselli",
         "position": "defender",
-        "price": 580000,
+        "price": 640000,
         "points": 27,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -4172,42 +4181,10 @@
         "image": "/media/players/3969.png"
       },
       {
-        "id": 3902,
-        "name": "Federico Redondo",
-        "position": "midfielder",
-        "price": 1780000,
-        "points": 31,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3902.png"
-      },
-      {
-        "id": 3927,
-        "name": "Miguel Román",
-        "position": "midfielder",
-        "price": 2510000,
-        "points": 49,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3927.png"
-      },
-      {
         "id": 3833,
         "name": "Gorrotxategi",
         "position": "midfielder",
-        "price": 1030000,
+        "price": 1090000,
         "points": 29,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -4223,7 +4200,7 @@
         "id": 4178,
         "name": "Alejandro Santiago",
         "position": "midfielder",
-        "price": 580000,
+        "price": 620000,
         "points": 6,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -4255,7 +4232,7 @@
         "id": 4176,
         "name": "Christian Imga",
         "position": "striker",
-        "price": 300000,
+        "price": 290000,
         "points": 4,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -4277,10 +4254,10 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 2,
     "points": 569,
-    "squadValue": 54960000,
-    "playerCount": 13,
-    "financialHealth": "Solvente Ajustado (+633k € en Caja)",
-    "debtAlert": "Saldo positivo (+633k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
+    "squadValue": 52900000,
+    "playerCount": 14,
+    "financialHealth": "Solvente Ajustado (+473k € en Caja)",
+    "debtAlert": "Saldo positivo (+473k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
     "projectedScore": 65,
     "formation": "3-5-2",
     "tacticDescription": "Estructura 3-5-2 orientada a maximizar 65 puntos según plantilla disponible.",
@@ -4305,22 +4282,22 @@
     ],
     "recommendations": [
       {
-        "name": "Iker Muñoz",
-        "pos": "Centrocampista",
-        "price": 920000,
-        "reason": "Oportunidad de mercado (0.92M € · 37 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "name": "Lunin",
+        "pos": "Portero",
+        "price": 390000,
+        "reason": "Alternativa para la portería (0.39M €) para asegurar titularidad y rotación fiable."
+      },
+      {
+        "name": "Carlos Puga",
+        "pos": "Defensa",
+        "price": 1620000,
+        "reason": "Oportunidad de mercado (1.62M € · 46 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       },
       {
         "name": "Adeyemi",
         "pos": "Delantero",
-        "price": 10140000,
-        "reason": "Pieza competitiva en el mercado (10.14M €) adaptable al esquema 3-5-2."
-      },
-      {
-        "name": "Koundé",
-        "pos": "Defensa",
-        "price": 2900000,
-        "reason": "Pieza competitiva en el mercado (2.90M €) adaptable al esquema 3-5-2."
+        "price": 9950000,
+        "reason": "Pieza competitiva en el mercado (9.95M €) adaptable al esquema 3-5-2."
       }
     ],
     "marketBalance": {
@@ -4331,9 +4308,9 @@
       "profitableTradesCount": 10,
       "totalClosedTradesCount": 16,
       "historicalSuccessRatePct": 63,
-      "totalLatentGainsEUR": 5617000,
-      "totalLatentLossesEUR": 18849941,
-      "netLatentBalanceEUR": -13232941,
+      "totalLatentGainsEUR": 5677100,
+      "totalLatentLossesEUR": 20560042,
+      "netLatentBalanceEUR": -14882942,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
       "healthSummary": "Ha asumido minusvalías netas en el mercado (-10.374.663 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
@@ -4488,37 +4465,46 @@
           "playerName": "Brugui",
           "position": "striker",
           "buyPrice": 580000,
-          "currentVM": 4930000,
-          "latentDiff": 4350000,
-          "latentRoiPct": 750,
+          "currentVM": 4950000,
+          "latentDiff": 4370000,
+          "latentRoiPct": 753.4,
           "isProfit": true
         },
         {
           "playerName": "Gabriel Suazo",
           "position": "defender",
           "buyPrice": 2502000,
-          "currentVM": 3200000,
-          "latentDiff": 698000,
-          "latentRoiPct": 27.9,
+          "currentVM": 3240000,
+          "latentDiff": 738000,
+          "latentRoiPct": 29.5,
           "isProfit": true
         },
         {
           "playerName": "Javi Morcillo",
           "position": "midfielder",
           "buyPrice": 1050000,
-          "currentVM": 1590000,
-          "latentDiff": 540000,
-          "latentRoiPct": 51.4,
+          "currentVM": 1560000,
+          "latentDiff": 510000,
+          "latentRoiPct": 48.6,
           "isProfit": true
         },
         {
-          "playerName": "Gayà",
-          "position": "defender",
-          "buyPrice": 1501000,
-          "currentVM": 1530000,
-          "latentDiff": 29000,
-          "latentRoiPct": 1.9,
+          "playerName": "Buchanan",
+          "position": "midfielder",
+          "buyPrice": 2200900,
+          "currentVM": 2260000,
+          "latentDiff": 59100,
+          "latentRoiPct": 2.7,
           "isProfit": true
+        },
+        {
+          "playerName": "Juanmi Jiménez",
+          "position": "striker",
+          "buyPrice": 160001,
+          "currentVM": 160000,
+          "latentDiff": -1,
+          "latentRoiPct": 0,
+          "isProfit": false
         },
         {
           "playerName": "Marcão",
@@ -4530,61 +4516,61 @@
           "isProfit": false
         },
         {
-          "playerName": "Buchanan",
-          "position": "midfielder",
-          "buyPrice": 2200900,
-          "currentVM": 2170000,
-          "latentDiff": -30900,
-          "latentRoiPct": -1.4,
-          "isProfit": false
-        },
-        {
-          "playerName": "Mario Soriano",
-          "position": "midfielder",
-          "buyPrice": 8728039,
-          "currentVM": 6460000,
-          "latentDiff": -2268039,
-          "latentRoiPct": -26,
+          "playerName": "Gayà",
+          "position": "defender",
+          "buyPrice": 1501000,
+          "currentVM": 1280000,
+          "latentDiff": -221000,
+          "latentRoiPct": -14.7,
           "isProfit": false
         },
         {
           "playerName": "Íñigo Vicente",
           "position": "midfielder",
           "buyPrice": 9780000,
-          "currentVM": 7490000,
-          "latentDiff": -2290000,
-          "latentRoiPct": -23.4,
+          "currentVM": 7290000,
+          "latentDiff": -2490000,
+          "latentRoiPct": -25.5,
+          "isProfit": false
+        },
+        {
+          "playerName": "Mario Soriano",
+          "position": "midfielder",
+          "buyPrice": 8728039,
+          "currentVM": 5500000,
+          "latentDiff": -3228039,
+          "latentRoiPct": -37,
           "isProfit": false
         },
         {
           "playerName": "Pepelu",
           "position": "midfielder",
           "buyPrice": 7350000,
-          "currentVM": 3860000,
-          "latentDiff": -3490000,
-          "latentRoiPct": -47.5,
+          "currentVM": 3850000,
+          "latentDiff": -3500000,
+          "latentRoiPct": -47.6,
           "isProfit": false
         },
         {
           "playerName": "Roberto Fernández",
           "position": "striker",
           "buyPrice": 12050000,
-          "currentVM": 7470000,
-          "latentDiff": -4580000,
-          "latentRoiPct": -38,
+          "currentVM": 7460000,
+          "latentDiff": -4590000,
+          "latentRoiPct": -38.1,
           "isProfit": false
         },
         {
           "playerName": "Marcos Alonso",
           "position": "defender",
           "buyPrice": 8501000,
-          "currentVM": 2310000,
-          "latentDiff": -6191000,
-          "latentRoiPct": -72.8,
+          "currentVM": 1970000,
+          "latentDiff": -6531000,
+          "latentRoiPct": -76.8,
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T17:00:50.883Z"
+      "lastUpdated": "2026-11-06T04:06:27.123Z"
     },
     "speculation": {
       "score": 98,
@@ -4592,15 +4578,15 @@
       "badgeColor": "#ef4444",
       "overbidRate": "+18.6%",
       "riskLevel": "Alto Riesgo (Apalancado)",
-      "totalSpent": 83316304,
+      "totalSpent": 83476305,
       "totalReceived": 58258900,
-      "purchasesCount": 28,
+      "purchasesCount": 29,
       "salesCount": 30,
-      "estimatedCash": 632596,
+      "estimatedCash": 472595,
       "prizesEarned": 5690000,
-      "maxCreditLimit": 13740000,
-      "netWealth": 55592596,
-      "analysis": "Operativa histórica de 28 compras (83.3M €) y 30 ventas (58.3M €). Dinero total rotado: 141.6M € con sobrepuja media de +18.6%."
+      "maxCreditLimit": 13225000,
+      "netWealth": 53372595,
+      "analysis": "Operativa histórica de 29 compras (83.5M €) y 30 ventas (58.3M €). Dinero total rotado: 141.7M € con sobrepuja media de +18.6%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -4614,8 +4600,8 @@
       "bestBuy": {
         "player": "Brugui",
         "price": 580000,
-        "impact": "Fichado por 0.58M €, hoy cotiza en 4.93M € (+4.350.000 € / +750% de plusvalía).",
-        "tag": "📈 +750% Plusvalía"
+        "impact": "Fichado por 0.58M €, hoy cotiza en 4.95M € (+4.370.000 € / +753.4% de plusvalía).",
+        "tag": "📈 +753.4% Plusvalía"
       },
       "worstMove": {
         "player": "Marcos Alonso",
@@ -5001,6 +4987,20 @@
           "seller": "Computer",
           "buyer": "Puente Avios FC",
           "date": "2026-11-04T04:29:40+01:00"
+        },
+        {
+          "playerName": "Juanmi Jiménez",
+          "price": 160001,
+          "marketValue": 160000,
+          "gain": -1,
+          "gainPct": 0,
+          "diff": 1,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Computer",
+          "buyer": "Puente Avios FC",
+          "date": "2026-11-06T04:29:40+01:00"
         }
       ],
       "sales": [
@@ -5413,7 +5413,7 @@
         "id": 1897,
         "name": "Oblak",
         "position": "keeper",
-        "price": 4560000,
+        "price": 5160000,
         "points": 68,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -5430,7 +5430,7 @@
         "id": 4125,
         "name": "Cristian Romero",
         "position": "defender",
-        "price": 9230000,
+        "price": 8060000,
         "points": 52,
         "expectedPoints": 7.7,
         "status": "ACTIVE",
@@ -5447,7 +5447,7 @@
         "id": 3875,
         "name": "Gabriel Suazo",
         "position": "defender",
-        "price": 3200000,
+        "price": 3240000,
         "points": 54,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -5461,11 +5461,11 @@
         "image": "/media/players/3875.png"
       },
       {
-        "id": 1844,
-        "name": "Gayà",
+        "id": 3345,
+        "name": "Marcos Alonso",
         "position": "defender",
-        "price": 1530000,
-        "points": 34,
+        "price": 1970000,
+        "points": 40,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -5475,13 +5475,13 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/1844.png"
+        "image": "/media/players/3345.png"
       },
       {
         "id": 3010,
         "name": "Íñigo Vicente",
         "position": "midfielder",
-        "price": 7490000,
+        "price": 7290000,
         "points": 77,
         "expectedPoints": 7.7,
         "status": "ACTIVE",
@@ -5498,7 +5498,7 @@
         "id": 4050,
         "name": "Mario Soriano",
         "position": "midfielder",
-        "price": 6460000,
+        "price": 5500000,
         "points": 76,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -5515,7 +5515,7 @@
         "id": 3096,
         "name": "Pepelu",
         "position": "midfielder",
-        "price": 3860000,
+        "price": 3850000,
         "points": 59,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -5532,7 +5532,7 @@
         "id": 3783,
         "name": "Buchanan",
         "position": "midfielder",
-        "price": 2170000,
+        "price": 2260000,
         "points": 34,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -5549,7 +5549,7 @@
         "id": 4011,
         "name": "Javi Morcillo",
         "position": "midfielder",
-        "price": 1590000,
+        "price": 1560000,
         "points": 40,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -5566,7 +5566,7 @@
         "id": 3773,
         "name": "Roberto Fernández",
         "position": "striker",
-        "price": 7470000,
+        "price": 7460000,
         "points": 71,
         "expectedPoints": 7.7,
         "status": "ACTIVE",
@@ -5583,7 +5583,7 @@
         "id": 3831,
         "name": "Brugui",
         "position": "striker",
-        "price": 4930000,
+        "price": 4950000,
         "points": 65,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -5599,11 +5599,11 @@
     ],
     "bench": [
       {
-        "id": 3345,
-        "name": "Marcos Alonso",
+        "id": 1844,
+        "name": "Gayà",
         "position": "defender",
-        "price": 2310000,
-        "points": 40,
+        "price": 1280000,
+        "points": 34,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -5612,7 +5612,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/3345.png"
+        "image": "/media/players/1844.png"
       },
       {
         "id": 3294,
@@ -5629,6 +5629,22 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3294.png"
+      },
+      {
+        "id": 1112,
+        "name": "Juanmi Jiménez",
+        "position": "striker",
+        "price": 160000,
+        "points": 0,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/1112.png"
       }
     ],
     "isMe": false
@@ -5640,10 +5656,10 @@
     "crest": "/media/crests/pachangueros.svg",
     "pos": 3,
     "points": 519,
-    "squadValue": 51980000,
-    "playerCount": 11,
-    "financialHealth": "Saneado / Alta Liquidez (+3.52M € en Caja)",
-    "debtAlert": "Excelente remanente de liquidez (+3.52M €) y solvencia plena para acudir a subastas sin deuda.",
+    "squadValue": 50640000,
+    "playerCount": 12,
+    "financialHealth": "Saneado / Alta Liquidez (+2.47M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+2.47M €) y solvencia plena para acudir a subastas sin deuda.",
     "projectedScore": 60,
     "formation": "4-5-1",
     "tacticDescription": "Estructura 4-5-1 orientada a maximizar 60 puntos según plantilla disponible.",
@@ -5654,7 +5670,7 @@
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla corta (11 jugadores) con escaso fondo de armario ante rotaciones."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -5668,22 +5684,22 @@
     ],
     "recommendations": [
       {
-        "name": "Dubasin",
+        "name": "Marcos Fernández",
         "pos": "Delantero",
-        "price": 2030000,
-        "reason": "Refuerzo de ataque (2.03M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+        "price": 1650000,
+        "reason": "Refuerzo de ataque (1.65M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
       },
       {
-        "name": "Iker Muñoz",
-        "pos": "Centrocampista",
-        "price": 920000,
-        "reason": "Oportunidad de mercado (0.92M € · 37 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "name": "Lunin",
+        "pos": "Portero",
+        "price": 390000,
+        "reason": "Alternativa para la portería (0.39M €) para asegurar titularidad y rotación fiable."
       },
       {
-        "name": "Adeyemi",
-        "pos": "Delantero",
-        "price": 10140000,
-        "reason": "Pieza competitiva en el mercado (10.14M €) adaptable al esquema 4-5-1."
+        "name": "Carlos Puga",
+        "pos": "Defensa",
+        "price": 1620000,
+        "reason": "Oportunidad de mercado (1.62M € · 46 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       }
     ],
     "marketBalance": {
@@ -5694,9 +5710,9 @@
       "profitableTradesCount": 2,
       "totalClosedTradesCount": 12,
       "historicalSuccessRatePct": 17,
-      "totalLatentGainsEUR": 447000,
-      "totalLatentLossesEUR": 3577000,
-      "netLatentBalanceEUR": -3130000,
+      "totalLatentGainsEUR": 177000,
+      "totalLatentLossesEUR": 5677000,
+      "netLatentBalanceEUR": -5500000,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
       "healthSummary": "Ha asumido minusvalías netas en el mercado (-4.917.500 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
@@ -5812,95 +5828,104 @@
       ],
       "latentTrades": [
         {
-          "playerName": "Álex Baena",
-          "position": "midfielder",
-          "buyPrice": 12620000,
-          "currentVM": 12960000,
-          "latentDiff": 340000,
-          "latentRoiPct": 2.7,
-          "isProfit": true
-        },
-        {
           "playerName": "Lucas Cepeda",
           "position": "midfielder",
           "buyPrice": 2163000,
-          "currentVM": 2270000,
-          "latentDiff": 107000,
-          "latentRoiPct": 4.9,
+          "currentVM": 2330000,
+          "latentDiff": 167000,
+          "latentRoiPct": 7.7,
           "isProfit": true
         },
         {
           "playerName": "Javier Hernández",
           "position": "midfielder",
           "buyPrice": 2510000,
-          "currentVM": 2510000,
-          "latentDiff": 0,
-          "latentRoiPct": 0,
+          "currentVM": 2520000,
+          "latentDiff": 10000,
+          "latentRoiPct": 0.4,
           "isProfit": true
+        },
+        {
+          "playerName": "Iker Muñoz",
+          "position": "midfielder",
+          "buyPrice": 1050000,
+          "currentVM": 980000,
+          "latentDiff": -70000,
+          "latentRoiPct": -6.7,
+          "isProfit": false
         },
         {
           "playerName": "Gerard Martín",
           "position": "defender",
           "buyPrice": 5130000,
-          "currentVM": 5080000,
-          "latentDiff": -50000,
-          "latentRoiPct": -1,
+          "currentVM": 5030000,
+          "latentDiff": -100000,
+          "latentRoiPct": -1.9,
           "isProfit": false
         },
         {
           "playerName": "Fer Niño",
           "position": "striker",
           "buyPrice": 6830000,
-          "currentVM": 6410000,
-          "latentDiff": -420000,
-          "latentRoiPct": -6.1,
+          "currentVM": 6310000,
+          "latentDiff": -520000,
+          "latentRoiPct": -7.6,
           "isProfit": false
         },
         {
           "playerName": "Sergio Carreira",
           "position": "defender",
           "buyPrice": 3995000,
-          "currentVM": 3370000,
-          "latentDiff": -625000,
-          "latentRoiPct": -15.6,
+          "currentVM": 3260000,
+          "latentDiff": -735000,
+          "latentRoiPct": -18.4,
           "isProfit": false
         },
         {
           "playerName": "Hancko",
           "position": "defender",
           "buyPrice": 6420000,
-          "currentVM": 5620000,
-          "latentDiff": -800000,
-          "latentRoiPct": -12.5,
+          "currentVM": 5460000,
+          "latentDiff": -960000,
+          "latentRoiPct": -15,
+          "isProfit": false
+        },
+        {
+          "playerName": "Álex Baena",
+          "position": "midfielder",
+          "buyPrice": 12620000,
+          "currentVM": 11020000,
+          "latentDiff": -1600000,
+          "latentRoiPct": -12.7,
           "isProfit": false
         },
         {
           "playerName": "Fran García",
           "position": "defender",
           "buyPrice": 4772000,
-          "currentVM": 3090000,
-          "latentDiff": -1682000,
-          "latentRoiPct": -35.2,
+          "currentVM": 3080000,
+          "latentDiff": -1692000,
+          "latentRoiPct": -35.5,
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T17:00:50.187Z"
+      "lastUpdated": "2026-11-06T04:06:26.417Z"
     },
     "speculation": {
-      "score": 70,
+      "score": 72,
       "badge": "🎰 Especulador de Mercado",
       "badgeColor": "#f59e0b",
-      "overbidRate": "+1.7%",
+      "overbidRate": "+1.8%",
       "riskLevel": "Riesgo Moderado-Alto",
-      "totalSpent": 75122000,
+      "totalSpent": 76172000,
       "totalReceived": 53449300,
-      "purchasesCount": 20,
+      "purchasesCount": 21,
       "salesCount": 24,
-      "estimatedCash": 3517300,
+      "estimatedCash": 2467300,
       "prizesEarned": 5190000,
-      "maxCreditLimit": 12995000,
-      "netWealth": 55497300,
-      "analysis": "Operativa histórica de 20 compras (75.1M €) y 24 ventas (53.4M €). Dinero total rotado: 128.6M € con sobrepuja media de +1.7%."
+      "maxCreditLimit": 12660000,
+      "netWealth": 53107300,
+      "analysis": "Operativa histórica de 21 compras (76.2M €) y 24 ventas (53.4M €). Dinero total rotado: 129.6M € con sobrepuja media de +1.8%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -5912,10 +5937,10 @@
         "tag": "🎯 14.02 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
-        "player": "Álex Baena",
-        "price": 12620000,
-        "impact": "Fichado por 12.62M €, hoy cotiza en 12.96M € (+340.000 € / +2.7% de plusvalía).",
-        "tag": "📈 +2.7% Plusvalía"
+        "player": "Adriá Altimira",
+        "price": 410000,
+        "impact": "Fichado por 0.41M €, hoy cotiza en 1.19M € (+780.000 € / +190.2% de plusvalía).",
+        "tag": "📈 +190.2% Plusvalía"
       },
       "worstMove": {
         "player": "Canales",
@@ -6195,6 +6220,20 @@
           "seller": "Computer",
           "buyer": "Pachangueros F.C.",
           "date": "2026-11-03T04:31:13+01:00"
+        },
+        {
+          "playerName": "Iker Muñoz",
+          "price": 1050000,
+          "marketValue": 980000,
+          "gain": -70000,
+          "gainPct": -6.7,
+          "diff": 70000,
+          "diffPct": 7.1,
+          "isOverbid": true,
+          "isGain": false,
+          "seller": "Computer",
+          "buyer": "Pachangueros F.C.",
+          "date": "2026-11-06T04:29:40+01:00"
         }
       ],
       "sales": [
@@ -6527,7 +6566,7 @@
         "id": 1946,
         "name": "Dimitrievski",
         "position": "keeper",
-        "price": 2180000,
+        "price": 2150000,
         "points": 52,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -6544,7 +6583,7 @@
         "id": 3690,
         "name": "Gerard Martín",
         "position": "defender",
-        "price": 5080000,
+        "price": 5030000,
         "points": 62,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -6561,7 +6600,7 @@
         "id": 3884,
         "name": "Hancko",
         "position": "defender",
-        "price": 5620000,
+        "price": 5460000,
         "points": 74,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -6578,7 +6617,7 @@
         "id": 3029,
         "name": "Sergio Carreira",
         "position": "defender",
-        "price": 3370000,
+        "price": 3260000,
         "points": 56,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -6595,7 +6634,7 @@
         "id": 3116,
         "name": "Fran García",
         "position": "defender",
-        "price": 3090000,
+        "price": 3080000,
         "points": 42,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -6612,7 +6651,7 @@
         "id": 2943,
         "name": "Álex Baena",
         "position": "midfielder",
-        "price": 12960000,
+        "price": 11020000,
         "points": 93,
         "expectedPoints": 7.7,
         "status": "ACTIVE",
@@ -6629,7 +6668,7 @@
         "id": 2379,
         "name": "Edu Expósito",
         "position": "midfielder",
-        "price": 6440000,
+        "price": 6410000,
         "points": 72,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -6646,7 +6685,7 @@
         "id": 1602,
         "name": "Rubén García",
         "position": "midfielder",
-        "price": 2050000,
+        "price": 2090000,
         "points": 52,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -6663,7 +6702,7 @@
         "id": 3851,
         "name": "Javier Hernández",
         "position": "midfielder",
-        "price": 2510000,
+        "price": 2520000,
         "points": 42,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -6680,7 +6719,7 @@
         "id": 3977,
         "name": "Lucas Cepeda",
         "position": "midfielder",
-        "price": 2270000,
+        "price": 2330000,
         "points": 49,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -6697,7 +6736,7 @@
         "id": 2895,
         "name": "Fer Niño",
         "position": "striker",
-        "price": 6410000,
+        "price": 6310000,
         "points": 73,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -6711,7 +6750,24 @@
         "image": "/media/players/2895.png"
       }
     ],
-    "bench": [],
+    "bench": [
+      {
+        "id": 3394,
+        "name": "Iker Muñoz",
+        "position": "midfielder",
+        "price": 980000,
+        "points": 37,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3394.png"
+      }
+    ],
     "isMe": false
   },
   {
@@ -6721,13 +6777,13 @@
     "crest": "/media/crests/ana.svg",
     "pos": 4,
     "points": 503,
-    "squadValue": 43260000,
+    "squadValue": 42990000,
     "playerCount": 15,
     "financialHealth": "Saneado / Alta Liquidez (+3.80M € en Caja)",
     "debtAlert": "Excelente remanente de liquidez (+3.80M €) y solvencia plena para acudir a subastas sin deuda.",
     "projectedScore": 57,
-    "formation": "5-3-2",
-    "tacticDescription": "Estructura 5-3-2 orientada a maximizar 57 puntos según plantilla disponible.",
+    "formation": "4-4-2",
+    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 57 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
@@ -6738,32 +6794,33 @@
     ],
     "tacticalAlerts": [
       {
-        "type": "success",
-        "badge": "✅ Once Saneado",
-        "player": "Alineación Óptima",
-        "title": "Sin Bajas ni Riesgos Críticos",
-        "description": "Todos los futbolistas del 11 titular están activos, disponibles y en plenitud para la jornada.",
-        "action": "Mantener la estructura táctica establecida."
+        "type": "suboptimal",
+        "badge": "⚠️ Banquillo Desperdiciado",
+        "player": "Ángel Recio",
+        "position": "defender",
+        "title": "Rendimiento en Reserva",
+        "description": "Tiene a Ángel Recio (40 pts) en el banquillo mientras alinea a Héctor Bellerín (28 pts).",
+        "action": "Valorar permuta táctica dando entrada a Ángel Recio de inicio."
       }
     ],
     "recommendations": [
       {
-        "name": "Iker Muñoz",
-        "pos": "Centrocampista",
-        "price": 920000,
-        "reason": "Oportunidad de mercado (0.92M € · 37 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "name": "Lunin",
+        "pos": "Portero",
+        "price": 390000,
+        "reason": "Alternativa para la portería (0.39M €) para asegurar titularidad y rotación fiable."
+      },
+      {
+        "name": "Carlos Puga",
+        "pos": "Defensa",
+        "price": 1620000,
+        "reason": "Oportunidad de mercado (1.62M € · 46 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       },
       {
         "name": "Adeyemi",
         "pos": "Delantero",
-        "price": 10140000,
-        "reason": "Pieza competitiva en el mercado (10.14M €) adaptable al esquema 5-3-2."
-      },
-      {
-        "name": "Koundé",
-        "pos": "Defensa",
-        "price": 2900000,
-        "reason": "Pieza competitiva en el mercado (2.90M €) adaptable al esquema 5-3-2."
+        "price": 9950000,
+        "reason": "Pieza competitiva en el mercado (9.95M €) adaptable al esquema 4-4-2."
       }
     ],
     "marketBalance": {
@@ -6774,9 +6831,9 @@
       "profitableTradesCount": 8,
       "totalClosedTradesCount": 12,
       "historicalSuccessRatePct": 67,
-      "totalLatentGainsEUR": 3819500,
-      "totalLatentLossesEUR": 20215036,
-      "netLatentBalanceEUR": -16395536,
+      "totalLatentGainsEUR": 3589500,
+      "totalLatentLossesEUR": 20275036,
+      "netLatentBalanceEUR": -16685536,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
       "healthSummary": "Ha asumido minusvalías netas en el mercado (-13.260.546 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
@@ -6895,36 +6952,36 @@
           "playerName": "Aitor Paredes",
           "position": "defender",
           "buyPrice": 2360000,
-          "currentVM": 4440000,
-          "latentDiff": 2080000,
-          "latentRoiPct": 88.1,
+          "currentVM": 4450000,
+          "latentDiff": 2090000,
+          "latentRoiPct": 88.6,
           "isProfit": true
         },
         {
           "playerName": "Ilaix Moriba",
           "position": "midfielder",
           "buyPrice": 2220000,
-          "currentVM": 3170000,
-          "latentDiff": 950000,
-          "latentRoiPct": 42.8,
+          "currentVM": 3150000,
+          "latentDiff": 930000,
+          "latentRoiPct": 41.9,
           "isProfit": true
         },
         {
           "playerName": "Ramón Enríquez",
           "position": "midfielder",
           "buyPrice": 770500,
-          "currentVM": 1230000,
-          "latentDiff": 459500,
-          "latentRoiPct": 59.6,
+          "currentVM": 1240000,
+          "latentDiff": 469500,
+          "latentRoiPct": 60.9,
           "isProfit": true
         },
         {
           "playerName": "Ángel Recio",
           "position": "defender",
           "buyPrice": 1350000,
-          "currentVM": 1680000,
-          "latentDiff": 330000,
-          "latentRoiPct": 24.4,
+          "currentVM": 1450000,
+          "latentDiff": 100000,
+          "latentRoiPct": 7.4,
           "isProfit": true
         },
         {
@@ -6940,85 +6997,85 @@
           "playerName": "Héctor Bellerín",
           "position": "defender",
           "buyPrice": 1890000,
-          "currentVM": 1690000,
-          "latentDiff": -200000,
-          "latentRoiPct": -10.6,
+          "currentVM": 1720000,
+          "latentDiff": -170000,
+          "latentRoiPct": -9,
           "isProfit": false
         },
         {
           "playerName": "Robert Navarro",
           "position": "midfielder",
           "buyPrice": 3660000,
-          "currentVM": 3340000,
-          "latentDiff": -320000,
-          "latentRoiPct": -8.7,
-          "isProfit": false
-        },
-        {
-          "playerName": "Nelson Deossa",
-          "position": "midfielder",
-          "buyPrice": 2500000,
-          "currentVM": 2070000,
-          "latentDiff": -430000,
-          "latentRoiPct": -17.2,
+          "currentVM": 3200000,
+          "latentDiff": -460000,
+          "latentRoiPct": -12.6,
           "isProfit": false
         },
         {
           "playerName": "Marc Roca",
           "position": "midfielder",
           "buyPrice": 3680000,
-          "currentVM": 2910000,
-          "latentDiff": -770000,
-          "latentRoiPct": -20.9,
+          "currentVM": 3030000,
+          "latentDiff": -650000,
+          "latentRoiPct": -17.7,
+          "isProfit": false
+        },
+        {
+          "playerName": "Nelson Deossa",
+          "position": "midfielder",
+          "buyPrice": 2500000,
+          "currentVM": 1760000,
+          "latentDiff": -740000,
+          "latentRoiPct": -29.6,
           "isProfit": false
         },
         {
           "playerName": "Ryan",
           "position": "keeper",
           "buyPrice": 3180000,
-          "currentVM": 2040000,
-          "latentDiff": -1140000,
-          "latentRoiPct": -35.8,
+          "currentVM": 2060000,
+          "latentDiff": -1120000,
+          "latentRoiPct": -35.2,
           "isProfit": false
         },
         {
           "playerName": "Satriano",
           "position": "striker",
           "buyPrice": 4980000,
-          "currentVM": 3630000,
-          "latentDiff": -1350000,
-          "latentRoiPct": -27.1,
+          "currentVM": 3830000,
+          "latentDiff": -1150000,
+          "latentRoiPct": -23.1,
           "isProfit": false
         },
         {
           "playerName": "Sergio Camello",
           "position": "striker",
           "buyPrice": 10510000,
-          "currentVM": 8890000,
-          "latentDiff": -1620000,
-          "latentRoiPct": -15.4,
+          "currentVM": 8970000,
+          "latentDiff": -1540000,
+          "latentRoiPct": -14.7,
           "isProfit": false
         },
         {
           "playerName": "Xavi Espart",
           "position": "defender",
           "buyPrice": 6990000,
-          "currentVM": 4110000,
-          "latentDiff": -2880000,
-          "latentRoiPct": -41.2,
+          "currentVM": 3930000,
+          "latentDiff": -3060000,
+          "latentRoiPct": -43.8,
           "isProfit": false
         },
         {
           "playerName": "Laporte",
           "position": "defender",
           "buyPrice": 13985036,
-          "currentVM": 2640000,
-          "latentDiff": -11345036,
-          "latentRoiPct": -81.1,
+          "currentVM": 2760000,
+          "latentDiff": -11225036,
+          "latentRoiPct": -80.3,
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T17:00:49.851Z"
+      "lastUpdated": "2026-11-06T04:06:26.060Z"
     },
     "speculation": {
       "score": 98,
@@ -7032,8 +7089,8 @@
       "salesCount": 26,
       "estimatedCash": 3800854,
       "prizesEarned": 5030000,
-      "maxCreditLimit": 10815000,
-      "netWealth": 47060854,
+      "maxCreditLimit": 10747500,
+      "netWealth": 46790854,
       "analysis": "Operativa histórica de 26 compras (121.9M €) y 26 ventas (100.7M €). Dinero total rotado: 222.6M € con sobrepuja media de +10.5%."
     },
     "keyDeals": {
@@ -7048,8 +7105,8 @@
       "bestBuy": {
         "player": "Aitor Paredes",
         "price": 2360000,
-        "impact": "Fichado por 2.36M €, hoy cotiza en 4.44M € (+2.080.000 € / +88.1% de plusvalía).",
-        "tag": "📈 +88.1% Plusvalía"
+        "impact": "Fichado por 2.36M €, hoy cotiza en 4.45M € (+2.090.000 € / +88.6% de plusvalía).",
+        "tag": "📈 +88.6% Plusvalía"
       },
       "worstMove": {
         "player": "Pau Cubarsí",
@@ -7763,7 +7820,7 @@
         "id": 2108,
         "name": "Ryan",
         "position": "keeper",
-        "price": 2040000,
+        "price": 2060000,
         "points": 61,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -7780,7 +7837,7 @@
         "id": 3331,
         "name": "Aitor Paredes",
         "position": "defender",
-        "price": 4440000,
+        "price": 4450000,
         "points": 63,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -7797,9 +7854,9 @@
         "id": 4008,
         "name": "Xavi Espart",
         "position": "defender",
-        "price": 4110000,
+        "price": 3930000,
         "points": 53,
-        "expectedPoints": 6.4,
+        "expectedPoints": 5.2,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -7814,7 +7871,7 @@
         "id": 1613,
         "name": "Laporte",
         "position": "defender",
-        "price": 2640000,
+        "price": 2760000,
         "points": 41,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -7831,7 +7888,7 @@
         "id": 3164,
         "name": "Héctor Bellerín",
         "position": "defender",
-        "price": 1690000,
+        "price": 1720000,
         "points": 28,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -7845,12 +7902,12 @@
         "image": "/media/players/3164.png"
       },
       {
-        "id": 4069,
-        "name": "Ángel Recio",
-        "position": "defender",
-        "price": 1680000,
-        "points": 40,
-        "expectedPoints": 4.1,
+        "id": 2313,
+        "name": "Marc Roca",
+        "position": "midfielder",
+        "price": 3030000,
+        "points": 53,
+        "expectedPoints": 5.2,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -7859,13 +7916,13 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/4069.png"
+        "image": "/media/players/2313.png"
       },
       {
         "id": 3048,
         "name": "Robert Navarro",
         "position": "midfielder",
-        "price": 3340000,
+        "price": 3200000,
         "points": 56,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -7882,7 +7939,7 @@
         "id": 3074,
         "name": "Ilaix Moriba",
         "position": "midfielder",
-        "price": 3170000,
+        "price": 3150000,
         "points": 50,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -7896,11 +7953,11 @@
         "image": "/media/players/3074.png"
       },
       {
-        "id": 2313,
-        "name": "Marc Roca",
+        "id": 3891,
+        "name": "Nelson Deossa",
         "position": "midfielder",
-        "price": 2910000,
-        "points": 53,
+        "price": 1760000,
+        "points": 48,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -7910,13 +7967,13 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/2313.png"
+        "image": "/media/players/3891.png"
       },
       {
         "id": 2764,
         "name": "Sergio Camello",
         "position": "striker",
-        "price": 8890000,
+        "price": 8970000,
         "points": 96,
         "expectedPoints": 7.7,
         "status": "ACTIVE",
@@ -7933,7 +7990,7 @@
         "id": 3970,
         "name": "Satriano",
         "position": "striker",
-        "price": 3630000,
+        "price": 3830000,
         "points": 61,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -7949,11 +8006,11 @@
     ],
     "bench": [
       {
-        "id": 3891,
-        "name": "Nelson Deossa",
-        "position": "midfielder",
-        "price": 2070000,
-        "points": 48,
+        "id": 4069,
+        "name": "Ángel Recio",
+        "position": "defender",
+        "price": 1450000,
+        "points": 40,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -7962,13 +8019,13 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/3891.png"
+        "image": "/media/players/4069.png"
       },
       {
         "id": 4074,
         "name": "Ramón Enríquez",
         "position": "midfielder",
-        "price": 1230000,
+        "price": 1240000,
         "points": 41,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -8000,7 +8057,7 @@
         "id": 4028,
         "name": "Abiel Osorio",
         "position": "striker",
-        "price": 1260000,
+        "price": 1280000,
         "points": 30,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -8022,31 +8079,22 @@
     "crest": "/media/crests/suances_nin.svg",
     "pos": 5,
     "points": 491,
-    "squadValue": 54180000,
-    "playerCount": 14,
-    "financialHealth": "Saneado / Alta Liquidez (+4.90M € en Caja)",
-    "debtAlert": "Excelente remanente de liquidez (+4.90M €) y solvencia plena para acudir a subastas sin deuda.",
-    "projectedScore": 52,
+    "squadValue": 51330000,
+    "playerCount": 15,
+    "financialHealth": "Saneado / Alta Liquidez (+4.30M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+4.30M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 53,
     "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 52 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 53 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
+      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
     ],
     "tacticalAlerts": [
-      {
-        "type": "suboptimal",
-        "badge": "⚠️ Banquillo Desperdiciado",
-        "player": " Juan Cruz",
-        "position": "midfielder",
-        "title": "Rendimiento en Reserva",
-        "description": "Tiene a  Juan Cruz (25 pts) en el banquillo mientras alinea a Aimar Oroz (12 pts).",
-        "action": "Valorar permuta táctica dando entrada a  Juan Cruz de inicio."
-      },
       {
         "type": "suboptimal",
         "badge": "⚠️ Banquillo Desperdiciado",
@@ -8055,6 +8103,15 @@
         "title": "Rendimiento en Reserva",
         "description": "Tiene a Beñat Turrientes (33 pts) en el banquillo mientras alinea a Aimar Oroz (12 pts).",
         "action": "Valorar permuta táctica dando entrada a Beñat Turrientes de inicio."
+      },
+      {
+        "type": "suboptimal",
+        "badge": "⚠️ Banquillo Desperdiciado",
+        "player": " Juan Cruz",
+        "position": "midfielder",
+        "title": "Rendimiento en Reserva",
+        "description": "Tiene a  Juan Cruz (25 pts) en el banquillo mientras alinea a Aimar Oroz (12 pts).",
+        "action": "Valorar permuta táctica dando entrada a  Juan Cruz de inicio."
       },
       {
         "type": "suboptimal",
@@ -8068,22 +8125,22 @@
     ],
     "recommendations": [
       {
-        "name": "Koundé",
-        "pos": "Defensa",
-        "price": 2900000,
-        "reason": "Zaguero de jerarquía (2.90M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
-      },
-      {
-        "name": "Iker Muñoz",
-        "pos": "Centrocampista",
-        "price": 920000,
-        "reason": "Centrocampista con llegada (0.92M €) para asociarse con Mbappé y dominar la posesión."
+        "name": "Lunin",
+        "pos": "Portero",
+        "price": 390000,
+        "reason": "Alternativa para la portería (0.39M €) para asegurar titularidad y rotación fiable."
       },
       {
         "name": "Adeyemi",
         "pos": "Delantero",
-        "price": 10140000,
-        "reason": "Oportunidad de mercado (10.14M € · 61 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "price": 9950000,
+        "reason": "Oportunidad de mercado (9.95M € · 61 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+      },
+      {
+        "name": "Carlos Puga",
+        "pos": "Defensa",
+        "price": 1620000,
+        "reason": "Pieza competitiva en el mercado (1.62M €) adaptable al esquema 3-4-3."
       }
     ],
     "marketBalance": {
@@ -8094,9 +8151,9 @@
       "profitableTradesCount": 8,
       "totalClosedTradesCount": 10,
       "historicalSuccessRatePct": 80,
-      "totalLatentGainsEUR": 7449333,
-      "totalLatentLossesEUR": 16924664,
-      "netLatentBalanceEUR": -9475331,
+      "totalLatentGainsEUR": 7639333,
+      "totalLatentLossesEUR": 20424777,
+      "netLatentBalanceEUR": -12785444,
       "healthLabel": "SUPERÁVIT DE TRADING",
       "healthBadgeColor": "emerald",
       "healthSummary": "Genera un superávit neto de +1.427.694 € en operaciones de mercado con una efectividad del 80%.",
@@ -8197,119 +8254,128 @@
           "playerName": "Alex Freeman",
           "position": "defender",
           "buyPrice": 1299999,
-          "currentVM": 4600000,
-          "latentDiff": 3300001,
-          "latentRoiPct": 253.8,
+          "currentVM": 4490000,
+          "latentDiff": 3190001,
+          "latentRoiPct": 245.4,
           "isProfit": true
         },
         {
           "playerName": "Roy Revivo",
           "position": "defender",
           "buyPrice": 499000,
-          "currentVM": 2780000,
-          "latentDiff": 2281000,
-          "latentRoiPct": 457.1,
+          "currentVM": 2740000,
+          "latentDiff": 2241000,
+          "latentRoiPct": 449.1,
           "isProfit": true
         },
         {
           "playerName": "Javi Puado",
           "position": "striker",
           "buyPrice": 1888333,
-          "currentVM": 3000000,
-          "latentDiff": 1111667,
-          "latentRoiPct": 58.9,
+          "currentVM": 3060000,
+          "latentDiff": 1171667,
+          "latentRoiPct": 62,
           "isProfit": true
         },
         {
           "playerName": "Umar Sadiq",
           "position": "striker",
           "buyPrice": 1320002,
-          "currentVM": 2020000,
-          "latentDiff": 699998,
-          "latentRoiPct": 53,
+          "currentVM": 2320000,
+          "latentDiff": 999998,
+          "latentRoiPct": 75.8,
           "isProfit": true
         },
         {
           "playerName": "Álex Calatrava",
           "position": "midfielder",
           "buyPrice": 1523333,
-          "currentVM": 1580000,
-          "latentDiff": 56667,
-          "latentRoiPct": 3.7,
+          "currentVM": 1560000,
+          "latentDiff": 36667,
+          "latentRoiPct": 2.4,
           "isProfit": true
+        },
+        {
+          "playerName": "Riedel",
+          "position": "defender",
+          "buyPrice": 600113,
+          "currentVM": 550000,
+          "latentDiff": -50113,
+          "latentRoiPct": -8.4,
+          "isProfit": false
         },
         {
           "playerName": "Swedberg",
           "position": "midfielder",
           "buyPrice": 1495111,
-          "currentVM": 1320000,
-          "latentDiff": -175111,
-          "latentRoiPct": -11.7,
+          "currentVM": 1110000,
+          "latentDiff": -385111,
+          "latentRoiPct": -25.8,
           "isProfit": false
         },
         {
           "playerName": "Peio Canales",
           "position": "midfielder",
           "buyPrice": 3299999,
-          "currentVM": 2660000,
-          "latentDiff": -639999,
-          "latentRoiPct": -19.4,
+          "currentVM": 2860000,
+          "latentDiff": -439999,
+          "latentRoiPct": -13.3,
           "isProfit": false
         },
         {
           "playerName": "Aimar Oroz",
           "position": "midfielder",
           "buyPrice": 1863333,
-          "currentVM": 1110000,
-          "latentDiff": -753333,
-          "latentRoiPct": -40.4,
+          "currentVM": 1090000,
+          "latentDiff": -773333,
+          "latentRoiPct": -41.5,
           "isProfit": false
         },
         {
           "playerName": "Beñat Turrientes",
           "position": "midfielder",
           "buyPrice": 2190222,
-          "currentVM": 770000,
-          "latentDiff": -1420222,
-          "latentRoiPct": -64.8,
+          "currentVM": 830000,
+          "latentDiff": -1360222,
+          "latentRoiPct": -62.1,
           "isProfit": false
         },
         {
           "playerName": "Etta Eyong",
           "position": "striker",
           "buyPrice": 4099999,
-          "currentVM": 2070000,
-          "latentDiff": -2029999,
-          "latentRoiPct": -49.5,
+          "currentVM": 2010000,
+          "latentDiff": -2089999,
+          "latentRoiPct": -51,
           "isProfit": false
         },
         {
           "playerName": "Mbappé",
           "position": "striker",
           "buyPrice": 34756000,
-          "currentVM": 22850000,
-          "latentDiff": -11906000,
-          "latentRoiPct": -34.3,
+          "currentVM": 19430000,
+          "latentDiff": -15326000,
+          "latentRoiPct": -44.1,
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T17:00:51.890Z"
+      "lastUpdated": "2026-11-06T04:06:28.225Z"
     },
     "speculation": {
-      "score": 85,
+      "score": 87,
       "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+12.1%",
       "riskLevel": "Alto Riesgo (Apalancado)",
-      "totalSpent": 73315759,
+      "totalSpent": 73915872,
       "totalReceived": 53308400,
-      "purchasesCount": 23,
+      "purchasesCount": 24,
       "salesCount": 27,
-      "estimatedCash": 4902641,
+      "estimatedCash": 4302528,
       "prizesEarned": 4910000,
-      "maxCreditLimit": 13545000,
-      "netWealth": 59082641,
-      "analysis": "Operativa histórica de 23 compras (73.3M €) y 27 ventas (53.3M €). Dinero total rotado: 126.6M € con sobrepuja media de +12.1%."
+      "maxCreditLimit": 12832500,
+      "netWealth": 55632528,
+      "analysis": "Operativa histórica de 24 compras (73.9M €) y 27 ventas (53.3M €). Dinero total rotado: 127.2M € con sobrepuja media de +12.1%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -8323,8 +8389,8 @@
       "bestBuy": {
         "player": "Alex Freeman",
         "price": 1299999,
-        "impact": "Fichado por 1.30M €, hoy cotiza en 4.60M € (+3.300.001 € / +253.8% de plusvalía).",
-        "tag": "📈 +253.8% Plusvalía"
+        "impact": "Fichado por 1.30M €, hoy cotiza en 4.49M € (+3.190.001 € / +245.4% de plusvalía).",
+        "tag": "📈 +245.4% Plusvalía"
       },
       "worstMove": {
         "player": "Mbappé",
@@ -8640,6 +8706,20 @@
           "seller": "Computer",
           "buyer": "Suances nin",
           "date": "2026-10-27T04:30:56+01:00"
+        },
+        {
+          "playerName": "Riedel",
+          "price": 600113,
+          "marketValue": 550000,
+          "gain": -50113,
+          "gainPct": -8.4,
+          "diff": 50113,
+          "diffPct": 9.1,
+          "isOverbid": true,
+          "isGain": false,
+          "seller": "Computer",
+          "buyer": "Suances nin",
+          "date": "2026-11-06T04:29:40+01:00"
         }
       ],
       "sales": [
@@ -9010,7 +9090,7 @@
         "id": 3428,
         "name": "Álvaro Valles",
         "position": "keeper",
-        "price": 6080000,
+        "price": 6350000,
         "points": 106,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -9027,7 +9107,7 @@
         "id": 3980,
         "name": "Alex Freeman",
         "position": "defender",
-        "price": 4600000,
+        "price": 4490000,
         "points": 60,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -9044,7 +9124,7 @@
         "id": 3017,
         "name": "Juan Foyth",
         "position": "defender",
-        "price": 2730000,
+        "price": 2330000,
         "points": 36,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -9061,7 +9141,7 @@
         "id": 4158,
         "name": "Roy Revivo",
         "position": "defender",
-        "price": 2780000,
+        "price": 2740000,
         "points": 41,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -9078,7 +9158,7 @@
         "id": 3728,
         "name": "Peio Canales",
         "position": "midfielder",
-        "price": 2660000,
+        "price": 2860000,
         "points": 30,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -9095,7 +9175,7 @@
         "id": 4083,
         "name": "Álex Calatrava",
         "position": "midfielder",
-        "price": 1580000,
+        "price": 1560000,
         "points": 43,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -9112,7 +9192,7 @@
         "id": 2953,
         "name": "Aimar Oroz",
         "position": "midfielder",
-        "price": 1110000,
+        "price": 1090000,
         "points": 12,
         "expectedPoints": 2.6,
         "status": "ACTIVE",
@@ -9129,7 +9209,7 @@
         "id": 3278,
         "name": "Swedberg",
         "position": "midfielder",
-        "price": 1320000,
+        "price": 1110000,
         "points": 37,
         "expectedPoints": 2.6,
         "status": "ACTIVE",
@@ -9146,7 +9226,7 @@
         "id": 3469,
         "name": "Mbappé",
         "position": "striker",
-        "price": 22850000,
+        "price": 19430000,
         "points": 130,
         "expectedPoints": 9,
         "status": "ACTIVE",
@@ -9163,9 +9243,9 @@
         "id": 2637,
         "name": "Javi Puado",
         "position": "striker",
-        "price": 3000000,
+        "price": 3060000,
         "points": 9,
-        "expectedPoints": 4.1,
+        "expectedPoints": 5.2,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -9180,7 +9260,7 @@
         "id": 3270,
         "name": "Umar Sadiq",
         "position": "striker",
-        "price": 2020000,
+        "price": 2320000,
         "points": 28,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -9196,11 +9276,11 @@
     ],
     "bench": [
       {
-        "id": 2571,
-        "name": " Juan Cruz",
-        "position": "midfielder",
-        "price": 610000,
-        "points": 25,
+        "id": 3920,
+        "name": "Riedel",
+        "position": "defender",
+        "price": 550000,
+        "points": 28,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -9209,13 +9289,13 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/2571.png"
+        "image": "/media/players/3920.png"
       },
       {
         "id": 3174,
         "name": "Beñat Turrientes",
         "position": "midfielder",
-        "price": 770000,
+        "price": 830000,
         "points": 33,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -9228,10 +9308,26 @@
         "image": "/media/players/3174.png"
       },
       {
+        "id": 2571,
+        "name": " Juan Cruz",
+        "position": "midfielder",
+        "price": 600000,
+        "points": 25,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/2571.png"
+      },
+      {
         "id": 3574,
         "name": "Etta Eyong",
         "position": "striker",
-        "price": 2070000,
+        "price": 2010000,
         "points": 22,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -9253,13 +9349,13 @@
     "crest": "/media/crests/amigos_de_nin.svg",
     "pos": 6,
     "points": 478,
-    "squadValue": 34790000,
+    "squadValue": 36060000,
     "playerCount": 12,
     "financialHealth": "Saneado / Alta Liquidez (+1.11M € en Caja)",
     "debtAlert": "Excelente remanente de liquidez (+1.11M €) y solvencia plena para acudir a subastas sin deuda.",
-    "projectedScore": 53,
+    "projectedScore": 54,
     "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 53 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 54 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
@@ -9281,22 +9377,22 @@
     ],
     "recommendations": [
       {
-        "name": "Iker Muñoz",
-        "pos": "Centrocampista",
-        "price": 920000,
-        "reason": "Oportunidad de mercado (0.92M € · 37 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "name": "Lunin",
+        "pos": "Portero",
+        "price": 390000,
+        "reason": "Alternativa para la portería (0.39M €) para asegurar titularidad y rotación fiable."
+      },
+      {
+        "name": "Carlos Puga",
+        "pos": "Defensa",
+        "price": 1620000,
+        "reason": "Oportunidad de mercado (1.62M € · 46 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       },
       {
         "name": "Adeyemi",
         "pos": "Delantero",
-        "price": 10140000,
-        "reason": "Pieza competitiva en el mercado (10.14M €) adaptable al esquema 3-4-3."
-      },
-      {
-        "name": "Koundé",
-        "pos": "Defensa",
-        "price": 2900000,
-        "reason": "Pieza competitiva en el mercado (2.90M €) adaptable al esquema 3-4-3."
+        "price": 9950000,
+        "reason": "Pieza competitiva en el mercado (9.95M €) adaptable al esquema 3-4-3."
       }
     ],
     "marketBalance": {
@@ -9308,8 +9404,8 @@
       "totalClosedTradesCount": 4,
       "historicalSuccessRatePct": 0,
       "totalLatentGainsEUR": 0,
-      "totalLatentLossesEUR": 17600310,
-      "netLatentBalanceEUR": -17600310,
+      "totalLatentLossesEUR": 16880310,
+      "netLatentBalanceEUR": -16880310,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
       "healthSummary": "Ha asumido minusvalías netas en el mercado (-3.104.300 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
@@ -9356,88 +9452,88 @@
           "playerName": "Unai López",
           "position": "midfielder",
           "buyPrice": 3805000,
-          "currentVM": 3250000,
-          "latentDiff": -555000,
-          "latentRoiPct": -14.6,
+          "currentVM": 3450000,
+          "latentDiff": -355000,
+          "latentRoiPct": -9.3,
           "isProfit": false
         },
         {
           "playerName": "Unai Simón",
           "position": "keeper",
           "buyPrice": 5135005,
-          "currentVM": 3900000,
-          "latentDiff": -1235005,
-          "latentRoiPct": -24.1,
+          "currentVM": 3950000,
+          "latentDiff": -1185005,
+          "latentRoiPct": -23.1,
           "isProfit": false
         },
         {
           "playerName": "Abel Bretones",
           "position": "defender",
           "buyPrice": 2205000,
-          "currentVM": 930000,
-          "latentDiff": -1275000,
-          "latentRoiPct": -57.8,
-          "isProfit": false
-        },
-        {
-          "playerName": "Amatucci",
-          "position": "midfielder",
-          "buyPrice": 4125000,
-          "currentVM": 2470000,
-          "latentDiff": -1655000,
-          "latentRoiPct": -40.1,
+          "currentVM": 960000,
+          "latentDiff": -1245000,
+          "latentRoiPct": -56.5,
           "isProfit": false
         },
         {
           "playerName": "Hugo Duro",
           "position": "striker",
           "buyPrice": 3657305,
-          "currentVM": 1930000,
-          "latentDiff": -1727305,
-          "latentRoiPct": -47.2,
+          "currentVM": 2190000,
+          "latentDiff": -1467305,
+          "latentRoiPct": -40.1,
+          "isProfit": false
+        },
+        {
+          "playerName": "Amatucci",
+          "position": "midfielder",
+          "buyPrice": 4125000,
+          "currentVM": 2410000,
+          "latentDiff": -1715000,
+          "latentRoiPct": -41.6,
           "isProfit": false
         },
         {
           "playerName": "Sergio Gómez",
           "position": "defender",
           "buyPrice": 4885000,
-          "currentVM": 3050000,
-          "latentDiff": -1835000,
-          "latentRoiPct": -37.6,
+          "currentVM": 3010000,
+          "latentDiff": -1875000,
+          "latentRoiPct": -38.4,
           "isProfit": false
         },
         {
           "playerName": "Álvaro García",
           "position": "midfielder",
           "buyPrice": 5750000,
-          "currentVM": 3540000,
-          "latentDiff": -2210000,
-          "latentRoiPct": -38.4,
+          "currentVM": 3410000,
+          "latentDiff": -2340000,
+          "latentRoiPct": -40.7,
           "isProfit": false
         },
         {
           "playerName": "Borja Iglesias",
           "position": "striker",
           "buyPrice": 4128000,
-          "currentVM": 1600000,
-          "latentDiff": -2528000,
-          "latentRoiPct": -61.2,
+          "currentVM": 1670000,
+          "latentDiff": -2458000,
+          "latentRoiPct": -59.5,
           "isProfit": false
         },
         {
           "playerName": "Marcos Llorente",
           "position": "defender",
           "buyPrice": 9860000,
-          "currentVM": 5280000,
-          "latentDiff": -4580000,
-          "latentRoiPct": -46.5,
+          "currentVM": 5620000,
+          "latentDiff": -4240000,
+          "latentRoiPct": -43,
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T17:00:50.516Z"
+      "lastUpdated": "2026-11-06T04:06:26.780Z"
     },
     "speculation": {
-      "score": 76,
+      "score": 75,
       "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+15.3%",
@@ -9448,8 +9544,8 @@
       "salesCount": 16,
       "estimatedCash": 1109000,
       "prizesEarned": 4780000,
-      "maxCreditLimit": 8697500,
-      "netWealth": 35899000,
+      "maxCreditLimit": 9015000,
+      "netWealth": 37169000,
       "analysis": "Operativa histórica de 13 compras (55.2M €) y 16 ventas (31.5M €). Dinero total rotado: 86.6M € con sobrepuja media de +15.3%."
     },
     "keyDeals": {
@@ -9849,7 +9945,7 @@
         "id": 2669,
         "name": "Unai Simón",
         "position": "keeper",
-        "price": 3900000,
+        "price": 3950000,
         "points": 73,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -9866,7 +9962,7 @@
         "id": 2158,
         "name": "Marcos Llorente",
         "position": "defender",
-        "price": 5280000,
+        "price": 5620000,
         "points": 63,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -9883,7 +9979,7 @@
         "id": 2990,
         "name": "Sergio Gómez",
         "position": "defender",
-        "price": 3050000,
+        "price": 3010000,
         "points": 42,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -9900,9 +9996,9 @@
         "id": 2447,
         "name": "Djené",
         "position": "defender",
-        "price": 960000,
+        "price": 1050000,
         "points": 27,
-        "expectedPoints": 2,
+        "expectedPoints": 2.6,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -9917,7 +10013,7 @@
         "id": 3387,
         "name": "Pape Gueye",
         "position": "midfielder",
-        "price": 5370000,
+        "price": 5570000,
         "points": 62,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -9934,7 +10030,7 @@
         "id": 1771,
         "name": "Álvaro García",
         "position": "midfielder",
-        "price": 3540000,
+        "price": 3410000,
         "points": 57,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -9951,7 +10047,7 @@
         "id": 1969,
         "name": "Unai López",
         "position": "midfielder",
-        "price": 3250000,
+        "price": 3450000,
         "points": 73,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -9968,7 +10064,7 @@
         "id": 4092,
         "name": "Amatucci",
         "position": "midfielder",
-        "price": 2470000,
+        "price": 2410000,
         "points": 43,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -9985,7 +10081,7 @@
         "id": 2550,
         "name": "Hugo Duro",
         "position": "striker",
-        "price": 1930000,
+        "price": 2190000,
         "points": 25,
         "expectedPoints": 5.1,
         "status": "ACTIVE",
@@ -10002,7 +10098,7 @@
         "id": 2009,
         "name": "Borja Iglesias",
         "position": "striker",
-        "price": 1600000,
+        "price": 1670000,
         "points": 8,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -10019,7 +10115,7 @@
         "id": 3563,
         "name": "Isaac Romero",
         "position": "striker",
-        "price": 2510000,
+        "price": 2770000,
         "points": 47,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -10038,7 +10134,7 @@
         "id": 3651,
         "name": "Abel Bretones",
         "position": "defender",
-        "price": 930000,
+        "price": 960000,
         "points": 34,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -10060,15 +10156,15 @@
     "crest": "/media/crests/m4_team.svg",
     "pos": 7,
     "points": 440,
-    "squadValue": 64800000,
+    "squadValue": 63170000,
     "playerCount": 18,
     "financialHealth": "Apalancado / Saldo Negativo (-10.20M €)",
-    "debtAlert": "Saldo en descubierto (-10.20M €). Consume el 62.9% del límite de crédito permitido (16.20M €). Exige ventas antes de puntuar.",
-    "projectedScore": 59,
+    "debtAlert": "Saldo en descubierto (-10.20M €). Consume el 64.6% del límite de crédito permitido (15.79M €). Exige ventas antes de puntuar.",
+    "projectedScore": 58,
     "formation": "3-5-2",
-    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 59 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 58 puntos según plantilla disponible.",
     "strengths": [
-      "Patrimonio de plantilla consolidado en Primera (64.80M €).",
+      "Patrimonio de plantilla consolidado en Primera (63.17M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
@@ -10089,22 +10185,22 @@
     ],
     "recommendations": [
       {
-        "name": "Riedel",
+        "name": "Adriá Altimira",
         "pos": "Defensa",
-        "price": 600000,
-        "reason": "Zaguero de jerarquía (0.60M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
+        "price": 1190000,
+        "reason": "Zaguero de jerarquía (1.19M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
       },
       {
-        "name": "Iker Muñoz",
-        "pos": "Centrocampista",
-        "price": 920000,
-        "reason": "Oportunidad de mercado (0.92M € · 37 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "name": "Carlos Puga",
+        "pos": "Defensa",
+        "price": 1620000,
+        "reason": "Oportunidad de mercado (1.62M € · 46 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       },
       {
         "name": "Adeyemi",
         "pos": "Delantero",
-        "price": 10140000,
-        "reason": "Pieza competitiva en el mercado (10.14M €) adaptable al esquema 3-5-2."
+        "price": 9950000,
+        "reason": "Pieza competitiva en el mercado (9.95M €) adaptable al esquema 3-5-2."
       }
     ],
     "marketBalance": {
@@ -10115,9 +10211,9 @@
       "profitableTradesCount": 12,
       "totalClosedTradesCount": 28,
       "historicalSuccessRatePct": 43,
-      "totalLatentGainsEUR": 5010010,
-      "totalLatentLossesEUR": 29264054,
-      "netLatentBalanceEUR": -24254044,
+      "totalLatentGainsEUR": 4400010,
+      "totalLatentLossesEUR": 29974054,
+      "netLatentBalanceEUR": -25574044,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
       "healthSummary": "Ha asumido minusvalías netas en el mercado (-21.872.979 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
@@ -10377,30 +10473,21 @@
       ],
       "latentTrades": [
         {
-          "playerName": "Lemar",
-          "position": "midfielder",
-          "buyPrice": 2899990,
-          "currentVM": 4440000,
-          "latentDiff": 1540010,
-          "latentRoiPct": 53.1,
-          "isProfit": true
-        },
-        {
           "playerName": "Carvajal",
           "position": "defender",
           "buyPrice": 2260000,
-          "currentVM": 3350000,
-          "latentDiff": 1090000,
-          "latentRoiPct": 48.2,
+          "currentVM": 3680000,
+          "latentDiff": 1420000,
+          "latentRoiPct": 62.8,
           "isProfit": true
         },
         {
-          "playerName": "Iván Martín",
+          "playerName": "Lemar",
           "position": "midfielder",
-          "buyPrice": 3360000,
-          "currentVM": 4020000,
-          "latentDiff": 660000,
-          "latentRoiPct": 19.6,
+          "buyPrice": 2899990,
+          "currentVM": 4220000,
+          "latentDiff": 1320010,
+          "latentRoiPct": 45.5,
           "isProfit": true
         },
         {
@@ -10416,36 +10503,45 @@
           "playerName": "Rosier",
           "position": "defender",
           "buyPrice": 499000,
-          "currentVM": 930000,
-          "latentDiff": 431000,
-          "latentRoiPct": 86.4,
+          "currentVM": 970000,
+          "latentDiff": 471000,
+          "latentRoiPct": 94.4,
           "isProfit": true
         },
         {
           "playerName": "Camavinga",
           "position": "midfielder",
           "buyPrice": 2980000,
-          "currentVM": 3390000,
-          "latentDiff": 410000,
-          "latentRoiPct": 13.8,
-          "isProfit": true
-        },
-        {
-          "playerName": "Olasagasti",
-          "position": "midfielder",
-          "buyPrice": 2640000,
-          "currentVM": 2860000,
-          "latentDiff": 220000,
-          "latentRoiPct": 8.3,
+          "currentVM": 3410000,
+          "latentDiff": 430000,
+          "latentRoiPct": 14.4,
           "isProfit": true
         },
         {
           "playerName": "Abde Rebbach",
           "position": "midfielder",
           "buyPrice": 859000,
-          "currentVM": 940000,
-          "latentDiff": 81000,
-          "latentRoiPct": 9.4,
+          "currentVM": 920000,
+          "latentDiff": 61000,
+          "latentRoiPct": 7.1,
+          "isProfit": true
+        },
+        {
+          "playerName": "Iván Martín",
+          "position": "midfielder",
+          "buyPrice": 3360000,
+          "currentVM": 3420000,
+          "latentDiff": 60000,
+          "latentRoiPct": 1.8,
+          "isProfit": true
+        },
+        {
+          "playerName": "Olasagasti",
+          "position": "midfielder",
+          "buyPrice": 2640000,
+          "currentVM": 2700000,
+          "latentDiff": 60000,
+          "latentRoiPct": 2.3,
           "isProfit": true
         },
         {
@@ -10476,30 +10572,21 @@
           "isProfit": false
         },
         {
-          "playerName": "Jon Aramburu",
-          "position": "defender",
-          "buyPrice": 1080000,
-          "currentVM": 890000,
-          "latentDiff": -190000,
-          "latentRoiPct": -17.6,
-          "isProfit": false
-        },
-        {
           "playerName": "Carlos Soler",
           "position": "midfielder",
           "buyPrice": 5999999,
-          "currentVM": 5780000,
-          "latentDiff": -219999,
-          "latentRoiPct": -3.7,
+          "currentVM": 5860000,
+          "latentDiff": -139999,
+          "latentRoiPct": -2.3,
           "isProfit": false
         },
         {
-          "playerName": "Toni Martínez",
-          "position": "striker",
-          "buyPrice": 2960000,
-          "currentVM": 2590000,
-          "latentDiff": -370000,
-          "latentRoiPct": -12.5,
+          "playerName": "Jon Aramburu",
+          "position": "defender",
+          "buyPrice": 1080000,
+          "currentVM": 910000,
+          "latentDiff": -170000,
+          "latentRoiPct": -15.7,
           "isProfit": false
         },
         {
@@ -10512,25 +10599,34 @@
           "isProfit": false
         },
         {
+          "playerName": "Toni Martínez",
+          "position": "striker",
+          "buyPrice": 2960000,
+          "currentVM": 2520000,
+          "latentDiff": -440000,
+          "latentRoiPct": -14.9,
+          "isProfit": false
+        },
+        {
           "playerName": "Pedri",
           "position": "midfielder",
           "buyPrice": 19699000,
-          "currentVM": 14420000,
-          "latentDiff": -5279000,
-          "latentRoiPct": -26.8,
+          "currentVM": 14330000,
+          "latentDiff": -5369000,
+          "latentRoiPct": -27.3,
           "isProfit": false
         },
         {
           "playerName": "Vinícius Júnior",
           "position": "striker",
           "buyPrice": 36870000,
-          "currentVM": 14060000,
-          "latentDiff": -22810000,
-          "latentRoiPct": -61.9,
+          "currentVM": 13410000,
+          "latentDiff": -23460000,
+          "latentRoiPct": -63.6,
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T17:00:51.232Z"
+      "lastUpdated": "2026-11-06T04:06:27.448Z"
     },
     "speculation": {
       "score": 98,
@@ -10544,8 +10640,8 @@
       "salesCount": 42,
       "estimatedCash": -10195823,
       "prizesEarned": 4400000,
-      "maxCreditLimit": 16200000,
-      "netWealth": 54604177,
+      "maxCreditLimit": 15792500,
+      "netWealth": 52974177,
       "analysis": "Operativa histórica de 45 compras (170.2M €) y 42 ventas (135.6M €). Dinero total rotado: 305.8M € con sobrepuja media de +13.2%."
     },
     "keyDeals": {
@@ -10558,10 +10654,10 @@
         "tag": "🎯 3.71 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
-        "player": "Lemar",
-        "price": 2899990,
-        "impact": "Fichado por 2.90M €, hoy cotiza en 4.44M € (+1.540.010 € / +53.1% de plusvalía).",
-        "tag": "📈 +53.1% Plusvalía"
+        "player": "Carvajal",
+        "price": 2260000,
+        "impact": "Fichado por 2.26M €, hoy cotiza en 3.68M € (+1.420.000 € / +62.8% de plusvalía).",
+        "tag": "📈 +62.8% Plusvalía"
       },
       "worstMove": {
         "player": "Vinícius Júnior",
@@ -11755,7 +11851,7 @@
         "id": 4065,
         "name": "Alfonso Herrero",
         "position": "keeper",
-        "price": 2070000,
+        "price": 1760000,
         "points": 56,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -11772,7 +11868,7 @@
         "id": 1683,
         "name": "Carvajal",
         "position": "defender",
-        "price": 3350000,
+        "price": 3680000,
         "points": 6,
         "expectedPoints": 4.6,
         "status": "ACTIVE",
@@ -11789,7 +11885,7 @@
         "id": 3577,
         "name": "Jon Aramburu",
         "position": "defender",
-        "price": 890000,
+        "price": 910000,
         "points": 30,
         "expectedPoints": 2,
         "status": "ACTIVE",
@@ -11806,7 +11902,7 @@
         "id": 3649,
         "name": "Rosier",
         "position": "defender",
-        "price": 930000,
+        "price": 970000,
         "points": 12,
         "expectedPoints": 2,
         "status": "ACTIVE",
@@ -11823,7 +11919,7 @@
         "id": 2969,
         "name": "Pedri",
         "position": "midfielder",
-        "price": 14420000,
+        "price": 14330000,
         "points": 73,
         "expectedPoints": 7.7,
         "status": "ACTIVE",
@@ -11840,7 +11936,7 @@
         "id": 2339,
         "name": "Carlos Soler",
         "position": "midfielder",
-        "price": 5780000,
+        "price": 5860000,
         "points": 59,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -11857,7 +11953,7 @@
         "id": 2596,
         "name": "Lemar",
         "position": "midfielder",
-        "price": 4440000,
+        "price": 4220000,
         "points": 58,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -11874,9 +11970,9 @@
         "id": 3125,
         "name": "Iván Martín",
         "position": "midfielder",
-        "price": 4020000,
+        "price": 3420000,
         "points": 52,
-        "expectedPoints": 6.4,
+        "expectedPoints": 5.2,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -11891,7 +11987,7 @@
         "id": 3163,
         "name": "Camavinga",
         "position": "midfielder",
-        "price": 3390000,
+        "price": 3410000,
         "points": 51,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -11908,7 +12004,7 @@
         "id": 2565,
         "name": "Vinícius Júnior",
         "position": "striker",
-        "price": 14060000,
+        "price": 13410000,
         "points": 40,
         "expectedPoints": 7.7,
         "status": "ACTIVE",
@@ -12008,7 +12104,7 @@
         "id": 3380,
         "name": "Olasagasti",
         "position": "midfielder",
-        "price": 2860000,
+        "price": 2700000,
         "points": 56,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -12024,7 +12120,7 @@
         "id": 3451,
         "name": "Abde Rebbach",
         "position": "midfielder",
-        "price": 940000,
+        "price": 920000,
         "points": 37,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -12040,7 +12136,7 @@
         "id": 3704,
         "name": "Toni Martínez",
         "position": "striker",
-        "price": 2590000,
+        "price": 2520000,
         "points": 35,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -12062,7 +12158,7 @@
     "crest": "/media/crests/melano_plabloroza.svg",
     "pos": 8,
     "points": 408,
-    "squadValue": 37260000,
+    "squadValue": 36990000,
     "playerCount": 15,
     "financialHealth": "Saneado / Alta Liquidez (+1.26M € en Caja)",
     "debtAlert": "Excelente remanente de liquidez (+1.26M €) y solvencia plena para acudir a subastas sin deuda.",
@@ -12089,22 +12185,22 @@
     ],
     "recommendations": [
       {
-        "name": "Iker Muñoz",
-        "pos": "Centrocampista",
-        "price": 920000,
-        "reason": "Oportunidad de mercado (0.92M € · 37 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "name": "Lunin",
+        "pos": "Portero",
+        "price": 390000,
+        "reason": "Alternativa para la portería (0.39M €) para asegurar titularidad y rotación fiable."
+      },
+      {
+        "name": "Carlos Puga",
+        "pos": "Defensa",
+        "price": 1620000,
+        "reason": "Oportunidad de mercado (1.62M € · 46 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       },
       {
         "name": "Adeyemi",
         "pos": "Delantero",
-        "price": 10140000,
-        "reason": "Pieza competitiva en el mercado (10.14M €) adaptable al esquema 4-4-2."
-      },
-      {
-        "name": "Koundé",
-        "pos": "Defensa",
-        "price": 2900000,
-        "reason": "Pieza competitiva en el mercado (2.90M €) adaptable al esquema 4-4-2."
+        "price": 9950000,
+        "reason": "Pieza competitiva en el mercado (9.95M €) adaptable al esquema 4-4-2."
       }
     ],
     "marketBalance": {
@@ -12115,12 +12211,12 @@
       "profitableTradesCount": 1,
       "totalClosedTradesCount": 2,
       "historicalSuccessRatePct": 50,
-      "totalLatentGainsEUR": 1460000,
-      "totalLatentLossesEUR": 13268909,
-      "netLatentBalanceEUR": -11808909,
+      "totalLatentGainsEUR": 1520000,
+      "totalLatentLossesEUR": 13738909,
+      "netLatentBalanceEUR": -12218909,
       "healthLabel": "TRANSICIÓN RENTABLE",
       "healthBadgeColor": "purple",
-      "healthSummary": "Las minusvalías de ventas cerradas (-994.109 €) quedan compensadas por la revalorización latente de su plantilla (+1.460.000 €).",
+      "healthSummary": "Las minusvalías de ventas cerradas (-994.109 €) quedan compensadas por la revalorización latente de su plantilla (+1.520.000 €).",
       "closedOperations": [
         {
           "playerName": "Isco",
@@ -12143,66 +12239,57 @@
       ],
       "latentTrades": [
         {
-          "playerName": "Luismi Cruz",
-          "position": "midfielder",
-          "buyPrice": 2690000,
-          "currentVM": 3430000,
-          "latentDiff": 740000,
-          "latentRoiPct": 27.5,
-          "isProfit": true
-        },
-        {
           "playerName": "Johaneko",
           "position": "defender",
           "buyPrice": 1100000,
-          "currentVM": 1820000,
-          "latentDiff": 720000,
-          "latentRoiPct": 65.5,
+          "currentVM": 1890000,
+          "latentDiff": 790000,
+          "latentRoiPct": 71.8,
+          "isProfit": true
+        },
+        {
+          "playerName": "Luismi Cruz",
+          "position": "midfielder",
+          "buyPrice": 2690000,
+          "currentVM": 3420000,
+          "latentDiff": 730000,
+          "latentRoiPct": 27.1,
           "isProfit": true
         },
         {
           "playerName": "Peque",
           "position": "midfielder",
           "buyPrice": 480000,
-          "currentVM": 420000,
-          "latentDiff": -60000,
-          "latentRoiPct": -12.5,
+          "currentVM": 360000,
+          "latentDiff": -120000,
+          "latentRoiPct": -25,
           "isProfit": false
         },
         {
           "playerName": "Oluwaseyi",
           "position": "striker",
           "buyPrice": 950000,
-          "currentVM": 580000,
-          "latentDiff": -370000,
-          "latentRoiPct": -38.9,
+          "currentVM": 570000,
+          "latentDiff": -380000,
+          "latentRoiPct": -40,
           "isProfit": false
         },
         {
           "playerName": "Thiago Pitarch",
           "position": "midfielder",
           "buyPrice": 899000,
-          "currentVM": 270000,
-          "latentDiff": -629000,
-          "latentRoiPct": -70,
+          "currentVM": 260000,
+          "latentDiff": -639000,
+          "latentRoiPct": -71.1,
           "isProfit": false
         },
         {
           "playerName": "Giuliano Simeone",
           "position": "midfielder",
           "buyPrice": 9000009,
-          "currentVM": 7440000,
-          "latentDiff": -1560009,
-          "latentRoiPct": -17.3,
-          "isProfit": false
-        },
-        {
-          "playerName": "Eric García",
-          "position": "defender",
-          "buyPrice": 7200000,
-          "currentVM": 4510000,
-          "latentDiff": -2690000,
-          "latentRoiPct": -37.4,
+          "currentVM": 7410000,
+          "latentDiff": -1590009,
+          "latentRoiPct": -17.7,
           "isProfit": false
         },
         {
@@ -12215,6 +12302,15 @@
           "isProfit": false
         },
         {
+          "playerName": "Eric García",
+          "position": "defender",
+          "buyPrice": 7200000,
+          "currentVM": 4150000,
+          "latentDiff": -3050000,
+          "latentRoiPct": -42.4,
+          "isProfit": false
+        },
+        {
           "playerName": "Budimir",
           "position": "striker",
           "buyPrice": 16699900,
@@ -12224,10 +12320,10 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T17:00:51.563Z"
+      "lastUpdated": "2026-11-06T04:06:27.877Z"
     },
     "speculation": {
-      "score": 63,
+      "score": 64,
       "badge": "🎰 Especulador de Mercado",
       "badgeColor": "#f59e0b",
       "overbidRate": "+9.8%",
@@ -12238,8 +12334,8 @@
       "salesCount": 11,
       "estimatedCash": 1261282,
       "prizesEarned": 4080000,
-      "maxCreditLimit": 9315000,
-      "netWealth": 38521282,
+      "maxCreditLimit": 9247500,
+      "netWealth": 38251282,
       "analysis": "Operativa histórica de 11 compras (56.5M €) y 11 ventas (33.7M €). Dinero total rotado: 90.2M € con sobrepuja media de +9.8%."
     },
     "keyDeals": {
@@ -12252,10 +12348,10 @@
         "tag": "🎯 21.19 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
-        "player": "Luismi Cruz",
-        "price": 2690000,
-        "impact": "Fichado por 2.69M €, hoy cotiza en 3.43M € (+740.000 € / +27.5% de plusvalía).",
-        "tag": "📈 +27.5% Plusvalía"
+        "player": "Johaneko",
+        "price": 1100000,
+        "impact": "Fichado por 1.10M €, hoy cotiza en 1.89M € (+790.000 € / +71.8% de plusvalía).",
+        "tag": "📈 +71.8% Plusvalía"
       },
       "worstMove": {
         "player": "Budimir",
@@ -12561,7 +12657,7 @@
         "id": 3849,
         "name": "Radu",
         "position": "keeper",
-        "price": 2670000,
+        "price": 2760000,
         "points": 74,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -12578,7 +12674,7 @@
         "id": 3100,
         "name": "Eric García",
         "position": "defender",
-        "price": 4510000,
+        "price": 4150000,
         "points": 52,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -12595,7 +12691,7 @@
         "id": 4142,
         "name": "Johaneko",
         "position": "defender",
-        "price": 1820000,
+        "price": 1890000,
         "points": 21,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -12612,7 +12708,7 @@
         "id": 2326,
         "name": "Yeray Álvarez",
         "position": "defender",
-        "price": 1180000,
+        "price": 1160000,
         "points": 24,
         "expectedPoints": 2.6,
         "status": "ACTIVE",
@@ -12629,7 +12725,7 @@
         "id": 3399,
         "name": "Carlos Romero",
         "position": "defender",
-        "price": 1230000,
+        "price": 1250000,
         "points": 25,
         "expectedPoints": 2.6,
         "status": "ACTIVE",
@@ -12646,7 +12742,7 @@
         "id": 3240,
         "name": "Giuliano Simeone",
         "position": "midfielder",
-        "price": 7440000,
+        "price": 7410000,
         "points": 76,
         "expectedPoints": 7.7,
         "status": "ACTIVE",
@@ -12663,7 +12759,7 @@
         "id": 3223,
         "name": "Luismi Cruz",
         "position": "midfielder",
-        "price": 3430000,
+        "price": 3420000,
         "points": 57,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -12680,7 +12776,7 @@
         "id": 4112,
         "name": "Facundo Buonanotte",
         "position": "midfielder",
-        "price": 1110000,
+        "price": 1200000,
         "points": 23,
         "expectedPoints": 2.6,
         "status": "ACTIVE",
@@ -12697,7 +12793,7 @@
         "id": 2408,
         "name": "Pere Milla",
         "position": "midfielder",
-        "price": 390000,
+        "price": 350000,
         "points": 17,
         "expectedPoints": 0.6,
         "status": "ACTIVE",
@@ -12731,7 +12827,7 @@
         "id": 3924,
         "name": "Oluwaseyi",
         "position": "striker",
-        "price": 580000,
+        "price": 570000,
         "points": 17,
         "expectedPoints": 0.7,
         "status": "ACTIVE",
@@ -12750,7 +12846,7 @@
         "id": 3655,
         "name": "Peque",
         "position": "midfielder",
-        "price": 420000,
+        "price": 360000,
         "points": 15,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -12766,7 +12862,7 @@
         "id": 4000,
         "name": "Thiago Pitarch",
         "position": "midfielder",
-        "price": 270000,
+        "price": 260000,
         "points": 0,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -12820,7 +12916,7 @@
     "crest": "/media/crest.jpg",
     "pos": 9,
     "points": 349,
-    "squadValue": 33990000,
+    "squadValue": 32980000,
     "playerCount": 16,
     "financialHealth": "Solvente Ajustado (+543k € en Caja)",
     "debtAlert": "Saldo positivo (+543k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
@@ -12833,7 +12929,7 @@
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -12847,22 +12943,22 @@
     ],
     "recommendations": [
       {
-        "name": "Iker Muñoz",
-        "pos": "Centrocampista",
-        "price": 920000,
-        "reason": "Oportunidad de mercado (0.92M € · 37 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
-      },
-      {
-        "name": "Adeyemi",
-        "pos": "Delantero",
-        "price": 10140000,
-        "reason": "Pieza competitiva en el mercado (10.14M €) adaptable al esquema 4-4-2."
-      },
-      {
-        "name": "Koundé",
+        "name": "Adriá Altimira",
         "pos": "Defensa",
-        "price": 2900000,
-        "reason": "Pieza competitiva en el mercado (2.90M €) adaptable al esquema 4-4-2."
+        "price": 1190000,
+        "reason": "Zaguero de jerarquía (1.19M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
+      },
+      {
+        "name": "Lunin",
+        "pos": "Portero",
+        "price": 390000,
+        "reason": "Alternativa para la portería (0.39M €) para asegurar titularidad y rotación fiable."
+      },
+      {
+        "name": "Carlos Puga",
+        "pos": "Defensa",
+        "price": 1620000,
+        "reason": "Oportunidad de mercado (1.62M € · 46 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       }
     ],
     "marketBalance": {
@@ -12873,9 +12969,9 @@
       "profitableTradesCount": 22,
       "totalClosedTradesCount": 39,
       "historicalSuccessRatePct": 56,
-      "totalLatentGainsEUR": 940000,
-      "totalLatentLossesEUR": 15830000,
-      "netLatentBalanceEUR": -14890000,
+      "totalLatentGainsEUR": 820000,
+      "totalLatentLossesEUR": 16610000,
+      "netLatentBalanceEUR": -15790000,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
       "healthSummary": "Ha asumido minusvalías netas en el mercado (-11.169.512 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
@@ -13237,37 +13333,28 @@
           "playerName": "Johnny Cardoso",
           "position": "midfielder",
           "buyPrice": 1090000,
-          "currentVM": 1700000,
-          "latentDiff": 610000,
-          "latentRoiPct": 56,
+          "currentVM": 1670000,
+          "latentDiff": 580000,
+          "latentRoiPct": 53.2,
           "isProfit": true
         },
         {
           "playerName": "Pau Navarro",
           "position": "defender",
           "buyPrice": 930000,
-          "currentVM": 1190000,
-          "latentDiff": 260000,
-          "latentRoiPct": 28,
+          "currentVM": 1170000,
+          "latentDiff": 240000,
+          "latentRoiPct": 25.8,
           "isProfit": true
         },
         {
-          "playerName": "Adrián de la Fuente",
-          "position": "defender",
-          "buyPrice": 3860000,
-          "currentVM": 3930000,
-          "latentDiff": 70000,
-          "latentRoiPct": 1.8,
-          "isProfit": true
-        },
-        {
-          "playerName": "Aihen Muñoz",
-          "position": "defender",
-          "buyPrice": 210000,
-          "currentVM": 210000,
-          "latentDiff": 0,
-          "latentRoiPct": 0,
-          "isProfit": true
+          "playerName": "Christantus Uche",
+          "position": "striker",
+          "buyPrice": 180000,
+          "currentVM": 170000,
+          "latentDiff": -10000,
+          "latentRoiPct": -5.6,
+          "isProfit": false
         },
         {
           "playerName": "Cestero",
@@ -13279,21 +13366,21 @@
           "isProfit": false
         },
         {
-          "playerName": "Christantus Uche",
-          "position": "striker",
-          "buyPrice": 180000,
-          "currentVM": 160000,
+          "playerName": "Aihen Muñoz",
+          "position": "defender",
+          "buyPrice": 210000,
+          "currentVM": 190000,
           "latentDiff": -20000,
-          "latentRoiPct": -11.1,
+          "latentRoiPct": -9.5,
           "isProfit": false
         },
         {
           "playerName": "Nizar",
           "position": "midfielder",
           "buyPrice": 210000,
-          "currentVM": 190000,
-          "latentDiff": -20000,
-          "latentRoiPct": -9.5,
+          "currentVM": 180000,
+          "latentDiff": -30000,
+          "latentRoiPct": -14.3,
           "isProfit": false
         },
         {
@@ -13324,43 +13411,52 @@
           "isProfit": false
         },
         {
+          "playerName": "Adrián de la Fuente",
+          "position": "defender",
+          "buyPrice": 3860000,
+          "currentVM": 3350000,
+          "latentDiff": -510000,
+          "latentRoiPct": -13.2,
+          "isProfit": false
+        },
+        {
           "playerName": "Denis Suárez",
           "position": "midfielder",
           "buyPrice": 2100000,
-          "currentVM": 1420000,
-          "latentDiff": -680000,
-          "latentRoiPct": -32.4,
+          "currentVM": 1350000,
+          "latentDiff": -750000,
+          "latentRoiPct": -35.7,
           "isProfit": false
         },
         {
           "playerName": "David Soria",
           "position": "keeper",
           "buyPrice": 4820000,
-          "currentVM": 3690000,
-          "latentDiff": -1130000,
-          "latentRoiPct": -23.4,
+          "currentVM": 3310000,
+          "latentDiff": -1510000,
+          "latentRoiPct": -31.3,
           "isProfit": false
         },
         {
           "playerName": "Mariano Díaz",
           "position": "striker",
           "buyPrice": 6315000,
-          "currentVM": 4080000,
-          "latentDiff": -2235000,
-          "latentRoiPct": -35.4,
+          "currentVM": 4230000,
+          "latentDiff": -2085000,
+          "latentRoiPct": -33,
           "isProfit": false
         },
         {
           "playerName": "Fede Valverde",
           "position": "midfielder",
           "buyPrice": 20510000,
-          "currentVM": 9110000,
-          "latentDiff": -11400000,
-          "latentRoiPct": -55.6,
+          "currentVM": 9160000,
+          "latentDiff": -11350000,
+          "latentRoiPct": -55.3,
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T17:00:52.276Z"
+      "lastUpdated": "2026-11-06T04:06:28.555Z"
     },
     "speculation": {
       "score": 98,
@@ -13374,8 +13470,8 @@
       "salesCount": 54,
       "estimatedCash": 543389,
       "prizesEarned": 3490000,
-      "maxCreditLimit": 8497500,
-      "netWealth": 34533389,
+      "maxCreditLimit": 8245000,
+      "netWealth": 33523389,
       "analysis": "Operativa histórica de 55 compras (83.4M €) y 54 ventas (61.0M €). Dinero total rotado: 144.4M € con sobrepuja media de +13.8%."
     },
     "keyDeals": {
@@ -13390,8 +13486,8 @@
       "bestBuy": {
         "player": "Johnny Cardoso",
         "price": 1090000,
-        "impact": "Fichado por 1.09M €, hoy cotiza en 1.70M € (+610.000 € / +56% de plusvalía).",
-        "tag": "📈 +56% Plusvalía"
+        "impact": "Fichado por 1.09M €, hoy cotiza en 1.67M € (+580.000 € / +53.2% de plusvalía).",
+        "tag": "📈 +53.2% Plusvalía"
       },
       "worstMove": {
         "player": "Fede Valverde",
@@ -14867,7 +14963,7 @@
         "id": 2206,
         "name": "David Soria",
         "position": "keeper",
-        "price": 3690000,
+        "price": 3310000,
         "points": 62,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -14884,7 +14980,7 @@
         "id": 3825,
         "name": "Adrián de la Fuente",
         "position": "defender",
-        "price": 3930000,
+        "price": 3350000,
         "points": 61,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -14901,7 +14997,7 @@
         "id": 2251,
         "name": "Aïssa Mandi",
         "position": "defender",
-        "price": 2090000,
+        "price": 2070000,
         "points": 42,
         "expectedPoints": 5.1,
         "status": "ACTIVE",
@@ -14918,7 +15014,7 @@
         "id": 3698,
         "name": "Pau Navarro",
         "position": "defender",
-        "price": 1190000,
+        "price": 1170000,
         "points": 25,
         "expectedPoints": 2.6,
         "status": "ACTIVE",
@@ -14952,7 +15048,7 @@
         "id": 2415,
         "name": "Fede Valverde",
         "position": "midfielder",
-        "price": 9110000,
+        "price": 9160000,
         "points": 59,
         "expectedPoints": 7.7,
         "status": "ACTIVE",
@@ -14969,7 +15065,7 @@
         "id": 3553,
         "name": "Johnny Cardoso",
         "position": "midfielder",
-        "price": 1700000,
+        "price": 1670000,
         "points": 30,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -14986,7 +15082,7 @@
         "id": 1876,
         "name": "Denis Suárez",
         "position": "midfielder",
-        "price": 1420000,
+        "price": 1350000,
         "points": 44,
         "expectedPoints": 2.6,
         "status": "ACTIVE",
@@ -15020,7 +15116,7 @@
         "id": 1927,
         "name": "Gerard Moreno",
         "position": "striker",
-        "price": 4240000,
+        "price": 4150000,
         "points": 53,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -15037,7 +15133,7 @@
         "id": 2304,
         "name": "Mariano Díaz",
         "position": "striker",
-        "price": 4080000,
+        "price": 4230000,
         "points": 76,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -15072,7 +15168,7 @@
         "id": 2719,
         "name": "Aihen Muñoz",
         "position": "defender",
-        "price": 210000,
+        "price": 190000,
         "points": 8,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -15104,7 +15200,7 @@
         "id": 4174,
         "name": "Nizar",
         "position": "midfielder",
-        "price": 190000,
+        "price": 180000,
         "points": 5,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -15120,7 +15216,7 @@
         "id": 3636,
         "name": "Christantus Uche",
         "position": "striker",
-        "price": 160000,
+        "price": 170000,
         "points": 0,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -15142,10 +15238,10 @@
     "crest": "/media/crests/hache_fc.svg",
     "pos": 10,
     "points": 225,
-    "squadValue": 44170000,
+    "squadValue": 42150000,
     "playerCount": 17,
     "financialHealth": "Apalancado / Saldo Negativo (-1.06M €)",
-    "debtAlert": "Saldo en descubierto (-1.06M €). Consume el 9.6% del límite de crédito permitido (11.04M €). Exige ventas antes de puntuar.",
+    "debtAlert": "Saldo en descubierto (-1.06M €). Consume el 10.0% del límite de crédito permitido (10.54M €). Exige ventas antes de puntuar.",
     "projectedScore": 56,
     "formation": "5-4-1",
     "tacticDescription": "Estructura 5-4-1 orientada a maximizar 56 puntos según plantilla disponible.",
@@ -15169,22 +15265,22 @@
     ],
     "recommendations": [
       {
-        "name": "Iker Muñoz",
-        "pos": "Centrocampista",
-        "price": 920000,
-        "reason": "Centrocampista con llegada (0.92M €) para asociarse con Huijsen y dominar la posesión."
+        "name": "Juan Carlos Arana",
+        "pos": "Delantero",
+        "price": 160000,
+        "reason": "Refuerzo de ataque (0.16M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
       },
       {
-        "name": "Riedel",
+        "name": "Adriá Altimira",
         "pos": "Defensa",
-        "price": 600000,
-        "reason": "Zaguero de jerarquía (0.60M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
+        "price": 1190000,
+        "reason": "Zaguero de jerarquía (1.19M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
       },
       {
-        "name": "Balliu",
+        "name": "Carlos Puga",
         "pos": "Defensa",
-        "price": 620000,
-        "reason": "Oportunidad de mercado (0.62M € · 24 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "price": 1620000,
+        "reason": "Oportunidad de mercado (1.62M € · 46 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       }
     ],
     "marketBalance": {
@@ -15195,39 +15291,39 @@
       "profitableTradesCount": 0,
       "totalClosedTradesCount": 0,
       "historicalSuccessRatePct": 0,
-      "totalLatentGainsEUR": 319024,
-      "totalLatentLossesEUR": 21082669,
-      "netLatentBalanceEUR": -20763645,
+      "totalLatentGainsEUR": 269024,
+      "totalLatentLossesEUR": 21962669,
+      "netLatentBalanceEUR": -21693645,
       "healthLabel": "DEPRECIACIÓN EN CARTERA",
       "healthBadgeColor": "red",
-      "healthSummary": "Mantiene los 8 fichajes realizados en plantilla con una minusvalía latente acumulada de -21.082.669 € debido a sobrepujas iniciales y posterior depreciación de mercado.",
+      "healthSummary": "Mantiene los 8 fichajes realizados en plantilla con una minusvalía latente acumulada de -21.962.669 € debido a sobrepujas iniciales y posterior depreciación de mercado.",
       "closedOperations": [],
       "latentTrades": [
         {
           "playerName": "Buba Sangaré",
           "position": "defender",
           "buyPrice": 990976,
-          "currentVM": 1310000,
-          "latentDiff": 319024,
-          "latentRoiPct": 32.2,
+          "currentVM": 1260000,
+          "latentDiff": 269024,
+          "latentRoiPct": 27.1,
           "isProfit": true
         },
         {
           "playerName": "Pablo Ibáñez",
           "position": "midfielder",
           "buyPrice": 2934579,
-          "currentVM": 2430000,
-          "latentDiff": -504579,
-          "latentRoiPct": -17.2,
+          "currentVM": 2610000,
+          "latentDiff": -324579,
+          "latentRoiPct": -11.1,
           "isProfit": false
         },
         {
           "playerName": "Antonio Blanco",
           "position": "midfielder",
           "buyPrice": 3864000,
-          "currentVM": 1740000,
-          "latentDiff": -2124000,
-          "latentRoiPct": -55,
+          "currentVM": 1720000,
+          "latentDiff": -2144000,
+          "latentRoiPct": -55.5,
           "isProfit": false
         },
         {
@@ -15243,43 +15339,43 @@
           "playerName": "Nahuel Tenaglia",
           "position": "defender",
           "buyPrice": 6127000,
-          "currentVM": 3470000,
-          "latentDiff": -2657000,
-          "latentRoiPct": -43.4,
+          "currentVM": 3290000,
+          "latentDiff": -2837000,
+          "latentRoiPct": -46.3,
           "isProfit": false
         },
         {
           "playerName": "Tyrhys Dolan",
           "position": "midfielder",
           "buyPrice": 4200090,
-          "currentVM": 830000,
-          "latentDiff": -3370090,
-          "latentRoiPct": -80.2,
+          "currentVM": 790000,
+          "latentDiff": -3410090,
+          "latentRoiPct": -81.2,
           "isProfit": false
         },
         {
           "playerName": "Cucho Hernández",
           "position": "striker",
           "buyPrice": 7768900,
-          "currentVM": 3470000,
-          "latentDiff": -4298900,
-          "latentRoiPct": -55.3,
+          "currentVM": 3460000,
+          "latentDiff": -4308900,
+          "latentRoiPct": -55.5,
           "isProfit": false
         },
         {
           "playerName": "Pablo Barrios",
           "position": "midfielder",
           "buyPrice": 11040500,
-          "currentVM": 5400000,
-          "latentDiff": -5640500,
-          "latentRoiPct": -51.1,
+          "currentVM": 4590000,
+          "latentDiff": -6450500,
+          "latentRoiPct": -58.4,
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-05T17:00:52.640Z"
+      "lastUpdated": "2026-11-06T04:06:28.967Z"
     },
     "speculation": {
-      "score": 71,
+      "score": 72,
       "badge": "🎰 Especulador de Mercado",
       "badgeColor": "#f59e0b",
       "overbidRate": "+15.7%",
@@ -15290,8 +15386,8 @@
       "salesCount": 6,
       "estimatedCash": -1055245,
       "prizesEarned": 2250000,
-      "maxCreditLimit": 11042500,
-      "netWealth": 43114755,
+      "maxCreditLimit": 10537500,
+      "netWealth": 41094755,
       "analysis": "Operativa histórica de 8 compras (44.9M €) y 6 ventas (21.6M €). Dinero total rotado: 66.5M € con sobrepuja media de +15.7%."
     },
     "keyDeals": {
@@ -15306,8 +15402,8 @@
       "bestBuy": {
         "player": "Buba Sangaré",
         "price": 990976,
-        "impact": "Fichado por 0.99M €, hoy cotiza en 1.31M € (+319.024 € / +32.2% de plusvalía).",
-        "tag": "📈 +32.2% Plusvalía"
+        "impact": "Fichado por 0.99M €, hoy cotiza en 1.26M € (+269.024 € / +27.1% de plusvalía).",
+        "tag": "📈 +27.1% Plusvalía"
       },
       "worstMove": {
         "player": "Nahuel Tenaglia",
@@ -15524,7 +15620,7 @@
         "id": 3515,
         "name": "César Tárrega",
         "position": "defender",
-        "price": 4780000,
+        "price": 4070000,
         "points": 39,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -15541,7 +15637,7 @@
         "id": 3816,
         "name": "Huijsen",
         "position": "defender",
-        "price": 5950000,
+        "price": 5960000,
         "points": 54,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -15558,7 +15654,7 @@
         "id": 3215,
         "name": "Nahuel Tenaglia",
         "position": "defender",
-        "price": 3470000,
+        "price": 3290000,
         "points": 50,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -15575,7 +15671,7 @@
         "id": 4071,
         "name": "Rafita Garrido",
         "position": "defender",
-        "price": 3460000,
+        "price": 3390000,
         "points": 40,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -15592,7 +15688,7 @@
         "id": 3993,
         "name": "Buba Sangaré",
         "position": "defender",
-        "price": 1310000,
+        "price": 1260000,
         "points": 42,
         "expectedPoints": 2.6,
         "status": "ACTIVE",
@@ -15609,7 +15705,7 @@
         "id": 3357,
         "name": "Pablo Barrios",
         "position": "midfielder",
-        "price": 5400000,
+        "price": 4590000,
         "points": 49,
         "expectedPoints": 6.4,
         "status": "ACTIVE",
@@ -15626,7 +15722,7 @@
         "id": 2727,
         "name": "Yangel Herrera",
         "position": "midfielder",
-        "price": 2020000,
+        "price": 1720000,
         "points": 43,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -15643,7 +15739,7 @@
         "id": 3081,
         "name": "Antonio Blanco",
         "position": "midfielder",
-        "price": 1740000,
+        "price": 1720000,
         "points": 44,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -15660,7 +15756,7 @@
         "id": 3311,
         "name": "Pablo Ibáñez",
         "position": "midfielder",
-        "price": 2430000,
+        "price": 2610000,
         "points": 54,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
@@ -15677,7 +15773,7 @@
         "id": 2585,
         "name": "Cucho Hernández",
         "position": "striker",
-        "price": 3470000,
+        "price": 3460000,
         "points": 41,
         "expectedPoints": 5.2,
         "status": "ACTIVE",
@@ -15696,7 +15792,7 @@
         "id": 3123,
         "name": "Matías Dituro",
         "position": "keeper",
-        "price": 1370000,
+        "price": 1390000,
         "points": 53,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -15712,7 +15808,7 @@
         "id": 3507,
         "name": "Marc Casadó",
         "position": "midfielder",
-        "price": 980000,
+        "price": 1000000,
         "points": 13,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -15728,7 +15824,7 @@
         "id": 3885,
         "name": "Tyrhys Dolan",
         "position": "midfielder",
-        "price": 830000,
+        "price": 790000,
         "points": 33,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -15744,7 +15840,7 @@
         "id": 2377,
         "name": "Aleñá",
         "position": "midfielder",
-        "price": 350000,
+        "price": 340000,
         "points": 24,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -15760,7 +15856,7 @@
         "id": 3785,
         "name": "Maroan Sannadi",
         "position": "striker",
-        "price": 940000,
+        "price": 890000,
         "points": 18,
         "status": "ACTIVE",
         "statusInfo": "",
