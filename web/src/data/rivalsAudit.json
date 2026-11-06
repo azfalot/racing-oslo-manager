@@ -6,16 +6,16 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 603,
-    "squadValue": 66430000,
-    "playerCount": 19,
-    "financialHealth": "Saneado / Alta Liquidez (+100.33M € en Caja)",
-    "debtAlert": "Excelente remanente de liquidez (+100.33M €) y solvencia plena para acudir a subastas sin deuda.",
+    "squadValue": 64890000,
+    "playerCount": 16,
+    "financialHealth": "Saneado / Alta Liquidez (+101.91M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+101.91M €) y solvencia plena para acudir a subastas sin deuda.",
     "projectedScore": 60,
     "formation": "3-4-3",
     "tacticDescription": "Estructura 3-4-3 orientada a maximizar 60 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 603 puntos acumulados (201.0 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (66.43M €).",
+      "Patrimonio de plantilla consolidado en Primera (64.89M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
@@ -55,18 +55,18 @@
     ],
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
-      "realizedGainsEUR": 82488016,
-      "realizedLossesEUR": 26246330,
-      "netRealizedBalanceEUR": 56241686,
-      "profitableTradesCount": 36,
-      "totalClosedTradesCount": 78,
-      "historicalSuccessRatePct": 46,
+      "realizedGainsEUR": 82493114,
+      "realizedLossesEUR": 24969429,
+      "netRealizedBalanceEUR": 57523685,
+      "profitableTradesCount": 37,
+      "totalClosedTradesCount": 79,
+      "historicalSuccessRatePct": 47,
       "totalLatentGainsEUR": 2883971,
-      "totalLatentLossesEUR": 38150286,
-      "netLatentBalanceEUR": -35266315,
+      "totalLatentLossesEUR": 36603060,
+      "netLatentBalanceEUR": -33719089,
       "healthLabel": "SUPERÁVIT DE TRADING",
       "healthBadgeColor": "emerald",
-      "healthSummary": "Genera un superávit neto de +56.241.686 € en operaciones de mercado con una efectividad del 46%.",
+      "healthSummary": "Genera un superávit neto de +57.523.685 € en operaciones de mercado con una efectividad del 47%.",
       "closedOperations": [
         {
           "playerName": "Lookman",
@@ -393,6 +393,15 @@
           "sellDate": "2026-10-03T04:29:17+02:00"
         },
         {
+          "playerName": "Álvaro Ferllo",
+          "buyPrice": 321002,
+          "sellPrice": 326100,
+          "diff": 5098,
+          "roiPct": 1.6,
+          "isProfit": true,
+          "sellDate": "2026-11-06T04:29:40+01:00"
+        },
+        {
           "playerName": "Rego",
           "buyPrice": 160006,
           "sellPrice": 157900,
@@ -436,6 +445,15 @@
           "roiPct": -2.7,
           "isProfit": false,
           "sellDate": "2026-09-03T04:37:26+02:00"
+        },
+        {
+          "playerName": "Christian Imga",
+          "buyPrice": 302001,
+          "sellPrice": 283600,
+          "diff": -18401,
+          "roiPct": -6.1,
+          "isProfit": false,
+          "sellDate": "2026-11-06T04:29:40+01:00"
         },
         {
           "playerName": "Marc Bernal",
@@ -526,15 +544,6 @@
           "roiPct": -1.7,
           "isProfit": false,
           "sellDate": "2026-09-25T02:11:23+02:00"
-        },
-        {
-          "playerName": "Álvaro Ferllo",
-          "buyPrice": 321002,
-          "sellPrice": 168000,
-          "diff": -153002,
-          "roiPct": -47.7,
-          "isProfit": false,
-          "sellDate": "2026-09-15T04:37:15+02:00"
         },
         {
           "playerName": "Pol Lozano",
@@ -663,6 +672,15 @@
           "sellDate": "2026-09-07T04:36:25+02:00"
         },
         {
+          "playerName": "Gorrotxategi",
+          "buyPrice": 2464223,
+          "sellPrice": 1882300,
+          "diff": -581923,
+          "roiPct": -23.6,
+          "isProfit": false,
+          "sellDate": "2026-11-06T04:29:40+01:00"
+        },
+        {
           "playerName": "Abde Ezzalzouli",
           "buyPrice": 9172002,
           "sellPrice": 8503000,
@@ -744,15 +762,6 @@
           "sellDate": "2026-10-07T04:30:43+02:00"
         },
         {
-          "playerName": "Gorrotxategi",
-          "buyPrice": 2464223,
-          "sellPrice": 740000,
-          "diff": -1724223,
-          "roiPct": -70,
-          "isProfit": false,
-          "sellDate": "2026-09-08T04:35:10+02:00"
-        },
-        {
           "playerName": "Militão",
           "buyPrice": 5828004,
           "sellPrice": 3172600,
@@ -827,24 +836,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Christian Imga",
-          "position": "striker",
-          "buyPrice": 302001,
-          "currentVM": 290000,
-          "latentDiff": -12001,
-          "latentRoiPct": -4,
-          "isProfit": false
-        },
-        {
-          "playerName": "Álvaro Ferllo",
-          "position": "keeper",
-          "buyPrice": 321002,
-          "currentVM": 160000,
-          "latentDiff": -161002,
-          "latentRoiPct": -50.2,
-          "isProfit": false
-        },
-        {
           "playerName": "Juan Iglesias",
           "position": "defender",
           "buyPrice": 3211003,
@@ -878,15 +869,6 @@
           "currentVM": 3870000,
           "latentDiff": -1032001,
           "latentRoiPct": -21.1,
-          "isProfit": false
-        },
-        {
-          "playerName": "Gorrotxategi",
-          "position": "midfielder",
-          "buyPrice": 2464223,
-          "currentVM": 1090000,
-          "latentDiff": -1374223,
-          "latentRoiPct": -55.8,
           "isProfit": false
         },
         {
@@ -926,7 +908,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T07:31:25.101Z"
+      "lastUpdated": "2026-11-06T11:00:27.182Z"
     },
     "speculation": {
       "score": 98,
@@ -935,14 +917,14 @@
       "overbidRate": "+6.3%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 367133371,
-      "totalReceived": 441433500,
+      "totalReceived": 443017500,
       "purchasesCount": 101,
-      "salesCount": 117,
-      "estimatedCash": 100330129,
+      "salesCount": 120,
+      "estimatedCash": 101914129,
       "prizesEarned": 6030000,
-      "maxCreditLimit": 16607500,
-      "netWealth": 166760129,
-      "analysis": "Operativa histórica de 101 compras (367.1M €) y 117 ventas (441.4M €). Dinero total rotado: 808.6M € con sobrepuja media de +6.3%."
+      "maxCreditLimit": 16222500,
+      "netWealth": 166804129,
+      "analysis": "Operativa histórica de 101 compras (367.1M €) y 120 ventas (443.0M €). Dinero total rotado: 810.2M € con sobrepuja media de +6.3%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -3923,6 +3905,48 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-11-05T04:29:31+01:00"
+        },
+        {
+          "playerName": "Gorrotxategi",
+          "price": 1142300,
+          "marketValue": 1142300,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-06T04:29:40+01:00"
+        },
+        {
+          "playerName": "Álvaro Ferllo",
+          "price": 158100,
+          "marketValue": 158100,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-06T04:29:40+01:00"
+        },
+        {
+          "playerName": "Christian Imga",
+          "price": 283600,
+          "marketValue": 283600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-06T04:29:40+01:00"
         }
       ]
     },
@@ -4117,22 +4141,6 @@
     ],
     "bench": [
       {
-        "id": 2331,
-        "name": "Álvaro Ferllo",
-        "position": "keeper",
-        "price": 160000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2331.png"
-      },
-      {
         "id": 3665,
         "name": "Álex Padilla ",
         "position": "keeper",
@@ -4181,22 +4189,6 @@
         "image": "/media/players/3969.png"
       },
       {
-        "id": 3833,
-        "name": "Gorrotxategi",
-        "position": "midfielder",
-        "price": 1090000,
-        "points": 29,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3833.png"
-      },
-      {
         "id": 4178,
         "name": "Alejandro Santiago",
         "position": "midfielder",
@@ -4227,22 +4219,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3354.png"
-      },
-      {
-        "id": 4176,
-        "name": "Christian Imga",
-        "position": "striker",
-        "price": 290000,
-        "points": 4,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4176.png"
       }
     ],
     "isMe": false
@@ -4570,7 +4546,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T07:31:26.411Z"
+      "lastUpdated": "2026-11-06T11:00:28.572Z"
     },
     "speculation": {
       "score": 98,
@@ -5909,7 +5885,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T07:31:25.777Z"
+      "lastUpdated": "2026-11-06T11:00:27.842Z"
     },
     "speculation": {
       "score": 72,
@@ -7075,7 +7051,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T07:31:25.447Z"
+      "lastUpdated": "2026-11-06T11:00:27.511Z"
     },
     "speculation": {
       "score": 98,
@@ -8359,7 +8335,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T07:31:27.519Z"
+      "lastUpdated": "2026-11-06T11:00:29.637Z"
     },
     "speculation": {
       "score": 87,
@@ -9530,7 +9506,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T07:31:26.091Z"
+      "lastUpdated": "2026-11-06T11:00:28.240Z"
     },
     "speculation": {
       "score": 75,
@@ -10626,7 +10602,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T07:31:26.756Z"
+      "lastUpdated": "2026-11-06T11:00:28.939Z"
     },
     "speculation": {
       "score": 98,
@@ -12320,7 +12296,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T07:31:27.154Z"
+      "lastUpdated": "2026-11-06T11:00:29.285Z"
     },
     "speculation": {
       "score": 64,
@@ -13456,7 +13432,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T07:31:27.833Z"
+      "lastUpdated": "2026-11-06T11:00:29.999Z"
     },
     "speculation": {
       "score": 98,
@@ -15372,7 +15348,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T07:31:28.180Z"
+      "lastUpdated": "2026-11-06T11:00:30.378Z"
     },
     "speculation": {
       "score": 72,
