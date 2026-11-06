@@ -908,7 +908,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T17:00:32.818Z"
+      "lastUpdated": "2026-11-06T19:30:31.670Z"
     },
     "speculation": {
       "score": 98,
@@ -4546,7 +4546,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T17:00:34.206Z"
+      "lastUpdated": "2026-11-06T19:30:32.982Z"
     },
     "speculation": {
       "score": 98,
@@ -5885,7 +5885,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T17:00:33.540Z"
+      "lastUpdated": "2026-11-06T19:30:32.323Z"
     },
     "speculation": {
       "score": 72,
@@ -7051,7 +7051,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T17:00:33.160Z"
+      "lastUpdated": "2026-11-06T19:30:31.983Z"
     },
     "speculation": {
       "score": 98,
@@ -8335,7 +8335,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T17:00:35.201Z"
+      "lastUpdated": "2026-11-06T19:30:34.109Z"
     },
     "speculation": {
       "score": 87,
@@ -9506,7 +9506,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T17:00:33.874Z"
+      "lastUpdated": "2026-11-06T19:30:32.666Z"
     },
     "speculation": {
       "score": 75,
@@ -10132,22 +10132,20 @@
     "crest": "/media/crests/m4_team.svg",
     "pos": 7,
     "points": 440,
-    "squadValue": 59760000,
-    "playerCount": 17,
-    "financialHealth": "Apalancado / Saldo Negativo (-6.88M €)",
-    "debtAlert": "Saldo en descubierto (-6.88M €). Consume el 46.0% del límite de crédito permitido (14.94M €). Exige ventas antes de puntuar.",
-    "projectedScore": 57,
+    "squadValue": 51860000,
+    "playerCount": 15,
+    "financialHealth": "Solvente Ajustado (+1000k € en Caja)",
+    "debtAlert": "Saldo positivo (+1000k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
+    "projectedScore": 50,
     "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 57 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 50 puntos según plantilla disponible.",
     "strengths": [
-      "Patrimonio de plantilla consolidado en Primera (59.76M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez.",
-      "Tensión de tesorería: Saldo negativo de -6.88M € que obliga a vender piezas."
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -10181,18 +10179,18 @@
     ],
     "marketBalance": {
       "clubName": "M4 TEAM",
-      "realizedGainsEUR": 7310110,
+      "realizedGainsEUR": 10027820,
       "realizedLossesEUR": 28845189,
-      "netRealizedBalanceEUR": -21535079,
-      "profitableTradesCount": 13,
-      "totalClosedTradesCount": 29,
-      "historicalSuccessRatePct": 45,
-      "totalLatentGainsEUR": 3970010,
+      "netRealizedBalanceEUR": -18817369,
+      "profitableTradesCount": 15,
+      "totalClosedTradesCount": 31,
+      "historicalSuccessRatePct": 48,
+      "totalLatentGainsEUR": 1230000,
       "totalLatentLossesEUR": 29974054,
-      "netLatentBalanceEUR": -26004044,
+      "netLatentBalanceEUR": -28744054,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-21.535.079 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-18.817.369 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Ugrinic",
@@ -10204,6 +10202,15 @@
           "sellDate": "2026-10-18T04:30:42+02:00"
         },
         {
+          "playerName": "Carvajal",
+          "buyPrice": 2260000,
+          "sellPrice": 3860300,
+          "diff": 1600300,
+          "roiPct": 70.8,
+          "isProfit": true,
+          "sellDate": "2026-11-06T04:29:40+01:00"
+        },
+        {
           "playerName": "De Haas",
           "buyPrice": 679900,
           "sellPrice": 2009300,
@@ -10211,6 +10218,15 @@
           "roiPct": 195.5,
           "isProfit": true,
           "sellDate": "2026-11-01T04:30:47+01:00"
+        },
+        {
+          "playerName": "Lemar",
+          "buyPrice": 2899990,
+          "sellPrice": 4017400,
+          "diff": 1117410,
+          "roiPct": 38.5,
+          "isProfit": true,
+          "sellDate": "2026-11-06T04:29:40+01:00"
         },
         {
           "playerName": "Dani Ceballos",
@@ -10458,24 +10474,6 @@
       ],
       "latentTrades": [
         {
-          "playerName": "Carvajal",
-          "position": "defender",
-          "buyPrice": 2260000,
-          "currentVM": 3680000,
-          "latentDiff": 1420000,
-          "latentRoiPct": 62.8,
-          "isProfit": true
-        },
-        {
-          "playerName": "Lemar",
-          "position": "midfielder",
-          "buyPrice": 2899990,
-          "currentVM": 4220000,
-          "latentDiff": 1320010,
-          "latentRoiPct": 45.5,
-          "isProfit": true
-        },
-        {
           "playerName": "Iñaki Williams",
           "position": "striker",
           "buyPrice": 3840000,
@@ -10602,23 +10600,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T17:00:34.540Z"
+      "lastUpdated": "2026-11-06T19:30:33.348Z"
     },
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+13.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 170219823,
-      "totalReceived": 138941900,
+      "totalReceived": 146819600,
       "purchasesCount": 45,
-      "salesCount": 43,
-      "estimatedCash": -6877923,
+      "salesCount": 45,
+      "estimatedCash": 999777,
       "prizesEarned": 4400000,
-      "maxCreditLimit": 14940000,
-      "netWealth": 52882077,
-      "analysis": "Operativa histórica de 45 compras (170.2M €) y 43 ventas (138.9M €). Dinero total rotado: 309.2M € con sobrepuja media de +13.2%."
+      "maxCreditLimit": 12965000,
+      "netWealth": 52859777,
+      "analysis": "Operativa histórica de 45 compras (170.2M €) y 45 ventas (146.8M €). Dinero total rotado: 317.0M € con sobrepuja media de +13.2%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -10630,10 +10628,10 @@
         "tag": "🎯 3.71 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
-        "player": "Carvajal",
-        "price": 2260000,
-        "impact": "Fichado por 2.26M €, hoy cotiza en 3.68M € (+1.420.000 € / +62.8% de plusvalía).",
-        "tag": "📈 +62.8% Plusvalía"
+        "player": "Javi Morcillo",
+        "price": 719099,
+        "impact": "Fichado por 0.72M €, hoy cotiza en 1.56M € (+840.901 € / +116.9% de plusvalía).",
+        "tag": "📈 +116.9% Plusvalía"
       },
       "worstMove": {
         "player": "Vinícius Júnior",
@@ -11833,6 +11831,34 @@
           "seller": "M4 TEAM",
           "buyer": "Computer",
           "date": "2026-11-06T04:29:40+01:00"
+        },
+        {
+          "playerName": "Carvajal",
+          "price": 3860300,
+          "marketValue": 3860300,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "M4 TEAM",
+          "buyer": "Computer",
+          "date": "2026-11-06T04:29:40+01:00"
+        },
+        {
+          "playerName": "Lemar",
+          "price": 4017400,
+          "marketValue": 4017400,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "M4 TEAM",
+          "buyer": "Computer",
+          "date": "2026-11-06T04:29:40+01:00"
         }
       ]
     },
@@ -11853,23 +11879,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/4065.png"
-      },
-      {
-        "id": 1683,
-        "name": "Carvajal",
-        "position": "defender",
-        "price": 3680000,
-        "points": 6,
-        "expectedPoints": 4.6,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/1683.png"
       },
       {
         "id": 3577,
@@ -11906,6 +11915,23 @@
         "image": "/media/players/3649.png"
       },
       {
+        "id": 2491,
+        "name": "Gorosabel",
+        "position": "defender",
+        "price": 160000,
+        "points": 0,
+        "expectedPoints": 0.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/2491.png"
+      },
+      {
         "id": 2969,
         "name": "Pedri",
         "position": "midfielder",
@@ -11940,23 +11966,6 @@
         "image": "/media/players/2339.png"
       },
       {
-        "id": 2596,
-        "name": "Lemar",
-        "position": "midfielder",
-        "price": 4220000,
-        "points": 58,
-        "expectedPoints": 6.4,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2596.png"
-      },
-      {
         "id": 3125,
         "name": "Iván Martín",
         "position": "midfielder",
@@ -11972,6 +11981,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3125.png"
+      },
+      {
+        "id": 3380,
+        "name": "Olasagasti",
+        "position": "midfielder",
+        "price": 2700000,
+        "points": 56,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3380.png"
       },
       {
         "id": 2565,
@@ -12059,22 +12085,6 @@
         "image": "/media/players/4066.png"
       },
       {
-        "id": 2491,
-        "name": "Gorosabel",
-        "position": "defender",
-        "price": 160000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2491.png"
-      },
-      {
         "id": 2791,
         "name": "Ferland Mendy",
         "position": "defender",
@@ -12089,22 +12099,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2791.png"
-      },
-      {
-        "id": 3380,
-        "name": "Olasagasti",
-        "position": "midfielder",
-        "price": 2700000,
-        "points": 56,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3380.png"
       },
       {
         "id": 3451,
@@ -12294,7 +12288,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T17:00:34.869Z"
+      "lastUpdated": "2026-11-06T19:30:33.725Z"
     },
     "speculation": {
       "score": 64,
@@ -13430,7 +13424,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T17:00:35.567Z"
+      "lastUpdated": "2026-11-06T19:30:34.449Z"
     },
     "speculation": {
       "score": 98,
@@ -15346,7 +15340,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-06T17:00:35.881Z"
+      "lastUpdated": "2026-11-06T19:30:34.780Z"
     },
     "speculation": {
       "score": 72,
