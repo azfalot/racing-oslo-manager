@@ -917,7 +917,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-07T04:10:37.689Z"
+      "lastUpdated": "2026-11-07T11:00:42.889Z"
     },
     "speculation": {
       "score": 98,
@@ -4267,10 +4267,10 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 2,
     "points": 569,
-    "squadValue": 53870000,
-    "playerCount": 14,
-    "financialHealth": "Solvente Ajustado (+473k € en Caja)",
-    "debtAlert": "Saldo positivo (+473k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
+    "squadValue": 53540000,
+    "playerCount": 12,
+    "financialHealth": "Solvente Ajustado (+804k € en Caja)",
+    "debtAlert": "Saldo positivo (+804k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
     "projectedScore": 65,
     "formation": "3-5-2",
     "tacticDescription": "Estructura 3-5-2 orientada a maximizar 65 puntos según plantilla disponible.",
@@ -4281,7 +4281,7 @@
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -4295,6 +4295,12 @@
     ],
     "recommendations": [
       {
+        "name": "Juan Carlos Arana",
+        "pos": "Delantero",
+        "price": 160000,
+        "reason": "Refuerzo de ataque (0.16M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+      },
+      {
         "name": "Lunin",
         "pos": "Portero",
         "price": 390000,
@@ -4305,28 +4311,22 @@
         "pos": "Centrocampista",
         "price": 1080000,
         "reason": "Oportunidad de mercado (1.08M € · 38 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
-      },
-      {
-        "name": "Sucic",
-        "pos": "Centrocampista",
-        "price": 4890000,
-        "reason": "Pieza competitiva en el mercado (4.89M €) adaptable al esquema 3-5-2."
       }
     ],
     "marketBalance": {
       "clubName": "Puente Avios FC",
-      "realizedGainsEUR": 1737897,
+      "realizedGainsEUR": 1749794,
       "realizedLossesEUR": 12112560,
-      "netRealizedBalanceEUR": -10374663,
-      "profitableTradesCount": 10,
-      "totalClosedTradesCount": 16,
-      "historicalSuccessRatePct": 63,
-      "totalLatentGainsEUR": 5977098,
-      "totalLatentLossesEUR": 19510040,
-      "netLatentBalanceEUR": -13532942,
+      "netRealizedBalanceEUR": -10362766,
+      "profitableTradesCount": 12,
+      "totalClosedTradesCount": 18,
+      "historicalSuccessRatePct": 67,
+      "totalLatentGainsEUR": 5967100,
+      "totalLatentLossesEUR": 19510039,
+      "netLatentBalanceEUR": -13542939,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-10.374.663 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-10.362.766 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Yuri Berchiche",
@@ -4390,6 +4390,24 @@
           "roiPct": 4.9,
           "isProfit": true,
           "sellDate": "2026-11-05T04:29:31+01:00"
+        },
+        {
+          "playerName": "Marcão",
+          "buyPrice": 160002,
+          "sellPrice": 166300,
+          "diff": 6298,
+          "roiPct": 3.9,
+          "isProfit": true,
+          "sellDate": "2026-11-07T04:30:51+01:00"
+        },
+        {
+          "playerName": "Juanmi Jiménez",
+          "buyPrice": 160001,
+          "sellPrice": 165600,
+          "diff": 5599,
+          "roiPct": 3.5,
+          "isProfit": true,
+          "sellDate": "2026-11-07T04:30:51+01:00"
         },
         {
           "playerName": "Álex Primo",
@@ -4511,24 +4529,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Marcão",
-          "position": "defender",
-          "buyPrice": 160002,
-          "currentVM": 170000,
-          "latentDiff": 9998,
-          "latentRoiPct": 6.2,
-          "isProfit": true
-        },
-        {
-          "playerName": "Juanmi Jiménez",
-          "position": "striker",
-          "buyPrice": 160001,
-          "currentVM": 160000,
-          "latentDiff": -1,
-          "latentRoiPct": 0,
-          "isProfit": false
-        },
-        {
           "playerName": "Gayà",
           "position": "defender",
           "buyPrice": 1501000,
@@ -4583,7 +4583,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-07T04:10:39.121Z"
+      "lastUpdated": "2026-11-07T11:00:44.230Z"
     },
     "speculation": {
       "score": 98,
@@ -4592,14 +4592,14 @@
       "overbidRate": "+18.6%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 83476305,
-      "totalReceived": 58258900,
+      "totalReceived": 58590800,
       "purchasesCount": 29,
-      "salesCount": 30,
-      "estimatedCash": 472595,
+      "salesCount": 32,
+      "estimatedCash": 804495,
       "prizesEarned": 5690000,
-      "maxCreditLimit": 13467500,
-      "netWealth": 54342595,
-      "analysis": "Operativa histórica de 29 compras (83.5M €) y 30 ventas (58.3M €). Dinero total rotado: 141.7M € con sobrepuja media de +18.6%."
+      "maxCreditLimit": 13385000,
+      "netWealth": 54344495,
+      "analysis": "Operativa histórica de 29 compras (83.5M €) y 32 ventas (58.6M €). Dinero total rotado: 142.1M € con sobrepuja media de +18.6%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -5418,6 +5418,34 @@
           "seller": "Puente Avios FC",
           "buyer": "Computer",
           "date": "2026-11-05T04:29:31+01:00"
+        },
+        {
+          "playerName": "Marcão",
+          "price": 166300,
+          "marketValue": 166300,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-07T04:30:51+01:00"
+        },
+        {
+          "playerName": "Juanmi Jiménez",
+          "price": 165600,
+          "marketValue": 165600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-07T04:30:51+01:00"
         }
       ]
     },
@@ -5626,38 +5654,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/1844.png"
-      },
-      {
-        "id": 3294,
-        "name": "Marcão",
-        "position": "defender",
-        "price": 170000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3294.png"
-      },
-      {
-        "id": 1112,
-        "name": "Juanmi Jiménez",
-        "position": "striker",
-        "price": 160000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/1112.png"
       }
     ],
     "isMe": false
@@ -5922,7 +5918,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-07T04:10:38.407Z"
+      "lastUpdated": "2026-11-07T11:00:43.564Z"
     },
     "speculation": {
       "score": 70,
@@ -7087,7 +7083,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-07T04:10:38.059Z"
+      "lastUpdated": "2026-11-07T11:00:43.202Z"
     },
     "speculation": {
       "score": 98,
@@ -8371,7 +8367,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-07T04:10:40.200Z"
+      "lastUpdated": "2026-11-07T11:00:45.227Z"
     },
     "speculation": {
       "score": 85,
@@ -9542,7 +9538,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-07T04:10:38.770Z"
+      "lastUpdated": "2026-11-07T11:00:43.895Z"
     },
     "speculation": {
       "score": 75,
@@ -10656,7 +10652,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-07T04:10:39.504Z"
+      "lastUpdated": "2026-11-07T11:00:44.576Z"
     },
     "speculation": {
       "score": 98,
@@ -12404,7 +12400,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-07T04:10:39.873Z"
+      "lastUpdated": "2026-11-07T11:00:44.906Z"
     },
     "speculation": {
       "score": 63,
@@ -13540,7 +13536,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-07T04:10:40.538Z"
+      "lastUpdated": "2026-11-07T11:00:45.586Z"
     },
     "speculation": {
       "score": 98,
@@ -15466,7 +15462,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-07T04:10:40.911Z"
+      "lastUpdated": "2026-11-07T11:00:45.917Z"
     },
     "speculation": {
       "score": 71,
