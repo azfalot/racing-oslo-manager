@@ -917,7 +917,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-08T07:30:55.532Z"
+      "lastUpdated": "2026-11-08T11:00:59.525Z"
     },
     "speculation": {
       "score": 98,
@@ -4267,22 +4267,21 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 2,
     "points": 569,
-    "squadValue": 62590000,
-    "playerCount": 15,
-    "financialHealth": "Apalancado / Saldo Negativo (-10.91M €)",
-    "debtAlert": "Saldo en descubierto (-10.91M €). Consume el 69.7% del límite de crédito permitido (15.65M €). Exige ventas antes de puntuar.",
-    "projectedScore": 68,
-    "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 68 puntos según plantilla disponible.",
+    "squadValue": 54760000,
+    "playerCount": 13,
+    "financialHealth": "Apalancado / Saldo Negativo (-3.16M €)",
+    "debtAlert": "Saldo en descubierto (-3.16M €). Consume el 23.1% del límite de crédito permitido (13.69M €). Exige ventas antes de puntuar.",
+    "projectedScore": 66,
+    "formation": "3-5-2",
+    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 66 puntos según plantilla disponible.",
     "strengths": [
       "2º en la clasificación general con 569 puntos acumulados (189.7 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (62.59M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -10.91M € que obliga a vender piezas."
+      "Tensión de tesorería: Saldo negativo de -3.16M € que obliga a vender piezas."
     ],
     "tacticalAlerts": [
       {
@@ -4305,29 +4304,29 @@
         "name": "Julián Álvarez",
         "pos": "Delantero",
         "price": 14160000,
-        "reason": "Pieza competitiva en el mercado (14.16M €) adaptable al esquema 3-4-3."
+        "reason": "Pieza competitiva en el mercado (14.16M €) adaptable al esquema 3-5-2."
       },
       {
         "name": "Pablo Martínez",
         "pos": "Centrocampista",
         "price": 1000000,
-        "reason": "Pieza competitiva en el mercado (1.00M €) adaptable al esquema 3-4-3."
+        "reason": "Pieza competitiva en el mercado (1.00M €) adaptable al esquema 3-5-2."
       }
     ],
     "marketBalance": {
       "clubName": "Puente Avios FC",
       "realizedGainsEUR": 1749794,
-      "realizedLossesEUR": 12112560,
-      "netRealizedBalanceEUR": -10362766,
+      "realizedLossesEUR": 17914260,
+      "netRealizedBalanceEUR": -16164466,
       "profitableTradesCount": 12,
-      "totalClosedTradesCount": 18,
-      "historicalSuccessRatePct": 67,
+      "totalClosedTradesCount": 20,
+      "historicalSuccessRatePct": 60,
       "totalLatentGainsEUR": 5997100,
-      "totalLatentLossesEUR": 21387039,
-      "netLatentBalanceEUR": -15389939,
+      "totalLatentLossesEUR": 15666039,
+      "netLatentBalanceEUR": -9668939,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-10.362.766 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-16.164.466 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Yuri Berchiche",
@@ -4456,6 +4455,15 @@
           "sellDate": "2026-09-29T04:31:19+02:00"
         },
         {
+          "playerName": "Gayà",
+          "buyPrice": 1501000,
+          "sellPrice": 1104200,
+          "diff": -396800,
+          "roiPct": -26.4,
+          "isProfit": false,
+          "sellDate": "2026-11-08T04:29:26+01:00"
+        },
+        {
           "playerName": "Robbie Ure",
           "buyPrice": 5220000,
           "sellPrice": 4690000,
@@ -4481,6 +4489,15 @@
           "roiPct": -38.7,
           "isProfit": false,
           "sellDate": "2026-09-09T04:36:36+02:00"
+        },
+        {
+          "playerName": "Roberto Fernández",
+          "buyPrice": 12050000,
+          "sellPrice": 6645100,
+          "diff": -5404900,
+          "roiPct": -44.9,
+          "isProfit": false,
+          "sellDate": "2026-11-08T04:29:26+01:00"
         },
         {
           "playerName": "Chupe",
@@ -4557,15 +4574,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Gayà",
-          "position": "defender",
-          "buyPrice": 1501000,
-          "currentVM": 1070000,
-          "latentDiff": -431000,
-          "latentRoiPct": -28.7,
-          "isProfit": false
-        },
-        {
           "playerName": "Íñigo Vicente",
           "position": "midfielder",
           "buyPrice": 9780000,
@@ -4593,15 +4601,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Roberto Fernández",
-          "position": "striker",
-          "buyPrice": 12050000,
-          "currentVM": 6760000,
-          "latentDiff": -5290000,
-          "latentRoiPct": -43.9,
-          "isProfit": false
-        },
-        {
           "playerName": "Marcos Alonso",
           "position": "defender",
           "buyPrice": 8501000,
@@ -4611,7 +4610,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-08T07:30:56.943Z"
+      "lastUpdated": "2026-11-08T11:01:00.956Z"
     },
     "speculation": {
       "score": 98,
@@ -4620,14 +4619,14 @@
       "overbidRate": "+17.0%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 95193305,
-      "totalReceived": 58590800,
+      "totalReceived": 66340100,
       "purchasesCount": 32,
-      "salesCount": 32,
-      "estimatedCash": -10912505,
+      "salesCount": 34,
+      "estimatedCash": -3163205,
       "prizesEarned": 5690000,
-      "maxCreditLimit": 15647500,
-      "netWealth": 51677495,
-      "analysis": "Operativa histórica de 32 compras (95.2M €) y 32 ventas (58.6M €). Dinero total rotado: 153.8M € con sobrepuja media de +17.0%."
+      "maxCreditLimit": 13690000,
+      "netWealth": 51596795,
+      "analysis": "Operativa histórica de 32 compras (95.2M €) y 34 ventas (66.3M €). Dinero total rotado: 161.5M € con sobrepuja media de +17.0%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -5516,6 +5515,34 @@
           "seller": "Puente Avios FC",
           "buyer": "Computer",
           "date": "2026-11-07T04:30:51+01:00"
+        },
+        {
+          "playerName": "Roberto Fernández",
+          "price": 6645100,
+          "marketValue": 6645100,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-08T04:29:26+01:00"
+        },
+        {
+          "playerName": "Gayà",
+          "price": 1104200,
+          "marketValue": 1104200,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-08T04:29:26+01:00"
         }
       ]
     },
@@ -5657,6 +5684,23 @@
         "image": "/media/players/4050.png"
       },
       {
+        "id": 3783,
+        "name": "Buchanan",
+        "position": "midfielder",
+        "price": 2410000,
+        "points": 34,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3783.png"
+      },
+      {
         "id": 2488,
         "name": "Guedes",
         "position": "striker",
@@ -5672,23 +5716,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2488.png"
-      },
-      {
-        "id": 3773,
-        "name": "Roberto Fernández",
-        "position": "striker",
-        "price": 6760000,
-        "points": 71,
-        "expectedPoints": 6.4,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3773.png"
       },
       {
         "id": 3831,
@@ -5710,22 +5737,6 @@
     ],
     "bench": [
       {
-        "id": 1844,
-        "name": "Gayà",
-        "position": "defender",
-        "price": 1070000,
-        "points": 34,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/1844.png"
-      },
-      {
         "id": 3185,
         "name": "Rubén Sánchez Sáez",
         "position": "defender",
@@ -5740,22 +5751,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3185.png"
-      },
-      {
-        "id": 3783,
-        "name": "Buchanan",
-        "position": "midfielder",
-        "price": 2410000,
-        "points": 34,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3783.png"
       },
       {
         "id": 4011,
@@ -6036,7 +6031,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-08T07:30:56.196Z"
+      "lastUpdated": "2026-11-08T11:01:00.223Z"
     },
     "speculation": {
       "score": 71,
@@ -7201,7 +7196,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-08T07:30:55.877Z"
+      "lastUpdated": "2026-11-08T11:00:59.927Z"
     },
     "speculation": {
       "score": 98,
@@ -8485,7 +8480,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-08T07:30:57.971Z"
+      "lastUpdated": "2026-11-08T11:01:01.953Z"
     },
     "speculation": {
       "score": 85,
@@ -9656,7 +9651,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-08T07:30:56.564Z"
+      "lastUpdated": "2026-11-08T11:01:00.591Z"
     },
     "speculation": {
       "score": 75,
@@ -10769,7 +10764,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-08T07:30:57.287Z"
+      "lastUpdated": "2026-11-08T11:01:01.271Z"
     },
     "speculation": {
       "score": 98,
@@ -12515,7 +12510,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-08T07:30:57.632Z"
+      "lastUpdated": "2026-11-08T11:01:01.637Z"
     },
     "speculation": {
       "score": 63,
@@ -13651,7 +13646,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-08T07:30:58.360Z"
+      "lastUpdated": "2026-11-08T11:01:02.286Z"
     },
     "speculation": {
       "score": 98,
@@ -15577,7 +15572,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-08T07:30:58.689Z"
+      "lastUpdated": "2026-11-08T11:01:02.654Z"
     },
     "speculation": {
       "score": 71,
