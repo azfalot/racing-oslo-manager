@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-07T22:50:57.761Z",
+  "timestamp": "2026-11-08T04:06:01.145Z",
   "currentMatchday": 12,
   "confidenceLevel": "HIGH",
   "standings": {
@@ -12,18 +12,18 @@
     "balance": 1125688,
     "committedBids": 0,
     "effectiveBalance": 1125688,
-    "squadValue": 33990000,
-    "totalPatrimony": 35115688
+    "squadValue": 33420000,
+    "totalPatrimony": 34545688
   },
   "lineup": {
     "formation": "4-4-2",
-    "expectedPoints": 43.5,
+    "expectedPoints": 42.4,
     "starterCount": 11,
     "starterRisks": [
       {
         "playerId": 3698,
         "name": "Pau Navarro",
-        "price": 1170000,
+        "price": 1150000,
         "totalPoints": 25,
         "status": null,
         "statusInfo": null,
@@ -142,7 +142,7 @@
       {
         "playerId": 2545,
         "name": "Junior Firpo",
-        "price": 320000,
+        "price": 300000,
         "totalPoints": 12,
         "status": null,
         "statusInfo": null,
@@ -296,7 +296,7 @@
       {
         "playerId": 3160,
         "name": "Gavi",
-        "price": 1180000,
+        "price": 1330000,
         "totalPoints": 16,
         "status": null,
         "statusInfo": null,
@@ -434,7 +434,7 @@
       "playerId": 2545,
       "name": "Junior Firpo",
       "position": "defender",
-      "price": 320000,
+      "price": 300000,
       "expectedPoints": 0.6,
       "vorp": -66,
       "vorpPerMatchday": -1.94,
@@ -446,7 +446,7 @@
       "playerId": 3698,
       "name": "Pau Navarro",
       "position": "defender",
-      "price": 1170000,
+      "price": 1150000,
       "expectedPoints": 1.8,
       "vorp": 1,
       "vorpPerMatchday": 0.03,
@@ -458,7 +458,7 @@
       "playerId": 3160,
       "name": "Gavi",
       "position": "midfielder",
-      "price": 1180000,
+      "price": 1330000,
       "expectedPoints": 1.6,
       "vorp": 3,
       "vorpPerMatchday": 0.09,
@@ -477,27 +477,27 @@
   },
   "marketTargets": [
     {
-      "playerId": 3848,
-      "name": "Marcos Fernández",
+      "playerId": 3680,
+      "name": "Julián Álvarez",
       "type": "striker",
-      "price": 1760000,
-      "bidAmount": 1971200,
-      "maxRationalBid": 1971200,
-      "marginPct": 12,
-      "band": "CLEAR_UPGRADE",
-      "expectedPoints": 5,
-      "ppm": 3.83,
-      "efficiency": 58.8,
-      "upgradePoints": 4.2,
-      "marginalValue": 4.2,
-      "vorp": 20,
-      "vorpPerMatchday": 0.59,
-      "cpmp": 419048,
-      "cpmpSeason": 12308,
+      "price": 14160000,
+      "bidAmount": 17416800,
+      "maxRationalBid": 17416800,
+      "marginPct": 23,
+      "band": "ELITE_LEAGUE_WINNER",
+      "expectedPoints": 6,
+      "ppm": 6.24,
+      "efficiency": 11.5,
+      "upgradePoints": 8,
+      "marginalValue": 8,
+      "vorp": 104,
+      "vorpPerMatchday": 3.06,
+      "cpmp": 1770000,
+      "cpmpSeason": 52059,
       "replacedPlayer": {
         "playerId": 2545,
         "name": "Junior Firpo",
-        "price": 320000,
+        "price": 300000,
         "totalPoints": 12,
         "status": null,
         "statusInfo": null,
@@ -650,17 +650,17 @@
       },
       "replacedPlayerName": "Junior Firpo",
       "replacedPlayerExpectedPoints": 0.6,
-      "strategicScore": 67.5,
+      "strategicScore": 68.9,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 4.2
+          "marginalValue": 8
         },
         "absoluteQuality": {
-          "raw": 63.8,
+          "raw": 100,
           "weight": 0.2,
-          "ppm": 3.83
+          "ppm": 6.24
         },
         "positionNeed": {
           "raw": 30,
@@ -668,9 +668,234 @@
           "detail": "3 disponibles. Fondo de armario ajustado."
         },
         "marketOpportunity": {
+          "raw": 28.7,
+          "weight": 0.1,
+          "efficiency": 11.5
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 10,
+          "weight": -0.05
+        }
+      },
+      "category": "SALTO_CUALITATIVO",
+      "impactTag": "🚀 SALTO CUALITATIVO (+8 pts XI)",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": true,
+      "reasoning": [
+        "✅ Entra en el XI titular (+8 pts al Once Ideal sustituyendo a Junior Firpo (2.93 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (6.24 PPM > 2.93 PPM).",
+        "🟡 Posición con necesidad MODERADA: 3 disponibles. Fondo de armario ajustado.",
+        "📊 ⭐ Titular Fijo (PPM: 6.24 | Fiabilidad: 95% minutos | Eficiencia: 11.5 pts/M€)",
+        "🔥 Dinámica de club: 🛡️ En Racha Positiva / Invictos (1.06x): 3V 2E 0D - Solidez defensiva y plantilla profunda",
+        "🎯 Balón parado: 🎯 2º Tirador Penaltis · 🚀 Faltas Directas (+0.35 PPM bonus).",
+        "⚔️ Competencia en club: Compite en [object Object] con Antoine Griezmann, Alexander Sorloth, Ángel Correa... (Nivel: BAJA, Confianza XI: 95%)",
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 17.416.800 € (123.0% VM | Sobreprecio: +23%).",
+        "⛔ Fondos insuficientes: Requiere 18.416.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.125.688 €."
+      ],
+      "reason": "🚀 SALTO CUALITATIVO (+8 pts XI): Mejora real del XI: +8 pts (sustituye a Junior Firpo). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 17.416.800 € (123.0% VM | Sobreprecio: +23%)."
+    },
+    {
+      "playerId": 4032,
+      "name": "Jorge Salinas",
+      "type": "defender",
+      "price": 1580000,
+      "bidAmount": 1738000,
+      "maxRationalBid": 1738000,
+      "marginPct": 10,
+      "band": "CLEAR_UPGRADE",
+      "expectedPoints": 4,
+      "ppm": 3.48,
+      "efficiency": 57.2,
+      "upgradePoints": 3.7,
+      "marginalValue": 3.7,
+      "vorp": 1,
+      "vorpPerMatchday": 0.03,
+      "cpmp": 427027,
+      "cpmpSeason": 12540,
+      "replacedPlayer": {
+        "playerId": 2545,
+        "name": "Junior Firpo",
+        "price": 300000,
+        "totalPoints": 12,
+        "status": null,
+        "statusInfo": null,
+        "type": "defender",
+        "historical": {
+          "points": [
+            {
+              "season": "17/18",
+              "points": "90",
+              "eventId": 869072
+            },
+            {
+              "season": "18/19",
+              "points": "127",
+              "eventId": 899953
+            },
+            {
+              "season": "19/20",
+              "points": "66",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "28",
+              "eventId": 939519
+            },
+            {
+              "season": "21/22",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "22/23",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "23/24",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "24/25",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "25/26",
+              "points": "37",
+              "eventId": 998265
+            }
+          ]
+        },
+        "average": {
+          "grade": "7,2",
+          "points": "6",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "0,0",
+            "points": "0"
+          }
+        },
+        "club": {
+          "id": 4,
+          "name": "Betis",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/4"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/4/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 12,
+            "homeClub": {
+              "id": 75,
+              "name": "Elche",
+              "abbreviation": "elc",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/75"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/75/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/4"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/4/logo"
+                }
+              }
+            },
+            "kickoff": "2026-11-08T14:00:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 13,
+            "homeClub": {
+              "id": 17,
+              "name": "Sevilla",
+              "abbreviation": "sev",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/17"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/17/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/4"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/4/logo"
+                }
+              }
+            },
+            "kickoff": "2026-11-21T18:30:00+01:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 1,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 0.6,
+        "id": 2545,
+        "position": "defender",
+        "points": 0
+      },
+      "replacedPlayerName": "Junior Firpo",
+      "replacedPlayerExpectedPoints": 0.6,
+      "strategicScore": 62.6,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 100,
+          "weight": 0.4,
+          "marginalValue": 3.7
+        },
+        "absoluteQuality": {
+          "raw": 58,
+          "weight": 0.2,
+          "ppm": 3.48
+        },
+        "positionNeed": {
+          "raw": 5,
+          "weight": 0.15,
+          "detail": "6 disponibles. Posición bien cubierta."
+        },
+        "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 58.8
+          "efficiency": 57.2
         },
         "rivalPressure": {
           "raw": 20,
@@ -689,486 +914,38 @@
       "isComputer": true,
       "requiresSaleFirst": true,
       "reasoning": [
-        "✅ Entra en el XI titular (+4.2 pts al Once Ideal sustituyendo a Junior Firpo (2.93 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (3.83 PPM > 2.93 PPM).",
-        "🟡 Posición con necesidad MODERADA: 3 disponibles. Fondo de armario ajustado.",
-        "📊 🔄 Rotación Habitual (PPM: 3.83 | Fiabilidad: 90% minutos | Eficiencia: 58.8 pts/M€)",
-        "🔥 Dinámica de club: 🚀 Pico de Confianza / Racha Ascendente (1.08x): 3V 0E 2D - Creciendo en sensaciones y puntuaciones fantasy",
+        "✅ Entra en el XI titular (+3.7 pts al Once Ideal sustituyendo a Junior Firpo (2.93 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (3.48 PPM > 2.93 PPM).",
+        "📊 🔄 Rotación Habitual (PPM: 3.48 | Fiabilidad: 90% minutos | Eficiencia: 57.2 pts/M€)",
+        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 90%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.971.200 € (112.0% VM | Sobreprecio: +12%).",
-        "⛔ Fondos insuficientes: Requiere 2.971.200 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.125.688 €."
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.738.000 € (110.0% VM | Sobreprecio: +10%).",
+        "⛔ Fondos insuficientes: Requiere 2.738.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.125.688 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Junior Firpo). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.971.200 € (112.0% VM | Sobreprecio: +12%)."
-    },
-    {
-      "playerId": 2488,
-      "name": "Guedes",
-      "type": "striker",
-      "price": 4560000,
-      "bidAmount": 5335200,
-      "maxRationalBid": 5335200,
-      "marginPct": 17,
-      "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 6,
-      "ppm": 4.11,
-      "efficiency": 24.3,
-      "upgradePoints": 5.8,
-      "marginalValue": 5.8,
-      "vorp": 85,
-      "vorpPerMatchday": 2.5,
-      "cpmp": 786207,
-      "cpmpSeason": 23147,
-      "replacedPlayer": {
-        "playerId": 2545,
-        "name": "Junior Firpo",
-        "price": 320000,
-        "totalPoints": 12,
-        "status": null,
-        "statusInfo": null,
-        "type": "defender",
-        "historical": {
-          "points": [
-            {
-              "season": "17/18",
-              "points": "90",
-              "eventId": 869072
-            },
-            {
-              "season": "18/19",
-              "points": "127",
-              "eventId": 899953
-            },
-            {
-              "season": "19/20",
-              "points": "66",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "28",
-              "eventId": 939519
-            },
-            {
-              "season": "21/22",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "22/23",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "23/24",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "24/25",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "25/26",
-              "points": "37",
-              "eventId": 998265
-            }
-          ]
-        },
-        "average": {
-          "grade": "7,2",
-          "points": "6",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "0,0",
-            "points": "0"
-          }
-        },
-        "club": {
-          "id": 4,
-          "name": "Betis",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/4"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/4/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 12,
-            "homeClub": {
-              "id": 75,
-              "name": "Elche",
-              "abbreviation": "elc",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/75"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/75/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 4,
-              "name": "Betis",
-              "abbreviation": "bet",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/4"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/4/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-08T14:00:00+01:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 13,
-            "homeClub": {
-              "id": 17,
-              "name": "Sevilla",
-              "abbreviation": "sev",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/17"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/17/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 4,
-              "name": "Betis",
-              "abbreviation": "bet",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/4"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/4/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-21T18:30:00+01:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 1,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 0.6,
-        "id": 2545,
-        "position": "defender",
-        "points": 0
-      },
-      "replacedPlayerName": "Junior Firpo",
-      "replacedPlayerExpectedPoints": 0.6,
-      "strategicScore": 65.8,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 5.8
-        },
-        "absoluteQuality": {
-          "raw": 68.5,
-          "weight": 0.2,
-          "ppm": 4.11
-        },
-        "positionNeed": {
-          "raw": 30,
-          "weight": 0.15,
-          "detail": "3 disponibles. Fondo de armario ajustado."
-        },
-        "marketOpportunity": {
-          "raw": 60.8,
-          "weight": 0.1,
-          "efficiency": 24.3
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": true,
-      "reasoning": [
-        "✅ Entra en el XI titular (+5.8 pts al Once Ideal sustituyendo a Junior Firpo (2.93 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.11 PPM > 2.93 PPM).",
-        "🟡 Posición con necesidad MODERADA: 3 disponibles. Fondo de armario ajustado.",
-        "📊 ⭐ Titular Fijo (PPM: 4.11 | Fiabilidad: 95% minutos | Eficiencia: 24.3 pts/M€)",
-        "🔥 Dinámica de club: 📉 Dudas Iniciales / Bajas Sensibles (0.9x): 1V 1E 3D - Falta de pegada y lesiones en puestos clave",
-        "⚔️ Competencia en club: Compite en [object Object] con Mikel Oyarzabal, Takefusa Kubo, Orri Óskarsson... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.335.200 € (117.0% VM | Sobreprecio: +17%).",
-        "⛔ Fondos insuficientes: Requiere 6.335.200 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.125.688 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Junior Firpo). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.335.200 € (117.0% VM | Sobreprecio: +17%)."
-    },
-    {
-      "playerId": 3671,
-      "name": "Sucic",
-      "type": "midfielder",
-      "price": 4890000,
-      "bidAmount": 5770200,
-      "maxRationalBid": 5770200,
-      "marginPct": 18,
-      "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 7,
-      "ppm": 4.58,
-      "efficiency": 25.3,
-      "upgradePoints": 6.1,
-      "marginalValue": 6.1,
-      "vorp": 43,
-      "vorpPerMatchday": 1.26,
-      "cpmp": 801639,
-      "cpmpSeason": 23623,
-      "replacedPlayer": {
-        "playerId": 2545,
-        "name": "Junior Firpo",
-        "price": 320000,
-        "totalPoints": 12,
-        "status": null,
-        "statusInfo": null,
-        "type": "defender",
-        "historical": {
-          "points": [
-            {
-              "season": "17/18",
-              "points": "90",
-              "eventId": 869072
-            },
-            {
-              "season": "18/19",
-              "points": "127",
-              "eventId": 899953
-            },
-            {
-              "season": "19/20",
-              "points": "66",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "28",
-              "eventId": 939519
-            },
-            {
-              "season": "21/22",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "22/23",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "23/24",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "24/25",
-              "points": "-",
-              "eventId": false
-            },
-            {
-              "season": "25/26",
-              "points": "37",
-              "eventId": 998265
-            }
-          ]
-        },
-        "average": {
-          "grade": "7,2",
-          "points": "6",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "0,0",
-            "points": "0"
-          }
-        },
-        "club": {
-          "id": 4,
-          "name": "Betis",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/4"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/4/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 12,
-            "homeClub": {
-              "id": 75,
-              "name": "Elche",
-              "abbreviation": "elc",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/75"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/75/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 4,
-              "name": "Betis",
-              "abbreviation": "bet",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/4"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/4/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-08T14:00:00+01:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 13,
-            "homeClub": {
-              "id": 17,
-              "name": "Sevilla",
-              "abbreviation": "sev",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/17"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/17/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 4,
-              "name": "Betis",
-              "abbreviation": "bet",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/4"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/4/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-21T18:30:00+01:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 1,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 0.6,
-        "id": 2545,
-        "position": "defender",
-        "points": 0
-      },
-      "replacedPlayerName": "Junior Firpo",
-      "replacedPlayerExpectedPoints": 0.6,
-      "strategicScore": 63.8,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 6.1
-        },
-        "absoluteQuality": {
-          "raw": 76.3,
-          "weight": 0.2,
-          "ppm": 4.58
-        },
-        "positionNeed": {
-          "raw": 5,
-          "weight": 0.15,
-          "detail": "6 disponibles. Posición bien cubierta."
-        },
-        "marketOpportunity": {
-          "raw": 63.3,
-          "weight": 0.1,
-          "efficiency": 25.3
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": true,
-      "reasoning": [
-        "✅ Entra en el XI titular (+6.1 pts al Once Ideal sustituyendo a Junior Firpo (2.93 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.58 PPM > 2.93 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 4.58 | Fiabilidad: 95% minutos | Eficiencia: 25.3 pts/M€)",
-        "🔥 Dinámica de club: 📉 Dudas Iniciales / Bajas Sensibles (0.9x): 1V 1E 3D - Falta de pegada y lesiones en puestos clave",
-        "⚔️ Competencia en club: Compite en [object Object] con Martín Zubimendi, Brais Méndez, Sergio Gómez... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.770.200 € (118.0% VM | Sobreprecio: +18%).",
-        "⛔ Fondos insuficientes: Requiere 6.770.200 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.125.688 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +6 pts (sustituye a Junior Firpo). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 5.770.200 € (118.0% VM | Sobreprecio: +18%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Junior Firpo). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.738.000 € (110.0% VM | Sobreprecio: +10%)."
     },
     {
       "playerId": 3843,
       "name": "Álvaro Núñez",
       "type": "defender",
-      "price": 690000,
-      "bidAmount": 731400,
-      "maxRationalBid": 731400,
+      "price": 650000,
+      "bidAmount": 689000,
+      "maxRationalBid": 689000,
       "marginPct": 6,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 3,
       "ppm": 3.43,
-      "efficiency": 134.2,
+      "efficiency": 137.2,
       "upgradePoints": 2.7,
       "marginalValue": 2.7,
       "vorp": 6,
       "vorpPerMatchday": 0.18,
-      "cpmp": 255556,
-      "cpmpSeason": 7500,
+      "cpmp": 240741,
+      "cpmpSeason": 7065,
       "replacedPlayer": {
         "playerId": 2545,
         "name": "Junior Firpo",
-        "price": 320000,
+        "price": 300000,
         "totalPoints": 12,
         "status": null,
         "statusInfo": null,
@@ -1341,7 +1118,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 134.2
+          "efficiency": 137.2
         },
         "rivalPressure": {
           "raw": 20,
@@ -1362,36 +1139,36 @@
       "reasoning": [
         "✅ Entra en el XI titular (+2.7 pts al Once Ideal sustituyendo a Junior Firpo (2.93 PPM)).",
         "🚀 Supera el promedio con momentum del titular actual (3.43 PPM > 2.93 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 3.43 | Fiabilidad: 95% minutos | Eficiencia: 134.2 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 3.43 | Fiabilidad: 95% minutos | Eficiencia: 137.2 pts/M€)",
         "🔥 Dinámica de club: ⚽ Alta Producción Ofensiva (1.05x): 3V 0E 2D - Fútbol vistoso con gran generación de ocasiones",
         "⚔️ Competencia en club: Compite en [object Object] con Marcos Alonso, Carl Starfelt, Jailson... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 731.400 € (106.0% VM | Sobreprecio: +6%).",
-        "⛔ Fondos insuficientes: Requiere 1.731.400 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.125.688 €."
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 689.000 € (106.0% VM | Sobreprecio: +6%).",
+        "⛔ Fondos insuficientes: Requiere 1.689.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.125.688 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Junior Firpo). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 731.400 € (106.0% VM | Sobreprecio: +6%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Junior Firpo). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 689.000 € (106.0% VM | Sobreprecio: +6%)."
     },
     {
-      "playerId": 2873,
-      "name": "Pablo Martínez",
+      "playerId": 4145,
+      "name": "Nathan Saliba",
       "type": "midfielder",
-      "price": 1080000,
-      "bidAmount": 1134000,
-      "maxRationalBid": 1134000,
-      "marginPct": 5,
+      "price": 2660000,
+      "bidAmount": 2872800,
+      "maxRationalBid": 2872800,
+      "marginPct": 8,
       "band": "CLEAR_UPGRADE",
-      "expectedPoints": 3,
-      "ppm": 3.86,
-      "efficiency": 96.6,
-      "upgradePoints": 2.5,
-      "marginalValue": 2.5,
-      "vorp": 10,
-      "vorpPerMatchday": 0.29,
-      "cpmp": 432000,
-      "cpmpSeason": 12706,
+      "expectedPoints": 4,
+      "ppm": 2.93,
+      "efficiency": 28.6,
+      "upgradePoints": 3.3,
+      "marginalValue": 3.3,
+      "vorp": 3,
+      "vorpPerMatchday": 0.09,
+      "cpmp": 806061,
+      "cpmpSeason": 23750,
       "replacedPlayer": {
         "playerId": 2545,
         "name": "Junior Firpo",
-        "price": 320000,
+        "price": 300000,
         "totalPoints": 12,
         "status": null,
         "statusInfo": null,
@@ -1544,7 +1321,230 @@
       },
       "replacedPlayerName": "Junior Firpo",
       "replacedPlayerExpectedPoints": 0.6,
-      "strategicScore": 58.5,
+      "strategicScore": 57.9,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 100,
+          "weight": 0.4,
+          "marginalValue": 3.3
+        },
+        "absoluteQuality": {
+          "raw": 48.8,
+          "weight": 0.2,
+          "ppm": 2.93
+        },
+        "positionNeed": {
+          "raw": 5,
+          "weight": 0.15,
+          "detail": "6 disponibles. Posición bien cubierta."
+        },
+        "marketOpportunity": {
+          "raw": 71.5,
+          "weight": 0.1,
+          "efficiency": 28.6
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 35,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": true,
+      "reasoning": [
+        "✅ Entra en el XI titular (+3.3 pts al Once Ideal sustituyendo a Junior Firpo (2.93 PPM)).",
+        "⚠️ Alerta: El promedio con momentum (2.93 PPM) no supera holgadamente a Junior Firpo (2.93 PPM).",
+        "📊 🔄 Rotación Habitual (PPM: 2.93 | Fiabilidad: 75% minutos | Eficiencia: 28.6 pts/M€)",
+        "🔥 Dinámica de club: ⚠️ Crisis Deportiva (0 Victorias) / Bloqueo Total (0.82x): 0V 2E 3D - 0 victorias en la temporada, depresión competitiva y bajas",
+        "⚔️ Competencia en club: Compite en [object Object] con Dani Parejo, Santi Comesaña, Pape Gueye... (Nivel: MEDIA, Confianza XI: 75%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.872.800 € (108.0% VM | Sobreprecio: +8%).",
+        "⛔ Fondos insuficientes: Requiere 3.872.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.125.688 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Junior Firpo). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.872.800 € (108.0% VM | Sobreprecio: +8%)."
+    },
+    {
+      "playerId": 2873,
+      "name": "Pablo Martínez",
+      "type": "midfielder",
+      "price": 1000000,
+      "bidAmount": 1050000,
+      "maxRationalBid": 1050000,
+      "marginPct": 5,
+      "band": "CLEAR_UPGRADE",
+      "expectedPoints": 3,
+      "ppm": 3.23,
+      "efficiency": 84.1,
+      "upgradePoints": 2.5,
+      "marginalValue": 2.5,
+      "vorp": 8,
+      "vorpPerMatchday": 0.24,
+      "cpmp": 400000,
+      "cpmpSeason": 11765,
+      "replacedPlayer": {
+        "playerId": 2545,
+        "name": "Junior Firpo",
+        "price": 300000,
+        "totalPoints": 12,
+        "status": null,
+        "statusInfo": null,
+        "type": "defender",
+        "historical": {
+          "points": [
+            {
+              "season": "17/18",
+              "points": "90",
+              "eventId": 869072
+            },
+            {
+              "season": "18/19",
+              "points": "127",
+              "eventId": 899953
+            },
+            {
+              "season": "19/20",
+              "points": "66",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "28",
+              "eventId": 939519
+            },
+            {
+              "season": "21/22",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "22/23",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "23/24",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "24/25",
+              "points": "-",
+              "eventId": false
+            },
+            {
+              "season": "25/26",
+              "points": "37",
+              "eventId": 998265
+            }
+          ]
+        },
+        "average": {
+          "grade": "7,2",
+          "points": "6",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "0,0",
+            "points": "0"
+          }
+        },
+        "club": {
+          "id": 4,
+          "name": "Betis",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/4"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/4/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 12,
+            "homeClub": {
+              "id": 75,
+              "name": "Elche",
+              "abbreviation": "elc",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/75"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/75/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/4"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/4/logo"
+                }
+              }
+            },
+            "kickoff": "2026-11-08T14:00:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 13,
+            "homeClub": {
+              "id": 17,
+              "name": "Sevilla",
+              "abbreviation": "sev",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/17"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/17/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 4,
+              "name": "Betis",
+              "abbreviation": "bet",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/4"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/4/logo"
+                }
+              }
+            },
+            "kickoff": "2026-11-21T18:30:00+01:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 1,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 0.6,
+        "id": 2545,
+        "position": "defender",
+        "points": 0
+      },
+      "replacedPlayerName": "Junior Firpo",
+      "replacedPlayerExpectedPoints": 0.6,
+      "strategicScore": 56.4,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 83.3,
@@ -1552,9 +1552,9 @@
           "marginalValue": 2.5
         },
         "absoluteQuality": {
-          "raw": 64.3,
+          "raw": 53.8,
           "weight": 0.2,
-          "ppm": 3.86
+          "ppm": 3.23
         },
         "positionNeed": {
           "raw": 5,
@@ -1564,7 +1564,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 96.6
+          "efficiency": 84.1
         },
         "rivalPressure": {
           "raw": 20,
@@ -1584,28 +1584,28 @@
       "requiresSaleFirst": true,
       "reasoning": [
         "✅ Entra en el XI titular (+2.5 pts al Once Ideal sustituyendo a Junior Firpo (2.93 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (3.86 PPM > 2.93 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 3.86 | Fiabilidad: 95% minutos | Eficiencia: 96.6 pts/M€)",
+        "🚀 Supera el promedio con momentum del titular actual (3.23 PPM > 2.93 PPM).",
+        "📊 ⭐ Titular Fijo (PPM: 3.23 | Fiabilidad: 95% minutos | Eficiencia: 84.1 pts/M€)",
         "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.134.000 € (105.0% VM | Sobreprecio: +5%).",
-        "⛔ Fondos insuficientes: Requiere 2.134.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.125.688 €."
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.050.000 € (105.0% VM | Sobreprecio: +5%).",
+        "⛔ Fondos insuficientes: Requiere 2.050.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.125.688 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Junior Firpo). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.134.000 € (105.0% VM | Sobreprecio: +5%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Junior Firpo). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.050.000 € (105.0% VM | Sobreprecio: +5%)."
     }
   ],
   "liquiditySuggestions": [
     {
       "playerId": 3285,
       "name": "Copete",
-      "price": 300000,
-      "reason": "Parche secundario sin minutos. Vender libera 300.000 € para acometer fichajes titulares."
+      "price": 310000,
+      "reason": "Parche secundario sin minutos. Vender libera 310.000 € para acometer fichajes titulares."
     },
     {
       "playerId": 3636,
       "name": "Christantus Uche",
-      "price": 170000,
-      "reason": "Parche secundario sin minutos. Vender libera 170.000 € para acometer fichajes titulares."
+      "price": 160000,
+      "reason": "Parche secundario sin minutos. Vender libera 160.000 € para acometer fichajes titulares."
     },
     {
       "playerId": 3997,
@@ -1626,7 +1626,7 @@
     "remainingMatchdays": 26,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 43.5,
+      "currentXiExpectedPoints": 42.4,
       "restOfSeasonAggregateExpectedPpm": 29.1,
       "pWin": 0,
       "pTop2": 0,
@@ -1974,5 +1974,5 @@
       }
     ]
   },
-  "priorityMovement": "Pujar 1.971.200 € por Marcos Fernández (striker) para sustituir a Junior Firpo (Expected XI Delta: +4.2 pts, CPMP: Óptimo)."
+  "priorityMovement": "Pujar 17.416.800 € por Julián Álvarez (striker) para sustituir a Junior Firpo (Expected XI Delta: +8 pts, CPMP: Óptimo)."
 }
