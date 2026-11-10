@@ -6,9 +6,9 @@
   "profitableTradesCount": 23,
   "totalClosedTradesCount": 40,
   "historicalSuccessRatePct": 57,
-  "totalLatentGainsEUR": 1075000,
-  "totalLatentLossesEUR": 16135000,
-  "netLatentBalanceEUR": -15060000,
+  "totalLatentGainsEUR": 815000,
+  "totalLatentLossesEUR": 15345000,
+  "netLatentBalanceEUR": -14530000,
   "healthLabel": "AJUSTES & DEUDA",
   "healthBadgeColor": "amber",
   "healthSummary": "El balance histórico refleja el coste de saneamiento inicial de deuda (ventas defensivas como Hugo Duro y Galarreta para salir de números rojos), mientras que el nuevo régimen de especulación opera con un 100% de plusvalías netas.",
@@ -379,27 +379,36 @@
       "playerName": "Johnny Cardoso",
       "position": "midfielder",
       "buyPrice": 1090000,
-      "currentVM": 1780000,
-      "latentDiff": 690000,
-      "latentRoiPct": 63.3,
+      "currentVM": 1570000,
+      "latentDiff": 480000,
+      "latentRoiPct": 44,
       "isProfit": true
     },
     {
       "playerName": "Pau Navarro",
       "position": "defender",
       "buyPrice": 930000,
-      "currentVM": 1160000,
-      "latentDiff": 230000,
-      "latentRoiPct": 24.7,
+      "currentVM": 1150000,
+      "latentDiff": 220000,
+      "latentRoiPct": 23.7,
       "isProfit": true
     },
     {
       "playerName": "Gavi",
       "position": "midfielder",
       "buyPrice": 1275000,
-      "currentVM": 1430000,
-      "latentDiff": 155000,
-      "latentRoiPct": 12.2,
+      "currentVM": 1390000,
+      "latentDiff": 115000,
+      "latentRoiPct": 9,
+      "isProfit": true
+    },
+    {
+      "playerName": "Nico Serrano",
+      "position": "midfielder",
+      "buyPrice": 290000,
+      "currentVM": 290000,
+      "latentDiff": 0,
+      "latentRoiPct": 0,
       "isProfit": true
     },
     {
@@ -412,21 +421,21 @@
       "isProfit": true
     },
     {
-      "playerName": "Christantus Uche",
-      "position": "striker",
-      "buyPrice": 180000,
-      "currentVM": 170000,
-      "latentDiff": -10000,
-      "latentRoiPct": -5.6,
-      "isProfit": false
-    },
-    {
       "playerName": "Aihen Muñoz",
       "position": "defender",
       "buyPrice": 210000,
       "currentVM": 190000,
       "latentDiff": -20000,
       "latentRoiPct": -9.5,
+      "isProfit": false
+    },
+    {
+      "playerName": "Christantus Uche",
+      "position": "striker",
+      "buyPrice": 180000,
+      "currentVM": 160000,
+      "latentDiff": -20000,
+      "latentRoiPct": -11.1,
       "isProfit": false
     },
     {
@@ -442,18 +451,18 @@
       "playerName": "Junior Firpo",
       "position": "defender",
       "buyPrice": 430000,
-      "currentVM": 290000,
-      "latentDiff": -140000,
-      "latentRoiPct": -32.6,
+      "currentVM": 270000,
+      "latentDiff": -160000,
+      "latentRoiPct": -37.2,
       "isProfit": false
     },
     {
       "playerName": "Adrián de la Fuente",
       "position": "defender",
       "buyPrice": 3860000,
-      "currentVM": 3480000,
-      "latentDiff": -380000,
-      "latentRoiPct": -9.8,
+      "currentVM": 3490000,
+      "latentDiff": -370000,
+      "latentRoiPct": -9.6,
       "isProfit": false
     },
     {
@@ -469,31 +478,31 @@
       "playerName": "David Soria",
       "position": "keeper",
       "buyPrice": 4820000,
-      "currentVM": 3100000,
-      "latentDiff": -1720000,
-      "latentRoiPct": -35.7,
+      "currentVM": 3440000,
+      "latentDiff": -1380000,
+      "latentRoiPct": -28.6,
       "isProfit": false
     },
     {
       "playerName": "Mariano Díaz",
       "position": "striker",
       "buyPrice": 6315000,
-      "currentVM": 3870000,
-      "latentDiff": -2445000,
-      "latentRoiPct": -38.7,
+      "currentVM": 4040000,
+      "latentDiff": -2275000,
+      "latentRoiPct": -36,
       "isProfit": false
     },
     {
       "playerName": "Fede Valverde",
       "position": "midfielder",
       "buyPrice": 20510000,
-      "currentVM": 9930000,
-      "latentDiff": -10580000,
-      "latentRoiPct": -51.6,
+      "currentVM": 10230000,
+      "latentDiff": -10280000,
+      "latentRoiPct": -50.1,
       "isProfit": false
     }
   ],
-  "lastUpdated": "2026-11-09T11:01:20.504Z",
+  "lastUpdated": "2026-11-10T11:01:04.194Z",
   "speculationGainsEUR": 157900,
   "speculationTradesCount": 28
 }
