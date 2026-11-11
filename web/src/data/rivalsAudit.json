@@ -962,7 +962,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-11T07:31:06.077Z"
+      "lastUpdated": "2026-11-11T11:01:12.256Z"
     },
     "speculation": {
       "score": 98,
@@ -4827,7 +4827,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-11T07:31:07.532Z"
+      "lastUpdated": "2026-11-11T11:01:13.628Z"
     },
     "speculation": {
       "score": 98,
@@ -6083,35 +6083,39 @@
     "crest": "/media/crests/pachangueros.svg",
     "pos": 3,
     "points": 577,
-    "squadValue": 55550000,
-    "playerCount": 13,
-    "financialHealth": "Apalancado / Saldo Negativo (-0.27M €)",
-    "debtAlert": "Saldo en descubierto (-0.27M €). Consume el 2.0% del límite de crédito permitido (13.89M €). Exige ventas antes de puntuar.",
+    "squadValue": 52590000,
+    "playerCount": 12,
+    "financialHealth": "Saneado / Alta Liquidez (+2.57M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+2.57M €) y solvencia plena para acudir a subastas sin deuda.",
     "projectedScore": 61,
     "formation": "5-4-1",
     "tacticDescription": "Estructura 5-4-1 orientada a maximizar 61 puntos según plantilla disponible.",
     "strengths": [
       "3º en la clasificación general con 577 puntos acumulados (192.3 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (55.55M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -0.27M € que obliga a vender piezas."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
-        "type": "suboptimal",
-        "badge": "⚠️ Banquillo Desperdiciado",
-        "player": "Lucas Cepeda",
-        "position": "midfielder",
-        "title": "Rendimiento en Reserva",
-        "description": "Tiene a Lucas Cepeda (55 pts) en el banquillo mientras alinea a Javier Hernández (45 pts).",
-        "action": "Valorar permuta táctica dando entrada a Lucas Cepeda de inicio."
+        "type": "success",
+        "badge": "✅ Once Saneado",
+        "player": "Alineación Óptima",
+        "title": "Sin Bajas ni Riesgos Críticos",
+        "description": "Todos los futbolistas del 11 titular están activos, disponibles y en plenitud para la jornada.",
+        "action": "Mantener la estructura táctica establecida."
       }
     ],
     "recommendations": [
+      {
+        "name": "Otorbi",
+        "pos": "Delantero",
+        "price": 2990000,
+        "reason": "Refuerzo de ataque (2.99M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
+      },
       {
         "name": "Raba",
         "pos": "Delantero",
@@ -6123,28 +6127,22 @@
         "pos": "Centrocampista",
         "price": 20650000,
         "reason": "Pieza competitiva en el mercado (20.65M €) adaptable al esquema 5-4-1."
-      },
-      {
-        "name": "Otorbi",
-        "pos": "Delantero",
-        "price": 2990000,
-        "reason": "Pieza competitiva en el mercado (2.99M €) adaptable al esquema 5-4-1."
       }
     ],
     "marketBalance": {
       "clubName": "Pachangueros F.C.",
-      "realizedGainsEUR": 1095300,
+      "realizedGainsEUR": 1429900,
       "realizedLossesEUR": 6012800,
-      "netRealizedBalanceEUR": -4917500,
-      "profitableTradesCount": 2,
-      "totalClosedTradesCount": 12,
-      "historicalSuccessRatePct": 17,
-      "totalLatentGainsEUR": 627000,
+      "netRealizedBalanceEUR": -4582900,
+      "profitableTradesCount": 3,
+      "totalClosedTradesCount": 13,
+      "historicalSuccessRatePct": 23,
+      "totalLatentGainsEUR": 177000,
       "totalLatentLossesEUR": 3717000,
-      "netLatentBalanceEUR": -3090000,
+      "netLatentBalanceEUR": -3540000,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-4.917.500 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-4.582.900 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Iván Romero",
@@ -6154,6 +6152,15 @@
           "roiPct": 20.6,
           "isProfit": true,
           "sellDate": "2026-10-14T04:30:50+02:00"
+        },
+        {
+          "playerName": "Javier Hernández",
+          "buyPrice": 2510000,
+          "sellPrice": 2844600,
+          "diff": 334600,
+          "roiPct": 13.3,
+          "isProfit": true,
+          "sellDate": "2026-11-11T04:30:59+01:00"
         },
         {
           "playerName": "Balliu",
@@ -6257,15 +6264,6 @@
       ],
       "latentTrades": [
         {
-          "playerName": "Javier Hernández",
-          "position": "midfielder",
-          "buyPrice": 2510000,
-          "currentVM": 2960000,
-          "latentDiff": 450000,
-          "latentRoiPct": 17.9,
-          "isProfit": true
-        },
-        {
           "playerName": "Fer Niño",
           "position": "striker",
           "buyPrice": 6830000,
@@ -6347,23 +6345,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-11T07:31:06.769Z"
+      "lastUpdated": "2026-11-11T11:01:12.916Z"
     },
     "speculation": {
-      "score": 90,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
-      "badgeColor": "#ef4444",
+      "score": 74,
+      "badge": "🎰 Especulador de Mercado",
+      "badgeColor": "#f59e0b",
       "overbidRate": "+1.7%",
-      "riskLevel": "Alto Riesgo (Apalancado)",
+      "riskLevel": "Riesgo Moderado-Alto",
       "totalSpent": 79492000,
-      "totalReceived": 53449300,
+      "totalReceived": 56293900,
       "purchasesCount": 22,
-      "salesCount": 24,
-      "estimatedCash": -272700,
+      "salesCount": 25,
+      "estimatedCash": 2571900,
       "prizesEarned": 5770000,
-      "maxCreditLimit": 13887500,
-      "netWealth": 55277300,
-      "analysis": "Operativa histórica de 22 compras (79.5M €) y 24 ventas (53.4M €). Dinero total rotado: 132.9M € con sobrepuja media de +1.7%."
+      "maxCreditLimit": 13147500,
+      "netWealth": 55161900,
+      "analysis": "Operativa histórica de 22 compras (79.5M €) y 25 ventas (56.3M €). Dinero total rotado: 135.8M € con sobrepuja media de +1.7%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -7010,6 +7008,20 @@
           "seller": "Pachangueros F.C.",
           "buyer": "Computer",
           "date": "2026-11-03T04:31:13+01:00"
+        },
+        {
+          "playerName": "Javier Hernández",
+          "price": 2844600,
+          "marketValue": 2844600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Pachangueros F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-11T04:30:59+01:00"
         }
       ]
     },
@@ -7168,11 +7180,11 @@
         "image": "/media/players/1602.png"
       },
       {
-        "id": 3851,
-        "name": "Javier Hernández",
+        "id": 3977,
+        "name": "Lucas Cepeda",
         "position": "midfielder",
-        "price": 2960000,
-        "points": 45,
+        "price": 2190000,
+        "points": 55,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -7182,7 +7194,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/3851.png"
+        "image": "/media/players/3977.png"
       },
       {
         "id": 2895,
@@ -7203,22 +7215,6 @@
       }
     ],
     "bench": [
-      {
-        "id": 3977,
-        "name": "Lucas Cepeda",
-        "position": "midfielder",
-        "price": 2190000,
-        "points": 55,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3977.png"
-      },
       {
         "id": 3394,
         "name": "Iker Muñoz",
@@ -7542,7 +7538,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-11T07:31:06.423Z"
+      "lastUpdated": "2026-11-11T11:01:12.581Z"
     },
     "speculation": {
       "score": 98,
@@ -8836,7 +8832,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-11T07:31:08.462Z"
+      "lastUpdated": "2026-11-11T11:01:14.676Z"
     },
     "speculation": {
       "score": 86,
@@ -9856,66 +9852,65 @@
     "crest": "/media/crests/amigos_de_nin.svg",
     "pos": 6,
     "points": 526,
-    "squadValue": 38080000,
-    "playerCount": 12,
-    "financialHealth": "Saneado / Alta Liquidez (+1.59M € en Caja)",
-    "debtAlert": "Excelente remanente de liquidez (+1.59M €) y solvencia plena para acudir a subastas sin deuda.",
-    "projectedScore": 56,
-    "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 56 puntos según plantilla disponible.",
+    "squadValue": 32970000,
+    "playerCount": 10,
+    "financialHealth": "Saneado / Alta Liquidez (+6.83M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+6.83M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 44,
+    "formation": "4-4-2",
+    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 44 puntos según plantilla disponible.",
     "strengths": [
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
+      "Plantilla corta (10 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
-        "type": "suboptimal",
-        "badge": "⚠️ Banquillo Desperdiciado",
-        "player": "Abel Bretones",
-        "position": "defender",
-        "title": "Rendimiento en Reserva",
-        "description": "Tiene a Abel Bretones (39 pts) en el banquillo mientras alinea a Djené (31 pts).",
-        "action": "Valorar permuta táctica dando entrada a Abel Bretones de inicio."
+        "type": "success",
+        "badge": "✅ Once Saneado",
+        "player": "Alineación Óptima",
+        "title": "Sin Bajas ni Riesgos Críticos",
+        "description": "Todos los futbolistas del 11 titular están activos, disponibles y en plenitud para la jornada.",
+        "action": "Mantener la estructura táctica establecida."
       }
     ],
     "recommendations": [
       {
-        "name": "Raba",
+        "name": "Otorbi",
         "pos": "Delantero",
-        "price": 1560000,
-        "reason": "Oportunidad de mercado (1.56M € · 24 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+        "price": 2990000,
+        "reason": "Refuerzo de ataque (2.99M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
       },
       {
         "name": "Rodri",
         "pos": "Centrocampista",
         "price": 20650000,
-        "reason": "Pieza competitiva en el mercado (20.65M €) adaptable al esquema 3-4-3."
+        "reason": "Centrocampista con llegada (20.65M €) para asociarse con Pape Gueye y dominar la posesión."
       },
       {
-        "name": "Otorbi",
+        "name": "Ferran Jutglà",
         "pos": "Delantero",
-        "price": 2990000,
-        "reason": "Pieza competitiva en el mercado (2.99M €) adaptable al esquema 3-4-3."
+        "price": 3110000,
+        "reason": "Oportunidad de mercado (3.11M € · 46 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
       }
     ],
     "marketBalance": {
       "clubName": "Amigos de NIN",
       "realizedGainsEUR": 0,
-      "realizedLossesEUR": 3104300,
-      "netRealizedBalanceEUR": -3104300,
+      "realizedLossesEUR": 7269905,
+      "netRealizedBalanceEUR": -7269905,
       "profitableTradesCount": 0,
-      "totalClosedTradesCount": 4,
+      "totalClosedTradesCount": 6,
       "historicalSuccessRatePct": 0,
       "totalLatentGainsEUR": 485000,
-      "totalLatentLossesEUR": 16205310,
-      "netLatentBalanceEUR": -15720310,
+      "totalLatentLossesEUR": 11908005,
+      "netLatentBalanceEUR": -11423005,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-3.104.300 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-7.269.905 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Pathé Ciss",
@@ -9952,6 +9947,24 @@
           "roiPct": -91.8,
           "isProfit": false,
           "sellDate": "2026-10-26T04:29:14+01:00"
+        },
+        {
+          "playerName": "Álvaro García",
+          "buyPrice": 5750000,
+          "sellPrice": 3904600,
+          "diff": -1845400,
+          "roiPct": -32.1,
+          "isProfit": false,
+          "sellDate": "2026-11-11T04:30:59+01:00"
+        },
+        {
+          "playerName": "Hugo Duro",
+          "buyPrice": 3657305,
+          "sellPrice": 1337100,
+          "diff": -2320205,
+          "roiPct": -63.4,
+          "isProfit": false,
+          "sellDate": "2026-11-11T04:30:59+01:00"
         }
       ],
       "latentTrades": [
@@ -10001,30 +10014,12 @@
           "isProfit": false
         },
         {
-          "playerName": "Álvaro García",
-          "position": "midfielder",
-          "buyPrice": 5750000,
-          "currentVM": 3740000,
-          "latentDiff": -2010000,
-          "latentRoiPct": -35,
-          "isProfit": false
-        },
-        {
           "playerName": "Borja Iglesias",
           "position": "striker",
           "buyPrice": 4128000,
           "currentVM": 1920000,
           "latentDiff": -2208000,
           "latentRoiPct": -53.5,
-          "isProfit": false
-        },
-        {
-          "playerName": "Hugo Duro",
-          "position": "striker",
-          "buyPrice": 3657305,
-          "currentVM": 1370000,
-          "latentDiff": -2287305,
-          "latentRoiPct": -62.5,
           "isProfit": false
         },
         {
@@ -10037,23 +10032,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-11T07:31:07.148Z"
+      "lastUpdated": "2026-11-11T11:01:13.272Z"
     },
     "speculation": {
-      "score": 73,
-      "badge": "🎰 Especulador de Mercado",
-      "badgeColor": "#f59e0b",
+      "score": 82,
+      "badge": "🦈 Tiburón / Hiper-Trader",
+      "badgeColor": "#ef4444",
       "overbidRate": "+15.3%",
-      "riskLevel": "Riesgo Moderado-Alto",
+      "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 55153410,
-      "totalReceived": 31482410,
+      "totalReceived": 36724110,
       "purchasesCount": 13,
-      "salesCount": 16,
-      "estimatedCash": 1589000,
+      "salesCount": 18,
+      "estimatedCash": 6830700,
       "prizesEarned": 5260000,
-      "maxCreditLimit": 9520000,
-      "netWealth": 39669000,
-      "analysis": "Operativa histórica de 13 compras (55.2M €) y 16 ventas (31.5M €). Dinero total rotado: 86.6M € con sobrepuja media de +15.3%."
+      "maxCreditLimit": 8242500,
+      "netWealth": 39800700,
+      "analysis": "Operativa histórica de 13 compras (55.2M €) y 18 ventas (36.7M €). Dinero total rotado: 91.9M € con sobrepuja media de +15.3%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -10444,6 +10439,34 @@
           "seller": "Amigos de NIN",
           "buyer": "Computer",
           "date": "2026-10-26T04:29:14+01:00"
+        },
+        {
+          "playerName": "Álvaro García",
+          "price": 3904600,
+          "marketValue": 3904600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Amigos de NIN",
+          "buyer": "Computer",
+          "date": "2026-11-11T04:30:59+01:00"
+        },
+        {
+          "playerName": "Hugo Duro",
+          "price": 1337100,
+          "marketValue": 1337100,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Amigos de NIN",
+          "buyer": "Computer",
+          "date": "2026-11-11T04:30:59+01:00"
         }
       ]
     },
@@ -10517,6 +10540,23 @@
         "image": "/media/players/2447.png"
       },
       {
+        "id": 3651,
+        "name": "Abel Bretones",
+        "position": "defender",
+        "price": 1150000,
+        "points": 39,
+        "expectedPoints": 2.6,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3651.png"
+      },
+      {
         "id": 1969,
         "name": "Unai López",
         "position": "midfielder",
@@ -10551,23 +10591,6 @@
         "image": "/media/players/3387.png"
       },
       {
-        "id": 1771,
-        "name": "Álvaro García",
-        "position": "midfielder",
-        "price": 3740000,
-        "points": 57,
-        "expectedPoints": 5.2,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/1771.png"
-      },
-      {
         "id": 4092,
         "name": "Amatucci",
         "position": "midfielder",
@@ -10583,23 +10606,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/4092.png"
-      },
-      {
-        "id": 2550,
-        "name": "Hugo Duro",
-        "position": "striker",
-        "price": 1370000,
-        "points": 25,
-        "expectedPoints": 5.1,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2550.png"
       },
       {
         "id": 2009,
@@ -10636,24 +10642,7 @@
         "image": "/media/players/3563.png"
       }
     ],
-    "bench": [
-      {
-        "id": 3651,
-        "name": "Abel Bretones",
-        "position": "defender",
-        "price": 1150000,
-        "points": 39,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3651.png"
-      }
-    ],
+    "bench": [],
     "isMe": false
   },
   {
@@ -11160,7 +11149,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-11T07:31:07.864Z"
+      "lastUpdated": "2026-11-11T11:01:13.976Z"
     },
     "speculation": {
       "score": 98,
@@ -12945,7 +12934,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-11T07:31:08.165Z"
+      "lastUpdated": "2026-11-11T11:01:14.324Z"
     },
     "speculation": {
       "score": 80,
@@ -14120,7 +14109,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-11T07:31:08.845Z"
+      "lastUpdated": "2026-11-11T11:01:15.022Z"
     },
     "speculation": {
       "score": 98,
@@ -16074,7 +16063,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-11T07:31:09.183Z"
+      "lastUpdated": "2026-11-11T11:01:15.395Z"
     },
     "speculation": {
       "score": 70,
