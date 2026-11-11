@@ -6,9 +6,9 @@
   "profitableTradesCount": 23,
   "totalClosedTradesCount": 40,
   "historicalSuccessRatePct": 57,
-  "totalLatentGainsEUR": 815000,
-  "totalLatentLossesEUR": 15345000,
-  "netLatentBalanceEUR": -14530000,
+  "totalLatentGainsEUR": 755000,
+  "totalLatentLossesEUR": 14295000,
+  "netLatentBalanceEUR": -13540000,
   "healthLabel": "AJUSTES & DEUDA",
   "healthBadgeColor": "amber",
   "healthSummary": "El balance histórico refleja el coste de saneamiento inicial de deuda (ventas defensivas como Hugo Duro y Galarreta para salir de números rojos), mientras que el nuevo régimen de especulación opera con un 100% de plusvalías netas.",
@@ -379,9 +379,9 @@
       "playerName": "Johnny Cardoso",
       "position": "midfielder",
       "buyPrice": 1090000,
-      "currentVM": 1570000,
-      "latentDiff": 480000,
-      "latentRoiPct": 44,
+      "currentVM": 1490000,
+      "latentDiff": 400000,
+      "latentRoiPct": 36.7,
       "isProfit": true
     },
     {
@@ -397,9 +397,18 @@
       "playerName": "Gavi",
       "position": "midfielder",
       "buyPrice": 1275000,
-      "currentVM": 1390000,
-      "latentDiff": 115000,
-      "latentRoiPct": 9,
+      "currentVM": 1410000,
+      "latentDiff": 135000,
+      "latentRoiPct": 10.6,
+      "isProfit": true
+    },
+    {
+      "playerName": "Aihen Muñoz",
+      "position": "defender",
+      "buyPrice": 210000,
+      "currentVM": 210000,
+      "latentDiff": 0,
+      "latentRoiPct": 0,
       "isProfit": true
     },
     {
@@ -421,21 +430,12 @@
       "isProfit": true
     },
     {
-      "playerName": "Aihen Muñoz",
-      "position": "defender",
-      "buyPrice": 210000,
-      "currentVM": 190000,
-      "latentDiff": -20000,
-      "latentRoiPct": -9.5,
-      "isProfit": false
-    },
-    {
       "playerName": "Christantus Uche",
       "position": "striker",
       "buyPrice": 180000,
-      "currentVM": 160000,
-      "latentDiff": -20000,
-      "latentRoiPct": -11.1,
+      "currentVM": 170000,
+      "latentDiff": -10000,
+      "latentRoiPct": -5.6,
       "isProfit": false
     },
     {
@@ -460,9 +460,9 @@
       "playerName": "Adrián de la Fuente",
       "position": "defender",
       "buyPrice": 3860000,
-      "currentVM": 3490000,
-      "latentDiff": -370000,
-      "latentRoiPct": -9.6,
+      "currentVM": 3540000,
+      "latentDiff": -320000,
+      "latentRoiPct": -8.3,
       "isProfit": false
     },
     {
@@ -496,13 +496,13 @@
       "playerName": "Fede Valverde",
       "position": "midfielder",
       "buyPrice": 20510000,
-      "currentVM": 10230000,
-      "latentDiff": -10280000,
-      "latentRoiPct": -50.1,
+      "currentVM": 11200000,
+      "latentDiff": -9310000,
+      "latentRoiPct": -45.4,
       "isProfit": false
     }
   ],
-  "lastUpdated": "2026-11-10T22:51:08.315Z",
+  "lastUpdated": "2026-11-11T04:06:11.384Z",
   "speculationGainsEUR": 157900,
   "speculationTradesCount": 28
 }
