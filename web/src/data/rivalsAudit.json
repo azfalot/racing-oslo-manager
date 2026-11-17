@@ -1016,7 +1016,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T07:31:14.480Z"
+      "lastUpdated": "2026-11-17T11:01:15.338Z"
     },
     "speculation": {
       "score": 98,
@@ -4680,32 +4680,31 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 2,
     "points": 619,
-    "squadValue": 58020000,
-    "playerCount": 15,
-    "financialHealth": "Apalancado / Saldo Negativo (-4.46M €)",
-    "debtAlert": "Saldo en descubierto (-4.46M €). Consume el 30.8% del límite de crédito permitido (14.51M €). Exige ventas antes de puntuar.",
+    "squadValue": 55230000,
+    "playerCount": 14,
+    "financialHealth": "Apalancado / Saldo Negativo (-1.55M €)",
+    "debtAlert": "Saldo en descubierto (-1.55M €). Consume el 11.2% del límite de crédito permitido (13.81M €). Exige ventas antes de puntuar.",
     "projectedScore": 64,
     "formation": "3-5-2",
     "tacticDescription": "Estructura 3-5-2 orientada a maximizar 64 puntos según plantilla disponible.",
     "strengths": [
       "2º en la clasificación general con 619 puntos acumulados (206.3 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (58.02M €).",
+      "Patrimonio de plantilla consolidado en Primera (55.23M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -4.46M € que obliga a vender piezas."
+      "Tensión de tesorería: Saldo negativo de -1.55M € que obliga a vender piezas."
     ],
     "tacticalAlerts": [
       {
-        "type": "suboptimal",
-        "badge": "⚠️ Banquillo Desperdiciado",
-        "player": "Marcos Alonso",
-        "position": "defender",
-        "title": "Rendimiento en Reserva",
-        "description": "Tiene a Marcos Alonso (50 pts) en el banquillo mientras alinea a Koundé (35 pts).",
-        "action": "Valorar permuta táctica dando entrada a Marcos Alonso de inicio."
+        "type": "success",
+        "badge": "✅ Once Saneado",
+        "player": "Alineación Óptima",
+        "title": "Sin Bajas ni Riesgos Críticos",
+        "description": "Todos los futbolistas del 11 titular están activos, disponibles y en plenitud para la jornada.",
+        "action": "Mantener la estructura táctica establecida."
       }
     ],
     "recommendations": [
@@ -4731,17 +4730,17 @@
     "marketBalance": {
       "clubName": "Puente Avios FC",
       "realizedGainsEUR": 2600173,
-      "realizedLossesEUR": 18215260,
-      "netRealizedBalanceEUR": -15615087,
+      "realizedLossesEUR": 18305960,
+      "netRealizedBalanceEUR": -15705787,
       "profitableTradesCount": 19,
-      "totalClosedTradesCount": 27,
-      "historicalSuccessRatePct": 70,
+      "totalClosedTradesCount": 28,
+      "historicalSuccessRatePct": 68,
       "totalLatentGainsEUR": 6532000,
-      "totalLatentLossesEUR": 15503039,
-      "netLatentBalanceEUR": -8971039,
+      "totalLatentLossesEUR": 15284039,
+      "netLatentBalanceEUR": -8752039,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-15.615.087 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-15.705.787 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Yuri Berchiche",
@@ -4924,6 +4923,15 @@
           "sellDate": "2026-09-28T04:29:26+02:00"
         },
         {
+          "playerName": "Koundé",
+          "buyPrice": 3009000,
+          "sellPrice": 2918300,
+          "diff": -90700,
+          "roiPct": -3,
+          "isProfit": false,
+          "sellDate": "2026-11-17T04:30:59+01:00"
+        },
+        {
           "playerName": "Beñat Prados",
           "buyPrice": 572000,
           "sellPrice": 203800,
@@ -5043,15 +5051,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Koundé",
-          "position": "defender",
-          "buyPrice": 3009000,
-          "currentVM": 2790000,
-          "latentDiff": -219000,
-          "latentRoiPct": -7.3,
-          "isProfit": false
-        },
-        {
           "playerName": "Beñat Prados",
           "position": "midfielder",
           "buyPrice": 572000,
@@ -5106,7 +5105,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T07:31:15.893Z"
+      "lastUpdated": "2026-11-17T11:01:16.712Z"
     },
     "speculation": {
       "score": 98,
@@ -5115,14 +5114,14 @@
       "overbidRate": "+16.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 101266426,
-      "totalReceived": 70612500,
+      "totalReceived": 73530800,
       "purchasesCount": 41,
-      "salesCount": 41,
-      "estimatedCash": -4463926,
+      "salesCount": 42,
+      "estimatedCash": -1545626,
       "prizesEarned": 6190000,
-      "maxCreditLimit": 14505000,
-      "netWealth": 53556074,
-      "analysis": "Operativa histórica de 41 compras (101.3M €) y 41 ventas (70.6M €). Dinero total rotado: 171.9M € con sobrepuja media de +16.2%."
+      "maxCreditLimit": 13807500,
+      "netWealth": 53684374,
+      "analysis": "Operativa histórica de 41 compras (101.3M €) y 42 ventas (73.5M €). Dinero total rotado: 174.8M € con sobrepuja media de +16.2%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -6263,6 +6262,20 @@
           "seller": "Puente Avios FC",
           "buyer": "Computer",
           "date": "2026-11-17T04:30:59+01:00"
+        },
+        {
+          "playerName": "Koundé",
+          "price": 2918300,
+          "marketValue": 2918300,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-17T04:30:59+01:00"
         }
       ]
     },
@@ -6319,11 +6332,11 @@
         "image": "/media/players/3875.png"
       },
       {
-        "id": 2818,
-        "name": "Koundé",
+        "id": 3345,
+        "name": "Marcos Alonso",
         "position": "defender",
-        "price": 2790000,
-        "points": 35,
+        "price": 2840000,
+        "points": 50,
         "expectedPoints": 4.1,
         "status": "ACTIVE",
         "statusInfo": "",
@@ -6333,7 +6346,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/2818.png"
+        "image": "/media/players/3345.png"
       },
       {
         "id": 3010,
@@ -6471,22 +6484,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/4164.png"
-      },
-      {
-        "id": 3345,
-        "name": "Marcos Alonso",
-        "position": "defender",
-        "price": 2840000,
-        "points": 50,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3345.png"
       },
       {
         "id": 3185,
@@ -6792,7 +6789,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T07:31:15.211Z"
+      "lastUpdated": "2026-11-17T11:01:16.014Z"
     },
     "speculation": {
       "score": 73,
@@ -7985,7 +7982,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T07:31:14.864Z"
+      "lastUpdated": "2026-11-17T11:01:15.682Z"
     },
     "speculation": {
       "score": 98,
@@ -9279,7 +9276,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T07:31:17.036Z"
+      "lastUpdated": "2026-11-17T11:01:17.708Z"
     },
     "speculation": {
       "score": 84,
@@ -10506,7 +10503,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T07:31:15.560Z"
+      "lastUpdated": "2026-11-17T11:01:16.383Z"
     },
     "speculation": {
       "score": 84,
@@ -11731,7 +11728,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T07:31:16.293Z"
+      "lastUpdated": "2026-11-17T11:01:17.059Z"
     },
     "speculation": {
       "score": 98,
@@ -13574,7 +13571,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T07:31:16.639Z"
+      "lastUpdated": "2026-11-17T11:01:17.371Z"
     },
     "speculation": {
       "score": 79,
@@ -14767,7 +14764,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T07:31:17.387Z"
+      "lastUpdated": "2026-11-17T11:01:18.075Z"
     },
     "speculation": {
       "score": 98,
@@ -16781,7 +16778,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T07:31:17.735Z"
+      "lastUpdated": "2026-11-17T11:01:18.439Z"
     },
     "speculation": {
       "score": 70,
