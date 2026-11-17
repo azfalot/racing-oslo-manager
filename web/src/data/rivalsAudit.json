@@ -6,16 +6,16 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 661,
-    "squadValue": 76470000,
-    "playerCount": 19,
-    "financialHealth": "Saneado / Alta Liquidez (+97.22M € en Caja)",
-    "debtAlert": "Excelente remanente de liquidez (+97.22M €) y solvencia plena para acudir a subastas sin deuda.",
-    "projectedScore": 64,
+    "squadValue": 73820000,
+    "playerCount": 16,
+    "financialHealth": "Saneado / Alta Liquidez (+99.83M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+99.83M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 63,
     "formation": "4-4-2",
-    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 64 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 4-4-2 orientada a maximizar 63 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 661 puntos acumulados (220.3 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (76.47M €).",
+      "Patrimonio de plantilla consolidado en Primera (73.82M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
@@ -25,12 +25,22 @@
     ],
     "tacticalAlerts": [
       {
-        "type": "success",
-        "badge": "✅ Once Saneado",
-        "player": "Alineación Óptima",
-        "title": "Sin Bajas ni Riesgos Críticos",
-        "description": "Todos los futbolistas del 11 titular están activos, disponibles y en plenitud para la jornada.",
-        "action": "Mantener la estructura táctica establecida."
+        "type": "suboptimal",
+        "badge": "⚠️ Banquillo Desperdiciado",
+        "player": "Boselli",
+        "position": "defender",
+        "title": "Rendimiento en Reserva",
+        "description": "Tiene a Boselli (31 pts) en el banquillo mientras alinea a Militão (4 pts).",
+        "action": "Valorar permuta táctica dando entrada a Boselli de inicio."
+      },
+      {
+        "type": "suboptimal",
+        "badge": "⚠️ Banquillo Desperdiciado",
+        "player": "Calero",
+        "position": "defender",
+        "title": "Rendimiento en Reserva",
+        "description": "Tiene a Calero (21 pts) en el banquillo mientras alinea a Militão (4 pts).",
+        "action": "Valorar permuta táctica dando entrada a Calero de inicio."
       }
     ],
     "recommendations": [
@@ -41,32 +51,32 @@
         "reason": "Refuerzo de ataque (8.54M €) para potenciar la pegada goleadora y elevar el promedio de puntos del equipo."
       },
       {
+        "name": "Unai Marrero",
+        "pos": "Portero",
+        "price": 160000,
+        "reason": "Alternativa para la portería (0.16M €) para asegurar titularidad y rotación fiable."
+      },
+      {
         "name": "Javier Hernández",
         "pos": "Centrocampista",
         "price": 2480000,
         "reason": "Oportunidad de mercado (2.48M € · 45 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
-      },
-      {
-        "name": "Gorrotxategi",
-        "pos": "Centrocampista",
-        "price": 1210000,
-        "reason": "Pieza competitiva en el mercado (1.21M €) adaptable al esquema 4-4-2."
       }
     ],
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
-      "realizedGainsEUR": 86215276,
-      "realizedLossesEUR": 29687294,
-      "netRealizedBalanceEUR": 56527982,
-      "profitableTradesCount": 41,
-      "totalClosedTradesCount": 88,
-      "historicalSuccessRatePct": 47,
+      "realizedGainsEUR": 87547043,
+      "realizedLossesEUR": 28578472,
+      "netRealizedBalanceEUR": 58968571,
+      "profitableTradesCount": 43,
+      "totalClosedTradesCount": 89,
+      "historicalSuccessRatePct": 48,
       "totalLatentGainsEUR": 5165888,
-      "totalLatentLossesEUR": 33777125,
-      "netLatentBalanceEUR": -28611237,
+      "totalLatentLossesEUR": 33777114,
+      "netLatentBalanceEUR": -28611226,
       "healthLabel": "SUPERÁVIT DE TRADING",
       "healthBadgeColor": "emerald",
-      "healthSummary": "Genera un superávit neto de +56.527.982 € en operaciones de mercado con una efectividad del 47%.",
+      "healthSummary": "Genera un superávit neto de +58.968.571 € en operaciones de mercado con una efectividad del 48%.",
       "closedOperations": [
         {
           "playerName": "Lookman",
@@ -193,6 +203,15 @@
           "roiPct": 86.7,
           "isProfit": true,
           "sellDate": "2026-10-21T23:14:20+01:00"
+        },
+        {
+          "playerName": "Hugo Rincón",
+          "buyPrice": 3254022,
+          "sellPrice": 4582200,
+          "diff": 1328178,
+          "roiPct": 40.8,
+          "isProfit": true,
+          "sellDate": "2026-11-17T04:30:59+01:00"
         },
         {
           "playerName": "Aubameyang",
@@ -438,6 +457,15 @@
           "sellDate": "2026-11-06T04:29:40+01:00"
         },
         {
+          "playerName": "Luiz Junior",
+          "buyPrice": 170011,
+          "sellPrice": 173600,
+          "diff": 3589,
+          "roiPct": 2.1,
+          "isProfit": true,
+          "sellDate": "2026-11-17T04:30:59+01:00"
+        },
+        {
           "playerName": "Rego",
           "buyPrice": 160006,
           "sellPrice": 157900,
@@ -472,6 +500,15 @@
           "roiPct": -2.7,
           "isProfit": false,
           "sellDate": "2026-09-15T04:37:15+02:00"
+        },
+        {
+          "playerName": "Álex Padilla",
+          "buyPrice": 320014,
+          "sellPrice": 315000,
+          "diff": -5014,
+          "roiPct": -1.6,
+          "isProfit": false,
+          "sellDate": "2026-11-17T04:30:59+01:00"
         },
         {
           "playerName": "Cestero",
@@ -587,15 +624,6 @@
           "sellPrice": 285600,
           "diff": -159401,
           "roiPct": -35.8,
-          "isProfit": false,
-          "sellDate": "2026-10-16T04:30:53+02:00"
-        },
-        {
-          "playerName": "Álex Padilla",
-          "buyPrice": 320014,
-          "sellPrice": 153900,
-          "diff": -166114,
-          "roiPct": -51.9,
           "isProfit": false,
           "sellDate": "2026-10-16T04:30:53+02:00"
         },
@@ -798,15 +826,6 @@
           "sellDate": "2026-10-09T04:29:01+02:00"
         },
         {
-          "playerName": "Hugo Rincón",
-          "buyPrice": 3254022,
-          "sellPrice": 2306300,
-          "diff": -947722,
-          "roiPct": -29.1,
-          "isProfit": false,
-          "sellDate": "2026-11-12T01:07:49+01:00"
-        },
-        {
           "playerName": "Hjulmand",
           "buyPrice": 7820020,
           "sellPrice": 6793800,
@@ -926,15 +945,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Luiz Junior",
-          "position": "keeper",
-          "buyPrice": 170011,
-          "currentVM": 170000,
-          "latentDiff": -11,
-          "latentRoiPct": 0,
-          "isProfit": false
-        },
-        {
           "playerName": "Pablo Marín",
           "position": "midfielder",
           "buyPrice": 162002,
@@ -1016,7 +1026,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T11:01:15.338Z"
+      "lastUpdated": "2026-11-17T17:01:21.172Z"
     },
     "speculation": {
       "score": 98,
@@ -1025,14 +1035,14 @@
       "overbidRate": "+6.4%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 435210608,
-      "totalReceived": 505821900,
+      "totalReceived": 508432500,
       "purchasesCount": 113,
-      "salesCount": 129,
-      "estimatedCash": 97221292,
+      "salesCount": 132,
+      "estimatedCash": 99831892,
       "prizesEarned": 6610000,
-      "maxCreditLimit": 19117500,
-      "netWealth": 173691292,
-      "analysis": "Operativa histórica de 113 compras (435.2M €) y 129 ventas (505.8M €). Dinero total rotado: 941.0M € con sobrepuja media de +6.4%."
+      "maxCreditLimit": 18455000,
+      "netWealth": 173651892,
+      "analysis": "Operativa histórica de 113 compras (435.2M €) y 132 ventas (508.4M €). Dinero total rotado: 943.6M € con sobrepuja media de +6.4%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -4349,6 +4359,48 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-11-11T04:30:59+01:00"
+        },
+        {
+          "playerName": "Hugo Rincón",
+          "price": 2275900,
+          "marketValue": 2275900,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-17T04:30:59+01:00"
+        },
+        {
+          "playerName": "Álex Padilla",
+          "price": 161100,
+          "marketValue": 161100,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-17T04:30:59+01:00"
+        },
+        {
+          "playerName": "Luiz Junior",
+          "price": 173600,
+          "marketValue": 173600,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-17T04:30:59+01:00"
         }
       ]
     },
@@ -4422,12 +4474,12 @@
         "image": "/media/players/3079.png"
       },
       {
-        "id": 3576,
-        "name": "Hugo Rincón ",
+        "id": 2760,
+        "name": "Militão",
         "position": "defender",
-        "price": 2320000,
-        "points": 36,
-        "expectedPoints": 4.1,
+        "price": 2500000,
+        "points": 4,
+        "expectedPoints": 3.1,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -4436,7 +4488,7 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/3576.png"
+        "image": "/media/players/2760.png"
       },
       {
         "id": 2761,
@@ -4542,54 +4594,6 @@
       }
     ],
     "bench": [
-      {
-        "id": 3665,
-        "name": "Álex Padilla ",
-        "position": "keeper",
-        "price": 160000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3665.png"
-      },
-      {
-        "id": 3695,
-        "name": "Luiz Junior",
-        "position": "keeper",
-        "price": 170000,
-        "points": 3,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3695.png"
-      },
-      {
-        "id": 2760,
-        "name": "Militão",
-        "position": "defender",
-        "price": 2500000,
-        "points": 4,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2760.png"
-      },
       {
         "id": 3969,
         "name": "Boselli",
@@ -5105,7 +5109,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T11:01:16.712Z"
+      "lastUpdated": "2026-11-17T17:01:22.555Z"
     },
     "speculation": {
       "score": 98,
@@ -6789,7 +6793,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T11:01:16.014Z"
+      "lastUpdated": "2026-11-17T17:01:21.854Z"
     },
     "speculation": {
       "score": 73,
@@ -7982,7 +7986,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T11:01:15.682Z"
+      "lastUpdated": "2026-11-17T17:01:21.524Z"
     },
     "speculation": {
       "score": 98,
@@ -9276,7 +9280,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T11:01:17.708Z"
+      "lastUpdated": "2026-11-17T17:01:23.649Z"
     },
     "speculation": {
       "score": 84,
@@ -10503,7 +10507,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T11:01:16.383Z"
+      "lastUpdated": "2026-11-17T17:01:22.207Z"
     },
     "speculation": {
       "score": 84,
@@ -11728,7 +11732,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T11:01:17.059Z"
+      "lastUpdated": "2026-11-17T17:01:22.930Z"
     },
     "speculation": {
       "score": 98,
@@ -13571,7 +13575,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T11:01:17.371Z"
+      "lastUpdated": "2026-11-17T17:01:23.292Z"
     },
     "speculation": {
       "score": 79,
@@ -14764,7 +14768,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T11:01:18.075Z"
+      "lastUpdated": "2026-11-17T17:01:24.010Z"
     },
     "speculation": {
       "score": 98,
@@ -16778,7 +16782,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T11:01:18.439Z"
+      "lastUpdated": "2026-11-17T17:01:24.334Z"
     },
     "speculation": {
       "score": 70,
