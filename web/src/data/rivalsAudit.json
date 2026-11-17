@@ -1016,7 +1016,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T04:07:57.742Z"
+      "lastUpdated": "2026-11-17T07:31:14.480Z"
     },
     "speculation": {
       "score": 98,
@@ -4680,22 +4680,22 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 2,
     "points": 619,
-    "squadValue": 58190000,
-    "playerCount": 16,
-    "financialHealth": "Apalancado / Saldo Negativo (-4.64M €)",
-    "debtAlert": "Saldo en descubierto (-4.64M €). Consume el 31.9% del límite de crédito permitido (14.55M €). Exige ventas antes de puntuar.",
+    "squadValue": 58020000,
+    "playerCount": 15,
+    "financialHealth": "Apalancado / Saldo Negativo (-4.46M €)",
+    "debtAlert": "Saldo en descubierto (-4.46M €). Consume el 30.8% del límite de crédito permitido (14.51M €). Exige ventas antes de puntuar.",
     "projectedScore": 64,
     "formation": "3-5-2",
     "tacticDescription": "Estructura 3-5-2 orientada a maximizar 64 puntos según plantilla disponible.",
     "strengths": [
       "2º en la clasificación general con 619 puntos acumulados (206.3 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (58.19M €).",
+      "Patrimonio de plantilla consolidado en Primera (58.02M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -4.64M € que obliga a vender piezas."
+      "Tensión de tesorería: Saldo negativo de -4.46M € que obliga a vender piezas."
     ],
     "tacticalAlerts": [
       {
@@ -4730,18 +4730,18 @@
     ],
     "marketBalance": {
       "clubName": "Puente Avios FC",
-      "realizedGainsEUR": 2582193,
+      "realizedGainsEUR": 2600173,
       "realizedLossesEUR": 18215260,
-      "netRealizedBalanceEUR": -15633067,
-      "profitableTradesCount": 18,
-      "totalClosedTradesCount": 26,
-      "historicalSuccessRatePct": 69,
-      "totalLatentGainsEUR": 6541980,
+      "netRealizedBalanceEUR": -15615087,
+      "profitableTradesCount": 19,
+      "totalClosedTradesCount": 27,
+      "historicalSuccessRatePct": 70,
+      "totalLatentGainsEUR": 6532000,
       "totalLatentLossesEUR": 15503039,
-      "netLatentBalanceEUR": -8961059,
+      "netLatentBalanceEUR": -8971039,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-15.633.067 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-15.615.087 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Yuri Berchiche",
@@ -4814,6 +4814,15 @@
           "roiPct": 10,
           "isProfit": true,
           "sellDate": "2026-10-21T04:29:40+02:00"
+        },
+        {
+          "playerName": "Odriozola",
+          "buyPrice": 160020,
+          "sellPrice": 178000,
+          "diff": 17980,
+          "roiPct": 11.2,
+          "isProfit": true,
+          "sellDate": "2026-11-17T04:30:59+01:00"
         },
         {
           "playerName": "Iván Villar",
@@ -5016,15 +5025,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Odriozola",
-          "position": "defender",
-          "buyPrice": 160020,
-          "currentVM": 170000,
-          "latentDiff": 9980,
-          "latentRoiPct": 6.2,
-          "isProfit": true
-        },
-        {
           "playerName": "Emil Audero",
           "position": "keeper",
           "buyPrice": 1542000,
@@ -5106,7 +5106,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T04:07:59.047Z"
+      "lastUpdated": "2026-11-17T07:31:15.893Z"
     },
     "speculation": {
       "score": 98,
@@ -5115,14 +5115,14 @@
       "overbidRate": "+16.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 101266426,
-      "totalReceived": 70434500,
+      "totalReceived": 70612500,
       "purchasesCount": 41,
-      "salesCount": 40,
-      "estimatedCash": -4641926,
+      "salesCount": 41,
+      "estimatedCash": -4463926,
       "prizesEarned": 6190000,
-      "maxCreditLimit": 14547500,
-      "netWealth": 53548074,
-      "analysis": "Operativa histórica de 41 compras (101.3M €) y 40 ventas (70.4M €). Dinero total rotado: 171.7M € con sobrepuja media de +16.2%."
+      "maxCreditLimit": 14505000,
+      "netWealth": 53556074,
+      "analysis": "Operativa histórica de 41 compras (101.3M €) y 41 ventas (70.6M €). Dinero total rotado: 171.9M € con sobrepuja media de +16.2%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -6249,6 +6249,20 @@
           "seller": "Puente Avios FC",
           "buyer": "Amigos de NIN",
           "date": "2026-11-11T04:30:59+01:00"
+        },
+        {
+          "playerName": "Odriozola",
+          "price": 178000,
+          "marketValue": 178000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-17T04:30:59+01:00"
         }
       ]
     },
@@ -6489,22 +6503,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3185.png"
-      },
-      {
-        "id": 2350,
-        "name": "Odriozola",
-        "position": "defender",
-        "price": 170000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2350.png"
       },
       {
         "id": 3440,
@@ -6794,7 +6792,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T04:07:58.369Z"
+      "lastUpdated": "2026-11-17T07:31:15.211Z"
     },
     "speculation": {
       "score": 73,
@@ -7987,7 +7985,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T04:07:58.067Z"
+      "lastUpdated": "2026-11-17T07:31:14.864Z"
     },
     "speculation": {
       "score": 98,
@@ -9281,7 +9279,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T04:08:00.165Z"
+      "lastUpdated": "2026-11-17T07:31:17.036Z"
     },
     "speculation": {
       "score": 84,
@@ -10508,7 +10506,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T04:07:58.728Z"
+      "lastUpdated": "2026-11-17T07:31:15.560Z"
     },
     "speculation": {
       "score": 84,
@@ -11733,7 +11731,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T04:07:59.425Z"
+      "lastUpdated": "2026-11-17T07:31:16.293Z"
     },
     "speculation": {
       "score": 98,
@@ -13576,7 +13574,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T04:07:59.785Z"
+      "lastUpdated": "2026-11-17T07:31:16.639Z"
     },
     "speculation": {
       "score": 79,
@@ -14769,7 +14767,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T04:08:00.480Z"
+      "lastUpdated": "2026-11-17T07:31:17.387Z"
     },
     "speculation": {
       "score": 98,
@@ -16783,7 +16781,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-17T04:08:00.809Z"
+      "lastUpdated": "2026-11-17T07:31:17.735Z"
     },
     "speculation": {
       "score": 70,
