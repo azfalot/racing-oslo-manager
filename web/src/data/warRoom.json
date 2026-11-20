@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-20T19:30:57.261Z",
-  "currentMatchday": 12,
+  "timestamp": "2026-11-20T22:52:14.735Z",
+  "currentMatchday": 13,
   "confidenceLevel": "HIGH",
   "standings": {
     "racingPoints": 188,
@@ -17,7 +17,7 @@
   },
   "lineup": {
     "formation": "3-4-3",
-    "expectedPoints": 41.6,
+    "expectedPoints": 41.7,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -411,37 +411,6 @@
         },
         "nextMatches": [
           {
-            "matchdayNr": 13,
-            "homeClub": {
-              "id": 1,
-              "name": "Athletic",
-              "abbreviation": "ath",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/1"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/1/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-20T21:00:00+01:00",
-            "odds": null
-          },
-          {
             "matchdayNr": 14,
             "homeClub": {
               "id": 7,
@@ -510,7 +479,7 @@
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.5,
+        "expectedPoints": 0.6,
         "id": 2202,
         "position": "striker",
         "points": 0
@@ -535,12 +504,12 @@
       "name": "Kike García",
       "position": "striker",
       "price": 280000,
-      "expectedPoints": 0.5,
+      "expectedPoints": 0.6,
       "vorp": 0,
       "vorpPerMatchday": 0,
       "replacementPpm": 2.5,
-      "upgradeGap": 5,
-      "urgencyScore": 18.5
+      "upgradeGap": 4.9,
+      "urgencyScore": 18.4
     },
     {
       "playerId": 2251,
@@ -569,19 +538,19 @@
       "name": "Rüdiger",
       "type": "defender",
       "price": 1330000,
-      "bidAmount": 1436400,
-      "maxRationalBid": 1436400,
-      "marginPct": 8,
+      "bidAmount": 1423100,
+      "maxRationalBid": 1423100,
+      "marginPct": 7,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 3,
       "ppm": 4.64,
       "efficiency": 87.2,
-      "upgradePoints": 3.2,
-      "marginalValue": 3.2,
+      "upgradePoints": 3.1,
+      "marginalValue": 3.1,
       "vorp": -1,
       "vorpPerMatchday": -0.03,
-      "cpmp": 415625,
-      "cpmpSeason": 12202,
+      "cpmp": 429032,
+      "cpmpSeason": 12667,
       "replacedPlayer": {
         "playerId": 2202,
         "name": "Kike García",
@@ -668,37 +637,6 @@
         },
         "nextMatches": [
           {
-            "matchdayNr": 13,
-            "homeClub": {
-              "id": 1,
-              "name": "Athletic",
-              "abbreviation": "ath",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/1"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/1/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-20T21:00:00+01:00",
-            "odds": null
-          },
-          {
             "matchdayNr": 14,
             "homeClub": {
               "id": 7,
@@ -767,19 +705,19 @@
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.5,
+        "expectedPoints": 0.6,
         "id": 2202,
         "position": "striker",
         "points": 0
       },
       "replacedPlayerName": "Kike García",
-      "replacedPlayerExpectedPoints": 0.5,
+      "replacedPlayerExpectedPoints": 0.6,
       "strategicScore": 67.7,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 3.2
+          "marginalValue": 3.1
         },
         "absoluteQuality": {
           "raw": 77.3,
@@ -813,16 +751,16 @@
       "isComputer": true,
       "requiresSaleFirst": true,
       "reasoning": [
-        "✅ Entra en el XI titular (+3.2 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
+        "✅ Entra en el XI titular (+3.1 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
         "🚀 Supera el promedio con momentum del titular actual (4.64 PPM > 2.04 PPM).",
         "📊 ⭐ Titular Fijo (PPM: 4.64 | Fiabilidad: 95% minutos | Eficiencia: 87.2 pts/M€)",
         "🔥 Dinámica de club: ⚖️ Alto Nivel con Rotaciones Champions (0.95x): 3V 2E 0D - Exigencia máxima y rotaciones frecuentes por Champions League",
         "🌟 Once Ideal: 1 presencia(s) en TOTW esta temporada.",
         "⚔️ Competencia en club: Compite en [object Object] con Éder Militão, Dani Carvajal, Ferland Mendy... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.436.400 € (108.0% VM | Sobreprecio: +8%).",
-        "⛔ Fondos insuficientes: Requiere 2.436.400 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.423.100 € (107.0% VM | Sobreprecio: +7%).",
+        "⛔ Fondos insuficientes: Requiere 2.423.100 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Kike García). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.436.400 € (108.0% VM | Sobreprecio: +8%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Kike García). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.423.100 € (107.0% VM | Sobreprecio: +7%)."
     },
     {
       "playerId": 3667,
@@ -836,12 +774,12 @@
       "expectedPoints": 4,
       "ppm": 4.23,
       "efficiency": 118.8,
-      "upgradePoints": 3,
-      "marginalValue": 3,
+      "upgradePoints": 2.9,
+      "marginalValue": 2.9,
       "vorp": -36,
       "vorpPerMatchday": -1.06,
-      "cpmp": 296667,
-      "cpmpSeason": 8725,
+      "cpmp": 306897,
+      "cpmpSeason": 8990,
       "replacedPlayer": {
         "playerId": 2202,
         "name": "Kike García",
@@ -928,37 +866,6 @@
         },
         "nextMatches": [
           {
-            "matchdayNr": 13,
-            "homeClub": {
-              "id": 1,
-              "name": "Athletic",
-              "abbreviation": "ath",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/1"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/1/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-20T21:00:00+01:00",
-            "odds": null
-          },
-          {
             "matchdayNr": 14,
             "homeClub": {
               "id": 7,
@@ -1027,19 +934,19 @@
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.5,
+        "expectedPoints": 0.6,
         "id": 2202,
         "position": "striker",
         "points": 0
       },
       "replacedPlayerName": "Kike García",
-      "replacedPlayerExpectedPoints": 0.5,
-      "strategicScore": 66.3,
+      "replacedPlayerExpectedPoints": 0.6,
+      "strategicScore": 65,
       "strategicComponents": {
         "squadUpgrade": {
-          "raw": 100,
+          "raw": 96.7,
           "weight": 0.4,
-          "marginalValue": 3
+          "marginalValue": 2.9
         },
         "absoluteQuality": {
           "raw": 70.5,
@@ -1073,7 +980,7 @@
       "isComputer": true,
       "requiresSaleFirst": true,
       "reasoning": [
-        "✅ Entra en el XI titular (+3 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
+        "✅ Entra en el XI titular (+2.9 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
         "🚀 Supera el promedio con momentum del titular actual (4.23 PPM > 2.04 PPM).",
         "📊 ⭐ Titular Fijo (PPM: 4.23 | Fiabilidad: 95% minutos | Eficiencia: 118.8 pts/M€)",
         "🔥 Dinámica de club: 🚀 Estado de Gracia / Racha Histórica (1.06x): 3V 1E 1D - Alta efectividad colectiva y moral por las nubes",
@@ -1095,12 +1002,12 @@
       "expectedPoints": 5,
       "ppm": 3.63,
       "efficiency": 46.6,
-      "upgradePoints": 4.1,
-      "marginalValue": 4.1,
+      "upgradePoints": 4,
+      "marginalValue": 4,
       "vorp": -1,
       "vorpPerMatchday": -0.03,
-      "cpmp": 475610,
-      "cpmpSeason": 14029,
+      "cpmp": 487500,
+      "cpmpSeason": 14338,
       "replacedPlayer": {
         "playerId": 2202,
         "name": "Kike García",
@@ -1187,37 +1094,6 @@
         },
         "nextMatches": [
           {
-            "matchdayNr": 13,
-            "homeClub": {
-              "id": 1,
-              "name": "Athletic",
-              "abbreviation": "ath",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/1"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/1/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-20T21:00:00+01:00",
-            "odds": null
-          },
-          {
             "matchdayNr": 14,
             "homeClub": {
               "id": 7,
@@ -1286,19 +1162,19 @@
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.5,
+        "expectedPoints": 0.6,
         "id": 2202,
         "position": "striker",
         "points": 0
       },
       "replacedPlayerName": "Kike García",
-      "replacedPlayerExpectedPoints": 0.5,
+      "replacedPlayerExpectedPoints": 0.6,
       "strategicScore": 64.3,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 4.1
+          "marginalValue": 4
         },
         "absoluteQuality": {
           "raw": 60.5,
@@ -1332,7 +1208,7 @@
       "isComputer": true,
       "requiresSaleFirst": true,
       "reasoning": [
-        "✅ Entra en el XI titular (+4.1 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
+        "✅ Entra en el XI titular (+4 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
         "🚀 Supera el promedio con momentum del titular actual (3.63 PPM > 2.04 PPM).",
         "📊 ⭐ Titular Fijo (PPM: 3.63 | Fiabilidad: 95% minutos | Eficiencia: 46.6 pts/M€)",
         "🔥 Dinámica de club: ⚖️ Ritmo Estable (0.98x): 2V 1E 2D - Rendimiento alternante",
@@ -1354,12 +1230,12 @@
       "expectedPoints": 4,
       "ppm": 3.16,
       "efficiency": 51,
-      "upgradePoints": 3.5,
-      "marginalValue": 3.5,
+      "upgradePoints": 3.4,
+      "marginalValue": 3.4,
       "vorp": -1,
       "vorpPerMatchday": -0.03,
-      "cpmp": 442857,
-      "cpmpSeason": 13025,
+      "cpmp": 455882,
+      "cpmpSeason": 13362,
       "replacedPlayer": {
         "playerId": 2202,
         "name": "Kike García",
@@ -1446,37 +1322,6 @@
         },
         "nextMatches": [
           {
-            "matchdayNr": 13,
-            "homeClub": {
-              "id": 1,
-              "name": "Athletic",
-              "abbreviation": "ath",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/1"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/1/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-20T21:00:00+01:00",
-            "odds": null
-          },
-          {
             "matchdayNr": 14,
             "homeClub": {
               "id": 7,
@@ -1545,19 +1390,19 @@
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.5,
+        "expectedPoints": 0.6,
         "id": 2202,
         "position": "striker",
         "points": 0
       },
       "replacedPlayerName": "Kike García",
-      "replacedPlayerExpectedPoints": 0.5,
+      "replacedPlayerExpectedPoints": 0.6,
       "strategicScore": 62.8,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 3.5
+          "marginalValue": 3.4
         },
         "absoluteQuality": {
           "raw": 52.7,
@@ -1591,7 +1436,7 @@
       "isComputer": true,
       "requiresSaleFirst": true,
       "reasoning": [
-        "✅ Entra en el XI titular (+3.5 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
+        "✅ Entra en el XI titular (+3.4 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
         "🚀 Supera el promedio con momentum del titular actual (3.16 PPM > 2.04 PPM).",
         "📊 🔄 Rotación Habitual (PPM: 3.16 | Fiabilidad: 75% minutos | Eficiencia: 51 pts/M€)",
         "🔥 Dinámica de club: 📉 Inestabilidad y Presión Social (0.88x): 1V 2E 2D - Dudas tácticas y tensión competitiva",
@@ -1599,26 +1444,26 @@
         "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.689.500 € (109.0% VM | Sobreprecio: +9%).",
         "⛔ Fondos insuficientes: Requiere 2.689.500 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Kike García). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.689.500 € (109.0% VM | Sobreprecio: +9%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Kike García). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.689.500 € (109.0% VM | Sobreprecio: +9%)."
     },
     {
       "playerId": 2691,
       "name": "Le Normand",
       "type": "defender",
       "price": 1170000,
-      "bidAmount": 1240200,
-      "maxRationalBid": 1240200,
-      "marginPct": 6,
+      "bidAmount": 1228500,
+      "maxRationalBid": 1228500,
+      "marginPct": 5,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 2,
       "ppm": 3.75,
       "efficiency": 80.1,
-      "upgradePoints": 2.7,
-      "marginalValue": 2.7,
+      "upgradePoints": 2.6,
+      "marginalValue": 2.6,
       "vorp": 21,
       "vorpPerMatchday": 0.62,
-      "cpmp": 433333,
-      "cpmpSeason": 12717,
+      "cpmp": 450000,
+      "cpmpSeason": 13295,
       "replacedPlayer": {
         "playerId": 2202,
         "name": "Kike García",
@@ -1705,37 +1550,6 @@
         },
         "nextMatches": [
           {
-            "matchdayNr": 13,
-            "homeClub": {
-              "id": 1,
-              "name": "Athletic",
-              "abbreviation": "ath",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/1"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/1/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-20T21:00:00+01:00",
-            "odds": null
-          },
-          {
             "matchdayNr": 14,
             "homeClub": {
               "id": 7,
@@ -1804,19 +1618,19 @@
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.5,
+        "expectedPoints": 0.6,
         "id": 2202,
         "position": "striker",
         "points": 0
       },
       "replacedPlayerName": "Kike García",
-      "replacedPlayerExpectedPoints": 0.5,
-      "strategicScore": 60.8,
+      "replacedPlayerExpectedPoints": 0.6,
+      "strategicScore": 59.4,
       "strategicComponents": {
         "squadUpgrade": {
-          "raw": 90,
+          "raw": 86.7,
           "weight": 0.4,
-          "marginalValue": 2.7
+          "marginalValue": 2.6
         },
         "absoluteQuality": {
           "raw": 62.5,
@@ -1850,16 +1664,16 @@
       "isComputer": true,
       "requiresSaleFirst": true,
       "reasoning": [
-        "✅ Entra en el XI titular (+2.7 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
+        "✅ Entra en el XI titular (+2.6 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
         "🚀 Supera el promedio con momentum del titular actual (3.75 PPM > 2.04 PPM).",
         "📊 ⭐ Titular Fijo (PPM: 3.75 | Fiabilidad: 95% minutos | Eficiencia: 80.1 pts/M€)",
         "🔥 Dinámica de club: 🛡️ En Racha Positiva / Invictos (1.06x): 3V 2E 0D - Solidez defensiva y plantilla profunda",
         "🌟 Once Ideal: 1 presencia(s) en TOTW esta temporada.",
         "⚔️ Competencia en club: Compite en [object Object] con José María Giménez, César Azpilicueta, Nahuel Molina... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.240.200 € (106.0% VM | Sobreprecio: +6%).",
-        "⛔ Fondos insuficientes: Requiere 2.240.200 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.228.500 € (105.0% VM | Sobreprecio: +5%).",
+        "⛔ Fondos insuficientes: Requiere 2.228.500 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Kike García). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.240.200 € (106.0% VM | Sobreprecio: +6%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Kike García). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.228.500 € (105.0% VM | Sobreprecio: +5%)."
     }
   ],
   "liquiditySuggestions": [
@@ -1891,16 +1705,16 @@
     "scenarioType": "ACTUAL_BASELINE",
     "totalSimulations": 1000,
     "iterations": 1000,
-    "remainingMatchdays": 26,
+    "remainingMatchdays": 25,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 41.6,
-      "restOfSeasonAggregateExpectedPpm": 33,
+      "currentXiExpectedPoints": 41.7,
+      "restOfSeasonAggregateExpectedPpm": 30.5,
       "pWin": 0,
       "pTop2": 0,
       "pTop3": 0,
-      "expectedFinalPoints": 1251,
-      "range": "1198 - 1303 pts",
+      "expectedFinalPoints": 1159,
+      "range": "1106 - 1208 pts",
       "wilsonCI95": {
         "lowerPct": 0,
         "upperPct": 0.4
@@ -1909,58 +1723,58 @@
     "probChampion": 0,
     "probTop2": 0,
     "probTop3": 0,
-    "racingExpectedFinalPoints": 1251,
-    "racingRange": "1198 - 1303 pts",
+    "racingExpectedFinalPoints": 1159,
+    "racingRange": "1106 - 1208 pts",
     "racingWilsonCI95": {
       "lowerPct": 0,
       "upperPct": 0.4
     },
     "leaderName": "Fermín Gadura F.C.",
-    "leaderExpectedPoints": 2092,
+    "leaderExpectedPoints": 1931,
     "standings": [
       {
         "id": 21163674,
         "name": "Fermín Gadura F.C.",
         "currentPoints": 661,
-        "meanPpm": 55.1,
+        "meanPpm": 50.8,
         "stdDev": 8,
-        "expectedFinalPoints": 2092,
-        "range": "2039 - 2141 pts",
-        "probChampion": 98.9,
+        "expectedFinalPoints": 1931,
+        "range": "1879 - 1986 pts",
+        "probChampion": 98.4,
         "probTop2": 100,
         "probTop3": 100,
         "wilsonCI95": {
-          "lowerPct": 98,
-          "upperPct": 99.4
+          "lowerPct": 97.4,
+          "upperPct": 99
         }
       },
       {
         "id": 21163563,
         "name": "Puente Avios FC",
         "currentPoints": 619,
-        "meanPpm": 51.6,
+        "meanPpm": 47.6,
         "stdDev": 8,
-        "expectedFinalPoints": 1960,
-        "range": "1908 - 2014 pts",
-        "probChampion": 1.1,
-        "probTop2": 98.6,
+        "expectedFinalPoints": 1810,
+        "range": "1762 - 1862 pts",
+        "probChampion": 1.6,
+        "probTop2": 98.2,
         "probTop3": 100,
         "wilsonCI95": {
-          "lowerPct": 0.6,
-          "upperPct": 2
+          "lowerPct": 1,
+          "upperPct": 2.6
         }
       },
       {
         "id": 21163653,
         "name": "Pachangueros F.C.",
         "currentPoints": 577,
-        "meanPpm": 48.1,
+        "meanPpm": 44.4,
         "stdDev": 8,
-        "expectedFinalPoints": 1828,
-        "range": "1778 - 1881 pts",
+        "expectedFinalPoints": 1687,
+        "range": "1638 - 1736 pts",
         "probChampion": 0,
-        "probTop2": 1.4,
-        "probTop3": 92,
+        "probTop2": 1.8,
+        "probTop3": 89.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1970,13 +1784,13 @@
         "id": 21163583,
         "name": "Ana",
         "currentPoints": 549,
-        "meanPpm": 45.8,
+        "meanPpm": 42.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1741,
-        "range": "1693 - 1793 pts",
+        "expectedFinalPoints": 1604,
+        "range": "1552 - 1656 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 5.3,
+        "probTop3": 7.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1986,10 +1800,10 @@
         "id": 21163606,
         "name": "Suances nin",
         "currentPoints": 541,
-        "meanPpm": 45.1,
+        "meanPpm": 41.6,
         "stdDev": 8,
-        "expectedFinalPoints": 1714,
-        "range": "1657 - 1772 pts",
+        "expectedFinalPoints": 1579,
+        "range": "1523 - 1633 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 2.6,
@@ -2002,13 +1816,13 @@
         "id": 21163650,
         "name": "Amigos de NIN",
         "currentPoints": 526,
-        "meanPpm": 43.8,
+        "meanPpm": 40.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1665,
-        "range": "1611 - 1718 pts",
+        "expectedFinalPoints": 1536,
+        "range": "1486 - 1586 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0.1,
+        "probTop3": 0.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2018,10 +1832,10 @@
         "id": 21163646,
         "name": "M4 TEAM",
         "currentPoints": 491,
-        "meanPpm": 40.9,
+        "meanPpm": 37.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1553,
-        "range": "1500 - 1607 pts",
+        "expectedFinalPoints": 1437,
+        "range": "1387 - 1494 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2034,10 +1848,10 @@
         "id": 21163612,
         "name": "Melano Plabloroza",
         "currentPoints": 463,
-        "meanPpm": 38.6,
+        "meanPpm": 35.6,
         "stdDev": 8,
-        "expectedFinalPoints": 1468,
-        "range": "1417 - 1519 pts",
+        "expectedFinalPoints": 1354,
+        "range": "1302 - 1409 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2050,10 +1864,10 @@
         "id": 21163822,
         "name": "Racing de Oslo",
         "currentPoints": 396,
-        "meanPpm": 33,
+        "meanPpm": 30.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1251,
-        "range": "1198 - 1303 pts",
+        "expectedFinalPoints": 1159,
+        "range": "1106 - 1208 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2068,8 +1882,8 @@
         "currentPoints": 225,
         "meanPpm": 25,
         "stdDev": 8,
-        "expectedFinalPoints": 879,
-        "range": "827 - 931 pts",
+        "expectedFinalPoints": 853,
+        "range": "801 - 906 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2084,45 +1898,45 @@
         "id": 21163674,
         "name": "Fermín Gadura F.C.",
         "currentPoints": 661,
-        "meanPpm": 55.1,
+        "meanPpm": 50.8,
         "stdDev": 8,
-        "expectedFinalPoints": 2092,
-        "range": "2039 - 2141 pts",
-        "probChampion": 98.9,
+        "expectedFinalPoints": 1931,
+        "range": "1879 - 1986 pts",
+        "probChampion": 98.4,
         "probTop2": 100,
         "probTop3": 100,
         "wilsonCI95": {
-          "lowerPct": 98,
-          "upperPct": 99.4
+          "lowerPct": 97.4,
+          "upperPct": 99
         }
       },
       {
         "id": 21163563,
         "name": "Puente Avios FC",
         "currentPoints": 619,
-        "meanPpm": 51.6,
+        "meanPpm": 47.6,
         "stdDev": 8,
-        "expectedFinalPoints": 1960,
-        "range": "1908 - 2014 pts",
-        "probChampion": 1.1,
-        "probTop2": 98.6,
+        "expectedFinalPoints": 1810,
+        "range": "1762 - 1862 pts",
+        "probChampion": 1.6,
+        "probTop2": 98.2,
         "probTop3": 100,
         "wilsonCI95": {
-          "lowerPct": 0.6,
-          "upperPct": 2
+          "lowerPct": 1,
+          "upperPct": 2.6
         }
       },
       {
         "id": 21163653,
         "name": "Pachangueros F.C.",
         "currentPoints": 577,
-        "meanPpm": 48.1,
+        "meanPpm": 44.4,
         "stdDev": 8,
-        "expectedFinalPoints": 1828,
-        "range": "1778 - 1881 pts",
+        "expectedFinalPoints": 1687,
+        "range": "1638 - 1736 pts",
         "probChampion": 0,
-        "probTop2": 1.4,
-        "probTop3": 92,
+        "probTop2": 1.8,
+        "probTop3": 89.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2132,13 +1946,13 @@
         "id": 21163583,
         "name": "Ana",
         "currentPoints": 549,
-        "meanPpm": 45.8,
+        "meanPpm": 42.2,
         "stdDev": 8,
-        "expectedFinalPoints": 1741,
-        "range": "1693 - 1793 pts",
+        "expectedFinalPoints": 1604,
+        "range": "1552 - 1656 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 5.3,
+        "probTop3": 7.8,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2148,10 +1962,10 @@
         "id": 21163606,
         "name": "Suances nin",
         "currentPoints": 541,
-        "meanPpm": 45.1,
+        "meanPpm": 41.6,
         "stdDev": 8,
-        "expectedFinalPoints": 1714,
-        "range": "1657 - 1772 pts",
+        "expectedFinalPoints": 1579,
+        "range": "1523 - 1633 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 2.6,
@@ -2164,13 +1978,13 @@
         "id": 21163650,
         "name": "Amigos de NIN",
         "currentPoints": 526,
-        "meanPpm": 43.8,
+        "meanPpm": 40.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1665,
-        "range": "1611 - 1718 pts",
+        "expectedFinalPoints": 1536,
+        "range": "1486 - 1586 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 0.1,
+        "probTop3": 0.3,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -2180,10 +1994,10 @@
         "id": 21163646,
         "name": "M4 TEAM",
         "currentPoints": 491,
-        "meanPpm": 40.9,
+        "meanPpm": 37.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1553,
-        "range": "1500 - 1607 pts",
+        "expectedFinalPoints": 1437,
+        "range": "1387 - 1494 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2196,10 +2010,10 @@
         "id": 21163612,
         "name": "Melano Plabloroza",
         "currentPoints": 463,
-        "meanPpm": 38.6,
+        "meanPpm": 35.6,
         "stdDev": 8,
-        "expectedFinalPoints": 1468,
-        "range": "1417 - 1519 pts",
+        "expectedFinalPoints": 1354,
+        "range": "1302 - 1409 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2212,10 +2026,10 @@
         "id": 21163822,
         "name": "Racing de Oslo",
         "currentPoints": 396,
-        "meanPpm": 33,
+        "meanPpm": 30.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1251,
-        "range": "1198 - 1303 pts",
+        "expectedFinalPoints": 1159,
+        "range": "1106 - 1208 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2230,8 +2044,8 @@
         "currentPoints": 225,
         "meanPpm": 25,
         "stdDev": 8,
-        "expectedFinalPoints": 879,
-        "range": "827 - 931 pts",
+        "expectedFinalPoints": 853,
+        "range": "801 - 906 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -2242,5 +2056,5 @@
       }
     ]
   },
-  "priorityMovement": "Pujar 1.436.400 € por Rüdiger (defender) para sustituir a Kike García (Expected XI Delta: +3.2 pts, CPMP: Óptimo)."
+  "priorityMovement": "Pujar 1.423.100 € por Rüdiger (defender) para sustituir a Kike García (Expected XI Delta: +3.1 pts, CPMP: Óptimo)."
 }

@@ -6,22 +6,22 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 661,
-    "squadValue": 73670000,
-    "playerCount": 14,
-    "financialHealth": "Saneado / Alta Liquidez (+101.91M € en Caja)",
-    "debtAlert": "Excelente remanente de liquidez (+101.91M €) y solvencia plena para acudir a subastas sin deuda.",
-    "projectedScore": 64,
+    "squadValue": 70270000,
+    "playerCount": 13,
+    "financialHealth": "Saneado / Alta Liquidez (+105.40M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+105.40M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 62,
     "formation": "3-5-2",
-    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 64 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-5-2 orientada a maximizar 62 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 661 puntos acumulados (220.3 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (73.67M €).",
+      "Patrimonio de plantilla consolidado en Primera (70.27M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Plantilla equilibrada sujeta al rendimiento semanal en liga."
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -44,7 +44,7 @@
         "name": "Andrés Castrín",
         "pos": "Defensa",
         "price": 1550000,
-        "reason": "Pieza competitiva en el mercado (1.55M €) adaptable al esquema 3-5-2."
+        "reason": "Zaguero de jerarquía (1.55M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
       },
       {
         "name": "Adrià Pedrosa",
@@ -56,17 +56,17 @@
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
       "realizedGainsEUR": 88263011,
-      "realizedLossesEUR": 28674174,
-      "netRealizedBalanceEUR": 59588837,
+      "realizedLossesEUR": 30547805,
+      "netRealizedBalanceEUR": 57715206,
       "profitableTradesCount": 45,
-      "totalClosedTradesCount": 92,
-      "historicalSuccessRatePct": 49,
+      "totalClosedTradesCount": 93,
+      "historicalSuccessRatePct": 48,
       "totalLatentGainsEUR": 5855891,
-      "totalLatentLossesEUR": 33155113,
-      "netLatentBalanceEUR": -27299222,
+      "totalLatentLossesEUR": 31193082,
+      "netLatentBalanceEUR": -25337191,
       "healthLabel": "SUPERÁVIT DE TRADING",
       "healthBadgeColor": "emerald",
-      "healthSummary": "Genera un superávit neto de +59.588.837 € en operaciones de mercado con una efectividad del 49%.",
+      "healthSummary": "Genera un superávit neto de +57.715.206 € en operaciones de mercado con una efectividad del 48%.",
       "closedOperations": [
         {
           "playerName": "Lookman",
@@ -870,6 +870,15 @@
           "sellDate": "2026-10-07T04:30:43+02:00"
         },
         {
+          "playerName": "Christensen",
+          "buyPrice": 5362031,
+          "sellPrice": 3488400,
+          "diff": -1873631,
+          "roiPct": -34.9,
+          "isProfit": false,
+          "sellDate": "2026-11-20T05:05:56+01:00"
+        },
+        {
           "playerName": "Ayoze Pérez",
           "buyPrice": 6491002,
           "sellPrice": 4111300,
@@ -989,15 +998,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Christensen",
-          "position": "defender",
-          "buyPrice": 5362031,
-          "currentVM": 3400000,
-          "latentDiff": -1962031,
-          "latentRoiPct": -36.6,
-          "isProfit": false
-        },
-        {
           "playerName": "Zabiri",
           "position": "striker",
           "buyPrice": 11710021,
@@ -1025,7 +1025,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-20T19:30:51.490Z"
+      "lastUpdated": "2026-11-20T22:52:08.879Z"
     },
     "speculation": {
       "score": 98,
@@ -1034,14 +1034,14 @@
       "overbidRate": "+6.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 447259838,
-      "totalReceived": 522564000,
+      "totalReceived": 526052400,
       "purchasesCount": 115,
-      "salesCount": 136,
-      "estimatedCash": 101914162,
+      "salesCount": 137,
+      "estimatedCash": 105402562,
       "prizesEarned": 6610000,
-      "maxCreditLimit": 18417500,
-      "netWealth": 175584162,
-      "analysis": "Operativa histórica de 115 compras (447.3M €) y 136 ventas (522.6M €). Dinero total rotado: 969.8M € con sobrepuja media de +6.2%."
+      "maxCreditLimit": 17567500,
+      "netWealth": 175672562,
+      "analysis": "Operativa histórica de 115 compras (447.3M €) y 137 ventas (526.1M €). Dinero total rotado: 973.3M € con sobrepuja media de +6.2%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -4484,6 +4484,20 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-11-20T05:05:56+01:00"
+        },
+        {
+          "playerName": "Christensen",
+          "price": 3488400,
+          "marketValue": 3488400,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-20T05:05:56+01:00"
         }
       ]
     },
@@ -4523,23 +4537,6 @@
         "image": "/media/players/1470.png"
       },
       {
-        "id": 3244,
-        "name": "Christensen",
-        "position": "defender",
-        "price": 3400000,
-        "points": 35,
-        "expectedPoints": 5.2,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3244.png"
-      },
-      {
         "id": 3079,
         "name": "Víctor Chust",
         "position": "defender",
@@ -4555,6 +4552,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3079.png"
+      },
+      {
+        "id": 2760,
+        "name": "Militão",
+        "position": "defender",
+        "price": 2780000,
+        "points": 4,
+        "expectedPoints": 3.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/2760.png"
       },
       {
         "id": 2761,
@@ -4677,22 +4691,6 @@
       }
     ],
     "bench": [
-      {
-        "id": 2760,
-        "name": "Militão",
-        "position": "defender",
-        "price": 2780000,
-        "points": 4,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2760.png"
-      },
       {
         "id": 4004,
         "name": "Antañón",
@@ -5159,7 +5157,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-20T19:30:52.895Z"
+      "lastUpdated": "2026-11-20T22:52:10.334Z"
     },
     "speculation": {
       "score": 98,
@@ -6867,7 +6865,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-20T19:30:52.230Z"
+      "lastUpdated": "2026-11-20T22:52:09.618Z"
     },
     "speculation": {
       "score": 74,
@@ -8060,7 +8058,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-20T19:30:51.853Z"
+      "lastUpdated": "2026-11-20T22:52:09.237Z"
     },
     "speculation": {
       "score": 98,
@@ -9345,7 +9343,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-20T19:30:54.000Z"
+      "lastUpdated": "2026-11-20T22:52:11.363Z"
     },
     "speculation": {
       "score": 85,
@@ -10570,7 +10568,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-20T19:30:52.563Z"
+      "lastUpdated": "2026-11-20T22:52:09.966Z"
     },
     "speculation": {
       "score": 86,
@@ -11794,7 +11792,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-20T19:30:53.257Z"
+      "lastUpdated": "2026-11-20T22:52:10.665Z"
     },
     "speculation": {
       "score": 98,
@@ -13635,7 +13633,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-20T19:30:53.647Z"
+      "lastUpdated": "2026-11-20T22:52:10.995Z"
     },
     "speculation": {
       "score": 79,
@@ -14828,7 +14826,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-20T19:30:54.360Z"
+      "lastUpdated": "2026-11-20T22:52:11.691Z"
     },
     "speculation": {
       "score": 98,
@@ -16840,7 +16838,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-20T19:30:54.673Z"
+      "lastUpdated": "2026-11-20T22:52:12.040Z"
     },
     "speculation": {
       "score": 71,
