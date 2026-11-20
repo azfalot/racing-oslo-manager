@@ -1,14 +1,14 @@
 {
   "clubName": "Racing de Oslo",
-  "realizedGainsEUR": 521000,
+  "realizedGainsEUR": 530500,
   "realizedLossesEUR": 11689712,
-  "netRealizedBalanceEUR": -11168712,
-  "profitableTradesCount": 23,
-  "totalClosedTradesCount": 40,
-  "historicalSuccessRatePct": 57,
-  "totalLatentGainsEUR": 765000,
-  "totalLatentLossesEUR": 15835000,
-  "netLatentBalanceEUR": -15070000,
+  "netRealizedBalanceEUR": -11159212,
+  "profitableTradesCount": 24,
+  "totalClosedTradesCount": 41,
+  "historicalSuccessRatePct": 59,
+  "totalLatentGainsEUR": 595000,
+  "totalLatentLossesEUR": 16645000,
+  "netLatentBalanceEUR": -16050000,
   "healthLabel": "AJUSTES & DEUDA",
   "healthBadgeColor": "amber",
   "healthSummary": "El balance histórico refleja el coste de saneamiento inicial de deuda (ventas defensivas como Hugo Duro y Galarreta para salir de números rojos), mientras que el nuevo régimen de especulación opera con un 100% de plusvalías netas.",
@@ -84,6 +84,15 @@
       "roiPct": 3.7,
       "isProfit": true,
       "sellDate": "2026-10-26T04:29:14+01:00"
+    },
+    {
+      "playerName": "Nizar",
+      "buyPrice": 210000,
+      "sellPrice": 219500,
+      "diff": 9500,
+      "roiPct": 4.5,
+      "isProfit": true,
+      "sellDate": "2026-11-20T05:05:56+01:00"
     },
     {
       "playerName": "Esquivel",
@@ -379,27 +388,18 @@
       "playerName": "Gavi",
       "position": "midfielder",
       "buyPrice": 1275000,
-      "currentVM": 1690000,
-      "latentDiff": 415000,
-      "latentRoiPct": 32.5,
+      "currentVM": 1560000,
+      "latentDiff": 285000,
+      "latentRoiPct": 22.4,
       "isProfit": true
     },
     {
       "playerName": "Johnny Cardoso",
       "position": "midfielder",
       "buyPrice": 1090000,
-      "currentVM": 1380000,
-      "latentDiff": 290000,
-      "latentRoiPct": 26.6,
-      "isProfit": true
-    },
-    {
-      "playerName": "Kike García",
-      "position": "striker",
-      "buyPrice": 280000,
-      "currentVM": 310000,
-      "latentDiff": 30000,
-      "latentRoiPct": 10.7,
+      "currentVM": 1370000,
+      "latentDiff": 280000,
+      "latentRoiPct": 25.7,
       "isProfit": true
     },
     {
@@ -412,10 +412,10 @@
       "isProfit": true
     },
     {
-      "playerName": "Nizar",
-      "position": "midfielder",
-      "buyPrice": 210000,
-      "currentVM": 210000,
+      "playerName": "Kike García",
+      "position": "striker",
+      "buyPrice": 280000,
+      "currentVM": 280000,
       "latentDiff": 0,
       "latentRoiPct": 0,
       "isProfit": true
@@ -442,36 +442,36 @@
       "playerName": "Nico Serrano",
       "position": "midfielder",
       "buyPrice": 290000,
-      "currentVM": 240000,
-      "latentDiff": -50000,
-      "latentRoiPct": -17.2,
+      "currentVM": 230000,
+      "latentDiff": -60000,
+      "latentRoiPct": -20.7,
       "isProfit": false
     },
     {
       "playerName": "Cajuste",
       "position": "midfielder",
       "buyPrice": 470000,
-      "currentVM": 420000,
-      "latentDiff": -50000,
-      "latentRoiPct": -10.6,
+      "currentVM": 410000,
+      "latentDiff": -60000,
+      "latentRoiPct": -12.8,
       "isProfit": false
     },
     {
       "playerName": "Pau Navarro",
       "position": "defender",
       "buyPrice": 930000,
-      "currentVM": 870000,
-      "latentDiff": -60000,
-      "latentRoiPct": -6.5,
+      "currentVM": 830000,
+      "latentDiff": -100000,
+      "latentRoiPct": -10.8,
       "isProfit": false
     },
     {
       "playerName": "Junior Firpo",
       "position": "defender",
       "buyPrice": 430000,
-      "currentVM": 260000,
-      "latentDiff": -170000,
-      "latentRoiPct": -39.5,
+      "currentVM": 250000,
+      "latentDiff": -180000,
+      "latentRoiPct": -41.9,
       "isProfit": false
     },
     {
@@ -487,40 +487,40 @@
       "playerName": "Denis Suárez",
       "position": "midfielder",
       "buyPrice": 2100000,
-      "currentVM": 960000,
-      "latentDiff": -1140000,
-      "latentRoiPct": -54.3,
+      "currentVM": 990000,
+      "latentDiff": -1110000,
+      "latentRoiPct": -52.9,
       "isProfit": false
     },
     {
       "playerName": "David Soria",
       "position": "keeper",
       "buyPrice": 4820000,
-      "currentVM": 3180000,
-      "latentDiff": -1640000,
-      "latentRoiPct": -34,
+      "currentVM": 2870000,
+      "latentDiff": -1950000,
+      "latentRoiPct": -40.5,
       "isProfit": false
     },
     {
       "playerName": "Mariano Díaz",
       "position": "striker",
       "buyPrice": 6315000,
-      "currentVM": 3610000,
-      "latentDiff": -2705000,
-      "latentRoiPct": -42.8,
+      "currentVM": 3170000,
+      "latentDiff": -3145000,
+      "latentRoiPct": -49.8,
       "isProfit": false
     },
     {
       "playerName": "Fede Valverde",
       "position": "midfielder",
       "buyPrice": 20510000,
-      "currentVM": 11320000,
-      "latentDiff": -9190000,
-      "latentRoiPct": -44.8,
+      "currentVM": 11300000,
+      "latentDiff": -9210000,
+      "latentRoiPct": -44.9,
       "isProfit": false
     }
   ],
-  "lastUpdated": "2026-11-19T17:01:52.913Z",
-  "speculationGainsEUR": 157900,
-  "speculationTradesCount": 28
+  "lastUpdated": "2026-11-20T07:31:51.613Z",
+  "speculationGainsEUR": 167400,
+  "speculationTradesCount": 29
 }
