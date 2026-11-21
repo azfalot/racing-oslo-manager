@@ -6,16 +6,16 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 661,
-    "squadValue": 72550000,
-    "playerCount": 15,
-    "financialHealth": "Saneado / Alta Liquidez (+103.03M € en Caja)",
-    "debtAlert": "Excelente remanente de liquidez (+103.03M €) y solvencia plena para acudir a subastas sin deuda.",
+    "squadValue": 72180000,
+    "playerCount": 14,
+    "financialHealth": "Saneado / Alta Liquidez (+103.39M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+103.39M €) y solvencia plena para acudir a subastas sin deuda.",
     "projectedScore": 63,
     "formation": "3-5-2",
     "tacticDescription": "Estructura 3-5-2 orientada a maximizar 63 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 661 puntos acumulados (220.3 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (72.55M €).",
+      "Patrimonio de plantilla consolidado en Primera (72.18M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
@@ -56,17 +56,17 @@
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
       "realizedGainsEUR": 88263011,
-      "realizedLossesEUR": 30958830,
-      "netRealizedBalanceEUR": 57304181,
+      "realizedLossesEUR": 30596630,
+      "netRealizedBalanceEUR": 57666381,
       "profitableTradesCount": 45,
       "totalClosedTradesCount": 93,
       "historicalSuccessRatePct": 48,
       "totalLatentGainsEUR": 6113889,
-      "totalLatentLossesEUR": 31734208,
-      "netLatentBalanceEUR": -25620319,
+      "totalLatentLossesEUR": 31315195,
+      "netLatentBalanceEUR": -25201306,
       "healthLabel": "SUPERÁVIT DE TRADING",
       "healthBadgeColor": "emerald",
-      "healthSummary": "Genera un superávit neto de +57.304.181 € en operaciones de mercado con una efectividad del 48%.",
+      "healthSummary": "Genera un superávit neto de +57.666.381 € en operaciones de mercado con una efectividad del 48%.",
       "closedOperations": [
         {
           "playerName": "Lookman",
@@ -591,6 +591,15 @@
           "sellDate": "2026-11-19T00:35:28+01:00"
         },
         {
+          "playerName": "Antañón",
+          "buyPrice": 789013,
+          "sellPrice": 680300,
+          "diff": -108713,
+          "roiPct": -13.8,
+          "isProfit": false,
+          "sellDate": "2026-11-21T04:30:47+01:00"
+        },
+        {
           "playerName": "Ratiu",
           "buyPrice": 2916001,
           "sellPrice": 2788600,
@@ -760,15 +769,6 @@
           "roiPct": -34,
           "isProfit": false,
           "sellDate": "2026-09-07T04:36:25+02:00"
-        },
-        {
-          "playerName": "Antañón",
-          "buyPrice": 789013,
-          "sellPrice": 318100,
-          "diff": -470913,
-          "roiPct": -59.7,
-          "isProfit": false,
-          "sellDate": "2026-10-27T04:30:56+01:00"
         },
         {
           "playerName": "Gorrotxategi",
@@ -989,15 +989,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Antañón",
-          "position": "midfielder",
-          "buyPrice": 789013,
-          "currentVM": 370000,
-          "latentDiff": -419013,
-          "latentRoiPct": -53.1,
-          "isProfit": false
-        },
-        {
           "playerName": "Sivera",
           "position": "keeper",
           "buyPrice": 3450010,
@@ -1043,7 +1034,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-21T17:01:24.237Z"
+      "lastUpdated": "2026-11-21T22:51:24.273Z"
     },
     "speculation": {
       "score": 98,
@@ -1052,14 +1043,14 @@
       "overbidRate": "+6.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 449631965,
-      "totalReceived": 526052400,
+      "totalReceived": 526414600,
       "purchasesCount": 117,
-      "salesCount": 137,
-      "estimatedCash": 103030435,
+      "salesCount": 138,
+      "estimatedCash": 103392635,
       "prizesEarned": 6610000,
-      "maxCreditLimit": 18137500,
-      "netWealth": 175580435,
-      "analysis": "Operativa histórica de 117 compras (449.6M €) y 137 ventas (526.1M €). Dinero total rotado: 975.7M € con sobrepuja media de +6.2%."
+      "maxCreditLimit": 18045000,
+      "netWealth": 175572635,
+      "analysis": "Operativa histórica de 117 compras (449.6M €) y 138 ventas (526.4M €). Dinero total rotado: 976.0M € con sobrepuja media de +6.2%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -4544,6 +4535,20 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-11-20T05:05:56+01:00"
+        },
+        {
+          "playerName": "Antañón",
+          "price": 362200,
+          "marketValue": 362200,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-21T04:30:47+01:00"
         }
       ]
     },
@@ -4768,22 +4773,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3440.png"
-      },
-      {
-        "id": 4004,
-        "name": "Antañón",
-        "position": "midfielder",
-        "price": 370000,
-        "points": 8,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4004.png"
       },
       {
         "id": 3354,
@@ -5235,7 +5224,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-21T17:01:25.546Z"
+      "lastUpdated": "2026-11-21T22:51:25.770Z"
     },
     "speculation": {
       "score": 98,
@@ -6943,7 +6932,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-21T17:01:24.896Z"
+      "lastUpdated": "2026-11-21T22:51:25.040Z"
     },
     "speculation": {
       "score": 74,
@@ -8136,7 +8125,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-21T17:01:24.546Z"
+      "lastUpdated": "2026-11-21T22:51:24.658Z"
     },
     "speculation": {
       "score": 98,
@@ -9140,15 +9129,14 @@
     "crest": "/media/crests/suances_nin.svg",
     "pos": 5,
     "points": 541,
-    "squadValue": 57540000,
-    "playerCount": 15,
-    "financialHealth": "Saneado / Alta Liquidez (+5.74M € en Caja)",
-    "debtAlert": "Excelente remanente de liquidez (+5.74M €) y solvencia plena para acudir a subastas sin deuda.",
-    "projectedScore": 56,
+    "squadValue": 52900000,
+    "playerCount": 14,
+    "financialHealth": "Saneado / Alta Liquidez (+10.53M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+10.53M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 53,
     "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 56 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 53 puntos según plantilla disponible.",
     "strengths": [
-      "Patrimonio de plantilla consolidado en Primera (57.54M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
@@ -9165,15 +9153,6 @@
         "title": "Rendimiento en Reserva",
         "description": "Tiene a  Juan Cruz (25 pts) en el banquillo mientras alinea a Aimar Oroz (12 pts).",
         "action": "Valorar permuta táctica dando entrada a  Juan Cruz de inicio."
-      },
-      {
-        "type": "suboptimal",
-        "badge": "⚠️ Banquillo Desperdiciado",
-        "player": "Etta Eyong",
-        "position": "striker",
-        "title": "Rendimiento en Reserva",
-        "description": "Tiene a Etta Eyong (23 pts) en el banquillo mientras alinea a Javi Puado (9 pts).",
-        "action": "Valorar permuta táctica dando entrada a Etta Eyong de inicio."
       }
     ],
     "recommendations": [
@@ -9198,19 +9177,28 @@
     ],
     "marketBalance": {
       "clubName": "Suances nin",
-      "realizedGainsEUR": 2118616,
+      "realizedGainsEUR": 5591714,
       "realizedLossesEUR": 588455,
-      "netRealizedBalanceEUR": 1530161,
-      "profitableTradesCount": 9,
-      "totalClosedTradesCount": 11,
-      "historicalSuccessRatePct": 82,
-      "totalLatentGainsEUR": 11379333,
+      "netRealizedBalanceEUR": 5003259,
+      "profitableTradesCount": 10,
+      "totalClosedTradesCount": 12,
+      "historicalSuccessRatePct": 83,
+      "totalLatentGainsEUR": 8059335,
       "totalLatentLossesEUR": 16571444,
-      "netLatentBalanceEUR": -5192111,
+      "netLatentBalanceEUR": -8512109,
       "healthLabel": "SUPERÁVIT DE TRADING",
       "healthBadgeColor": "emerald",
-      "healthSummary": "Genera un superávit neto de +1.530.161 € en operaciones de mercado con una efectividad del 82%.",
+      "healthSummary": "Genera un superávit neto de +5.003.259 € en operaciones de mercado con una efectividad del 83%.",
       "closedOperations": [
+        {
+          "playerName": "Umar Sadiq",
+          "buyPrice": 1320002,
+          "sellPrice": 4793100,
+          "diff": 3473098,
+          "roiPct": 263.1,
+          "isProfit": true,
+          "sellDate": "2026-11-21T04:30:47+01:00"
+        },
         {
           "playerName": "Víctor García",
           "buyPrice": 390011,
@@ -9322,15 +9310,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Umar Sadiq",
-          "position": "striker",
-          "buyPrice": 1320002,
-          "currentVM": 4640000,
-          "latentDiff": 3319998,
-          "latentRoiPct": 251.5,
-          "isProfit": true
-        },
-        {
           "playerName": "Roy Revivo",
           "position": "defender",
           "buyPrice": 499000,
@@ -9421,23 +9400,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-21T17:01:26.622Z"
+      "lastUpdated": "2026-11-21T22:51:26.797Z"
     },
     "speculation": {
-      "score": 85,
+      "score": 90,
       "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+11.9%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 74605872,
-      "totalReceived": 54934200,
+      "totalReceived": 59727300,
       "purchasesCount": 25,
-      "salesCount": 28,
-      "estimatedCash": 5738328,
+      "salesCount": 29,
+      "estimatedCash": 10531428,
       "prizesEarned": 5410000,
-      "maxCreditLimit": 14385000,
-      "netWealth": 63278328,
-      "analysis": "Operativa histórica de 25 compras (74.6M €) y 28 ventas (54.9M €). Dinero total rotado: 129.5M € con sobrepuja media de +11.9%."
+      "maxCreditLimit": 13225000,
+      "netWealth": 63431428,
+      "analysis": "Operativa histórica de 25 compras (74.6M €) y 29 ventas (59.7M €). Dinero total rotado: 134.3M € con sobrepuja media de +11.9%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -10172,6 +10151,20 @@
           "seller": "Suances nin",
           "buyer": "Computer",
           "date": "2026-11-19T04:31:02+01:00"
+        },
+        {
+          "playerName": "Umar Sadiq",
+          "price": 4793100,
+          "marketValue": 4793100,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Suances nin",
+          "buyer": "Computer",
+          "date": "2026-11-21T04:30:47+01:00"
         }
       ]
     },
@@ -10330,23 +10323,6 @@
         "image": "/media/players/3469.png"
       },
       {
-        "id": 3270,
-        "name": "Umar Sadiq",
-        "position": "striker",
-        "price": 4640000,
-        "points": 30,
-        "expectedPoints": 6.4,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3270.png"
-      },
-      {
         "id": 2637,
         "name": "Javi Puado",
         "position": "striker",
@@ -10362,6 +10338,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2637.png"
+      },
+      {
+        "id": 3574,
+        "name": "Etta Eyong",
+        "position": "striker",
+        "price": 2440000,
+        "points": 23,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3574.png"
       }
     ],
     "bench": [
@@ -10412,22 +10405,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/2571.png"
-      },
-      {
-        "id": 3574,
-        "name": "Etta Eyong",
-        "position": "striker",
-        "price": 2440000,
-        "points": 23,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3574.png"
       }
     ],
     "isMe": false
@@ -10646,7 +10623,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-21T17:01:25.211Z"
+      "lastUpdated": "2026-11-21T22:51:25.422Z"
     },
     "speculation": {
       "score": 86,
@@ -11870,7 +11847,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-21T17:01:25.892Z"
+      "lastUpdated": "2026-11-21T22:51:26.085Z"
     },
     "speculation": {
       "score": 98,
@@ -13711,7 +13688,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-21T17:01:26.210Z"
+      "lastUpdated": "2026-11-21T22:51:26.432Z"
     },
     "speculation": {
       "score": 79,
@@ -14904,7 +14881,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-21T17:01:26.938Z"
+      "lastUpdated": "2026-11-21T22:51:27.179Z"
     },
     "speculation": {
       "score": 98,
@@ -16916,7 +16893,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-21T17:01:27.252Z"
+      "lastUpdated": "2026-11-21T22:51:27.561Z"
     },
     "speculation": {
       "score": 71,

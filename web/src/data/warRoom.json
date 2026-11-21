@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-21T17:01:29.636Z",
+  "timestamp": "2026-11-21T22:51:30.037Z",
   "currentMatchday": 13,
   "confidenceLevel": "HIGH",
   "standings": {
@@ -17,7 +17,7 @@
   },
   "lineup": {
     "formation": "4-4-2",
-    "expectedPoints": 41.70000000000001,
+    "expectedPoints": 41.60000000000001,
     "starterCount": 11,
     "starterRisks": [
       {
@@ -53,7 +53,7 @@
           ]
         },
         "average": {
-          "grade": "8,1",
+          "grade": "8,3",
           "points": "15",
           "lastXMatchdays": {
             "matchesAmount": 5,
@@ -75,37 +75,6 @@
           }
         },
         "nextMatches": [
-          {
-            "matchdayNr": 13,
-            "homeClub": {
-              "id": 70,
-              "name": "Rayo Vallecano",
-              "abbreviation": "ray",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/70"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/70/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 18,
-              "name": "Valencia",
-              "abbreviation": "val",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/18"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/18/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-21T16:15:00+01:00",
-            "odds": null
-          },
           {
             "matchdayNr": 14,
             "homeClub": {
@@ -558,14 +527,14 @@
       "marginPct": 11,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 4,
-      "ppm": 4.25,
-      "efficiency": 33.3,
-      "upgradePoints": 3.9,
-      "marginalValue": 3.9,
+      "ppm": 4.36,
+      "efficiency": 34.2,
+      "upgradePoints": 4.1,
+      "marginalValue": 4.1,
       "vorp": 60,
       "vorpPerMatchday": 1.76,
-      "cpmp": 817949,
-      "cpmpSeason": 23985,
+      "cpmp": 778049,
+      "cpmpSeason": 22950,
       "replacedPlayer": {
         "playerId": 3698,
         "name": "Pau Navarro",
@@ -718,17 +687,17 @@
       },
       "replacedPlayerName": "Pau Navarro",
       "replacedPlayerExpectedPoints": 1.1,
-      "strategicScore": 64.7,
+      "strategicScore": 65.3,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 3.9
+          "marginalValue": 4.1
         },
         "absoluteQuality": {
-          "raw": 70.8,
+          "raw": 72.7,
           "weight": 0.2,
-          "ppm": 4.25
+          "ppm": 4.36
         },
         "positionNeed": {
           "raw": 5,
@@ -736,9 +705,9 @@
           "detail": "4 disponibles. Posición bien cubierta."
         },
         "marketOpportunity": {
-          "raw": 83.2,
+          "raw": 85.5,
           "weight": 0.1,
-          "efficiency": 33.3
+          "efficiency": 34.2
         },
         "rivalPressure": {
           "raw": 20,
@@ -757,9 +726,9 @@
       "isComputer": true,
       "requiresSaleFirst": true,
       "reasoning": [
-        "✅ Entra en el XI titular (+3.9 pts al Once Ideal sustituyendo a Pau Navarro (2.33 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.25 PPM > 2.33 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 4.25 | Fiabilidad: 95% minutos | Eficiencia: 33.3 pts/M€)",
+        "✅ Entra en el XI titular (+4.1 pts al Once Ideal sustituyendo a Pau Navarro (2.33 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (4.36 PPM > 2.33 PPM).",
+        "📊 ⭐ Titular Fijo (PPM: 4.36 | Fiabilidad: 95% minutos | Eficiencia: 34.2 pts/M€)",
         "🔥 Dinámica de club: ⚖️ Alto Nivel con Rotaciones Champions (0.95x): 3V 2E 0D - Exigencia máxima y rotaciones frecuentes por Champions League",
         "⚔️ Competencia en club: Compite en [object Object] con Kylian Mbappé, Vinicius Jr, Rodrygo... (Nivel: BAJA, Confianza XI: 95%)",
         "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.540.900 € (111.0% VM | Sobreprecio: +11%).",
@@ -1437,8 +1406,8 @@
       "marginPct": 7,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 4,
-      "ppm": 3.16,
-      "efficiency": 50,
+      "ppm": 3.18,
+      "efficiency": 50.3,
       "upgradePoints": 2.9,
       "marginalValue": 2.9,
       "vorp": 0,
@@ -1605,9 +1574,9 @@
           "marginalValue": 2.9
         },
         "absoluteQuality": {
-          "raw": 52.7,
+          "raw": 53,
           "weight": 0.2,
-          "ppm": 3.16
+          "ppm": 3.18
         },
         "positionNeed": {
           "raw": 5,
@@ -1617,7 +1586,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 50
+          "efficiency": 50.3
         },
         "rivalPressure": {
           "raw": 20,
@@ -1637,8 +1606,8 @@
       "requiresSaleFirst": true,
       "reasoning": [
         "✅ Entra en el XI titular (+2.9 pts al Once Ideal sustituyendo a Pau Navarro (2.33 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (3.16 PPM > 2.33 PPM).",
-        "📊 🔄 Rotación Habitual (PPM: 3.16 | Fiabilidad: 75% minutos | Eficiencia: 50 pts/M€)",
+        "🚀 Supera el promedio con momentum del titular actual (3.18 PPM > 2.33 PPM).",
+        "📊 🔄 Rotación Habitual (PPM: 3.18 | Fiabilidad: 75% minutos | Eficiencia: 50.3 pts/M€)",
         "🔥 Dinámica de club: 📉 Inestabilidad y Presión Social (0.88x): 1V 2E 2D - Dudas tácticas y tensión competitiva",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 75%)",
         "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.690.600 € (107.0% VM | Sobreprecio: +7%).",
@@ -1679,7 +1648,7 @@
     "remainingMatchdays": 25,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 41.7,
+      "currentXiExpectedPoints": 41.6,
       "restOfSeasonAggregateExpectedPpm": 30.5,
       "pWin": 0,
       "pTop2": 0,
@@ -2027,5 +1996,5 @@
       }
     ]
   },
-  "priorityMovement": "Pujar 3.540.900 € por Carlos Espí (striker) para sustituir a Pau Navarro (Expected XI Delta: +3.9 pts, CPMP: Óptimo)."
+  "priorityMovement": "Pujar 3.540.900 € por Carlos Espí (striker) para sustituir a Pau Navarro (Expected XI Delta: +4.1 pts, CPMP: Óptimo)."
 }
