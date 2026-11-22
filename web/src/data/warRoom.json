@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-21T22:51:30.037Z",
+  "timestamp": "2026-11-22T04:06:24.601Z",
   "currentMatchday": 13,
   "confidenceLevel": "HIGH",
   "standings": {
@@ -12,18 +12,18 @@
     "balance": 1005988,
     "committedBids": 0,
     "effectiveBalance": 1005988,
-    "squadValue": 32990000,
-    "totalPatrimony": 33995988
+    "squadValue": 34740000,
+    "totalPatrimony": 35745988
   },
   "lineup": {
     "formation": "4-4-2",
-    "expectedPoints": 41.60000000000001,
+    "expectedPoints": 41.800000000000004,
     "starterCount": 11,
     "starterRisks": [
       {
         "playerId": 3285,
         "name": "Copete",
-        "price": 380000,
+        "price": 590000,
         "totalPoints": 0,
         "status": null,
         "statusInfo": null,
@@ -144,7 +144,7 @@
           "red": 0
         },
         "available": true,
-        "expectedPoints": 1.1,
+        "expectedPoints": 1.2,
         "id": 3285,
         "position": "defender",
         "points": 0
@@ -152,7 +152,7 @@
       {
         "playerId": 3698,
         "name": "Pau Navarro",
-        "price": 840000,
+        "price": 780000,
         "totalPoints": 25,
         "status": null,
         "statusInfo": null,
@@ -302,7 +302,7 @@
       {
         "playerId": 1876,
         "name": "Denis Suárez",
-        "price": 1000000,
+        "price": 1240000,
         "totalPoints": 44,
         "status": null,
         "statusInfo": null,
@@ -463,7 +463,7 @@
           "red": 0
         },
         "available": true,
-        "expectedPoints": 2.2,
+        "expectedPoints": 2.3,
         "id": 1876,
         "position": "midfielder",
         "points": 0
@@ -475,19 +475,19 @@
       "playerId": 3285,
       "name": "Copete",
       "position": "defender",
-      "price": 380000,
-      "expectedPoints": 1.1,
-      "vorp": -56,
-      "vorpPerMatchday": -1.65,
+      "price": 590000,
+      "expectedPoints": 1.2,
+      "vorp": -19,
+      "vorpPerMatchday": -0.56,
       "replacementPpm": 3.08,
-      "upgradeGap": 4.4,
-      "urgencyScore": 34.9
+      "upgradeGap": 4.3,
+      "urgencyScore": 23.7
     },
     {
       "playerId": 3698,
       "name": "Pau Navarro",
       "position": "defender",
-      "price": 840000,
+      "price": 780000,
       "expectedPoints": 1.1,
       "vorp": -15,
       "vorpPerMatchday": -0.44,
@@ -499,7 +499,7 @@
       "playerId": 2251,
       "name": "Aïssa Mandi",
       "position": "defender",
-      "price": 2050000,
+      "price": 2130000,
       "expectedPoints": 4.7,
       "vorp": 0,
       "vorpPerMatchday": 0,
@@ -518,27 +518,287 @@
   },
   "marketTargets": [
     {
-      "playerId": 3832,
-      "name": "Carlos Espí",
-      "type": "striker",
-      "price": 3190000,
-      "bidAmount": 3540900,
-      "maxRationalBid": 3540900,
+      "playerId": 3795,
+      "name": "Fortuño",
+      "type": "keeper",
+      "price": 3130000,
+      "bidAmount": 3411700,
+      "maxRationalBid": 3411700,
+      "marginPct": 9,
+      "band": "CLEAR_UPGRADE",
+      "expectedPoints": 8,
+      "ppm": 6.32,
+      "efficiency": 50.5,
+      "upgradePoints": 3.4,
+      "marginalValue": 3.4,
+      "vorp": 60,
+      "vorpPerMatchday": 1.76,
+      "cpmp": 920588,
+      "cpmpSeason": 26983,
+      "replacedPlayer": {
+        "playerId": 2206,
+        "name": "David Soria",
+        "price": 2980000,
+        "totalPoints": 73,
+        "status": null,
+        "statusInfo": null,
+        "type": "keeper",
+        "historical": {
+          "points": [
+            {
+              "season": "16/17",
+              "points": "6",
+              "eventId": 788917
+            },
+            {
+              "season": "17/18",
+              "points": "60",
+              "eventId": 869072
+            },
+            {
+              "season": "18/19",
+              "points": "174",
+              "eventId": 899953
+            },
+            {
+              "season": "19/20",
+              "points": "152",
+              "eventId": 923561
+            },
+            {
+              "season": "20/21",
+              "points": "119",
+              "eventId": 939519
+            },
+            {
+              "season": "21/22",
+              "points": "170",
+              "eventId": 951313
+            },
+            {
+              "season": "22/23",
+              "points": "195",
+              "eventId": 961836
+            },
+            {
+              "season": "23/24",
+              "points": "204",
+              "eventId": 975270
+            },
+            {
+              "season": "24/25",
+              "points": "184",
+              "eventId": 988474
+            },
+            {
+              "season": "25/26",
+              "points": "230",
+              "eventId": 998265
+            }
+          ]
+        },
+        "average": {
+          "grade": "7,0",
+          "points": "6,08",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "6,4",
+            "points": "3,4"
+          }
+        },
+        "club": {
+          "id": 8,
+          "name": "Getafe",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/8"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/8/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 13,
+            "homeClub": {
+              "id": 8,
+              "name": "Getafe",
+              "abbreviation": "get",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/8"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/8/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 2,
+              "name": "Atlético",
+              "abbreviation": "atm",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/2"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/2/logo"
+                }
+              }
+            },
+            "kickoff": "2026-11-22T21:00:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 14,
+            "homeClub": {
+              "id": 7,
+              "name": "Espanyol",
+              "abbreviation": "esp",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/7"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/7/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 8,
+              "name": "Getafe",
+              "abbreviation": "get",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/8"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/8/logo"
+                }
+              }
+            },
+            "kickoff": "2026-11-30T21:00:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 15,
+            "homeClub": {
+              "id": 8,
+              "name": "Getafe",
+              "abbreviation": "get",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/8"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/8/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 18,
+              "name": "Valencia",
+              "abbreviation": "val",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/18"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/18/logo"
+                }
+              }
+            },
+            "kickoff": "2026-12-06T18:30:00+01:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 4.3,
+        "id": 2206,
+        "position": "keeper",
+        "points": 0
+      },
+      "replacedPlayerName": "David Soria",
+      "replacedPlayerExpectedPoints": 4.3,
+      "strategicScore": 79,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 100,
+          "weight": 0.4,
+          "marginalValue": 3.4
+        },
+        "absoluteQuality": {
+          "raw": 100,
+          "weight": 0.2,
+          "ppm": 6.32
+        },
+        "positionNeed": {
+          "raw": 50,
+          "weight": 0.15,
+          "detail": "1 disponibles = exactamente los requeridos. Sin suplentes."
+        },
+        "marketOpportunity": {
+          "raw": 100,
+          "weight": 0.1,
+          "efficiency": 50.5
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 10,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": true,
+      "reasoning": [
+        "✅ Entra en el XI titular (+3.4 pts al Once Ideal sustituyendo a David Soria (3.62 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (6.32 PPM > 3.62 PPM).",
+        "🟡 Posición con necesidad MODERADA: 1 disponibles = exactamente los requeridos. Sin suplentes.",
+        "📊 ⭐ Titular Fijo (PPM: 6.32 | Fiabilidad: 95% minutos | Eficiencia: 50.5 pts/M€)",
+        "🔥 Dinámica de club: 🚀 Pico de Confianza / Racha Ascendente (1.08x): 3V 0E 2D - Creciendo en sensaciones y puntuaciones fantasy",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.411.700 € (109.0% VM | Sobreprecio: +9%).",
+        "⛔ Fondos insuficientes: Requiere 4.411.700 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a David Soria). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.411.700 € (109.0% VM | Sobreprecio: +9%)."
+    },
+    {
+      "playerId": 3163,
+      "name": "Camavinga",
+      "type": "midfielder",
+      "price": 3480000,
+      "bidAmount": 3862800,
+      "maxRationalBid": 3862800,
       "marginPct": 11,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 4,
-      "ppm": 4.36,
-      "efficiency": 34.2,
+      "ppm": 4.41,
+      "efficiency": 31.7,
       "upgradePoints": 4.1,
       "marginalValue": 4.1,
-      "vorp": 60,
-      "vorpPerMatchday": 1.76,
-      "cpmp": 778049,
-      "cpmpSeason": 22950,
+      "vorp": 57,
+      "vorpPerMatchday": 1.68,
+      "cpmp": 848780,
+      "cpmpSeason": 25036,
       "replacedPlayer": {
         "playerId": 3698,
         "name": "Pau Navarro",
-        "price": 840000,
+        "price": 780000,
         "totalPoints": 25,
         "status": null,
         "statusInfo": null,
@@ -687,7 +947,7 @@
       },
       "replacedPlayerName": "Pau Navarro",
       "replacedPlayerExpectedPoints": 1.1,
-      "strategicScore": 65.3,
+      "strategicScore": 64.9,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
@@ -695,19 +955,19 @@
           "marginalValue": 4.1
         },
         "absoluteQuality": {
-          "raw": 72.7,
+          "raw": 73.5,
           "weight": 0.2,
-          "ppm": 4.36
+          "ppm": 4.41
         },
         "positionNeed": {
           "raw": 5,
           "weight": 0.15,
-          "detail": "4 disponibles. Posición bien cubierta."
+          "detail": "6 disponibles. Posición bien cubierta."
         },
         "marketOpportunity": {
-          "raw": 85.5,
+          "raw": 79.3,
           "weight": 0.1,
-          "efficiency": 34.2
+          "efficiency": 31.7
         },
         "rivalPressure": {
           "raw": 20,
@@ -727,37 +987,37 @@
       "requiresSaleFirst": true,
       "reasoning": [
         "✅ Entra en el XI titular (+4.1 pts al Once Ideal sustituyendo a Pau Navarro (2.33 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.36 PPM > 2.33 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 4.36 | Fiabilidad: 95% minutos | Eficiencia: 34.2 pts/M€)",
+        "🚀 Supera el promedio con momentum del titular actual (4.41 PPM > 2.33 PPM).",
+        "📊 ⭐ Titular Fijo (PPM: 4.41 | Fiabilidad: 95% minutos | Eficiencia: 31.7 pts/M€)",
         "🔥 Dinámica de club: ⚖️ Alto Nivel con Rotaciones Champions (0.95x): 3V 2E 0D - Exigencia máxima y rotaciones frecuentes por Champions League",
-        "⚔️ Competencia en club: Compite en [object Object] con Kylian Mbappé, Vinicius Jr, Rodrygo... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.540.900 € (111.0% VM | Sobreprecio: +11%).",
-        "⛔ Fondos insuficientes: Requiere 4.540.900 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
+        "⚔️ Competencia en club: Compite en [object Object] con Jude Bellingham, Federico Valverde, Aurélien Tchouaméni... (Nivel: BAJA, Confianza XI: 95%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.862.800 € (111.0% VM | Sobreprecio: +11%).",
+        "⛔ Fondos insuficientes: Requiere 4.862.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Pau Navarro). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.540.900 € (111.0% VM | Sobreprecio: +11%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Pau Navarro). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 3.862.800 € (111.0% VM | Sobreprecio: +11%)."
     },
     {
       "playerId": 3628,
       "name": "Boyomo",
       "type": "defender",
-      "price": 1730000,
-      "bidAmount": 1903000,
-      "maxRationalBid": 1903000,
+      "price": 1700000,
+      "bidAmount": 1870000,
+      "maxRationalBid": 1870000,
       "marginPct": 10,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 5,
       "ppm": 3.64,
-      "efficiency": 52.6,
+      "efficiency": 53.5,
       "upgradePoints": 3.8,
       "marginalValue": 3.8,
       "vorp": 18,
       "vorpPerMatchday": 0.53,
-      "cpmp": 455263,
-      "cpmpSeason": 13411,
+      "cpmp": 447368,
+      "cpmpSeason": 13178,
       "replacedPlayer": {
         "playerId": 3698,
         "name": "Pau Navarro",
-        "price": 840000,
+        "price": 780000,
         "totalPoints": 25,
         "status": null,
         "statusInfo": null,
@@ -926,7 +1186,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 52.6
+          "efficiency": 53.5
         },
         "rivalPressure": {
           "raw": 20,
@@ -947,37 +1207,37 @@
       "reasoning": [
         "✅ Entra en el XI titular (+3.8 pts al Once Ideal sustituyendo a Pau Navarro (2.33 PPM)).",
         "🚀 Supera el promedio con momentum del titular actual (3.64 PPM > 2.33 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 3.64 | Fiabilidad: 95% minutos | Eficiencia: 52.6 pts/M€)",
+        "📊 ⭐ Titular Fijo (PPM: 3.64 | Fiabilidad: 95% minutos | Eficiencia: 53.5 pts/M€)",
         "🔥 Dinámica de club: 🏟️ Fuerte en El Sadar / Regular (1.02x): 3V 1E 1D - Fiable en casa y regularidad táctica",
         "🌟 Once Ideal: 1 presencia(s) en TOTW esta temporada.",
         "⚔️ Competencia en club: Compite en [object Object] con Alejandro Catena, Jesús Areso, Juan Cruz... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.903.000 € (110.0% VM | Sobreprecio: +10%).",
-        "⛔ Fondos insuficientes: Requiere 2.903.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.870.000 € (110.0% VM | Sobreprecio: +10%).",
+        "⛔ Fondos insuficientes: Requiere 2.870.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Pau Navarro). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.903.000 € (110.0% VM | Sobreprecio: +10%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Pau Navarro). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.870.000 € (110.0% VM | Sobreprecio: +10%)."
     },
     {
-      "playerId": 2161,
-      "name": "Oyarzabal",
-      "type": "striker",
-      "price": 11110000,
-      "bidAmount": 13332000,
-      "maxRationalBid": 13332000,
-      "marginPct": 20,
-      "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 8,
-      "ppm": 5.52,
-      "efficiency": 12.4,
-      "upgradePoints": 7,
-      "marginalValue": 7,
-      "vorp": 134,
-      "vorpPerMatchday": 3.94,
-      "cpmp": 1587143,
-      "cpmpSeason": 46681,
+      "playerId": 4139,
+      "name": "Ndukwe",
+      "type": "defender",
+      "price": 1970000,
+      "bidAmount": 2167000,
+      "maxRationalBid": 2167000,
+      "marginPct": 10,
+      "band": "CLEAR_UPGRADE",
+      "expectedPoints": 5,
+      "ppm": 3.83,
+      "efficiency": 48.6,
+      "upgradePoints": 3.7,
+      "marginalValue": 3.7,
+      "vorp": 0,
+      "vorpPerMatchday": 0,
+      "cpmp": 532432,
+      "cpmpSeason": 15635,
       "replacedPlayer": {
         "playerId": 3698,
         "name": "Pau Navarro",
-        "price": 840000,
+        "price": 780000,
         "totalPoints": 25,
         "status": null,
         "statusInfo": null,
@@ -1131,232 +1391,12 @@
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 7
+          "marginalValue": 3.7
         },
         "absoluteQuality": {
-          "raw": 92,
+          "raw": 63.8,
           "weight": 0.2,
-          "ppm": 5.52
-        },
-        "positionNeed": {
-          "raw": 5,
-          "weight": 0.15,
-          "detail": "4 disponibles. Posición bien cubierta."
-        },
-        "marketOpportunity": {
-          "raw": 31,
-          "weight": 0.1,
-          "efficiency": 12.4
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": true,
-      "reasoning": [
-        "✅ Entra en el XI titular (+7 pts al Once Ideal sustituyendo a Pau Navarro (2.33 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (5.52 PPM > 2.33 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 5.52 | Fiabilidad: 95% minutos | Eficiencia: 12.4 pts/M€)",
-        "🔥 Dinámica de club: 📉 Dudas Iniciales / Bajas Sensibles (0.9x): 1V 1E 3D - Falta de pegada y lesiones en puestos clave",
-        "🎯 Balón parado: 🎯 1º Tirador Penaltis (+0.45 PPM bonus).",
-        "⚔️ Competencia en club: Compite en [object Object] con Takefusa Kubo, Orri Óskarsson, Sheraldo Becker... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 13.332.000 € (120.0% VM | Sobreprecio: +20%).",
-        "⛔ Fondos insuficientes: Requiere 14.332.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +7 pts (sustituye a Pau Navarro). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 13.332.000 € (120.0% VM | Sobreprecio: +20%)."
-    },
-    {
-      "playerId": 3243,
-      "name": "Rüdiger",
-      "type": "defender",
-      "price": 1460000,
-      "bidAmount": 1533000,
-      "maxRationalBid": 1533000,
-      "marginPct": 5,
-      "band": "CLEAR_UPGRADE",
-      "expectedPoints": 3,
-      "ppm": 4.64,
-      "efficiency": 79.4,
-      "upgradePoints": 2.6,
-      "marginalValue": 2.6,
-      "vorp": 0,
-      "vorpPerMatchday": 0,
-      "cpmp": 561538,
-      "cpmpSeason": 16591,
-      "replacedPlayer": {
-        "playerId": 3698,
-        "name": "Pau Navarro",
-        "price": 840000,
-        "totalPoints": 25,
-        "status": null,
-        "statusInfo": null,
-        "type": "defender",
-        "historical": {
-          "points": [
-            {
-              "season": "24/25",
-              "points": "54",
-              "eventId": 988474
-            },
-            {
-              "season": "25/26",
-              "points": "90",
-              "eventId": 998265
-            }
-          ]
-        },
-        "average": {
-          "grade": "6,8",
-          "points": "4,17",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "4,0",
-            "points": "2,2"
-          }
-        },
-        "club": {
-          "id": 19,
-          "name": "Villarreal",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/19"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/19/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 13,
-            "homeClub": {
-              "id": 3,
-              "name": "Barcelona",
-              "abbreviation": "bar",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/3"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/3/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 19,
-              "name": "Villarreal",
-              "abbreviation": "vil",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/19"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/19/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-22T14:00:00+01:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 14,
-            "homeClub": {
-              "id": 5,
-              "name": "Celta",
-              "abbreviation": "cel",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/5"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/5/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 19,
-              "name": "Villarreal",
-              "abbreviation": "vil",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/19"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/19/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-29T18:30:00+01:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 15,
-            "homeClub": {
-              "id": 19,
-              "name": "Villarreal",
-              "abbreviation": "vil",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/19"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/19/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 13,
-              "name": "Real Sociedad",
-              "abbreviation": "rso",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/13"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/13/logo"
-                }
-              }
-            },
-            "kickoff": "2026-12-05T18:30:00+01:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 1,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 1.1,
-        "id": 3698,
-        "position": "defender",
-        "points": 0
-      },
-      "replacedPlayerName": "Pau Navarro",
-      "replacedPlayerExpectedPoints": 1.1,
-      "strategicScore": 62.4,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 86.7,
-          "weight": 0.4,
-          "marginalValue": 2.6
-        },
-        "absoluteQuality": {
-          "raw": 77.3,
-          "weight": 0.2,
-          "ppm": 4.64
+          "ppm": 3.83
         },
         "positionNeed": {
           "raw": 5,
@@ -1366,14 +1406,14 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 79.4
+          "efficiency": 48.6
         },
         "rivalPressure": {
           "raw": 20,
           "weight": 0.1
         },
         "riskAdjustment": {
-          "raw": 10,
+          "raw": 35,
           "weight": -0.05
         }
       },
@@ -1385,39 +1425,38 @@
       "isComputer": true,
       "requiresSaleFirst": true,
       "reasoning": [
-        "✅ Entra en el XI titular (+2.6 pts al Once Ideal sustituyendo a Pau Navarro (2.33 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.64 PPM > 2.33 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 4.64 | Fiabilidad: 95% minutos | Eficiencia: 79.4 pts/M€)",
-        "🔥 Dinámica de club: ⚖️ Alto Nivel con Rotaciones Champions (0.95x): 3V 2E 0D - Exigencia máxima y rotaciones frecuentes por Champions League",
-        "🌟 Once Ideal: 1 presencia(s) en TOTW esta temporada.",
-        "⚔️ Competencia en club: Compite en [object Object] con Éder Militão, Dani Carvajal, Ferland Mendy... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.533.000 € (105.0% VM | Sobreprecio: +5%).",
-        "⛔ Fondos insuficientes: Requiere 2.533.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
+        "✅ Entra en el XI titular (+3.7 pts al Once Ideal sustituyendo a Pau Navarro (2.33 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (3.83 PPM > 2.33 PPM).",
+        "📊 ⭐ Titular Fijo (PPM: 3.83 | Fiabilidad: 95% minutos | Eficiencia: 48.6 pts/M€)",
+        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.167.000 € (110.0% VM | Sobreprecio: +10%).",
+        "⛔ Fondos insuficientes: Requiere 3.167.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Pau Navarro). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.533.000 € (105.0% VM | Sobreprecio: +5%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Pau Navarro). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.167.000 € (110.0% VM | Sobreprecio: +10%)."
     },
     {
-      "playerId": 3910,
-      "name": "Andrés Castrín",
-      "type": "defender",
-      "price": 1580000,
-      "bidAmount": 1690600,
-      "maxRationalBid": 1690600,
-      "marginPct": 7,
+      "playerId": 2812,
+      "name": "Luis Rioja",
+      "type": "midfielder",
+      "price": 1690000,
+      "bidAmount": 1825200,
+      "maxRationalBid": 1825200,
+      "marginPct": 8,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 4,
-      "ppm": 3.18,
-      "efficiency": 50.3,
-      "upgradePoints": 2.9,
-      "marginalValue": 2.9,
-      "vorp": 0,
-      "vorpPerMatchday": 0,
-      "cpmp": 544828,
-      "cpmpSeason": 15960,
+      "ppm": 3.07,
+      "efficiency": 45.5,
+      "upgradePoints": 3.3,
+      "marginalValue": 3.3,
+      "vorp": 64,
+      "vorpPerMatchday": 1.88,
+      "cpmp": 512121,
+      "cpmpSeason": 15089,
       "replacedPlayer": {
         "playerId": 3698,
         "name": "Pau Navarro",
-        "price": 840000,
+        "price": 780000,
         "totalPoints": 25,
         "status": null,
         "statusInfo": null,
@@ -1566,17 +1605,17 @@
       },
       "replacedPlayerName": "Pau Navarro",
       "replacedPlayerExpectedPoints": 1.1,
-      "strategicScore": 61.5,
+      "strategicScore": 62.5,
       "strategicComponents": {
         "squadUpgrade": {
-          "raw": 96.7,
+          "raw": 100,
           "weight": 0.4,
-          "marginalValue": 2.9
+          "marginalValue": 3.3
         },
         "absoluteQuality": {
-          "raw": 53,
+          "raw": 51.2,
           "weight": 0.2,
-          "ppm": 3.18
+          "ppm": 3.07
         },
         "positionNeed": {
           "raw": 5,
@@ -1586,7 +1625,7 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 50.3
+          "efficiency": 45.5
         },
         "rivalPressure": {
           "raw": 20,
@@ -1605,29 +1644,30 @@
       "isComputer": true,
       "requiresSaleFirst": true,
       "reasoning": [
-        "✅ Entra en el XI titular (+2.9 pts al Once Ideal sustituyendo a Pau Navarro (2.33 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (3.18 PPM > 2.33 PPM).",
-        "📊 🔄 Rotación Habitual (PPM: 3.18 | Fiabilidad: 75% minutos | Eficiencia: 50.3 pts/M€)",
-        "🔥 Dinámica de club: 📉 Inestabilidad y Presión Social (0.88x): 1V 2E 2D - Dudas tácticas y tensión competitiva",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 75%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.690.600 € (107.0% VM | Sobreprecio: +7%).",
-        "⛔ Fondos insuficientes: Requiere 2.690.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
+        "✅ Entra en el XI titular (+3.3 pts al Once Ideal sustituyendo a Pau Navarro (2.33 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (3.07 PPM > 2.33 PPM).",
+        "📊 ⭐ Titular Fijo (PPM: 3.07 | Fiabilidad: 95% minutos | Eficiencia: 45.5 pts/M€)",
+        "🔥 Dinámica de club: 🚨 Crisis Institucional y Deportiva (Colista) (0.8x): 0V 1E 4D - Colista, generación ofensiva mínima y pesimismo",
+        "🎯 Balón parado: 🚩 Córners (+0.1 PPM bonus).",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.825.200 € (108.0% VM | Sobreprecio: +8%).",
+        "⛔ Fondos insuficientes: Requiere 2.825.200 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Pau Navarro). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.690.600 € (107.0% VM | Sobreprecio: +7%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +3 pts (sustituye a Pau Navarro). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.825.200 € (108.0% VM | Sobreprecio: +8%)."
     }
   ],
   "liquiditySuggestions": [
     {
       "playerId": 2202,
       "name": "Kike García",
-      "price": 290000,
-      "reason": "Parche secundario sin minutos. Vender libera 290.000 € para acometer fichajes titulares."
+      "price": 270000,
+      "reason": "Parche secundario sin minutos. Vender libera 270.000 € para acometer fichajes titulares."
     },
     {
       "playerId": 3285,
       "name": "Copete",
-      "price": 380000,
-      "reason": "Parche secundario sin minutos. Vender libera 380.000 € para acometer fichajes titulares."
+      "price": 590000,
+      "reason": "Parche secundario sin minutos. Vender libera 590.000 € para acometer fichajes titulares."
     },
     {
       "playerId": 3636,
@@ -1648,7 +1688,7 @@
     "remainingMatchdays": 25,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 41.6,
+      "currentXiExpectedPoints": 41.8,
       "restOfSeasonAggregateExpectedPpm": 30.5,
       "pWin": 0,
       "pTop2": 0,
@@ -1996,5 +2036,5 @@
       }
     ]
   },
-  "priorityMovement": "Pujar 3.540.900 € por Carlos Espí (striker) para sustituir a Pau Navarro (Expected XI Delta: +4.1 pts, CPMP: Óptimo)."
+  "priorityMovement": "Pujar 3.411.700 € por Fortuño (keeper) para sustituir a David Soria (Expected XI Delta: +3.4 pts, CPMP: Óptimo)."
 }
