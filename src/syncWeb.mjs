@@ -7,6 +7,7 @@ import { getTransfermarktData } from './transfermarkt.js';
 import fs from 'fs';
 import path from 'path';
 import { randomUUID } from 'node:crypto';
+import { buildTransferPlan } from './transferPlan.js';
 
 export function acquireSyncLock(lockPath = '.sync_web.lock') {
   try {
@@ -183,6 +184,23 @@ async function fetchRealData() {
   
   // Market
   const rawMarket = await client.getMarket();
+  // Refresh the financing snapshot without selling players or placing bids.
+  try {
+    const [profileRes, offersRes] = await Promise.all([
+      axios.get('https://api.comunio.es/', { headers: client.getHeaders(), timeout: 15000 }),
+      axios.get(`https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers?current`, { headers: client.getHeaders(), timeout: 15000 })
+    ]);
+    const offers = offersRes.data;
+    const budget = profileRes.data.user?.budget;
+    if (budget == null || budget === '' || offers.credit == null || offers.credit === '' || !Array.isArray(offers.items)) throw new Error('Finanzas incompletas');
+    const transferPlan = buildTransferPlan({ squad, market: rawMarket, balance: Number(budget), credit: Number(offers.credit),
+      pendingBids: offers.items.filter(o => o.type === 'PURCHASE' && o.state === 'PENDING').map(o => ({ playerId: o.tradable?.id, price: Number(o.price) })) });
+    const listedIds = new Set((rawMarket.players || []).filter(p => Number(p.owner?.id) === Number(client.userId)).map(p => p.playerId));
+    transferPlan.actions = (transferPlan.scenarios.find(s => s.feasible)?.plan.sales || []).filter(p => listedIds.has(p.playerId)).map(p => ({ ...p, status: 'LISTED_VERIFIED' }));
+    fs.writeFileSync('web/src/data/transferPlan.json', JSON.stringify(transferPlan, null, 2) + '\n');
+  } catch (error) {
+    console.warn('[SYNC-WEB] Se conserva el último plan de fichaje con su fecha:', error.message);
+  }
   const marketJson = rawMarket.players.map(p => ({
     id: p.playerId,
     name: p.name,

@@ -1,0 +1,359 @@
+
+> comunio-bot@1.2.0 test
+> node --test test/transfer_plan.test.mjs test/daily_speculator.test.mjs test/speculation_radar.test.mjs test/set_pieces.test.mjs test/totw_traffic.test.mjs test/club_momentum.test.mjs test/engine.test.mjs test/system_rules.test.mjs
+
+TAP version 13
+# Subtest: 1. Club Momentum: Correctly normalizes club names and assigns momentum tiers
+ok 1 - 1. Club Momentum: Correctly normalizes club names and assigns momentum tiers
+  ---
+  duration_ms: 2.0669
+  type: 'test'
+  ...
+# Subtest: 2. Club Momentum: Crisis clubs receive performance penalty vs surging clubs
+ok 2 - 2. Club Momentum: Crisis clubs receive performance penalty vs surging clubs
+  ---
+  duration_ms: 5.2322
+  type: 'test'
+  ...
+# Subtest: 3. Engine: getExpectedPoints integrates club momentum into matchday estimation
+ok 3 - 3. Engine: getExpectedPoints integrates club momentum into matchday estimation
+  ---
+  duration_ms: 1.7693
+  type: 'test'
+  ...
+# Subtest: 4. Strategic Purchase: Recommending a target requires strictly superior momentum-adjusted PPM (DeltaXI > 0)
+ok 4 - 4. Strategic Purchase: Recommending a target requires strictly superior momentum-adjusted PPM (DeltaXI > 0)
+  ---
+  duration_ms: 6.3065
+  type: 'test'
+  ...
+# [DAILY-SPECULATOR] Capacidad: 2/15 (13 libres) | Saldo: 1.200.000 EUR | Cap Especulacion: 200.000 EUR
+# [DAILY-SPECULATOR] 🛒 Puja especulativa enviada: Parche Barato (170.000 EUR)
+# [DAILY-SPECULATOR] Capacidad: 15/15 (0 libres) | Saldo: 5.000.000 EUR | Cap Especulacion: 4.000.000 EUR
+# [DAILY-SPECULATOR] 🏷️ Puesto en venta para ofertas de Computer: undefined (240.000 EUR)
+# [DAILY-SPECULATOR] 🏷️ Puesto en venta para ofertas de Computer: Trading Player 1 (210.000 EUR)
+# [DAILY-SPECULATOR] Venta ejecutada: Chollo Profitable por 240.000 EUR | Beneficio neto: +40.000 EUR
+# [DAILY-SPECULATOR] Nuevo activo especulativo incorporado: Nuevo Chollo Fichado (190.000 EUR)
+# [DAILY-SPECULATOR] 🏷️ Puesto en venta para ofertas de Computer: Banquillo Especulacion (180.000 EUR)
+# Subtest: Speculation Ledger - Initialization and Persistence
+ok 5 - Speculation Ledger - Initialization and Persistence
+  ---
+  duration_ms: 8.9183
+  type: 'test'
+  ...
+# Subtest: Execute Daily Speculation Bids - Safety Reserve and Capacity Constraints
+ok 6 - Execute Daily Speculation Bids - Safety Reserve and Capacity Constraints
+  ---
+  duration_ms: 39.7448
+  type: 'test'
+  ...
+# Subtest: Dry-run respects ledger listings when no live market client is available
+ok 7 - Dry-run respects ledger listings when no live market client is available
+  ---
+  duration_ms: 26.6676
+  type: 'test'
+  ...
+# Subtest: Non-trading core offers stay outside speculation decisions without debt
+ok 8 - Non-trading core offers stay outside speculation decisions without debt
+  ---
+  duration_ms: 2.395
+  type: 'test'
+  ...
+# Subtest: Auto-List Speculation Players on Market
+ok 9 - Auto-List Speculation Players on Market
+  ---
+  duration_ms: 25.8028
+  type: 'test'
+  ...
+# Subtest: Evaluate and Execute Speculation Sale Offers - Strict Profit Spreading
+ok 10 - Evaluate and Execute Speculation Sale Offers - Strict Profit Spreading
+  ---
+  duration_ms: 9.2847
+  type: 'test'
+  ...
+# Subtest: Sync Ledger with New Signings
+ok 11 - Sync Ledger with New Signings
+  ---
+  duration_ms: 1.8893
+  type: 'test'
+  ...
+# Subtest: Starting XI Immunity - Starters and Non-Trading Core Players are 100% Protected
+ok 12 - Starting XI Immunity - Starters and Non-Trading Core Players are 100% Protected
+  ---
+  duration_ms: 4.7195
+  type: 'test'
+  ...
+# Subtest: 1. Candidate beats worst player but does NOT improve best XI -> no aggressive bid (PASS or low score)
+ok 13 - 1. Candidate beats worst player but does NOT improve best XI -> no aggressive bid (PASS or low score)
+  ---
+  duration_ms: 13.5049
+  type: 'test'
+  ...
+# Subtest: 2. Candidate genuinely upgrades starting XI -> strategic score increases
+ok 14 - 2. Candidate genuinely upgrades starting XI -> strategic score increases
+  ---
+  duration_ms: 3.7721
+  type: 'test'
+  ...
+# Subtest: 3. Superstar opportunity with low cash -> valuation remains high but affordability constrains action
+ok 15 - 3. Superstar opportunity with low cash -> valuation remains high but affordability constrains action
+  ---
+  duration_ms: 39.9574
+  type: 'test'
+  ...
+# Subtest: 4. Expensive player with poor points-per-million -> valuation penalized appropriately
+ok 16 - 4. Expensive player with poor points-per-million -> valuation penalized appropriately
+  ---
+  duration_ms: 1.6112
+  type: 'test'
+  ...
+# Subtest: 5. Strong positional need increases valuation
+ok 17 - 5. Strong positional need increases valuation
+  ---
+  duration_ms: 1.9632
+  type: 'test'
+  ...
+# Subtest: 6. Rival pressure may increase recommended bid but never beyond maximum rational bid
+ok 18 - 6. Rival pressure may increase recommended bid but never beyond maximum rational bid
+  ---
+  duration_ms: 1.7803
+  type: 'test'
+  ...
+# Subtest: 7. Negative balance does NOT accept a terrible offer automatically
+ok 19 - 7. Negative balance does NOT accept a terrible offer automatically
+  ---
+  duration_ms: 1.6372
+  type: 'test'
+  ...
+# Subtest: 8. Small debt chooses a low-impact sale instead of sacrificing a star
+ok 20 - 8. Small debt chooses a low-impact sale instead of sacrificing a star
+  ---
+  duration_ms: 8.1591
+  type: 'test'
+  ...
+# Subtest: 9. Two cheap fringe-player sales can be preferred over one expensive key-player sale
+ok 21 - 9. Two cheap fringe-player sales can be preferred over one expensive key-player sale
+  ---
+  duration_ms: 6.7983
+  type: 'test'
+  ...
+# Subtest: 10. A high-scoring but redundant player can be sold if not core to XI
+ok 22 - 10. A high-scoring but redundant player can be sold if not core to XI
+  ---
+  duration_ms: 1.5906
+  type: 'test'
+  ...
+# Subtest: 11. A lower-scoring core player is protected because replacement loss is high
+ok 23 - 11. A lower-scoring core player is protected because replacement loss is high
+  ---
+  duration_ms: 1.1994
+  type: 'test'
+  ...
+# Subtest: 12. No sale is triggered when squad and liquidity benefit from keeping both players
+ok 24 - 12. No sale is triggered when squad and liquidity benefit from keeping both players
+  ---
+  duration_ms: 1.0651
+  type: 'test'
+  ...
+# Subtest: 13. High-value transaction requires confirmation according to autoBidLimit
+ok 25 - 13. High-value transaction requires confirmation according to autoBidLimit
+  ---
+  duration_ms: 2.1054
+  type: 'test'
+  ...
+# Subtest: 14. Engine lineup optimization remains deterministic and valid
+ok 26 - 14. Engine lineup optimization remains deterministic and valid
+  ---
+  duration_ms: 0.8959
+  type: 'test'
+  ...
+# Subtest: 15. Sanctioned, red-banned, or suspended player is discarded (PASS) and rival-owned player gets no extra margin
+ok 27 - 15. Sanctioned, red-banned, or suspended player is discarded (PASS) and rival-owned player gets no extra margin
+  ---
+  duration_ms: 2.7718
+  type: 'test'
+  ...
+# Subtest: 16. Positional club competition evaluates depth chart, direct rivals and starter confidence
+ok 28 - 16. Positional club competition evaluates depth chart, direct rivals and starter confidence
+  ---
+  duration_ms: 1.3429
+  type: 'test'
+  ...
+# Subtest: 1. Set-Pieces: Gerard Moreno is identified as \#1 penalty taker for Villarreal with bonus
+ok 29 - 1. Set-Pieces: Gerard Moreno is identified as \#1 penalty taker for Villarreal with bonus
+  ---
+  duration_ms: 2.2072
+  type: 'test'
+  ...
+# Subtest: 2. Set-Pieces: Denis Suárez receives set-piece specialist bonus for Alavés
+ok 30 - 2. Set-Pieces: Denis Suárez receives set-piece specialist bonus for Alavés
+  ---
+  duration_ms: 0.4836
+  type: 'test'
+  ...
+# Subtest: 3. Engine: getExpectedPoints awards bonus to set-piece specialists
+ok 31 - 3. Engine: getExpectedPoints awards bonus to set-piece specialists
+  ---
+  duration_ms: 1.5625
+  type: 'test'
+  ...
+# Subtest: 4. Squad Optimizer: getExpectedPerformance attaches setPiece metadata
+ok 32 - 4. Squad Optimizer: getExpectedPerformance attaches setPiece metadata
+  ---
+  duration_ms: 4.7751
+  type: 'test'
+  ...
+# Subtest: 1. Speculation Radar: Identifies Gavi as top CRACK_RECOVERY opportunity
+ok 33 - 1. Speculation Radar: Identifies Gavi as top CRACK_RECOVERY opportunity
+  ---
+  duration_ms: 43.0319
+  type: 'test'
+  ...
+# Subtest: 2. Speculation Radar: Identifies floor price bargains (< 300k €) with zero risk
+ok 34 - 2. Speculation Radar: Identifies floor price bargains (< 300k €) with zero risk
+  ---
+  duration_ms: 0.457
+  type: 'test'
+  ...
+# Subtest: 3. Speculation Radar: Denies non-Computer owned players for automated speculation flips
+ok 35 - 3. Speculation Radar: Denies non-Computer owned players for automated speculation flips
+  ---
+  duration_ms: 0.6526
+  type: 'test'
+  ...
+# Subtest: 4. Speculation Radar: 100% BLOCKS injured, doubtful or medically compromised players
+ok 36 - 4. Speculation Radar: 100% BLOCKS injured, doubtful or medically compromised players
+  ---
+  duration_ms: 0.7024
+  type: 'test'
+  ...
+# Subtest: 5. Speculation Radar: BLOCKS devaluing players with negative market trend (trend < 0)
+ok 37 - 5. Speculation Radar: BLOCKS devaluing players with negative market trend (trend < 0)
+  ---
+  duration_ms: 0.4231
+  type: 'test'
+  ...
+# [SYNC-WEB] ⏳ Ya hay una sincronización en curso. Omitiendo ejecución concurrente.
+# Subtest: System Rule 1: evaluateIncomingOffer NEVER returns ACCEPT_OFFER automatically
+ok 38 - System Rule 1: evaluateIncomingOffer NEVER returns ACCEPT_OFFER automatically
+  ---
+  duration_ms: 20.7454
+  type: 'test'
+  ...
+# Subtest: System Rule 2: Deny-by-default on non-Computer players for auto-bidding
+ok 39 - System Rule 2: Deny-by-default on non-Computer players for auto-bidding
+  ---
+  duration_ms: 3.6154
+  type: 'test'
+  ...
+# Subtest: System Rule 3: Recommended bid operates within dynamic valuation bands bounded by 100-125% VM
+ok 40 - System Rule 3: Recommended bid operates within dynamic valuation bands bounded by 100-125% VM
+  ---
+  duration_ms: 0.2375
+  type: 'test'
+  ...
+# Subtest: System Rule 4: isWithinPreMatchdayWindow checks exact 15-30 min boundary
+ok 41 - System Rule 4: isWithinPreMatchdayWindow checks exact 15-30 min boundary
+  ---
+  duration_ms: 0.1552
+  type: 'test'
+  ...
+# Subtest: System Rule 5: getAutoBidLimit standardizes both million units and euro amounts
+ok 42 - System Rule 5: getAutoBidLimit standardizes both million units and euro amounts
+  ---
+  duration_ms: 2.7194
+  type: 'test'
+  ...
+# Subtest: System Rule 6: acquireSyncLock enforces single-process exclusion and owner-only release
+ok 43 - System Rule 6: acquireSyncLock enforces single-process exclusion and owner-only release
+  ---
+  duration_ms: 5.3522
+  type: 'test'
+  ...
+# Subtest: System Rule 7: Placing a bid must never publish an official signing news article
+ok 44 - System Rule 7: Placing a bid must never publish an official signing news article
+  ---
+  duration_ms: 3.7995
+  type: 'test'
+  ...
+# Subtest: 1. TOTW Tracker: Registry contains valid matchday Onces Ideales
+ok 45 - 1. TOTW Tracker: Registry contains valid matchday Onces Ideales
+  ---
+  duration_ms: 1.4586
+  type: 'test'
+  ...
+# Subtest: 2. TOTW Tracker: Evaluates squad player appearances and next round candidacy
+ok 46 - 2. TOTW Tracker: Evaluates squad player appearances and next round candidacy
+  ---
+  duration_ms: 0.878
+  type: 'test'
+  ...
+# Subtest: 3. TOTW Tracker: getSquadTotwSummary aggregates full squad audit
+ok 47 - 3. TOTW Tracker: getSquadTotwSummary aggregates full squad audit
+  ---
+  duration_ms: 0.777
+  type: 'test'
+  ...
+# Subtest: 4. Web Traffic: trafficStats.json contains complete valid schema
+ok 48 - 4. Web Traffic: trafficStats.json contains complete valid schema
+  ---
+  duration_ms: 4.4607
+  type: 'test'
+  ...
+# Subtest: planned sales do not become spendable cash or permit a current bid
+ok 49 - planned sales do not become spendable cash or permit a current bid
+  ---
+  duration_ms: 23.2315
+  type: 'test'
+  ...
+# Subtest: every feasible scenario funds replacements, reserve and a legal formation
+ok 50 - every feasible scenario funds replacements, reserve and a legal formation
+  ---
+  duration_ms: 20.2548
+  type: 'test'
+  ...
+# Subtest: subtracts other pending commitments once and does not double-count Yamal bid
+ok 51 - subtracts other pending commitments once and does not double-count Yamal bid
+  ---
+  duration_ms: 20.7472
+  type: 'test'
+  ...
+# Subtest: rejects impossible price even when every player is sold
+ok 52 - rejects impossible price even when every player is sold
+  ---
+  duration_ms: 20.0978
+  type: 'test'
+  ...
+# Subtest: missing target or already owned target never recommends liquidation
+ok 53 - missing target or already owned target never recommends liquidation
+  ---
+  duration_ms: 0.4072
+  type: 'test'
+  ...
+# Subtest: cheap radar excludes our players and flags rival offers without promising minutes
+ok 54 - cheap radar excludes our players and flags rival offers without promising minutes
+  ---
+  duration_ms: 19.6339
+  type: 'test'
+  ...
+# Subtest: rejects unreadable finances, invalid prices and duplicate players
+ok 55 - rejects unreadable finances, invalid prices and duplicate players
+  ---
+  duration_ms: 1.0307
+  type: 'test'
+  ...
+# Subtest: funds the actual target position and rejects unknown positions
+ok 56 - funds the actual target position and rejects unknown positions
+  ---
+  duration_ms: 21.6328
+  type: 'test'
+  ...
+1..56
+# tests 56
+# suites 0
+# pass 56
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1056.6861

@@ -1,0 +1,173 @@
+TAP version 13
+# [DAILY-SPECULATOR] Capacidad: 2/15 (13 libres) | Saldo: 1.200.000 EUR | Cap Especulacion: 200.000 EUR
+# [DAILY-SPECULATOR] 🛒 Puja especulativa enviada: Parche Barato (170.000 EUR)
+# [DAILY-SPECULATOR] Capacidad: 15/15 (0 libres) | Saldo: 5.000.000 EUR | Cap Especulacion: 4.000.000 EUR
+# [DAILY-SPECULATOR] 🏷️ Puesto en venta para ofertas de Computer: undefined (240.000 EUR)
+# [DAILY-SPECULATOR] 🏷️ Puesto en venta para ofertas de Computer: Trading Player 1 (210.000 EUR)
+# [DAILY-SPECULATOR] 🏷️ Puesto en venta para ofertas de Computer: Already Listed (240.000 EUR)
+# [DAILY-SPECULATOR] Nuevo activo especulativo incorporado: Nuevo Chollo Fichado (190.000 EUR)
+# [DAILY-SPECULATOR] 🏷️ Puesto en venta para ofertas de Computer: Banquillo Especulacion (180.000 EUR)
+# Subtest: Speculation Ledger - Initialization and Persistence
+ok 1 - Speculation Ledger - Initialization and Persistence
+  ---
+  duration_ms: 6.3685
+  type: 'test'
+  ...
+# Subtest: Execute Daily Speculation Bids - Safety Reserve and Capacity Constraints
+ok 2 - Execute Daily Speculation Bids - Safety Reserve and Capacity Constraints
+  ---
+  duration_ms: 20.21
+  type: 'test'
+  ...
+# Subtest: Dry-run respects ledger listings when no live market client is available
+not ok 3 - Dry-run respects ledger listings when no live market client is available
+  ---
+  duration_ms: 7.1082
+  type: 'test'
+  location: 'D:\\racing-oslo-manager-worktrees\\20-yamal\\test\\daily_speculator.test.mjs:96:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   {
+    +     askPrice: 240000,
+    +     name: undefined,
+    +     playerId: 502
+    +   }
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      playerId: 502
+      askPrice: 240000
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///D:/racing-oslo-manager-worktrees/20-yamal/test/daily_speculator.test.mjs:105:12)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Non-trading core offers stay outside speculation decisions without debt
+not ok 4 - Non-trading core offers stay outside speculation decisions without debt
+  ---
+  duration_ms: 1.7325
+  type: 'test'
+  location: 'D:\\racing-oslo-manager-worktrees\\20-yamal\\test\\daily_speculator.test.mjs:112:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      {
+        toAccept: [],
+    +   toHoldOrReject: [
+    +     {
+    +       buyPrice: 1000000,
+    +       decision: 'HOLD',
+    +       name: 'Desconocido',
+    +       offerId: undefined,
+    +       offerPrice: 1000000,
+    +       playerId: 1,
+    +       profitEUR: 0,
+    +       reason: 'Jugador de plantilla fuera del libro activo de trading.'
+    +     }
+    +   ]
+    -   toHoldOrReject: []
+      }
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    toAccept:
+    toHoldOrReject:
+  actual:
+    toAccept:
+    toHoldOrReject:
+      0:
+        playerId: 1
+        name: 'Desconocido'
+        buyPrice: 1000000
+        offerPrice: 1000000
+        profitEUR: 0
+        decision: 'HOLD'
+        reason: 'Jugador de plantilla fuera del libro activo de trading.'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///D:/racing-oslo-manager-worktrees/20-yamal/test/daily_speculator.test.mjs:119:12)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Auto-List Speculation Players on Market
+not ok 5 - Auto-List Speculation Players on Market
+  ---
+  duration_ms: 2.3266
+  type: 'test'
+  location: 'D:\\racing-oslo-manager-worktrees\\20-yamal\\test\\daily_speculator.test.mjs:123:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    2 !== 1
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///D:/racing-oslo-manager-worktrees/20-yamal/test/daily_speculator.test.mjs:146:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Evaluate and Execute Speculation Sale Offers - Strict Profit Spreading
+not ok 6 - Evaluate and Execute Speculation Sale Offers - Strict Profit Spreading
+  ---
+  duration_ms: 1.8368
+  type: 'test'
+  location: 'D:\\racing-oslo-manager-worktrees\\20-yamal\\test\\daily_speculator.test.mjs:157:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    2 !== 1
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///D:/racing-oslo-manager-worktrees/20-yamal/test/daily_speculator.test.mjs:188:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Sync Ledger with New Signings
+ok 7 - Sync Ledger with New Signings
+  ---
+  duration_ms: 1.0383
+  type: 'test'
+  ...
+# Subtest: Starting XI Immunity - Starters and Non-Trading Core Players are 100% Protected
+ok 8 - Starting XI Immunity - Starters and Non-Trading Core Players are 100% Protected
+  ---
+  duration_ms: 2.9657
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 4
+# fail 4
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 159.7429

@@ -1,0 +1,41 @@
+import { chromium } from 'playwright';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+
+const baseURL = process.env.E2E_BASE_URL || 'http://127.0.0.1:5180';
+const evidence = 'docs/evidence/20-yamal';
+fs.mkdirSync(evidence, { recursive: true });
+const browser = await chromium.launch({ headless: true });
+const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+await context.tracing.start({ screenshots: true, snapshots: true, sources: true });
+const page = await context.newPage();
+const errors = [];
+page.on('pageerror', error => errors.push(error.message));
+try {
+  await page.goto(`${baseURL}/mercado`, { waitUntil: 'networkidle' });
+  const panel = page.getByRole('region', { name: 'Operación Yamal' });
+  await panel.waitFor({ state: 'visible' });
+  assert.match(await panel.innerText(), /Financiación pendiente/);
+  assert.match(await panel.innerText(), /tres|3 recambios/);
+  await panel.getByText('Ver jugadores a vender (8)', { exact: true }).click();
+  assert.match(await panel.innerText(), /Fede Valverde/);
+  assert.match(await panel.innerText(), /David Soria/);
+  await panel.getByLabel('Precio del fichaje').selectOption('35000000');
+  await panel.getByText(/^No viable/).waitFor({ state: 'visible' });
+  await panel.getByLabel('Precio del fichaje').selectOption('32500000');
+  await panel.getByText(/^No viable/).waitFor({ state: 'visible' });
+  await panel.getByLabel('Precio del fichaje').selectOption('30000000');
+  await panel.getByText('Radar por debajo de un millón', { exact: true }).click();
+  assert.match(await panel.innerText(), /Swedberg/);
+  assert.match(await panel.innerText(), /Negociar/);
+  await panel.screenshot({ path: `${evidence}/desktop.png` });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await panel.scrollIntoViewIfNeeded();
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), 'No page-level horizontal overflow on mobile');
+  await page.screenshot({ path: `${evidence}/mobile.png`, fullPage: true });
+  assert.deepEqual(errors, []);
+  console.log('PASS Chromium desktop/mobile: scenarios, sale details, cheap radar, no page errors or horizontal overflow.');
+} finally {
+  await context.tracing.stop({ path: `${evidence}/trace.zip` });
+  await browser.close();
+}

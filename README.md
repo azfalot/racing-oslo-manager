@@ -59,6 +59,23 @@ Desarrollado en React 19 + Tailwind CSS + Vite y alojado en Cloudflare Workers:
 
 ## 🧪 Suite de Pruebas Automatizadas
 
+### Operación Yamal: financiación y reconstrucción
+
+El panel de Mercado permite comparar pujas de 30, 32,5 y 35 millones. Calcula carteras de ventas a valor de mercado, preserva la mejor calidad media asequible, comprueba seis formaciones legales y reserva 500.000 € por recambio hasta completar 13 jugadores, además de 500.000 € de colchón. Son hipótesis presupuestarias: no garantizan ventas, disponibilidad ni minutos. Las ofertas reales pueden hacer inviable un escenario.
+
+```powershell
+# Consultar Comunio y actualizar el plan; no realiza operaciones
+npm run transfer:plan
+
+# Listar SOLO las ventas del primer escenario viable; comprueba listados reales
+npm run transfer:plan -- --list
+
+# Validación del panel con Vite disponible en localhost:5180
+node test/transfer_plan.e2e.mjs
+```
+
+El comando requiere las credenciales habituales de `.env`. No vende, acepta ofertas, puja ni publica mensajes. `--list` es una acción explícita; la consulta por defecto es de lectura. La sincronización habitual refresca el plan sin operar. Si falla la consulta, mantiene la última captura con su fecha; el panel avisa cuando supera 24 horas. El límite de puja de la API no se interpreta como caja y las pujas pendientes se descuentan una sola vez. [Plan semanal y evidencia](docs/YAMAL_PLAN.md).
+
 El proyecto cuenta con una batería de tests unitarios que validan las reglas de negocio y algoritmos de optimización:
 
 ```powershell

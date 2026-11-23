@@ -5,6 +5,7 @@ import newsData from '../data/news.json'
 import speculationRadar from '../data/speculationRadar.json'
 import marketBalance from '../data/marketBalance.json'
 import PlayerProfileModal from '../components/PlayerProfileModal'
+import TransferPlan from '../components/TransferPlan'
 import { getCategoryBadgeStyle, formatNewsDate } from './Noticias'
 
 export default function Mercado() {
@@ -110,6 +111,8 @@ export default function Mercado() {
           </div>
         )}
       </div>
+
+      <TransferPlan />
 
       {/* SECCIÓN DE RUMORES DE MERCADO (TOP 3 COMPACTO + BOTÓN AMPLIAR) */}
       {rumorNews.length > 0 && (
