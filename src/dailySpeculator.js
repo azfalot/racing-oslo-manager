@@ -5,7 +5,7 @@ import { isVerifiedComputerOwner } from './ownership.js';
 import { ComunioEngine } from './engine.js';
 
 export const DEFAULT_LEDGER_PATH = 'data/speculationLedger.json';
-export const DEFAULT_SAFETY_RESERVE_MIN_EUR = 50000;
+export const DEFAULT_SAFETY_RESERVE_MIN_EUR = 1000000;
 export const MAX_SQUAD_CAPACITY = 15;
 
 /**
@@ -28,6 +28,7 @@ export function loadSpeculationLedger(ledgerPath = DEFAULT_LEDGER_PATH) {
       const data = JSON.parse(fs.readFileSync(ledgerPath, 'utf8'));
       return {
         activeTradingPlayers: Array.isArray(data.activeTradingPlayers) ? data.activeTradingPlayers : [],
+        pendingPurchases: Array.isArray(data.pendingPurchases) ? data.pendingPurchases : [],
         closedTrades: Array.isArray(data.closedTrades) ? data.closedTrades : [],
         totalProfitEUR: typeof data.totalProfitEUR === 'number' ? data.totalProfitEUR : 0,
         successfulTradesCount: typeof data.successfulTradesCount === 'number' ? data.successfulTradesCount : 0,
@@ -40,6 +41,7 @@ export function loadSpeculationLedger(ledgerPath = DEFAULT_LEDGER_PATH) {
 
   return {
     activeTradingPlayers: [],
+    pendingPurchases: [],
     closedTrades: [],
     totalProfitEUR: 0,
     successfulTradesCount: 0,
@@ -90,7 +92,8 @@ export async function executeDailySpeculationBids(client, squad = { players: [] 
   let availableSlots = Math.max(0, maxSquadSize - occupiedSlots);
 
   // Liquidez disponible respetando el colchón de seguridad
-  let availableBiddingCap = Math.max(0, currentBalance - safetyReserveMin);
+  const committedBids = pendingBids.reduce((sum, bid) => sum + Number(bid.price || 0), 0);
+  let availableBiddingCap = Math.max(0, currentBalance - committedBids - safetyReserveMin);
 
   console.log('[DAILY-SPECULATOR] Capacidad: ' + occupiedSlots + '/' + maxSquadSize + ' (' + availableSlots + ' libres) | Saldo: ' + currentBalance.toLocaleString() + ' EUR | Cap Especulacion: ' + availableBiddingCap.toLocaleString() + ' EUR');
 
@@ -142,20 +145,21 @@ export async function executeDailySpeculationBids(client, squad = { players: [] 
     if (dryRun) {
       success = true;
     } else if (client && typeof client.placeBid === 'function') {
-      success = await client.placeBid(pid, opp.name, price);
+      success = await client.placeBid(pid, opp.name, price, { purpose: 'speculation' });
     }
 
     if (success) {
       availableSlots--;
       availableBiddingCap -= price;
 
-      // Registrar activo en el ledger para seguimiento contable
-      if (!ledger.activeTradingPlayers.some(p => p.playerId === pid)) {
-        ledger.activeTradingPlayers.push({
+      // A submitted bid is a commitment, not a player owned or a purchase cost.
+      if (!ledger.pendingPurchases.some(p => p.playerId === pid)) {
+        ledger.pendingPurchases.push({
           playerId: pid,
           name: opp.name,
-          buyPrice: price,
-          buyDate: new Date().toISOString(),
+          bidAmount: price,
+          submittedAt: new Date().toISOString(),
+          status: 'BID_SUBMITTED',
           tier: opp.tier || 'FLOOR_PRICE_BARGAIN',
           listedOnMarket: false
         });
@@ -199,6 +203,9 @@ export async function autoListSpeculationPlayers(client, squad = { players: [] }
   if (client && typeof client.getUserMarketListings === 'function') {
     const activeListings = await client.getUserMarketListings();
     activeMarketIds = new Set(activeListings.map(l => l.playerId));
+  } else if (options.dryRun) {
+    // Offline simulations use the ledger; live listings remain authoritative.
+    activeMarketIds = new Set(ledger.activeTradingPlayers.filter(p => p.listedOnMarket).map(p => p.playerId));
   }
 
   const listedPlayers = [];
@@ -321,16 +328,7 @@ export function evaluateSpeculationOffers(saleOffers = [], options = {}) {
 
     // Si no está en activeTradingMap y no hay deuda, mantener
     if (!tradingRecord) {
-      toHoldOrReject.push({
-        offerId: offer.id || offer.offerId,
-        playerId: pid,
-        name: playerName,
-        buyPrice,
-        offerPrice,
-        profitEUR,
-        decision: 'HOLD',
-        reason: 'Jugador de plantilla fuera del libro activo de trading.'
-      });
+      // Core-player offers belong to manual review, outside the trading ledger.
       continue;
     }
 
@@ -424,21 +422,23 @@ export function syncLedgerWithNewSignings(currentSquadPlayers = [], recentBids =
 
   let updated = false;
 
-  for (const bid of recentBids) {
+  for (const bid of [...ledger.pendingPurchases, ...recentBids]) {
     const pid = bid.playerId || bid.id;
     if (squadMap.has(pid) && !activeIds.has(pid)) {
       const squadPlayer = squadMap.get(pid);
       ledger.activeTradingPlayers.push({
         playerId: pid,
         name: squadPlayer.name || bid.name,
-        buyPrice: bid.price,
+        buyPrice: Number.isFinite(Number(squadPlayer.purchasePrice)) && Number(squadPlayer.purchasePrice) > 0 ? Number(squadPlayer.purchasePrice) : null,
         buyDate: new Date().toISOString(),
         tier: bid.tier || 'FLOOR_PRICE_BARGAIN',
         listedOnMarket: false
       });
       activeIds.add(pid);
+      ledger.pendingPurchases = ledger.pendingPurchases.filter(p => p.playerId !== pid);
       updated = true;
-      console.log('[DAILY-SPECULATOR] Nuevo activo especulativo incorporado: ' + squadPlayer.name + ' (' + bid.price.toLocaleString() + ' EUR)');
+      const observedCost = squadPlayer.purchasePrice > 0 ? Number(squadPlayer.purchasePrice).toLocaleString() + ' EUR' : 'coste confirmado desconocido';
+      console.log('[DAILY-SPECULATOR] Jugador observado en plantilla: ' + squadPlayer.name + ' (' + observedCost + ')');
     }
   }
 

@@ -2,11 +2,14 @@ import axios from 'axios';
 import { chromium } from 'playwright';
 import dotenv from 'dotenv';
 import fs from 'fs';
+import { amount, loadCapitalPolicy } from './capitalPolicy.js';
+import { executeCapitalPurchase, releaseCapitalReservation } from './capitalExecution.js';
 
 dotenv.config();
 
 export class ComunioClient {
-  constructor() {
+  constructor({ capitalStatePath, capitalLockPath } = {}) {
+    this.capitalPaths = { statePath: capitalStatePath, lockPath: capitalLockPath };
     this.username = process.env.COMUNIO_USERNAME;
     this.password = process.env.COMUNIO_PASSWORD;
     this.token = null;
@@ -214,6 +217,8 @@ export class ComunioClient {
             name: item.name,
             price: item.quotedprice,
             totalPoints: item.points === '-' ? 0 : parseInt(item.points) || 0,
+            lastPoints: Number.isFinite(amount(item.lastPoints)) ? amount(item.lastPoints) : null,
+            purchasePrice: Number.isFinite(amount(item.purchaseInfo?.price)) && amount(item.purchaseInfo.price) > 0 ? amount(item.purchaseInfo.price) : null,
             status: item.status,
             statusInfo: item.statusInfo,
             type: item.position,
@@ -282,8 +287,8 @@ export class ComunioClient {
             club: playerObj.club || details?.club || {},
             clubName: playerObj.club?.name || details?.club?.name || '',
             owner: {
-              id: ownerObj?.id || 1,
-              name: ownerObj?.name || 'Computer'
+              id: ownerObj?.id ?? null,
+              name: ownerObj?.name || 'Desconocido'
             },
             historical: details?.historical || [],
             average: details?.average || { points: '0' }
@@ -301,101 +306,45 @@ export class ComunioClient {
   /**
    * Realiza una puja por un jugador en el mercado (vía API directa)
    */
-  async placeBid(playerId, playerName, bidAmount) {
+  async getPurchaseContext() {
     if (!this.isLoggedIn) await this.login();
-    console.log(`[CLIENT] Colocando puja por ${playerName} (ID ${playerId}) por valor de ${bidAmount}...`);
-    try {
-      const url = `https://api.comunio.es/communities/${this.communityId}/users/${this.userId}/offers`;
-      const response = await axios.post(url, {
-        offers: [
-          {
-            price: parseInt(bidAmount),
-            tradableid: parseInt(playerId),
-            type: "NEW"
-          }
-        ]
-      }, {
-        headers: this.getHeaders()
-      });
-
-      if (response.status === 200 || response.status === 201) {
-        // La API puede devolver status OK pero contener errores en el body de respuesta
-        const resData = response.data;
-        if (resData.status === 'OK' && resData.response && resData.response[0]) {
-          const offerResult = resData.response[0];
-          if (offerResult.status === 'ERROR') {
-            console.warn(`[CLIENT] Petición recibida, pero rechazada por Comunio: ${offerResult.message}`);
-            return false;
-          }
-        }
-        console.log('[CLIENT] Puja colocada con éxito vía API.');
-        return true;
-      }
-    } catch (err) {
-      console.warn('[CLIENT] Error al enviar puja vía API direct, iniciando fallback con Playwright...', err.message);
-      return this.placeBidPlaywright(playerName, bidAmount);
-    }
-    return false;
+    const [squad, market, offers] = await Promise.all([
+      this.getSquad(), this.getMarket(),
+      axios.get(`https://api.comunio.es/communities/${this.communityId}/users/${this.userId}/offers?current`, { headers: this.getHeaders(), timeout: 15000 }).then(r => r.data)
+    ]);
+    if (!squad.players?.length || !Array.isArray(market.players) || !Array.isArray(offers.items)) throw new Error('Estado de compras incompleto.');
+    // Read cash last, after resolving owned players and pending commitments.
+    const profile = (await axios.get('https://api.comunio.es/', { headers: this.getHeaders(), timeout: 15000 })).data;
+    const mapBid = o => ({ playerId: Number(o.tradable?.id), price: amount(o.price) });
+    return { accountId: Number(this.userId), squad, market, balance: amount(profile.user?.budget), credit: amount(offers.credit),
+      pendingBids: offers.items.filter(o => o.type === 'PURCHASE' && o.state === 'PENDING').map(mapBid),
+      closedBids: offers.items.filter(o => o.type === 'PURCHASE' && ['DECLINED', 'REJECTED', 'EXPIRED', 'CANCELLED'].includes(o.state)).map(mapBid) };
   }
 
-  async placeBidPlaywright(playerName, bidAmount) {
-    let browser;
-    try {
-      browser = await chromium.launch({ headless: true });
-      const context = await browser.newContext();
-      const page = await context.newPage();
-
-      await page.goto('https://www.comunio.es', { waitUntil: 'networkidle' });
-
-      // Cookies
-      const acceptBtn = page.locator('button:has-text("AGREE"), button:has-text("Aceptar"), #accept-btn');
-      if (await acceptBtn.count() > 0) {
-        await acceptBtn.first().click();
-        await page.waitForTimeout(1000);
-      }
-
-      // Login
-      const entrarBtn = page.locator('button:has-text("Entrar")');
-      await entrarBtn.first().click();
-      await page.waitForTimeout(1000);
-
-      await page.fill('input#usernameLogin', this.username);
-      await page.fill('input#passwordLogin', this.password);
-
-      const submitBtn = page.locator('button.login_loginButton__lZg4d');
-      await submitBtn.click();
-      await page.waitForTimeout(5000);
-
-      // Ir a mercado
-      await page.goto('https://www.comunio.es/game/market', { waitUntil: 'networkidle' });
-      await page.waitForTimeout(3000);
-
-      // Localizar jugador
-      const playerRow = page.locator(`div:has-text("${playerName}")`).last();
-      if (await playerRow.count() === 0) {
-        console.error(`[CLIENT-FALLBACK] No se encontró a ${playerName} en el mercado.`);
-        return false;
-      }
-
-      const bidBtn = playerRow.locator('button:has-text("Pujar"), button:has-text("Ofertar"), button:has-text("Hacer oferta")');
-      if (await bidBtn.count() > 0) {
-        await bidBtn.first().click();
-        await page.waitForTimeout(1500);
-
-        const inputAmount = page.locator('input[type="number"], input[placeholder*="precio"]');
-        await inputAmount.fill(bidAmount.toString());
-
-        const confirmBtn = page.locator('button:has-text("Confirmar"), button:has-text("Enviar"), button:has-text("Pujar")');
-        await confirmBtn.first().click();
-        await page.waitForTimeout(2000);
-        console.log(`[CLIENT-FALLBACK] Puja de ${bidAmount} por ${playerName} realizada con éxito.`);
-        return true;
-      }
-    } catch (e) {
-      console.error('[CLIENT-FALLBACK] Fallo al pujar con Playwright:', e.message);
-    } finally {
-      if (browser) await browser.close();
+  async placeBid(playerId, playerName, bidAmount, options = {}) {
+    const { ComunioEngine } = await import('./engine.js');
+    const { calculateMarginalValue } = await import('./squadOptimizer.js');
+    const engine = new ComunioEngine();
+    let policy;
+    try { policy = loadCapitalPolicy(); } catch (error) {
+      this.lastPurchaseDecision = { allowed: false, reason: 'INVALID_CAPITAL_POLICY', detail: error.message };
+      return false;
     }
+    this.lastPurchaseDecision = await executeCapitalPurchase({ ...this.capitalPaths, policy,
+      candidateId: Number(playerId), bidAmount: amount(bidAmount), confirmedByUser: options.confirmedByUser === true, purpose: options.purpose || 'upgrade',
+      loadContext: () => this.getPurchaseContext(),
+      evaluateQuality: (candidate, squad) => ({ ...calculateMarginalValue(engine, squad, candidate), available: engine.isPlayerAvailable(candidate),
+        recentAverage: amount(String(candidate.average?.lastXMatchdays?.points ?? '').replace(',', '.')) }),
+      submit: async (candidate, price) => (await axios.post(`https://api.comunio.es/communities/${this.communityId}/users/${this.userId}/offers`, {
+        offers: [{ price, tradableid: Number(candidate.playerId), type: 'NEW' }]
+      }, { headers: this.getHeaders(), timeout: 15000 })).data
+    });
+    console.log(`[CAPITAL] ${this.lastPurchaseDecision.allowed ? 'Puja registrada' : 'Puja bloqueada'}: ${playerName} · ${this.lastPurchaseDecision.reason}`);
+    return this.lastPurchaseDecision.allowed;
+  }
+
+  async placeBidPlaywright() {
+    console.warn('[CAPITAL] Compra por navegador deshabilitada: evita saltarse reservas o duplicar una petición incierta.');
     return false;
   }
 
@@ -783,7 +732,13 @@ export class ComunioClient {
   /**
    * Acepta una oferta de venta recibida (Vía API directa de Comunio)
    */
-  async acceptSaleOffer(offerId, playerId, price) {
+  async acceptSaleOffer(offerId, playerId, price, options = {}) {
+    // Sales require a direct manual confirmation. Debt and trading profits never
+    // authorize background jobs to transfer a player out of the squad.
+    if (options?.confirmedByUser !== true) {
+      console.warn(`[CLIENT] Venta bloqueada: jugador ${playerId} sin confirmación manual.`);
+      return false;
+    }
     if (!this.isLoggedIn) await this.login();
     console.log(`[CLIENT] Aceptando oferta ID ${offerId} por jugador ID ${playerId} a precio ${price} € vía API directa...`);
     try {
@@ -801,7 +756,7 @@ export class ComunioClient {
         headers: this.getHeaders()
       });
 
-      if (response.status === 200 && response.data?.status === 'OK') {
+      if (response.status === 200 && response.data?.status === 'OK' && !response.data.response?.some(r => r.status === 'ERROR')) {
         console.log(`[CLIENT] Oferta ID ${offerId} por jugador ID ${playerId} aceptada con éxito (API).`);
         return true;
       }
@@ -828,7 +783,12 @@ export class ComunioClient {
       }, {
         headers: this.getHeaders()
       });
-      if (response.status === 200 && response.data?.status === 'OK') {
+      if (response.status === 200 && response.data?.status === 'OK' && !response.data.response?.some(r => r.status === 'ERROR')) {
+        if (Number(playerId) > 0) {
+          const fresh = (await axios.get(url + '?current', { headers: this.getHeaders(), timeout: 15000 })).data;
+          if (!Array.isArray(fresh.items) || fresh.items.some(o => o.type === 'PURCHASE' && o.state === 'PENDING' && Number(o.tradable?.id) === Number(playerId))) return false;
+          if (!releaseCapitalReservation({ ...this.capitalPaths, candidateId: Number(playerId), accountId: Number(this.userId) })) return false;
+        }
         console.log(`[CLIENT] Puja por ${playerName} cancelada con éxito.`);
         return true;
       }

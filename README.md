@@ -59,6 +59,40 @@ Desarrollado en React 19 + Tailwind CSS + Vite y alojado en Cloudflare Workers:
 
 ## 🧪 Suite de Pruebas Automatizadas
 
+### Protección de capital y mejora por jornada
+
+`/capital` muestra caja, compromisos, reserva, poder de compra, coste conocido de los jugadores y propuestas de mejora. El informe diario incorpora este análisis y registra una observación diaria de patrimonio y once estimado; las variaciones de VM y las primas no se presentan como beneficio de trading.
+
+Todas las compras pasan por el mismo control antes de enviar dinero: VM exacto, Computer verificado, reserva por defecto de 1 M€, máximo 15 jugadores contando pujas, concentración máxima del 35 % del patrimonio por nueva compra y, para compras autónomas, evidencia reciente de juego y al menos +0,75 puntos estimados en el mejor once. Las ventas siguen siendo exclusivamente manuales. No se autorizan compras especulativas por una plusvalía hipotética; las pujas no son jugadores adquiridos.
+
+La política se configura mediante `strategy.capital` en el `config.json` local, con las claves `reserve`, `maxSquadSize`, `maxAssetShare` y `minXIUpgrade`. El cliente comprueba datos frescos, mantiene un bloqueo entre procesos y reserva cada petición antes de enviarla. Una respuesta incierta retiene el compromiso y no dispara un reintento por navegador. La cancelación solo libera la reserva después de comprobar la desaparición de la puja en la API.
+
+```powershell
+npm run capital:report
+npm run capital:report -- --record
+```
+
+Estos comandos no compran, venden ni envían mensajes. `--record` actualiza `data/capitalHistory.json`. Los compromisos pendientes se conservan en `data/capitalCommitments.json`, incluso tras reinicios. [Reglas, límites y operación](docs/CAPITAL_POLICY.md).
+
+### Operación Yamal: financiación y reconstrucción
+
+Las ventas reales requieren confirmación manual mediante el botón de aceptar oferta en Telegram. `ComunioClient.acceptSaleOffer` bloquea cualquier llamada sin `confirmedByUser: true`, incluso desde especulación o saneamiento de deuda. No basta con que la oferta sea rentable. `COMUNIO_NOTIFY_STARTUP=false` permite reiniciar el servicio sin enviar el aviso de arranque.
+
+El panel de Mercado permite comparar pujas de 30, 32,5 y 35 millones. Tanto el objetivo como el radar barato deben estar ofrecidos por Computer verificado: se excluyen jugadores de rivales y vendedores desconocidos de todos los planes de compra. Calcula carteras de ventas a valor de mercado, preserva la mejor calidad media asequible, comprueba seis formaciones legales y reserva 500.000 € por recambio hasta completar 13 jugadores, además de 500.000 € de colchón. Son hipótesis presupuestarias: no garantizan ventas, disponibilidad ni minutos. Las ofertas reales pueden hacer inviable un escenario.
+
+```powershell
+# Consultar Comunio y actualizar el plan; no realiza operaciones
+npm run transfer:plan
+
+# Listar SOLO las ventas del primer escenario viable; comprueba listados reales
+npm run transfer:plan -- --list
+
+# Validación del panel con Vite disponible en localhost:5180
+node test/transfer_plan.e2e.mjs
+```
+
+El comando requiere las credenciales habituales de `.env`. No vende, acepta ofertas, puja ni publica mensajes. `--list` es una acción explícita; la consulta por defecto es de lectura. La sincronización habitual refresca el plan sin operar. Si falla la consulta, mantiene la última captura con su fecha; el panel avisa cuando supera 24 horas. El límite de puja de la API no se interpreta como caja y las pujas pendientes se descuentan una sola vez. [Plan semanal y evidencia](docs/YAMAL_PLAN.md).
+
 El proyecto cuenta con una batería de tests unitarios que validan las reglas de negocio y algoritmos de optimización:
 
 ```powershell

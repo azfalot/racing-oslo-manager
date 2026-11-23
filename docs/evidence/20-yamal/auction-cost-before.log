@@ -1,0 +1,69 @@
+TAP version 13
+# [DAILY-SPECULATOR] Capacidad: 0/15 (15 libres) | Saldo: 2.000.000 EUR | Cap Especulacion: 1.000.000 EUR
+# [DAILY-SPECULATOR] 🛒 Puja especulativa enviada: Cheap (170.000 EUR)
+# [DAILY-SPECULATOR] Capacidad: 1/15 (14 libres) | Saldo: 1.200.000 EUR | Cap Especulacion: 0 EUR
+# Subtest: market season points never masquerade as last-match momentum
+ok 1 - market season points never masquerade as last-match momentum
+  ---
+  duration_ms: 1.8129
+  type: 'test'
+  ...
+# Subtest: contradictory averages cannot promote a player with zero season and recent points
+ok 2 - contradictory averages cannot promote a player with zero season and recent points
+  ---
+  duration_ms: 0.1629
+  type: 'test'
+  ...
+# Subtest: all purchase recommendations use exact VM even for elite upgrades and rival pressure
+ok 3 - all purchase recommendations use exact VM even for elite upgrades and rival pressure
+  ---
+  duration_ms: 16.146
+  type: 'test'
+  ...
+# Subtest: a cheap price is never advertised as zero risk or guaranteed profit
+ok 4 - a cheap price is never advertised as zero risk or guaranteed profit
+  ---
+  duration_ms: 1.8352
+  type: 'test'
+  ...
+# Subtest: placing a bid never records a player as already purchased
+ok 5 - placing a bid never records a player as already purchased
+  ---
+  duration_ms: 5.9048
+  type: 'test'
+  ...
+# Subtest: award registration distinguishes bid amount, observed purchase cost and unknown cost
+not ok 6 - award registration distinguishes bid amount, observed purchase cost and unknown cost
+  ---
+  duration_ms: 2.6939
+  type: 'test'
+  location: 'D:\\racing-oslo-manager-worktrees\\20-yamal\\test\\capital_regression.test.mjs:53:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of undefined (reading 'toLocaleString')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    syncLedgerWithNewSignings (file:///D:/racing-oslo-manager-worktrees/20-yamal/src/dailySpeculator.js:439:118)
+    TestContext.<anonymous> (file:///D:/racing-oslo-manager-worktrees/20-yamal/test/capital_regression.test.mjs:59:20)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: speculation subtracts pending commitments, including API string prices
+ok 7 - speculation subtracts pending commitments, including API string prices
+  ---
+  duration_ms: 0.93
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 6
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 144.5636

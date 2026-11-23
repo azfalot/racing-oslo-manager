@@ -5,6 +5,7 @@ import newsData from '../data/news.json'
 import speculationRadar from '../data/speculationRadar.json'
 import marketBalance from '../data/marketBalance.json'
 import PlayerProfileModal from '../components/PlayerProfileModal'
+import TransferPlan from '../components/TransferPlan'
 import { getCategoryBadgeStyle, formatNewsDate } from './Noticias'
 
 export default function Mercado() {
@@ -14,6 +15,8 @@ export default function Mercado() {
   const [positionFilter, setPositionFilter] = useState('ALL') // ALL, keeper, defender, midfielder, striker
   const [searchTerm, setSearchTerm] = useState('')
   const [showAllRumors, setShowAllRumors] = useState(false)
+  const netRealized = Number(marketBalance.netRealizedBalanceEUR ?? 0)
+  const netLatent = Number(marketBalance.netLatentBalanceEUR ?? 0)
 
   const filterPlayer = (p) => {
     // 1. Filtro por posición
@@ -85,15 +88,15 @@ export default function Mercado() {
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] uppercase font-bold text-cream/60 font-mono tracking-wider">Balance Plusvalías</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-[10px] uppercase font-bold text-cream/60 font-mono tracking-wider">Resultado neto realizado</span>
+                  <span className={`w-1.5 h-1.5 rounded-full ${netRealized < 0 ? 'bg-red-400' : 'bg-emerald-400'}`} />
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs sm:text-sm font-mono font-bold text-forest-light">
-                    +{(marketBalance.realizedGainsEUR || 0).toLocaleString('es-ES')} €
+                  <span className={`text-xs sm:text-sm font-mono font-bold ${netRealized < 0 ? 'text-red-400' : 'text-emerald-400'}`}>
+                    {netRealized >= 0 ? '+' : ''}{netRealized.toLocaleString('es-ES')} €
                   </span>
                   <span className="text-[10px] text-cream/50 font-mono hidden sm:inline">
-                    ({marketBalance.profitableTradesCount || 4} trades ganadores)
+                    ({marketBalance.totalClosedTradesCount ?? 0} registros con coste)
                   </span>
                 </div>
               </div>
@@ -110,6 +113,8 @@ export default function Mercado() {
           </div>
         )}
       </div>
+
+      <TransferPlan />
 
       {/* SECCIÓN DE RUMORES DE MERCADO (TOP 3 COMPACTO + BOTÓN AMPLIAR) */}
       {rumorNews.length > 0 && (
@@ -490,46 +495,46 @@ export default function Mercado() {
                     +{(marketBalance.realizedGainsEUR || 0).toLocaleString('es-ES')} €
                   </p>
                   <p className="text-[10px] text-cream/50 font-mono">
-                    {marketBalance.profitableTradesCount || 4} traspasos en verde
+                    {marketBalance.profitableTradesCount ?? 0} registros con plusvalía
                   </p>
                 </div>
 
                 {/* 2. Minusvalías de Saneamiento */}
                 <div className="bg-black/70 border border-red-500/40 p-3 rounded-sm space-y-1 shadow-md">
                   <span className="text-[10px] uppercase font-bold text-red-400 font-mono flex items-center gap-1">
-                    <TrendingDown size={12} /> Minusvalías Saneadas
+                    <TrendingDown size={12} /> Minusvalías Realizadas
                   </span>
                   <p className="text-base sm:text-lg font-bold font-mono text-red-300">
                     -{(marketBalance.realizedLossesEUR || 0).toLocaleString('es-ES')} €
                   </p>
                   <p className="text-[10px] text-cream/50 font-mono">
-                    Ventas forzadas de deuda (J1-J4)
+                    Operaciones cerradas con coste identificado
                   </p>
                 </div>
 
                 {/* 3. Plusvalías Latentes en Once */}
                 <div className="bg-black/70 border border-purple-500/40 p-3 rounded-sm space-y-1 shadow-md">
                   <span className="text-[10px] uppercase font-bold text-purple-300 font-mono flex items-center gap-1">
-                    <Sparkles size={12} /> Plusvalía en Once
+                    <Sparkles size={12} /> Latente con coste conocido
                   </span>
-                  <p className="text-base sm:text-lg font-bold font-mono text-purple-300">
-                    +{(marketBalance.totalLatentGainsEUR || 0).toLocaleString('es-ES')} €
+                  <p className={`text-base sm:text-lg font-bold font-mono ${netLatent < 0 ? 'text-red-400' : 'text-emerald-400'}`}>
+                    {netLatent >= 0 ? '+' : ''}{netLatent.toLocaleString('es-ES')} €
                   </p>
                   <p className="text-[10px] text-cream/50 font-mono">
-                    Mariano, Cardoso, De la Fuente
+                    VM actual frente al coste identificado
                   </p>
                 </div>
 
                 {/* 4. Eficacia Especulación Actual */}
                 <div className="bg-black/70 border border-amber-500/40 p-3 rounded-sm space-y-1 shadow-md">
                   <span className="text-[10px] uppercase font-bold text-amber-300 font-mono flex items-center gap-1">
-                    <CheckCircle2 size={12} /> Motor Actual a VM
+                    <CheckCircle2 size={12} /> Subastas de Computer
                   </span>
                   <p className="text-base sm:text-lg font-bold font-mono text-amber-300">
-                    100% Éxito
+                    Adjudicación incierta
                   </p>
                   <p className="text-[10px] text-cream/50 font-mono">
-                    0% riesgo / salida en beneficio
+                    Una puja enviada no garantiza fichaje ni beneficio
                   </p>
                 </div>
               </div>
@@ -552,7 +557,7 @@ export default function Mercado() {
               {/* Tabla de Operaciones Cerradas */}
               <div className="space-y-3">
                 <h4 className="text-xs font-display font-bold text-white uppercase tracking-wider flex items-center justify-between border-b border-forest/20 pb-2">
-                  <span>Historial Completo de Traspasos Cerrados ({marketBalance.closedOperations?.length || 0})</span>
+                  <span>Operaciones agrupadas por jugador ({marketBalance.closedOperations?.length || 0})</span>
                   <span className="text-[10px] font-mono text-cream/50 font-normal">Ordenado por rendimiento económico</span>
                 </h4>
 
@@ -568,7 +573,7 @@ export default function Mercado() {
                       </tr>
                     </thead>
                     <tbody>
-                      {(marketBalance.closedOperations || []).map((op, idx) => (
+                      {[...(marketBalance.closedOperations || [])].sort((a, b) => a.diff - b.diff).map((op, idx) => (
                         <tr key={idx} className="border-b border-white/5 hover:bg-forest-dark/20 transition-colors">
                           <td className="p-2.5 font-bold text-white font-sans">{op.playerName}</td>
                           <td className="p-2.5 text-cream/70">{op.buyPrice.toLocaleString('es-ES')} €</td>
@@ -589,7 +594,7 @@ export default function Mercado() {
               {/* Tabla de Plusvalías Latentes de la Plantilla Actual */}
               <div className="space-y-3">
                 <h4 className="text-xs font-display font-bold text-white uppercase tracking-wider flex items-center justify-between border-b border-forest/20 pb-2">
-                  <span>Revalorización de la Plantilla Actual ({marketBalance.latentTrades?.length || 0} jugadores)</span>
+                  <span>Valoración con coste conocido ({marketBalance.latentTrades?.length || 0} jugadores)</span>
                   <span className="text-[10px] font-mono text-purple-300 font-normal">Valor de Mercado actual vs Coste de compra</span>
                 </h4>
 
@@ -605,7 +610,7 @@ export default function Mercado() {
                       </tr>
                     </thead>
                     <tbody>
-                      {(marketBalance.latentTrades || []).map((lat, idx) => (
+                      {[...(marketBalance.latentTrades || [])].sort((a, b) => a.latentDiff - b.latentDiff).map((lat, idx) => (
                         <tr key={idx} className="border-b border-white/5 hover:bg-forest-dark/20 transition-colors">
                           <td className="p-2.5 font-bold text-white font-sans">{lat.playerName}</td>
                           <td className="p-2.5 text-cream/70">{lat.buyPrice.toLocaleString('es-ES')} €</td>

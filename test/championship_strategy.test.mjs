@@ -95,7 +95,7 @@ test('2. Quantitative Delta XI: Accurately identifies dropped starter and margin
 });
 
 // ── TEST 3: DYNAMIC BIDDING BAND 1 — SPECULATION (95-102% VM) ─────────────────
-test('3. Dynamic Bidding Band 1: Speculation assets bid in 95-102% VM range', () => {
+test('3. Speculation valuation stays within its band; actual recommendation is exact VM', () => {
   const candidate = createMockPlayer(101, 'Injured Bargain', 'midfielder', 2000000, 4.8, 140, 'INJURED');
   candidate.statusInfo = 'Duda leve 1 jornada';
 
@@ -107,13 +107,15 @@ test('3. Dynamic Bidding Band 1: Speculation assets bid in 95-102% VM range', ()
   };
 
   const bidCalc = calculateMaxRationalBid(candidate, purchaseScore, 10000000);
-  assert.equal(bidCalc.band, 'SPECULATION');
-  assert.ok(bidCalc.marginPct >= 0 && bidCalc.marginPct <= 2, `Speculation margin must be 0-2% (got ${bidCalc.marginPct}%)`);
-  assert.ok(bidCalc.recommendedBid <= 2000000 * 1.02);
+  assert.equal(bidCalc.modelBand, 'SPECULATION');
+  assert.ok(bidCalc.modelMarginPct >= 0 && bidCalc.modelMarginPct <= 2, `Speculation valuation margin must be 0-2% (got ${bidCalc.modelMarginPct}%)`);
+  assert.ok(bidCalc.modelValuation <= 2000000 * 1.02);
+  assert.equal(bidCalc.recommendedBid, 2000000);
+  assert.equal(bidCalc.marginPct, 0);
 });
 
 // ── TEST 4: DYNAMIC BIDDING BAND 2 — DEPTH (100-105% VM) ───────────────────────
-test('4. Dynamic Bidding Band 2: Rotation & depth pieces bid in 100-105% VM range', () => {
+test('4. Depth valuation stays within its band; actual recommendation is exact VM', () => {
   const candidate = createMockPlayer(102, 'Solid Rotation Mid', 'midfielder', 1500000, 3.5, 100);
 
   const purchaseScore = {
@@ -124,13 +126,15 @@ test('4. Dynamic Bidding Band 2: Rotation & depth pieces bid in 100-105% VM rang
   };
 
   const bidCalc = calculateMaxRationalBid(candidate, purchaseScore, 10000000);
-  assert.equal(bidCalc.band, 'DEPTH');
-  assert.ok(bidCalc.marginPct >= 0 && bidCalc.marginPct <= 5, `Depth margin must be 0-5% (got ${bidCalc.marginPct}%)`);
-  assert.ok(bidCalc.recommendedBid <= 1500000 * 1.05);
+  assert.equal(bidCalc.modelBand, 'DEPTH');
+  assert.ok(bidCalc.modelMarginPct >= 0 && bidCalc.modelMarginPct <= 5, `Depth valuation margin must be 0-5% (got ${bidCalc.modelMarginPct}%)`);
+  assert.ok(bidCalc.modelValuation <= 1500000 * 1.05);
+  assert.equal(bidCalc.recommendedBid, 1500000);
+  assert.equal(bidCalc.marginPct, 0);
 });
 
 // ── TEST 5: DYNAMIC BIDDING BAND 3 — CLEAR UPGRADE (105-115% VM) ──────────────
-test('5. Dynamic Bidding Band 3: Clear Starting XI upgrade (+2.5 pts) bids in 105-115% VM range', () => {
+test('5. Clear-upgrade valuation stays within 105-115%; execution remains at exact VM', () => {
   const candidate = createMockPlayer(103, 'Proven Starter', 'striker', 7000000, 5.5, 160);
 
   const purchaseScore = {
@@ -141,14 +145,16 @@ test('5. Dynamic Bidding Band 3: Clear Starting XI upgrade (+2.5 pts) bids in 10
   };
 
   const bidCalc = calculateMaxRationalBid(candidate, purchaseScore, 15000000);
-  assert.equal(bidCalc.band, 'CLEAR_UPGRADE');
-  assert.ok(bidCalc.marginPct >= 5 && bidCalc.marginPct <= 15, `Clear upgrade margin must be 5-15% (got ${bidCalc.marginPct}%)`);
-  assert.ok(bidCalc.recommendedBid >= 7000000 * 1.05);
-  assert.ok(bidCalc.recommendedBid <= 7000000 * 1.15);
+  assert.equal(bidCalc.modelBand, 'CLEAR_UPGRADE');
+  assert.ok(bidCalc.modelMarginPct >= 5 && bidCalc.modelMarginPct <= 15, `Clear upgrade valuation margin must be 5-15% (got ${bidCalc.modelMarginPct}%)`);
+  assert.ok(bidCalc.modelValuation >= 7000000 * 1.05);
+  assert.ok(bidCalc.modelValuation <= 7000000 * 1.15);
+  assert.equal(bidCalc.recommendedBid, 7000000);
+  assert.equal(bidCalc.marginPct, 0);
 });
 
 // ── TEST 6: DYNAMIC BIDDING BAND 4 — ELITE LEAGUE WINNER (115-125% VM) ────────
-test('6. Dynamic Bidding Band 4: Elite league-winning star (+5.0 pts) bids in 115-125% VM range', () => {
+test('6. Elite valuation stays within 115-125%; execution remains at exact VM', () => {
   const candidate = createMockPlayer(104, 'Galactico', 'midfielder', 18000000, 7.8, 230);
 
   const purchaseScore = {
@@ -159,10 +165,12 @@ test('6. Dynamic Bidding Band 4: Elite league-winning star (+5.0 pts) bids in 11
   };
 
   const bidCalc = calculateMaxRationalBid(candidate, purchaseScore, 30000000);
-  assert.equal(bidCalc.band, 'ELITE_LEAGUE_WINNER');
-  assert.ok(bidCalc.marginPct >= 15 && bidCalc.marginPct <= 25, `Elite margin must be 15-25% (got ${bidCalc.marginPct}%)`);
-  assert.ok(bidCalc.recommendedBid >= 18000000 * 1.15);
-  assert.ok(bidCalc.recommendedBid <= 18000000 * 1.25);
+  assert.equal(bidCalc.modelBand, 'ELITE_LEAGUE_WINNER');
+  assert.ok(bidCalc.modelMarginPct >= 15 && bidCalc.modelMarginPct <= 25, `Elite valuation margin must be 15-25% (got ${bidCalc.modelMarginPct}%)`);
+  assert.ok(bidCalc.modelValuation >= 18000000 * 1.15);
+  assert.ok(bidCalc.modelValuation <= 18000000 * 1.25);
+  assert.equal(bidCalc.recommendedBid, 18000000);
+  assert.equal(bidCalc.marginPct, 0);
 });
 
 // ── TEST 7: SOLVENCY CONSTRAINT & SAFETY RESERVE PROTECTION ───────────────────

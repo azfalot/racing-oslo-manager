@@ -32,3 +32,19 @@ jobs:
       - name: Build Web App
         working-directory: ./web
         run: npm run build
+
+      - name: Install Chromium for transfer plan validation
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate transfer plan in desktop and mobile Chromium
+        run: |
+          npm --prefix web run dev -- --host 127.0.0.1 --port 5180 > /tmp/transfer-vite.log 2>&1 &
+          node --input-type=module -e "for(let i=0;i<60;i++){try{if((await fetch('http://127.0.0.1:5180/mercado')).ok)process.exit(0)}catch{}await new Promise(r=>setTimeout(r,1000))}process.exit(1)"
+          node test/transfer_plan.e2e.mjs
+
+      - name: Upload transfer plan browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: transfer-plan-browser-evidence
+          path: docs/evidence/20-yamal/

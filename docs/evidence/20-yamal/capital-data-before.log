@@ -1,0 +1,69 @@
+TAP version 13
+# [DAILY-SPECULATOR] Capacidad: 0/15 (15 libres) | Saldo: 2.000.000 EUR | Cap Especulacion: 1.000.000 EUR
+# [DAILY-SPECULATOR] 🛒 Puja especulativa enviada: Cheap (170.000 EUR)
+# [DAILY-SPECULATOR] Capacidad: 1/15 (14 libres) | Saldo: 1.200.000 EUR | Cap Especulacion: 0 EUR
+# Subtest: market season points never masquerade as last-match momentum
+ok 1 - market season points never masquerade as last-match momentum
+  ---
+  duration_ms: 1.7934
+  type: 'test'
+  ...
+# Subtest: contradictory averages cannot promote a player with zero season and recent points
+not ok 2 - contradictory averages cannot promote a player with zero season and recent points
+  ---
+  duration_ms: 4.3627
+  type: 'test'
+  location: 'D:\\racing-oslo-manager-worktrees\\20-yamal\\test\\capital_regression.test.mjs:19:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+
+      assert.ok(expected <= 0.5)
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///D:/racing-oslo-manager-worktrees/20-yamal/test/capital_regression.test.mjs:23:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: all purchase recommendations use exact VM even for elite upgrades and rival pressure
+ok 3 - all purchase recommendations use exact VM even for elite upgrades and rival pressure
+  ---
+  duration_ms: 16.3591
+  type: 'test'
+  ...
+# Subtest: a cheap price is never advertised as zero risk or guaranteed profit
+ok 4 - a cheap price is never advertised as zero risk or guaranteed profit
+  ---
+  duration_ms: 1.8679
+  type: 'test'
+  ...
+# Subtest: placing a bid never records a player as already purchased
+ok 5 - placing a bid never records a player as already purchased
+  ---
+  duration_ms: 5.881
+  type: 'test'
+  ...
+# Subtest: speculation subtracts pending commitments, including API string prices
+ok 6 - speculation subtracts pending commitments, including API string prices
+  ---
+  duration_ms: 0.9645
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 5
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 142.6633

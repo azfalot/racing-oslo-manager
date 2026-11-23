@@ -1,0 +1,54 @@
+TAP version 13
+# [CLIENT] Descargando mercado de fichajes...
+# [CLIENT] Mercado descargado (1 fichajes disponibles). Enriqueciendo datos...
+# [CAPITAL] Puja registrada: Target · SUBMITTED
+# [CAPITAL] Puja bloqueada: Target · RESERVE_OR_CREDIT
+# [CAPITAL] Compra por navegador deshabilitada: evita saltarse reservas o duplicar una petición incierta.
+# [CLIENT] Cancelando puja (offerId: 20) por Target...
+# [CLIENT] Puja por Target cancelada con éxito.
+# [CAPITAL] Puja registrada: Target · SUBMITTED
+# [CLIENT] Aceptando oferta ID 1 por jugador ID 2 a precio 300000 € vía API directa...
+# [CLIENT] Cancelando puja (offerId: 1) por Expired...
+# Subtest: API market normalization never invents Computer ownership when seller is absent
+not ok 1 - API market normalization never invents Computer ownership when seller is absent
+  ---
+  duration_ms: 2.5605
+  type: 'test'
+  location: 'D:\\racing-oslo-manager-worktrees\\20-yamal\\test\\capital_client.test.mjs:11:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///D:/racing-oslo-manager-worktrees/20-yamal/test/capital_client.test.mjs:19:12)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: real client purchase boundary shares commitments across client instances
+ok 2 - real client purchase boundary shares commitments across client instances
+  ---
+  duration_ms: 55.9667
+  type: 'test'
+  ...
+# Subtest: HTTP 200 with a rejected sale or cancellation is never reported as success
+ok 3 - HTTP 200 with a rejected sale or cancellation is never reported as success
+  ---
+  duration_ms: 0.8716
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 2
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 760.3882

@@ -926,8 +926,12 @@ export function calculateMaxRationalBid(candidate, purchaseScore, balance, rival
     }
   }
 
-  const marginPct = !isComputer ? 0 : Math.min(25, baseMarginPct + denialBonusPct);
-  const maxRationalBid = Math.round(marketValue * (1 + (marginPct / 100)));
+  const modelBand = band;
+  const modelMarginPct = !isComputer ? 0 : Math.min(25, baseMarginPct + denialBonusPct);
+  const modelValuation = Math.round(marketValue * (1 + modelMarginPct / 100));
+  const marginPct = 0;
+  band = 'EXACT_VM';
+  const maxRationalBid = marketValue;
   const recommendedBid = maxRationalBid;
 
   reasoning.push(`💰 [Banda: ${band}] Puja recomendada: ${recommendedBid.toLocaleString()} € (${(100 + marginPct).toFixed(1)}% VM | Sobreprecio: +${marginPct}%).`);
@@ -961,6 +965,9 @@ export function calculateMaxRationalBid(candidate, purchaseScore, balance, rival
 
   return {
     maxRationalBid,
+    modelValuation,
+    modelBand,
+    modelMarginPct,
     recommendedBid,
     marginPct,
     band,

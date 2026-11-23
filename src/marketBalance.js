@@ -154,9 +154,9 @@ export function calculateClubMarketBalance({ clubName, managerLogin, squad = [],
     healthBadgeColor = 'purple';
     healthSummary = `Las minusvalías de ventas cerradas (-${realizedLosses.toLocaleString()} €) quedan compensadas por la revalorización latente de su plantilla (+${totalLatentGains.toLocaleString()} €).`;
   } else if (realizedLosses > realizedGains) {
-    healthLabel = 'AJUSTES & DEUDA';
-    healthBadgeColor = 'amber';
-    healthSummary = `Ha asumido minusvalías netas en el mercado (-${(realizedLosses - realizedGains).toLocaleString()} €), principalmente por liquidaciones o desinversiones a precio de saldo.`;
+    healthLabel = 'PÉRDIDAS REALIZADAS';
+    healthBadgeColor = 'red';
+    healthSummary = `El histórico registra minusvalías netas de -${(realizedLosses - realizedGains).toLocaleString()} € en operaciones cerradas con coste identificado. No se atribuye una causa ni se garantiza rentabilidad futura.`;
   }
 
   return {
@@ -226,9 +226,8 @@ export function calculateMarketBalance(options = {}) {
   // Enriquecer con datos del ledger de especulación autónoma de Racing de Oslo
   const finalResult = {
     ...baseResult,
-    speculationGainsEUR: speculationLedger.totalProfitEUR || 5900,
-    speculationTradesCount: speculationLedger.successfulTradesCount || 1,
-    healthSummary: 'El balance histórico refleja el coste de saneamiento inicial de deuda (ventas defensivas como Hugo Duro y Galarreta para salir de números rojos), mientras que el nuevo régimen de especulación opera con un 100% de plusvalías netas.'
+    speculationGainsEUR: speculationLedger.totalProfitEUR ?? 0,
+    speculationTradesCount: speculationLedger.successfulTradesCount ?? 0
   };
 
   return finalResult;

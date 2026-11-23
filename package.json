@@ -7,7 +7,9 @@
     "build": "npm --prefix web run build",
     "discover": "node src/discover.js",
     "start": "node src/app.js",
-    "test": "node --test test/daily_speculator.test.mjs test/speculation_radar.test.mjs test/set_pieces.test.mjs test/totw_traffic.test.mjs test/club_momentum.test.mjs test/engine.test.mjs test/system_rules.test.mjs",
+    "test": "node --test test/championship_strategy.test.mjs test/model_consistency.test.mjs test/capital_report.test.mjs test/capital_client.test.mjs test/capital_policy.test.mjs test/capital_regression.test.mjs test/manual_sales.test.mjs test/transfer_plan.test.mjs test/daily_speculator.test.mjs test/speculation_radar.test.mjs test/set_pieces.test.mjs test/totw_traffic.test.mjs test/club_momentum.test.mjs test/engine.test.mjs test/system_rules.test.mjs",
+    "capital:report": "node src/reportCapital.mjs",
+    "transfer:plan": "node src/planTransfer.mjs",
     "whatsapp": "node src/whatsappPair.js"
   },
   "dependencies": {

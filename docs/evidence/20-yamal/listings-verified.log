@@ -1,0 +1,126 @@
+[CLIENT] Sesión activa reutilizada con éxito (evitando límite de login en picos de tráfico).
+[CLIENT] Descargando plantilla...
+[CLIENT] Descargando mercado de fichajes...
+[CLIENT] Plantilla descargada (17 jugadores). Buscando detalles históricos...
+[CLIENT] Mercado descargado (94 fichajes disponibles). Enriqueciendo datos...
+{
+  "capturedAt": "2026-11-23T13:40:52.879Z",
+  "output": "D:/racing-oslo-manager-worktrees/20-yamal/web/src/data/transferPlan.json",
+  "balance": 1005988,
+  "credit": 9813488,
+  "scenarios": [
+    {
+      "price": 30000000,
+      "feasible": true,
+      "sales": [
+        {
+          "playerId": 1927,
+          "name": "Gerard Moreno",
+          "price": 3330000,
+          "position": "striker"
+        },
+        {
+          "playerId": 2206,
+          "name": "David Soria",
+          "price": 2930000,
+          "position": "keeper"
+        },
+        {
+          "playerId": 2251,
+          "name": "Aïssa Mandi",
+          "price": 2230000,
+          "position": "defender"
+        },
+        {
+          "playerId": 2304,
+          "name": "Mariano Díaz",
+          "price": 3460000,
+          "position": "striker"
+        },
+        {
+          "playerId": 2415,
+          "name": "Fede Valverde",
+          "price": 12220000,
+          "position": "midfielder"
+        },
+        {
+          "playerId": 3160,
+          "name": "Gavi",
+          "price": 1690000,
+          "position": "midfielder"
+        },
+        {
+          "playerId": 3553,
+          "name": "Johnny Cardoso",
+          "price": 1700000,
+          "position": "midfielder"
+        },
+        {
+          "playerId": 3825,
+          "name": "Adrián de la Fuente",
+          "price": 3440000,
+          "position": "defender"
+        }
+      ],
+      "replacements": 1500000
+    },
+    {
+      "price": 32500000,
+      "feasible": false
+    },
+    {
+      "price": 35000000,
+      "feasible": false
+    }
+  ],
+  "actions": [
+    {
+      "playerId": 1927,
+      "name": "Gerard Moreno",
+      "price": 3330000,
+      "status": "LISTED_VERIFIED"
+    },
+    {
+      "playerId": 2206,
+      "name": "David Soria",
+      "price": 2930000,
+      "status": "LISTED_VERIFIED"
+    },
+    {
+      "playerId": 2251,
+      "name": "Aïssa Mandi",
+      "price": 2230000,
+      "status": "LISTED_VERIFIED"
+    },
+    {
+      "playerId": 2304,
+      "name": "Mariano Díaz",
+      "price": 3460000,
+      "status": "LISTED_VERIFIED"
+    },
+    {
+      "playerId": 2415,
+      "name": "Fede Valverde",
+      "price": 12220000,
+      "status": "LISTED_VERIFIED"
+    },
+    {
+      "playerId": 3160,
+      "name": "Gavi",
+      "price": 1690000,
+      "status": "LISTED_VERIFIED"
+    },
+    {
+      "playerId": 3553,
+      "name": "Johnny Cardoso",
+      "price": 1700000,
+      "status": "LISTED_VERIFIED"
+    },
+    {
+      "playerId": 3825,
+      "name": "Adrián de la Fuente",
+      "price": 3440000,
+      "status": "LISTED_VERIFIED"
+    }
+  ]
+}
