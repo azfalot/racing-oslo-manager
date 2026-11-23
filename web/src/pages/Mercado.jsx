@@ -15,6 +15,8 @@ export default function Mercado() {
   const [positionFilter, setPositionFilter] = useState('ALL') // ALL, keeper, defender, midfielder, striker
   const [searchTerm, setSearchTerm] = useState('')
   const [showAllRumors, setShowAllRumors] = useState(false)
+  const netRealized = Number(marketBalance.netRealizedBalanceEUR ?? 0)
+  const netLatent = Number(marketBalance.netLatentBalanceEUR ?? 0)
 
   const filterPlayer = (p) => {
     // 1. Filtro por posición
@@ -86,15 +88,15 @@ export default function Mercado() {
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] uppercase font-bold text-cream/60 font-mono tracking-wider">Balance Plusvalías</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-[10px] uppercase font-bold text-cream/60 font-mono tracking-wider">Resultado neto realizado</span>
+                  <span className={`w-1.5 h-1.5 rounded-full ${netRealized < 0 ? 'bg-red-400' : 'bg-emerald-400'}`} />
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs sm:text-sm font-mono font-bold text-forest-light">
-                    +{(marketBalance.realizedGainsEUR || 0).toLocaleString('es-ES')} €
+                  <span className={`text-xs sm:text-sm font-mono font-bold ${netRealized < 0 ? 'text-red-400' : 'text-emerald-400'}`}>
+                    {netRealized >= 0 ? '+' : ''}{netRealized.toLocaleString('es-ES')} €
                   </span>
                   <span className="text-[10px] text-cream/50 font-mono hidden sm:inline">
-                    ({marketBalance.profitableTradesCount || 4} trades ganadores)
+                    ({marketBalance.totalClosedTradesCount ?? 0} registros con coste)
                   </span>
                 </div>
               </div>
@@ -513,26 +515,26 @@ export default function Mercado() {
                 {/* 3. Plusvalías Latentes en Once */}
                 <div className="bg-black/70 border border-purple-500/40 p-3 rounded-sm space-y-1 shadow-md">
                   <span className="text-[10px] uppercase font-bold text-purple-300 font-mono flex items-center gap-1">
-                    <Sparkles size={12} /> Plusvalía en Once
+                    <Sparkles size={12} /> Latente con coste conocido
                   </span>
-                  <p className="text-base sm:text-lg font-bold font-mono text-purple-300">
-                    +{(marketBalance.totalLatentGainsEUR || 0).toLocaleString('es-ES')} €
+                  <p className={`text-base sm:text-lg font-bold font-mono ${netLatent < 0 ? 'text-red-400' : 'text-emerald-400'}`}>
+                    {netLatent >= 0 ? '+' : ''}{netLatent.toLocaleString('es-ES')} €
                   </p>
                   <p className="text-[10px] text-cream/50 font-mono">
-                    Mariano, Cardoso, De la Fuente
+                    VM actual frente al coste identificado
                   </p>
                 </div>
 
                 {/* 4. Eficacia Especulación Actual */}
                 <div className="bg-black/70 border border-amber-500/40 p-3 rounded-sm space-y-1 shadow-md">
                   <span className="text-[10px] uppercase font-bold text-amber-300 font-mono flex items-center gap-1">
-                    <CheckCircle2 size={12} /> Motor Actual a VM
+                    <CheckCircle2 size={12} /> Subastas de Computer
                   </span>
                   <p className="text-base sm:text-lg font-bold font-mono text-amber-300">
-                    100% Éxito
+                    Adjudicación incierta
                   </p>
                   <p className="text-[10px] text-cream/50 font-mono">
-                    0% riesgo / salida en beneficio
+                    Una puja enviada no garantiza fichaje ni beneficio
                   </p>
                 </div>
               </div>

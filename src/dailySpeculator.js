@@ -157,8 +157,9 @@ export async function executeDailySpeculationBids(client, squad = { players: [] 
         ledger.pendingPurchases.push({
           playerId: pid,
           name: opp.name,
-          buyPrice: price,
-          buyDate: new Date().toISOString(),
+          bidAmount: price,
+          submittedAt: new Date().toISOString(),
+          status: 'BID_SUBMITTED',
           tier: opp.tier || 'FLOOR_PRICE_BARGAIN',
           listedOnMarket: false
         });
@@ -428,7 +429,7 @@ export function syncLedgerWithNewSignings(currentSquadPlayers = [], recentBids =
       ledger.activeTradingPlayers.push({
         playerId: pid,
         name: squadPlayer.name || bid.name,
-        buyPrice: squadPlayer.purchasePrice || bid.price,
+        buyPrice: Number.isFinite(Number(squadPlayer.purchasePrice)) && Number(squadPlayer.purchasePrice) > 0 ? Number(squadPlayer.purchasePrice) : null,
         buyDate: new Date().toISOString(),
         tier: bid.tier || 'FLOOR_PRICE_BARGAIN',
         listedOnMarket: false
@@ -436,7 +437,8 @@ export function syncLedgerWithNewSignings(currentSquadPlayers = [], recentBids =
       activeIds.add(pid);
       ledger.pendingPurchases = ledger.pendingPurchases.filter(p => p.playerId !== pid);
       updated = true;
-      console.log('[DAILY-SPECULATOR] Nuevo activo especulativo incorporado: ' + squadPlayer.name + ' (' + bid.price.toLocaleString() + ' EUR)');
+      const observedCost = squadPlayer.purchasePrice > 0 ? Number(squadPlayer.purchasePrice).toLocaleString() + ' EUR' : 'coste confirmado desconocido';
+      console.log('[DAILY-SPECULATOR] Jugador observado en plantilla: ' + squadPlayer.name + ' (' + observedCost + ')');
     }
   }
 

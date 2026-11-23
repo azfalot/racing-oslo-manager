@@ -1,0 +1,28 @@
+
+> comunio-bot@1.2.0 build
+> npm --prefix web run build
+
+
+> web@1.2.0 build
+> vite build
+
+vite v8.2.1 building client environment for production...
+transforming...
+✓ 2069 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/.assetsignore                       0.02 kB
+dist/index.html                          0.73 kB │ gzip:   0.46 kB
+dist/wrangler.json                       1.27 kB │ gzip:   0.63 kB
+dist/assets/index-eYJEcTzU.css         101.71 kB │ gzip:  14.30 kB
+dist/assets/purify.es-ChwZkWde.js       26.81 kB │ gzip:  10.65 kB
+dist/assets/index.es-BYFbx5Q8.js       151.40 kB │ gzip:  48.89 kB
+dist/assets/html2canvas-_PI5DTeQ.js    199.49 kB │ gzip:  46.77 kB
+dist/assets/index-CCEWfklZ.js        1,459.00 kB │ gzip: 346.22 kB
+
+✓ built in 2.69s
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

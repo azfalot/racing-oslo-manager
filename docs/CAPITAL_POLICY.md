@@ -29,7 +29,11 @@ Las ventas requieren `confirmedByUser === true` y conservan el botón manual de 
 
 Los planes condicionales prueban hasta tres salidas de una bolsa limitada de jugadores prescindibles y simulan el XI completo después del fichaje. Exigen once completo, reserva, capacidad y ganancia neta conjunta. Las ventas se estiman a VM y siguen pendientes de ofertas reales: el cliente de compras no permite gastar esos ingresos hasta que sean efectivos. Una propuesta no obliga a vender ni transmite una puja.
 
+Una puja registrada no garantiza adjudicación. Reservar su importe protege únicamente el escenario financiero de que se ganen todas; no descuenta patrimonio ni registra un activo adquirido. Los planes contemplan ganar y perder la subasta: no se propone vender antes si, al perder, quedaría un once incompleto o con pérdida estimada de puntos. Se muestran las cajas de ambos escenarios y no se inventa una probabilidad de éxito. La subida esperada del XI solo se presenta condicionada a la adjudicación.
+
 Una puja especulativa enviada se registra en `pendingPurchases`; solo pasa a `activeTradingPlayers` cuando se observa el jugador adquirido. Se usa el coste real de la plantilla cuando está disponible.
+
+Los pendientes guardan `bidAmount` y `submittedAt`, no un coste de compra. Si el jugador aparece en plantilla sin coste confirmado, este permanece desconocido: no se sustituye por la puja ni por el VM. El balance histórico conserva las pérdidas y no reemplaza su resumen por una afirmación fija de «100% de plusvalías»; cero beneficios o cero operaciones siguen siendo cero.
 
 ## Seguimiento y puesta en servicio
 
@@ -39,6 +43,6 @@ El bot local se ejecuta desde este worktree y conserva `D:/racing-oslo-manager` 
 
 ## Validación
 
-`npm test`: 109 pruebas, incluidas integración del cliente con API simulada, propietario desconocido sin suplantar a Computer, reserva entre instancias, concurrencia, mejoras pendientes sin duplicar su ganancia, respuesta incierta sin reintentos, errores de negocio dentro de HTTP 200, cancelación y liberación verificada, ventas manuales, costes desconocidos y planes conjuntos. Las regresiones fallaron antes del arreglo; los logs `capital-*-before.log` conservan la evidencia. No se han eliminado tests; la antigua expectativa de riesgo cero se sustituyó por el nuevo requisito de riesgo cuantificado y no garantizado, conservando la identificación de candidatos. Los tests de bandas conservan los límites de la valoración teórica (`modelValuation`, `modelBand`, `modelMarginPct`) y añaden la exigencia más estricta de recomendación a VM exacto. La suite habitual incorpora ahora estrategia de campeonato y consistencia del modelo, antes fuera de `npm test`.
+`npm test`: 113 pruebas, incluidas integración del cliente con API simulada, propietario desconocido sin suplantar a Computer, reserva entre instancias, concurrencia, mejoras pendientes sin duplicar su ganancia, respuesta incierta sin reintentos, errores de negocio dentro de HTTP 200, cancelación y liberación verificada, ventas manuales, costes desconocidos y planes conjuntos. Las regresiones fallaron antes del arreglo; los logs `capital-*-before.log` conservan la evidencia. No se han eliminado tests; la antigua expectativa de riesgo cero se sustituyó por el nuevo requisito de riesgo cuantificado y no garantizado, conservando la identificación de candidatos. Los tests de bandas conservan los límites de la valoración teórica (`modelValuation`, `modelBand`, `modelMarginPct`) y añaden la exigencia más estricta de recomendación a VM exacto. La suite habitual incorpora ahora estrategia de campeonato y consistencia del modelo, antes fuera de `npm test`.
 
 Evidencia: `docs/evidence/20-yamal/capital-after.log`, `capital-build.log`, `capital-live.json` y `capital-live.log`. La consulta real es de lectura; no se realizan operaciones para probar las protecciones.

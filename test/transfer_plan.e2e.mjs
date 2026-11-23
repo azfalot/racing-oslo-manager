@@ -30,6 +30,14 @@ try {
   assert.match(await panel.innerText(), /Solo jugadores vendidos por Computer/);
   assert.doesNotMatch(await panel.innerText(), /Swedberg|Iker Muñoz|Negociar/);
   await panel.screenshot({ path: `${evidence}/desktop.png` });
+  assert.match(await page.locator('body').innerText(), /Resultado neto realizado/i);
+  await page.getByRole('button', { name: 'Info Balance' }).click();
+  await page.getByRole('heading', { name: /Auditoría Financiera/i }).waitFor({ state: 'visible' });
+  const auditText = await page.locator('body').innerText();
+  assert.doesNotMatch(auditText, /100% Éxito|0% riesgo/);
+  assert.match(auditText, /Latente con coste conocido/i);
+  await page.screenshot({ path: `${evidence}/loss-audit.png` });
+  await page.getByRole('button', { name: 'Cerrar auditoría' }).click();
   await page.setViewportSize({ width: 390, height: 844 });
   await panel.scrollIntoViewIfNeeded();
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), 'No page-level horizontal overflow on mobile');

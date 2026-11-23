@@ -31,6 +31,22 @@ test('individual sale labels cannot hide the combined loss of selling starters',
   assert.deepEqual(planConditionalUpgrades({...input,squad:{players:players.slice(0,11)},sales}),[]);
 });
 
+test('a financed auction plan must preserve a complete XI even if the bid loses',()=>{
+  const sales=[players[0],players[12]].map(p=>({...p,sportingAction:'REVIEW_SALE',replacementLoss:0}));
+  // Winning would add +1, but selling first removes two points if we lose.
+  const plans=planConditionalUpgrades({...input,sales,candidates:[{...candidate,power:3}]});
+  assert.deepEqual(plans,[]);
+});
+
+test('safe auction plans distinguish winning from losing without inventing odds',()=>{
+  const plan=planConditionalUpgrades(input)[0];
+  assert.equal(plan.auctionWinProbability,null);
+  assert.equal(plan.xiLossIfNotAwarded,0);
+  assert.equal(plan.cashIfNotAwarded,3000000);
+  assert.equal(plan.cashIfAwarded,1000000);
+  assert.equal(plan.purchaseConfirmed,false);
+});
+
 test('daily capital history preserves its baseline and separates accounts',()=>{
   const dir=mkdtempSync(join(tmpdir(),'oslo-history-'));
   try{

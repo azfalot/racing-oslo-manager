@@ -211,7 +211,7 @@ test('Sync Ledger with New Signings', () => {
   if (fs.existsSync(testPath)) fs.unlinkSync(testPath);
 
   const currentSquadPlayers = [
-    { playerId: 801, name: 'Nuevo Chollo Fichado', price: 190000 },
+    { playerId: 801, name: 'Nuevo Chollo Fichado', price: 190000, purchasePrice: 190000 },
     { playerId: 802, name: 'Titular de Siempre', price: 4000000 }
   ];
 

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { ComunioEngine } from '../src/engine.js';
@@ -8,6 +8,8 @@ import { executeDailySpeculationBids } from '../src/dailySpeculator.js';
 import { loadSpeculationLedger } from '../src/dailySpeculator.js';
 import { scanSpeculationOpportunities } from '../src/speculationRadar.js';
 import { calculateMaxRationalBid } from '../src/squadOptimizer.js';
+import { saveSpeculationLedger, syncLedgerWithNewSignings } from '../src/dailySpeculator.js';
+import { calculateMarketBalance } from '../src/marketBalance.js';
 
 test('market season points never masquerade as last-match momentum', () => {
   const engine = new ComunioEngine();
@@ -47,6 +49,39 @@ test('placing a bid never records a player as already purchased', async () => {
     assert.deepEqual(loadSpeculationLedger(ledgerPath).activeTradingPlayers, []);
     assert.equal(loadSpeculationLedger(ledgerPath).pendingPurchases[0].playerId, 33);
   } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('award registration distinguishes bid amount, observed purchase cost and unknown cost', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'oslo-award-'));
+  try {
+    const ledgerPath = join(dir, 'ledger.json');
+    saveSpeculationLedger({ activeTradingPlayers: [], closedTrades: [], totalProfitEUR: 0, successfulTradesCount: 0,
+      pendingPurchases: [{ playerId: 901, bidAmount: 200000 }, { playerId: 902, bidAmount: 200000 }] }, ledgerPath);
+    const ledger = syncLedgerWithNewSignings([
+      { playerId: 901, name: 'Won', price: 220000, purchasePrice: 180000 },
+      { playerId: 902, name: 'Unknown cost', price: 220000 }
+    ], [], { ledgerPath });
+    assert.equal(ledger.activeTradingPlayers.find(p=>p.playerId===901).buyPrice,180000);
+    assert.equal(ledger.activeTradingPlayers.find(p=>p.playerId===902).buyPrice,null);
+    assert.deepEqual(ledger.pendingPurchases,[]);
+  } finally { rmSync(dir,{recursive:true,force:true}); }
+});
+
+test('loss reporting never fabricates speculation profits or a 100% success claim', () => {
+  const dir=mkdtempSync(join(tmpdir(),'oslo-loss-report-'));
+  try {
+    const tx=join(dir,'tx.json'), squad=join(dir,'squad.json'), ledger=join(dir,'ledger.json');
+    writeFileSync(tx,JSON.stringify([{playerName:'Loss',buyer:'Racing de Oslo',seller:'Computer',price:1000000,date:'2026-10-01'},
+      {playerName:'Loss',buyer:'Computer',seller:'Racing de Oslo',price:700000,date:'2026-10-02'}]));
+    writeFileSync(squad,JSON.stringify({players:[]}));
+    writeFileSync(ledger,JSON.stringify({totalProfitEUR:0,successfulTradesCount:0,closedTrades:[]}));
+    const result=calculateMarketBalance({historicalTransactionsPath:tx,squadPath:squad,speculationLedgerPath:ledger});
+    assert.equal(result.speculationGainsEUR,0);
+    assert.equal(result.speculationTradesCount,0);
+    assert.equal(result.netRealizedBalanceEUR,-300000);
+    assert.doesNotMatch(result.healthSummary,/100%/);
+    assert.match(result.healthSummary,/minusvalías/);
+  } finally { rmSync(dir,{recursive:true,force:true}); }
 });
 
 test('speculation subtracts pending commitments, including API string prices', async () => {

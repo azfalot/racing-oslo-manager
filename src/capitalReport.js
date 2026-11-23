@@ -24,7 +24,11 @@ export function planConditionalUpgrades({ squad, balance, committed, candidates,
       const cashAfter = balance + estimatedProceeds - committed - candidate.price;
       if (cashAfter < policy.reserve) continue;
       const outgoing = new Set(selected.map(playerId));
-      const players = [...squad.players.filter(p => !outgoing.has(playerId(p))), candidate];
+      const retained = squad.players.filter(p => !outgoing.has(playerId(p)));
+      const notAwardedXI = engine.optimizeLineup({ ...squad, players: retained });
+      const xiLossIfNotAwarded = Math.max(0, Math.round((baseline - (notAwardedXI.score || 0)) * 10) / 10);
+      if (notAwardedXI.starting11?.length !== 11 || xiLossIfNotAwarded > 0) continue;
+      const players = [...retained, candidate];
       if (players.length < 11 || players.length > policy.maxSquadSize) continue;
       const xi = engine.optimizeLineup({ ...squad, players });
       const netXIUpgrade = Math.round(((xi.score || 0) - baseline) * 10) / 10;
@@ -32,7 +36,9 @@ export function planConditionalUpgrades({ squad, balance, committed, candidates,
       if (!best || netXIUpgrade > best.netXIUpgrade || (netXIUpgrade === best.netXIUpgrade && selected.length < best.sales.length)) {
         best = { playerId: playerId(candidate), name: candidate.name, price: candidate.price,
           sales: selected.map(s => ({ playerId: s.playerId, name: s.name, estimatedPrice: s.price, knownCost: s.purchasePrice })),
-          estimatedProceeds, estimatedCashAfter: cashAfter, netXIUpgrade, requiresConfirmedSales: true };
+          estimatedProceeds, estimatedCashAfter: cashAfter, netXIUpgrade, requiresConfirmedSales: true,
+          purchaseConfirmed: false, auctionWinProbability: null, cashIfAwarded: cashAfter,
+          cashIfNotAwarded: balance + estimatedProceeds - committed, xiLossIfNotAwarded };
       }
     }
     if (best) plans.push(best);
@@ -113,10 +119,11 @@ export function formatCapitalReport(report) {
     `Reserva: ${euro(report.reserve)} · Poder de compra real: ${euro(report.buyingPower)}`,
     `Patrimonio observado: ${euro(report.wealth)} · Plantilla: ${report.squadCount}/${report.maxSquadSize}`,
     `Once estimado: ${report.formation} · ${report.expectedXI} puntos (estimación)`,
-    'Ventas: solo confirmación manual. No se usan ventas previstas ni primas futuras para comprar.',
-    available.length ? 'Mejoras financiables: ' + available.slice(0, 3).map(c => `${c.name} (${euro(c.price)}, +${c.marginalValue.toFixed(1)} XI estimado)`).join('; ') : 'No hay compras que superen todos los límites hoy.',
+    'Las pujas pendientes no son compras ni gasto realizado. Los compromisos cubren el escenario de que se adjudiquen todas.',
+    'Ventas: solo confirmación manual. No se usan ventas previstas ni primas futuras para pujar.',
+    available.length ? 'Pujas candidatas, sin adjudicación garantizada: ' + available.slice(0, 3).map(c => `${c.name} (${euro(c.price)}, +${c.marginalValue.toFixed(1)} XI estimado solo si se adjudica)`).join('; ') : 'No hay pujas que superen todos los límites hoy.',
     sales.length ? 'Revisar ventas, sin ejecutarlas: ' + sales.map(s => `${s.name} (${euro(s.price)}, coste ${s.purchasePrice ? euro(s.purchasePrice) : 'desconocido'})`).join('; ') : 'No hay descartes evidentes por falta de rendimiento reciente.',
-    ...(report.conditionalPlans || []).map(p => `Plan condicionado: vender ${p.sales.map(s => s.name).join(' + ')} a VM estimado y estudiar ${p.name} por ${euro(p.price)}. Mejora neta estimada +${p.netXIUpgrade.toFixed(1)} XI; caja estimada ${euro(p.estimatedCashAfter)}. Primero confirmar ventas y recalcular con las ofertas reales.`),
+    ...(report.conditionalPlans || []).map(p => `Subasta condicionada: revisar ventas de ${p.sales.map(s => s.name).join(' + ')} a VM estimado y pujar por ${p.name} hasta ${euro(p.price)}. Si se adjudica: +${p.netXIUpgrade.toFixed(1)} XI estimado y caja ${euro(p.cashIfAwarded)}. Si se pierde: caja ${euro(p.cashIfNotAwarded)}, once completo sin pérdida estimada. No se conoce la probabilidad de ganar. Recalcular con ofertas reales antes de vender.`),
     report.uncertainPurchases.length ? `ATENCIÓN: ${report.uncertainPurchases.length} compras inciertas mantienen el dinero reservado; comprobar antes de repetir.` : '',
     report.note
   ].filter(Boolean).join('\n');
