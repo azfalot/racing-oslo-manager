@@ -1,0 +1,65 @@
+TAP version 13
+# [DAILY-SPECULATOR] Capacidad: 0/15 (15 libres) | Saldo: 2.000.000 EUR | Cap Especulacion: 1.000.000 EUR
+# [DAILY-SPECULATOR] 🛒 Puja especulativa enviada: Cheap (170.000 EUR)
+# [DAILY-SPECULATOR] Capacidad: 1/15 (14 libres) | Saldo: 1.200.000 EUR | Cap Especulacion: 0 EUR
+# Subtest: market season points never masquerade as last-match momentum
+ok 1 - market season points never masquerade as last-match momentum
+  ---
+  duration_ms: 1.7356
+  type: 'test'
+  ...
+# Subtest: all purchase recommendations use exact VM even for elite upgrades and rival pressure
+not ok 2 - all purchase recommendations use exact VM even for elite upgrades and rival pressure
+  ---
+  duration_ms: 17.2395
+  type: 'test'
+  location: 'D:\\racing-oslo-manager-worktrees\\20-yamal\\test\\capital_regression.test.mjs:19:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + 6250000
+    - 5000000
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 5000000
+  actual: 6250000
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///D:/racing-oslo-manager-worktrees/20-yamal/test/capital_regression.test.mjs:22:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: a cheap price is never advertised as zero risk or guaranteed profit
+ok 3 - a cheap price is never advertised as zero risk or guaranteed profit
+  ---
+  duration_ms: 1.7725
+  type: 'test'
+  ...
+# Subtest: placing a bid never records a player as already purchased
+ok 4 - placing a bid never records a player as already purchased
+  ---
+  duration_ms: 5.7775
+  type: 'test'
+  ...
+# Subtest: speculation subtracts pending commitments, including API string prices
+ok 5 - speculation subtracts pending commitments, including API string prices
+  ---
+  duration_ms: 0.9406
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 4
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 140.0927

@@ -5,7 +5,7 @@
  * financiera a corto y medio plazo (1 a 3 jornadas), permitiendo generar tesorería continua:
  * 
  * 1. CRACK_RECOVERY: Estrellas de 8M-15M€ en recta final de lesión a precio de saldo (< 3M€).
- * 2. FLOOR_PRICE_BARGAIN: Chollos en precio suelo (160k - 300k €) con riesgo de pérdida 0€.
+ * 2. FLOOR_PRICE_BARGAIN: Activos baratos (160k - 300k €) con riesgo de pérdida.
  * 3. RISING_MOMENTUM: Jugadores en racha goleadora o fichajes recientes en fuerte subida diaria.
  * 4. ARBITRAGE_FLIP: Compra a VM exacto y venta inmediata con plusvalía a Computer.
  */
@@ -168,7 +168,7 @@ export function scanSpeculationOpportunities(marketPlayers = [], squad = null, c
         owner: p.owner || { id: p.ownerId || 1, name: p.ownerName || 'Computer' },
         price,
         tier: 'FLOOR_PRICE_BARGAIN',
-        tierLabel: '🪙 Precio Suelo / Riesgo Cero',
+        tierLabel: '🪙 Precio bajo / Revisar riesgo y minutos',
         badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
         recoveryStatus: 'ACTIVO_O_PARCHE',
         returnWindow: 'Inmediato',
@@ -176,9 +176,11 @@ export function scanSpeculationOpportunities(marketPlayers = [], squad = null, c
         projectedUpsideEUR: estimatedGainEUR,
         dailyGrowthEstEUR: 15000,
         intrinsicValue: price + estimatedGainEUR,
-        downsideRisk: 'CERO (Precio mínimo garantizado por Comunio)',
+        downsideRisk: 'NO_NULO (el valor de mercado y la oferta de salida pueden bajar)',
+        potentialDownsideEUR: Math.max(0, price - Math.round(160000 * 0.95)),
+        guaranteedProfit: false,
         recommendation: 'COMPRAR_FLIP_RAPIDO',
-        actionLabel: `Pujar valor mínimo (${price.toLocaleString()} €) • Riesgo 0€ • Beneficio rápido`,
+        actionLabel: `Revisar ${price.toLocaleString()} € • Beneficio hipotético, no garantizado`,
         priorityScore: 85
       });
       continue;
@@ -224,17 +226,18 @@ export function scanSpeculationOpportunities(marketPlayers = [], squad = null, c
   const strategyRecommendations = [
     `🎯 Capacidad de plantilla disponible: ${freeSlots} hueco(s) libre(s) para trading sin forzar ventas.`,
     `💡 Regla de Oro del Trading Comunio: Pujar SIEMPRE el valor de mercado exacto a Computer (0% sobreprecio) para maximizar margen de ganancia.`,
-    `💰 Salida de Posición: En cuanto Computer haga oferta matinal con +3% a +5% de plusvalía o el jugador toque su techo, vender para recuperar liquidez y reinvertir.`
+    `💰 Revisar cada oferta real contra coste, VM y pérdida deportiva; solo vender tras confirmación manual. Las plusvalías del radar son hipótesis y no autorizan compras especulativas.`
   ];
 
   if (opportunities.some(o => o.name === 'Gavi')) {
-    strategyRecommendations.unshift('🔥 OPORTUNIDAD TOP 1: Gavi (1.910.000 €) es el activo de mayor retorno potencial de todo el mercado (ROI +150% hacia 5M€+).');
+    strategyRecommendations.unshift('⚠️ Las hipótesis históricas de recuperación requieren noticias recientes; no garantizan retorno ni fecha de vuelta.');
   }
 
   return {
     opportunities,
     totalOpportunitiesCount: opportunities.length,
     totalProjectedGainsEUR,
+    estimatesAreUnverified: true,
     freeSlots,
     strategyRecommendations,
     timestamp: new Date().toISOString()

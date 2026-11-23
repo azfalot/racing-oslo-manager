@@ -8,6 +8,9 @@ import { checkMarket, ignorePlayer, fetchRecentTransactions } from './marketMoni
 import { generateSigningCard } from './signingCard.js';
 import { isVerifiedComputerOwner } from './ownership.js';
 import { isWithinPreMatchdayWindow } from './preMatchdayWindow.js';
+import { assessSaleCapital } from './capitalPolicy.js';
+import { calculateReplacementLoss } from './squadOptimizer.js';
+import { createCapitalReport, formatCapitalReport, recordCapitalSnapshot, explainPurchaseDecision } from './capitalReport.js';
 import fs from 'fs';
 
 dotenv.config();
@@ -259,6 +262,17 @@ async function handleTelegramMessage(message) {
     await sendTelegramMessage(helpText, helpMarkup);
   }
 
+  else if (cleanText.startsWith('/capital')) {
+    const client = new ComunioClient();
+    try {
+      const report = await createCapitalReport(client);
+      recordCapitalSnapshot(report);
+      await sendTelegramMessage(`<pre>${escapeHtml(formatCapitalReport(report))}</pre>`);
+    } catch (error) {
+      await sendTelegramMessage(`No se puede verificar el capital: ${escapeHtml(error.message)}`);
+    } finally { await client.close(); }
+  }
+
   // ── /warroom · /war_room ──────────────────────────────────────────────────
   else if (cleanText.startsWith('/warroom') || cleanText.startsWith('/war_room')) {
     await sendTelegramMessage('💼 ⏳ <i>[Mateo Oslomany]: Convocando al Gabinete Estratégico War Room...</i>');
@@ -270,7 +284,7 @@ async function handleTelegramMessage(message) {
       const dash = await client.getDashboardData();
       const market = await client.getMarket();
       const pendingBids = await client.getPendingBids();
-      const committedBids = (pendingBids || []).reduce((s, b) => s + (b.amount || 0), 0);
+      const committedBids = (pendingBids || []).reduce((s, b) => s + Number(b.price || 0), 0);
       const rivalsData = await analyzeRivals(client);
       await client.close();
 
@@ -574,7 +588,7 @@ async function handleTelegramMessage(message) {
       if (specGems.length > 0) {
         rep += `\n💎 <b>3. Especulación con Lesionados (&lt; 2 Jornadas / Dip-Buying) (${specGems.length}):</b>\n`;
         specGems.slice(0, 3).forEach(({ player: gem, eval: gemEval }) => {
-          const bidP = Math.round(gem.price * 1.01);
+          const bidP = gem.price;
           const affordable = bidP <= effectiveCash;
           rep += ` • ⚡ <b>${escapeHtml(gem.name)}</b> (${(gem.price/1000000).toFixed(2)}M €)\n`;
           rep += `   ⏱️ <i>Retorno previsto: <b>${escapeHtml(gemEval.estimatedReturn)}</b> | ${escapeHtml(gemEval.injuryType)}</i>\n`;
@@ -925,14 +939,14 @@ async function handleTelegramMessage(message) {
       }
 
       await sendTelegramMessage(`💼 🚀 <i>[Mateo Oslomany]: Pujando por ${player.name} (${player.price.toLocaleString()} €)...</i>`);
-      const success = await client.placeBid(player.playerId, player.name, player.price);
+      const success = await client.placeBid(player.playerId, player.name, player.price, { confirmedByUser: true });
 
       if (success) {
         let log = [];
         try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
         await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> ¡Puja enviada! <b>${player.name}</b> por <b>${player.price.toLocaleString()} €</b>.\n<i>(Oferta registrada en el mercado; pendiente de resolución por Comunio)</i>`);
       } else {
-        await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> La puja por ${player.name} fue rechazada por Comunio.`);
+        await sendTelegramMessage(`💼 ⛔ <b>${escapeHtml(player.name)}</b>: ${escapeHtml(explainPurchaseDecision(client.lastPurchaseDecision))}`);
       }
 
     } catch (e) {
@@ -959,7 +973,7 @@ async function handleTelegramMessage(message) {
         await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> No encontré una puja activa por "${nameQuery}". Usa <code>/mis_pujas</code> para ver la lista.`);
         return;
       }
-      const success = await client.cancelBid(bid.offerId, bid.playerName);
+      const success = await client.cancelBid(bid.offerId, bid.playerName, bid.playerId);
       if (success) {
         await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Puja por <b>${bid.playerName}</b> cancelada con éxito.`);
       } else {
@@ -1096,6 +1110,8 @@ async function handleTelegramMessage(message) {
       const url = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers?current`;
       const res = await axios.get(url, { headers: client.getHeaders() });
       const saleOffers = (res.data?.items || []).filter(item => item.type === 'SALE' && item.state === 'PENDING');
+      const saleSquad = await client.getSquad();
+      const saleEngine = new ComunioEngine();
 
       let rep = `💼 <b>[Mateo Oslomany] · Ofertas de Venta Recibidas (${saleOffers.length})</b>\n\n`;
       const keyboard = [];
@@ -1106,16 +1122,23 @@ async function handleTelegramMessage(message) {
           const playerId = offer.tradable?.id;
           const offerPrice = offer.price;
           const buyerName = offer.user?.name || offer.tradingPartner?.name || 'Computadora';
-          const marketValue = offer.tradable?.quotedPrice || offer.tradable?.price || offerPrice;
+          const ownedPlayer = saleSquad.players.find(p => Number(p.playerId) === Number(playerId));
+          const marketValue = ownedPlayer?.price || offer.tradable?.quotedPrice || offer.tradable?.price || 0;
+          const replacementLoss = ownedPlayer ? calculateReplacementLoss(saleEngine, saleSquad, ownedPlayer).replacementLoss : 0;
+          const capital = assessSaleCapital({ player: ownedPlayer || { price: marketValue }, offerPrice, replacementLoss });
           const diff = offerPrice - marketValue;
           const diffStr = diff >= 0 ? `+${diff.toLocaleString()} €` : `${diff.toLocaleString()} €`;
 
           rep += `👤 <b>${escapeHtml(playerName)}</b>\n`;
           rep += `   💰 Oferta: <b>${offerPrice.toLocaleString()} €</b> | Valor: ${marketValue.toLocaleString()} € (<i>${diffStr}</i>)\n`;
-          rep += `   🤝 Comprador: ${escapeHtml(buyerName)}\n\n`;
+          rep += `   🤝 Comprador: ${escapeHtml(buyerName)}\n`;
+          rep += capital.purchasePrice ? `   📒 Coste real: ${capital.purchasePrice.toLocaleString()} € · Resultado si vendes: ${capital.profit.toLocaleString()} €\n` : `   📒 Coste de adquisición desconocido; no se calcula beneficio.\n`;
+          if (capital.action === 'REVIEW_LOSS') rep += `   ⚠️ Oferta por debajo de VM o coste. Revisa la pérdida antes de aceptar.\n`;
+          if (replacementLoss >= 1) rep += `   ⚽ Pérdida estimada del once al vender: ${replacementLoss.toFixed(1)} puntos.\n`;
+          rep += '\n';
 
           keyboard.push([
-            { text: `✅ ACEPTAR VENTA (${offerPrice.toLocaleString()} €)`, callback_data: `acc_sale:${offer.id}:${playerId}:${offerPrice}` },
+            { text: `${capital.action === 'REVIEW_LOSS' ? '⚠️ ACEPTAR CON PÉRDIDA' : replacementLoss >= 1 ? '⚠️ VENDER PIEZA DEL ONCE' : '✅ ACEPTAR VENTA'} (${offerPrice.toLocaleString()} €)`, callback_data: `acc_sale:${offer.id}:${playerId}:${offerPrice}` },
             { text: `❌ RECHAZAR`, callback_data: `rej_sale:${offer.id}:${playerName}` }
           ]);
         }
@@ -1611,7 +1634,7 @@ async function handleCallbackQuery(callbackQuery) {
     }
 
     await answerCallbackQuery(callbackQuery.id, '⏳ Procesando puja...');
-    await updateSpecificTelegramButton(callbackQuery, `✅ PUJA CONFIRMADA (${parseInt(price).toLocaleString()} €)`);
+    await updateSpecificTelegramButton(callbackQuery, `⏳ COMPROBANDO CAJA Y OBJETIVO`);
 
     const client = new ComunioClient();
     try {
@@ -1623,7 +1646,7 @@ async function handleCallbackQuery(callbackQuery) {
       }
       const exactPrice = target.price;
       const exactName = target.name;
-      const success = await client.placeBid(parseInt(playerId), exactName, exactPrice);
+      const success = await client.placeBid(parseInt(playerId), exactName, exactPrice, { confirmedByUser: true });
 
       let log = [];
       try { if (fs.existsSync('audit_log.json')) log = JSON.parse(fs.readFileSync('audit_log.json', 'utf-8')); } catch (e) {}
@@ -1631,9 +1654,11 @@ async function handleCallbackQuery(callbackQuery) {
       fs.writeFileSync('audit_log.json', JSON.stringify(log.slice(-50), null, 2));
 
       if (success) {
+        await updateSpecificTelegramButton(callbackQuery, `✅ PUJA REGISTRADA (${exactPrice.toLocaleString()} €)`);
         await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Puja enviada con éxito por <b>${escapeHtml(exactName)}</b> por <b>${exactPrice.toLocaleString()} €</b>.\n<i>(Oferta registrada en el mercado; pendiente de resolución por Comunio)</i>`);
       } else {
-        await sendTelegramMessage(`💼 ❌ <b>[Mateo Oslomany]:</b> Error al enviar la puja por ${escapeHtml(exactName)}.`);
+        await updateSpecificTelegramButton(callbackQuery, `⛔ REVISAR OPERACIÓN`);
+        await sendTelegramMessage(`💼 ⛔ <b>${escapeHtml(exactName)}</b>: ${escapeHtml(explainPurchaseDecision(client.lastPurchaseDecision))}`);
       }
     } catch (e) {
       await sendTelegramMessage(`💼 ❌ Error al procesar puja: <code>${e.message}</code>`);
@@ -1651,7 +1676,7 @@ async function handleCallbackQuery(callbackQuery) {
   } else if (data.startsWith('acc_sale:')) {
     const [, offerId, playerId, price] = data.split(':');
     await answerCallbackQuery(callbackQuery.id, '⏳ Procesando aceptación de venta...');
-    await updateSpecificTelegramButton(callbackQuery, `✅ VENTA ACEPTADA (${parseInt(price).toLocaleString()} €)`);
+    await updateSpecificTelegramButton(callbackQuery, `⏳ PROCESANDO VENTA MANUAL`);
 
     const client = new ComunioClient();
     try {
@@ -1662,6 +1687,7 @@ async function handleCallbackQuery(callbackQuery) {
 
       const success = await client.acceptSaleOffer(offerId, playerId, price, { confirmedByUser: true });
       if (success) {
+        await updateSpecificTelegramButton(callbackQuery, `✅ VENTA ACEPTADA (${parseInt(price).toLocaleString()} €)`);
         await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Venta de <b>${playerName}</b> por <b>${parseInt(price).toLocaleString()} €</b> ACEPTADA con éxito.`);
         try {
           const { publishSaleNews } = await import('./imageGen.js');
@@ -1774,6 +1800,7 @@ async function registerTelegramCommands() {
     { command: 'mercado', description: '🛒 Jugadores a la venta, oportunidades y gangas' },
     { command: 'pujas', description: '🛒 Centro unificado de pujas activas y mercado' },
     { command: 'finanzas', description: '💰 Balance, primas oficiales (10k€/pt) y rivales' },
+    { command: 'capital', description: '🛡️ Caja protegida, mejoras del once y revisión de ventas' },
     { command: 'analisis', description: '🕵️‍♂️ Auditoría táctica & oportunidades de mercado' },
     { command: 'ofertas', description: '📩 Ofertas de compra recibidas' },
     { command: 'sugerencias', description: '💡 Sugerencias de venta y descarte' },

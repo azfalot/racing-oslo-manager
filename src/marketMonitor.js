@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ComunioEngine } from './engine.js';
 import { getRivalBiddingIntelligence } from './rivals.js';
 import { isVerifiedComputerOwner } from './ownership.js';
+import { loadCapitalPolicy, committedCapital } from './capitalPolicy.js';
 
 const lastMarketFile = 'last_market.json';
 const ignoredPlayersFile = 'ignored_players.json';
@@ -141,9 +142,9 @@ export async function checkMarket(client, squad, balance, botPaused) {
   // 🛡️ REGLA DE ORO DE TESORERÍA PRE-JORNADA:
   // El tope de pujas abiertas concurrentes es estrictamente el SALDO LÍQUIDO DISPONIBLE (balance).
   // De esta forma, aunque la Computadora acepte el 100% de las pujas simultáneamente, NUNCA entraremos en deuda.
-  const maxOpenBidsCap = balance;
+  const maxOpenBidsCap = Math.max(0, balance - loadCapitalPolicy().reserve);
   const pendingBids = await client.getPendingBids();
-  let currentOpenBidsSum = pendingBids.reduce((s, b) => s + (b.price || 0), 0);
+  let currentOpenBidsSum = committedCapital(pendingBids).total;
   let availableBiddingPower = Math.max(0, maxOpenBidsCap - currentOpenBidsSum);
 
   const pendingIds = new Set(pendingBids.map(b => parseInt(b.playerId || b.id || 0)).filter(id => id > 0));

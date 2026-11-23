@@ -39,7 +39,7 @@ test('1. Speculation Radar: Identifies Gavi as top CRACK_RECOVERY opportunity', 
   assert.ok(gavi.projectedUpsideEUR > 5000000, 'Gavi upside must be > 5M€');
 });
 
-test('2. Speculation Radar: Identifies floor price bargains (< 300k €) with zero risk', () => {
+test('2. Speculation Radar: Identifies cheap candidates and quantifies nonzero downside', () => {
   const market = [
     createMockMarketPlayer(2847, 'Iker Losada', 'midfielder', 170000, 'Computer')
   ];
@@ -48,7 +48,9 @@ test('2. Speculation Radar: Identifies floor price bargains (< 300k €) with ze
   const bargain = result.opportunities[0];
 
   assert.equal(bargain.tier, 'FLOOR_PRICE_BARGAIN');
-  assert.equal(bargain.downsideRisk, 'CERO (Precio mínimo garantizado por Comunio)');
+  assert.match(bargain.downsideRisk, /^NO_NULO/);
+  assert.equal(bargain.potentialDownsideEUR, 18000);
+  assert.equal(bargain.guaranteedProfit, false);
   assert.ok(bargain.projectedUpsideEUR > 0);
 });
 

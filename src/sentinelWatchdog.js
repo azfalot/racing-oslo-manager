@@ -1,13 +1,17 @@
 import { ComunioClient } from './comunioClient.js';
 import { ComunioEngine } from './engine.js';
-import { autoListSpeculationPlayers, executeSpeculationOfferAcceptances } from './dailySpeculator.js';
+import { autoListSpeculationPlayers } from './dailySpeculator.js';
 import axios from 'axios';
 import fs from 'fs';
 import dotenv from 'dotenv';
+import { createCapitalReport, formatCapitalReport, recordCapitalSnapshot } from './capitalReport.js';
+import { loadCapitalPolicy } from './capitalPolicy.js';
+import { isVerifiedComputerOwner } from './ownership.js';
 dotenv.config();
 
 const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
 const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+let lastDebtAlertKey = null;
 
 export async function sendSentinelTelegramMessage(htmlContent, replyMarkup = null) {
   if (!telegramToken || !telegramChatId) {
@@ -143,8 +147,8 @@ export async function generateDailyImprovementReport(client) {
     const marketPlayers = market?.players || [];
     // Filtrar gangas y titulares de Primera
     const potentialUpgrades = marketPlayers.filter(p => {
-      const isComputer = !p.owner || p.owner.name === 'Computer' || p.owner.id === 1;
-      const isAffordable = p.price <= (balance > 0 ? balance : 2500000);
+      const isComputer = isVerifiedComputerOwner(p);
+      const isAffordable = p.price <= Math.max(0, balance - loadCapitalPolicy().reserve);
       return isComputer && isAffordable && p.points > 15;
     }).sort((a, b) => (b.points / Math.max(b.price, 1)) - (a.points / Math.max(a.price, 1)));
 
@@ -164,6 +168,13 @@ export async function generateDailyImprovementReport(client) {
       report += ` 🔄 <b>Recomendación Táctica:</b> Fichar a <b>${escapeHtml(firstTarget.name)}</b> para cubrir la baja de <b>${escapeHtml(injuredStarters[0].name)}</b>.\n`;
     }
 
+    try {
+      const capitalReport = await createCapitalReport(c);
+      recordCapitalSnapshot(capitalReport);
+      report += `\n<pre>${escapeHtml(formatCapitalReport(capitalReport))}</pre>\n`;
+    } catch (error) {
+      report += `\n⚠️ Informe de capital no verificable: ${escapeHtml(error.message)}\n`;
+    }
     report += `\n🤖 <i>Sistema Centinela activo · Monitoreo continuo 24/7 de solvencia y ofertas.</i>`;
 
     return {
@@ -183,7 +194,7 @@ export async function generateDailyImprovementReport(client) {
 
 /**
  * Watchdog de solvencia: Si hay deuda y faltan menos de 48h, asegura que los suplentes
- * estén listados en mercado, acepta ofertas pendientes y envía alerta inmediata.
+ * estén listados en mercado y avisa para revisar las ofertas manualmente.
  */
 export async function checkSolvencyAndAutoAlert() {
   const client = new ComunioClient();
@@ -207,28 +218,19 @@ export async function checkSolvencyAndAutoAlert() {
         protectedPlayerIds: Array.from(starterIds)
       });
 
-      // 2. Verificar y aceptar cualquier oferta de venta entrante para los suplentes
+      // 2. Informar de ofertas disponibles sin ejecutar ventas.
       const offersUrl = `https://api.comunio.es/communities/${client.communityId}/users/${client.userId}/offers?current`;
       const offersRes = await axios.get(offersUrl, { headers: client.getHeaders() });
       const saleOffers = (offersRes.data?.items || []).filter(item => item.type === 'SALE' && item.state === 'PENDING');
 
-      if (saleOffers.length > 0) {
-        console.log(`[SENTINEL-WATCHDOG] Ofertas detectadas para sanear (${saleOffers.length}). Ejecutando ventas...`);
-        const result = await executeSpeculationOfferAcceptances(client, saleOffers, {
-          currentBalance: balance,
-          forceSanear: true,
-          protectedPlayerIds: Array.from(starterIds),
-          squad
-        });
-
-        for (const trade of result.acceptedTrades) {
-          const alertMsg = `🚨 🩹 <b>[Centinela · Saneamiento Automático de Emergencia]</b>\n\n` +
-            `👤 Se ha aceptado la venta de <b>${escapeHtml(trade.name)}</b> por <b>${trade.sellPrice.toLocaleString('es-ES')} €</b>.\n` +
-            `💵 Objetivo: Eliminar saldo negativo para asegurar puntos en la jornada.\n` +
-            `📊 Saldo anterior: ${balance.toLocaleString('es-ES')} € ➔ Proyectado: ${(balance + trade.sellPrice).toLocaleString('es-ES')} €.`;
-          await sendSentinelTelegramMessage(alertMsg);
-        }
+      const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid' }).format(new Date());
+      const alertKey = `${day}:${Math.floor(balance / 100000)}:${saleOffers.map(o => o.id).sort().join(',')}`;
+      if (alertKey !== lastDebtAlertKey) {
+        const sent = await sendSentinelTelegramMessage(`🚨 <b>Saldo negativo: ${balance.toLocaleString('es-ES')} €</b>\nHay ${saleOffers.length} ofertas pendientes. Revisa <code>/ofertas</code> y <code>/capital</code> para recuperar solvencia antes del cierre. <b>No se ha vendido a nadie automáticamente.</b>`);
+        if (sent) lastDebtAlertKey = alertKey;
       }
+    } else {
+      lastDebtAlertKey = null;
     }
   } catch (err) {
     console.error('[SENTINEL-WATCHDOG ERROR]', err.message);

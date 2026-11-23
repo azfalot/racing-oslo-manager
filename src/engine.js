@@ -190,7 +190,7 @@ export class ComunioEngine {
     }
 
     // 2.1. Impulso dinámico por Momentum / Puntos recientes (detecta suplentes en racha tipo Kike Barja)
-    const lastPts = typeof player.lastPoints === 'number' ? player.lastPoints : (player.points || 0);
+    const lastPts = typeof player.lastPoints === 'number' ? player.lastPoints : (recentScores.at(-1) || 0);
     if (lastPts >= 8) {
       matchExpected += 1.5;
     } else if (lastPts >= 5) {
@@ -221,6 +221,13 @@ export class ComunioEngine {
     const setPiece = evaluateSetPieceSpecialist(player);
 
     matchExpected = (matchExpected * matchMod * minuteMod * lineupProbMod * clubMomentum.momentumMultiplier) + setPiece.bonusPpm;
+
+    const recentAverage = parseFloat(String(player.average?.lastXMatchdays?.points ?? '').replace(',', '.'));
+    if (player.totalPoints === 0 && recentAverage === 0 && lastPts <= 0) {
+      // Sparse detail endpoints may expose an average from a different sample.
+      // Zero current-season and recent points do not establish a starting role.
+      matchExpected = Math.min(matchExpected, 0.5);
+    }
 
     return parseFloat(matchExpected.toFixed(1));
   }
