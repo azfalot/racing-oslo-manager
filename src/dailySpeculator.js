@@ -199,6 +199,9 @@ export async function autoListSpeculationPlayers(client, squad = { players: [] }
   if (client && typeof client.getUserMarketListings === 'function') {
     const activeListings = await client.getUserMarketListings();
     activeMarketIds = new Set(activeListings.map(l => l.playerId));
+  } else if (options.dryRun) {
+    // Offline simulations use the ledger; live listings remain authoritative.
+    activeMarketIds = new Set(ledger.activeTradingPlayers.filter(p => p.listedOnMarket).map(p => p.playerId));
   }
 
   const listedPlayers = [];
@@ -321,16 +324,7 @@ export function evaluateSpeculationOffers(saleOffers = [], options = {}) {
 
     // Si no está en activeTradingMap y no hay deuda, mantener
     if (!tradingRecord) {
-      toHoldOrReject.push({
-        offerId: offer.id || offer.offerId,
-        playerId: pid,
-        name: playerName,
-        buyPrice,
-        offerPrice,
-        profitEUR,
-        decision: 'HOLD',
-        reason: 'Jugador de plantilla fuera del libro activo de trading.'
-      });
+      // Core-player offers belong to manual review, outside the trading ledger.
       continue;
     }
 

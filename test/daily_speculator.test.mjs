@@ -93,6 +93,33 @@ test('Execute Daily Speculation Bids - Safety Reserve and Capacity Constraints',
   if (fs.existsSync(testPath)) fs.unlinkSync(testPath);
 });
 
+test('Dry-run respects ledger listings when no live market client is available', async () => {
+  const { mkdtempSync, rmSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const dir = mkdtempSync(join(tmpdir(), 'oslo-dry-list-'));
+  try {
+    const ledgerPath = join(dir, 'ledger.json');
+    saveSpeculationLedger({ activeTradingPlayers: [{ playerId: 502, name: 'Listed', buyPrice: 200000, listedOnMarket: true }], closedTrades: [], totalProfitEUR: 0, successfulTradesCount: 0 }, ledgerPath);
+    const listed = await autoListSpeculationPlayers(null, { players: [{ playerId: 502, price: 240000 }] }, { ledgerPath, dryRun: true });
+    assert.deepEqual(listed, []);
+    // A live empty listing overrides stale ledger state and permits re-listing.
+    const live = await autoListSpeculationPlayers({ getUserMarketListings: async () => [], listPlayerOnMarket: async () => true }, { players: [{ playerId: 502, price: 240000 }] }, { ledgerPath });
+    assert.equal(live.length, 1);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('Non-trading core offers stay outside speculation decisions without debt', async () => {
+  const { mkdtempSync, rmSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const dir = mkdtempSync(join(tmpdir(), 'oslo-core-offers-'));
+  try {
+    const result = evaluateSpeculationOffers([{ playerId: 1, price: 1000000 }], { ledgerPath: join(dir, 'ledger.json') });
+    assert.deepEqual(result, { toAccept: [], toHoldOrReject: [] });
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
 test('Auto-List Speculation Players on Market', async () => {
   const testPath = 'data/test_list_ledger.json';
   if (fs.existsSync(testPath)) fs.unlinkSync(testPath);
