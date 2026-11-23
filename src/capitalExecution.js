@@ -63,7 +63,13 @@ export async function executeCapitalPurchase({ loadContext, submit, evaluateQual
     const pending = new Set(context.pendingBids.map(playerId));
     state.reservations = state.reservations.filter(r => !owned.has(playerId(r)) && !(closed.has(playerId(r)) && !pending.has(playerId(r))));
     const candidate = context.market.players.find(p => playerId(p) === Number(candidateId));
-    const quality = candidate ? await evaluateQuality(candidate, context.squad) : {};
+    const expectedIds = new Set([...context.pendingBids, ...state.reservations].map(playerId).filter(id => !owned.has(id)));
+    const expectedPlayers = context.market.players.filter(p => expectedIds.has(playerId(p)));
+    if (confirmedByUser !== true && expectedPlayers.length !== expectedIds.size) return { allowed: false, reason: 'PENDING_UPGRADE_DATA_MISSING' };
+    // Compare against the XI if every earlier commitment succeeds. Two bids
+    // must not both claim the improvement from replacing the same weak starter.
+    const projectedSquad = { ...context.squad, players: [...context.squad.players, ...expectedPlayers] };
+    const quality = candidate ? await evaluateQuality(candidate, projectedSquad) : {};
     const decision = evaluateCapitalPurchase({ ...context, candidate, bidAmount, quality, reservations: state.reservations, confirmedByUser, purpose, policy });
     writeState(statePath, state);
     if (!decision.allowed) return decision;

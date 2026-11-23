@@ -50,13 +50,18 @@ export async function createCapitalReport(client, { policy = loadCapitalPolicy()
   const reservations = state.reservations.filter(r => !owned.has(playerId(r)) && !(closed.has(playerId(r)) && !pending.has(playerId(r))));
   const commitments = committedCapital(data.pendingBids, reservations);
   const committed = commitments.total;
+  const expectedPlayers = data.market.players.filter(p => commitments.ids.has(playerId(p)) && !owned.has(playerId(p)));
+  const expectedIds = new Set([...commitments.ids].filter(id => !owned.has(id)));
+  const completePendingData = expectedPlayers.length === expectedIds.size;
+  const projectedSquad = { ...data.squad, players: [...data.squad.players, ...expectedPlayers] };
   const squadValue = data.squad.players.reduce((sum, p) => sum + Number(p.price), 0);
   if (![data.balance, data.credit, squadValue].every(Number.isSafeInteger)) throw new Error('No se dispone de finanzas verificables.');
   const currentXI = engine.optimizeLineup(data.squad);
   const candidates = data.market.players.filter(isVerifiedComputerOwner).filter(p => !owned.has(playerId(p))).map(candidate => {
-    const marginal = calculateMarginalValue(engine, data.squad, candidate);
+    const marginal = calculateMarginalValue(engine, projectedSquad, candidate);
     const quality = { ...marginal, available: engine.isPlayerAvailable(candidate), recentAverage: recent(candidate) };
     const decision = evaluateCapitalPurchase({ ...data, candidate, bidAmount: amount(candidate.price), reservations, quality, policy });
+    if (!completePendingData) { decision.allowed = false; decision.reason = 'PENDING_UPGRADE_DATA_MISSING'; }
     return { playerId: playerId(candidate), name: candidate.name, price: candidate.price, position: candidate.type,
       marginalValue: marginal.marginalValue, recentAverage: Number.isFinite(recent(candidate)) ? recent(candidate) : null,
       allowed: decision.allowed, reason: decision.reason, gainPerMillion: candidate.price > 0 ? marginal.marginalValue / (candidate.price / 1000000) : 0 };
@@ -74,7 +79,7 @@ export async function createCapitalReport(client, { policy = loadCapitalPolicy()
     squadCount: data.squad.players.length, maxSquadSize: policy.maxSquadSize, expectedXI: Math.round((currentXI.score || 0) * 10) / 10,
     formation: currentXI.formation, salesMode: 'MANUAL_ONLY', speculativePurchases: 'BLOCKED_WITHOUT_VERIFIED_EXIT',
     uncertainPurchases: reservations.filter(r => r.status === 'UNCERTAIN'), candidates, sales,
-    conditionalPlans: planConditionalUpgrades({ squad: data.squad, balance: data.balance, committed, candidates: data.market.players.filter(p => !owned.has(playerId(p)) && !commitments.ids.has(playerId(p))), sales, engine, policy }),
+    conditionalPlans: commitments.ids.size ? [] : planConditionalUpgrades({ squad: data.squad, balance: data.balance, committed, candidates: data.market.players.filter(p => !owned.has(playerId(p))), sales, engine, policy }),
     note: 'El patrimonio fluctúa con VM y primas. Las proyecciones del once son estimaciones; no hay rentabilidad ni puntos garantizados.' };
 }
 
@@ -90,6 +95,7 @@ export function explainPurchaseDecision(decision) {
     ALREADY_OWNED: 'El jugador ya está en la plantilla.',
     UNCERTAIN_RESPONSE: 'La respuesta de Comunio es incierta. Se mantiene la reserva: comprueba la puja antes de repetir.',
     PURCHASE_IN_PROGRESS: 'Hay otra compra en curso. La caja está bloqueada temporalmente.',
+    PENDING_UPGRADE_DATA_MISSING: 'Faltan datos de una compra pendiente para comprobar si este jugador mejora el once.',
     API_REJECTED: 'Comunio ha rechazado expresamente la puja.',
     EXACT_MARKET_VALUE_REQUIRED: 'La puja debe coincidir con el valor de mercado actual.',
     UNVERIFIED_COMPUTER: 'El vendedor no está verificado como Computer.'

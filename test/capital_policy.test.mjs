@@ -71,6 +71,23 @@ test('network uncertainty keeps the commitment and never retries a purchase', as
   } finally { rmSync(storage.dir, { recursive: true, force: true }); }
 });
 
+test('earlier pending upgrades count in the XI and cannot justify redundant buys', async () => {
+  const storage = temp();
+  try {
+    const request = setup(storage);
+    const context = await request.loadContext();
+    context.balance = 5000000;
+    context.pendingBids = [{ playerId: 100, price: 600000 }];
+    const result = await executeCapitalPurchase({ ...request, candidateId: 101, loadContext: async () => context,
+      evaluateQuality: async (_candidate, projected) => ({ ...quality, marginalValue: projected.players.some(p => p.playerId === 100) ? 0 : 2 }) });
+    assert.equal(result.reason, 'INSUFFICIENT_XI_UPGRADE');
+    context.market = { players: [player(101)] };
+    const unavailable = await executeCapitalPurchase({ ...request, candidateId: 101, loadContext: async () => context });
+    assert.equal(unavailable.reason, 'PENDING_UPGRADE_DATA_MISSING');
+    assert.deepEqual(readCapitalState(storage.statePath).reservations, []);
+  } finally { rmSync(storage.dir, { recursive: true, force: true }); }
+});
+
 test('API rejection releases funds; malformed success keeps them reserved', async () => {
   const storage = temp();
   try {

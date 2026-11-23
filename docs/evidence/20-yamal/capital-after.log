@@ -16,232 +16,238 @@ TAP version 13
 # Subtest: API market normalization never invents Computer ownership when seller is absent
 ok 1 - API market normalization never invents Computer ownership when seller is absent
   ---
-  duration_ms: 2.2332
+  duration_ms: 3.1206
   type: 'test'
   ...
 # Subtest: real client purchase boundary shares commitments across client instances
 ok 2 - real client purchase boundary shares commitments across client instances
   ---
-  duration_ms: 60.6709
+  duration_ms: 68.8355
   type: 'test'
   ...
 # Subtest: HTTP 200 with a rejected sale or cancellation is never reported as success
 ok 3 - HTTP 200 with a rejected sale or cancellation is never reported as success
   ---
-  duration_ms: 0.8963
+  duration_ms: 0.7636
   type: 'test'
   ...
 # Subtest: reserve is protected and local/API commitments are not counted twice
 ok 4 - reserve is protected and local/API commitments are not counted twice
   ---
-  duration_ms: 2.3086
+  duration_ms: 1.9829
   type: 'test'
   ...
 # Subtest: rejects bad data, rival/unknown seller, overbid, duplicate and capacity
 ok 5 - rejects bad data, rival/unknown seller, overbid, duplicate and capacity
   ---
-  duration_ms: 1.5404
+  duration_ms: 0.5096
   type: 'test'
   ...
 # Subtest: automated buys require playing evidence and real XI improvement; manual buys retain cash limits
 ok 6 - automated buys require playing evidence and real XI improvement; manual buys retain cash limits
   ---
-  duration_ms: 0.9287
+  duration_ms: 0.8215
   type: 'test'
   ...
 # Subtest: write-ahead reservations protect cash when the next API response is stale
 ok 7 - write-ahead reservations protect cash when the next API response is stale
   ---
-  duration_ms: 29.4528
+  duration_ms: 31.3272
   type: 'test'
   ...
 # Subtest: concurrent purchase workers cannot spend the same cash
 ok 8 - concurrent purchase workers cannot spend the same cash
   ---
-  duration_ms: 16.3133
+  duration_ms: 16.4377
   type: 'test'
   ...
 # Subtest: network uncertainty keeps the commitment and never retries a purchase
 ok 9 - network uncertainty keeps the commitment and never retries a purchase
   ---
-  duration_ms: 19.5871
+  duration_ms: 17.5842
+  type: 'test'
+  ...
+# Subtest: earlier pending upgrades count in the XI and cannot justify redundant buys
+ok 10 - earlier pending upgrades count in the XI and cannot justify redundant buys
+  ---
+  duration_ms: 17.6433
   type: 'test'
   ...
 # Subtest: API rejection releases funds; malformed success keeps them reserved
-ok 10 - API rejection releases funds; malformed success keeps them reserved
+ok 11 - API rejection releases funds; malformed success keeps them reserved
   ---
-  duration_ms: 30.2703
+  duration_ms: 31.9153
   type: 'test'
   ...
 # Subtest: invalid journal, another account or unavailable snapshot blocks all requests
-ok 11 - invalid journal, another account or unavailable snapshot blocks all requests
+ok 12 - invalid journal, another account or unavailable snapshot blocks all requests
   ---
-  duration_ms: 15.7692
+  duration_ms: 13.2903
   type: 'test'
   ...
 # Subtest: sales expose actual loss and never invent a cost basis or auto-accept
-ok 12 - sales expose actual loss and never invent a cost basis or auto-accept
+ok 13 - sales expose actual loss and never invent a cost basis or auto-accept
   ---
-  duration_ms: 0.877
+  duration_ms: 2.0146
   type: 'test'
   ...
 # Subtest: invalid capital policy cannot silently weaken defaults
-ok 13 - invalid capital policy cannot silently weaken defaults
+ok 14 - invalid capital policy cannot silently weaken defaults
   ---
-  duration_ms: 6.3193
+  duration_ms: 6.5115
   type: 'test'
   ...
 # [DAILY-SPECULATOR] Capacidad: 0/15 (15 libres) | Saldo: 2.000.000 EUR | Cap Especulacion: 1.000.000 EUR
 # [DAILY-SPECULATOR] 🛒 Puja especulativa enviada: Cheap (170.000 EUR)
 # [DAILY-SPECULATOR] Capacidad: 1/15 (14 libres) | Saldo: 1.200.000 EUR | Cap Especulacion: 0 EUR
 # Subtest: market season points never masquerade as last-match momentum
-ok 14 - market season points never masquerade as last-match momentum
+ok 15 - market season points never masquerade as last-match momentum
   ---
-  duration_ms: 3.4341
+  duration_ms: 4.9765
   type: 'test'
   ...
 # Subtest: contradictory averages cannot promote a player with zero season and recent points
-ok 15 - contradictory averages cannot promote a player with zero season and recent points
+ok 16 - contradictory averages cannot promote a player with zero season and recent points
   ---
-  duration_ms: 0.4401
+  duration_ms: 0.4189
   type: 'test'
   ...
 # Subtest: all purchase recommendations use exact VM even for elite upgrades and rival pressure
-ok 16 - all purchase recommendations use exact VM even for elite upgrades and rival pressure
+ok 17 - all purchase recommendations use exact VM even for elite upgrades and rival pressure
   ---
-  duration_ms: 38.9227
+  duration_ms: 39.3604
   type: 'test'
   ...
 # Subtest: a cheap price is never advertised as zero risk or guaranteed profit
-ok 17 - a cheap price is never advertised as zero risk or guaranteed profit
+ok 18 - a cheap price is never advertised as zero risk or guaranteed profit
   ---
-  duration_ms: 3.6942
+  duration_ms: 2.9673
   type: 'test'
   ...
 # Subtest: placing a bid never records a player as already purchased
-ok 18 - placing a bid never records a player as already purchased
+ok 19 - placing a bid never records a player as already purchased
   ---
-  duration_ms: 10.7375
+  duration_ms: 20.9788
   type: 'test'
   ...
 # Subtest: speculation subtracts pending commitments, including API string prices
-ok 19 - speculation subtracts pending commitments, including API string prices
+ok 20 - speculation subtracts pending commitments, including API string prices
   ---
-  duration_ms: 1.7995
+  duration_ms: 1.9467
   type: 'test'
   ...
 # Subtest: conditional purchase requires sale proceeds, complete XI and positive combined gain
-ok 20 - conditional purchase requires sale proceeds, complete XI and positive combined gain
+ok 21 - conditional purchase requires sale proceeds, complete XI and positive combined gain
   ---
-  duration_ms: 4.1088
+  duration_ms: 2.4617
   type: 'test'
   ...
 # Subtest: individual sale labels cannot hide the combined loss of selling starters
-ok 21 - individual sale labels cannot hide the combined loss of selling starters
+ok 22 - individual sale labels cannot hide the combined loss of selling starters
   ---
-  duration_ms: 1.6615
+  duration_ms: 1.3569
   type: 'test'
   ...
 # Subtest: daily capital history preserves its baseline and separates accounts
-ok 22 - daily capital history preserves its baseline and separates accounts
+ok 23 - daily capital history preserves its baseline and separates accounts
   ---
-  duration_ms: 61.9625
+  duration_ms: 54.8515
   type: 'test'
   ...
 # Subtest: 1. Quantitative VORP: Replacement level baseline and VORP metrics across positions
-ok 23 - 1. Quantitative VORP: Replacement level baseline and VORP metrics across positions
+ok 24 - 1. Quantitative VORP: Replacement level baseline and VORP metrics across positions
   ---
-  duration_ms: 4.7048
+  duration_ms: 4.2418
   type: 'test'
   ...
 # Subtest: 2. Quantitative Delta XI: Accurately identifies dropped starter and marginal gain
-ok 24 - 2. Quantitative Delta XI: Accurately identifies dropped starter and marginal gain
+ok 25 - 2. Quantitative Delta XI: Accurately identifies dropped starter and marginal gain
   ---
-  duration_ms: 5.4444
+  duration_ms: 2.5264
   type: 'test'
   ...
 # Subtest: 3. Speculation valuation stays within its band; actual recommendation is exact VM
-ok 25 - 3. Speculation valuation stays within its band; actual recommendation is exact VM
+ok 26 - 3. Speculation valuation stays within its band; actual recommendation is exact VM
   ---
-  duration_ms: 42.5415
+  duration_ms: 36.0343
   type: 'test'
   ...
 # Subtest: 4. Depth valuation stays within its band; actual recommendation is exact VM
-ok 26 - 4. Depth valuation stays within its band; actual recommendation is exact VM
+ok 27 - 4. Depth valuation stays within its band; actual recommendation is exact VM
   ---
-  duration_ms: 0.4503
+  duration_ms: 0.4841
   type: 'test'
   ...
 # Subtest: 5. Clear-upgrade valuation stays within 105-115%; execution remains at exact VM
-ok 27 - 5. Clear-upgrade valuation stays within 105-115%; execution remains at exact VM
+ok 28 - 5. Clear-upgrade valuation stays within 105-115%; execution remains at exact VM
   ---
-  duration_ms: 0.671
+  duration_ms: 0.6041
   type: 'test'
   ...
 # Subtest: 6. Elite valuation stays within 115-125%; execution remains at exact VM
-ok 28 - 6. Elite valuation stays within 115-125%; execution remains at exact VM
+ok 29 - 6. Elite valuation stays within 115-125%; execution remains at exact VM
   ---
-  duration_ms: 0.3165
+  duration_ms: 0.3902
   type: 'test'
   ...
 # Subtest: 7. Solvency Constraint: Bids are strictly capped by Balance - SafetyReserve
-ok 29 - 7. Solvency Constraint: Bids are strictly capped by Balance - SafetyReserve
+ok 30 - 7. Solvency Constraint: Bids are strictly capped by Balance - SafetyReserve
   ---
-  duration_ms: 0.3585
+  duration_ms: 0.4489
   type: 'test'
   ...
 # Subtest: 8. Squad Role Classification: Categorizes every player into CORE, STARTER, UPGRADEABLE, DEPTH, SPECULATIVE, SELL
-ok 30 - 8. Squad Role Classification: Categorizes every player into CORE, STARTER, UPGRADEABLE, DEPTH, SPECULATIVE, SELL
+ok 31 - 8. Squad Role Classification: Categorizes every player into CORE, STARTER, UPGRADEABLE, DEPTH, SPECULATIVE, SELL
   ---
-  duration_ms: 10.6549
+  duration_ms: 11.3066
   type: 'test'
   ...
 # Subtest: 9. Star Replacement Test: Rejects sacrificing a star when upgrade package net delta is < +5.0 pts
-ok 31 - 9. Star Replacement Test: Rejects sacrificing a star when upgrade package net delta is < +5.0 pts
+ok 32 - 9. Star Replacement Test: Rejects sacrificing a star when upgrade package net delta is < +5.0 pts
   ---
-  duration_ms: 3.7984
+  duration_ms: 3.8897
   type: 'test'
   ...
 # Subtest: 10. Star Replacement Test: Approves star sale only when net delta >= +5.0 pts and cash delta >= 0
-ok 32 - 10. Star Replacement Test: Approves star sale only when net delta >= +5.0 pts and cash delta >= 0
+ok 33 - 10. Star Replacement Test: Approves star sale only when net delta >= +5.0 pts and cash delta >= 0
   ---
-  duration_ms: 2.2327
+  duration_ms: 1.9668
   type: 'test'
   ...
 # Subtest: 11. Dynamic Season Utility: Points weight rises to 0.95 as matchday approaches 38
-ok 33 - 11. Dynamic Season Utility: Points weight rises to 0.95 as matchday approaches 38
+ok 34 - 11. Dynamic Season Utility: Points weight rises to 0.95 as matchday approaches 38
   ---
-  duration_ms: 0.7421
+  duration_ms: 0.592
   type: 'test'
   ...
 # Subtest: 12. Monte Carlo Simulator: Runs 1,000 simulations and computes championship probability delta
-ok 34 - 12. Monte Carlo Simulator: Runs 1,000 simulations and computes championship probability delta
+ok 35 - 12. Monte Carlo Simulator: Runs 1,000 simulations and computes championship probability delta
   ---
-  duration_ms: 159.9667
+  duration_ms: 118.8931
   type: 'test'
   ...
 # Subtest: 1. Club Momentum: Correctly normalizes club names and assigns momentum tiers
-ok 35 - 1. Club Momentum: Correctly normalizes club names and assigns momentum tiers
+ok 36 - 1. Club Momentum: Correctly normalizes club names and assigns momentum tiers
   ---
-  duration_ms: 1.8916
+  duration_ms: 1.8554
   type: 'test'
   ...
 # Subtest: 2. Club Momentum: Crisis clubs receive performance penalty vs surging clubs
-ok 36 - 2. Club Momentum: Crisis clubs receive performance penalty vs surging clubs
+ok 37 - 2. Club Momentum: Crisis clubs receive performance penalty vs surging clubs
   ---
-  duration_ms: 4.7875
+  duration_ms: 5.2636
   type: 'test'
   ...
 # Subtest: 3. Engine: getExpectedPoints integrates club momentum into matchday estimation
-ok 37 - 3. Engine: getExpectedPoints integrates club momentum into matchday estimation
+ok 38 - 3. Engine: getExpectedPoints integrates club momentum into matchday estimation
   ---
-  duration_ms: 1.6461
+  duration_ms: 1.645
   type: 'test'
   ...
 # Subtest: 4. Strategic Purchase: Recommending a target requires strictly superior momentum-adjusted PPM (DeltaXI > 0)
-ok 38 - 4. Strategic Purchase: Recommending a target requires strictly superior momentum-adjusted PPM (DeltaXI > 0)
+ok 39 - 4. Strategic Purchase: Recommending a target requires strictly superior momentum-adjusted PPM (DeltaXI > 0)
   ---
-  duration_ms: 5.6643
+  duration_ms: 7.3654
   type: 'test'
   ...
 # [DAILY-SPECULATOR] Capacidad: 2/15 (13 libres) | Saldo: 1.200.000 EUR | Cap Especulacion: 200.000 EUR
@@ -253,147 +259,147 @@ ok 38 - 4. Strategic Purchase: Recommending a target requires strictly superior 
 # [DAILY-SPECULATOR] Nuevo activo especulativo incorporado: Nuevo Chollo Fichado (190.000 EUR)
 # [DAILY-SPECULATOR] 🏷️ Puesto en venta para ofertas de Computer: Banquillo Especulacion (180.000 EUR)
 # Subtest: Speculation Ledger - Initialization and Persistence
-ok 39 - Speculation Ledger - Initialization and Persistence
+ok 40 - Speculation Ledger - Initialization and Persistence
   ---
-  duration_ms: 6.7853
+  duration_ms: 5.7724
   type: 'test'
   ...
 # Subtest: Execute Daily Speculation Bids - Safety Reserve and Capacity Constraints
-ok 40 - Execute Daily Speculation Bids - Safety Reserve and Capacity Constraints
+ok 41 - Execute Daily Speculation Bids - Safety Reserve and Capacity Constraints
   ---
-  duration_ms: 63.6951
+  duration_ms: 44.7673
   type: 'test'
   ...
 # Subtest: Dry-run respects ledger listings when no live market client is available
-ok 41 - Dry-run respects ledger listings when no live market client is available
+ok 42 - Dry-run respects ledger listings when no live market client is available
   ---
-  duration_ms: 10.0696
+  duration_ms: 15.1533
   type: 'test'
   ...
 # Subtest: Non-trading core offers stay outside speculation decisions without debt
-ok 42 - Non-trading core offers stay outside speculation decisions without debt
+ok 43 - Non-trading core offers stay outside speculation decisions without debt
   ---
-  duration_ms: 3.0543
+  duration_ms: 1.8617
   type: 'test'
   ...
 # Subtest: Auto-List Speculation Players on Market
-ok 43 - Auto-List Speculation Players on Market
+ok 44 - Auto-List Speculation Players on Market
   ---
-  duration_ms: 7.1166
+  duration_ms: 8.2976
   type: 'test'
   ...
 # Subtest: Evaluate and Execute Speculation Sale Offers - Strict Profit Spreading
-ok 44 - Evaluate and Execute Speculation Sale Offers - Strict Profit Spreading
+ok 45 - Evaluate and Execute Speculation Sale Offers - Strict Profit Spreading
   ---
-  duration_ms: 16.1983
+  duration_ms: 9.0487
   type: 'test'
   ...
 # Subtest: Sync Ledger with New Signings
-ok 45 - Sync Ledger with New Signings
+ok 46 - Sync Ledger with New Signings
   ---
-  duration_ms: 3.3258
+  duration_ms: 2.1339
   type: 'test'
   ...
 # Subtest: Starting XI Immunity - Starters and Non-Trading Core Players are 100% Protected
-ok 46 - Starting XI Immunity - Starters and Non-Trading Core Players are 100% Protected
+ok 47 - Starting XI Immunity - Starters and Non-Trading Core Players are 100% Protected
   ---
-  duration_ms: 5.7666
+  duration_ms: 6.491
   type: 'test'
   ...
 # Subtest: 1. Candidate beats worst player but does NOT improve best XI -> no aggressive bid (PASS or low score)
-ok 47 - 1. Candidate beats worst player but does NOT improve best XI -> no aggressive bid (PASS or low score)
+ok 48 - 1. Candidate beats worst player but does NOT improve best XI -> no aggressive bid (PASS or low score)
   ---
-  duration_ms: 12.1076
+  duration_ms: 11.134
   type: 'test'
   ...
 # Subtest: 2. Candidate genuinely upgrades starting XI -> strategic score increases
-ok 48 - 2. Candidate genuinely upgrades starting XI -> strategic score increases
+ok 49 - 2. Candidate genuinely upgrades starting XI -> strategic score increases
   ---
-  duration_ms: 3.6763
+  duration_ms: 3.615
   type: 'test'
   ...
 # Subtest: 3. Superstar opportunity with low cash -> valuation remains high but affordability constrains action
-ok 49 - 3. Superstar opportunity with low cash -> valuation remains high but affordability constrains action
+ok 50 - 3. Superstar opportunity with low cash -> valuation remains high but affordability constrains action
   ---
-  duration_ms: 56.5833
+  duration_ms: 33.7424
   type: 'test'
   ...
 # Subtest: 4. Expensive player with poor points-per-million -> valuation penalized appropriately
-ok 50 - 4. Expensive player with poor points-per-million -> valuation penalized appropriately
+ok 51 - 4. Expensive player with poor points-per-million -> valuation penalized appropriately
   ---
-  duration_ms: 1.9119
+  duration_ms: 3.8139
   type: 'test'
   ...
 # Subtest: 5. Strong positional need increases valuation
-ok 51 - 5. Strong positional need increases valuation
+ok 52 - 5. Strong positional need increases valuation
   ---
-  duration_ms: 2.604
+  duration_ms: 2.0961
   type: 'test'
   ...
 # Subtest: 6. Rival pressure may increase recommended bid but never beyond maximum rational bid
-ok 52 - 6. Rival pressure may increase recommended bid but never beyond maximum rational bid
+ok 53 - 6. Rival pressure may increase recommended bid but never beyond maximum rational bid
   ---
-  duration_ms: 2.2304
+  duration_ms: 2.2481
   type: 'test'
   ...
 # Subtest: 7. Negative balance does NOT accept a terrible offer automatically
-ok 53 - 7. Negative balance does NOT accept a terrible offer automatically
+ok 54 - 7. Negative balance does NOT accept a terrible offer automatically
   ---
-  duration_ms: 3.8203
+  duration_ms: 1.6023
   type: 'test'
   ...
 # Subtest: 8. Small debt chooses a low-impact sale instead of sacrificing a star
-ok 54 - 8. Small debt chooses a low-impact sale instead of sacrificing a star
+ok 55 - 8. Small debt chooses a low-impact sale instead of sacrificing a star
   ---
-  duration_ms: 16.0552
+  duration_ms: 7.9291
   type: 'test'
   ...
 # Subtest: 9. Two cheap fringe-player sales can be preferred over one expensive key-player sale
-ok 55 - 9. Two cheap fringe-player sales can be preferred over one expensive key-player sale
+ok 56 - 9. Two cheap fringe-player sales can be preferred over one expensive key-player sale
   ---
-  duration_ms: 10.3593
+  duration_ms: 6.4212
   type: 'test'
   ...
 # Subtest: 10. A high-scoring but redundant player can be sold if not core to XI
-ok 56 - 10. A high-scoring but redundant player can be sold if not core to XI
+ok 57 - 10. A high-scoring but redundant player can be sold if not core to XI
   ---
-  duration_ms: 2.2271
+  duration_ms: 1.6433
   type: 'test'
   ...
 # Subtest: 11. A lower-scoring core player is protected because replacement loss is high
-ok 57 - 11. A lower-scoring core player is protected because replacement loss is high
+ok 58 - 11. A lower-scoring core player is protected because replacement loss is high
   ---
-  duration_ms: 4.2818
+  duration_ms: 1.1809
   type: 'test'
   ...
 # Subtest: 12. No sale is triggered when squad and liquidity benefit from keeping both players
-ok 58 - 12. No sale is triggered when squad and liquidity benefit from keeping both players
+ok 59 - 12. No sale is triggered when squad and liquidity benefit from keeping both players
   ---
-  duration_ms: 1.2811
+  duration_ms: 0.8532
   type: 'test'
   ...
 # Subtest: 13. High-value transaction requires confirmation according to autoBidLimit
-ok 59 - 13. High-value transaction requires confirmation according to autoBidLimit
+ok 60 - 13. High-value transaction requires confirmation according to autoBidLimit
   ---
-  duration_ms: 1.971
+  duration_ms: 1.6956
   type: 'test'
   ...
 # Subtest: 14. Engine lineup optimization remains deterministic and valid
-ok 60 - 14. Engine lineup optimization remains deterministic and valid
+ok 61 - 14. Engine lineup optimization remains deterministic and valid
   ---
-  duration_ms: 0.6264
+  duration_ms: 0.6025
   type: 'test'
   ...
 # Subtest: 15. Sanctioned, red-banned, or suspended player is discarded (PASS) and rival-owned player gets no extra margin
-ok 61 - 15. Sanctioned, red-banned, or suspended player is discarded (PASS) and rival-owned player gets no extra margin
+ok 62 - 15. Sanctioned, red-banned, or suspended player is discarded (PASS) and rival-owned player gets no extra margin
   ---
-  duration_ms: 1.9391
+  duration_ms: 1.8163
   type: 'test'
   ...
 # Subtest: 16. Positional club competition evaluates depth chart, direct rivals and starter confidence
-ok 62 - 16. Positional club competition evaluates depth chart, direct rivals and starter confidence
+ok 63 - 16. Positional club competition evaluates depth chart, direct rivals and starter confidence
   ---
-  duration_ms: 3.4426
+  duration_ms: 1.0321
   type: 'test'
   ...
 # [CLIENT] Venta bloqueada: jugador 2415 sin confirmación manual.
@@ -405,282 +411,282 @@ ok 62 - 16. Positional club competition evaluates depth chart, direct rivals and
 # [CLIENT] Venta bloqueada: jugador 100 sin confirmación manual.
 # [CLIENT] Venta bloqueada: jugador 100 sin confirmación manual.
 # Subtest: sale API denies unconfirmed sales before authentication or network access
-ok 63 - sale API denies unconfirmed sales before authentication or network access
+ok 64 - sale API denies unconfirmed sales before authentication or network access
   ---
-  duration_ms: 1.7972
+  duration_ms: 2.1875
   type: 'test'
   ...
 # Subtest: only explicitly confirmed manual sale reaches the API
-ok 64 - only explicitly confirmed manual sale reaches the API
+ok 65 - only explicitly confirmed manual sale reaches the API
   ---
-  duration_ms: 0.4538
+  duration_ms: 0.6026
   type: 'test'
   ...
 # Subtest: autonomous trading cannot sell at a profit or clear debt through the real client
-ok 65 - autonomous trading cannot sell at a profit or clear debt through the real client
+ok 66 - autonomous trading cannot sell at a profit or clear debt through the real client
   ---
-  duration_ms: 27.0443
+  duration_ms: 25.4733
   type: 'test'
   ...
 # Subtest: 1. Seeded PRNG Reproducibility: Mulberry32 generates identical streams with identical seed
-ok 66 - 1. Seeded PRNG Reproducibility: Mulberry32 generates identical streams with identical seed
+ok 67 - 1. Seeded PRNG Reproducibility: Mulberry32 generates identical streams with identical seed
   ---
-  duration_ms: 93.645
+  duration_ms: 70.7905
   type: 'test'
   ...
 # Subtest: 2. Wilson Score Confidence Interval: Bounds remain within [0, 1] and narrow with sample size
-ok 67 - 2. Wilson Score Confidence Interval: Bounds remain within [0, 1] and narrow with sample size
+ok 68 - 2. Wilson Score Confidence Interval: Bounds remain within [0, 1] and narrow with sample size
   ---
-  duration_ms: 0.5234
+  duration_ms: 0.4398
   type: 'test'
   ...
 # Subtest: 3. CRN Transfer Evaluation: Identical seed cancels out rival variance during transfer delta
-ok 68 - 3. CRN Transfer Evaluation: Identical seed cancels out rival variance during transfer delta
+ok 69 - 3. CRN Transfer Evaluation: Identical seed cancels out rival variance during transfer delta
   ---
-  duration_ms: 93.1344
+  duration_ms: 92.9668
   type: 'test'
   ...
 # Subtest: 4. Recency-Weighted Prior: Weights last 3 seasons correctly (0.50 / 0.30 / 0.20)
-ok 69 - 4. Recency-Weighted Prior: Weights last 3 seasons correctly (0.50 / 0.30 / 0.20)
+ok 70 - 4. Recency-Weighted Prior: Weights last 3 seasons correctly (0.50 / 0.30 / 0.20)
   ---
-  duration_ms: 0.5334
+  duration_ms: 0.6306
   type: 'test'
   ...
 # Subtest: 5. Empirical-Bayes Shrinkage: Small sample sizes shrink towards prior PPM
-ok 70 - 5. Empirical-Bayes Shrinkage: Small sample sizes shrink towards prior PPM
+ok 71 - 5. Empirical-Bayes Shrinkage: Small sample sizes shrink towards prior PPM
   ---
-  duration_ms: 0.7145
+  duration_ms: 0.4878
   type: 'test'
   ...
 # Subtest: 6. Dynamic P35 Replacement Level: Calibrates baseline points by position
-ok 71 - 6. Dynamic P35 Replacement Level: Calibrates baseline points by position
+ok 72 - 6. Dynamic P35 Replacement Level: Calibrates baseline points by position
   ---
-  duration_ms: 0.8345
+  duration_ms: 0.8576
   type: 'test'
   ...
 # Subtest: 7. VORP Confidence Tiers: Appropriately flags sample size reliability
-ok 72 - 7. VORP Confidence Tiers: Appropriately flags sample size reliability
+ok 73 - 7. VORP Confidence Tiers: Appropriately flags sample size reliability
   ---
-  duration_ms: 1.0585
+  duration_ms: 1.0594
   type: 'test'
   ...
 # Subtest: 8. Explainable Rival Forecast: Incorporates season PPM, form, squad depth and availability
-ok 73 - 8. Explainable Rival Forecast: Incorporates season PPM, form, squad depth and availability
+ok 74 - 8. Explainable Rival Forecast: Incorporates season PPM, form, squad depth and availability
   ---
-  duration_ms: 0.3512
+  duration_ms: 0.3304
   type: 'test'
   ...
 # Subtest: 9. Dynamic Matchday Resolver: Resolves matchday without hardcoding
-ok 74 - 9. Dynamic Matchday Resolver: Resolves matchday without hardcoding
+ok 75 - 9. Dynamic Matchday Resolver: Resolves matchday without hardcoding
   ---
-  duration_ms: 2.4657
+  duration_ms: 2.5638
   type: 'test'
   ...
 # Subtest: 10. Season Utility: Dimensions are normalized and wPts scales from 0.50 to 0.95
-ok 75 - 10. Season Utility: Dimensions are normalized and wPts scales from 0.50 to 0.95
+ok 76 - 10. Season Utility: Dimensions are normalized and wPts scales from 0.50 to 0.95
   ---
-  duration_ms: 0.7009
+  duration_ms: 1.1789
   type: 'test'
   ...
 # Subtest: 11. War Room Integration: Uses dynamic matchday and optimized lineup expected score
-ok 76 - 11. War Room Integration: Uses dynamic matchday and optimized lineup expected score
+ok 77 - 11. War Room Integration: Uses dynamic matchday and optimized lineup expected score
   ---
-  duration_ms: 74.1096
+  duration_ms: 69.3067
   type: 'test'
   ...
 # Subtest: 12. Monotonicity of Title Probability: Higher Racing PPM yields higher or equal P(Win) under CRN
-ok 77 - 12. Monotonicity of Title Probability: Higher Racing PPM yields higher or equal P(Win) under CRN
+ok 78 - 12. Monotonicity of Title Probability: Higher Racing PPM yields higher or equal P(Win) under CRN
   ---
-  duration_ms: 19.9177
+  duration_ms: 19.1593
   type: 'test'
   ...
 # Subtest: 13. Bounded Parameters: Calibrated standard deviations and PPMs are within physically valid ranges
-ok 78 - 13. Bounded Parameters: Calibrated standard deviations and PPMs are within physically valid ranges
+ok 79 - 13. Bounded Parameters: Calibrated standard deviations and PPMs are within physically valid ranges
   ---
-  duration_ms: 0.2675
+  duration_ms: 0.2349
   type: 'test'
   ...
 # Subtest: 14. Backtester Metrics: Correctly computes MAE, RMSE, Bias, and ECE
-ok 79 - 14. Backtester Metrics: Correctly computes MAE, RMSE, Bias, and ECE
+ok 80 - 14. Backtester Metrics: Correctly computes MAE, RMSE, Bias, and ECE
   ---
-  duration_ms: 0.7267
+  duration_ms: 0.7819
   type: 'test'
   ...
 # Subtest: 1. Set-Pieces: Gerard Moreno is identified as \#1 penalty taker for Villarreal with bonus
-ok 80 - 1. Set-Pieces: Gerard Moreno is identified as \#1 penalty taker for Villarreal with bonus
+ok 81 - 1. Set-Pieces: Gerard Moreno is identified as \#1 penalty taker for Villarreal with bonus
   ---
-  duration_ms: 2.4284
+  duration_ms: 2.2087
   type: 'test'
   ...
 # Subtest: 2. Set-Pieces: Denis Suárez receives set-piece specialist bonus for Alavés
-ok 81 - 2. Set-Pieces: Denis Suárez receives set-piece specialist bonus for Alavés
+ok 82 - 2. Set-Pieces: Denis Suárez receives set-piece specialist bonus for Alavés
   ---
-  duration_ms: 0.4954
+  duration_ms: 0.4313
   type: 'test'
   ...
 # Subtest: 3. Engine: getExpectedPoints awards bonus to set-piece specialists
-ok 82 - 3. Engine: getExpectedPoints awards bonus to set-piece specialists
+ok 83 - 3. Engine: getExpectedPoints awards bonus to set-piece specialists
   ---
-  duration_ms: 1.5502
+  duration_ms: 1.6435
   type: 'test'
   ...
 # Subtest: 4. Squad Optimizer: getExpectedPerformance attaches setPiece metadata
-ok 83 - 4. Squad Optimizer: getExpectedPerformance attaches setPiece metadata
+ok 84 - 4. Squad Optimizer: getExpectedPerformance attaches setPiece metadata
   ---
-  duration_ms: 18.1073
+  duration_ms: 3.9108
   type: 'test'
   ...
 # Subtest: 1. Speculation Radar: Identifies Gavi as top CRACK_RECOVERY opportunity
-ok 84 - 1. Speculation Radar: Identifies Gavi as top CRACK_RECOVERY opportunity
+ok 85 - 1. Speculation Radar: Identifies Gavi as top CRACK_RECOVERY opportunity
   ---
-  duration_ms: 52.4179
+  duration_ms: 41.3688
   type: 'test'
   ...
 # Subtest: 2. Speculation Radar: Identifies cheap candidates and quantifies nonzero downside
-ok 85 - 2. Speculation Radar: Identifies cheap candidates and quantifies nonzero downside
+ok 86 - 2. Speculation Radar: Identifies cheap candidates and quantifies nonzero downside
   ---
-  duration_ms: 0.9644
+  duration_ms: 0.6076
   type: 'test'
   ...
 # Subtest: 3. Speculation Radar: Denies non-Computer owned players for automated speculation flips
-ok 86 - 3. Speculation Radar: Denies non-Computer owned players for automated speculation flips
+ok 87 - 3. Speculation Radar: Denies non-Computer owned players for automated speculation flips
   ---
-  duration_ms: 0.7422
+  duration_ms: 0.6601
   type: 'test'
   ...
 # Subtest: 4. Speculation Radar: 100% BLOCKS injured, doubtful or medically compromised players
-ok 87 - 4. Speculation Radar: 100% BLOCKS injured, doubtful or medically compromised players
+ok 88 - 4. Speculation Radar: 100% BLOCKS injured, doubtful or medically compromised players
   ---
-  duration_ms: 0.6902
+  duration_ms: 0.7162
   type: 'test'
   ...
 # Subtest: 5. Speculation Radar: BLOCKS devaluing players with negative market trend (trend < 0)
-ok 88 - 5. Speculation Radar: BLOCKS devaluing players with negative market trend (trend < 0)
+ok 89 - 5. Speculation Radar: BLOCKS devaluing players with negative market trend (trend < 0)
   ---
-  duration_ms: 0.4326
+  duration_ms: 0.4004
   type: 'test'
   ...
 # [SYNC-WEB] ⏳ Ya hay una sincronización en curso. Omitiendo ejecución concurrente.
 # Subtest: System Rule 1: evaluateIncomingOffer NEVER returns ACCEPT_OFFER automatically
-ok 89 - System Rule 1: evaluateIncomingOffer NEVER returns ACCEPT_OFFER automatically
+ok 90 - System Rule 1: evaluateIncomingOffer NEVER returns ACCEPT_OFFER automatically
   ---
-  duration_ms: 21.7416
+  duration_ms: 20.3298
   type: 'test'
   ...
 # Subtest: System Rule 2: Deny-by-default on non-Computer players for auto-bidding
-ok 90 - System Rule 2: Deny-by-default on non-Computer players for auto-bidding
+ok 91 - System Rule 2: Deny-by-default on non-Computer players for auto-bidding
   ---
-  duration_ms: 4.2773
+  duration_ms: 4.8606
   type: 'test'
   ...
 # Subtest: System Rule 3: Recommended bid operates within dynamic valuation bands bounded by 100-125% VM
-ok 91 - System Rule 3: Recommended bid operates within dynamic valuation bands bounded by 100-125% VM
+ok 92 - System Rule 3: Recommended bid operates within dynamic valuation bands bounded by 100-125% VM
   ---
-  duration_ms: 0.2783
+  duration_ms: 0.2821
   type: 'test'
   ...
 # Subtest: System Rule 4: isWithinPreMatchdayWindow checks exact 15-30 min boundary
-ok 92 - System Rule 4: isWithinPreMatchdayWindow checks exact 15-30 min boundary
+ok 93 - System Rule 4: isWithinPreMatchdayWindow checks exact 15-30 min boundary
   ---
-  duration_ms: 0.1598
+  duration_ms: 0.1677
   type: 'test'
   ...
 # Subtest: System Rule 5: getAutoBidLimit standardizes both million units and euro amounts
-ok 93 - System Rule 5: getAutoBidLimit standardizes both million units and euro amounts
+ok 94 - System Rule 5: getAutoBidLimit standardizes both million units and euro amounts
   ---
-  duration_ms: 3.0561
+  duration_ms: 3.0619
   type: 'test'
   ...
 # Subtest: System Rule 6: acquireSyncLock enforces single-process exclusion and owner-only release
-ok 94 - System Rule 6: acquireSyncLock enforces single-process exclusion and owner-only release
+ok 95 - System Rule 6: acquireSyncLock enforces single-process exclusion and owner-only release
   ---
-  duration_ms: 5.4539
+  duration_ms: 6.4677
   type: 'test'
   ...
 # Subtest: System Rule 7: Placing a bid must never publish an official signing news article
-ok 95 - System Rule 7: Placing a bid must never publish an official signing news article
+ok 96 - System Rule 7: Placing a bid must never publish an official signing news article
   ---
-  duration_ms: 3.719
+  duration_ms: 3.7205
   type: 'test'
   ...
 # Subtest: 1. TOTW Tracker: Registry contains valid matchday Onces Ideales
-ok 96 - 1. TOTW Tracker: Registry contains valid matchday Onces Ideales
+ok 97 - 1. TOTW Tracker: Registry contains valid matchday Onces Ideales
   ---
-  duration_ms: 1.5633
+  duration_ms: 1.2771
   type: 'test'
   ...
 # Subtest: 2. TOTW Tracker: Evaluates squad player appearances and next round candidacy
-ok 97 - 2. TOTW Tracker: Evaluates squad player appearances and next round candidacy
+ok 98 - 2. TOTW Tracker: Evaluates squad player appearances and next round candidacy
   ---
-  duration_ms: 0.9775
+  duration_ms: 0.8069
   type: 'test'
   ...
 # Subtest: 3. TOTW Tracker: getSquadTotwSummary aggregates full squad audit
-ok 98 - 3. TOTW Tracker: getSquadTotwSummary aggregates full squad audit
+ok 99 - 3. TOTW Tracker: getSquadTotwSummary aggregates full squad audit
   ---
-  duration_ms: 0.8812
+  duration_ms: 0.6866
   type: 'test'
   ...
 # Subtest: 4. Web Traffic: trafficStats.json contains complete valid schema
-ok 99 - 4. Web Traffic: trafficStats.json contains complete valid schema
+ok 100 - 4. Web Traffic: trafficStats.json contains complete valid schema
   ---
-  duration_ms: 1.7118
+  duration_ms: 1.4985
   type: 'test'
   ...
 # Subtest: planned sales do not become spendable cash or permit a current bid
-ok 100 - planned sales do not become spendable cash or permit a current bid
+ok 101 - planned sales do not become spendable cash or permit a current bid
   ---
-  duration_ms: 25.0716
+  duration_ms: 27.2498
   type: 'test'
   ...
 # Subtest: every feasible scenario funds replacements, reserve and a legal formation
-ok 101 - every feasible scenario funds replacements, reserve and a legal formation
+ok 102 - every feasible scenario funds replacements, reserve and a legal formation
   ---
-  duration_ms: 19.8758
+  duration_ms: 21.2073
   type: 'test'
   ...
 # Subtest: subtracts other pending commitments once and does not double-count Yamal bid
-ok 102 - subtracts other pending commitments once and does not double-count Yamal bid
+ok 103 - subtracts other pending commitments once and does not double-count Yamal bid
   ---
-  duration_ms: 21.145
+  duration_ms: 20.906
   type: 'test'
   ...
 # Subtest: rejects impossible price even when every player is sold
-ok 103 - rejects impossible price even when every player is sold
+ok 104 - rejects impossible price even when every player is sold
   ---
-  duration_ms: 20.8131
+  duration_ms: 19.6779
   type: 'test'
   ...
 # Subtest: missing target or already owned target never recommends liquidation
-ok 104 - missing target or already owned target never recommends liquidation
+ok 105 - missing target or already owned target never recommends liquidation
   ---
-  duration_ms: 0.3873
+  duration_ms: 0.3821
   type: 'test'
   ...
 # Subtest: cheap radar excludes our players and flags rival offers without promising minutes
-ok 105 - cheap radar excludes our players and flags rival offers without promising minutes
+ok 106 - cheap radar excludes our players and flags rival offers without promising minutes
   ---
-  duration_ms: 20.4604
+  duration_ms: 22.6759
   type: 'test'
   ...
 # Subtest: rejects unreadable finances, invalid prices and duplicate players
-ok 106 - rejects unreadable finances, invalid prices and duplicate players
+ok 107 - rejects unreadable finances, invalid prices and duplicate players
   ---
-  duration_ms: 1.3038
+  duration_ms: 1.0885
   type: 'test'
   ...
 # Subtest: funds the actual target position and rejects unknown positions
-ok 107 - funds the actual target position and rejects unknown positions
+ok 108 - funds the actual target position and rejects unknown positions
   ---
-  duration_ms: 21.6304
+  duration_ms: 19.2924
   type: 'test'
   ...
-1..107
-# tests 107
+1..108
+# tests 108
 # suites 0
-# pass 107
+# pass 108
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 1535.0704
+# duration_ms 1549.1026
