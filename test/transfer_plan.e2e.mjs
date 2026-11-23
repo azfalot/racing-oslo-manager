@@ -26,8 +26,9 @@ try {
   await panel.getByText(/^No viable/).waitFor({ state: 'visible' });
   await panel.getByLabel('Precio del fichaje').selectOption('30000000');
   await panel.getByText('Radar por debajo de un millón', { exact: true }).click();
-  assert.match(await panel.innerText(), /Swedberg/);
-  assert.match(await panel.innerText(), /Negociar/);
+  assert.match(await panel.innerText(), /José Salinas/);
+  assert.match(await panel.innerText(), /Solo jugadores vendidos por Computer/);
+  assert.doesNotMatch(await panel.innerText(), /Swedberg|Iker Muñoz|Negociar/);
   await panel.screenshot({ path: `${evidence}/desktop.png` });
   await page.setViewportSize({ width: 390, height: 844 });
   await panel.scrollIntoViewIfNeeded();

@@ -32,7 +32,7 @@ export function buildTransferPlan({ squad, market, balance, pendingBids = [], cr
   const eligible = players.filter(p => id(p) !== targetId);
   const scenarios = prices.map(price => ({ price, feasible: false, plan: null }));
   // Enumerate portfolios rather than sell the cheapest players until the account is empty.
-  if (target && !owned) for (let mask = 0; mask < 2 ** eligible.length; mask++) {
+  if (target && isVerifiedComputerOwner(target) && !owned) for (let mask = 0; mask < 2 ** eligible.length; mask++) {
     let proceeds = 0;
     let count = 0;
     let retainedQuality = 0;
@@ -65,7 +65,7 @@ export function buildTransferPlan({ squad, market, balance, pendingBids = [], cr
         replacements: best.replacements, replacementBudget, cashAfterSigning, spare };
     }
   }
-  const cheapCandidates = marketPlayers.filter(p => id(p) !== targetId && value(p) > 0 && value(p) < 1000000 &&
+  const cheapCandidates = marketPlayers.filter(p => isVerifiedComputerOwner(p) && id(p) !== targetId && value(p) > 0 && value(p) < 1000000 &&
     !players.some(own => id(own) === id(p)) && p.status === 'ACTIVE').map(p => ({
     playerId: id(p), name: p.name, price: value(p), position: p.type ?? p.position,
     average: average(p), recentAverage: Number(String(p.average?.lastXMatchdays?.points ?? 0).replace(',', '.')) || 0,
@@ -73,7 +73,7 @@ export function buildTransferPlan({ squad, market, balance, pendingBids = [], cr
   })).sort((a, b) => b.recentAverage - a.recentAverage || a.price - b.price);
   return { capturedAt, target: target ? { playerId: id(target), name: target.name, price: value(target), computer: isVerifiedComputerOwner(target) } : null,
     owned, availableCash, committed, credit, teamValue, totalWealth: balance + teamValue, squadSize, replacementPrice, reserve,
-    canBidNow: target ? prices[0] <= credit - committed && prices[0] <= availableCash - reserve : false,
+    canBidNow: target && isVerifiedComputerOwner(target) && !owned ? prices[0] <= credit - committed && prices[0] <= availableCash - reserve : false,
     scenarios, cheapCandidates,
     warning: 'Ventas estimadas a valor de mercado, sin garantizar ofertas ni adjudicación. Los recambios son una provisión de gasto; no garantizan titulares disponibles.' };
 }

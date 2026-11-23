@@ -41,11 +41,13 @@ test('missing target or already owned target never recommends liquidation', () =
   assert.equal(buildTransferPlan({ ...input, squad: { players: [...squad.players, target] } }).scenarios[0].plan, null);
 });
 
-test('cheap radar excludes our players and flags rival offers without promising minutes', () => {
+test('cheap radar includes only Computer and excludes owned, expensive and injured players', () => {
   const cheap = { ...p(40, 'defender', 800000), owner: { id: 8, name: 'Rival' }, average: { points: '4,57', lastXMatchdays: { points: '4' } } };
-  const plan = buildTransferPlan({ ...input, market: { players: [target, cheap, squad.players[0], p(41, 'defender', 1000000), { ...p(42,'keeper'), status:'INJURED' }] } });
+  const computer = { ...cheap, playerId: 43, owner: { id: 1, name: 'Computer' } };
+  const plan = buildTransferPlan({ ...input, market: { players: [target, cheap, computer, squad.players[0], { ...p(41, 'defender', 1000000), owner: computer.owner }, { ...p(42,'keeper'), status:'INJURED', owner: computer.owner }] } });
   assert.equal(plan.cheapCandidates.length, 1);
-  assert.equal(plan.cheapCandidates[0].computer, false);
+  assert.equal(plan.cheapCandidates[0].computer, true);
+  assert.equal(plan.cheapCandidates[0].playerId, 43);
   assert.equal(plan.cheapCandidates[0].average, 4.57);
 });
 
@@ -61,4 +63,13 @@ test('funds the actual target position and rejects unknown positions', () => {
     assert.equal(s.plan.missingPositions.keeper, 0);
   }
   assert.throws(() => buildTransferPlan({ ...input, market: { players: [{ ...target, type: 'unknown' }] } }), /inválidos/);
+});
+
+test('rival and unknown sellers never enter the cheap radar or financing plans', () => {
+  const rival = { ...p(50, 'defender', 300000), owner: { id: 8, name: 'Rival' } };
+  const unknown = { ...p(51, 'defender', 300000) };
+  const plan = buildTransferPlan({ ...input, market: { players: [{ ...target, owner: rival.owner }, rival, unknown] } });
+  assert.deepEqual(plan.cheapCandidates, []);
+  assert.ok(plan.scenarios.every(s => s.plan === null && s.feasible === false));
+  assert.equal(plan.canBidNow, false);
 });

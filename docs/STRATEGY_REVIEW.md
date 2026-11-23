@@ -21,9 +21,9 @@ Junior Firpo y una tercera incorporación completarían la plantilla. Kike y Uch
 
 Conservar Soria, Valverde, Mandi, Adrián, Denis, Johnny, Gerard y Mariano. Estudiar ventas de Gavi (1,69 M€), Copete (630.000 €), Cajuste (430.000 €), Kike (280.000 €), Junior (250.000 €), Nico (230.000 €) y Uche (170.000 €): total 3,68 M€. No se han solicitado ni aceptado nuevas ventas para esta alternativa.
 
-Objetivos observados: Ndukwe (Computer, VM 2,05 M€), Swedberg (Suances nin, VM 820.000 €) e Iker Muñoz (Pachangueros, VM 870.000 €). Total hipotético 3,74 M€, solo si se adjudican o negocian a esos precios. Los dos últimos pertenecen a rivales y no tienen un precio acordado.
+**Escenario anterior retirado:** incluía a Swedberg e Iker Muñoz, propiedad de rivales. El mánager confirma que los rivales no venden. No se debe planificar ninguna compra, sustitución o negociación con ellos. El archivo de evidencia `balanced-strategy.json` conserva aquel cálculo histórico, que no constituye una recomendación vigente.
 
-Once 3-5-2: **Soria; Mandi, Adrián, Ndukwe; Valverde, Denis, Johnny, Swedberg, Iker; Gerard y Mariano**. Banquillo: Pau Navarro y Aihen. Serían 13 jugadores y quedarían 945.988 € de caja. La suma de medias recientes de este once es 41,6 frente a 35 de una estructura actual 3-5-2 comparable: es un indicador descriptivo, no una predicción ni un incremento garantizado. Se deben comprobar minutos, lesiones, rival y titularidades antes de cada fichaje. No bastaría por sí solo para afirmar que se recuperará el liderato.
+Solo se consideran jugadores publicados por Computer. En la consulta observada estaban Andrés Martín (1,63 M€), Zubeldia (1,07 M€), Ndukwe (2,05 M€) y Camavinga (3,56 M€). No se ha pujado por ellos durante esta revisión. El informe `/capital` selecciona mejoras financiables y planes condicionados a ventas confirmadas usando únicamente esos vendedores verificados, con nuevas comprobaciones en cada puja. No se construye un once dando por fichados jugadores de rivales ni suponiendo que Computer mantendrá la misma oferta mañana.
 
 ## Seguridad operativa
 

@@ -78,7 +78,7 @@ Estos comandos no compran, venden ni envían mensajes. `--record` actualiza `dat
 
 Las ventas reales requieren confirmación manual mediante el botón de aceptar oferta en Telegram. `ComunioClient.acceptSaleOffer` bloquea cualquier llamada sin `confirmedByUser: true`, incluso desde especulación o saneamiento de deuda. No basta con que la oferta sea rentable. `COMUNIO_NOTIFY_STARTUP=false` permite reiniciar el servicio sin enviar el aviso de arranque.
 
-El panel de Mercado permite comparar pujas de 30, 32,5 y 35 millones. Calcula carteras de ventas a valor de mercado, preserva la mejor calidad media asequible, comprueba seis formaciones legales y reserva 500.000 € por recambio hasta completar 13 jugadores, además de 500.000 € de colchón. Son hipótesis presupuestarias: no garantizan ventas, disponibilidad ni minutos. Las ofertas reales pueden hacer inviable un escenario.
+El panel de Mercado permite comparar pujas de 30, 32,5 y 35 millones. Tanto el objetivo como el radar barato deben estar ofrecidos por Computer verificado: se excluyen jugadores de rivales y vendedores desconocidos de todos los planes de compra. Calcula carteras de ventas a valor de mercado, preserva la mejor calidad media asequible, comprueba seis formaciones legales y reserva 500.000 € por recambio hasta completar 13 jugadores, además de 500.000 € de colchón. Son hipótesis presupuestarias: no garantizan ventas, disponibilidad ni minutos. Las ofertas reales pueden hacer inviable un escenario.
 
 ```powershell
 # Consultar Comunio y actualizar el plan; no realiza operaciones

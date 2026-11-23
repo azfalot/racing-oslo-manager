@@ -17,7 +17,7 @@ export default function TransferPlan() {
   return <section aria-labelledby="transfer-plan-title" className="border border-amber-400/40 bg-black/40 p-4 rounded-sm space-y-4">
     <div>
       <h2 id="transfer-plan-title" className="text-lg font-bold text-amber-300">Operación Yamal</h2>
-      <p className="text-sm text-cream-dark">{data.target ? `${data.target.name} · Valor de mercado ${euros(data.target.price)}` : 'Objetivo fuera del mercado'} · Datos del {new Date(data.capturedAt).toLocaleString('es-ES')}</p>
+      <p className="text-sm text-cream-dark">{data.target?.computer ? `${data.target.name} · Valor de mercado ${euros(data.target.price)}` : 'Objetivo no ofrecido por Computer'} · Datos del {new Date(data.capturedAt).toLocaleString('es-ES')}</p>
       {stale && <p role="status" className="text-amber-300">Datos de más de 24 horas. Actualiza el plan antes de operar.</p>}
     </div>
     <div className="grid sm:grid-cols-3 gap-3 text-sm">
@@ -41,10 +41,10 @@ export default function TransferPlan() {
     </>}
     <details>
       <summary className="cursor-pointer text-sm font-bold">Radar por debajo de un millón</summary>
-      <p className="text-xs mt-2 text-amber-300">Comprueba minutos y titularidad. Los precios de jugadores rivales son valores de mercado, no ofertas aceptadas.</p>
+      <p className="text-xs mt-2 text-amber-300">Solo jugadores vendidos por Computer. Comprueba minutos y titularidad antes de pujar.</p>
       <div className="overflow-x-auto mt-2"><table className="w-full text-left text-sm">
         <thead><tr><th className="p-2">Jugador</th><th className="p-2">Posición</th><th className="p-2">VM</th><th className="p-2">Media últimos 5</th><th className="p-2">Vendedor</th></tr></thead>
-        <tbody>{data.cheapCandidates.map(p => <tr key={p.playerId} className="border-t border-forest/30"><td className="p-2">{p.name}</td><td className="p-2">{labels[p.position]}</td><td className="p-2 whitespace-nowrap">{euros(p.price)}</td><td className="p-2">{p.recentAverage}</td><td className="p-2">{p.owner}{!p.computer && ' · Negociar'}</td></tr>)}</tbody>
+        <tbody>{data.cheapCandidates.filter(p => p.computer === true).map(p => <tr key={p.playerId} className="border-t border-forest/30"><td className="p-2">{p.name}</td><td className="p-2">{labels[p.position]}</td><td className="p-2 whitespace-nowrap">{euros(p.price)}</td><td className="p-2">{p.recentAverage}</td><td className="p-2">{p.owner}</td></tr>)}</tbody>
       </table></div>
     </details>
     <p className="text-xs text-cream-dark">{data.warning}</p>
