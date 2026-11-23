@@ -1,13 +1,13 @@
 {
-  "lastSyncTimestamp": "2026-11-22T17:01:40.065Z",
-  "lastSyncFormatted": "22/11/26, 18:01:40",
+  "lastSyncTimestamp": "2026-11-23T04:06:45.875Z",
+  "lastSyncFormatted": "23/11/26, 5:06:45",
   "bot": {
     "name": "comunio-bot",
     "version": "1.2.0",
     "status": "ONLINE",
     "mode": "autonomo",
     "environment": "production",
-    "pid": 21172,
+    "pid": 7188,
     "uptime": "0h 1m",
     "pm2Process": "comunio-bot (id 0, fork)",
     "schedule": {
@@ -45,7 +45,7 @@
     "distStatus": "Sincronizado con origin/main",
     "dataFiles": {
       "squad": "17 jugadores en plantilla",
-      "news": "100 noticias históricas sincronizadas",
+      "news": "99 noticias históricas sincronizadas",
       "rivals": "10 clubes auditados con sugerencias dinámicas",
       "market": "Mercado escaneado",
       "warRoom": "War Room cuantitativo activo con Monte Carlo (1.000 iteraciones)",
@@ -57,7 +57,7 @@
     "manager": "azfalot",
     "standingsPosition": 2,
     "points": 188,
-    "squadValue": 34740000,
+    "squadValue": 35230000,
     "balanceStatus": "Positivo / Saneado (+280.288 €)",
     "activeFormation": "3-4-3",
     "starterCount": 11,
@@ -92,7 +92,7 @@
       "id": "news_crawler",
       "name": "Crawler de Noticias & Tablón",
       "status": "OK",
-      "detail": "100 noticias históricas sincronizadas y deduplicadas"
+      "detail": "99 noticias históricas sincronizadas y deduplicadas"
     },
     {
       "id": "bench_trends",
@@ -126,7 +126,7 @@
     {
       "name": "Radar y deduplicación de noticias",
       "status": "OK",
-      "detail": "100 noticias históricas"
+      "detail": "99 noticias históricas"
     },
     {
       "name": "Auditoría de banquillo y tendencias",
