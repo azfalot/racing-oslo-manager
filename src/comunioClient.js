@@ -783,7 +783,13 @@ export class ComunioClient {
   /**
    * Acepta una oferta de venta recibida (Vía API directa de Comunio)
    */
-  async acceptSaleOffer(offerId, playerId, price) {
+  async acceptSaleOffer(offerId, playerId, price, options = {}) {
+    // Sales require a direct manual confirmation. Debt and trading profits never
+    // authorize background jobs to transfer a player out of the squad.
+    if (options?.confirmedByUser !== true) {
+      console.warn(`[CLIENT] Venta bloqueada: jugador ${playerId} sin confirmación manual.`);
+      return false;
+    }
     if (!this.isLoggedIn) await this.login();
     console.log(`[CLIENT] Aceptando oferta ID ${offerId} por jugador ID ${playerId} a precio ${price} € vía API directa...`);
     try {

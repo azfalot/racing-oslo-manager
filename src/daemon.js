@@ -1660,7 +1660,7 @@ async function handleCallbackQuery(callbackQuery) {
       const player = (squad?.players || []).find(p => p.id === parseInt(playerId) || p.playerId === parseInt(playerId));
       const playerName = player?.name || `Jugador #${playerId}`;
 
-      const success = await client.acceptSaleOffer(offerId, playerId, price);
+      const success = await client.acceptSaleOffer(offerId, playerId, price, { confirmedByUser: true });
       if (success) {
         await sendTelegramMessage(`💼 ✅ <b>[Mateo Oslomany]:</b> Venta de <b>${playerName}</b> por <b>${parseInt(price).toLocaleString()} €</b> ACEPTADA con éxito.`);
         try {
@@ -1797,7 +1797,9 @@ async function registerTelegramCommands() {
 async function startPolling() {
   console.log('[DAEMON] Iniciando escucha de comandos de Telegram (Long Polling v3.5.0)...');
   await registerTelegramCommands();
-  await sendTelegramMessage('💼 🟢 <b>[Mateo Oslomany v3.5]:</b> Servicio iniciado y en línea (v3.5.0). Envía <code>/help</code> para ver el Centro de Mando.');
+  if (process.env.COMUNIO_NOTIFY_STARTUP !== 'false') {
+    await sendTelegramMessage('💼 🟢 <b>[Mateo Oslomany v3.5]:</b> Servicio iniciado y en línea (v3.5.0). Envía <code>/help</code> para ver el Centro de Mando.');
+  }
 
   while (true) {
     try {
