@@ -35,6 +35,7 @@ try {
   await page.getByRole('heading', { name: /Auditoría Financiera/i }).waitFor({ state: 'visible' });
   const auditText = await page.locator('body').innerText();
   assert.doesNotMatch(auditText, /100% Éxito|0% riesgo/);
+  assert.doesNotMatch(auditText, /Ventas forzadas de deuda|Minusvalías saneadas/i);
   assert.match(auditText, /Latente con coste conocido/i);
   await page.screenshot({ path: `${evidence}/loss-audit.png` });
   await page.getByRole('button', { name: 'Cerrar auditoría' }).click();

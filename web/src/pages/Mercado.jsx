@@ -495,20 +495,20 @@ export default function Mercado() {
                     +{(marketBalance.realizedGainsEUR || 0).toLocaleString('es-ES')} €
                   </p>
                   <p className="text-[10px] text-cream/50 font-mono">
-                    {marketBalance.profitableTradesCount || 4} traspasos en verde
+                    {marketBalance.profitableTradesCount ?? 0} registros con plusvalía
                   </p>
                 </div>
 
                 {/* 2. Minusvalías de Saneamiento */}
                 <div className="bg-black/70 border border-red-500/40 p-3 rounded-sm space-y-1 shadow-md">
                   <span className="text-[10px] uppercase font-bold text-red-400 font-mono flex items-center gap-1">
-                    <TrendingDown size={12} /> Minusvalías Saneadas
+                    <TrendingDown size={12} /> Minusvalías Realizadas
                   </span>
                   <p className="text-base sm:text-lg font-bold font-mono text-red-300">
                     -{(marketBalance.realizedLossesEUR || 0).toLocaleString('es-ES')} €
                   </p>
                   <p className="text-[10px] text-cream/50 font-mono">
-                    Ventas forzadas de deuda (J1-J4)
+                    Operaciones cerradas con coste identificado
                   </p>
                 </div>
 
@@ -557,7 +557,7 @@ export default function Mercado() {
               {/* Tabla de Operaciones Cerradas */}
               <div className="space-y-3">
                 <h4 className="text-xs font-display font-bold text-white uppercase tracking-wider flex items-center justify-between border-b border-forest/20 pb-2">
-                  <span>Historial Completo de Traspasos Cerrados ({marketBalance.closedOperations?.length || 0})</span>
+                  <span>Operaciones agrupadas por jugador ({marketBalance.closedOperations?.length || 0})</span>
                   <span className="text-[10px] font-mono text-cream/50 font-normal">Ordenado por rendimiento económico</span>
                 </h4>
 
@@ -573,7 +573,7 @@ export default function Mercado() {
                       </tr>
                     </thead>
                     <tbody>
-                      {(marketBalance.closedOperations || []).map((op, idx) => (
+                      {[...(marketBalance.closedOperations || [])].sort((a, b) => a.diff - b.diff).map((op, idx) => (
                         <tr key={idx} className="border-b border-white/5 hover:bg-forest-dark/20 transition-colors">
                           <td className="p-2.5 font-bold text-white font-sans">{op.playerName}</td>
                           <td className="p-2.5 text-cream/70">{op.buyPrice.toLocaleString('es-ES')} €</td>
@@ -594,7 +594,7 @@ export default function Mercado() {
               {/* Tabla de Plusvalías Latentes de la Plantilla Actual */}
               <div className="space-y-3">
                 <h4 className="text-xs font-display font-bold text-white uppercase tracking-wider flex items-center justify-between border-b border-forest/20 pb-2">
-                  <span>Revalorización de la Plantilla Actual ({marketBalance.latentTrades?.length || 0} jugadores)</span>
+                  <span>Valoración con coste conocido ({marketBalance.latentTrades?.length || 0} jugadores)</span>
                   <span className="text-[10px] font-mono text-purple-300 font-normal">Valor de Mercado actual vs Coste de compra</span>
                 </h4>
 
@@ -610,7 +610,7 @@ export default function Mercado() {
                       </tr>
                     </thead>
                     <tbody>
-                      {(marketBalance.latentTrades || []).map((lat, idx) => (
+                      {[...(marketBalance.latentTrades || [])].sort((a, b) => a.latentDiff - b.latentDiff).map((lat, idx) => (
                         <tr key={idx} className="border-b border-white/5 hover:bg-forest-dark/20 transition-colors">
                           <td className="p-2.5 font-bold text-white font-sans">{lat.playerName}</td>
                           <td className="p-2.5 text-cream/70">{lat.buyPrice.toLocaleString('es-ES')} €</td>
