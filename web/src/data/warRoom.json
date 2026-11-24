@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-23T22:51:32.523Z",
+  "timestamp": "2026-11-24T04:06:24.754Z",
   "currentMatchday": 13,
   "confidenceLevel": "HIGH",
   "standings": {
@@ -9,22 +9,22 @@
     "gap": 57
   },
   "finances": {
-    "balance": 1005988,
+    "balance": 1465988,
     "committedBids": 0,
-    "effectiveBalance": 1005988,
-    "squadValue": 35230000,
-    "totalPatrimony": 36235988
+    "effectiveBalance": 1465988,
+    "squadValue": 35830000,
+    "totalPatrimony": 37295988
   },
   "lineup": {
-    "formation": "3-4-3",
-    "expectedPoints": 45.3,
+    "formation": "3-5-2",
+    "expectedPoints": 45.099999999999994,
     "starterCount": 11,
     "starterRisks": [
       {
         "playerId": 1876,
         "name": "Denis Suárez",
-        "price": 1240000,
-        "totalPoints": 44,
+        "price": 1280000,
+        "totalPoints": 56,
         "status": null,
         "statusInfo": null,
         "type": "midfielder",
@@ -97,8 +97,8 @@
           "points": "5,09",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "5,4",
-            "points": "3"
+            "grade": "5,5",
+            "points": "4,4"
           }
         },
         "club": {
@@ -176,6 +176,37 @@
             },
             "kickoff": "2026-12-04T21:00:00+01:00",
             "odds": null
+          },
+          {
+            "matchdayNr": 16,
+            "homeClub": {
+              "id": 10,
+              "name": "Levante",
+              "abbreviation": "lev",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/10"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/10/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 89,
+              "name": "Alavés",
+              "abbreviation": "ala",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/89"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/89/logo"
+                }
+              }
+            },
+            "kickoff": "2026-12-12T14:00:00+01:00",
+            "odds": null
           }
         ],
         "cards": {
@@ -190,86 +221,35 @@
         "points": 0
       },
       {
-        "playerId": 2202,
-        "name": "Kike García",
-        "price": 280000,
-        "totalPoints": 0,
+        "playerId": 4161,
+        "name": "Cajuste",
+        "price": 420000,
+        "totalPoints": 9,
         "status": null,
         "statusInfo": null,
-        "type": "striker",
+        "type": "midfielder",
         "historical": {
-          "points": [
-            {
-              "season": "16/17",
-              "points": "105",
-              "eventId": 788917
-            },
-            {
-              "season": "17/18",
-              "points": "116",
-              "eventId": 869072
-            },
-            {
-              "season": "18/19",
-              "points": "119",
-              "eventId": 899953
-            },
-            {
-              "season": "19/20",
-              "points": "118",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "237",
-              "eventId": 939519
-            },
-            {
-              "season": "21/22",
-              "points": "127",
-              "eventId": 951313
-            },
-            {
-              "season": "22/23",
-              "points": "113",
-              "eventId": 961836
-            },
-            {
-              "season": "23/24",
-              "points": "128",
-              "eventId": 975270
-            },
-            {
-              "season": "24/25",
-              "points": "225",
-              "eventId": 988474
-            },
-            {
-              "season": "25/26",
-              "points": "161",
-              "eventId": 998265
-            }
-          ]
+          "points": []
         },
         "average": {
-          "grade": "0",
-          "points": "0",
+          "grade": "6,5",
+          "points": "3",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "",
-            "points": ""
+            "grade": "2,6",
+            "points": "1"
           }
         },
         "club": {
-          "id": 7,
-          "name": "Espanyol",
+          "id": 65,
+          "name": "Málaga",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/7"
+              "href": "https://api.comunio.es/clubs/65"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/7/logo"
+              "href": "https://api.comunio.es/clubs/65/logo"
             }
           }
         },
@@ -277,63 +257,94 @@
           {
             "matchdayNr": 14,
             "homeClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/65"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/65/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/8"
+                  "href": "https://api.comunio.es/clubs/1"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
+                  "href": "https://api.comunio.es/clubs/1/logo"
                 }
               }
             },
-            "kickoff": "2026-11-30T21:00:00+01:00",
+            "kickoff": "2026-11-28T16:15:00+01:00",
             "odds": null
           },
           {
             "matchdayNr": 15,
             "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
+              "id": 17,
+              "name": "Sevilla",
+              "abbreviation": "sev",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/89"
+                  "href": "https://api.comunio.es/clubs/17"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
+                  "href": "https://api.comunio.es/clubs/17/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/65"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/65/logo"
                 }
               }
             },
-            "kickoff": "2026-12-04T21:00:00+01:00",
+            "kickoff": "2026-12-07T21:00:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 16,
+            "homeClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "kickoff": "2026-12-12T18:30:00+01:00",
             "odds": null
           }
         ],
@@ -343,31 +354,31 @@
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.6,
-        "id": 2202,
-        "position": "striker",
+        "expectedPoints": 0.4,
+        "id": 4161,
+        "position": "midfielder",
         "points": 0
       }
     ]
   },
   "weaknesses": [
     {
-      "playerId": 2202,
-      "name": "Kike García",
-      "position": "striker",
-      "price": 280000,
-      "expectedPoints": 0.6,
-      "vorp": 0,
-      "vorpPerMatchday": 0,
-      "replacementPpm": 2.5,
-      "upgradeGap": 4.9,
-      "urgencyScore": 18.4
+      "playerId": 4161,
+      "name": "Cajuste",
+      "position": "midfielder",
+      "price": 420000,
+      "expectedPoints": 0.4,
+      "vorp": -43,
+      "vorpPerMatchday": -1.26,
+      "replacementPpm": 2.6,
+      "upgradeGap": 5.1,
+      "urgencyScore": 31.5
     },
     {
       "playerId": 3285,
       "name": "Copete",
       "position": "defender",
-      "price": 630000,
+      "price": 700000,
       "expectedPoints": 3.4,
       "vorp": -6,
       "vorpPerMatchday": -0.18,
@@ -379,7 +390,7 @@
       "playerId": 2251,
       "name": "Aïssa Mandi",
       "position": "defender",
-      "price": 2230000,
+      "price": 2190000,
       "expectedPoints": 4.3,
       "vorp": 13,
       "vorpPerMatchday": 0.38,
@@ -398,104 +409,53 @@
   },
   "marketTargets": [
     {
-      "playerId": 4139,
-      "name": "Ndukwe",
+      "playerId": 3971,
+      "name": "Zaid Romero",
       "type": "defender",
-      "price": 2050000,
-      "bidAmount": 2296000,
-      "maxRationalBid": 2296000,
-      "marginPct": 12,
+      "price": 1540000,
+      "bidAmount": 1678600,
+      "maxRationalBid": 1678600,
+      "marginPct": 9,
       "band": "CLEAR_UPGRADE",
-      "expectedPoints": 5,
-      "ppm": 3.83,
-      "efficiency": 46.7,
-      "upgradePoints": 4.2,
-      "marginalValue": 4.2,
+      "expectedPoints": 4,
+      "ppm": 2.67,
+      "efficiency": 41.6,
+      "upgradePoints": 3.5,
+      "marginalValue": 3.5,
       "vorp": 13,
       "vorpPerMatchday": 0.38,
-      "cpmp": 488095,
-      "cpmpSeason": 14336,
+      "cpmp": 440000,
+      "cpmpSeason": 12941,
       "replacedPlayer": {
-        "playerId": 2202,
-        "name": "Kike García",
-        "price": 280000,
-        "totalPoints": 0,
+        "playerId": 4161,
+        "name": "Cajuste",
+        "price": 420000,
+        "totalPoints": 9,
         "status": null,
         "statusInfo": null,
-        "type": "striker",
+        "type": "midfielder",
         "historical": {
-          "points": [
-            {
-              "season": "16/17",
-              "points": "105",
-              "eventId": 788917
-            },
-            {
-              "season": "17/18",
-              "points": "116",
-              "eventId": 869072
-            },
-            {
-              "season": "18/19",
-              "points": "119",
-              "eventId": 899953
-            },
-            {
-              "season": "19/20",
-              "points": "118",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "237",
-              "eventId": 939519
-            },
-            {
-              "season": "21/22",
-              "points": "127",
-              "eventId": 951313
-            },
-            {
-              "season": "22/23",
-              "points": "113",
-              "eventId": 961836
-            },
-            {
-              "season": "23/24",
-              "points": "128",
-              "eventId": 975270
-            },
-            {
-              "season": "24/25",
-              "points": "225",
-              "eventId": 988474
-            },
-            {
-              "season": "25/26",
-              "points": "161",
-              "eventId": 998265
-            }
-          ]
+          "points": []
         },
         "average": {
-          "grade": "0",
-          "points": "0",
+          "grade": "6,5",
+          "points": "3",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "",
-            "points": ""
+            "grade": "2,6",
+            "points": "1"
           }
         },
         "club": {
-          "id": 7,
-          "name": "Espanyol",
+          "id": 65,
+          "name": "Málaga",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/7"
+              "href": "https://api.comunio.es/clubs/65"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/7/logo"
+              "href": "https://api.comunio.es/clubs/65/logo"
             }
           }
         },
@@ -503,63 +463,94 @@
           {
             "matchdayNr": 14,
             "homeClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/65"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/65/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/8"
+                  "href": "https://api.comunio.es/clubs/1"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
+                  "href": "https://api.comunio.es/clubs/1/logo"
                 }
               }
             },
-            "kickoff": "2026-11-30T21:00:00+01:00",
+            "kickoff": "2026-11-28T16:15:00+01:00",
             "odds": null
           },
           {
             "matchdayNr": 15,
             "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
+              "id": 17,
+              "name": "Sevilla",
+              "abbreviation": "sev",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/89"
+                  "href": "https://api.comunio.es/clubs/17"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
+                  "href": "https://api.comunio.es/clubs/17/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/65"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/65/logo"
                 }
               }
             },
-            "kickoff": "2026-12-04T21:00:00+01:00",
+            "kickoff": "2026-12-07T21:00:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 16,
+            "homeClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "kickoff": "2026-12-12T18:30:00+01:00",
             "odds": null
           }
         ],
@@ -569,24 +560,24 @@
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.6,
-        "id": 2202,
-        "position": "striker",
+        "expectedPoints": 0.4,
+        "id": 4161,
+        "position": "midfielder",
         "points": 0
       },
-      "replacedPlayerName": "Kike García",
-      "replacedPlayerExpectedPoints": 0.6,
-      "strategicScore": 67.5,
+      "replacedPlayerName": "Cajuste",
+      "replacedPlayerExpectedPoints": 0.4,
+      "strategicScore": 64.9,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 4.2
+          "marginalValue": 3.5
         },
         "absoluteQuality": {
-          "raw": 63.8,
+          "raw": 44.5,
           "weight": 0.2,
-          "ppm": 3.83
+          "ppm": 2.67
         },
         "positionNeed": {
           "raw": 30,
@@ -596,7 +587,632 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 46.7
+          "efficiency": 41.6
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 10,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": true,
+      "reasoning": [
+        "✅ Entra en el XI titular (+3.5 pts al Once Ideal sustituyendo a Cajuste (2.21 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (2.67 PPM > 2.21 PPM).",
+        "🟡 Posición con necesidad MODERADA: 5 disponibles. Fondo de armario ajustado.",
+        "📊 🔄 Rotación Habitual (PPM: 2.67 | Fiabilidad: 55% minutos | Eficiencia: 41.6 pts/M€)",
+        "🔥 Dinámica de club: 📉 Sequía Ofensiva / Plantilla Corta (0.88x): 0V 3E 2D - Sin victorias y escasa producción de goles",
+        "⚔️ Competencia en club: Compite en [object Object] con Djené Dakonam, Omar Alderete, Juan Berrocal... (Nivel: ALTA, Confianza XI: 55%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.678.600 € (109.0% VM | Sobreprecio: +9%).",
+        "⛔ Fondos insuficientes: Requiere 2.678.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.465.988 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Cajuste). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.678.600 € (109.0% VM | Sobreprecio: +9%)."
+    },
+    {
+      "playerId": 3109,
+      "name": "Andrés Martín",
+      "type": "striker",
+      "price": 1650000,
+      "bidAmount": 1831500,
+      "maxRationalBid": 1831500,
+      "marginPct": 11,
+      "band": "CLEAR_UPGRADE",
+      "expectedPoints": 5,
+      "ppm": 3.61,
+      "efficiency": 52.5,
+      "upgradePoints": 4.1,
+      "marginalValue": 4.1,
+      "vorp": 20,
+      "vorpPerMatchday": 0.59,
+      "cpmp": 402439,
+      "cpmpSeason": 11871,
+      "replacedPlayer": {
+        "playerId": 4161,
+        "name": "Cajuste",
+        "price": 420000,
+        "totalPoints": 9,
+        "status": null,
+        "statusInfo": null,
+        "type": "midfielder",
+        "historical": {
+          "points": []
+        },
+        "average": {
+          "grade": "6,5",
+          "points": "3",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "2,6",
+            "points": "1"
+          }
+        },
+        "club": {
+          "id": 65,
+          "name": "Málaga",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/65"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/65/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 14,
+            "homeClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/1"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/1/logo"
+                }
+              }
+            },
+            "kickoff": "2026-11-28T16:15:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 15,
+            "homeClub": {
+              "id": 17,
+              "name": "Sevilla",
+              "abbreviation": "sev",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/17"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/17/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "kickoff": "2026-12-07T21:00:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 16,
+            "homeClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "kickoff": "2026-12-12T18:30:00+01:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 0.4,
+        "id": 4161,
+        "position": "midfielder",
+        "points": 0
+      },
+      "replacedPlayerName": "Cajuste",
+      "replacedPlayerExpectedPoints": 0.4,
+      "strategicScore": 64.3,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 100,
+          "weight": 0.4,
+          "marginalValue": 4.1
+        },
+        "absoluteQuality": {
+          "raw": 60.2,
+          "weight": 0.2,
+          "ppm": 3.61
+        },
+        "positionNeed": {
+          "raw": 5,
+          "weight": 0.15,
+          "detail": "4 disponibles. Posición bien cubierta."
+        },
+        "marketOpportunity": {
+          "raw": 100,
+          "weight": 0.1,
+          "efficiency": 52.5
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 10,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": true,
+      "reasoning": [
+        "✅ Entra en el XI titular (+4.1 pts al Once Ideal sustituyendo a Cajuste (2.21 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (3.61 PPM > 2.21 PPM).",
+        "📊 🔄 Rotación Habitual (PPM: 3.61 | Fiabilidad: 75% minutos | Eficiencia: 52.5 pts/M€)",
+        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 75%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.831.500 € (111.0% VM | Sobreprecio: +11%).",
+        "⛔ Fondos insuficientes: Requiere 2.831.500 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.465.988 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Cajuste). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.831.500 € (111.0% VM | Sobreprecio: +11%)."
+    },
+    {
+      "playerId": 3125,
+      "name": "Iván Martín",
+      "type": "midfielder",
+      "price": 2680000,
+      "bidAmount": 3082000,
+      "maxRationalBid": 3082000,
+      "marginPct": 15,
+      "band": "ELITE_LEAGUE_WINNER",
+      "expectedPoints": 5,
+      "ppm": 3.81,
+      "efficiency": 34.1,
+      "upgradePoints": 5,
+      "marginalValue": 5,
+      "vorp": 52,
+      "vorpPerMatchday": 1.53,
+      "cpmp": 536000,
+      "cpmpSeason": 15765,
+      "replacedPlayer": {
+        "playerId": 4161,
+        "name": "Cajuste",
+        "price": 420000,
+        "totalPoints": 9,
+        "status": null,
+        "statusInfo": null,
+        "type": "midfielder",
+        "historical": {
+          "points": []
+        },
+        "average": {
+          "grade": "6,5",
+          "points": "3",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "2,6",
+            "points": "1"
+          }
+        },
+        "club": {
+          "id": 65,
+          "name": "Málaga",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/65"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/65/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 14,
+            "homeClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/1"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/1/logo"
+                }
+              }
+            },
+            "kickoff": "2026-11-28T16:15:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 15,
+            "homeClub": {
+              "id": 17,
+              "name": "Sevilla",
+              "abbreviation": "sev",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/17"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/17/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "kickoff": "2026-12-07T21:00:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 16,
+            "homeClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "kickoff": "2026-12-12T18:30:00+01:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 0.4,
+        "id": 4161,
+        "position": "midfielder",
+        "points": 0
+      },
+      "replacedPlayerName": "Cajuste",
+      "replacedPlayerExpectedPoints": 0.4,
+      "strategicScore": 63.5,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 100,
+          "weight": 0.4,
+          "marginalValue": 5
+        },
+        "absoluteQuality": {
+          "raw": 63.5,
+          "weight": 0.2,
+          "ppm": 3.81
+        },
+        "positionNeed": {
+          "raw": 5,
+          "weight": 0.15,
+          "detail": "6 disponibles. Posición bien cubierta."
+        },
+        "marketOpportunity": {
+          "raw": 85.3,
+          "weight": 0.1,
+          "efficiency": 34.1
+        },
+        "rivalPressure": {
+          "raw": 20,
+          "weight": 0.1
+        },
+        "riskAdjustment": {
+          "raw": 10,
+          "weight": -0.05
+        }
+      },
+      "category": "MEJORA_MODERADA",
+      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
+      "action": "PASS",
+      "ownerName": "Computer",
+      "ownerId": 1,
+      "isComputer": true,
+      "requiresSaleFirst": true,
+      "reasoning": [
+        "✅ Entra en el XI titular (+5 pts al Once Ideal sustituyendo a Cajuste (2.21 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (3.81 PPM > 2.21 PPM).",
+        "📊 ⭐ Titular Fijo (PPM: 3.81 | Fiabilidad: 95% minutos | Eficiencia: 34.1 pts/M€)",
+        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
+        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 3.082.000 € (115.0% VM | Sobreprecio: +15%).",
+        "⛔ Fondos insuficientes: Requiere 4.082.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.465.988 €."
+      ],
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Cajuste). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 3.082.000 € (115.0% VM | Sobreprecio: +15%)."
+    },
+    {
+      "playerId": 4154,
+      "name": "Félix Correia",
+      "type": "midfielder",
+      "price": 7750000,
+      "bidAmount": 9222500,
+      "maxRationalBid": 9222500,
+      "marginPct": 19,
+      "band": "ELITE_LEAGUE_WINNER",
+      "expectedPoints": 7,
+      "ppm": 5.09,
+      "efficiency": 15.8,
+      "upgradePoints": 6.7,
+      "marginalValue": 6.7,
+      "vorp": 97,
+      "vorpPerMatchday": 2.85,
+      "cpmp": 1156716,
+      "cpmpSeason": 33991,
+      "replacedPlayer": {
+        "playerId": 4161,
+        "name": "Cajuste",
+        "price": 420000,
+        "totalPoints": 9,
+        "status": null,
+        "statusInfo": null,
+        "type": "midfielder",
+        "historical": {
+          "points": []
+        },
+        "average": {
+          "grade": "6,5",
+          "points": "3",
+          "lastXMatchdays": {
+            "matchesAmount": 5,
+            "grade": "2,6",
+            "points": "1"
+          }
+        },
+        "club": {
+          "id": 65,
+          "name": "Málaga",
+          "abbreviation": "",
+          "_links": {
+            "self": {
+              "href": "https://api.comunio.es/clubs/65"
+            },
+            "logo": {
+              "href": "https://api.comunio.es/clubs/65/logo"
+            }
+          }
+        },
+        "nextMatches": [
+          {
+            "matchdayNr": 14,
+            "homeClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/1"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/1/logo"
+                }
+              }
+            },
+            "kickoff": "2026-11-28T16:15:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 15,
+            "homeClub": {
+              "id": 17,
+              "name": "Sevilla",
+              "abbreviation": "sev",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/17"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/17/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "kickoff": "2026-12-07T21:00:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 16,
+            "homeClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "kickoff": "2026-12-12T18:30:00+01:00",
+            "odds": null
+          }
+        ],
+        "cards": {
+          "yellow": 0,
+          "yellowRed": 0,
+          "red": 0
+        },
+        "available": true,
+        "expectedPoints": 0.4,
+        "id": 4161,
+        "position": "midfielder",
+        "points": 0
+      },
+      "replacedPlayerName": "Cajuste",
+      "replacedPlayerExpectedPoints": 0.4,
+      "strategicScore": 61.9,
+      "strategicComponents": {
+        "squadUpgrade": {
+          "raw": 100,
+          "weight": 0.4,
+          "marginalValue": 6.7
+        },
+        "absoluteQuality": {
+          "raw": 84.8,
+          "weight": 0.2,
+          "ppm": 5.09
+        },
+        "positionNeed": {
+          "raw": 5,
+          "weight": 0.15,
+          "detail": "6 disponibles. Posición bien cubierta."
+        },
+        "marketOpportunity": {
+          "raw": 39.5,
+          "weight": 0.1,
+          "efficiency": 15.8
         },
         "rivalPressure": {
           "raw": 20,
@@ -615,802 +1231,64 @@
       "isComputer": true,
       "requiresSaleFirst": true,
       "reasoning": [
-        "✅ Entra en el XI titular (+4.2 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (3.83 PPM > 2.04 PPM).",
-        "🟡 Posición con necesidad MODERADA: 5 disponibles. Fondo de armario ajustado.",
-        "📊 ⭐ Titular Fijo (PPM: 3.83 | Fiabilidad: 95% minutos | Eficiencia: 46.7 pts/M€)",
-        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
+        "✅ Entra en el XI titular (+6.7 pts al Once Ideal sustituyendo a Cajuste (2.21 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (5.09 PPM > 2.21 PPM).",
+        "📊 ⭐ Titular Fijo (PPM: 5.09 | Fiabilidad: 95% minutos | Eficiencia: 15.8 pts/M€)",
+        "🔥 Dinámica de club: 📉 Inestabilidad y Presión Social (0.88x): 1V 2E 2D - Dudas tácticas y tensión competitiva",
         "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.296.000 € (112.0% VM | Sobreprecio: +12%).",
-        "⛔ Fondos insuficientes: Requiere 3.296.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
+        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 9.222.500 € (119.0% VM | Sobreprecio: +19%).",
+        "⛔ Fondos insuficientes: Requiere 10.222.500 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.465.988 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Kike García). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 2.296.000 € (112.0% VM | Sobreprecio: +12%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +7 pts (sustituye a Cajuste). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 9.222.500 € (119.0% VM | Sobreprecio: +19%)."
     },
     {
-      "playerId": 3773,
-      "name": "Roberto Fernández",
+      "playerId": 4144,
+      "name": "Driouech",
       "type": "striker",
-      "price": 6860000,
-      "bidAmount": 8300600,
-      "maxRationalBid": 8300600,
-      "marginPct": 21,
-      "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 9,
-      "ppm": 5.41,
-      "efficiency": 19.7,
-      "upgradePoints": 7.3,
-      "marginalValue": 7.3,
-      "vorp": 60,
-      "vorpPerMatchday": 1.76,
-      "cpmp": 939726,
-      "cpmpSeason": 27661,
-      "replacedPlayer": {
-        "playerId": 2202,
-        "name": "Kike García",
-        "price": 280000,
-        "totalPoints": 0,
-        "status": null,
-        "statusInfo": null,
-        "type": "striker",
-        "historical": {
-          "points": [
-            {
-              "season": "16/17",
-              "points": "105",
-              "eventId": 788917
-            },
-            {
-              "season": "17/18",
-              "points": "116",
-              "eventId": 869072
-            },
-            {
-              "season": "18/19",
-              "points": "119",
-              "eventId": 899953
-            },
-            {
-              "season": "19/20",
-              "points": "118",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "237",
-              "eventId": 939519
-            },
-            {
-              "season": "21/22",
-              "points": "127",
-              "eventId": 951313
-            },
-            {
-              "season": "22/23",
-              "points": "113",
-              "eventId": 961836
-            },
-            {
-              "season": "23/24",
-              "points": "128",
-              "eventId": 975270
-            },
-            {
-              "season": "24/25",
-              "points": "225",
-              "eventId": 988474
-            },
-            {
-              "season": "25/26",
-              "points": "161",
-              "eventId": 998265
-            }
-          ]
-        },
-        "average": {
-          "grade": "0",
-          "points": "0",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "",
-            "points": ""
-          }
-        },
-        "club": {
-          "id": 7,
-          "name": "Espanyol",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/7"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/7/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 14,
-            "homeClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/8"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-30T21:00:00+01:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 15,
-            "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "kickoff": "2026-12-04T21:00:00+01:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 0,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 0.6,
-        "id": 2202,
-        "position": "striker",
-        "points": 0
-      },
-      "replacedPlayerName": "Kike García",
-      "replacedPlayerExpectedPoints": 0.6,
-      "strategicScore": 65.2,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 7.3
-        },
-        "absoluteQuality": {
-          "raw": 90.2,
-          "weight": 0.2,
-          "ppm": 5.41
-        },
-        "positionNeed": {
-          "raw": 5,
-          "weight": 0.15,
-          "detail": "4 disponibles. Posición bien cubierta."
-        },
-        "marketOpportunity": {
-          "raw": 49.3,
-          "weight": 0.1,
-          "efficiency": 19.7
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": true,
-      "reasoning": [
-        "✅ Entra en el XI titular (+7.3 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (5.41 PPM > 2.04 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 5.41 | Fiabilidad: 95% minutos | Eficiencia: 19.7 pts/M€)",
-        "🔥 Dinámica de club: 🚀 Pico de Confianza / Racha Ascendente (1.08x): 3V 0E 2D - Creciendo en sensaciones y puntuaciones fantasy",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 8.300.600 € (121.0% VM | Sobreprecio: +21%).",
-        "⛔ Fondos insuficientes: Requiere 9.300.600 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +7 pts (sustituye a Kike García). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 8.300.600 € (121.0% VM | Sobreprecio: +21%)."
-    },
-    {
-      "playerId": 3409,
-      "name": "Lamine Yamal",
-      "type": "striker",
-      "price": 22640000,
-      "bidAmount": 28300000,
-      "maxRationalBid": 28300000,
-      "marginPct": 25,
-      "band": "ELITE_LEAGUE_WINNER",
-      "expectedPoints": 11,
-      "ppm": 9.28,
-      "efficiency": 10.2,
-      "upgradePoints": 13.6,
-      "marginalValue": 13.6,
-      "vorp": 210,
-      "vorpPerMatchday": 6.18,
-      "cpmp": 1664706,
-      "cpmpSeason": 49004,
-      "replacedPlayer": {
-        "playerId": 2202,
-        "name": "Kike García",
-        "price": 280000,
-        "totalPoints": 0,
-        "status": null,
-        "statusInfo": null,
-        "type": "striker",
-        "historical": {
-          "points": [
-            {
-              "season": "16/17",
-              "points": "105",
-              "eventId": 788917
-            },
-            {
-              "season": "17/18",
-              "points": "116",
-              "eventId": 869072
-            },
-            {
-              "season": "18/19",
-              "points": "119",
-              "eventId": 899953
-            },
-            {
-              "season": "19/20",
-              "points": "118",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "237",
-              "eventId": 939519
-            },
-            {
-              "season": "21/22",
-              "points": "127",
-              "eventId": 951313
-            },
-            {
-              "season": "22/23",
-              "points": "113",
-              "eventId": 961836
-            },
-            {
-              "season": "23/24",
-              "points": "128",
-              "eventId": 975270
-            },
-            {
-              "season": "24/25",
-              "points": "225",
-              "eventId": 988474
-            },
-            {
-              "season": "25/26",
-              "points": "161",
-              "eventId": 998265
-            }
-          ]
-        },
-        "average": {
-          "grade": "0",
-          "points": "0",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "",
-            "points": ""
-          }
-        },
-        "club": {
-          "id": 7,
-          "name": "Espanyol",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/7"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/7/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 14,
-            "homeClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/8"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-30T21:00:00+01:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 15,
-            "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "kickoff": "2026-12-04T21:00:00+01:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 0,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 0.6,
-        "id": 2202,
-        "position": "striker",
-        "points": 0
-      },
-      "replacedPlayerName": "Kike García",
-      "replacedPlayerExpectedPoints": 0.6,
-      "strategicScore": 64.8,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 13.6
-        },
-        "absoluteQuality": {
-          "raw": 100,
-          "weight": 0.2,
-          "ppm": 9.28
-        },
-        "positionNeed": {
-          "raw": 5,
-          "weight": 0.15,
-          "detail": "4 disponibles. Posición bien cubierta."
-        },
-        "marketOpportunity": {
-          "raw": 25.5,
-          "weight": 0.1,
-          "efficiency": 10.2
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "SALTO_CUALITATIVO",
-      "impactTag": "🚀 SALTO CUALITATIVO (+8 pts XI)",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": true,
-      "reasoning": [
-        "✅ Entra en el XI titular (+13.6 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (9.28 PPM > 2.04 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 9.28 | Fiabilidad: 95% minutos | Eficiencia: 10.2 pts/M€)",
-        "🔥 Dinámica de club: 🔥 Euforia / Líder Arrollador (1.1x): 5V 0E 0D - Ataque demoledor y máxima confianza colectiva",
-        "🎯 Balón parado: 🚩 Córners (+0.1 PPM bonus).",
-        "🌟 Once Ideal: 2 presencia(s) en TOTW esta temporada.",
-        "⚔️ Competencia en club: Compite en [object Object] con Robert Lewandowski, Raphinha, Ferran Torres... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 28.300.000 € (125.0% VM | Sobreprecio: +25%).",
-        "⛔ Fondos insuficientes: Requiere 29.300.000 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
-      ],
-      "reason": "🚀 SALTO CUALITATIVO (+8 pts XI): Mejora real del XI: +14 pts (sustituye a Kike García). 💰 [Banda: ELITE_LEAGUE_WINNER] Puja recomendada: 28.300.000 € (125.0% VM | Sobreprecio: +25%)."
-    },
-    {
-      "playerId": 3163,
-      "name": "Camavinga",
-      "type": "midfielder",
-      "price": 3560000,
-      "bidAmount": 4022800,
-      "maxRationalBid": 4022800,
-      "marginPct": 13,
-      "band": "CLEAR_UPGRADE",
-      "expectedPoints": 4,
-      "ppm": 4.41,
-      "efficiency": 31,
-      "upgradePoints": 4.6,
-      "marginalValue": 4.6,
-      "vorp": 57,
-      "vorpPerMatchday": 1.68,
-      "cpmp": 773913,
-      "cpmpSeason": 22821,
-      "replacedPlayer": {
-        "playerId": 2202,
-        "name": "Kike García",
-        "price": 280000,
-        "totalPoints": 0,
-        "status": null,
-        "statusInfo": null,
-        "type": "striker",
-        "historical": {
-          "points": [
-            {
-              "season": "16/17",
-              "points": "105",
-              "eventId": 788917
-            },
-            {
-              "season": "17/18",
-              "points": "116",
-              "eventId": 869072
-            },
-            {
-              "season": "18/19",
-              "points": "119",
-              "eventId": 899953
-            },
-            {
-              "season": "19/20",
-              "points": "118",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "237",
-              "eventId": 939519
-            },
-            {
-              "season": "21/22",
-              "points": "127",
-              "eventId": 951313
-            },
-            {
-              "season": "22/23",
-              "points": "113",
-              "eventId": 961836
-            },
-            {
-              "season": "23/24",
-              "points": "128",
-              "eventId": 975270
-            },
-            {
-              "season": "24/25",
-              "points": "225",
-              "eventId": 988474
-            },
-            {
-              "season": "25/26",
-              "points": "161",
-              "eventId": 998265
-            }
-          ]
-        },
-        "average": {
-          "grade": "0",
-          "points": "0",
-          "lastXMatchdays": {
-            "matchesAmount": 5,
-            "grade": "",
-            "points": ""
-          }
-        },
-        "club": {
-          "id": 7,
-          "name": "Espanyol",
-          "abbreviation": "",
-          "_links": {
-            "self": {
-              "href": "https://api.comunio.es/clubs/7"
-            },
-            "logo": {
-              "href": "https://api.comunio.es/clubs/7/logo"
-            }
-          }
-        },
-        "nextMatches": [
-          {
-            "matchdayNr": 14,
-            "homeClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/8"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
-                }
-              }
-            },
-            "kickoff": "2026-11-30T21:00:00+01:00",
-            "odds": null
-          },
-          {
-            "matchdayNr": 15,
-            "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/89"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
-                }
-              }
-            },
-            "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
-              "_links": {
-                "self": {
-                  "href": "https://api.comunio.es/clubs/7"
-                },
-                "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
-                }
-              }
-            },
-            "kickoff": "2026-12-04T21:00:00+01:00",
-            "odds": null
-          }
-        ],
-        "cards": {
-          "yellow": 0,
-          "yellowRed": 0,
-          "red": 0
-        },
-        "available": true,
-        "expectedPoints": 0.6,
-        "id": 2202,
-        "position": "striker",
-        "points": 0
-      },
-      "replacedPlayerName": "Kike García",
-      "replacedPlayerExpectedPoints": 0.6,
-      "strategicScore": 64.7,
-      "strategicComponents": {
-        "squadUpgrade": {
-          "raw": 100,
-          "weight": 0.4,
-          "marginalValue": 4.6
-        },
-        "absoluteQuality": {
-          "raw": 73.5,
-          "weight": 0.2,
-          "ppm": 4.41
-        },
-        "positionNeed": {
-          "raw": 5,
-          "weight": 0.15,
-          "detail": "6 disponibles. Posición bien cubierta."
-        },
-        "marketOpportunity": {
-          "raw": 77.5,
-          "weight": 0.1,
-          "efficiency": 31
-        },
-        "rivalPressure": {
-          "raw": 20,
-          "weight": 0.1
-        },
-        "riskAdjustment": {
-          "raw": 10,
-          "weight": -0.05
-        }
-      },
-      "category": "MEJORA_MODERADA",
-      "impactTag": "📈 MEJORA TÁCTICA / ROTACIÓN",
-      "action": "PASS",
-      "ownerName": "Computer",
-      "ownerId": 1,
-      "isComputer": true,
-      "requiresSaleFirst": true,
-      "reasoning": [
-        "✅ Entra en el XI titular (+4.6 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (4.41 PPM > 2.04 PPM).",
-        "📊 ⭐ Titular Fijo (PPM: 4.41 | Fiabilidad: 95% minutos | Eficiencia: 31 pts/M€)",
-        "🔥 Dinámica de club: ⚖️ Alto Nivel con Rotaciones Champions (0.95x): 3V 2E 0D - Exigencia máxima y rotaciones frecuentes por Champions League",
-        "⚔️ Competencia en club: Compite en [object Object] con Jude Bellingham, Federico Valverde, Aurélien Tchouaméni... (Nivel: BAJA, Confianza XI: 95%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 4.022.800 € (113.0% VM | Sobreprecio: +13%).",
-        "⛔ Fondos insuficientes: Requiere 5.022.800 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
-      ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +5 pts (sustituye a Kike García). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 4.022.800 € (113.0% VM | Sobreprecio: +13%)."
-    },
-    {
-      "playerId": 3109,
-      "name": "Andrés Martín",
-      "type": "striker",
-      "price": 1630000,
-      "bidAmount": 1809300,
-      "maxRationalBid": 1809300,
+      "price": 1520000,
+      "bidAmount": 1687200,
+      "maxRationalBid": 1687200,
       "marginPct": 11,
       "band": "CLEAR_UPGRADE",
       "expectedPoints": 5,
-      "ppm": 3.61,
-      "efficiency": 55.4,
-      "upgradePoints": 3.9,
-      "marginalValue": 3.9,
+      "ppm": 3.07,
+      "efficiency": 48.5,
+      "upgradePoints": 4.1,
+      "marginalValue": 4.1,
       "vorp": 20,
       "vorpPerMatchday": 0.59,
-      "cpmp": 417949,
-      "cpmpSeason": 12256,
+      "cpmp": 370732,
+      "cpmpSeason": 10935,
       "replacedPlayer": {
-        "playerId": 2202,
-        "name": "Kike García",
-        "price": 280000,
-        "totalPoints": 0,
+        "playerId": 4161,
+        "name": "Cajuste",
+        "price": 420000,
+        "totalPoints": 9,
         "status": null,
         "statusInfo": null,
-        "type": "striker",
+        "type": "midfielder",
         "historical": {
-          "points": [
-            {
-              "season": "16/17",
-              "points": "105",
-              "eventId": 788917
-            },
-            {
-              "season": "17/18",
-              "points": "116",
-              "eventId": 869072
-            },
-            {
-              "season": "18/19",
-              "points": "119",
-              "eventId": 899953
-            },
-            {
-              "season": "19/20",
-              "points": "118",
-              "eventId": 923561
-            },
-            {
-              "season": "20/21",
-              "points": "237",
-              "eventId": 939519
-            },
-            {
-              "season": "21/22",
-              "points": "127",
-              "eventId": 951313
-            },
-            {
-              "season": "22/23",
-              "points": "113",
-              "eventId": 961836
-            },
-            {
-              "season": "23/24",
-              "points": "128",
-              "eventId": 975270
-            },
-            {
-              "season": "24/25",
-              "points": "225",
-              "eventId": 988474
-            },
-            {
-              "season": "25/26",
-              "points": "161",
-              "eventId": 998265
-            }
-          ]
+          "points": []
         },
         "average": {
-          "grade": "0",
-          "points": "0",
+          "grade": "6,5",
+          "points": "3",
           "lastXMatchdays": {
             "matchesAmount": 5,
-            "grade": "",
-            "points": ""
+            "grade": "2,6",
+            "points": "1"
           }
         },
         "club": {
-          "id": 7,
-          "name": "Espanyol",
+          "id": 65,
+          "name": "Málaga",
           "abbreviation": "",
           "_links": {
             "self": {
-              "href": "https://api.comunio.es/clubs/7"
+              "href": "https://api.comunio.es/clubs/65"
             },
             "logo": {
-              "href": "https://api.comunio.es/clubs/7/logo"
+              "href": "https://api.comunio.es/clubs/65/logo"
             }
           }
         },
@@ -1418,63 +1296,94 @@
           {
             "matchdayNr": 14,
             "homeClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/65"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/65/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 8,
-              "name": "Getafe",
-              "abbreviation": "get",
+              "id": 1,
+              "name": "Athletic",
+              "abbreviation": "ath",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/8"
+                  "href": "https://api.comunio.es/clubs/1"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/8/logo"
+                  "href": "https://api.comunio.es/clubs/1/logo"
                 }
               }
             },
-            "kickoff": "2026-11-30T21:00:00+01:00",
+            "kickoff": "2026-11-28T16:15:00+01:00",
             "odds": null
           },
           {
             "matchdayNr": 15,
             "homeClub": {
-              "id": 89,
-              "name": "Alavés",
-              "abbreviation": "ala",
+              "id": 17,
+              "name": "Sevilla",
+              "abbreviation": "sev",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/89"
+                  "href": "https://api.comunio.es/clubs/17"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/89/logo"
+                  "href": "https://api.comunio.es/clubs/17/logo"
                 }
               }
             },
             "guestClub": {
-              "id": 7,
-              "name": "Espanyol",
-              "abbreviation": "esp",
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
               "_links": {
                 "self": {
-                  "href": "https://api.comunio.es/clubs/7"
+                  "href": "https://api.comunio.es/clubs/65"
                 },
                 "logo": {
-                  "href": "https://api.comunio.es/clubs/7/logo"
+                  "href": "https://api.comunio.es/clubs/65/logo"
                 }
               }
             },
-            "kickoff": "2026-12-04T21:00:00+01:00",
+            "kickoff": "2026-12-07T21:00:00+01:00",
+            "odds": null
+          },
+          {
+            "matchdayNr": 16,
+            "homeClub": {
+              "id": 65,
+              "name": "Málaga",
+              "abbreviation": "mga",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/65"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/65/logo"
+                }
+              }
+            },
+            "guestClub": {
+              "id": 3,
+              "name": "Barcelona",
+              "abbreviation": "bar",
+              "_links": {
+                "self": {
+                  "href": "https://api.comunio.es/clubs/3"
+                },
+                "logo": {
+                  "href": "https://api.comunio.es/clubs/3/logo"
+                }
+              }
+            },
+            "kickoff": "2026-12-12T18:30:00+01:00",
             "odds": null
           }
         ],
@@ -1484,24 +1393,24 @@
           "red": 0
         },
         "available": true,
-        "expectedPoints": 0.6,
-        "id": 2202,
-        "position": "striker",
+        "expectedPoints": 0.4,
+        "id": 4161,
+        "position": "midfielder",
         "points": 0
       },
-      "replacedPlayerName": "Kike García",
-      "replacedPlayerExpectedPoints": 0.6,
-      "strategicScore": 64.3,
+      "replacedPlayerName": "Cajuste",
+      "replacedPlayerExpectedPoints": 0.4,
+      "strategicScore": 61.2,
       "strategicComponents": {
         "squadUpgrade": {
           "raw": 100,
           "weight": 0.4,
-          "marginalValue": 3.9
+          "marginalValue": 4.1
         },
         "absoluteQuality": {
-          "raw": 60.2,
+          "raw": 51.2,
           "weight": 0.2,
-          "ppm": 3.61
+          "ppm": 3.07
         },
         "positionNeed": {
           "raw": 5,
@@ -1511,14 +1420,14 @@
         "marketOpportunity": {
           "raw": 100,
           "weight": 0.1,
-          "efficiency": 55.4
+          "efficiency": 48.5
         },
         "rivalPressure": {
           "raw": 20,
           "weight": 0.1
         },
         "riskAdjustment": {
-          "raw": 10,
+          "raw": 35,
           "weight": -0.05
         }
       },
@@ -1530,29 +1439,23 @@
       "isComputer": true,
       "requiresSaleFirst": true,
       "reasoning": [
-        "✅ Entra en el XI titular (+3.9 pts al Once Ideal sustituyendo a Kike García (2.04 PPM)).",
-        "🚀 Supera el promedio con momentum del titular actual (3.61 PPM > 2.04 PPM).",
-        "📊 🔄 Rotación Habitual (PPM: 3.61 | Fiabilidad: 75% minutos | Eficiencia: 55.4 pts/M€)",
-        "🔥 Dinámica de club: Rendimiento estándar sin impacto anímico extremo (1.00x).",
-        "⚔️ Competencia en club: Sin competencia directa registrada en su puesto (Confianza XI: 75%)",
-        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.809.300 € (111.0% VM | Sobreprecio: +11%).",
-        "⛔ Fondos insuficientes: Requiere 2.809.300 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.005.988 €."
+        "✅ Entra en el XI titular (+4.1 pts al Once Ideal sustituyendo a Cajuste (2.21 PPM)).",
+        "🚀 Supera el promedio con momentum del titular actual (3.07 PPM > 2.21 PPM).",
+        "📊 🔄 Rotación Habitual (PPM: 3.07 | Fiabilidad: 55% minutos | Eficiencia: 48.5 pts/M€)",
+        "🔥 Dinámica de club: ⚽ Alta Producción Ofensiva (1.05x): 3V 0E 2D - Fútbol vistoso con gran generación de ocasiones",
+        "⚔️ Competencia en club: Compite en [object Object] con Iago Aspas, Borja Iglesias, Anastasios Douvikas... (Nivel: ALTA, Confianza XI: 55%)",
+        "💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.687.200 € (111.0% VM | Sobreprecio: +11%).",
+        "⛔ Fondos insuficientes: Requiere 2.687.200 € (incl. reserva de seguridad de 1.000.000 €), caja actual: 1.465.988 €."
       ],
-      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Kike García). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.809.300 € (111.0% VM | Sobreprecio: +11%)."
+      "reason": "📈 MEJORA TÁCTICA / ROTACIÓN: Mejora real del XI: +4 pts (sustituye a Cajuste). 💰 [Banda: CLEAR_UPGRADE] Puja recomendada: 1.687.200 € (111.0% VM | Sobreprecio: +11%)."
     }
   ],
   "liquiditySuggestions": [
     {
       "playerId": 2202,
       "name": "Kike García",
-      "price": 280000,
-      "reason": "Parche secundario sin minutos. Vender libera 280.000 € para acometer fichajes titulares."
-    },
-    {
-      "playerId": 3285,
-      "name": "Copete",
-      "price": 630000,
-      "reason": "Parche secundario sin minutos. Vender libera 630.000 € para acometer fichajes titulares."
+      "price": 250000,
+      "reason": "Parche secundario sin minutos. Vender libera 250.000 € para acometer fichajes titulares."
     },
     {
       "playerId": 3636,
@@ -1573,13 +1476,13 @@
     "remainingMatchdays": 25,
     "seed": 42,
     "racing": {
-      "currentXiExpectedPoints": 45.3,
-      "restOfSeasonAggregateExpectedPpm": 30.5,
+      "currentXiExpectedPoints": 45.1,
+      "restOfSeasonAggregateExpectedPpm": 34,
       "pWin": 0,
       "pTop2": 0,
       "pTop3": 0,
-      "expectedFinalPoints": 1159,
-      "range": "1106 - 1208 pts",
+      "expectedFinalPoints": 1292,
+      "range": "1239 - 1342 pts",
       "wilsonCI95": {
         "lowerPct": 0,
         "upperPct": 0.4
@@ -1588,74 +1491,58 @@
     "probChampion": 0,
     "probTop2": 0,
     "probTop3": 0,
-    "racingExpectedFinalPoints": 1159,
-    "racingRange": "1106 - 1208 pts",
+    "racingExpectedFinalPoints": 1292,
+    "racingRange": "1239 - 1342 pts",
     "racingWilsonCI95": {
       "lowerPct": 0,
       "upperPct": 0.4
     },
     "leaderName": "Fermín Gadura F.C.",
-    "leaderExpectedPoints": 1931,
+    "leaderExpectedPoints": 2120,
     "standings": [
       {
         "id": 21163674,
         "name": "Fermín Gadura F.C.",
-        "currentPoints": 661,
-        "meanPpm": 50.8,
+        "currentPoints": 725,
+        "meanPpm": 55.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1931,
-        "range": "1879 - 1986 pts",
-        "probChampion": 98.4,
+        "expectedFinalPoints": 2120,
+        "range": "2068 - 2175 pts",
+        "probChampion": 96.8,
         "probTop2": 100,
         "probTop3": 100,
         "wilsonCI95": {
-          "lowerPct": 97.4,
-          "upperPct": 99
+          "lowerPct": 95.5,
+          "upperPct": 97.7
         }
       },
       {
         "id": 21163563,
         "name": "Puente Avios FC",
-        "currentPoints": 619,
-        "meanPpm": 47.6,
+        "currentPoints": 689,
+        "meanPpm": 53,
         "stdDev": 8,
-        "expectedFinalPoints": 1810,
-        "range": "1762 - 1862 pts",
-        "probChampion": 1.6,
-        "probTop2": 98.1,
+        "expectedFinalPoints": 2015,
+        "range": "1967 - 2066 pts",
+        "probChampion": 3.2,
+        "probTop2": 98.9,
         "probTop3": 100,
         "wilsonCI95": {
-          "lowerPct": 1,
-          "upperPct": 2.6
+          "lowerPct": 2.3,
+          "upperPct": 4.5
         }
       },
       {
         "id": 21163653,
         "name": "Pachangueros F.C.",
-        "currentPoints": 577,
-        "meanPpm": 44.4,
+        "currentPoints": 645,
+        "meanPpm": 49.6,
         "stdDev": 8,
-        "expectedFinalPoints": 1687,
-        "range": "1638 - 1736 pts",
+        "expectedFinalPoints": 1885,
+        "range": "1835 - 1935 pts",
         "probChampion": 0,
-        "probTop2": 1.8,
-        "probTop3": 89.8,
-        "wilsonCI95": {
-          "lowerPct": 0,
-          "upperPct": 0.4
-        }
-      },
-      {
-        "id": 21163583,
-        "name": "Ana",
-        "currentPoints": 549,
-        "meanPpm": 42.2,
-        "stdDev": 8,
-        "expectedFinalPoints": 1602,
-        "range": "1552 - 1652 pts",
-        "probChampion": 0,
-        "probTop2": 0.1,
-        "probTop3": 7.9,
+        "probTop2": 1.1,
+        "probTop3": 99.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1664,14 +1551,14 @@
       {
         "id": 21163606,
         "name": "Suances nin",
-        "currentPoints": 541,
-        "meanPpm": 41.6,
+        "currentPoints": 591,
+        "meanPpm": 45.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1581,
-        "range": "1528 - 1633 pts",
+        "expectedFinalPoints": 1728,
+        "range": "1676 - 1781 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 2.2,
+        "probTop3": 0.2,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1680,11 +1567,11 @@
       {
         "id": 21163650,
         "name": "Amigos de NIN",
-        "currentPoints": 526,
-        "meanPpm": 40.5,
+        "currentPoints": 584,
+        "meanPpm": 44.9,
         "stdDev": 8,
-        "expectedFinalPoints": 1536,
-        "range": "1480 - 1590 pts",
+        "expectedFinalPoints": 1704,
+        "range": "1648 - 1759 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0.1,
@@ -1694,13 +1581,29 @@
         }
       },
       {
+        "id": 21163583,
+        "name": "Ana",
+        "currentPoints": 581,
+        "meanPpm": 44.7,
+        "stdDev": 8,
+        "expectedFinalPoints": 1696,
+        "range": "1647 - 1747 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
         "id": 21163646,
         "name": "M4 TEAM",
-        "currentPoints": 491,
-        "meanPpm": 37.8,
+        "currentPoints": 544,
+        "meanPpm": 41.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1437,
-        "range": "1387 - 1494 pts",
+        "expectedFinalPoints": 1590,
+        "range": "1540 - 1647 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1728,11 +1631,11 @@
       {
         "id": 21163822,
         "name": "Racing de Oslo",
-        "currentPoints": 396,
-        "meanPpm": 30.5,
+        "currentPoints": 442,
+        "meanPpm": 34,
         "stdDev": 8,
-        "expectedFinalPoints": 1159,
-        "range": "1106 - 1208 pts",
+        "expectedFinalPoints": 1292,
+        "range": "1239 - 1342 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1762,62 +1665,46 @@
       {
         "id": 21163674,
         "name": "Fermín Gadura F.C.",
-        "currentPoints": 661,
-        "meanPpm": 50.8,
+        "currentPoints": 725,
+        "meanPpm": 55.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1931,
-        "range": "1879 - 1986 pts",
-        "probChampion": 98.4,
+        "expectedFinalPoints": 2120,
+        "range": "2068 - 2175 pts",
+        "probChampion": 96.8,
         "probTop2": 100,
         "probTop3": 100,
         "wilsonCI95": {
-          "lowerPct": 97.4,
-          "upperPct": 99
+          "lowerPct": 95.5,
+          "upperPct": 97.7
         }
       },
       {
         "id": 21163563,
         "name": "Puente Avios FC",
-        "currentPoints": 619,
-        "meanPpm": 47.6,
+        "currentPoints": 689,
+        "meanPpm": 53,
         "stdDev": 8,
-        "expectedFinalPoints": 1810,
-        "range": "1762 - 1862 pts",
-        "probChampion": 1.6,
-        "probTop2": 98.1,
+        "expectedFinalPoints": 2015,
+        "range": "1967 - 2066 pts",
+        "probChampion": 3.2,
+        "probTop2": 98.9,
         "probTop3": 100,
         "wilsonCI95": {
-          "lowerPct": 1,
-          "upperPct": 2.6
+          "lowerPct": 2.3,
+          "upperPct": 4.5
         }
       },
       {
         "id": 21163653,
         "name": "Pachangueros F.C.",
-        "currentPoints": 577,
-        "meanPpm": 44.4,
+        "currentPoints": 645,
+        "meanPpm": 49.6,
         "stdDev": 8,
-        "expectedFinalPoints": 1687,
-        "range": "1638 - 1736 pts",
+        "expectedFinalPoints": 1885,
+        "range": "1835 - 1935 pts",
         "probChampion": 0,
-        "probTop2": 1.8,
-        "probTop3": 89.8,
-        "wilsonCI95": {
-          "lowerPct": 0,
-          "upperPct": 0.4
-        }
-      },
-      {
-        "id": 21163583,
-        "name": "Ana",
-        "currentPoints": 549,
-        "meanPpm": 42.2,
-        "stdDev": 8,
-        "expectedFinalPoints": 1602,
-        "range": "1552 - 1652 pts",
-        "probChampion": 0,
-        "probTop2": 0.1,
-        "probTop3": 7.9,
+        "probTop2": 1.1,
+        "probTop3": 99.7,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1826,14 +1713,14 @@
       {
         "id": 21163606,
         "name": "Suances nin",
-        "currentPoints": 541,
-        "meanPpm": 41.6,
+        "currentPoints": 591,
+        "meanPpm": 45.5,
         "stdDev": 8,
-        "expectedFinalPoints": 1581,
-        "range": "1528 - 1633 pts",
+        "expectedFinalPoints": 1728,
+        "range": "1676 - 1781 pts",
         "probChampion": 0,
         "probTop2": 0,
-        "probTop3": 2.2,
+        "probTop3": 0.2,
         "wilsonCI95": {
           "lowerPct": 0,
           "upperPct": 0.4
@@ -1842,11 +1729,11 @@
       {
         "id": 21163650,
         "name": "Amigos de NIN",
-        "currentPoints": 526,
-        "meanPpm": 40.5,
+        "currentPoints": 584,
+        "meanPpm": 44.9,
         "stdDev": 8,
-        "expectedFinalPoints": 1536,
-        "range": "1480 - 1590 pts",
+        "expectedFinalPoints": 1704,
+        "range": "1648 - 1759 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0.1,
@@ -1856,13 +1743,29 @@
         }
       },
       {
+        "id": 21163583,
+        "name": "Ana",
+        "currentPoints": 581,
+        "meanPpm": 44.7,
+        "stdDev": 8,
+        "expectedFinalPoints": 1696,
+        "range": "1647 - 1747 pts",
+        "probChampion": 0,
+        "probTop2": 0,
+        "probTop3": 0,
+        "wilsonCI95": {
+          "lowerPct": 0,
+          "upperPct": 0.4
+        }
+      },
+      {
         "id": 21163646,
         "name": "M4 TEAM",
-        "currentPoints": 491,
-        "meanPpm": 37.8,
+        "currentPoints": 544,
+        "meanPpm": 41.8,
         "stdDev": 8,
-        "expectedFinalPoints": 1437,
-        "range": "1387 - 1494 pts",
+        "expectedFinalPoints": 1590,
+        "range": "1540 - 1647 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1890,11 +1793,11 @@
       {
         "id": 21163822,
         "name": "Racing de Oslo",
-        "currentPoints": 396,
-        "meanPpm": 30.5,
+        "currentPoints": 442,
+        "meanPpm": 34,
         "stdDev": 8,
-        "expectedFinalPoints": 1159,
-        "range": "1106 - 1208 pts",
+        "expectedFinalPoints": 1292,
+        "range": "1239 - 1342 pts",
         "probChampion": 0,
         "probTop2": 0,
         "probTop3": 0,
@@ -1921,5 +1824,5 @@
       }
     ]
   },
-  "priorityMovement": "Pujar 2.296.000 € por Ndukwe (defender) para sustituir a Kike García (Expected XI Delta: +4.2 pts, CPMP: Óptimo)."
+  "priorityMovement": "Pujar 1.678.600 € por Zaid Romero (defender) para sustituir a Cajuste (Expected XI Delta: +3.5 pts, CPMP: Óptimo)."
 }
