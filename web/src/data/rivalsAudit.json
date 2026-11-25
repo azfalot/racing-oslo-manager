@@ -1088,7 +1088,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-25T07:31:44.293Z"
+      "lastUpdated": "2026-11-25T11:01:48.484Z"
     },
     "speculation": {
       "score": 98,
@@ -5054,10 +5054,10 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 2,
     "points": 689,
-    "squadValue": 53700000,
-    "playerCount": 17,
-    "financialHealth": "Apalancado / Saldo Negativo (-2.40M €)",
-    "debtAlert": "Saldo en descubierto (-2.40M €). Consume el 17.9% del límite de crédito permitido (13.43M €). Exige ventas antes de puntuar.",
+    "squadValue": 52940000,
+    "playerCount": 16,
+    "financialHealth": "Apalancado / Saldo Negativo (-1.63M €)",
+    "debtAlert": "Saldo en descubierto (-1.63M €). Consume el 12.3% del límite de crédito permitido (13.23M €). Exige ventas antes de puntuar.",
     "projectedScore": 65,
     "formation": "3-5-2",
     "tacticDescription": "Estructura 3-5-2 orientada a maximizar 65 puntos según plantilla disponible.",
@@ -5068,7 +5068,7 @@
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -2.40M € que obliga a vender piezas."
+      "Tensión de tesorería: Saldo negativo de -1.63M € que obliga a vender piezas."
     ],
     "tacticalAlerts": [
       {
@@ -5103,17 +5103,17 @@
     "marketBalance": {
       "clubName": "Puente Avios FC",
       "realizedGainsEUR": 2650473,
-      "realizedLossesEUR": 18253560,
-      "netRealizedBalanceEUR": -15603087,
+      "realizedLossesEUR": 18542160,
+      "netRealizedBalanceEUR": -15891687,
       "profitableTradesCount": 20,
-      "totalClosedTradesCount": 30,
-      "historicalSuccessRatePct": 67,
+      "totalClosedTradesCount": 31,
+      "historicalSuccessRatePct": 65,
       "totalLatentGainsEUR": 6221948,
-      "totalLatentLossesEUR": 16362081,
-      "netLatentBalanceEUR": -10140133,
+      "totalLatentLossesEUR": 16062081,
+      "netLatentBalanceEUR": -9840133,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-15.603.087 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-15.891.687 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Yuri Berchiche",
@@ -5332,6 +5332,15 @@
           "sellDate": "2026-11-18T04:29:31+01:00"
         },
         {
+          "playerName": "Rubén Sánchez Sáez",
+          "buyPrice": 1060000,
+          "sellPrice": 771400,
+          "diff": -288600,
+          "roiPct": -27.2,
+          "isProfit": false,
+          "sellDate": "2026-11-25T04:31:18+01:00"
+        },
+        {
           "playerName": "Gayà",
           "buyPrice": 1501000,
           "sellPrice": 1104200,
@@ -5469,15 +5478,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Rubén Sánchez Sáez",
-          "position": "defender",
-          "buyPrice": 1060000,
-          "currentVM": 760000,
-          "latentDiff": -300000,
-          "latentRoiPct": -28.3,
-          "isProfit": false
-        },
-        {
           "playerName": "Guedes",
           "position": "striker",
           "buyPrice": 5201000,
@@ -5523,7 +5523,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-25T07:31:45.640Z"
+      "lastUpdated": "2026-11-25T11:01:49.866Z"
     },
     "speculation": {
       "score": 98,
@@ -5532,14 +5532,14 @@
       "overbidRate": "+15.4%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 105578620,
-      "totalReceived": 76285600,
+      "totalReceived": 77057000,
       "purchasesCount": 47,
-      "salesCount": 45,
-      "estimatedCash": -2403020,
+      "salesCount": 46,
+      "estimatedCash": -1631620,
       "prizesEarned": 6890000,
-      "maxCreditLimit": 13425000,
-      "netWealth": 51296980,
-      "analysis": "Operativa histórica de 47 compras (105.6M €) y 45 ventas (76.3M €). Dinero total rotado: 181.9M € con sobrepuja media de +15.4%."
+      "maxCreditLimit": 13235000,
+      "netWealth": 51308380,
+      "analysis": "Operativa histórica de 47 compras (105.6M €) y 46 ventas (77.1M €). Dinero total rotado: 182.6M € con sobrepuja media de +15.4%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -6820,6 +6820,20 @@
           "seller": "Puente Avios FC",
           "buyer": "Computer",
           "date": "2026-11-19T04:31:02+01:00"
+        },
+        {
+          "playerName": "Rubén Sánchez Sáez",
+          "price": 771400,
+          "marketValue": 771400,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-25T04:31:18+01:00"
         }
       ]
     },
@@ -7044,22 +7058,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3628.png"
-      },
-      {
-        "id": 3185,
-        "name": "Rubén Sánchez Sáez",
-        "position": "defender",
-        "price": 760000,
-        "points": 32,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3185.png"
       },
       {
         "id": 3845,
@@ -7390,7 +7388,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-25T07:31:44.950Z"
+      "lastUpdated": "2026-11-25T11:01:49.228Z"
     },
     "speculation": {
       "score": 78,
@@ -8609,7 +8607,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-25T07:31:46.663Z"
+      "lastUpdated": "2026-11-25T11:01:50.933Z"
     },
     "speculation": {
       "score": 93,
@@ -9890,7 +9888,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-25T07:31:45.282Z"
+      "lastUpdated": "2026-11-25T11:01:49.537Z"
     },
     "speculation": {
       "score": 87,
@@ -10906,7 +10904,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-25T07:31:44.619Z"
+      "lastUpdated": "2026-11-25T11:01:48.856Z"
     },
     "speculation": {
       "score": 98,
@@ -12473,7 +12471,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-25T07:31:45.971Z"
+      "lastUpdated": "2026-11-25T11:01:50.247Z"
     },
     "speculation": {
       "score": 98,
@@ -14371,7 +14369,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-25T07:31:46.306Z"
+      "lastUpdated": "2026-11-25T11:01:50.573Z"
     },
     "speculation": {
       "score": 64,
@@ -15553,7 +15551,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-25T07:31:47.039Z"
+      "lastUpdated": "2026-11-25T11:01:51.280Z"
     },
     "speculation": {
       "score": 98,
@@ -17574,7 +17572,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-25T07:31:47.432Z"
+      "lastUpdated": "2026-11-25T11:01:51.604Z"
     },
     "speculation": {
       "score": 71,
