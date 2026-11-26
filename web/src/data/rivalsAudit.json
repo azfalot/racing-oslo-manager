@@ -1116,7 +1116,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-26T07:31:53.158Z"
+      "lastUpdated": "2026-11-26T11:01:24.658Z"
     },
     "speculation": {
       "score": 98,
@@ -5140,10 +5140,10 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 2,
     "points": 689,
-    "squadValue": 54120000,
-    "playerCount": 17,
-    "financialHealth": "Apalancado / Saldo Negativo (-2.63M €)",
-    "debtAlert": "Saldo en descubierto (-2.63M €). Consume el 19.5% del límite de crédito permitido (13.53M €). Exige ventas antes de puntuar.",
+    "squadValue": 53770000,
+    "playerCount": 16,
+    "financialHealth": "Apalancado / Saldo Negativo (-2.27M €)",
+    "debtAlert": "Saldo en descubierto (-2.27M €). Consume el 16.9% del límite de crédito permitido (13.44M €). Exige ventas antes de puntuar.",
     "projectedScore": 65,
     "formation": "3-5-2",
     "tacticDescription": "Estructura 3-5-2 orientada a maximizar 65 puntos según plantilla disponible.",
@@ -5154,7 +5154,7 @@
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -2.63M € que obliga a vender piezas."
+      "Tensión de tesorería: Saldo negativo de -2.27M € que obliga a vender piezas."
     ],
     "tacticalAlerts": [
       {
@@ -5188,18 +5188,18 @@
     ],
     "marketBalance": {
       "clubName": "Puente Avios FC",
-      "realizedGainsEUR": 2650473,
+      "realizedGainsEUR": 2744823,
       "realizedLossesEUR": 18542160,
-      "netRealizedBalanceEUR": -15891687,
-      "profitableTradesCount": 20,
-      "totalClosedTradesCount": 31,
-      "historicalSuccessRatePct": 65,
-      "totalLatentGainsEUR": 6451898,
+      "netRealizedBalanceEUR": -15797337,
+      "profitableTradesCount": 21,
+      "totalClosedTradesCount": 32,
+      "historicalSuccessRatePct": 66,
+      "totalLatentGainsEUR": 6371948,
       "totalLatentLossesEUR": 15792041,
-      "netLatentBalanceEUR": -9340143,
+      "netLatentBalanceEUR": -9420093,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-15.891.687 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-15.797.337 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Yuri Berchiche",
@@ -5236,6 +5236,15 @@
           "roiPct": 34,
           "isProfit": true,
           "sellDate": "2026-11-13T04:29:21+01:00"
+        },
+        {
+          "playerName": "Kiko Femenía",
+          "buyPrice": 270050,
+          "sellPrice": 364400,
+          "diff": 94350,
+          "roiPct": 34.9,
+          "isProfit": true,
+          "sellDate": "2026-11-26T04:29:35+01:00"
         },
         {
           "playerName": "Mella",
@@ -5519,15 +5528,6 @@
           "isProfit": true
         },
         {
-          "playerName": "Kiko Femenía",
-          "position": "defender",
-          "buyPrice": 270050,
-          "currentVM": 350000,
-          "latentDiff": 79950,
-          "latentRoiPct": 29.6,
-          "isProfit": true
-        },
-        {
           "playerName": "Pedro Díaz",
           "position": "midfielder",
           "buyPrice": 1000010,
@@ -5618,7 +5618,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-26T07:31:54.587Z"
+      "lastUpdated": "2026-11-26T11:01:26.149Z"
     },
     "speculation": {
       "score": 98,
@@ -5627,14 +5627,14 @@
       "overbidRate": "+15.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 106578630,
-      "totalReceived": 77057000,
+      "totalReceived": 77421400,
       "purchasesCount": 48,
-      "salesCount": 46,
-      "estimatedCash": -2631630,
+      "salesCount": 47,
+      "estimatedCash": -2267230,
       "prizesEarned": 6890000,
-      "maxCreditLimit": 13530000,
-      "netWealth": 51488370,
-      "analysis": "Operativa histórica de 48 compras (106.6M €) y 46 ventas (77.1M €). Dinero total rotado: 183.6M € con sobrepuja media de +15.2%."
+      "maxCreditLimit": 13442500,
+      "netWealth": 51502770,
+      "analysis": "Operativa histórica de 48 compras (106.6M €) y 47 ventas (77.4M €). Dinero total rotado: 184.0M € con sobrepuja media de +15.2%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -6943,6 +6943,20 @@
           "seller": "Puente Avios FC",
           "buyer": "Computer",
           "date": "2026-11-25T04:31:18+01:00"
+        },
+        {
+          "playerName": "Kiko Femenía",
+          "price": 364400,
+          "marketValue": 364400,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-26T04:29:35+01:00"
         }
       ]
     },
@@ -7183,22 +7197,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3845.png"
-      },
-      {
-        "id": 1168,
-        "name": "Kiko Femenía",
-        "position": "defender",
-        "price": 350000,
-        "points": 14,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/1168.png"
       },
       {
         "id": 3675,
@@ -7513,7 +7511,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-26T07:31:53.884Z"
+      "lastUpdated": "2026-11-26T11:01:25.425Z"
     },
     "speculation": {
       "score": 78,
@@ -8750,7 +8748,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-26T07:31:55.658Z"
+      "lastUpdated": "2026-11-26T11:01:27.173Z"
     },
     "speculation": {
       "score": 98,
@@ -10059,7 +10057,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-26T07:31:54.255Z"
+      "lastUpdated": "2026-11-26T11:01:25.756Z"
     },
     "speculation": {
       "score": 86,
@@ -11075,7 +11073,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-26T07:31:53.562Z"
+      "lastUpdated": "2026-11-26T11:01:25.033Z"
     },
     "speculation": {
       "score": 98,
@@ -12642,7 +12640,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-26T07:31:54.966Z"
+      "lastUpdated": "2026-11-26T11:01:26.506Z"
     },
     "speculation": {
       "score": 98,
@@ -14540,7 +14538,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-26T07:31:55.309Z"
+      "lastUpdated": "2026-11-26T11:01:26.841Z"
     },
     "speculation": {
       "score": 64,
@@ -15722,7 +15720,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-26T07:31:56.040Z"
+      "lastUpdated": "2026-11-26T11:01:27.497Z"
     },
     "speculation": {
       "score": 98,
@@ -17743,7 +17741,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-26T07:31:56.370Z"
+      "lastUpdated": "2026-11-26T11:01:27.835Z"
     },
     "speculation": {
       "score": 71,
