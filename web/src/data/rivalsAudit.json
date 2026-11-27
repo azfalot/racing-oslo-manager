@@ -6,16 +6,16 @@
     "crest": "/media/crests/fermin_gadura.svg",
     "pos": 1,
     "points": 725,
-    "squadValue": 92780000,
-    "playerCount": 17,
-    "financialHealth": "Saneado / Alta Liquidez (+80.05M € en Caja)",
-    "debtAlert": "Excelente remanente de liquidez (+80.05M €) y solvencia plena para acudir a subastas sin deuda.",
-    "projectedScore": 68,
+    "squadValue": 69070000,
+    "playerCount": 14,
+    "financialHealth": "Saneado / Alta Liquidez (+103.63M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+103.63M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 58,
     "formation": "3-4-3",
-    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 68 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 3-4-3 orientada a maximizar 58 puntos según plantilla disponible.",
     "strengths": [
       "1º en la clasificación general con 725 puntos acumulados (241.7 pts/jornada).",
-      "Patrimonio de plantilla consolidado en Primera (92.78M €).",
+      "Patrimonio de plantilla consolidado en Primera (69.07M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
@@ -27,19 +27,10 @@
       {
         "type": "suboptimal",
         "badge": "⚠️ Banquillo Desperdiciado",
-        "player": "Miguel Román",
-        "position": "midfielder",
-        "title": "Rendimiento en Reserva",
-        "description": "Tiene a Miguel Román (49 pts) en el banquillo mientras alinea a Frenkie de Jong (22 pts).",
-        "action": "Valorar permuta táctica dando entrada a Miguel Román de inicio."
-      },
-      {
-        "type": "suboptimal",
-        "badge": "⚠️ Banquillo Desperdiciado",
         "player": "Óscar Valentín",
         "position": "midfielder",
         "title": "Rendimiento en Reserva",
-        "description": "Tiene a Óscar Valentín (39 pts) en el banquillo mientras alinea a Frenkie de Jong (22 pts).",
+        "description": "Tiene a Óscar Valentín (39 pts) en el banquillo mientras alinea a Alejandro Santiago (18 pts).",
         "action": "Valorar permuta táctica dando entrada a Óscar Valentín de inicio."
       }
     ],
@@ -65,18 +56,18 @@
     ],
     "marketBalance": {
       "clubName": "Fermín Gadura F.C.",
-      "realizedGainsEUR": 88829440,
+      "realizedGainsEUR": 94385689,
       "realizedLossesEUR": 29068740,
-      "netRealizedBalanceEUR": 59760700,
-      "profitableTradesCount": 49,
-      "totalClosedTradesCount": 98,
-      "historicalSuccessRatePct": 50,
-      "totalLatentGainsEUR": 5256873,
-      "totalLatentLossesEUR": 36074408,
-      "netLatentBalanceEUR": -30817535,
+      "netRealizedBalanceEUR": 65316949,
+      "profitableTradesCount": 51,
+      "totalClosedTradesCount": 100,
+      "historicalSuccessRatePct": 51,
+      "totalLatentGainsEUR": 2676924,
+      "totalLatentLossesEUR": 33218393,
+      "netLatentBalanceEUR": -30541469,
       "healthLabel": "SUPERÁVIT DE TRADING",
       "healthBadgeColor": "emerald",
-      "healthSummary": "Genera un superávit neto de +59.760.700 € en operaciones de mercado con una efectividad del 50%.",
+      "healthSummary": "Genera un superávit neto de +65.316.949 € en operaciones de mercado con una efectividad del 51%.",
       "closedOperations": [
         {
           "playerName": "Lookman",
@@ -142,6 +133,15 @@
           "sellDate": "2026-08-24T23:08:24+01:00"
         },
         {
+          "playerName": "Iván Martín",
+          "buyPrice": 5966015,
+          "sellPrice": 10071100,
+          "diff": 4105085,
+          "roiPct": 68.8,
+          "isProfit": true,
+          "sellDate": "2026-11-27T04:33:20+01:00"
+        },
+        {
           "playerName": "Álex Berenguer",
           "buyPrice": 7827013,
           "sellPrice": 11760600,
@@ -167,6 +167,15 @@
           "roiPct": 16.9,
           "isProfit": true,
           "sellDate": "2026-09-01T04:36:39+02:00"
+        },
+        {
+          "playerName": "Frenkie de Jong",
+          "buyPrice": 6310030,
+          "sellPrice": 8164700,
+          "diff": 1854670,
+          "roiPct": 29.4,
+          "isProfit": true,
+          "sellDate": "2026-11-27T04:33:20+01:00"
         },
         {
           "playerName": "Sergio Camello",
@@ -277,15 +286,6 @@
           "sellDate": "2026-10-01T04:31:11+02:00"
         },
         {
-          "playerName": "Iván Martín",
-          "buyPrice": 5966015,
-          "sellPrice": 6930000,
-          "diff": 963985,
-          "roiPct": 16.2,
-          "isProfit": true,
-          "sellDate": "2026-10-13T23:08:59+01:00"
-        },
-        {
           "playerName": "Belocian",
           "buyPrice": 1415001,
           "sellPrice": 2377600,
@@ -338,6 +338,15 @@
           "roiPct": 165.8,
           "isProfit": true,
           "sellDate": "2026-08-27T23:14:45+01:00"
+        },
+        {
+          "playerName": "Zabiri",
+          "buyPrice": 11710021,
+          "sellPrice": 12270500,
+          "diff": 560479,
+          "roiPct": 4.8,
+          "isProfit": true,
+          "sellDate": "2026-11-27T04:33:20+01:00"
         },
         {
           "playerName": "Boselli",
@@ -963,30 +972,12 @@
       ],
       "latentTrades": [
         {
-          "playerName": "Frenkie de Jong",
-          "position": "midfielder",
-          "buyPrice": 6310030,
-          "currentVM": 7950000,
-          "latentDiff": 1639970,
-          "latentRoiPct": 26,
-          "isProfit": true
-        },
-        {
           "playerName": "Alejandro Santiago",
           "position": "midfielder",
           "buyPrice": 345012,
           "currentVM": 1840000,
           "latentDiff": 1494988,
           "latentRoiPct": 433.3,
-          "isProfit": true
-        },
-        {
-          "playerName": "Zabiri",
-          "position": "striker",
-          "buyPrice": 11710021,
-          "currentVM": 12650000,
-          "latentDiff": 939979,
-          "latentRoiPct": 8,
           "isProfit": true
         },
         {
@@ -1098,15 +1089,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Iván Martín",
-          "position": "midfielder",
-          "buyPrice": 5966015,
-          "currentVM": 3110000,
-          "latentDiff": -2856015,
-          "latentRoiPct": -47.9,
-          "isProfit": false
-        },
-        {
           "playerName": "Raphinha",
           "position": "striker",
           "buyPrice": 49119030,
@@ -1116,7 +1098,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T17:00:43.351Z"
+      "lastUpdated": "2026-11-27T19:30:43.806Z"
     },
     "speculation": {
       "score": 98,
@@ -1125,14 +1107,14 @@
       "overbidRate": "+5.9%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 494170364,
-      "totalReceived": 546969100,
+      "totalReceived": 570545400,
       "purchasesCount": 126,
-      "salesCount": 144,
-      "estimatedCash": 80048736,
+      "salesCount": 147,
+      "estimatedCash": 103625036,
       "prizesEarned": 7250000,
-      "maxCreditLimit": 23195000,
-      "netWealth": 172828736,
-      "analysis": "Operativa histórica de 126 compras (494.2M €) y 144 ventas (547.0M €). Dinero total rotado: 1041.1M € con sobrepuja media de +5.9%."
+      "maxCreditLimit": 17267500,
+      "netWealth": 172695036,
+      "analysis": "Operativa histórica de 126 compras (494.2M €) y 147 ventas (570.5M €). Dinero total rotado: 1064.7M € con sobrepuja media de +5.9%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -1144,10 +1126,10 @@
         "tag": "🎯 6.07 pts/M€ (Titular ROI)"
       },
       "bestBuy": {
-        "player": "Frenkie de Jong",
-        "price": 6310030,
-        "impact": "Fichado por 6.31M €, hoy cotiza en 7.95M € (+1.639.970 € / +26% de plusvalía).",
-        "tag": "📈 +26% Plusvalía"
+        "player": "Alejandro Santiago",
+        "price": 345012,
+        "impact": "Fichado por 0.35M €, hoy cotiza en 1.84M € (+1.494.988 € / +433.3% de plusvalía).",
+        "tag": "📈 +433.3% Plusvalía"
       },
       "worstMove": {
         "player": "Gordon",
@@ -4841,6 +4823,48 @@
           "seller": "Fermín Gadura F.C.",
           "buyer": "Computer",
           "date": "2026-11-26T00:55:26+01:00"
+        },
+        {
+          "playerName": "Frenkie de Jong",
+          "price": 8164700,
+          "marketValue": 8164700,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-27T04:33:20+01:00"
+        },
+        {
+          "playerName": "Zabiri",
+          "price": 12270500,
+          "marketValue": 12270500,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-27T04:33:20+01:00"
+        },
+        {
+          "playerName": "Iván Martín",
+          "price": 3141100,
+          "marketValue": 3141100,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Fermín Gadura F.C.",
+          "buyer": "Computer",
+          "date": "2026-11-27T04:33:20+01:00"
         }
       ]
     },
@@ -4914,23 +4938,6 @@
         "image": "/media/players/3971.png"
       },
       {
-        "id": 2761,
-        "name": "Frenkie de Jong",
-        "position": "midfielder",
-        "price": 7950000,
-        "points": 22,
-        "expectedPoints": 7.7,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2761.png"
-      },
-      {
         "id": 1083,
         "name": "Koke",
         "position": "midfielder",
@@ -4948,23 +4955,6 @@
         "image": "/media/players/1083.png"
       },
       {
-        "id": 3125,
-        "name": "Iván Martín",
-        "position": "midfielder",
-        "price": 3110000,
-        "points": 54,
-        "expectedPoints": 5.2,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3125.png"
-      },
-      {
         "id": 3404,
         "name": "Javier Guerra",
         "position": "midfielder",
@@ -4980,6 +4970,40 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3404.png"
+      },
+      {
+        "id": 3927,
+        "name": "Miguel Román",
+        "position": "midfielder",
+        "price": 1900000,
+        "points": 49,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3927.png"
+      },
+      {
+        "id": 4178,
+        "name": "Alejandro Santiago",
+        "position": "midfielder",
+        "price": 1840000,
+        "points": 18,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/4178.png"
       },
       {
         "id": 3298,
@@ -5016,12 +5040,12 @@
         "image": "/media/players/3409.png"
       },
       {
-        "id": 4100,
-        "name": "Zabiri",
+        "id": 3109,
+        "name": "Andrés Martín",
         "position": "striker",
-        "price": 12650000,
-        "points": 107,
-        "expectedPoints": 7.7,
+        "price": 1370000,
+        "points": 25,
+        "expectedPoints": 2.6,
         "status": "ACTIVE",
         "statusInfo": "",
         "isAvailable": true,
@@ -5030,42 +5054,10 @@
         "isInjured": false,
         "isCardRisk": false,
         "riskBadge": null,
-        "image": "/media/players/4100.png"
+        "image": "/media/players/3109.png"
       }
     ],
     "bench": [
-      {
-        "id": 3927,
-        "name": "Miguel Román",
-        "position": "midfielder",
-        "price": 1900000,
-        "points": 49,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3927.png"
-      },
-      {
-        "id": 4178,
-        "name": "Alejandro Santiago",
-        "position": "midfielder",
-        "price": 1840000,
-        "points": 18,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4178.png"
-      },
       {
         "id": 3107,
         "name": "Óscar Valentín",
@@ -5113,22 +5105,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3354.png"
-      },
-      {
-        "id": 3109,
-        "name": "Andrés Martín",
-        "position": "striker",
-        "price": 1370000,
-        "points": 25,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3109.png"
       }
     ],
     "isMe": false
@@ -5618,7 +5594,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T17:00:44.731Z"
+      "lastUpdated": "2026-11-27T19:30:45.214Z"
     },
     "speculation": {
       "score": 98,
@@ -7513,7 +7489,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T17:00:44.070Z"
+      "lastUpdated": "2026-11-27T19:30:44.512Z"
     },
     "speculation": {
       "score": 77,
@@ -8781,7 +8757,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T17:00:45.695Z"
+      "lastUpdated": "2026-11-27T19:30:46.194Z"
     },
     "speculation": {
       "score": 97,
@@ -10090,7 +10066,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T17:00:44.399Z"
+      "lastUpdated": "2026-11-27T19:30:44.885Z"
     },
     "speculation": {
       "score": 86,
@@ -11106,7 +11082,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T17:00:43.697Z"
+      "lastUpdated": "2026-11-27T19:30:44.185Z"
     },
     "speculation": {
       "score": 98,
@@ -12140,22 +12116,21 @@
     "crest": "/media/crests/m4_team.svg",
     "pos": 7,
     "points": 545,
-    "squadValue": 68130000,
-    "playerCount": 17,
-    "financialHealth": "Apalancado / Saldo Negativo (-10.03M €)",
-    "debtAlert": "Saldo en descubierto (-10.03M €). Consume el 58.9% del límite de crédito permitido (17.03M €). Exige ventas antes de puntuar.",
-    "projectedScore": 61,
+    "squadValue": 56770000,
+    "playerCount": 16,
+    "financialHealth": "Saneado / Alta Liquidez (+1.35M € en Caja)",
+    "debtAlert": "Excelente remanente de liquidez (+1.35M €) y solvencia plena para acudir a subastas sin deuda.",
+    "projectedScore": 58,
     "formation": "4-3-3",
-    "tacticDescription": "Estructura 4-3-3 orientada a maximizar 61 puntos según plantilla disponible.",
+    "tacticDescription": "Estructura 4-3-3 orientada a maximizar 58 puntos según plantilla disponible.",
     "strengths": [
-      "Patrimonio de plantilla consolidado en Primera (68.13M €).",
+      "Patrimonio de plantilla consolidado en Primera (56.77M €).",
       "Seguridad contrastada bajo palos en portería.",
       "Medular con futbolistas de jerarquía técnica y capacidad de puntuación.",
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez.",
-      "Tensión de tesorería: Saldo negativo de -10.03M € que obliga a vender piezas."
+      "Línea defensiva con bajo valor de mercado o margen de mejora en solidez."
     ],
     "tacticalAlerts": [
       {
@@ -12169,10 +12144,10 @@
     ],
     "recommendations": [
       {
-        "name": "Toljan",
+        "name": "Ville Koski",
         "pos": "Defensa",
-        "price": 1030000,
-        "reason": "Zaguero de jerarquía (1.03M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
+        "price": 2510000,
+        "reason": "Zaguero de jerarquía (2.51M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
       },
       {
         "name": "Pablo Martínez",
@@ -12190,17 +12165,17 @@
     "marketBalance": {
       "clubName": "M4 TEAM",
       "realizedGainsEUR": 12208620,
-      "realizedLossesEUR": 28845189,
-      "netRealizedBalanceEUR": -16636569,
+      "realizedLossesEUR": 28853489,
+      "netRealizedBalanceEUR": -16644869,
       "profitableTradesCount": 20,
-      "totalClosedTradesCount": 36,
-      "historicalSuccessRatePct": 56,
+      "totalClosedTradesCount": 37,
+      "historicalSuccessRatePct": 54,
       "totalLatentGainsEUR": 3594000,
-      "totalLatentLossesEUR": 29670054,
-      "netLatentBalanceEUR": -26076054,
+      "totalLatentLossesEUR": 29639054,
+      "netLatentBalanceEUR": -26045054,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-16.636.569 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-16.644.869 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Ugrinic",
@@ -12381,6 +12356,15 @@
           "roiPct": 0.3,
           "isProfit": true,
           "sellDate": "2026-11-15T04:30:33+01:00"
+        },
+        {
+          "playerName": "Oyarzabal",
+          "buyPrice": 11391000,
+          "sellPrice": 11382700,
+          "diff": -8300,
+          "roiPct": -0.1,
+          "isProfit": false,
+          "sellDate": "2026-11-27T04:33:20+01:00"
         },
         {
           "playerName": "Miguel Rodríguez",
@@ -12601,15 +12585,6 @@
           "isProfit": false
         },
         {
-          "playerName": "Oyarzabal",
-          "position": "striker",
-          "buyPrice": 11391000,
-          "currentVM": 11360000,
-          "latentDiff": -31000,
-          "latentRoiPct": -0.3,
-          "isProfit": false
-        },
-        {
           "playerName": "Abde Rebbach",
           "position": "midfielder",
           "buyPrice": 859000,
@@ -12673,23 +12648,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T17:00:45.063Z"
+      "lastUpdated": "2026-11-27T19:30:45.527Z"
     },
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+11.4%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 197642823,
-      "totalReceived": 162161400,
+      "totalReceived": 173544100,
       "purchasesCount": 52,
-      "salesCount": 50,
-      "estimatedCash": -10031423,
+      "salesCount": 51,
+      "estimatedCash": 1351277,
       "prizesEarned": 5450000,
-      "maxCreditLimit": 17032500,
-      "netWealth": 58098577,
-      "analysis": "Operativa histórica de 52 compras (197.6M €) y 50 ventas (162.2M €). Dinero total rotado: 359.8M € con sobrepuja media de +11.4%."
+      "maxCreditLimit": 14192500,
+      "netWealth": 58121277,
+      "analysis": "Operativa histórica de 52 compras (197.6M €) y 51 ventas (173.5M €). Dinero total rotado: 371.2M € con sobrepuja media de +11.4%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -14100,6 +14075,20 @@
           "seller": "M4 TEAM",
           "buyer": "Computer",
           "date": "2026-11-22T04:29:00+01:00"
+        },
+        {
+          "playerName": "Oyarzabal",
+          "price": 11382700,
+          "marketValue": 11382700,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "M4 TEAM",
+          "buyer": "Computer",
+          "date": "2026-11-27T04:33:20+01:00"
         }
       ]
     },
@@ -14258,23 +14247,6 @@
         "image": "/media/players/2565.png"
       },
       {
-        "id": 2161,
-        "name": "Oyarzabal",
-        "position": "striker",
-        "price": 11360000,
-        "points": 76,
-        "expectedPoints": 7.7,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/2161.png"
-      },
-      {
         "id": 3773,
         "name": "Roberto Fernández",
         "position": "striker",
@@ -14290,6 +14262,23 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3773.png"
+      },
+      {
+        "id": 3704,
+        "name": "Toni Martínez",
+        "position": "striker",
+        "price": 2630000,
+        "points": 40,
+        "expectedPoints": 4.1,
+        "status": "ACTIVE",
+        "statusInfo": "",
+        "isAvailable": true,
+        "isDoubt": false,
+        "isBanned": false,
+        "isInjured": false,
+        "isCardRisk": false,
+        "riskBadge": null,
+        "image": "/media/players/3704.png"
       }
     ],
     "bench": [
@@ -14372,22 +14361,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3451.png"
-      },
-      {
-        "id": 3704,
-        "name": "Toni Martínez",
-        "position": "striker",
-        "price": 2630000,
-        "points": 40,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3704.png"
       }
     ],
     "isMe": false
@@ -14580,7 +14553,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T17:00:45.363Z"
+      "lastUpdated": "2026-11-27T19:30:45.834Z"
     },
     "speculation": {
       "score": 68,
@@ -15793,7 +15766,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T17:00:46.058Z"
+      "lastUpdated": "2026-11-27T19:30:46.571Z"
     },
     "speculation": {
       "score": 98,
@@ -17814,7 +17787,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T17:00:46.405Z"
+      "lastUpdated": "2026-11-27T19:30:46.914Z"
     },
     "speculation": {
       "score": 71,
