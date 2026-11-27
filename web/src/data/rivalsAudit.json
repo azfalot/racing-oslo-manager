@@ -1116,7 +1116,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T07:30:40.236Z"
+      "lastUpdated": "2026-11-27T11:00:42.743Z"
     },
     "speculation": {
       "score": 98,
@@ -5140,10 +5140,10 @@
     "crest": "/media/crests/puente_avios.svg",
     "pos": 2,
     "points": 689,
-    "squadValue": 53440000,
-    "playerCount": 16,
-    "financialHealth": "Apalancado / Saldo Negativo (-2.27M €)",
-    "debtAlert": "Saldo en descubierto (-2.27M €). Consume el 17.0% del límite de crédito permitido (13.36M €). Exige ventas antes de puntuar.",
+    "squadValue": 51200000,
+    "playerCount": 12,
+    "financialHealth": "Solvente Ajustado (+5k € en Caja)",
+    "debtAlert": "Saldo positivo (+5k €). Fondo de maniobra en caja ajustado; compras superiores a 1.5M € exigen ventas previas.",
     "projectedScore": 65,
     "formation": "3-5-2",
     "tacticDescription": "Estructura 3-5-2 orientada a maximizar 65 puntos según plantilla disponible.",
@@ -5154,7 +5154,7 @@
       "Poderío goleador diferencial en ataque."
     ],
     "weaknesses": [
-      "Tensión de tesorería: Saldo negativo de -2.27M € que obliga a vender piezas."
+      "Plantilla corta (12 jugadores) con escaso fondo de armario ante rotaciones."
     ],
     "tacticalAlerts": [
       {
@@ -5168,38 +5168,38 @@
     ],
     "recommendations": [
       {
-        "name": "André Almeida ",
-        "pos": "Centrocampista",
-        "price": 1080000,
-        "reason": "Centrocampista con llegada (1.08M €) para asociarse con Íñigo Vicente y dominar la posesión."
-      },
-      {
-        "name": "Toljan",
-        "pos": "Defensa",
-        "price": 1030000,
-        "reason": "Zaguero de jerarquía (1.03M €) para blindar la línea defensiva y evitar bajas puntuaciones atrás."
-      },
-      {
         "name": "Pablo Martínez",
         "pos": "Centrocampista",
         "price": 1570000,
         "reason": "Oportunidad de mercado (1.57M € · 48 pts) ideal para dar profundidad al banquillo sin desestabilizar la tesorería."
+      },
+      {
+        "name": "Yeremay",
+        "pos": "Centrocampista",
+        "price": 7220000,
+        "reason": "Pieza competitiva en el mercado (7.22M €) adaptable al esquema 3-5-2."
+      },
+      {
+        "name": "Ville Koski",
+        "pos": "Defensa",
+        "price": 2510000,
+        "reason": "Pieza competitiva en el mercado (2.51M €) adaptable al esquema 3-5-2."
       }
     ],
     "marketBalance": {
       "clubName": "Puente Avios FC",
-      "realizedGainsEUR": 2744823,
-      "realizedLossesEUR": 18542160,
-      "netRealizedBalanceEUR": -15797337,
-      "profitableTradesCount": 21,
-      "totalClosedTradesCount": 32,
-      "historicalSuccessRatePct": 66,
-      "totalLatentGainsEUR": 6031956,
-      "totalLatentLossesEUR": 15482049,
-      "netLatentBalanceEUR": -9450093,
+      "realizedGainsEUR": 2846671,
+      "realizedLossesEUR": 18574160,
+      "netRealizedBalanceEUR": -15727489,
+      "profitableTradesCount": 24,
+      "totalClosedTradesCount": 36,
+      "historicalSuccessRatePct": 67,
+      "totalLatentGainsEUR": 5961998,
+      "totalLatentLossesEUR": 15450039,
+      "netLatentBalanceEUR": -9488041,
       "healthLabel": "AJUSTES & DEUDA",
       "healthBadgeColor": "amber",
-      "healthSummary": "Ha asumido minusvalías netas en el mercado (-15.797.337 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
+      "healthSummary": "Ha asumido minusvalías netas en el mercado (-15.727.489 €), principalmente por liquidaciones o desinversiones a precio de saldo.",
       "closedOperations": [
         {
           "playerName": "Yuri Berchiche",
@@ -5256,6 +5256,15 @@
           "sellDate": "2026-11-05T04:29:31+01:00"
         },
         {
+          "playerName": "José Salinas",
+          "buyPrice": 590002,
+          "sellPrice": 642000,
+          "diff": 51998,
+          "roiPct": 8.8,
+          "isProfit": true,
+          "sellDate": "2026-11-27T04:33:20+01:00"
+        },
+        {
           "playerName": "Gorrotxategi",
           "buyPrice": 1110100,
           "sellPrice": 1160400,
@@ -5292,6 +5301,15 @@
           "sellDate": "2026-10-21T04:29:40+02:00"
         },
         {
+          "playerName": "Pedro Díaz",
+          "buyPrice": 1000010,
+          "sellPrice": 1035000,
+          "diff": 34990,
+          "roiPct": 3.5,
+          "isProfit": true,
+          "sellDate": "2026-11-27T04:33:20+01:00"
+        },
+        {
           "playerName": "Odriozola",
           "buyPrice": 160020,
           "sellPrice": 178000,
@@ -5299,6 +5317,15 @@
           "roiPct": 11.2,
           "isProfit": true,
           "sellDate": "2026-11-17T04:30:59+01:00"
+        },
+        {
+          "playerName": "Zakaria",
+          "buyPrice": 330040,
+          "sellPrice": 344900,
+          "diff": 14860,
+          "roiPct": 4.5,
+          "isProfit": true,
+          "sellDate": "2026-11-27T04:33:20+01:00"
         },
         {
           "playerName": "Iván Villar",
@@ -5389,6 +5416,15 @@
           "roiPct": 1.1,
           "isProfit": true,
           "sellDate": "2026-11-15T04:30:33+01:00"
+        },
+        {
+          "playerName": "Musso",
+          "buyPrice": 282000,
+          "sellPrice": 250000,
+          "diff": -32000,
+          "roiPct": -11.3,
+          "isProfit": false,
+          "sellDate": "2026-11-27T04:33:20+01:00"
         },
         {
           "playerName": "Aitor Mañas",
@@ -5537,42 +5573,6 @@
           "isProfit": true
         },
         {
-          "playerName": "José Salinas",
-          "position": "defender",
-          "buyPrice": 590002,
-          "currentVM": 630000,
-          "latentDiff": 39998,
-          "latentRoiPct": 6.8,
-          "isProfit": true
-        },
-        {
-          "playerName": "Zakaria",
-          "position": "striker",
-          "buyPrice": 330040,
-          "currentVM": 360000,
-          "latentDiff": 29960,
-          "latentRoiPct": 9.1,
-          "isProfit": true
-        },
-        {
-          "playerName": "Pedro Díaz",
-          "position": "midfielder",
-          "buyPrice": 1000010,
-          "currentVM": 1000000,
-          "latentDiff": -10,
-          "latentRoiPct": 0,
-          "isProfit": false
-        },
-        {
-          "playerName": "Musso",
-          "position": "keeper",
-          "buyPrice": 282000,
-          "currentVM": 250000,
-          "latentDiff": -32000,
-          "latentRoiPct": -11.3,
-          "isProfit": false
-        },
-        {
           "playerName": "Guedes",
           "position": "striker",
           "buyPrice": 5201000,
@@ -5618,23 +5618,23 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T07:30:41.624Z"
+      "lastUpdated": "2026-11-27T11:00:44.113Z"
     },
     "speculation": {
       "score": 98,
-      "badge": "🦈 Tiburón Kamikaze / Deuda",
+      "badge": "🦈 Tiburón / Hiper-Trader",
       "badgeColor": "#ef4444",
       "overbidRate": "+15.2%",
       "riskLevel": "Alto Riesgo (Apalancado)",
       "totalSpent": 106578630,
-      "totalReceived": 77421400,
+      "totalReceived": 79693300,
       "purchasesCount": 48,
-      "salesCount": 47,
-      "estimatedCash": -2267230,
+      "salesCount": 51,
+      "estimatedCash": 4670,
       "prizesEarned": 6890000,
-      "maxCreditLimit": 13360000,
-      "netWealth": 51172770,
-      "analysis": "Operativa histórica de 48 compras (106.6M €) y 47 ventas (77.4M €). Dinero total rotado: 184.0M € con sobrepuja media de +15.2%."
+      "maxCreditLimit": 12800000,
+      "netWealth": 51204670,
+      "analysis": "Operativa histórica de 48 compras (106.6M €) y 51 ventas (79.7M €). Dinero total rotado: 186.3M € con sobrepuja media de +15.2%."
     },
     "keyDeals": {
       "smartBuy": {
@@ -6957,6 +6957,62 @@
           "seller": "Puente Avios FC",
           "buyer": "Computer",
           "date": "2026-11-26T04:29:35+01:00"
+        },
+        {
+          "playerName": "Zakaria",
+          "price": 344900,
+          "marketValue": 344900,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-27T04:33:20+01:00"
+        },
+        {
+          "playerName": "José Salinas",
+          "price": 642000,
+          "marketValue": 642000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-27T04:33:20+01:00"
+        },
+        {
+          "playerName": "Musso",
+          "price": 250000,
+          "marketValue": 250000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-27T04:33:20+01:00"
+        },
+        {
+          "playerName": "Pedro Díaz",
+          "price": 1035000,
+          "marketValue": 1035000,
+          "gain": 0,
+          "gainPct": 0,
+          "diff": 0,
+          "diffPct": 0,
+          "isOverbid": false,
+          "isGain": false,
+          "seller": "Puente Avios FC",
+          "buyer": "Computer",
+          "date": "2026-11-27T04:33:20+01:00"
         }
       ]
     },
@@ -7151,22 +7207,6 @@
     ],
     "bench": [
       {
-        "id": 3705,
-        "name": "Musso",
-        "position": "keeper",
-        "price": 250000,
-        "points": 0,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3705.png"
-      },
-      {
         "id": 3628,
         "name": "Boyomo",
         "position": "defender",
@@ -7181,54 +7221,6 @@
         "isCardRisk": false,
         "riskBadge": null,
         "image": "/media/players/3628.png"
-      },
-      {
-        "id": 3845,
-        "name": "José Salinas",
-        "position": "defender",
-        "price": 630000,
-        "points": 31,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3845.png"
-      },
-      {
-        "id": 3675,
-        "name": "Pedro Díaz",
-        "position": "midfielder",
-        "price": 1000000,
-        "points": 42,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/3675.png"
-      },
-      {
-        "id": 4057,
-        "name": "Zakaria",
-        "position": "striker",
-        "price": 360000,
-        "points": 19,
-        "status": "ACTIVE",
-        "statusInfo": "",
-        "isAvailable": true,
-        "isDoubt": false,
-        "isBanned": false,
-        "isInjured": false,
-        "isCardRisk": false,
-        "riskBadge": null,
-        "image": "/media/players/4057.png"
       }
     ],
     "isMe": false
@@ -7521,7 +7513,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T07:30:40.946Z"
+      "lastUpdated": "2026-11-27T11:00:43.449Z"
     },
     "speculation": {
       "score": 77,
@@ -8789,7 +8781,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T07:30:42.651Z"
+      "lastUpdated": "2026-11-27T11:00:45.157Z"
     },
     "speculation": {
       "score": 97,
@@ -10098,7 +10090,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T07:30:41.286Z"
+      "lastUpdated": "2026-11-27T11:00:43.796Z"
     },
     "speculation": {
       "score": 86,
@@ -11114,7 +11106,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T07:30:40.584Z"
+      "lastUpdated": "2026-11-27T11:00:43.097Z"
     },
     "speculation": {
       "score": 98,
@@ -12681,7 +12673,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T07:30:41.976Z"
+      "lastUpdated": "2026-11-27T11:00:44.428Z"
     },
     "speculation": {
       "score": 98,
@@ -14588,7 +14580,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T07:30:42.346Z"
+      "lastUpdated": "2026-11-27T11:00:44.808Z"
     },
     "speculation": {
       "score": 68,
@@ -15801,7 +15793,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T07:30:43.041Z"
+      "lastUpdated": "2026-11-27T11:00:45.495Z"
     },
     "speculation": {
       "score": 98,
@@ -17822,7 +17814,7 @@
           "isProfit": false
         }
       ],
-      "lastUpdated": "2026-11-27T07:30:43.401Z"
+      "lastUpdated": "2026-11-27T11:00:45.853Z"
     },
     "speculation": {
       "score": 71,
